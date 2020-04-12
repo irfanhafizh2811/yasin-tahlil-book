@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "268027687975",
+    "firebase_url": "https://tasbeeh-df93c.firebaseio.com",
+    "project_id": "tasbeeh-df93c",
+    "storage_bucket": "tasbeeh-df93c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268027687975:android:36a1411599646509318a02",
+        "android_client_info": {
+          "package_name": "com.dzikir.tasbeeh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268027687975-sf3rfkh8g1u9h2e051lebitjtavugjq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dzikir.tasbeeh",
+            "certificate_hash": "578c7d6e69daf484ea9aa0e7751bc175d077024f"
+          }
+        },
+        {
+          "client_id": "268027687975-dv7npvvl8ujdrelks5ca83bo1cvb3eld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUaMRjaPhawtM6qbVpdubhvpC_pfeJJDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268027687975-dv7npvvl8ujdrelks5ca83bo1cvb3eld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

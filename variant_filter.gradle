@@ -1,0 +1,21 @@
+android.variantFilter { variant ->
+    if (variant.buildType.name == "debug") {
+        variant.getFlavors().each {flavor ->
+            println("debug loop flavor : ${flavor.name}")
+            variant.setIgnore(false)
+//            if (flavor.name.contains('staging')
+//                    || flavor.name.contains('alpha')
+//                    || flavor.name.contains('production')) {
+//                variant.setIgnore(true)
+//            }
+        }
+    }
+    else if (variant.buildType.name == "release") {
+        variant.getFlavors().each {flavor ->
+            println("release loop flavor : ${flavor.name}")
+            if (flavor.name.contains('dev')) {
+                variant.setIgnore(true)
+            }
+        }
+    }
+}

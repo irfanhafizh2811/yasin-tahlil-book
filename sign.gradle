@@ -1,0 +1,18 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        debug {
+            storePassword "tasbeeh2020"
+            keyAlias 'tasbeeh-debug-key'
+            keyPassword 'tasbeeh2020'
+            storeFile file("debug-key.jks")
+        }
+        release {
+            storePassword "tasbeeh2020"
+            keyAlias 'tasbeeh-release-key'
+            keyPassword 'tasbeeh2020'
+            storeFile file('release-key.jks')
+        }
+    }
+}

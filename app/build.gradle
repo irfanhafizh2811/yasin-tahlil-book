@@ -4,28 +4,68 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+ext.majorVersion = 1
+ext.minorVersion = 0
+ext.patchVersion = 0
+ext.preRelease = ""
+
+if (new File('sign.gradle').exists()) {
+    apply from: '../sign.gradle'
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.dzikir.tasbeeh"
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode generateVersionCode()
+        versionName generateVersionName()
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
+        debug {
+            testCoverageEnabled = true
             minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            crunchPngs true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
+    flavorDimensions "env"
+    productFlavors {
+        production {
+            dimension "env"
+            applicationId "com.dzikir.tasbeeh"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "Tasbeeh-${generateVersionName()}-${variant.flavorName}-${variant.buildType.name}.apk"
+        }
+    }
 }
+
+androidExtensions {
+    experimental = true
+}
+
+apply from: '../variant_filter.gradle'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -35,6 +75,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.7.9'
 
     //Android Support Dependencies
     implementation supportDependencies.appCompat
@@ -74,8 +115,21 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-core:17.3.0'
 
+    //Glide
+
+    implementation libraries.glide
+
     //Lottie
     implementation 'com.airbnb.android:lottie:3.4.0'
+}
+
+private Integer generateVersionCode() {
+    return project.ext.minSdkVersion * 10000000 + ext.majorVersion * 10000 + ext.minorVersion * 100 + ext.patchVersion
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.majorVersion}.${ext.minorVersion}.${ext.patchVersion}"
+    return versionName
 }
 
 apply plugin: 'com.google.gms.google-services'
