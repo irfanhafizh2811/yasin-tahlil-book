@@ -41,6 +41,7 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/tvSubhanallah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_arabic_subhanallah"
@@ -50,7 +51,7 @@
                     android:textStyle="bold" />
 
                 <com.dzikir.tasbeeh.widget.Flipmeter
-                    android:id="@+id/fsSubhanallah"
+                    android:id="@+id/fmSubhanallah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -80,6 +81,7 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/tvAlhamdulillah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_arabic_alhamdulillah"
@@ -89,7 +91,7 @@
                     android:textStyle="bold" />
 
                 <com.dzikir.tasbeeh.widget.Flipmeter
-                    android:id="@+id/fsAlhamdulillah"
+                    android:id="@+id/fmAlhamdulillah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -119,6 +121,7 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/tvLaila"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_arabic_laila"
@@ -128,7 +131,7 @@
                     android:textStyle="bold" />
 
                 <com.dzikir.tasbeeh.widget.Flipmeter
-                    android:id="@+id/fsLaila"
+                    android:id="@+id/fmLaila"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -158,6 +161,7 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/tvAllahuAkbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/text_arabic_allahu_akbar"
@@ -167,7 +171,7 @@
                     android:textStyle="bold" />
 
                 <com.dzikir.tasbeeh.widget.Flipmeter
-                    android:id="@+id/fsAllahuAkbar"
+                    android:id="@+id/fmAllahuAkbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

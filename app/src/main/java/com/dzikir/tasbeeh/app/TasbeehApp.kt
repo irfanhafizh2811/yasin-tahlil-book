@@ -1,15 +1,22 @@
 package com.dzikir.tasbeeh.app
 
-import android.media.MediaPlayer
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import org.koin.android.ext.android.inject
+import com.dzikir.tasbeeh.deps.libraries
+import com.google.firebase.FirebaseApp
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class TasbeehApp : MultiDexApplication() {
 
-    private val mediaPlayer by inject<MediaPlayer>()
-
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        FirebaseApp.initializeApp(this@TasbeehApp)
+        startKoin {
+            modules(libraries)
+            androidContext(this@TasbeehApp)
+        }
     }
 
     override fun onTerminate() {

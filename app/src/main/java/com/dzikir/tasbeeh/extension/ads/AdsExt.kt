@@ -106,13 +106,10 @@ fun InterstitialAd.loadAd(context: Context, onAdLoaded: () -> Unit) {
 fun InterstitialAd.loadAdMobTest(context: Context, onAdLoaded: () -> Unit) {
     try {
         adUnitId = context.getString(R.string.id_unit_interstitial_sample_test)
-        val deviceId = "3200cbcb466bb599"
         val extras = Bundle()
         extras.putString("max_ad_content_rating", "G")
         val adRequest = AdRequest.Builder()
             .addNetworkExtrasBundle(clazz<AdMobAdapter>(), extras)
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-            .addTestDevice(deviceId)
             .build()
         loadAd(adRequest)
         adListener = object : AdListener() {

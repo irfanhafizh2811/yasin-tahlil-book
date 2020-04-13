@@ -10,4 +10,7 @@
     <string name="text_arabic_subhanallah">سُبْحَانَ اللّهُ</string>
     <string name="text_arabic_laila">لاَ اِلَهَ اِلاَّ اللّهُ</string>
     <string name="text_arabic_allahu_akbar">اَللّهُ اَكْبَرُ</string>
+    <string name="label_count">Count</string>
+    <string name="label_tasbeeh">Tasbeeh</string>
+    <string name="label_reset">Reset</string>
 </resources>

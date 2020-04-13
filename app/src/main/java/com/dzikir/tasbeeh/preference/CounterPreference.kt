@@ -1,0 +1,28 @@
+package com.dzikir.tasbeeh.preference
+
+class CounterPreference(val corePreference: CorePreference) {
+
+    companion object {
+        const val SUBHANALLAH = "SUBHANALLAH"
+        const val ALHAMDULILLAH = "ALHAMDULILLAH"
+        const val LAILAHAILALLAH = "LAILAHAILALLAH"
+        const val ALLAHU_AKBAR = "ALLAHU_AKBAR"
+    }
+
+    var subhanallah :Int
+        set(value) = corePreference.setInt(SUBHANALLAH, value)
+        get() = corePreference.getInt(SUBHANALLAH, 0)
+
+    var alhamdulillah :Int
+        set(value) = corePreference.setInt(ALHAMDULILLAH, value)
+        get() = corePreference.getInt(ALHAMDULILLAH, 0)
+
+    var lailahailallah :Int
+        set(value) = corePreference.setInt(LAILAHAILALLAH, value)
+        get() = corePreference.getInt(LAILAHAILALLAH, 0)
+
+    var allahukkbar :Int
+        set(value) = corePreference.setInt(ALLAHU_AKBAR, value)
+        get() = corePreference.getInt(ALLAHU_AKBAR, 0)
+
+}

@@ -2,12 +2,15 @@ package com.dzikir.tasbeeh.view
 
 import android.animation.Animator
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.dzikir.tasbeeh.R
+import com.dzikir.tasbeeh.remote.CoreRemoteConfig
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.intentFor
+import org.koin.android.ext.android.inject
 
 class SplashActivity : BaseActivity() {
+
+    private val coreRemoteConfig by inject<CoreRemoteConfig>()
 
     companion object {
         const val ANIMATION_ASSET_JSON = "anim_bismillah.json"
@@ -16,6 +19,7 @@ class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        coreRemoteConfig.remoteConfig.fetchAndActivate()
         setContentView(R.layout.activity_splash)
         lav_splash?.run {
             setAnimation(ANIMATION_ASSET_JSON)

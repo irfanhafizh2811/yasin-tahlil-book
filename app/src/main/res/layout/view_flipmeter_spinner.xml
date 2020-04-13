@@ -7,27 +7,27 @@
 
     <ImageView
         android:id="@+id/FlipMeterSpinner_image_back_upper"
-        android:layout_width="30dip"
-        android:layout_height="22dip"
+        android:layout_width="45dp"
+        android:layout_height="33dp"
         android:src="@drawable/digit_0_upper" />
 
     <ImageView
         android:id="@+id/FlipMeterSpinner_image_back_lower"
-        android:layout_width="30dip"
-        android:layout_height="22dip"
+        android:layout_width="45dp"
+        android:layout_height="33dp"
         android:layout_below="@+id/FlipMeterSpinner_image_back_upper"
         android:src="@drawable/digit_0_lower" />
 
     <ImageView
         android:id="@+id/FlipMeterSpinner_image_front_upper"
-        android:layout_width="30dip"
-        android:layout_height="22dip"
+        android:layout_width="45dp"
+        android:layout_height="33dp"
         android:src="@drawable/digit_0_upper" />
 
     <ImageView
         android:id="@+id/FlipMeterSpinner_image_front_lower"
-        android:layout_width="30dip"
-        android:layout_height="22dip"
+        android:layout_width="45dp"
+        android:layout_height="33dp"
         android:layout_below="@+id/FlipMeterSpinner_image_front_upper"
         android:src="@drawable/digit_0_lower" />
 
