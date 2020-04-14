@@ -13,8 +13,7 @@ import com.google.android.gms.ads.RequestConfiguration
 open class BaseActivity : AppCompatActivity() {
 
     protected lateinit var requestConfiguration: RequestConfiguration
-    private val mInterstitialAd: InterstitialAd by lazy { InterstitialAd(this) }
-
+    protected val mInterstitialAd: InterstitialAd by lazy { InterstitialAd(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

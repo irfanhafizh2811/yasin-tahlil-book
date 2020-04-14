@@ -62,5 +62,4 @@ class MainActivity : BaseActivity() {
         super.onDestroy()
         disposable.dispose()
     }
-
 }

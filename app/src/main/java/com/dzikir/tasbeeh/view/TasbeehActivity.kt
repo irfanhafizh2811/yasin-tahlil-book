@@ -30,7 +30,10 @@ class TasbeehActivity : BaseActivity() {
         type = intent?.getStringExtra(TYPE_EXTRA) ?: TextUtils.BLANK
         setContentView(R.layout.activity_tasbeeh)
         ivBack?.setOnClickListener { finish() }
-        fabReset?.setOnClickListener { reset() }
+        fabReset?.setOnClickListener {
+            reset()
+            loadAdMobInterstitial()
+        }
         tvDzikir?.text = intent?.getStringExtra(TASBEEH_ARABIC_EXTRA)
         initTasbeeh()
         disposable.add(
@@ -40,12 +43,7 @@ class TasbeehActivity : BaseActivity() {
                     TimeUnit.MILLISECONDS,
                     AndroidSchedulers.mainThread()
                 )
-                .subscribe {
-                    count()
-                    interstitialPreference.countTasbeeh {
-                        loadAdMobInterstitial()
-                    }
-                }
+                .subscribe { count() }
         )
         interstitialPreference.countPage {
             loadAdMobInterstitial()
@@ -105,6 +103,17 @@ class TasbeehActivity : BaseActivity() {
                 else -> 0
             }
             fmDzikir.setValue(count, true)
+        }
+    }
+
+    override fun onBackPressed() {
+        when {
+            mInterstitialAd.isLoaded -> {
+                loadAdMobInterstitial()
+            }
+            else -> {
+                super.onBackPressed()
+            }
         }
     }
 

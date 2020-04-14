@@ -14,7 +14,7 @@ class SplashActivity : BaseActivity() {
 
     companion object {
         const val ANIMATION_ASSET_JSON = "anim_bismillah.json"
-        const val ANIMATION_SPEED = 1f
+        const val ANIMATION_SPEED = 1.5f
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
