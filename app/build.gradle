@@ -18,7 +18,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.dzikir.tasbeeh"
+        applicationId "com.icaali.tasbeeh"
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
         versionCode generateVersionCode()
@@ -50,7 +50,7 @@ android {
     productFlavors {
         production {
             dimension "env"
-            applicationId "com.dzikir.tasbeeh"
+            applicationId "com.icaali.tasbeeh"
         }
     }
 
@@ -120,8 +120,8 @@ dependencies {
     //Glide
     implementation libraries.glide
 
-    //Lottie
-    implementation 'com.airbnb.android:lottie:3.4.0'
+    //ViewAnimator
+    implementation 'com.github.florent37:viewanimator:1.1.0'
 }
 
 private Integer generateVersionCode() {

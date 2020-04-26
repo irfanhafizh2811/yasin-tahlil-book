@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:268027687975:android:36a1411599646509318a02",
         "android_client_info": {
-          "package_name": "com.dzikir.tasbeeh"
+          "package_name": "com.icaali.tasbeeh"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "268027687975-sf3rfkh8g1u9h2e051lebitjtavugjq1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.dzikir.tasbeeh",
+            "package_name": "com.icaali.tasbeeh",
             "certificate_hash": "578c7d6e69daf484ea9aa0e7751bc175d077024f"
           }
         },

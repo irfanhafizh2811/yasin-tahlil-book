@@ -2,6 +2,8 @@
     <string name="app_name">Tasbeeh</string>
     <string name="id_unit_interstitial">ca-app-pub-5079073523461972/7622404494</string>
     <string name="id_unit_interstitial_sample_test">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="id_unit_banner">ca-app-pub-5079073523461972/8857837804</string>
+    <string name="id_unit_banner_sample_test">ca-app-pub-3940256099942544/6300978111</string>
 
     <!-- Text Arabic -->
     <string name="text_arabic_allah">ُ لِلَّه</string>
@@ -14,4 +16,17 @@
     <string name="label_count">Count</string>
     <string name="label_tasbeeh">Tasbeeh</string>
     <string name="label_reset">Reset</string>
+    <string name="label_counter_x">%1$dx</string>
+    <string name="label_tasbeeh_message">Have you dhikr today?</string>
+    <string name="text_latin_subhanallah">Subhanallah</string>
+    <string name="text_latin_alhamdulillah">Alhamdulillah</string>
+    <string name="text_latin_allahu_akbar">Allahu Akbar</string>
+    <string name="text_latin_astaghfirullah">Astaghfirullah</string>
+    <string name="text_latin_laailaahaillallah">Laailaaha illallah</string>
+    <string name="label_text_counter_hint">00000</string>
+    <string name="label_yes">Yes</string>
+    <string name="label_no">No</string>
+    <string name="label_title_dialog_reset">Counter will be reset?</string>
+    <string name="label_message_dialog_reset">Are you sure you want to reset the counter?</string>
+    <string name="label_bismillahirrahmanirrahim">Bismillahirrahmanirrahim</string>
 </resources>

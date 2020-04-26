@@ -1,4 +1,4 @@
-package com.dzikir.tasbeeh
+package com.icaali.tasbeeh
 
 import org.junit.Test
 
