@@ -9,10 +9,10 @@ android {
             storeFile file("debug-key.jks")
         }
         release {
-            storePassword "tasbeeh2020"
-            keyAlias 'tasbeeh-release-key'
-            keyPassword 'tasbeeh2020'
-            storeFile file('release-key.jks')
+            storePassword "tasbeeh2021"
+            keyAlias 'tasbeeh-release-key2'
+            keyPassword 'tasbeeh2021'
+            storeFile file('release-key2.jks')
         }
     }
 }
