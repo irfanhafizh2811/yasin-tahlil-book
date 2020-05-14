@@ -15,6 +15,7 @@ import androidx.annotation.FontRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -25,11 +26,27 @@ import java.io.InputStreamReader
 
 fun Context.getColorCompat(@ColorRes colorId: Int) = ContextCompat.getColor(this, colorId)
 
-
 fun Context.getDrawableCompat(@DrawableRes drawableId: Int) =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         this.resources.getDrawable(drawableId, null)
     } else AppCompatResources.getDrawable(this, drawableId)
+
+fun Context.getDrawableCompat(@DrawableRes drawableId: Int, @ColorRes colorRes: Int) =
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        val drawable = this.resources.getDrawable(drawableId, null)
+        drawable?.let { it ->
+            val drawable = DrawableCompat.wrap(it)
+            DrawableCompat.setTint(drawable, getColorCompat(colorRes))
+        }
+        drawable
+    } else {
+        val drawable = AppCompatResources.getDrawable(this, drawableId)
+        drawable?.let { it ->
+            val drawable = DrawableCompat.wrap(it)
+            DrawableCompat.setTint(drawable, getColorCompat(colorRes))
+        }
+        drawable
+    }
 
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager: InputMethodManager by lazy {
@@ -48,8 +65,13 @@ fun Context.showKeyboard(view: View) {
 }
 
 fun Context.showKeyboardForce(view: View) {
-    val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.toggleSoftInputFromWindow(view.windowToken, InputMethodManager.SHOW_FORCED, 0)
+    val inputMethodManager =
+        this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.toggleSoftInputFromWindow(
+        view.windowToken,
+        InputMethodManager.SHOW_FORCED,
+        0
+    )
 }
 
 @Throws(RuntimeException::class)

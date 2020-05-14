@@ -2,16 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_counter_screen">
+    tools:background="@drawable/bg_counter_screen_flowers">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
-        android:gravity="bottom"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,10 +20,79 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="16dp"
+            android:background="?attr/actionBarItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_arrow_back"
             tools:ignore="ContentDescription" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llThemes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/actionBarItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/llMore">
+
+            <ImageView
+                android:id="@+id/ivThemes"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:srcCompat="@drawable/ic_theme"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tvThemes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="end"
+                android:letterSpacing="0.01"
+                android:text="@string/label_themes"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                tools:targetApi="lollipop"
+                tools:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/actionBarItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/ivMore"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:srcCompat="@drawable/ic_more"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tvMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="end"
+                android:letterSpacing="0.01"
+                android:text="@string/label_more"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                tools:targetApi="lollipop"
+                tools:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -86,8 +154,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_counter_skin"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/bg_tasbeeh_digital_flowers" />
 
         <ImageView
             android:id="@+id/ivCounterSkinBox"
@@ -97,8 +165,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_counter_skin_box"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/bg_output_flowers" />
 
         <TextView
             android:id="@+id/tvHintCounter"
@@ -113,13 +181,13 @@
             android:paddingBottom="8dp"
             android:text="@string/label_text_counter_hint"
             android:textAlignment="gravity"
-            android:textColor="#e5c15c"
             android:textSize="70sp"
             app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
             app:layout_constraintEnd_toEndOf="@id/ivCounterSkinBox"
             app:layout_constraintStart_toStartOf="@id/ivCounterSkinBox"
             app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
             tools:text="00012"
+            tools:textColor="@color/textHintOutputFlowers"
             tools:visibility="visible" />
 
         <TextView
@@ -150,8 +218,8 @@
             android:layout_marginEnd="40dp"
             app:layout_constraintBottom_toTopOf="@+id/fabCount"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_button_reset_counter_skin"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/ic_reset_flowers" />
 
         <ImageView
             android:id="@+id/fabCount"
@@ -162,8 +230,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_button_counter_skin"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/ic_counter_flowers" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

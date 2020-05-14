@@ -5,13 +5,21 @@ import android.os.Bundle
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.InterstitialPreference
+import com.icaali.tasbeeh.preference.ThemesPreference
+import com.icaali.tasbeeh.view.theme.Theme
+import com.icaali.tasbeeh.view.theme.ThemeFactory
+import com.icaali.tasbeeh.view.theme.ThemeType
+import com.icaali.tasbeeh.view.theme.ThemesPickDialog
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_tasbeeh.*
+import org.jetbrains.anko.backgroundDrawable
+import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
 import java.util.concurrent.TimeUnit
 
@@ -19,9 +27,16 @@ class TasbeehActivity : BaseActivity() {
 
     private val counterPreference by inject<CounterPreference>()
     private val interstitialPreference by inject<InterstitialPreference>()
+    private val themesPreference by inject<ThemesPreference>()
     private val disposable = CompositeDisposable()
     private var type = TextUtils.BLANK
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
+    private var theme: Theme? = null
+    private val themesPickDialog by lazy {
+        ThemesPickDialog(
+            this
+        )
+    }
 
     companion object {
         const val THROTTLE_FIRST = 100L
@@ -33,7 +48,22 @@ class TasbeehActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         type = intent?.getStringExtra(TYPE_EXTRA) ?: TextUtils.BLANK
         setContentView(R.layout.activity_tasbeeh)
+        selectedTheme()
         ivBack?.setOnClickListener { finish() }
+        llThemes?.setOnClickListener {
+            themesPickDialog.apply {
+                setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
+                setOnPositiveListener { themeSelected ->
+                    themesPreference.type = themeSelected.type
+                    selectedTheme()
+                }
+                setOnDismissListener { loadAdMobInterstitial() }
+            }.show()
+        }
+        llMore?.setOnClickListener {
+
+        }
+
         fabReset?.setOnClickListener {
             ViewAnimator.animate(fabReset)
                 .pulse()
@@ -44,7 +74,6 @@ class TasbeehActivity : BaseActivity() {
             }.show()
         }
         tvDzikir?.text = intent?.getStringExtra(TASBEEH_LATIN_EXTRA)
-        ivDzikir?.setImageDrawable(getDzikirImage())
         initTasbeeh()
         disposable.add(
             RxView.clicks(fabCount)
@@ -78,13 +107,49 @@ class TasbeehActivity : BaseActivity() {
         }
     }
 
+    private fun selectedTheme() {
+        theme = ThemeFactory.generate(themesPreference.type)
+        theme?.run {
+            ivDzikir?.setImageDrawable(getDzikirImage())
+
+            clRootLayout?.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes)
+            ivSkin?.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes))
+            fabCount?.setImageDrawable(getDrawableCompat(counterImageRes))
+            fabReset?.setImageDrawable(getDrawableCompat(resetImageRes))
+            ivCounterSkinBox?.setImageDrawable(getDrawableCompat(outputImageRes))
+            tvHintCounter?.textColor = getColorCompat(outputHintColorRes)
+
+            ivBack?.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent))
+            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more, tintColorAccent))
+            tvMore?.textColor = getColorCompat(tintColorAccent)
+            ivThemes?.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent))
+            tvThemes?.textColor = getColorCompat(tintColorAccent)
+            tvDzikir?.textColor = getColorCompat(tintColorAccent)
+        }
+    }
+
     private fun getDzikirImage(): Drawable? {
         return when (type) {
-            Tasbeeh.SUBHANALLAH -> getDrawableCompat(R.drawable.ic_subhanallah)
-            Tasbeeh.ALHAMDULILLAH -> getDrawableCompat(R.drawable.ic_alhamdulillah)
-            Tasbeeh.ALLAHU_AKBAR -> getDrawableCompat(R.drawable.ic_allahu_akbar)
-            Tasbeeh.ASTAGHFIRULLAH -> getDrawableCompat(R.drawable.ic_astagfirllah)
-            Tasbeeh.LAILAHAILALLAH -> getDrawableCompat(R.drawable.ic_laailaahaillallah)
+            Tasbeeh.SUBHANALLAH -> getDrawableCompat(
+                R.drawable.ic_subhanallah,
+                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+            )
+            Tasbeeh.ALHAMDULILLAH -> getDrawableCompat(
+                R.drawable.ic_alhamdulillah,
+                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+            )
+            Tasbeeh.ALLAHU_AKBAR -> getDrawableCompat(
+                R.drawable.ic_allahu_akbar,
+                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+            )
+            Tasbeeh.ASTAGHFIRULLAH -> getDrawableCompat(
+                R.drawable.ic_astagfirllah,
+                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+            )
+            Tasbeeh.LAILAHAILALLAH -> getDrawableCompat(
+                R.drawable.ic_laailaahaillallah,
+                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+            )
             else -> getDrawableCompat(R.drawable.ic_subhanallah)
         }
     }

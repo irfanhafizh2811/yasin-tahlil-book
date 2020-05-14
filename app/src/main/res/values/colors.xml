@@ -3,4 +3,12 @@
     <color name="colorPrimary">#2B3137</color>
     <color name="colorPrimaryDark">#0e3a6a</color>
     <color name="colorAccent">#d9b04b</color>
+
+    <color name="themeSelected">#b2782a</color>
+    <color name="themeUnselected">#bcb5b9</color>
+
+    <color name="textHintOutputDefault">#e8d399</color>
+    <color name="textHintOutputFlowers">#f7d4d4</color>
+    <color name="textHintOutputLeaves">#ceeae4</color>
+    <color name="textHintOutputBlackWhite">#c1c5cc</color>
 </resources>

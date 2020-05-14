@@ -29,4 +29,11 @@
     <string name="label_title_dialog_reset">Counter will be reset?</string>
     <string name="label_message_dialog_reset">Are you sure you want to reset the counter?</string>
     <string name="label_bismillahirrahmanirrahim">Bismillahirrahmanirrahim</string>
+    <string name="label_choose_themes">Choose Themes</string>
+    <string name="label_themes">Themes</string>
+    <string name="label_more">More</string>
+    <string name="label_picker_black_white">BlackWhite</string>
+    <string name="label_picker_default">Default</string>
+    <string name="label_picker_flowers">Flower</string>
+    <string name="label_picker_leaves">Leaves</string>
 </resources>
