@@ -1,4 +1,4 @@
-package com.icaali.tasbeeh.view
+package com.icaali.tasbeeh.view.dialog
 
 import android.content.Context
 import android.os.Bundle

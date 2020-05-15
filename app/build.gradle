@@ -88,6 +88,7 @@ dependencies {
     implementation libraries.multidex
     implementation libraries.anko
     implementation libraries.ankoCommon
+    implementation libraries.gson
 
     //Ads
     implementation libraries.playServiceAds

@@ -1,24 +1,29 @@
-package com.icaali.tasbeeh.view
+package com.icaali.tasbeeh.view.activity
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.extension.activty.openPlaystore
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.InterstitialPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
+import com.icaali.tasbeeh.view.Tasbeeh
+import com.icaali.tasbeeh.view.dialog.ConfirmationDialog
+import com.icaali.tasbeeh.view.dialog.MoreDialog
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeFactory
 import com.icaali.tasbeeh.view.theme.ThemeType
-import com.icaali.tasbeeh.view.theme.ThemesPickDialog
+import com.icaali.tasbeeh.view.dialog.ThemesDialog
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_tasbeeh.*
 import org.jetbrains.anko.backgroundDrawable
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
 import java.util.concurrent.TimeUnit
@@ -30,13 +35,11 @@ class TasbeehActivity : BaseActivity() {
     private val themesPreference by inject<ThemesPreference>()
     private val disposable = CompositeDisposable()
     private var type = TextUtils.BLANK
-    private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private var theme: Theme? = null
-    private val themesPickDialog by lazy {
-        ThemesPickDialog(
-            this
-        )
-    }
+
+    private val confirmationDialog by lazy { ConfirmationDialog(this) }
+    private val themesPickDialog by lazy { ThemesDialog(this) }
+    private val moreDialog by lazy { MoreDialog(this) }
 
     companion object {
         const val THROTTLE_FIRST = 100L
@@ -49,20 +52,8 @@ class TasbeehActivity : BaseActivity() {
         type = intent?.getStringExtra(TYPE_EXTRA) ?: TextUtils.BLANK
         setContentView(R.layout.activity_tasbeeh)
         selectedTheme()
+        setupDialog()
         ivBack?.setOnClickListener { finish() }
-        llThemes?.setOnClickListener {
-            themesPickDialog.apply {
-                setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
-                setOnPositiveListener { themeSelected ->
-                    themesPreference.type = themeSelected.type
-                    selectedTheme()
-                }
-                setOnDismissListener { loadAdMobInterstitial() }
-            }.show()
-        }
-        llMore?.setOnClickListener {
-
-        }
 
         fabReset?.setOnClickListener {
             ViewAnimator.animate(fabReset)
@@ -104,6 +95,37 @@ class TasbeehActivity : BaseActivity() {
                 else -> 0
             }
             setTextCounter(value)
+        }
+    }
+
+    private fun setupDialog() {
+        llThemes?.setOnClickListener {
+            themesPickDialog.apply {
+                setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
+                setOnPositiveListener { themeSelected ->
+                    themesPreference.type = themeSelected.type
+                    selectedTheme()
+                }
+                setOnDismissListener { loadAdMobInterstitial() }
+            }.show()
+        }
+
+        llMore?.setOnClickListener {
+            moreDialog.apply {
+                setOnSelectedListener {
+                    when (it) {
+                        MoreDialog.Menu.RATING_AND_REVIEW -> {
+                            openPlaystore(packageName)
+                        }
+                        MoreDialog.Menu.APP_LINK -> {
+                            startActivity(intentFor<DeveloperAppsActivity>())
+                        }
+                    }
+                }
+                setOnDismissListener {
+                    loadAdMobInterstitial()
+                }
+            }.show()
         }
     }
 
@@ -150,7 +172,10 @@ class TasbeehActivity : BaseActivity() {
                 R.drawable.ic_laailaahaillallah,
                 theme?.tintColorAccent ?: R.color.textHintOutputDefault
             )
-            else -> getDrawableCompat(R.drawable.ic_subhanallah)
+            else -> getDrawableCompat(
+                R.drawable.ic_subhanallah,
+                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+            )
         }
     }
 

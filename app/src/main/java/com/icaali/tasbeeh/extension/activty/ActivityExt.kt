@@ -13,9 +13,9 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
+import com.google.android.material.snackbar.Snackbar
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.extension.view.showSnackbar
-import com.google.android.material.snackbar.Snackbar
 
 /**
  * Created by irfanbrader on 22/06/18.
@@ -32,9 +32,15 @@ fun Activity.startActivityWithTransition(intent: Intent) {
     }
 }
 
-fun Activity.startActivityWithSharedTransition(intent: Intent, vararg sharedElements: Pair<View, String>) {
+fun Activity.startActivityWithSharedTransition(
+    intent: Intent,
+    vararg sharedElements: Pair<View, String>
+) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        this.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this, *sharedElements).toBundle())
+        this.startActivity(
+            intent,
+            ActivityOptions.makeSceneTransitionAnimation(this, *sharedElements).toBundle()
+        )
     } else {
         this.startActivity(intent)
     }
@@ -44,12 +50,6 @@ fun Activity.startPickImageActivity(intent: Intent, requestCode: Int, title: Str
     intent.type = "image/*"
     intent.action = Intent.ACTION_GET_CONTENT
     startActivityForResult(Intent.createChooser(intent, title), requestCode)
-}
-
-fun Activity.openPhoneAct(phoneNumber: String) {
-    val callIntent = Intent(Intent.ACTION_CALL)
-    callIntent.data = Uri.parse("tel:$phoneNumber")
-    startActivity(callIntent)
 }
 
 fun Activity.startMailActivity(recipient: String, subject: String) {
@@ -107,7 +107,10 @@ fun Activity.statusBarTranslucentVisible(visible: Boolean) {
 }
 
 fun Window.blockTouchScreen() {
-    this.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    this.setFlags(
+        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+    )
 }
 
 fun Window.unblockTouchScreen() {
@@ -116,4 +119,38 @@ fun Window.unblockTouchScreen() {
 
 fun Activity.isTablet(): Boolean {
     return resources.getBoolean(R.bool.isTablet)
+}
+
+fun Activity.appInstalledOrNot(uri: String): Boolean {
+    val pm = packageManager
+    try {
+        pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
+        return true
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+    }
+    return false
+}
+
+fun Activity.launchApp(packageApp: String) {
+    val intent = packageManager.getLaunchIntentForPackage(packageApp)
+    intent?.let { startActivity(it) }
+}
+
+fun Activity.openPlaystore(packageApp: String) {
+    try {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("market://details?id=$packageApp")
+            )
+        )
+    } catch (anfe: ActivityNotFoundException) {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=$packageApp")
+            )
+        )
+    }
 }

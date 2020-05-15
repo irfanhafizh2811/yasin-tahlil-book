@@ -1,13 +1,16 @@
-package com.icaali.tasbeeh.view.theme
+package com.icaali.tasbeeh.view.dialog
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.view.theme.Theme
+import com.icaali.tasbeeh.view.adapter.ThemeAdapter
+import com.icaali.tasbeeh.view.theme.ThemeType
 import kotlinx.android.synthetic.main.dialog_bottom_themes_picker.*
 
-class ThemesPickDialog(context: Context) : BottomSheetDialog(context) {
+class ThemesDialog(context: Context) : BottomSheetDialog(context) {
 
     private var onPositiveListener: ((Theme) -> Unit)? = null
     private val adapter by lazy {
@@ -33,14 +36,14 @@ class ThemesPickDialog(context: Context) : BottomSheetDialog(context) {
     fun setItemThemes(
         themes: MutableList<Theme>,
         type: ThemeType
-    ): ThemesPickDialog {
+    ): ThemesDialog {
         adapter.themes = themes
         adapter.type = type
         adapter.notifyDataSetChanged()
         return this
     }
 
-    fun setOnPositiveListener(onPositiveListener: (Theme) -> Unit): ThemesPickDialog {
+    fun setOnPositiveListener(onPositiveListener: (Theme) -> Unit): ThemesDialog {
         this.onPositiveListener = onPositiveListener
         return this
     }

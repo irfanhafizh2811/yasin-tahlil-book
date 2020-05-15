@@ -1,4 +1,4 @@
-package com.icaali.tasbeeh.view
+package com.icaali.tasbeeh.view.activity
 
 import android.content.res.Configuration
 import android.os.Bundle

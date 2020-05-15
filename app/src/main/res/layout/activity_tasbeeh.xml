@@ -108,7 +108,6 @@
             android:id="@+id/ivDzikir"
             android:layout_width="198dp"
             android:layout_height="104dp"
-            android:tint="@android:color/white"
             tools:ignore="ContentDescription"
             tools:srcCompat="@drawable/ic_subhanallah" />
 

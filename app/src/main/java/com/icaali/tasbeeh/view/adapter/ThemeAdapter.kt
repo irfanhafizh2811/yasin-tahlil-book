@@ -1,4 +1,4 @@
-package com.icaali.tasbeeh.view.theme
+package com.icaali.tasbeeh.view.adapter
 
 import android.graphics.Typeface
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.getString
+import com.icaali.tasbeeh.view.theme.Theme
+import com.icaali.tasbeeh.view.theme.ThemeType
 import kotlinx.android.synthetic.main.item_theme.view.*
 import org.jetbrains.anko.textColor
 

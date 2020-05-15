@@ -1,8 +1,9 @@
-package com.icaali.tasbeeh.view
+package com.icaali.tasbeeh.view.activity
 
 import android.os.Bundle
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.preference.CounterPreference
+import com.icaali.tasbeeh.view.Tasbeeh
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor

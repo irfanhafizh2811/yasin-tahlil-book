@@ -1,6 +1,5 @@
-package com.icaali.tasbeeh.view
+package com.icaali.tasbeeh.view.activity
 
-import android.animation.Animator
 import android.os.Bundle
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R

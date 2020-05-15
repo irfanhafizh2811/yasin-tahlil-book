@@ -3,51 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/llToolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/llApplication"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ivBack"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:tint="@android:color/black"
-            app:srcCompat="@drawable/ic_arrow_back"
-            tools:ignore="ContentDescription" />
+            android:id="@+id/ivApplicationLauncher"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/ic_app_makkah_live" />
 
         <TextView
+            android:id="@+id/tvApplicationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="sans-serif"
             android:letterSpacing="0.01"
-            android:text="@string/label_our_applications"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="normal"
-            tools:targetApi="lollipop" />
+            tools:targetApi="lollipop"
+            tools:text="Streaming Baitullah" />
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvApplication"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="1dp"
+        android:background="#E8E8E8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llToolbar"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_application" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
