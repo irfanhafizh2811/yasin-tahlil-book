@@ -2,6 +2,7 @@ package com.icaali.tasbeeh.view.activity
 
 import android.os.Bundle
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.view.Tasbeeh
 import io.reactivex.disposables.CompositeDisposable
@@ -71,6 +72,37 @@ class MainActivity : BaseActivity() {
             getString(R.string.label_counter_x, counterPreference.astaghfirullah)
         tvLaailaahaillallahCount?.text =
             getString(R.string.label_counter_x, counterPreference.lailahailallah)
+
+        ivSubhanallah?.setImageDrawable(
+            getDrawableCompat(
+                R.drawable.ic_subhanallah,
+                android.R.color.black
+            )
+        )
+        ivAlhamdulillah?.setImageDrawable(
+            getDrawableCompat(
+                R.drawable.ic_alhamdulillah,
+                android.R.color.black
+            )
+        )
+        ivAllahuAkbar?.setImageDrawable(
+            getDrawableCompat(
+                R.drawable.ic_allahu_akbar,
+                android.R.color.black
+            )
+        )
+        ivAstaghfirullah?.setImageDrawable(
+            getDrawableCompat(
+                R.drawable.ic_astagfirllah,
+                android.R.color.black
+            )
+        )
+        ivLaailaahaillallah?.setImageDrawable(
+            getDrawableCompat(
+                R.drawable.ic_laailaahaillallah,
+                android.R.color.black
+            )
+        )
     }
 
     override fun onDestroy() {

@@ -8,6 +8,8 @@ import com.icaali.tasbeeh.common.TextUtils
 import com.icaali.tasbeeh.extension.activty.openPlaystore
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
+import com.icaali.tasbeeh.extension.view.gone
+import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.InterstitialPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
@@ -36,6 +38,9 @@ class TasbeehActivity : BaseActivity() {
     private val disposable = CompositeDisposable()
     private var type = TextUtils.BLANK
     private var theme: Theme? = null
+    private val tvCounters by lazy {
+        listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter4, tvCounter5)
+    }
 
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
@@ -230,7 +235,7 @@ class TasbeehActivity : BaseActivity() {
     }
 
     private fun setTextCounter(counter: Int) {
-        val textCounter = counter.toString()
+        var textCounter = counter.toString()
         tvHintCounter?.text = when (textCounter.length == 1 &&
                 textCounter.contains("1")) {
             false -> getString(R.string.label_text_counter_hint)
@@ -243,9 +248,16 @@ class TasbeehActivity : BaseActivity() {
                 text
             }
         }
-        tvCounter?.text = when {
-            counter <= 0 -> TextUtils.BLANK
-            else -> counter.toString()
+
+        tvCounters.forEachIndexed { index, textView ->
+            when {
+                index < textCounter.length -> {
+                    textView.text = textCounter.reversed()[index].toString()
+                    textView.visible()
+                }
+                else ->
+                    textView.gone()
+            }
         }
     }
 

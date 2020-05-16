@@ -7,8 +7,8 @@
     <color name="themeSelected">#b2782a</color>
     <color name="themeUnselected">#bcb5b9</color>
 
-    <color name="textHintOutputDefault">#e8d399</color>
+    <color name="textHintOutputDefault">#e5c27b</color>
     <color name="textHintOutputFlowers">#f7d4d4</color>
-    <color name="textHintOutputLeaves">#ceeae4</color>
+    <color name="textHintOutputLeaves">#f5f5f5</color>
     <color name="textHintOutputBlackWhite">#c1c5cc</color>
 </resources>

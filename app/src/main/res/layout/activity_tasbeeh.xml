@@ -106,23 +106,24 @@
 
         <ImageView
             android:id="@+id/ivDzikir"
-            android:layout_width="198dp"
-            android:layout_height="104dp"
+            android:layout_width="120dp"
+            android:layout_height="64dp"
             tools:ignore="ContentDescription"
-            tools:srcCompat="@drawable/ic_subhanallah" />
+            tools:srcCompat="@drawable/ic_astagfirllah" />
 
         <TextView
             android:id="@+id/tvDzikir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:gravity="end"
             android:letterSpacing="0.01"
-            android:textColor="#ffffff"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textStyle="normal"
             tools:targetApi="lollipop"
-            tools:text="Subhanallah" />
+            tools:text="Subhanallah"
+            tools:textColor="@android:color/black" />
 
     </LinearLayout>
 
@@ -185,18 +186,18 @@
             app:layout_constraintEnd_toEndOf="@id/ivCounterSkinBox"
             app:layout_constraintStart_toStartOf="@id/ivCounterSkinBox"
             app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
-            tools:text="00012"
+            tools:text="00000"
             tools:textColor="@color/textHintOutputFlowers"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/tvCounter"
-            android:layout_width="0dp"
+            android:id="@+id/tvCounter1"
+            android:layout_width="40sp"
             android:layout_height="0dp"
             android:fontFamily="@font/font_digital_seven"
             android:gravity="center_vertical|end"
             android:lines="1"
-            android:maxLength="5"
+            android:maxLength="1"
             android:paddingStart="0dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
@@ -205,9 +206,76 @@
             android:textSize="70sp"
             app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
             app:layout_constraintEnd_toEndOf="@id/ivCounterSkinBox"
-            app:layout_constraintStart_toStartOf="@id/ivCounterSkinBox"
             app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
-            tools:text="12" />
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter2"
+            android:layout_width="32sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter1"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter3"
+            android:layout_width="34sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter2"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter4"
+            android:layout_width="33sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter3"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter5"
+            android:layout_width="33sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter4"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
 
         <ImageView
             android:id="@+id/fabReset"
