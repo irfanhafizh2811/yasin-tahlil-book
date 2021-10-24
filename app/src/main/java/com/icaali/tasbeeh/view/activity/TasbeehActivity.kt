@@ -1,7 +1,13 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.content.Context
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
+import android.media.ToneGenerator
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.common.TextUtils
@@ -45,11 +51,17 @@ class TasbeehActivity : BaseActivity() {
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
     private val moreDialog by lazy { MoreDialog(this) }
+    private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
 
     companion object {
         const val THROTTLE_FIRST = 100L
         const val TYPE_EXTRA = "TYPE_EXTRA"
         const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
+
+        const val VIBRATE_TARGET_DURATION = 2000L
+        const val VIBRATE_CLICK_DURATION = 500L
+
+        const val MAX_VOLUME = 100
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -230,6 +242,14 @@ class TasbeehActivity : BaseActivity() {
                 }
                 else -> 0
             }
+
+            vibrate(
+                if (count % 10 == 0 && count != 0)
+                    VIBRATE_TARGET_DURATION
+                else
+                    VIBRATE_CLICK_DURATION
+            )
+            clickSound(count)
             setTextCounter(count)
         }
     }
@@ -259,6 +279,30 @@ class TasbeehActivity : BaseActivity() {
                     textView.gone()
             }
         }
+    }
+
+    private fun vibrate(duration: Long) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    duration,
+                    VibrationEffect.DEFAULT_AMPLITUDE
+                )
+            );
+        } else {
+            vibrator.vibrate(duration);
+        }
+    }
+
+    private fun clickSound(count: Int) {
+        val mp = MediaPlayer.create(
+            this@TasbeehActivity,
+            if (count % 10 == 0 && count != 0)
+                R.raw.target
+            else
+                R.raw.sound_click
+        )
+        mp.start()
     }
 
     override fun onBackPressed() {
