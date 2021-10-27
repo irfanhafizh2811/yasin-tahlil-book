@@ -39,4 +39,9 @@
     <string name="label_rating_and_review_apps">Rating and Review MyDhikr Apps</string>
     <string name="label_our_aplications">Our Aplications</string>
     <string name="label_our_applications">Our Applications</string>
+    <string name="label_vibration">Vibration</string>
+    <string name="label_sound">Sound</string>
+    <string name="label_delete">Delete Your Dhikr</string>
+    <string name="label_on">On</string>
+    <string name="label_off">Off</string>
 </resources>

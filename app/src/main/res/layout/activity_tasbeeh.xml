@@ -17,12 +17,13 @@
 
         <ImageView
             android:id="@+id/ivBack"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="?attr/actionBarItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_arrow_back"
             tools:ignore="ContentDescription" />
 
@@ -35,27 +36,15 @@
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/llMore">
 
             <ImageView
                 android:id="@+id/ivThemes"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 app:srcCompat="@drawable/ic_theme"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/tvThemes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="end"
-                android:letterSpacing="0.01"
-                android:text="@string/label_themes"
-                android:textSize="12sp"
-                android:textStyle="normal"
-                tools:targetApi="lollipop"
-                tools:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -68,27 +57,15 @@
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
                 android:id="@+id/ivMore"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_more"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_more_new"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/tvMore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="end"
-                android:letterSpacing="0.01"
-                android:text="@string/label_more"
-                android:textSize="12sp"
-                android:textStyle="normal"
-                tools:targetApi="lollipop"
-                tools:textColor="@android:color/white" />
 
         </LinearLayout>
 

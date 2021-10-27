@@ -18,10 +18,12 @@ import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.InterstitialPreference
+import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
 import com.icaali.tasbeeh.view.Tasbeeh
 import com.icaali.tasbeeh.view.dialog.ConfirmationDialog
 import com.icaali.tasbeeh.view.dialog.MoreDialog
+import com.icaali.tasbeeh.view.dialog.MoreTasbeehDialog
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeFactory
 import com.icaali.tasbeeh.view.theme.ThemeType
@@ -41,6 +43,7 @@ class TasbeehActivity : BaseActivity() {
     private val counterPreference by inject<CounterPreference>()
     private val interstitialPreference by inject<InterstitialPreference>()
     private val themesPreference by inject<ThemesPreference>()
+    private val settingPreference by inject<SettingPreference>()
     private val disposable = CompositeDisposable()
     private var type = TextUtils.BLANK
     private var theme: Theme? = null
@@ -50,7 +53,7 @@ class TasbeehActivity : BaseActivity() {
 
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
-    private val moreDialog by lazy { MoreDialog(this) }
+    private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
     private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
 
     companion object {
@@ -129,15 +132,9 @@ class TasbeehActivity : BaseActivity() {
 
         llMore?.setOnClickListener {
             moreDialog.apply {
-                setOnSelectedListener {
-                    when (it) {
-                        MoreDialog.Menu.RATING_AND_REVIEW -> {
-                            openPlaystore(packageName)
-                        }
-                        MoreDialog.Menu.APP_LINK -> {
-                            startActivity(intentFor<DeveloperAppsActivity>())
-                        }
-                    }
+                showButtonDelete(false)
+                setDeleteClickListener {
+
                 }
                 setOnDismissListener {
                     loadAdMobInterstitial()
@@ -159,10 +156,8 @@ class TasbeehActivity : BaseActivity() {
             tvHintCounter?.textColor = getColorCompat(outputHintColorRes)
 
             ivBack?.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent))
-            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more, tintColorAccent))
-            tvMore?.textColor = getColorCompat(tintColorAccent)
+            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent))
             ivThemes?.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent))
-            tvThemes?.textColor = getColorCompat(tintColorAccent)
             tvDzikir?.textColor = getColorCompat(tintColorAccent)
         }
     }
@@ -282,27 +277,31 @@ class TasbeehActivity : BaseActivity() {
     }
 
     private fun vibrate(duration: Long) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            vibrator.vibrate(
-                VibrationEffect.createOneShot(
-                    duration,
-                    VibrationEffect.DEFAULT_AMPLITUDE
-                )
-            );
-        } else {
-            vibrator.vibrate(duration);
+        if (settingPreference.vibrate) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        duration,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                );
+            } else {
+                vibrator.vibrate(duration);
+            }
         }
     }
 
     private fun clickSound(count: Int) {
-        val mp = MediaPlayer.create(
-            this@TasbeehActivity,
-            if (count % 10 == 0 && count != 0)
-                R.raw.target
-            else
-                R.raw.sound_click
-        )
-        mp.start()
+        if (settingPreference.sound) {
+            val mp = MediaPlayer.create(
+                this@TasbeehActivity,
+                if (count % 10 == 0 && count != 0)
+                    R.raw.target
+                else
+                    R.raw.sound_click
+            )
+            mp.start()
+        }
     }
 
     override fun onBackPressed() {
