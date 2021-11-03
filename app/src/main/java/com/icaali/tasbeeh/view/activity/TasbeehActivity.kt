@@ -114,6 +114,7 @@ class TasbeehActivity : BaseActivity() {
                 Tasbeeh.ASTAGHFIRULLAH -> astaghfirullah
                 else -> 0
             }
+            tvTargetCounter?.text = target.toString()
             setTextCounter(value)
         }
     }
@@ -159,6 +160,9 @@ class TasbeehActivity : BaseActivity() {
             ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent))
             ivThemes?.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent))
             tvDzikir?.textColor = getColorCompat(tintColorAccent)
+
+            ivTargetCounter?.setImageDrawable(getDrawableCompat(backgroundTargetCounterImageRes))
+            tvTargetCounter?.textColor = getColorCompat(outputHintColorRes)
         }
     }
 
@@ -239,10 +243,14 @@ class TasbeehActivity : BaseActivity() {
             }
 
             vibrate(
-                if (count % 10 == 0 && count != 0)
-                    VIBRATE_TARGET_DURATION
-                else
+                try {
+                    if (count % counterPreference.target == 0)
+                        VIBRATE_TARGET_DURATION
+                    else
+                        VIBRATE_CLICK_DURATION
+                } catch (e: ArithmeticException) {
                     VIBRATE_CLICK_DURATION
+                }
             )
             clickSound(count)
             setTextCounter(count)
@@ -295,10 +303,14 @@ class TasbeehActivity : BaseActivity() {
         if (settingPreference.sound) {
             val mp = MediaPlayer.create(
                 this@TasbeehActivity,
-                if (count % 10 == 0 && count != 0)
-                    R.raw.target
-                else
+                try {
+                    if (count % counterPreference.target == 0)
+                        R.raw.target
+                    else
+                        R.raw.sound_click
+                } catch (e: ArithmeticException) {
                     R.raw.sound_click
+                }
             )
             mp.start()
         }

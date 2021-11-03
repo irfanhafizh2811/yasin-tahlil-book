@@ -12,5 +12,6 @@ interface Theme {
     var backgroundDigitalImageRes: Int
     var backgroundScreenImageRes: Int
     var tintColorAccent: Int
+    var backgroundTargetCounterImageRes: Int
 
 }

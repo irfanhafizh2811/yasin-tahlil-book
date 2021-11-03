@@ -56,4 +56,8 @@ class ThemeFlowers : BaseTheme() {
         get() = android.R.color.white
         set(value) {}
 
+    override var backgroundTargetCounterImageRes: Int
+        get() = R.drawable.bg_target_counter_flowers
+        set(value) {}
+
 }

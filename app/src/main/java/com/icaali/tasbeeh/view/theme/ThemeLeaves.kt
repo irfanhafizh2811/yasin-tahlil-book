@@ -56,4 +56,8 @@ class ThemeLeaves : BaseTheme() {
         get() = android.R.color.black
         set(value) {}
 
+    override var backgroundTargetCounterImageRes: Int
+        get() = R.drawable.bg_target_counter_leaves
+        set(value) {}
+
 }
