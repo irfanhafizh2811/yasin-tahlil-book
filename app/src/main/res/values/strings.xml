@@ -44,4 +44,10 @@
     <string name="label_delete">Delete Your Dhikr</string>
     <string name="label_on">On</string>
     <string name="label_off">Off</string>
+    <string name="label_target_dhikr">Target Dhikr</string>
+    <string name="hint_target_dhikr">Enter the number of your reminder dhikr</string>
+    <string name="label_simpan">Save</string>
+    <string name="label_information">Information</string>
+    <string name="label_desc_information_target_change">Changes made will be applied to all dhikr</string>
+    <string name="label_dont_show_again">Don\'t show it again</string>
 </resources>

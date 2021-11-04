@@ -3,7 +3,6 @@ package com.icaali.tasbeeh.view.activity
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
-import android.media.ToneGenerator
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -11,7 +10,6 @@ import android.os.Vibrator
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.common.TextUtils
-import com.icaali.tasbeeh.extension.activty.openPlaystore
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
@@ -21,19 +19,15 @@ import com.icaali.tasbeeh.preference.InterstitialPreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
 import com.icaali.tasbeeh.view.Tasbeeh
-import com.icaali.tasbeeh.view.dialog.ConfirmationDialog
-import com.icaali.tasbeeh.view.dialog.MoreDialog
-import com.icaali.tasbeeh.view.dialog.MoreTasbeehDialog
+import com.icaali.tasbeeh.view.dialog.*
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeFactory
 import com.icaali.tasbeeh.view.theme.ThemeType
-import com.icaali.tasbeeh.view.dialog.ThemesDialog
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_tasbeeh.*
 import org.jetbrains.anko.backgroundDrawable
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
 import java.util.concurrent.TimeUnit
@@ -54,6 +48,21 @@ class TasbeehActivity : BaseActivity() {
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
     private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
+    private val targetChangeInformationDialog by lazy {
+        TargetChangeInformationDialog(
+            this,
+            settingPreference
+        )
+    }
+    private val targetDhikrDialog by lazy {
+        TargetDhikrDialog(this) {
+            counterPreference.target = it
+            tvTargetCounter?.text = it.toString()
+            if (settingPreference.showPopupAgain)
+                targetChangeInformationDialog.show()
+        }
+    }
+
     private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
 
     companion object {
@@ -101,6 +110,9 @@ class TasbeehActivity : BaseActivity() {
                     count()
                 }
         )
+        clTargetCounter?.setOnClickListener {
+            targetDhikrDialog.show(counterPreference.target)
+        }
         loadBanner(adViewContainer)
     }
 
