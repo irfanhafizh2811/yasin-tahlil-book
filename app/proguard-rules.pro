@@ -262,10 +262,12 @@
 # This rule will properly ProGuard all the model classes in
 # the package com.yourcompany.models. Modify to fit the structure
 # of your app.
--keepclassmembers class com.anak.bunda.model.** {
+-keepclassmembers class com.icaali.tasbeeh.** {
   *;
 }
 
 #UX-CAM
 -keep class com.uxcam.** { *; }
 -dontwarn com.uxcam.**
+
+-keep class androidx.core.app.CoreComponentFactory { *; }

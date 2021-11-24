@@ -50,4 +50,5 @@
     <string name="label_information">Information</string>
     <string name="label_desc_information_target_change">Changes made will be applied to all dhikr</string>
     <string name="label_dont_show_again">Don\'t show it again</string>
+    <string name="label_add_dhikr">Add Dhikr</string>
 </resources>

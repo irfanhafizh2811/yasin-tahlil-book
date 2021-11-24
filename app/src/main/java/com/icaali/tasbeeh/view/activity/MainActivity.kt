@@ -1,19 +1,31 @@
 package com.icaali.tasbeeh.view.activity
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.database.table.Dhikr
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
+import com.icaali.tasbeeh.extension.view.gone
+import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.view.Tasbeeh
+import com.icaali.tasbeeh.view.adapter.DhikrAdapter
+import com.icaali.tasbeeh.view.dialog.AddCustomDialog
+import com.icaali.tasbeeh.vm.DhikrViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
 
-    private val counterPreference by inject<CounterPreference>()
+    private val counterPreference: CounterPreference by inject()
+    val dhikrViewModel: DhikrViewModel by viewModel()
     private val disposable = CompositeDisposable()
+
+    private val dhikrAdapter by lazy { DhikrAdapter() }
+    private val addCustomDialog by lazy { AddCustomDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +70,30 @@ class MainActivity : BaseActivity() {
                 )
             )
         }
+        rvAddDhikr.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity);
+            adapter = dhikrAdapter
+        }
+
+        cvAddDhikr?.setOnClickListener {
+            addCustomDialog.setOnPositiveListener {
+                dhikrViewModel.insert(it)
+            }.show()
+        }
+
+        dhikrViewModel.dhikrs.observe(this, {
+            when {
+                it.isEmpty() -> {
+                    rvAddDhikr.gone()
+                    tvYourDhikr.gone()
+                }
+                else -> {
+                    rvAddDhikr.visible()
+                    tvYourDhikr.visible()
+                    dhikrAdapter.submitList(it)
+                }
+            }
+        })
     }
 
     override fun onResume() {
