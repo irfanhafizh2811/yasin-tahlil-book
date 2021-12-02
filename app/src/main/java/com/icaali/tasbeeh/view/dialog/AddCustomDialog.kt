@@ -27,7 +27,7 @@ class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
         btnSave?.setOnClickListener {
             val latinDhikr = edtAddDhikr.text.toString()
             val dhikr = when {
-                null != dhikr ->
+                null == dhikr ->
                     Dhikr(id = latinDhikr, arabic = TextUtils.BLANK, latin = latinDhikr, count = 0)
                 else -> dhikr
             }

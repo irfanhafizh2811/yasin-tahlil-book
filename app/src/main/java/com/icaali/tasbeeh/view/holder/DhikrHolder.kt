@@ -10,11 +10,12 @@ import kotlinx.android.synthetic.main.item_dhikr.view.*
 
 class DhikrHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(dhikr: Dhikr) {
+    fun bind(onClickListener: (Dhikr) -> Unit, dhikr: Dhikr) {
         val (_, _, latin, count) = dhikr
         with(itemView) {
             tvDhikrLatin.text = latin
-            tvDhikrCount.text = count.toString()
+            tvDhikrCount.text = "$count".plus("x")
+            cvDhikr.setOnClickListener { onClickListener(dhikr) }
         }
     }
 

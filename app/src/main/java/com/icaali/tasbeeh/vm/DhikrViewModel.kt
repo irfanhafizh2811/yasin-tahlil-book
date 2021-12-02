@@ -20,6 +20,14 @@ class DhikrViewModel(private val repository: DhikrRepository) : ViewModel() {
         repository.insert(dhikr)
     }
 
+    fun update(dhikr: Dhikr) = viewModelScope.launch {
+        repository.update(dhikr)
+    }
+
+    fun delete(dhikr: Dhikr) = viewModelScope.launch {
+        repository.delete(dhikr)
+    }
+
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
     }

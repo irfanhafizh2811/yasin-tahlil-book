@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import com.icaali.tasbeeh.database.table.Dhikr
 import com.icaali.tasbeeh.view.holder.DhikrHolder
 
-class DhikrAdapter : ListAdapter<Dhikr, DhikrHolder>(DhikrComparator()) {
+class DhikrAdapter(val onClickListener: (Dhikr) -> Unit) :
+    ListAdapter<Dhikr, DhikrHolder>(DhikrComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DhikrHolder =
         DhikrHolder.create(parent)
 
     override fun onBindViewHolder(holder: DhikrHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(onClickListener, getItem(position))
 
     class DhikrComparator : DiffUtil.ItemCallback<Dhikr>() {
         override fun areItemsTheSame(oldItem: Dhikr, newItem: Dhikr): Boolean {

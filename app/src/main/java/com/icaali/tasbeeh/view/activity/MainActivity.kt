@@ -24,7 +24,18 @@ class MainActivity : BaseActivity() {
     val dhikrViewModel: DhikrViewModel by viewModel()
     private val disposable = CompositeDisposable()
 
-    private val dhikrAdapter by lazy { DhikrAdapter() }
+    private val dhikrAdapter by lazy {
+        DhikrAdapter {
+            startActivity(
+                intentFor<TasbeehActivity>(
+                    TasbeehActivity.TYPE_EXTRA to Tasbeeh.CUSTOM,
+                    TasbeehActivity.TASBEEH_LATIN_EXTRA to it.latin,
+                    TasbeehActivity.TASBEEH_DHIKR_EXTRA to it
+                )
+            )
+        }
+    }
+
     private val addCustomDialog by lazy { AddCustomDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +82,7 @@ class MainActivity : BaseActivity() {
             )
         }
         rvAddDhikr.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity);
+            layoutManager = LinearLayoutManager(this@MainActivity).apply { reverseLayout = true }
             adapter = dhikrAdapter
         }
 

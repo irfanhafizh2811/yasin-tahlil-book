@@ -10,6 +10,7 @@ import android.os.Vibrator
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.database.table.Dhikr
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
@@ -23,6 +24,7 @@ import com.icaali.tasbeeh.view.dialog.*
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeFactory
 import com.icaali.tasbeeh.view.theme.ThemeType
+import com.icaali.tasbeeh.vm.DhikrViewModel
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -30,6 +32,7 @@ import kotlinx.android.synthetic.main.activity_tasbeeh.*
 import org.jetbrains.anko.backgroundDrawable
 import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 class TasbeehActivity : BaseActivity() {
@@ -40,11 +43,13 @@ class TasbeehActivity : BaseActivity() {
     private val settingPreference by inject<SettingPreference>()
     private val disposable = CompositeDisposable()
     private var type = TextUtils.BLANK
+    private var dhikr = Dhikr(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
     private var theme: Theme? = null
     private val tvCounters by lazy {
         listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter4, tvCounter5)
     }
 
+    val dhikrViewModel: DhikrViewModel by viewModel()
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
     private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
@@ -69,6 +74,7 @@ class TasbeehActivity : BaseActivity() {
         const val THROTTLE_FIRST = 100L
         const val TYPE_EXTRA = "TYPE_EXTRA"
         const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
+        const val TASBEEH_DHIKR_EXTRA = "TASBEEH_DHIKR_EXTRA"
 
         const val VIBRATE_TARGET_DURATION = 2000L
         const val VIBRATE_CLICK_DURATION = 500L
@@ -80,6 +86,7 @@ class TasbeehActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         type = intent?.getStringExtra(TYPE_EXTRA) ?: TextUtils.BLANK
         setContentView(R.layout.activity_tasbeeh)
+        setViewTypeCustom()
         selectedTheme()
         setupDialog()
         ivBack?.setOnClickListener { finish() }
@@ -116,9 +123,29 @@ class TasbeehActivity : BaseActivity() {
         loadBanner(adViewContainer)
     }
 
+    private fun setViewTypeCustom() {
+        if (type.equals(Tasbeeh.CUSTOM, true)) {
+            intent?.getParcelableExtra<Dhikr>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
+            llDelete?.apply {
+                visible()
+                setOnClickListener {
+                    confirmationDialog.apply {
+                        setOnDismissListener { loadAdMobInterstitial() }
+                        setText(getString(R.string.label_message_delete_confirm))
+                        setOnPositiveListener {
+                            dhikrViewModel.delete(dhikr)
+                            finish()
+                        }
+                    }.show()
+                }
+            }
+        }
+    }
+
     private fun initTasbeeh() {
         with(counterPreference) {
             val value = when (type) {
+                Tasbeeh.CUSTOM -> dhikr.count
                 Tasbeeh.SUBHANALLAH -> subhanallah
                 Tasbeeh.ALHAMDULILLAH -> alhamdulillah
                 Tasbeeh.LAILAHAILALLAH -> lailahailallah
@@ -159,7 +186,8 @@ class TasbeehActivity : BaseActivity() {
     private fun selectedTheme() {
         theme = ThemeFactory.generate(themesPreference.type)
         theme?.run {
-            ivDzikir?.setImageDrawable(getDzikirImage())
+            if (!this@TasbeehActivity.type.equals(Tasbeeh.CUSTOM, false))
+                ivDzikir?.setImageDrawable(getDzikirImage())
 
             clRootLayout?.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes)
             ivSkin?.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes))
@@ -231,6 +259,10 @@ class TasbeehActivity : BaseActivity() {
     private fun count() {
         with(counterPreference) {
             val count = when (type) {
+                Tasbeeh.CUSTOM -> {
+                    dhikr.count += 1
+                    dhikr.count
+                }
                 Tasbeeh.SUBHANALLAH -> {
                     subhanallah += 1
                     subhanallah
@@ -293,6 +325,10 @@ class TasbeehActivity : BaseActivity() {
                 else ->
                     textView.gone()
             }
+        }
+        if (type.equals(Tasbeeh.CUSTOM, true)) {
+            dhikr.count = counter
+            dhikrViewModel.update(dhikr)
         }
     }
 

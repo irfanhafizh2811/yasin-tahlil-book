@@ -28,6 +28,29 @@
             tools:ignore="ContentDescription" />
 
         <LinearLayout
+            android:id="@+id/llDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/actionBarItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/llThemes"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_delete"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/llThemes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,11 +132,11 @@
         android:id="@+id/clTargetCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="24dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/llDzikir"
-        app:layout_constraintBottom_toTopOf="@id/vwCounter">
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@id/vwCounter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llDzikir">
 
         <ImageView
             android:id="@+id/ivTargetCounter"
@@ -130,39 +153,29 @@
             android:id="@+id/tvTargetCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/ivTargetCounter"
-            app:layout_constraintEnd_toEndOf="@id/ivTargetCounter"
-            app:layout_constraintStart_toStartOf="@id/ivTargetCounter"
-            app:layout_constraintTop_toTopOf="@id/ivTargetCounter"
             android:fontFamily="sans-serif"
             android:letterSpacing="0.01"
             android:textSize="15sp"
             android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/ivTargetCounter"
+            app:layout_constraintEnd_toEndOf="@id/ivTargetCounter"
+            app:layout_constraintStart_toStartOf="@id/ivTargetCounter"
+            app:layout_constraintTop_toTopOf="@id/ivTargetCounter"
             tools:targetApi="lollipop"
-            tools:textColor="@android:color/black"
-            tools:text="33"/>
+            tools:text="33"
+            tools:textColor="@android:color/black" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/vwCenter"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vwCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        app:layout_constraintBottom_toTopOf="@id/vwCenter"
+        app:layout_constraintBottom_toTopOf="@+id/adViewContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vwCenter">
+        app:layout_constraintTop_toBottomOf="@id/llDzikir">
 
         <ImageView
             android:id="@+id/ivSkin"

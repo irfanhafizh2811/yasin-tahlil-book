@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/clContainer"
     android:padding="20dp">
 
     <TextView
@@ -47,15 +47,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif"
+        android:imeOptions="actionDone"
         android:letterSpacing="0.01"
-        android:text="@string/label_message_dialog_reset"
         android:textColor="#000000"
         android:textSize="14sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vwDivider"
-        tools:targetApi="lollipop" />
+        tools:targetApi="lollipop"
+        tools:text="@string/label_message_dialog_reset" />
 
     <Button
         android:id="@+id/btnCancel"

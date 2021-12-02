@@ -1,9 +1,6 @@
 package com.icaali.tasbeeh.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.icaali.tasbeeh.database.table.Dhikr
 import kotlinx.coroutines.flow.Flow
 
@@ -15,6 +12,12 @@ interface DhikrDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(dhikr: Dhikr)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(dhikr: Dhikr)
+
+    @Delete
+    suspend fun delete(dhikr: Dhikr)
 
     @Query("DELETE FROM dhirk_table")
     suspend fun deleteAll()

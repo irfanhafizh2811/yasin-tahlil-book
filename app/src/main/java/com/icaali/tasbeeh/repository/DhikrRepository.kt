@@ -24,7 +24,26 @@ class DhikrRepository(private val dhikrDao: DhikrDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
+    suspend fun update(dhikr: Dhikr) {
+        dhikrDao.update(dhikr)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun delete(dhikr: Dhikr) {
+        dhikrDao.delete(dhikr)
+    }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun deleteAll() {
         dhikrDao.deleteAll()
+    }
+
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun getDhikrs() {
+        dhikrDao.getDhikrs()
     }
 }
