@@ -2,7 +2,7 @@
 <resources>
     <string name="okhttp_log_level" translatable="false">NONE</string>
     <string name="firebase_sender_id">836493472986</string>
-    <string name="app_name">Tasbeeh</string>
+    <string name="app_name">MyDhikr</string>
     <string name="app_env">production</string>
     <string name="firebase_realtime_database_collection_id">1qLTNuZ5qfS3iOItkS5GW4reruO_i46VMUPgH0shu270</string>
     <string name="id_addmob">ca-app-pub-5079073523461972~9127057853</string>

@@ -6,8 +6,8 @@ import android.util.DisplayMetrics
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.*
+import com.google.android.gms.ads.admanager.AdManagerInterstitialAd
 import com.icaali.tasbeeh.BuildConfig
-import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.extension.ads.loadAd
 import com.icaali.tasbeeh.extension.ads.loadAdMob
 import com.icaali.tasbeeh.extension.ads.loadAdMobTest
@@ -15,14 +15,14 @@ import com.icaali.tasbeeh.extension.ads.loadAdMobTest
 open class BaseActivity : AppCompatActivity() {
 
     protected lateinit var requestConfiguration: RequestConfiguration
-    protected val mInterstitialAd: InterstitialAd by lazy { InterstitialAd(this) }
+    protected var mInterstitialAd: AdManagerInterstitialAd? = null
     protected val mAdView: AdView by lazy { AdView(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestConfiguration = when (isTestAdmob()) {
             true -> {
-                val deviceId = "3200cbcb466bb599"
+                val deviceId = "040A8B4F3C09E831C2C1A355CBBCA3ED"
                 RequestConfiguration.Builder()
                     .setTestDeviceIds(listOf(deviceId))
                     .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
@@ -33,10 +33,9 @@ open class BaseActivity : AppCompatActivity() {
                     .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
                     .build()
             }
-
         }
         MobileAds.setRequestConfiguration(requestConfiguration)
-        MobileAds.initialize(this, getString(R.string.id_addmob))
+        MobileAds.initialize(this)
     }
 
     protected fun isTestAdmob(): Boolean {
@@ -47,18 +46,31 @@ open class BaseActivity : AppCompatActivity() {
         return (BuildConfig.BUILD_TYPE == "release" && BuildConfig.FLAVOR == "production")
     }
 
-    fun loadAdMobInterstitial(){
-        with(mInterstitialAd) {
-            when (isTestAdmob()) {
-                true -> {
-                    loadAdMobTest(this@BaseActivity) {
+    fun loadAdMobInterstitial() {
+        when (isTestAdmob()) {
+            true -> {
+                loadAdMobTest(this@BaseActivity) {
+                    mInterstitialAd = it
+                    mInterstitialAd?.show(this)
+                }
+            }
+            else -> {
+                if (isProductionRelease())
+                    loadAd(this@BaseActivity) {
+                        mInterstitialAd = it
+                        mInterstitialAd?.fullScreenContentCallback = object :
+                            FullScreenContentCallback() {
+                            override fun onAdShowedFullScreenContent() {
+                                super.onAdShowedFullScreenContent()
+                            }
 
+                            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                                super.onAdFailedToShowFullScreenContent(p0)
+                                mInterstitialAd = null
+                            }
+                        }
+                        mInterstitialAd?.show(this)
                     }
-                }
-                else -> {
-                    if (isProductionRelease())
-                        loadAd(this@BaseActivity) { }
-                }
             }
         }
     }

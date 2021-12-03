@@ -7,7 +7,15 @@ import android.util.Log
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.extension.common.clazz
 import com.google.ads.mediation.admob.AdMobAdapter
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.admanager.AdManagerInterstitialAd
+import com.google.android.gms.ads.admanager.AdManagerAdRequest
+import com.google.android.gms.ads.admanager.AdManagerInterstitialAdLoadCallback
+import com.icaali.tasbeeh.view.activity.BaseActivity
 
 @SuppressLint("HardwareIds")
 fun AdView.loadAdMob(
@@ -30,6 +38,10 @@ fun AdView.loadAdMob(
                 super.onAdLoaded()
                 onAdLoaded.invoke()
                 Log.d(clazz<AdView>().name, "onAdLoaded")
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                super.onAdFailedToLoad(p0)
             }
 
         }
@@ -59,10 +71,6 @@ fun AdView.loadAdMobTest(
                 Log.d(clazz<AdView>().name, "onAdLoaded")
             }
 
-            override fun onAdFailedToLoad(errorCode: Int) {
-                Log.d(clazz<AdView>().name, "onAdFailedToLoad : $errorCode")
-            }
-
             override fun onAdOpened() {
                 Log.d(clazz<AdView>().name, "onAdOpened")
             }
@@ -71,12 +79,12 @@ fun AdView.loadAdMobTest(
                 Log.d(clazz<AdView>().name, "onAdClicked")
             }
 
-            override fun onAdLeftApplication() {
-                Log.d(clazz<AdView>().name, "onAdLeftApplication")
-            }
-
             override fun onAdClosed() {
                 Log.d(clazz<AdView>().name, "onAdClosed")
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                super.onAdFailedToLoad(p0)
             }
         }
     } catch (e: Exception) {
@@ -84,68 +92,43 @@ fun AdView.loadAdMobTest(
     }
 }
 
-fun InterstitialAd.loadAd(context: Context, onAdLoaded: () -> Unit) {
+fun BaseActivity.loadAd(context: Context, onAdLoaded: (AdManagerInterstitialAd) -> Unit) {
     try {
-        adUnitId = context.getString(R.string.id_unit_interstitial)
-        val extras = Bundle()
-        extras.putString("max_ad_content_rating", "G")
-        val adRequest = AdRequest.Builder()
-            .addNetworkExtrasBundle(clazz<AdMobAdapter>(), extras)
-            .build()
-        if (!adRequest.isTestDevice(context)) {
-            loadAd(adRequest)
-            adListener = object : AdListener() {
-
-                override fun onAdLoaded() {
-                    super.onAdLoaded()
-                    onAdLoaded.invoke()
-                    Log.d(clazz<AdView>().name, "onAdLoaded")
-                    show()
+        AdManagerInterstitialAd.load(
+            context,
+            context.getString(R.string.id_unit_interstitial),
+            AdManagerAdRequest.Builder().build(),
+            object : AdManagerInterstitialAdLoadCallback() {
+                override fun onAdLoaded(p0: AdManagerInterstitialAd) {
+                    super.onAdLoaded(p0)
+                    onAdLoaded.invoke(p0)
                 }
 
-            }
-        }
+                override fun onAdFailedToLoad(p0: LoadAdError) {
+                    super.onAdFailedToLoad(p0)
+                }
+            })
     } catch (e: Exception) {
         e.printStackTrace()
     }
 }
 
-fun InterstitialAd.loadAdMobTest(context: Context, onAdLoaded: () -> Unit) {
+fun BaseActivity.loadAdMobTest(context: Context, onAdLoaded: (AdManagerInterstitialAd) -> Unit) {
     try {
-        adUnitId = context.getString(R.string.id_unit_interstitial_sample_test)
-        val extras = Bundle()
-        extras.putString("max_ad_content_rating", "G")
-        val adRequest = AdRequest.Builder()
-            .addNetworkExtrasBundle(clazz<AdMobAdapter>(), extras)
-            .build()
-        loadAd(adRequest)
-        adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                onAdLoaded.invoke()
-                show()
-                Log.d(clazz<AdView>().name, "onAdLoaded")
-            }
+        AdManagerInterstitialAd.load(
+            context,
+            context.getString(R.string.id_unit_interstitial_sample_test),
+            AdManagerAdRequest.Builder().build(),
+            object : AdManagerInterstitialAdLoadCallback() {
+                override fun onAdLoaded(p0: AdManagerInterstitialAd) {
+                    super.onAdLoaded(p0)
+                    onAdLoaded.invoke(p0)
+                }
 
-            override fun onAdFailedToLoad(errorCode: Int) {
-                Log.d(clazz<AdView>().name, "onAdFailedToLoad : $errorCode")
-            }
-
-            override fun onAdOpened() {
-                Log.d(clazz<AdView>().name, "onAdOpened")
-            }
-
-            override fun onAdClicked() {
-                Log.d(clazz<AdView>().name, "onAdClicked")
-            }
-
-            override fun onAdLeftApplication() {
-                Log.d(clazz<AdView>().name, "onAdLeftApplication")
-            }
-
-            override fun onAdClosed() {
-                Log.d(clazz<AdView>().name, "onAdClosed")
-            }
-        }
+                override fun onAdFailedToLoad(p0: LoadAdError) {
+                    super.onAdFailedToLoad(p0)
+                }
+            })
     } catch (e: Exception) {
         e.printStackTrace()
     }

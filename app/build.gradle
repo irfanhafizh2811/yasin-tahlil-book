@@ -101,7 +101,7 @@ dependencies {
 
     //Ads
     implementation libraries.playServiceAds
-    implementation 'com.google.firebase:firebase-ads:19.0.1'
+    implementation 'com.google.firebase:firebase-ads:20.5.0'
 
     //Dependency Injection
     implementation libraries.koinCore

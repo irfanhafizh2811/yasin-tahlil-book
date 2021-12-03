@@ -364,17 +364,6 @@ class TasbeehActivity : BaseActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        when {
-            mInterstitialAd.isLoaded -> {
-                loadAdMobInterstitial()
-            }
-            else -> {
-                super.onBackPressed()
-            }
-        }
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()
