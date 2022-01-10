@@ -1,16 +1,23 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.database.table.Dhikr
+import com.icaali.tasbeeh.extension.activty.openPlaystore
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
+import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.view.Tasbeeh
 import com.icaali.tasbeeh.view.adapter.DhikrAdapter
 import com.icaali.tasbeeh.view.dialog.AddCustomDialog
+import com.icaali.tasbeeh.view.dialog.MoreDialog
 import com.icaali.tasbeeh.vm.DhikrViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,6 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity() {
 
     private val counterPreference: CounterPreference by inject()
+    private val settingPreference by inject<SettingPreference>()
     val dhikrViewModel: DhikrViewModel by viewModel()
     private val disposable = CompositeDisposable()
 
@@ -37,6 +45,12 @@ class MainActivity : BaseActivity() {
     }
 
     private val addCustomDialog by lazy { AddCustomDialog(this) }
+    private val moreDialog by lazy { MoreDialog(this, settingPreference) }
+
+    companion object {
+        private const val CHROME_PACKAGE_NAME = "com.android.chrome"
+        private const val MYDHIKR_INSTAGRAM_URL = "https://www.instagram.com/mydhikr/"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +119,21 @@ class MainActivity : BaseActivity() {
                 }
             }
         })
+
+        llMore?.setOnClickListener {
+            moreDialog.apply {
+                setOnSelectedListener {
+                    when (it) {
+                        MoreDialog.Menu.LANGUAGE -> {
+                        }
+                        MoreDialog.Menu.RATING_AND_REVIEW -> openPlaystore(packageName)
+                        MoreDialog.Menu.SHARE -> shareMyDhikr()
+                        MoreDialog.Menu.INSTAGRAM -> openInstagramMyDhikr()
+                    }
+                }
+                show()
+            }
+        }
     }
 
     override fun onResume() {
@@ -155,5 +184,33 @@ class MainActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()
+    }
+
+    private fun shareMyDhikr() {
+        val shareText =
+            "Alhamdulillah ini aplikasi favorit saya yang selalu digunakan ketika melakukan Zikir. Namanya MyDhikr, Kamu perlu coba! https://play.google.com/store/apps/details?id=com.icaali.tasbeeh"
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, shareText)
+        }
+        startActivity(Intent.createChooser(shareIntent, getString(R.string.label_share_text)))
+    }
+
+    private fun openInstagramMyDhikr() {
+        val uri = Uri.parse(MYDHIKR_INSTAGRAM_URL)
+        val builder = CustomTabsIntent.Builder().apply {
+            setToolbarColor(ContextCompat.getColor(this@MainActivity, R.color.colorPrimaryDark))
+            setShowTitle(true)
+        }.build()
+        builder.intent.data = uri
+        val resolveInfoList =
+            packageManager.queryIntentActivities(builder.intent, PackageManager.MATCH_DEFAULT_ONLY)
+        resolveInfoList.forEach {
+            val packageName = it.activityInfo.packageName
+            if (packageName.equals(CHROME_PACKAGE_NAME, true)) {
+                builder.intent.setPackage(CHROME_PACKAGE_NAME)
+            }
+        }
+        builder.launchUrl(this, builder.intent.data)
     }
 }

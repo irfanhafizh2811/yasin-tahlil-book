@@ -3,15 +3,20 @@ package com.icaali.tasbeeh.view.dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.preference.SettingPreference
 import kotlinx.android.synthetic.main.dialog_bottom_more.*
 
-class MoreDialog(context: Context) : BottomSheetDialog(context) {
+class MoreDialog(context: Context, private val settingPreference: SettingPreference) :
+    BottomSheetDialog(context) {
 
     enum class Menu {
+        LANGUAGE,
         RATING_AND_REVIEW,
-        APP_LINK
+        SHARE,
+        INSTAGRAM
     }
 
     private var onSelectedListener: ((Menu) -> Unit)? = null
@@ -29,16 +34,43 @@ class MoreDialog(context: Context) : BottomSheetDialog(context) {
             dismiss()
             onSelectedListener?.invoke(Menu.RATING_AND_REVIEW)
         }
-        llLinkApp?.setOnClickListener {
+        llInstagram?.setOnClickListener {
             dismiss()
-            onSelectedListener?.invoke(Menu.APP_LINK)
+            onSelectedListener?.invoke(Menu.INSTAGRAM)
         }
+        llLanguage?.setOnClickListener {
+            dismiss()
+            onSelectedListener?.invoke(Menu.LANGUAGE)
+        }
+        llShare?.setOnClickListener {
+            dismiss()
+            onSelectedListener?.invoke(Menu.SHARE)
+        }
+
         ivClose?.setOnClickListener { dismiss() }
+
+        swNotification?.run {
+            isChecked = settingPreference.notification
+            setOnCheckedChangeListener { _, isChecked ->
+                settingPreference.notification = isChecked
+                setTextSwitch(tvLabelSwitchNotification, isChecked)
+            }
+        }
+
+        setTextSwitch(tvLabelSwitchNotification, settingPreference.notification)
     }
 
     fun setOnSelectedListener(onSelectedListener: (Menu) -> Unit): MoreDialog {
         this.onSelectedListener = onSelectedListener
         return this
+    }
+
+    private fun setTextSwitch(view: TextView, isChecked: Boolean) {
+        view.text = if (isChecked) {
+            context.getString(R.string.label_on)
+        } else {
+            context.getString(R.string.label_off)
+        }
     }
 
 }
