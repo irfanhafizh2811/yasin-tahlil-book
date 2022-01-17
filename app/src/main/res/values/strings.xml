@@ -57,4 +57,6 @@
     <string name="label_share">Share to your friends</string>
     <string name="label_instagram">Follow MyDhikr on Instagram</string>
     <string name="label_share_text">Share My Dhikr Apps</string>
+    <string name="label_notification_title">Have you done dhikr today?</string>
+    <string name="label_notification_text">Don\'t forget to dhikr with MyDhikr Apps...</string>
 </resources>

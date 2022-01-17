@@ -7,6 +7,7 @@ class SettingPreference(val corePreference: CorePreference) {
         private const val SOUND = "sound"
         private const val SHOW_POPUP_AGAIN = "show_popup_again"
         private const val NOTIFICATION = "notification"
+        private const val TIME_NOTIFICATION = "time_notification"
     }
 
     var vibrate: Boolean
@@ -24,5 +25,9 @@ class SettingPreference(val corePreference: CorePreference) {
     var notification: Boolean
         set(value) = corePreference.setBoolean(NOTIFICATION, value)
         get() = corePreference.getBoolean(NOTIFICATION, true)
+
+    var timeNotification: Long
+        set(value) = corePreference.setLong(TIME_NOTIFICATION, value)
+        get() = corePreference.getLong(TIME_NOTIFICATION, 0)
 
 }
