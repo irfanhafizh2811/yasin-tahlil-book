@@ -25,7 +25,6 @@ class TasbeehApp : MultiDexApplication() {
 
     companion object {
         const val CHANNEL_ID = "Tasbeeh.notification"
-        const val HOUR_TO_SHOW_PUSH = 19
     }
 
     // No need to cancel this scope as it'll be torn down with the process
@@ -55,38 +54,6 @@ class TasbeehApp : MultiDexApplication() {
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             notificationManager.createNotificationChannel(channel)
-        }
-        schedulePushNotification()
-    }
-
-    private fun schedulePushNotification() {
-        val settingPreference =
-            SettingPreference(CorePreference.getInstance(applicationContext))
-        if (settingPreference.timeNotification == 0L || System.currentTimeMillis() > settingPreference.timeNotification) {
-
-            val alarmManager =
-                applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val intent = Intent(applicationContext, NotificationReceiver::class.java)
-            val alarmPendingIntent = PendingIntent.getBroadcast(applicationContext, 0, intent, 0)
-
-            val calendar = Calendar.getInstance().apply {
-                if (get(Calendar.HOUR_OF_DAY) >= HOUR_TO_SHOW_PUSH) {
-                    add(Calendar.DAY_OF_MONTH, 1)
-                }
-                set(Calendar.HOUR_OF_DAY, HOUR_TO_SHOW_PUSH)
-                set(Calendar.MINUTE, 0)
-                set(Calendar.SECOND, 0)
-                set(Calendar.MILLISECOND, 0)
-
-
-                settingPreference.timeNotification = timeInMillis
-            }
-
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                alarmPendingIntent
-            )
         }
     }
 
