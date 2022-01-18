@@ -48,6 +48,7 @@
         android:layout_marginTop="27dp"
         android:backgroundTint="#E8E8E8"
         android:hint="@string/hint_target_dhikr"
+        android:imeOptions="actionDone"
         android:inputType="number"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
