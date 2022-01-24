@@ -11,6 +11,7 @@ import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.common.TextUtils
 import com.icaali.tasbeeh.database.table.Dhikr
+import com.icaali.tasbeeh.extension.activty.isCustomType
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
@@ -42,14 +43,12 @@ class TasbeehActivity : BaseActivity() {
     private val themesPreference by inject<ThemesPreference>()
     private val settingPreference by inject<SettingPreference>()
     private val disposable = CompositeDisposable()
-    private var type = TextUtils.BLANK
     private var dhikr = Dhikr(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
     private var theme: Theme? = null
     private val tvCounters by lazy {
         listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter4, tvCounter5)
     }
 
-    val dhikrViewModel: DhikrViewModel by viewModel()
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
     private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
@@ -69,6 +68,9 @@ class TasbeehActivity : BaseActivity() {
     }
 
     private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
+
+    var type = TextUtils.BLANK
+    val dhikrViewModel: DhikrViewModel by viewModel()
 
     companion object {
         const val THROTTLE_FIRST = 100L
@@ -124,22 +126,8 @@ class TasbeehActivity : BaseActivity() {
     }
 
     private fun setViewTypeCustom() {
-        if (type.equals(Tasbeeh.CUSTOM, true)) {
+        if (isCustomType())
             intent?.getParcelableExtra<Dhikr>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
-            llDelete?.apply {
-                visible()
-                setOnClickListener {
-                    confirmationDialog.apply {
-                        setOnDismissListener { loadAdMobInterstitial() }
-                        setText(getString(R.string.label_message_delete_confirm))
-                        setOnPositiveListener {
-                            dhikrViewModel.delete(dhikr)
-                            finish()
-                        }
-                    }.show()
-                }
-            }
-        }
     }
 
     private fun initTasbeeh() {
@@ -172,9 +160,17 @@ class TasbeehActivity : BaseActivity() {
 
         llMore?.setOnClickListener {
             moreDialog.apply {
-                showButtonDelete(false)
+                showButtonDelete(isCustomType())
                 setDeleteClickListener {
-
+                    dismiss()
+                    confirmationDialog.apply {
+                        setOnDismissListener { loadAdMobInterstitial() }
+                        setText(getString(R.string.label_message_delete_confirm))
+                        setOnPositiveListener {
+                            dhikrViewModel.delete(dhikr)
+                            finish()
+                        }
+                    }.show()
                 }
                 setOnDismissListener {
                     loadAdMobInterstitial()
@@ -186,8 +182,7 @@ class TasbeehActivity : BaseActivity() {
     private fun selectedTheme() {
         theme = ThemeFactory.generate(themesPreference.type)
         theme?.run {
-            if (!this@TasbeehActivity.type.equals(Tasbeeh.CUSTOM, false))
-                ivDzikir?.setImageDrawable(getDzikirImage())
+            if (!isCustomType()) ivDzikir?.setImageDrawable(getDzikirImage())
 
             clRootLayout?.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes)
             ivSkin?.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes))
@@ -326,7 +321,7 @@ class TasbeehActivity : BaseActivity() {
                     textView.gone()
             }
         }
-        if (type.equals(Tasbeeh.CUSTOM, true)) {
+        if (isCustomType()) {
             dhikr.count = counter
             dhikrViewModel.update(dhikr)
         }
@@ -340,7 +335,7 @@ class TasbeehActivity : BaseActivity() {
                         duration,
                         VibrationEffect.DEFAULT_AMPLITUDE
                     )
-                );
+                )
             } else {
                 vibrator.vibrate(duration);
             }

@@ -31,19 +31,19 @@ android {
 
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
             testCoverageEnabled = true
             minifyEnabled false
             debuggable true
-            signingConfig signingConfigs.debug
         }
         release {
+            signingConfig signingConfigs.release
             debuggable false
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
             crunchPngs true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 

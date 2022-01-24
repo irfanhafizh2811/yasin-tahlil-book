@@ -28,29 +28,6 @@
             tools:ignore="ContentDescription" />
 
         <LinearLayout
-            android:id="@+id/llDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/actionBarItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llThemes"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivDelete"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                app:srcCompat="@drawable/ic_delete"
-                tools:ignore="ContentDescription" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/llThemes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +73,7 @@
 
     <LinearLayout
         android:id="@+id/llDzikir"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
@@ -114,12 +91,14 @@
 
         <TextView
             android:id="@+id/tvDzikir"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
-            android:gravity="end"
+            android:gravity="center"
             android:letterSpacing="0.01"
+            android:textAlignment="gravity"
             android:textSize="20sp"
             android:textStyle="normal"
             tools:targetApi="lollipop"

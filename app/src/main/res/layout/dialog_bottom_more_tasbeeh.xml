@@ -162,7 +162,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="?attr/selectableItemBackground"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
         android:visibility="visible"
@@ -175,6 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_delete"
+            app:tint="@color/colorRedPrimary"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -184,7 +184,7 @@
             android:fontFamily="sans-serif"
             android:letterSpacing="0.01"
             android:text="@string/label_delete"
-            android:textColor="#C20202"
+            android:textColor="@color/colorRedPrimary"
             android:textSize="16sp"
             android:textStyle="normal"
             tools:targetApi="lollipop" />

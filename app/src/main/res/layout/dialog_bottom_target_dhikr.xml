@@ -102,7 +102,7 @@
             android:layout_marginStart="16dp"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_btn_negative"
-            android:text="@string/label_simpan"
+            android:text="@string/label_save"
             tools:targetApi="lollipop" />
 
     </LinearLayout>

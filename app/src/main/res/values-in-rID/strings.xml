@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyDhikr</string>
+    <string name="label_save">Simpan</string>
+    <string name="label_cancel">Batal</string>
+    <string name="label_hint_add_dhikr">Ketik Zikir yang Anda inginkan</string>
+    <string name="label_message_delete_confirm">Apakah Anda yakin ingin mengatur ulang penghitung?</string>
+    <string name="label_add_dhikr">Tambah Dhikr</string>
+    <string name="label_dont_show_again">Jangan tampilkan lagi</string>
+    <string name="label_desc_information_target_change">Perubahan yang dilakukan akan diterapkan pada semua Zikir</string>
+    <string name="label_information">Informasi</string>
+    <string name="hint_target_dhikr">Ketik angka untuk mengingatkan Zikir Anda</string>
+    <string name="label_target_dhikr">Target Zikir</string>
+    <string name="label_on">Hidup</string>
+    <string name="label_off">Mati</string>
+    <string name="label_delete">Hapus Zikir Anda</string>
+    <string name="label_sound">Suara</string>
+    <string name="label_vibration">Getar</string>
+    <string name="label_rating_and_review_apps">Rating dan tinjau aplikasi MyDhikr</string>
+    <string name="label_picker_leaves">Dedaunan</string>
+    <string name="label_picker_flowers">Bunga</string>
+    <string name="label_picker_black_white">Hitam Putih</string>
+    <string name="label_picker_default">Utama</string>
+    <string name="label_more">Lainnya</string>
+    <string name="label_themes">Tema</string>
+    <string name="label_choose_themes">Pilih Tema</string>
+    <string name="label_bismillahirrahmanirrahim">Bismillahirrahmanirrahim</string>
+    <string name="label_message_dialog_reset">Apakah Anda yakin ingin mengatur ulang penghitung?</string>
+    <string name="label_title_dialog_reset">Penghitung ingin diatur ulang?</string>
+    <string name="label_no">Tidak</string>
+    <string name="label_yes">Ya</string>
+    <string name="label_reset">Ulang</string>
+    <string name="label_tasbeeh">Tasbih</string>
+    <string name="label_count">Hitung</string>
+    <string name="label_our_applications">Aplikasi Kita Lainya</string>
+    <string name="label_our_aplications">Aplikasi Kita Lainya</string>
+</resources>
