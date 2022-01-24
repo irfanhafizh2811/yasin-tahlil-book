@@ -354,7 +354,11 @@ class TasbeehActivity : BaseActivity() {
                 } catch (e: ArithmeticException) {
                     R.raw.sound_click
                 }
-            )
+            ).apply {
+                setOnCompletionListener {
+                    it.release()
+                }
+            }
             mp.start()
         }
     }
