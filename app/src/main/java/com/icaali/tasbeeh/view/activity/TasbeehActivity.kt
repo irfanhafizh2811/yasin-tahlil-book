@@ -33,6 +33,14 @@ import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
+import com.google.android.gms.ads.AdInspectorError
+
+import com.google.android.gms.ads.OnAdInspectorClosedListener
+
+import com.google.android.gms.ads.MobileAds
+
+
+
 
 class TasbeehActivity : BaseActivity() {
 
@@ -131,6 +139,9 @@ class TasbeehActivity : BaseActivity() {
             }.show()
         })
         loadBanner(adViewContainer)
+        MobileAds.openAdInspector(this) {
+            // Error will be non-null if ad inspector closed due to an error.
+        }
     }
 
     private fun setViewTypeCustom() {

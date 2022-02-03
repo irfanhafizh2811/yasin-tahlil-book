@@ -5,8 +5,13 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.ads.*
-import com.google.android.gms.ads.admanager.AdManagerInterstitialAd
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.RequestConfiguration
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.icaali.tasbeeh.BuildConfig
 import com.icaali.tasbeeh.extension.ads.loadAd
 import com.icaali.tasbeeh.extension.ads.loadAdMob
@@ -24,7 +29,7 @@ open class BaseActivity : AppCompatActivity() {
     //----------------------   Access Protected   ----------------------
     protected val guidePref: GuidePreference by inject()
     protected lateinit var requestConfiguration: RequestConfiguration
-    protected var mInterstitialAd: AdManagerInterstitialAd? = null
+    protected var mInterstitialAd: InterstitialAd? = null
     protected val mAdView: AdView by lazy { AdView(this) }
     protected val mDisposable = CompositeDisposable()
     //---------------------- End Access Protected ----------------------
@@ -131,5 +136,4 @@ open class BaseActivity : AppCompatActivity() {
         mDisposable.dispose()
         super.onDestroy()
     }
-
 }

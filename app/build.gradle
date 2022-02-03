@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'koin'
 
 ext.majorVersion = 1
-ext.minorVersion = 1
+ext.minorVersion = 2
 ext.patchVersion = 0
 ext.preRelease = ""
 

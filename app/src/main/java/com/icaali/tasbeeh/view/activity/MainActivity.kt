@@ -13,7 +13,6 @@ import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
-import com.icaali.tasbeeh.preference.GuidePreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.view.Tasbeeh
 import com.icaali.tasbeeh.view.adapter.DhikrAdapter
@@ -42,7 +41,7 @@ class MainActivity : BaseActivity() {
 
     private val dhikrAdapter by lazy {
         DhikrAdapter {
-            if (!guidePref.hasShownAddDhikr) startActivity(
+            startActivity(
                 intentFor<TasbeehActivity>(
                     TasbeehActivity.TYPE_EXTRA to Tasbeeh.CUSTOM,
                     TasbeehActivity.TASBEEH_LATIN_EXTRA to it.latin,
@@ -101,10 +100,9 @@ class MainActivity : BaseActivity() {
         }
 
         cvAddDhikr?.setOnClickListener {
-            if (!guidePref.hasShownAddDhikr)
-                addCustomDialog.setOnPositiveListener {
-                    dhikrViewModel.insert(it)
-                }.show()
+            addCustomDialog.setOnPositiveListener {
+                dhikrViewModel.insert(it)
+            }.show()
         }
 
         dhikrViewModel.dhikrs.observe(this, {
