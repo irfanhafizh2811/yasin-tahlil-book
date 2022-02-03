@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clRootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="8dp"
+    tools:background="@color/colorBackgroundTarget">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clThemeGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appBarLayoutThemeGuide"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llThemesGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="?android:actionBarItemBackground"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/llMoreTheme"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivThemesGuide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_guide_themes"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llMoreTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:actionBarItemBackground"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivMoreTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_guide_more"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/ivArrowTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayoutThemeGuide"
+            app:srcCompat="@drawable/ic_guide_arrow" />
+
+        <TextView
+            android:id="@+id/tvThemeGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"
+            android:text="You can change \nthe theme you like"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/ivArrowTheme"
+            app:layout_constraintTop_toBottomOf="@id/ivArrowTheme" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clVibrateSoundGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appBarLayoutVibrateSound"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llMoreVibrateSound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="?android:actionBarItemBackground"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivMoreVibrateSound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/ic_guide_more"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/ivArrowVibrateSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayoutVibrateSound"
+            app:srcCompat="@drawable/ic_guide_arrow" />
+
+        <TextView
+            android:id="@+id/tvVibrateSoundGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"
+            android:text="Vibrate or Sound\nyou can set here"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/ivArrowVibrateSound"
+            app:layout_constraintTop_toBottomOf="@id/ivArrowVibrateSound" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llDzikir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/vwCounter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivDzikir"
+            android:layout_width="120dp"
+            android:layout_height="64dp"
+            android:visibility="invisible"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/ic_astagfirllah" />
+
+        <TextView
+            android:id="@+id/tvDzikir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:letterSpacing="0.01"
+            android:textAlignment="gravity"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:visibility="invisible"
+            tools:targetApi="lollipop"
+            tools:text="Subhanallah"
+            tools:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTargetCounter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/vwCounter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llDzikir"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivTargetCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_target_counter_default"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvTargetCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/ivTargetCounter"
+            app:layout_constraintEnd_toEndOf="@id/ivTargetCounter"
+            app:layout_constraintStart_toStartOf="@id/ivTargetCounter"
+            app:layout_constraintTop_toTopOf="@id/ivTargetCounter"
+            tools:targetApi="lollipop"
+            tools:text="33"
+            tools:textColor="@android:color/black" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/vwCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/adViewContainerGuide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llDzikir">
+
+        <ImageView
+            android:id="@+id/ivSkin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_tasbeeh_digital_default"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/ivCounterSkinBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_output_default"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvHintCounter"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="5"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/label_text_counter_hint"
+            android:textAlignment="gravity"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toEndOf="@id/ivCounterSkinBox"
+            app:layout_constraintStart_toStartOf="@id/ivCounterSkinBox"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="00000"
+            tools:textColor="@color/textHintOutputFlowers"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvCounter1"
+            android:layout_width="40sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toEndOf="@id/ivCounterSkinBox"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter2"
+            android:layout_width="32sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter1"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter3"
+            android:layout_width="34sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter2"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter4"
+            android:layout_width="33sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter3"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/tvCounter5"
+            android:layout_width="33sp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/font_digital_seven"
+            android:gravity="center_vertical|end"
+            android:lines="1"
+            android:maxLength="1"
+            android:paddingBottom="8dp"
+            android:textAlignment="gravity"
+            android:textColor="@android:color/black"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCounterSkinBox"
+            app:layout_constraintEnd_toStartOf="@id/tvCounter4"
+            app:layout_constraintTop_toTopOf="@id/ivCounterSkinBox"
+            tools:text="9" />
+
+        <ImageView
+            android:id="@+id/fabReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/fabCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/ic_reset_default" />
+
+        <ImageView
+            android:id="@+id/fabCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/ic_counter_default" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTargetDhikrGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/vwCounter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llDzikir"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/ivTargetCounterGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bg_target_counter_default"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvTargetCounterGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:text="33"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/ivTargetCounterGuide"
+            app:layout_constraintEnd_toEndOf="@id/ivTargetCounterGuide"
+            app:layout_constraintStart_toStartOf="@id/ivTargetCounterGuide"
+            app:layout_constraintTop_toTopOf="@id/ivTargetCounterGuide"
+            tools:targetApi="lollipop" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTargetDhikrGuideDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clTargetDhikrGuide">
+
+        <ImageView
+            android:id="@+id/ivArrowTarget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="64dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_guide_arrow" />
+
+        <TextView
+            android:id="@+id/tvTargetGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"
+            android:text="Set your dhikr target"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@id/ivArrowTarget"
+            app:layout_constraintTop_toBottomOf="@id/ivArrowTarget" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05"
+        android:text="Skip, I Understand"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/adViewContainerGuide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05"
+        android:paddingHorizontal="56dp"
+        android:layout_marginBottom="8dp"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnSkip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/adViewContainerGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:minHeight="?android:actionBarSize"
+        android:visibility="invisible"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="wrap"
+        app:layout_constraintHeight_min="0dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

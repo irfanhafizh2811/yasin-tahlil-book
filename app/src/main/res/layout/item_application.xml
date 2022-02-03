@@ -9,7 +9,7 @@
         android:id="@+id/llApplication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        android:background="?android:selectableItemBackground"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
         android:padding="16dp"

@@ -13,13 +13,14 @@ import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
+import com.icaali.tasbeeh.preference.GuidePreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.view.Tasbeeh
 import com.icaali.tasbeeh.view.adapter.DhikrAdapter
 import com.icaali.tasbeeh.view.dialog.AddCustomDialog
+import com.icaali.tasbeeh.view.dialog.GuideMainDialog
 import com.icaali.tasbeeh.view.dialog.MoreDialog
 import com.icaali.tasbeeh.vm.DhikrViewModel
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
@@ -27,14 +28,21 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
 
+    companion object {
+        private const val CHROME_PACKAGE_NAME = "com.android.chrome"
+        private const val MYDHIKR_INSTAGRAM_URL = "https://www.instagram.com/mydhikr/"
+    }
+
     private val counterPreference: CounterPreference by inject()
     private val settingPreference by inject<SettingPreference>()
-    val dhikrViewModel: DhikrViewModel by viewModel()
-    private val disposable = CompositeDisposable()
+    internal val dhikrViewModel: DhikrViewModel by viewModel()
+    private val addCustomDialog by lazy { AddCustomDialog(this) }
+    private val moreDialog by lazy { MoreDialog(this, settingPreference) }
+    private val mainGuideDialog by lazy { GuideMainDialog(this, guidePref) }
 
     private val dhikrAdapter by lazy {
         DhikrAdapter {
-            startActivity(
+            if (!guidePref.hasShownAddDhikr) startActivity(
                 intentFor<TasbeehActivity>(
                     TasbeehActivity.TYPE_EXTRA to Tasbeeh.CUSTOM,
                     TasbeehActivity.TASBEEH_LATIN_EXTRA to it.latin,
@@ -42,14 +50,6 @@ class MainActivity : BaseActivity() {
                 )
             )
         }
-    }
-
-    private val addCustomDialog by lazy { AddCustomDialog(this) }
-    private val moreDialog by lazy { MoreDialog(this, settingPreference) }
-
-    companion object {
-        private const val CHROME_PACKAGE_NAME = "com.android.chrome"
-        private const val MYDHIKR_INSTAGRAM_URL = "https://www.instagram.com/mydhikr/"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,9 +101,10 @@ class MainActivity : BaseActivity() {
         }
 
         cvAddDhikr?.setOnClickListener {
-            addCustomDialog.setOnPositiveListener {
-                dhikrViewModel.insert(it)
-            }.show()
+            if (!guidePref.hasShownAddDhikr)
+                addCustomDialog.setOnPositiveListener {
+                    dhikrViewModel.insert(it)
+                }.show()
         }
 
         dhikrViewModel.dhikrs.observe(this, {
@@ -134,6 +135,11 @@ class MainActivity : BaseActivity() {
                 show()
             }
         }
+        mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
+            if (!mainGuideDialog.isShowingAll()) mainGuideDialog.apply {
+                onTapTargetListener = { addCustomDialog.show() }
+            }.show()
+        })
     }
 
     override fun onResume() {
@@ -179,11 +185,6 @@ class MainActivity : BaseActivity() {
                 android.R.color.black
             )
         )
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
     }
 
     private fun shareMyDhikr() {

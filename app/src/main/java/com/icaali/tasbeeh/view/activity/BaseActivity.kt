@@ -11,12 +11,23 @@ import com.icaali.tasbeeh.BuildConfig
 import com.icaali.tasbeeh.extension.ads.loadAd
 import com.icaali.tasbeeh.extension.ads.loadAdMob
 import com.icaali.tasbeeh.extension.ads.loadAdMobTest
+import com.icaali.tasbeeh.preference.GuidePreference
+import io.reactivex.disposables.CompositeDisposable
+import org.koin.android.ext.android.inject
 
 open class BaseActivity : AppCompatActivity() {
 
+    companion object {
+        const val DHIKR_SECOND_DELAY = 2L
+    }
+
+    //----------------------   Access Protected   ----------------------
+    protected val guidePref: GuidePreference by inject()
     protected lateinit var requestConfiguration: RequestConfiguration
     protected var mInterstitialAd: AdManagerInterstitialAd? = null
     protected val mAdView: AdView by lazy { AdView(this) }
+    protected val mDisposable = CompositeDisposable()
+    //---------------------- End Access Protected ----------------------
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,6 +125,11 @@ open class BaseActivity : AppCompatActivity() {
                 adWidth
             )
         }
+    }
+
+    override fun onDestroy() {
+        mDisposable.dispose()
+        super.onDestroy()
     }
 
 }

@@ -13,4 +13,6 @@
     <color name="textHintOutputBlackWhite">#c1c5cc</color>
 
     <color name="colorRedPrimary">#C20202</color>
+
+    <color name="colorBackgroundTarget">#B3000000</color>
 </resources>

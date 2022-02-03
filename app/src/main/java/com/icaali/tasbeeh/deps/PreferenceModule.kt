@@ -10,4 +10,5 @@ val prefModule = module {
     single { CounterPreference(get()) }
     single { ThemesPreference(get()) }
     single { SettingPreference(get()) }
+    single { GuidePreference(get()) }
 }

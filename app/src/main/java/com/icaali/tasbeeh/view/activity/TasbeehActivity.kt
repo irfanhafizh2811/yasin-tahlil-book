@@ -17,7 +17,6 @@ import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
-import com.icaali.tasbeeh.preference.InterstitialPreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
 import com.icaali.tasbeeh.view.Tasbeeh
@@ -28,7 +27,6 @@ import com.icaali.tasbeeh.view.theme.ThemeType
 import com.icaali.tasbeeh.vm.DhikrViewModel
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_tasbeeh.*
 import org.jetbrains.anko.backgroundDrawable
 import org.jetbrains.anko.textColor
@@ -38,17 +36,28 @@ import java.util.concurrent.TimeUnit
 
 class TasbeehActivity : BaseActivity() {
 
+    companion object {
+        const val MAX_VOLUME = 100
+        const val THROTTLE_FIRST = 100L
+        const val TYPE_EXTRA = "TYPE_EXTRA"
+        const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
+        const val TASBEEH_DHIKR_EXTRA = "TASBEEH_DHIKR_EXTRA"
+        const val VIBRATE_TARGET_DURATION = 2000L
+        const val VIBRATE_CLICK_DURATION = 500L
+    }
+
+    //----------------------------------   Dependency Inject   ----------------------------------
     private val counterPreference by inject<CounterPreference>()
-    private val interstitialPreference by inject<InterstitialPreference>()
     private val themesPreference by inject<ThemesPreference>()
     private val settingPreference by inject<SettingPreference>()
-    private val disposable = CompositeDisposable()
-    private var dhikr = Dhikr(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
-    private var theme: Theme? = null
+    private val dhikrViewModel: DhikrViewModel by viewModel()
+    //---------------------------------- End Dependency Inject ----------------------------------
+
+    //------------------------------------   Section Lazy   ------------------------------------
     private val tvCounters by lazy {
         listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter4, tvCounter5)
     }
-
+    private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
     private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
@@ -66,23 +75,12 @@ class TasbeehActivity : BaseActivity() {
                 targetChangeInformationDialog.show()
         }
     }
+    private val guideTasbeehDialog by lazy { GuideTasbeehDialog(this, guidePref) }
+    //------------------------------------ Section Lazy ------------------------------------
 
-    private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
-
-    var type = TextUtils.BLANK
-    val dhikrViewModel: DhikrViewModel by viewModel()
-
-    companion object {
-        const val THROTTLE_FIRST = 100L
-        const val TYPE_EXTRA = "TYPE_EXTRA"
-        const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
-        const val TASBEEH_DHIKR_EXTRA = "TASBEEH_DHIKR_EXTRA"
-
-        const val VIBRATE_TARGET_DURATION = 2000L
-        const val VIBRATE_CLICK_DURATION = 500L
-
-        const val MAX_VOLUME = 100
-    }
+    private var dhikr = Dhikr(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
+    private var theme: Theme? = null
+    internal var type = TextUtils.BLANK
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +102,7 @@ class TasbeehActivity : BaseActivity() {
         }
         tvDzikir?.text = intent?.getStringExtra(TASBEEH_LATIN_EXTRA)
         initTasbeeh()
-        disposable.add(
+        mDisposable.add(
             RxView.clicks(fabCount)
                 .throttleFirst(
                     THROTTLE_FIRST,
@@ -119,9 +117,19 @@ class TasbeehActivity : BaseActivity() {
                     count()
                 }
         )
-        clTargetCounter?.setOnClickListener {
-            targetDhikrDialog.show(counterPreference.target)
-        }
+        mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
+            if (!guideTasbeehDialog.isShowingAll()) guideTasbeehDialog.apply {
+                onTapTargetListener = {
+                    when {
+                        guidePref.hasShownPickTheme && !guidePref.hasShownVibrateSound ->
+                            showThemeDialog(true)
+                        guidePref.hasShownVibrateSound && !guidePref.hasShownDhikrTarget ->
+                            showMoreDialog(true)
+                        else -> showTargetDialog()
+                    }
+                }
+            }.show()
+        })
         loadBanner(adViewContainer)
     }
 
@@ -147,36 +155,48 @@ class TasbeehActivity : BaseActivity() {
     }
 
     private fun setupDialog() {
-        llThemes?.setOnClickListener {
-            themesPickDialog.apply {
-                setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
-                setOnPositiveListener { themeSelected ->
-                    themesPreference.type = themeSelected.type
-                    selectedTheme()
-                }
-                setOnDismissListener { loadAdMobInterstitial() }
-            }.show()
-        }
+        clTargetCounter?.setOnClickListener { showTargetDialog() }
+        llThemes?.setOnClickListener { showThemeDialog() }
+        llMore?.setOnClickListener { showMoreDialog() }
+    }
 
-        llMore?.setOnClickListener {
-            moreDialog.apply {
-                showButtonDelete(isCustomType())
-                setDeleteClickListener {
-                    dismiss()
-                    confirmationDialog.apply {
-                        setOnDismissListener { loadAdMobInterstitial() }
-                        setText(getString(R.string.label_message_delete_confirm))
-                        setOnPositiveListener {
-                            dhikrViewModel.delete(dhikr)
-                            finish()
-                        }
-                    }.show()
-                }
-                setOnDismissListener {
-                    loadAdMobInterstitial()
-                }
-            }.show()
-        }
+    private fun showTargetDialog() {
+        targetDhikrDialog.show(counterPreference.target)
+    }
+
+    private fun showThemeDialog(isGuide: Boolean = false) {
+        themesPickDialog.apply {
+            setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
+            setOnPositiveListener { themeSelected ->
+                themesPreference.type = themeSelected.type
+                selectedTheme()
+            }
+            setOnDismissListener {
+                if (isGuide) guideTasbeehDialog.show()
+                else loadAdMobInterstitial()
+            }
+        }.show()
+    }
+
+    private fun showMoreDialog(isGuide: Boolean = false) {
+        moreDialog.apply {
+            showButtonDelete(isCustomType())
+            setDeleteClickListener {
+                dismiss()
+                confirmationDialog.apply {
+                    setOnDismissListener { loadAdMobInterstitial() }
+                    setText(getString(R.string.label_message_delete_confirm))
+                    setOnPositiveListener {
+                        dhikrViewModel.delete(dhikr)
+                        finish()
+                    }
+                }.show()
+            }
+            setOnDismissListener {
+                if (isGuide) guideTasbeehDialog.show()
+                else loadAdMobInterstitial()
+            }
+        }.show()
     }
 
     private fun selectedTheme() {
@@ -361,10 +381,5 @@ class TasbeehActivity : BaseActivity() {
             }
             mp.start()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
     }
 }

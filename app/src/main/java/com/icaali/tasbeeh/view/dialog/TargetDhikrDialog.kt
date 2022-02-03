@@ -8,6 +8,7 @@ import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.view.adapter.TargetDhikrAdapter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.dialog_bottom_target_dhikr.*
 import java.util.concurrent.TimeUnit
 
@@ -20,6 +21,7 @@ class TargetDhikrDialog(
         private const val DELAY = 400L
     }
 
+    private val compositeDisposable = CompositeDisposable()
     private val adapter by lazy {
         TargetDhikrAdapter {
             etTargetDhikr?.setText(it.toString())
@@ -46,16 +48,18 @@ class TargetDhikrDialog(
             dismiss()
         }
 
-        RxTextView.afterTextChangeEvents(etTargetDhikr)
-            .debounce(DELAY, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                val targetCount = it?.editable()?.toString().orEmpty()
-                adapter.selectedTarget(
-                    if (targetCount.isEmpty()) 0
-                    else targetCount.toInt()
-                )
-            }
+        compositeDisposable.addAll(
+            RxTextView.afterTextChangeEvents(etTargetDhikr)
+                .debounce(DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    val targetCount = it?.editable()?.toString().orEmpty()
+                    adapter.selectedTarget(
+                        if (targetCount.isEmpty()) 0
+                        else targetCount.toInt()
+                    )
+                }
+        )
     }
 
     fun show(targetCount: Int) {
@@ -64,5 +68,10 @@ class TargetDhikrDialog(
             adapter.selectedTarget(targetCount)
         }
         show()
+    }
+
+    override fun onDetachedFromWindow() {
+        compositeDisposable.dispose()
+        super.onDetachedFromWindow()
     }
 }
