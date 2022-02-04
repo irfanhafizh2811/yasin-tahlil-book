@@ -33,14 +33,7 @@ import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
-import com.google.android.gms.ads.AdInspectorError
-
-import com.google.android.gms.ads.OnAdInspectorClosedListener
-
 import com.google.android.gms.ads.MobileAds
-
-
-
 
 class TasbeehActivity : BaseActivity() {
 
@@ -195,6 +188,7 @@ class TasbeehActivity : BaseActivity() {
             setDeleteClickListener {
                 dismiss()
                 confirmationDialog.apply {
+                    setTitle(R.string.label_delete)
                     setOnDismissListener { loadAdMobInterstitial() }
                     setText(getString(R.string.label_message_delete_confirm))
                     setOnPositiveListener {

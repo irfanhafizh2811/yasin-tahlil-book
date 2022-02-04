@@ -42,6 +42,7 @@
     <string name="label_vibration">Vibration</string>
     <string name="label_sound">Sound</string>
     <string name="label_delete">Delete Your Dhikr</string>
+    <string name="label_delete_confirmation">Delete Your Dhikr</string>
     <string name="label_on">On</string>
     <string name="label_off">Off</string>
     <string name="label_target_dhikr">Target Dhikr</string>
@@ -51,12 +52,12 @@
     <string name="label_desc_information_target_change">Changes made will be applied to all dhikr</string>
     <string name="label_dont_show_again">Don\'t show it again</string>
     <string name="label_add_dhikr">Add Dhikr</string>
-    <string name="label_message_delete_confirm">Are you sure you want to reset the counter?</string>
+    <string name="label_message_delete_confirm">Are you sure want to delete this dhikr?</string>
     <string name="label_language">Language</string>
     <string name="label_notification">App Notifications</string>
     <string name="label_share">Share to your friends</string>
     <string name="label_instagram">Follow MyDhikr on Instagram</string>
-    <string name="label_share_text">Share My Dhikr Apps</string>
+    <string name="label_share_text">Share MyDhikr Apps</string>
     <string name="label_notification_title">Have you done dhikr today?</string>
     <string name="label_notification_text">Don\'t forget to dhikr with MyDhikr Apps...</string>
     <string name="label_cancel">Cancel</string>

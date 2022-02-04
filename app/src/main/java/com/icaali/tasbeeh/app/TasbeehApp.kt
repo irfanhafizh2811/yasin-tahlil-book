@@ -1,25 +1,18 @@
 package com.icaali.tasbeeh.app
 
-import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import com.icaali.tasbeeh.deps.libraries
 import com.google.firebase.FirebaseApp
 import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.preference.CorePreference
-import com.icaali.tasbeeh.preference.SettingPreference
-import com.icaali.tasbeeh.receiver.NotificationReceiver
+import com.icaali.tasbeeh.deps.libraries
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import java.util.*
 
 class TasbeehApp : MultiDexApplication() {
 

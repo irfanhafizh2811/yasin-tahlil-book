@@ -4,7 +4,7 @@
     <string name="label_save">Simpan</string>
     <string name="label_cancel">Batal</string>
     <string name="label_hint_add_dhikr">Ketik Zikir yang Anda inginkan</string>
-    <string name="label_message_delete_confirm">Apakah Anda yakin ingin mengatur ulang penghitung?</string>
+    <string name="label_message_delete_confirm">Apakah Anda yakin ingin menghapus Zikir ini?</string>
     <string name="label_add_dhikr">Tambah Dhikr</string>
     <string name="label_dont_show_again">Jangan tampilkan lagi</string>
     <string name="label_desc_information_target_change">Perubahan yang dilakukan akan diterapkan pada semua Zikir</string>
@@ -34,4 +34,13 @@
     <string name="label_count">Hitung</string>
     <string name="label_our_applications">Aplikasi Kita Lainya</string>
     <string name="label_our_aplications">Aplikasi Kita Lainya</string>
+    <string name="label_delete_confirmation">Konfirmasi Hapus</string>
+    <string name="label_simpan">Simpan</string>
+    <string name="label_language">Bahasa</string>
+    <string name="label_notification">Notifikasi aplikasi</string>
+    <string name="label_share">Bagikan ke teman Anda</string>
+    <string name="label_instagram">Ikuti MyDhikr di Instagram</string>
+    <string name="label_notification_title">Sudahkah Anda Zikir hari ini?</string>
+    <string name="label_share_text">Bagikan Aplikasi MyDhikr</string>
+    <string name="label_notification_text">Jangan lupa Zikir dengan aplikasi MyDhikr</string>
 </resources>
