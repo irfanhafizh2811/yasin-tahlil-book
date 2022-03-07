@@ -56,7 +56,7 @@ ext {
     firestore = '19.0.1'
     moengage = '9.3.02'
     facebookShimmer = '0.4.0'
-    playServiceAds = '20.5.0'
+    playServiceAds = '20.6.0'
     selectableRoundedVersion = '1.0.1'
 
     supportDependencies = [

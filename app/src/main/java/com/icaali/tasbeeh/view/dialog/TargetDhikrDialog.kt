@@ -44,8 +44,10 @@ class TargetDhikrDialog(
         }
         btnSave?.setOnClickListener {
             val targetCount = etTargetDhikr?.text?.toString().orEmpty()
-            onPositiveListener.invoke(targetCount.toInt())
-            dismiss()
+            if (targetCount.isNotEmpty()) {
+                onPositiveListener.invoke(targetCount.toInt())
+                dismiss()
+            }
         }
 
         compositeDisposable.addAll(

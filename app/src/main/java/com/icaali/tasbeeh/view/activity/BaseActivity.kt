@@ -38,20 +38,26 @@ open class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestConfiguration = when (isTestAdmob()) {
             true -> {
-                val deviceId = "040A8B4F3C09E831C2C1A355CBBCA3ED"
+                val deviceId = "F479D985133C6B3E3794DD9D1EF08219"
                 RequestConfiguration.Builder()
                     .setTestDeviceIds(listOf(deviceId))
-                    .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
+                    .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
+                    .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_FALSE)
+                    .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_FALSE)
                     .build()
             }
             else -> {
                 RequestConfiguration.Builder()
-                    .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE)
+                    .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
+                    .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_FALSE)
+                    .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_FALSE)
                     .build()
             }
         }
         MobileAds.setRequestConfiguration(requestConfiguration)
-        MobileAds.initialize(this)
+        MobileAds.initialize(this) {
+
+        }
     }
 
     protected fun isTestAdmob(): Boolean {
