@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.01"
+        android:text="@string/label_target_dhikr"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivClose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivClose"
+        tools:targetApi="lollipop" />
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/vwDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#e8e8e8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivClose" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etTargetDhikr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:backgroundTint="#E8E8E8"
+        android:hint="@string/hint_target_dhikr"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwDivider"
+        tools:targetApi="lollipop" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTargetDhikr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTargetDhikr"
+        app:spanCount="4"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_target_dhikr"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvTargetDhikr">
+
+        <TextView
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn_positive"
+            android:text="@android:string/cancel"
+            tools:targetApi="lollipop" />
+
+        <TextView
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:textStyle="normal"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn_negative"
+            android:text="@string/label_save"
+            tools:targetApi="lollipop" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

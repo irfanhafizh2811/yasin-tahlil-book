@@ -8,6 +8,7 @@ class CounterPreference(val corePreference: CorePreference) {
         const val LAILAHAILALLAH = "LAILAHAILALLAH"
         const val ALLAHU_AKBAR = "ALLAHU_AKBAR"
         const val ASTAGHFIRULLAH = "ASTAGHFIRULLAH"
+        const val TARGET = "TARGET"
     }
 
     var subhanallah: Int
@@ -29,5 +30,9 @@ class CounterPreference(val corePreference: CorePreference) {
     var astaghfirullah: Int
         set(value) = corePreference.setInt(ASTAGHFIRULLAH, value)
         get() = corePreference.getInt(ASTAGHFIRULLAH, 0)
+
+    var target: Int
+        set(value) = corePreference.setInt(TARGET, value)
+        get() = corePreference.getInt(TARGET, 0)
 
 }

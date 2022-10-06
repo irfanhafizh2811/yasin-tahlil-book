@@ -12,13 +12,13 @@ ext {
     glideVersion = '4.9.0'
     glideOkHttpVersion = '4.9.0'
     daggerVersion = '2.21'
-    koinVersion = '2.0.0-GA'
+    koinVersion = '2.2.3'
     gsonVersion = '2.8.1'
     espressoCoreVersion = '2.2.2'
     constrainLayoutVersion = '1.1.2'
     deepLinkVersion = '3.1.0'
     ankoVersion = '0.10.5'
-    multidexVersion = '1.0.1'
+    multidexVersion = '2.0.1'
     rxBindingVersion = '2.0.0'
     playServiceVersion = '16.0.0'
     googlePlacesVersion = '1.1.0'
@@ -56,7 +56,7 @@ ext {
     firestore = '19.0.1'
     moengage = '9.3.02'
     facebookShimmer = '0.4.0'
-    playServiceAds = '17.2.1'
+    playServiceAds = '20.6.0'
     selectableRoundedVersion = '1.0.1'
 
     supportDependencies = [
@@ -98,17 +98,21 @@ ext {
             dagger                    : "com.google.dagger:dagger:${daggerVersion}",
             daggerCompiler            : "com.google.dagger:dagger-compiler:${daggerVersion}",
             daggerAndroidSupport      : "com.google.dagger:dagger-android-support:${daggerVersion}",
-            koinCore                  : "org.koin:koin-core:${koinVersion}",
-            koinAndroid               : "org.koin:koin-android:${koinVersion}",
-            koinScope                 : "org.koin:koin-android-scope:${koinVersion}",
-            koinViewModel             : "org.koin:koin-android-viewmodel:${koinVersion}",
+            koinCore                  : "io.insert-koin:koin-core:${koinVersion}",
+            koinCoreExt               : "io.insert-koin:koin-core-ext:${koinVersion}",
+            koinFragment              : "io.insert-koin:koin-androidx-fragment:${koinVersion}",
+            koinWorkManager           : "io.insert-koin:koin-androidx-workmanager:${koinVersion}",
+            koinWorkCompose           : "io.insert-koin:koin-androidx-compose:${koinVersion}",
+            koinScope                 : "io.insert-koin:koin-androidx-scope:${koinVersion}",
+            koinViewModel             : "io.insert-koin:koin-androidx-viewmodel:${koinVersion}",
+            koinAndroidExt            : "io.insert-koin:koin-androidx-ext:${koinVersion}",
             gson                      : "com.google.code.gson:gson:${gsonVersion}",
             deeplinkDispatch          : "com.airbnb:deeplinkdispatch:${deepLinkVersion}",
             deeplinkDispatchProcessor : "com.airbnb:deeplinkdispatch-processor:${deepLinkVersion}",
             kotlinJre7                : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
             anko                      : "org.jetbrains.anko:anko:${ankoVersion}",
             ankoCommon                : "org.jetbrains.anko:anko-commons:${ankoVersion}",
-            multidex                  : "com.android.support:multidex:${multidexVersion}",
+            multidex                  : "androidx.multidex:multidex:${multidexVersion}",
             rxBindingPlatform         : "com.jakewharton.rxbinding2:rxbinding:${rxBindingVersion}",
             rxBindingAppCompat        : "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:${rxBindingVersion}",
             rxBindingSupport          : "com.jakewharton.rxbinding2:rxbinding-support-v4:${rxBindingVersion}",
@@ -185,7 +189,7 @@ ext {
             mockitoKotlin            : "com.nhaarman:mockito-kotlin:1.5.0",
             robolectric              : "org.robolectric:robolectric:3.6.1",
             kotlin_reflect           : "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
-            koinTest                 : "org.koin:koin-test:${koinVersion}"
+            koinTest                 : "io.insert-koin:koin-test:${koinVersion}"
     ]
 
 }

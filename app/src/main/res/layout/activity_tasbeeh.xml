@@ -17,12 +17,13 @@
 
         <ImageView
             android:id="@+id/ivBack"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:background="?attr/actionBarItemBackground"
+            android:background="?android:actionBarItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_arrow_back"
             tools:ignore="ContentDescription" />
 
@@ -31,31 +32,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:background="?attr/actionBarItemBackground"
+            android:background="?android:actionBarItemBackground"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/llMore">
+            app:layout_constraintEnd_toStartOf="@+id/llMore"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/ivThemes"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 app:srcCompat="@drawable/ic_theme"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/tvThemes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="end"
-                android:letterSpacing="0.01"
-                android:text="@string/label_themes"
-                android:textSize="12sp"
-                android:textStyle="normal"
-                tools:targetApi="lollipop"
-                tools:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -64,38 +53,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:background="?attr/actionBarItemBackground"
+            android:background="?android:actionBarItemBackground"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/ivMore"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                app:srcCompat="@drawable/ic_more"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_more_new"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/tvMore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:gravity="end"
-                android:letterSpacing="0.01"
-                android:text="@string/label_more"
-                android:textSize="12sp"
-                android:textStyle="normal"
-                tools:targetApi="lollipop"
-                tools:textColor="@android:color/white" />
 
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/llDzikir"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
@@ -113,12 +91,14 @@
 
         <TextView
             android:id="@+id/tvDzikir"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
-            android:gravity="end"
+            android:gravity="center"
             android:letterSpacing="0.01"
+            android:textAlignment="gravity"
             android:textSize="20sp"
             android:textStyle="normal"
             tools:targetApi="lollipop"
@@ -127,24 +107,54 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/vwCenter"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTargetCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@id/vwCounter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/llDzikir">
+
+        <ImageView
+            android:id="@+id/ivTargetCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/bg_target_counter_flowers" />
+
+        <TextView
+            android:id="@+id/tvTargetCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/ivTargetCounter"
+            app:layout_constraintEnd_toEndOf="@id/ivTargetCounter"
+            app:layout_constraintStart_toStartOf="@id/ivTargetCounter"
+            app:layout_constraintTop_toTopOf="@id/ivTargetCounter"
+            tools:targetApi="lollipop"
+            tools:text="33"
+            tools:textColor="@android:color/black" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/vwCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        app:layout_constraintBottom_toTopOf="@id/vwCenter"
+        app:layout_constraintBottom_toTopOf="@+id/adViewContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vwCenter">
+        app:layout_constraintTop_toBottomOf="@id/llDzikir">
 
         <ImageView
             android:id="@+id/ivSkin"
@@ -311,7 +321,6 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_default="wrap"
         app:layout_constraintHeight_min="0dp"
         app:layout_constraintStart_toStartOf="parent" />
 

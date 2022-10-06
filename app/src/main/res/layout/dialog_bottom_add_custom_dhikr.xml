@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.01"
+        android:text="@string/label_add_dhikr"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivClose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivClose"
+        tools:targetApi="lollipop" />
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/vwDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#e8e8e8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivClose" />
+
+    <EditText
+        android:id="@+id/edtAddDhikr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/label_hint_add_dhikr"
+        android:imeOptions="actionDone"
+        android:letterSpacing="0.01"
+        android:maxLength="300"
+        android:maxLines="6"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/tvCounterChar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vwDivider"
+        tools:targetApi="lollipop" />
+
+    <TextView
+        android:id="@+id/tvCounterChar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@id/btnSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtAddDhikr"
+        tools:text="0/300" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_btn_positive"
+        android:text="@string/label_no"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtAddDhikr" />
+
+    <Button
+        android:id="@+id/btnSave"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn_negative"
+        android:text="@string/label_yes"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnCancel"
+        app:layout_constraintTop_toBottomOf="@id/edtAddDhikr" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

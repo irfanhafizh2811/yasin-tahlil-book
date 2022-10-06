@@ -56,4 +56,8 @@ class ThemeBlackWhite : BaseTheme() {
         get() = android.R.color.black
         set(value) {}
 
+    override var backgroundTargetCounterImageRes: Int
+        get() = R.drawable.bg_target_counter_black_white
+        set(value) {}
+
 }

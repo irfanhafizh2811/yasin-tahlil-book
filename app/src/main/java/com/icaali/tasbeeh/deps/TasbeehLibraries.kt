@@ -2,5 +2,7 @@ package com.icaali.tasbeeh.deps
 
 val libraries = arrayListOf(
     prefModule,
-    firebaseModule
+    firebaseModule,
+    databaseModule,
+    viewModelModule
 )

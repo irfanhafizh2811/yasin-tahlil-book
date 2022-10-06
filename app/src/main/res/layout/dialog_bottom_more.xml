@@ -42,16 +42,107 @@
         app:layout_constraintTop_toBottomOf="@id/ivClose" />
 
     <LinearLayout
-        android:id="@+id/llPlaystoreRate"
+        android:id="@+id/llLanguage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        android:layout_marginTop="24dp"
+        android:background="?android:selectableItemBackground"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vwDivider">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_language"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:text="@string/label_language"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            tools:targetApi="lollipop" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llLanguage">
+
+        <ImageView
+            android:id="@+id/ivNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_notification"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:text="@string/label_notification"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toEndOf="@id/ivNotification"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="lollipop" />
+
+        <TextView
+            android:id="@+id/tvLabelSwitchNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:text="@string/label_on"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/swNotification"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="lollipop" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swNotification"
+            android:layout_width="44dp"
+            android:layout_height="24dp"
+            android:thumb="@drawable/selector_thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:track="@drawable/selector_switch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/llPlaystoreRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="?android:selectableItemBackground"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clNotification">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -62,7 +153,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="sans-serif"
             android:letterSpacing="0.01"
             android:text="@string/label_rating_and_review_apps"
@@ -74,14 +165,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llLinkApp"
+        android:id="@+id/llShare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        android:layout_marginTop="24dp"
+        android:background="?android:selectableItemBackground"
         android:gravity="start|center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llPlaystoreRate">
@@ -89,16 +179,49 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_apps"
+            app:srcCompat="@drawable/ic_share"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="sans-serif"
             android:letterSpacing="0.01"
-            android:text="@string/label_our_aplications"
+            android:text="@string/label_share"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            tools:targetApi="lollipop" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llInstagram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="?android:selectableItemBackground"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llShare">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_instagram"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif"
+            android:letterSpacing="0.01"
+            android:text="@string/label_instagram"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="normal"

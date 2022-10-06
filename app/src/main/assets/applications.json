@@ -1,0 +1,24 @@
+{
+  "applications": [
+    {
+      "name": "Flash Sale",
+      "package": "com.icaali.flashsale",
+      "image_url": "https://lh3.googleusercontent.com/38ZyOBlpdhJbVeYohlZRFx85WVCDMQSGlX2borPN2AKkBk2HF8fagIfKoxvvJ6bbvDE=s360-rw"
+    },
+    {
+      "name": "My Dhikr",
+      "package": "com.icaali.tasbeeh",
+      "image_url": "https://lh3.googleusercontent.com/q6c83uoKH7NPqcNI625BN-qkKAaobP4W8agXD8oRPHm4Z0C6EXk5xwiGhKclCqme_cA=s180-rw"
+    },
+    {
+      "name": "Baitullah Streaming",
+      "package": "com.icaali.makkah",
+      "image_url": "https://lh3.googleusercontent.com/Hr-9IPsOMY3bbxkP9hvOM0aVAbjUvi_9hDAiKt0c_m5BYs3715HIfOh_ooxhE7ynsuM=s180-rw"
+    },
+    {
+      "name": "Sticker islamic moslem for WhatsApp WAStickerApps",
+      "package": "com.icaali.StickerIslami",
+      "image_url": "https://lh3.googleusercontent.com/ewa6OZ69JjO0WVSgQBh1op1ElQD_mC36gpPTfbbhrBPvNOoKOdlVBzfEMeoHG2e6-hc=s180-rw"
+    }
+  ]
+}

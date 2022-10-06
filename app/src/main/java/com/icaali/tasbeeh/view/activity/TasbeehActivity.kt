@@ -1,61 +1,93 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.content.Context
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.common.TextUtils
-import com.icaali.tasbeeh.extension.activty.openPlaystore
+import com.icaali.tasbeeh.database.table.Dhikr
+import com.icaali.tasbeeh.extension.activty.isCustomType
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
-import com.icaali.tasbeeh.preference.InterstitialPreference
+import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
 import com.icaali.tasbeeh.view.Tasbeeh
-import com.icaali.tasbeeh.view.dialog.ConfirmationDialog
-import com.icaali.tasbeeh.view.dialog.MoreDialog
+import com.icaali.tasbeeh.view.dialog.*
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeFactory
 import com.icaali.tasbeeh.view.theme.ThemeType
-import com.icaali.tasbeeh.view.dialog.ThemesDialog
+import com.icaali.tasbeeh.vm.DhikrViewModel
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_tasbeeh.*
 import org.jetbrains.anko.backgroundDrawable
-import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
+import com.google.android.gms.ads.MobileAds
 
 class TasbeehActivity : BaseActivity() {
 
-    private val counterPreference by inject<CounterPreference>()
-    private val interstitialPreference by inject<InterstitialPreference>()
-    private val themesPreference by inject<ThemesPreference>()
-    private val disposable = CompositeDisposable()
-    private var type = TextUtils.BLANK
-    private var theme: Theme? = null
-    private val tvCounters by lazy {
-        listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter4, tvCounter5)
-    }
-
-    private val confirmationDialog by lazy { ConfirmationDialog(this) }
-    private val themesPickDialog by lazy { ThemesDialog(this) }
-    private val moreDialog by lazy { MoreDialog(this) }
-
     companion object {
+        const val MAX_VOLUME = 100
         const val THROTTLE_FIRST = 100L
         const val TYPE_EXTRA = "TYPE_EXTRA"
         const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
+        const val TASBEEH_DHIKR_EXTRA = "TASBEEH_DHIKR_EXTRA"
+        const val VIBRATE_TARGET_DURATION = 2000L
+        const val VIBRATE_CLICK_DURATION = 500L
     }
+
+    //----------------------------------   Dependency Inject   ----------------------------------
+    private val counterPreference by inject<CounterPreference>()
+    private val themesPreference by inject<ThemesPreference>()
+    private val settingPreference by inject<SettingPreference>()
+    private val dhikrViewModel: DhikrViewModel by viewModel()
+    //---------------------------------- End Dependency Inject ----------------------------------
+
+    //------------------------------------   Section Lazy   ------------------------------------
+    private val tvCounters by lazy {
+        listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter4, tvCounter5)
+    }
+    private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
+    private val confirmationDialog by lazy { ConfirmationDialog(this) }
+    private val themesPickDialog by lazy { ThemesDialog(this) }
+    private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
+    private val targetChangeInformationDialog by lazy {
+        TargetChangeInformationDialog(
+            this,
+            settingPreference
+        )
+    }
+    private val targetDhikrDialog by lazy {
+        TargetDhikrDialog(this) {
+            counterPreference.target = it
+            tvTargetCounter?.text = it.toString()
+            if (settingPreference.showPopupAgain)
+                targetChangeInformationDialog.show()
+        }
+    }
+    private val guideTasbeehDialog by lazy { GuideTasbeehDialog(this, guidePref) }
+    //------------------------------------ Section Lazy ------------------------------------
+
+    private var dhikr = Dhikr(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
+    private var theme: Theme? = null
+    internal var type = TextUtils.BLANK
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         type = intent?.getStringExtra(TYPE_EXTRA) ?: TextUtils.BLANK
         setContentView(R.layout.activity_tasbeeh)
+        setViewTypeCustom()
         selectedTheme()
         setupDialog()
         ivBack?.setOnClickListener { finish() }
@@ -71,7 +103,7 @@ class TasbeehActivity : BaseActivity() {
         }
         tvDzikir?.text = intent?.getStringExtra(TASBEEH_LATIN_EXTRA)
         initTasbeeh()
-        disposable.add(
+        mDisposable.add(
             RxView.clicks(fabCount)
                 .throttleFirst(
                     THROTTLE_FIRST,
@@ -86,12 +118,34 @@ class TasbeehActivity : BaseActivity() {
                     count()
                 }
         )
+        mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
+            if (!guideTasbeehDialog.isShowingAll()) guideTasbeehDialog.apply {
+                onTapTargetListener = {
+                    when {
+                        guidePref.hasShownPickTheme && !guidePref.hasShownVibrateSound ->
+                            showThemeDialog(true)
+                        guidePref.hasShownVibrateSound && !guidePref.hasShownDhikrTarget ->
+                            showMoreDialog(true)
+                        else -> showTargetDialog()
+                    }
+                }
+            }.show()
+        })
         loadBanner(adViewContainer)
+        MobileAds.openAdInspector(this) {
+            // Error will be non-null if ad inspector closed due to an error.
+        }
+    }
+
+    private fun setViewTypeCustom() {
+        if (isCustomType())
+            intent?.getParcelableExtra<Dhikr>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
     }
 
     private fun initTasbeeh() {
         with(counterPreference) {
             val value = when (type) {
+                Tasbeeh.CUSTOM -> dhikr.count
                 Tasbeeh.SUBHANALLAH -> subhanallah
                 Tasbeeh.ALHAMDULILLAH -> alhamdulillah
                 Tasbeeh.LAILAHAILALLAH -> lailahailallah
@@ -99,45 +153,61 @@ class TasbeehActivity : BaseActivity() {
                 Tasbeeh.ASTAGHFIRULLAH -> astaghfirullah
                 else -> 0
             }
+            tvTargetCounter?.text = target.toString()
             setTextCounter(value)
         }
     }
 
     private fun setupDialog() {
-        llThemes?.setOnClickListener {
-            themesPickDialog.apply {
-                setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
-                setOnPositiveListener { themeSelected ->
-                    themesPreference.type = themeSelected.type
-                    selectedTheme()
-                }
-                setOnDismissListener { loadAdMobInterstitial() }
-            }.show()
-        }
+        clTargetCounter?.setOnClickListener { showTargetDialog() }
+        llThemes?.setOnClickListener { showThemeDialog() }
+        llMore?.setOnClickListener { showMoreDialog() }
+    }
 
-        llMore?.setOnClickListener {
-            moreDialog.apply {
-                setOnSelectedListener {
-                    when (it) {
-                        MoreDialog.Menu.RATING_AND_REVIEW -> {
-                            openPlaystore(packageName)
-                        }
-                        MoreDialog.Menu.APP_LINK -> {
-                            startActivity(intentFor<DeveloperAppsActivity>())
-                        }
+    private fun showTargetDialog() {
+        targetDhikrDialog.show(counterPreference.target)
+    }
+
+    private fun showThemeDialog(isGuide: Boolean = false) {
+        themesPickDialog.apply {
+            setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
+            setOnPositiveListener { themeSelected ->
+                themesPreference.type = themeSelected.type
+                selectedTheme()
+            }
+            setOnDismissListener {
+                if (isGuide) guideTasbeehDialog.show()
+                else loadAdMobInterstitial()
+            }
+        }.show()
+    }
+
+    private fun showMoreDialog(isGuide: Boolean = false) {
+        moreDialog.apply {
+            showButtonDelete(isCustomType())
+            setDeleteClickListener {
+                dismiss()
+                confirmationDialog.apply {
+                    setTitle(R.string.label_delete)
+                    setOnDismissListener { loadAdMobInterstitial() }
+                    setText(getString(R.string.label_message_delete_confirm))
+                    setOnPositiveListener {
+                        dhikrViewModel.delete(dhikr)
+                        finish()
                     }
-                }
-                setOnDismissListener {
-                    loadAdMobInterstitial()
-                }
-            }.show()
-        }
+                }.show()
+            }
+            setOnDismissListener {
+                if (isGuide) guideTasbeehDialog.show()
+                else loadAdMobInterstitial()
+            }
+        }.show()
     }
 
     private fun selectedTheme() {
         theme = ThemeFactory.generate(themesPreference.type)
         theme?.run {
-            ivDzikir?.setImageDrawable(getDzikirImage())
+            if (!isCustomType()) ivDzikir?.setImageDrawable(getDzikirImage())
 
             clRootLayout?.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes)
             ivSkin?.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes))
@@ -147,11 +217,12 @@ class TasbeehActivity : BaseActivity() {
             tvHintCounter?.textColor = getColorCompat(outputHintColorRes)
 
             ivBack?.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent))
-            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more, tintColorAccent))
-            tvMore?.textColor = getColorCompat(tintColorAccent)
+            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent))
             ivThemes?.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent))
-            tvThemes?.textColor = getColorCompat(tintColorAccent)
             tvDzikir?.textColor = getColorCompat(tintColorAccent)
+
+            ivTargetCounter?.setImageDrawable(getDrawableCompat(backgroundTargetCounterImageRes))
+            tvTargetCounter?.textColor = getColorCompat(outputHintColorRes)
         }
     }
 
@@ -208,6 +279,10 @@ class TasbeehActivity : BaseActivity() {
     private fun count() {
         with(counterPreference) {
             val count = when (type) {
+                Tasbeeh.CUSTOM -> {
+                    dhikr.count += 1
+                    dhikr.count
+                }
                 Tasbeeh.SUBHANALLAH -> {
                     subhanallah += 1
                     subhanallah
@@ -230,6 +305,18 @@ class TasbeehActivity : BaseActivity() {
                 }
                 else -> 0
             }
+
+            vibrate(
+                try {
+                    if (count % counterPreference.target == 0)
+                        VIBRATE_TARGET_DURATION
+                    else
+                        VIBRATE_CLICK_DURATION
+                } catch (e: ArithmeticException) {
+                    VIBRATE_CLICK_DURATION
+                }
+            )
+            clickSound(count)
             setTextCounter(count)
         }
     }
@@ -259,21 +346,45 @@ class TasbeehActivity : BaseActivity() {
                     textView.gone()
             }
         }
+        if (isCustomType()) {
+            dhikr.count = counter
+            dhikrViewModel.update(dhikr)
+        }
     }
 
-    override fun onBackPressed() {
-        when {
-            mInterstitialAd.isLoaded -> {
-                loadAdMobInterstitial()
-            }
-            else -> {
-                super.onBackPressed()
+    private fun vibrate(duration: Long) {
+        if (settingPreference.vibrate) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        duration,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                )
+            } else {
+                vibrator.vibrate(duration);
             }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
+    private fun clickSound(count: Int) {
+        if (settingPreference.sound) {
+            val mp = MediaPlayer.create(
+                this@TasbeehActivity,
+                try {
+                    if (count % counterPreference.target == 0)
+                        R.raw.target
+                    else
+                        R.raw.sound_click
+                } catch (e: ArithmeticException) {
+                    R.raw.sound_click
+                }
+            ).apply {
+                setOnCompletionListener {
+                    it.release()
+                }
+            }
+            mp.start()
+        }
     }
 }
