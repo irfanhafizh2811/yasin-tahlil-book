@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="invisible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/appBarLayoutThemeGuide"
@@ -86,7 +86,7 @@
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:lineSpacingExtra="8dp"
-            android:text="You can change \nthe theme you like"
+            android:text="@string/label_info_change_theme"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@id/ivArrowTheme"
@@ -214,7 +214,7 @@
         app:layout_constraintBottom_toTopOf="@id/vwCounter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llDzikir"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <ImageView
             android:id="@+id/ivTargetCounter"
@@ -251,7 +251,8 @@
         app:layout_constraintBottom_toTopOf="@+id/adViewContainerGuide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llDzikir">
+        app:layout_constraintTop_toBottomOf="@id/llDzikir"
+        tools:visibility="invisible">
 
         <ImageView
             android:id="@+id/ivSkin"
@@ -419,7 +420,7 @@
         app:layout_constraintBottom_toTopOf="@id/vwCounter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llDzikir"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <ImageView
             android:id="@+id/ivTargetCounterGuide"
@@ -453,7 +454,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clTargetDhikrGuide">
+        app:layout_constraintTop_toBottomOf="@id/clTargetDhikrGuide"
+        tools:visibility="invisible">
 
         <ImageView
             android:id="@+id/ivArrowTarget"
@@ -473,7 +475,7 @@
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:lineSpacingExtra="8dp"
-            android:text="Set your dhikr target"
+            android:text="@string/label_set_target_dhikr"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@id/ivArrowTarget"
@@ -488,7 +490,7 @@
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.05"
-        android:text="Skip, I Understand"
+        android:text="@string/label_skip_guide"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/adViewContainerGuide"
@@ -504,7 +506,7 @@
         android:letterSpacing="0.05"
         android:paddingHorizontal="56dp"
         android:layout_marginBottom="8dp"
-        android:text="Next"
+        android:text="@string/label_next"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnSkip"

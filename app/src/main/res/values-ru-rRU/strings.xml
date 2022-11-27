@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мой Зикр</string>
+
+    <!-- Text -->
+    <string name="label_your_dhikr">Ваш Зикр</string>
+    <string name="label_popular_dhikr">Популярный Зикр</string>
+    <string name="label_info_fav_dhikr">Вы можете добавить\nсвой любимый Зикр</string>
+    <string name="label_info_add_dhikr">Вы можете добавить\nлюбой зикр, который хотите</string>
+    <string name="label_count">Считать</string>
+    <string name="label_tasbeeh">Тасбих</string>
+    <string name="label_reset">Перезагрузить</string>
+    <string name="label_counter_x" translatable="false">%1$dx</string>
+    <string name="label_tasbeeh_message" translatable="false">У тебя сегодня был зикр?</string>
+    <string name="text_latin_subhanallah" translatable="false">Subhanallah</string>
+    <string name="text_latin_alhamdulillah" translatable="false">Alhamdulillah</string>
+    <string name="text_latin_allahu_akbar" translatable="false">Allahu Akbar</string>
+    <string name="text_latin_astaghfirullah" translatable="false">Astaghfirullah</string>
+    <string name="text_latin_laailaahaillallah" translatable="false">Laailaaha illallah</string>
+    <string name="label_text_counter_hint" translatable="false">00000</string>
+    <string name="label_yes">Да</string>
+    <string name="label_no">нет</string>
+    <string name="label_title_dialog_reset">Счетчик будет сброшен?</string>
+    <string name="label_message_dialog_reset">Вы уверены, что хотите сбросить счетчик?</string>
+    <string name="label_bismillahirrahmanirrahim">Bismillahirrahmanirrahim</string>
+    <string name="label_choose_themes">Выберите темы</string>
+    <string name="label_themes">Темы</string>
+    <string name="label_more">Более</string>
+    <string name="label_picker_black_white">Черно-белый</string>
+    <string name="label_picker_default">По умолчанию</string>
+    <string name="label_picker_flowers">Цветок</string>
+    <string name="label_picker_leaves">Листья</string>
+    <string name="label_rating_and_review_apps">Оценка и обзор приложений MyDhikr</string>
+    <string name="label_our_applications">Наши приложения</string>
+    <string name="label_vibration">Вибрация</string>
+    <string name="label_sound">Звук</string>
+    <string name="label_delete">Удалить свой Зикр</string>
+    <string name="label_delete_confirmation">Удалить свой Зикр</string>
+    <string name="label_on">На</string>
+    <string name="label_off">Выключенный</string>
+    <string name="label_target_dhikr">Целевой Зикр</string>
+    <string name="hint_target_dhikr">Введите номер напоминания о зикре</string>
+    <string name="label_simpan">Сохранять</string>
+    <string name="label_information">Информация</string>
+    <string name="label_desc_information_target_change">Внесенные изменения будут применяться ко всем зикрам</string>
+    <string name="label_dont_show_again">Больше не показывать</string>
+    <string name="label_add_dhikr">Добавить Зикр</string>
+    <string name="label_message_delete_confirm">Вы уверены, что хотите удалить этот зикр?</string>
+    <string name="label_language">Язык</string>
+    <string name="label_notification">Уведомления приложений</string>
+    <string name="label_share">Поделитесь с друзьями</string>
+    <string name="label_instagram">Подпишитесь на MyDhikr в Instagram</string>
+    <string name="label_share_text">Поделитесь приложениями MyDhikr</string>
+    <string name="label_notification_title">Ты сделал зикр сегодня?</string>
+    <string name="label_notification_text">Не забывайте делать зикр с приложениями MyDhikr...</string>
+    <string name="label_cancel">Отмена</string>
+    <string name="label_save">Симпан</string>
+    <string name="label_next">Следующий</string>
+    <string name="label_skip_guide">Пропустить, я понимаю</string>
+    <string name="label_hint_add_dhikr">Введите зикр, который хотите добавить</string>
+    <string name="label_info_change_theme">Вы можете изменить тему,\nкоторая вам нравится</string>
+    <string name="label_set_target_dhikr">Установите цель зикра</string>
+</resources>

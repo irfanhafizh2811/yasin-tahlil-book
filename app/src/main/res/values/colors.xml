@@ -15,4 +15,6 @@
     <color name="colorRedPrimary">#C20202</color>
 
     <color name="colorBackgroundTarget">#B3000000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGrey">#2B2B2B</color>
 </resources>

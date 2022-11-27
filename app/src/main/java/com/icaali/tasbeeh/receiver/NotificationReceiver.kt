@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.RingtoneManager
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.icaali.tasbeeh.R
@@ -36,8 +37,13 @@ class NotificationReceiver : BroadcastReceiver() {
             val intent = Intent(context, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
-            val pendingIntent =
-                PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                PendingIntent.getBroadcast(
+                    context, 0, intent,
+                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            else PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
             val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification_logo)
                 .setContentTitle(context.getString(R.string.label_notification_title))
@@ -57,7 +63,12 @@ class NotificationReceiver : BroadcastReceiver() {
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, NotificationReceiver::class.java)
-        val alarmPendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        val alarmPendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            PendingIntent.getBroadcast(
+                context, 0, intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        else PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val calendar = Calendar.getInstance().apply {
             timeInMillis = settingPreference.timeNotification

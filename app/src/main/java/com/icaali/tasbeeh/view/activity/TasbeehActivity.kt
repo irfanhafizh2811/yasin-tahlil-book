@@ -1,5 +1,7 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.media.MediaPlayer
@@ -34,6 +36,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 import com.google.android.gms.ads.MobileAds
+import com.icaali.tasbeeh.extension.activty.hasPermissions
 
 class TasbeehActivity : BaseActivity() {
 
@@ -97,7 +100,7 @@ class TasbeehActivity : BaseActivity() {
                 .pulse()
                 .start()
             confirmationDialog.apply {
-                setOnDismissListener { loadAdMobInterstitial() }
+//                setOnDismissListener { loadAdMobInterstitial() }
                 setOnPositiveListener { reset() }
             }.show()
         }
@@ -116,6 +119,7 @@ class TasbeehActivity : BaseActivity() {
                         .duration(THROTTLE_FIRST)
                         .start()
                     count()
+                    logCount(intent?.getStringExtra(TASBEEH_LATIN_EXTRA) ?: TextUtils.BLANK)
                 }
         )
         mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
@@ -172,6 +176,7 @@ class TasbeehActivity : BaseActivity() {
         themesPickDialog.apply {
             setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
             setOnPositiveListener { themeSelected ->
+                logTheme(themeSelected.type.name)
                 themesPreference.type = themeSelected.type
                 selectedTheme()
             }
@@ -189,7 +194,7 @@ class TasbeehActivity : BaseActivity() {
                 dismiss()
                 confirmationDialog.apply {
                     setTitle(R.string.label_delete)
-                    setOnDismissListener { loadAdMobInterstitial() }
+//                    setOnDismissListener { loadAdMobInterstitial() }
                     setText(getString(R.string.label_message_delete_confirm))
                     setOnPositiveListener {
                         dhikrViewModel.delete(dhikr)
@@ -199,7 +204,7 @@ class TasbeehActivity : BaseActivity() {
             }
             setOnDismissListener {
                 if (isGuide) guideTasbeehDialog.show()
-                else loadAdMobInterstitial()
+//                else loadAdMobInterstitial()
             }
         }.show()
     }
@@ -352,17 +357,20 @@ class TasbeehActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun vibrate(duration: Long) {
         if (settingPreference.vibrate) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(
-                    VibrationEffect.createOneShot(
-                        duration,
-                        VibrationEffect.DEFAULT_AMPLITUDE
+            if (hasPermissions(arrayOf(Manifest.permission.VIBRATE))) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                            duration,
+                            VibrationEffect.DEFAULT_AMPLITUDE
+                        )
                     )
-                )
-            } else {
-                vibrator.vibrate(duration);
+                } else {
+                    vibrator.vibrate(duration);
+                }
             }
         }
     }

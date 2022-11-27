@@ -26,26 +26,12 @@ import java.io.InputStreamReader
 
 fun Context.getColorCompat(@ColorRes colorId: Int) = ContextCompat.getColor(this, colorId)
 
-fun Context.getDrawableCompat(@DrawableRes drawableId: Int) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        this.resources.getDrawable(drawableId, null)
-    } else AppCompatResources.getDrawable(this, drawableId)
+fun Context.getDrawableCompat(@DrawableRes drawableId: Int) = AppCompatResources.getDrawable(this, drawableId)
 
 fun Context.getDrawableCompat(@DrawableRes drawableId: Int, @ColorRes colorRes: Int) =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        val drawable = this.resources.getDrawable(drawableId, null)
-        drawable?.let { it ->
-            val drawable = DrawableCompat.wrap(it)
-            DrawableCompat.setTint(drawable, getColorCompat(colorRes))
-        }
-        drawable
-    } else {
-        val drawable = AppCompatResources.getDrawable(this, drawableId)
-        drawable?.let { it ->
-            val drawable = DrawableCompat.wrap(it)
-            DrawableCompat.setTint(drawable, getColorCompat(colorRes))
-        }
-        drawable
+    AppCompatResources.getDrawable(this, drawableId)?.apply {
+        val drawable = DrawableCompat.wrap(this)
+        DrawableCompat.setTint(drawable, getColorCompat(colorRes))
     }
 
 fun Context.hideKeyboard(view: View) {

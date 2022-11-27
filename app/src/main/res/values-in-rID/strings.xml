@@ -33,9 +33,9 @@
     <string name="label_tasbeeh">Tasbih</string>
     <string name="label_count">Hitung</string>
     <string name="label_our_applications">Aplikasi Kita Lainya</string>
-    <string name="label_our_aplications">Aplikasi Kita Lainya</string>
     <string name="label_delete_confirmation">Konfirmasi Hapus</string>
     <string name="label_simpan">Simpan</string>
+    <string name="label_next">Lanjutkan</string>
     <string name="label_language">Bahasa</string>
     <string name="label_notification">Notifikasi aplikasi</string>
     <string name="label_share">Bagikan ke teman Anda</string>
@@ -43,4 +43,12 @@
     <string name="label_notification_title">Sudahkah Anda Zikir hari ini?</string>
     <string name="label_share_text">Bagikan Aplikasi MyDhikr</string>
     <string name="label_notification_text">Jangan lupa Zikir dengan aplikasi MyDhikr</string>
+
+    <string name="label_your_dhikr">Zikir Anda</string>
+    <string name="label_popular_dhikr">Zikir Terkenal</string>
+    <string name="label_info_add_dhikr">Anda bisa menambah\nzikir yang anda inginkan</string>
+    <string name="label_info_fav_dhikr">Anda Bisa Menambah\nZikir Yang Anda Inginkan</string>
+    <string name="label_info_change_theme">Anda bisa mengubah \nsesuai tema yang anda inginkan</string>
+    <string name="label_set_target_dhikr">Bikin target zikir anda</string>
+    <string name="label_skip_guide">Lewati, Saya Mengerti</string>
 </resources>

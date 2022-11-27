@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Benim Zikrim</string>
+
+    <!-- Text -->
+    <string name="label_your_dhikr">Zikiriniz</string>
+    <string name="label_popular_dhikr">Popüler Zikir</string>
+    <string name="label_info_fav_dhikr">Favori Zikrinizi\nEkleyebilirsiniz</string>
+    <string name="label_info_add_dhikr">İstediğiniz zikri\nekleyebilirsiniz</string>
+    <string name="label_count">Saymak</string>
+    <string name="label_tasbeeh">Tesbih</string>
+    <string name="label_reset">Sıfırla</string>
+    <string name="label_counter_x" translatable="false">%1$dx</string>
+    <string name="label_tasbeeh_message" translatable="true">Bugün zikir var mı?</string>
+    <string name="text_latin_subhanallah" translatable="false">Subhanallah</string>
+    <string name="text_latin_alhamdulillah" translatable="false">Alhamdulillah</string>
+    <string name="text_latin_allahu_akbar" translatable="false">Allahu Akbar</string>
+    <string name="text_latin_astaghfirullah" translatable="false">Astaghfirullah</string>
+    <string name="text_latin_laailaahaillallah" translatable="false">Laailaaha illallah</string>
+    <string name="label_text_counter_hint" translatable="false">00000</string>
+    <string name="label_yes">Evet</string>
+    <string name="label_no">Numara</string>
+    <string name="label_title_dialog_reset">Sayaç sıfırlanacak mı?</string>
+    <string name="label_message_dialog_reset">Sayacı sıfırlamak istediğinizden emin misiniz?</string>
+    <string name="label_bismillahirrahmanirrahim">Bismillahirrahmanirrahim</string>
+    <string name="label_choose_themes">Temaları Seçin</string>
+    <string name="label_themes">Temalar</string>
+    <string name="label_more">Daha</string>
+    <string name="label_picker_black_white">Siyah beyaz</string>
+    <string name="label_picker_default">Varsayılan</string>
+    <string name="label_picker_flowers">Çiçek</string>
+    <string name="label_picker_leaves">Yapraklar</string>
+    <string name="label_rating_and_review_apps">MyDhikr Uygulamalarını Derecelendirin ve İnceleyin</string>
+    <string name="label_our_applications">Uygulamalarımız</string>
+    <string name="label_vibration">Titreşim</string>
+    <string name="label_sound">Ses</string>
+    <string name="label_delete">Zikrinizi Silin</string>
+    <string name="label_delete_confirmation">Zikrinizi Silin</string>
+    <string name="label_on">Açık</string>
+    <string name="label_off">Kapalı</string>
+    <string name="label_target_dhikr">Hedef Zikir</string>
+    <string name="hint_target_dhikr">Hatırlatıcı zikirinizin numarasını girin</string>
+    <string name="label_simpan">Kaydetmek</string>
+    <string name="label_information">Bilgi</string>
+    <string name="label_desc_information_target_change">Yapılan değişiklikler tüm zikirlere uygulanacaktır.</string>
+    <string name="label_dont_show_again">Bir daha gösterme</string>
+    <string name="label_add_dhikr">Zikir ekle</string>
+    <string name="label_message_delete_confirm">Bu zikri silmek istediğinizden emin misiniz?</string>
+    <string name="label_language">Dil</string>
+    <string name="label_notification">Uygulama bildirimleri</string>
+    <string name="label_share">Arkadaşlarına paylaş</string>
+    <string name="label_instagram">Instagram\'da MyDhikr\'ı takip edin</string>
+    <string name="label_share_text">MyDhikr Uygulamalarını Paylaşın</string>
+    <string name="label_notification_title">Bugün zikir yaptın mı?</string>
+    <string name="label_notification_text">MyDhikr Uygulamaları ile zikir yapmayı unutmayın...</string>
+    <string name="label_cancel">İptal</string>
+    <string name="label_save">kaydetmek</string>
+    <string name="label_next">Sonraki</string>
+    <string name="label_skip_guide">geç anladım</string>
+    <string name="label_hint_add_dhikr">Eklemek istediğiniz zikri yazın</string>
+    <string name="label_info_change_theme">Beğendiğiniz temayı değiştirebilirsiniz</string>
+    <string name="label_set_target_dhikr">Zikir hedefinizi belirleyin</string>
+</resources>

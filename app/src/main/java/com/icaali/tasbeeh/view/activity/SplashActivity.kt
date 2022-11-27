@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
@@ -52,12 +53,16 @@ class SplashActivity : BaseActivity() {
         schedulePushNotification()
     }
 
-
     private fun schedulePushNotification() {
         if (settingPreference.timeNotification == 0L || System.currentTimeMillis() > settingPreference.timeNotification) {
             val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(this, NotificationReceiver::class.java)
-            val alarmPendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+            val alarmPendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                PendingIntent.getBroadcast(
+                    this, 0, intent,
+                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            else PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             val calendar = Calendar.getInstance().apply {
                 if (get(Calendar.HOUR_OF_DAY) >= HOUR_TO_SHOW_PUSH) {

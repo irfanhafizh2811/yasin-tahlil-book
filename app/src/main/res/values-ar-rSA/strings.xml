@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ذِكْر</string>
+
+    <!-- Text Arabic -->
+    <string name="text_arabic_allah" translatable="false">ُ لِلَّه</string>
+    <string name="text_arabic_alhamdulillah" translatable="false">اَلْحَمْدُ لِلَّه</string>
+    <string name="text_arabic_subhanallah" translatable="false">سُبْحَانَ اللّهُ</string>
+    <string name="text_arabic_laila" translatable="false">لاَ إِلَهَ إِلاَّ اللهُ</string>
+    <string name="text_arabic_allahu_akbar" translatable="false">اَللّهُ اَكْبَرُ</string>
+
+    <!-- Text -->
+    <string name="label_your_dhikr">الذكر الخاص بك</string>
+    <string name="label_popular_dhikr">شعبي اذكار</string>
+    <string name="label_info_add_dhikr">يمكنك إضافة أي ذكر تريده</string>
+    <string name="label_info_fav_dhikr">يمكنك إضافة أي ذكر تريده</string>
+    <string name="label_count">عدد</string>
+    <string name="label_tasbeeh">تسبيح</string>
+    <string name="label_reset">إعادة تعيين</string>
+    <string name="label_counter_x" translatable="false">%1$dx</string>
+    <string name="label_tasbeeh_message" translatable="true">هل لديك ذكر اليوم؟</string>
+    <string name="text_latin_subhanallah" translatable="false">Subhanallah</string>
+    <string name="text_latin_alhamdulillah" translatable="false">Alhamdulillah</string>
+    <string name="text_latin_allahu_akbar" translatable="false">Allahu Akbar</string>
+    <string name="text_latin_astaghfirullah" translatable="false">Astaghfirullah</string>
+    <string name="text_latin_laailaahaillallah" translatable="false">Laailaaha illallah</string>
+    <string name="label_text_counter_hint" translatable="false">00000</string>
+    <string name="label_yes">نعم</string>
+    <string name="label_no">رقم</string>
+    <string name="label_title_dialog_reset">سيتم إعادة تعيين العداد؟</string>
+    <string name="label_message_dialog_reset">هل أنت متأكد أنك تريد إعادة تعيين العداد؟</string>
+    <string name="label_bismillahirrahmanirrahim">Bismillahirrahmanirrahim</string>
+    <string name="label_choose_themes">اختر السمات</string>
+    <string name="label_themes">ثيمات</string>
+    <string name="label_more">أكثر</string>
+    <string name="label_picker_black_white">أسود أبيض</string>
+    <string name="label_picker_default">تقصير</string>
+    <string name="label_picker_flowers">ورد</string>
+    <string name="label_picker_leaves">اوراق اشجار</string>
+    <string name="label_rating_and_review_apps">تقييم ومراجعة تطبيقات ذكري</string>
+    <string name="label_our_applications">تطبيقاتنا</string>
+    <string name="label_vibration">اهتزاز</string>
+    <string name="label_sound">يبدو</string>
+    <string name="label_delete">حذف الذكر الخاص بك</string>
+    <string name="label_delete_confirmation">حذف الذكر الخاص بك</string>
+    <string name="label_on">على</string>
+    <string name="label_off">عن</string>
+    <string name="label_target_dhikr">الهدف الذكر</string>
+    <string name="hint_target_dhikr">أدخل رقم تذكيرك الذكر</string>
+    <string name="label_simpan">يحفظ</string>
+    <string name="label_information">معلومة</string>
+    <string name="label_desc_information_target_change">سيتم تطبيق التغييرات التي تم إجراؤها على جميع الأذكار</string>
+    <string name="label_dont_show_again">لا تظهره مرة أخرى</string>
+    <string name="label_add_dhikr">أضف الذكر</string>
+    <string name="label_message_delete_confirm">هل أنت متأكد أنك تريد حذف هذا الذكر؟</string>
+    <string name="label_language">لغة</string>
+    <string name="label_notification">اشعارات التطبيق</string>
+    <string name="label_share">شاركها مع أصدقائك</string>
+    <string name="label_instagram">اتبع ذكري على انستغرام</string>
+    <string name="label_share_text">مشاركة تطبيقات ذكري</string>
+    <string name="label_notification_title">هل أديت الذكر اليوم؟</string>
+    <string name="label_notification_text">لا تنسى الذكر مع تطبيقاتي الذكر</string>
+    <string name="label_cancel">يلغي</string>
+    <string name="label_save">حفظ</string>
+    <string name="label_next">التالي</string>
+    <string name="label_skip_guide">تخطي ، أنا أفهم</string>
+    <string name="label_hint_add_dhikr">اكتب الذكر الذي تريد إضافته</string>
+    <string name="label_info_change_theme">يمكنك تغيير الموضوع الذي يعجبك</string>
+    <string name="label_set_target_dhikr">حدد هدفك للذكر</string>
+</resources>

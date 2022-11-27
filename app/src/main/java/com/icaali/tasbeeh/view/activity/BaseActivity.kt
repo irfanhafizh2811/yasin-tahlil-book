@@ -1,18 +1,26 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.LocaleManager
+import android.content.Context
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.BuildConfig
+import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.extension.activty.hasPermissions
 import com.icaali.tasbeeh.extension.ads.loadAd
 import com.icaali.tasbeeh.extension.ads.loadAdMob
 import com.icaali.tasbeeh.extension.ads.loadAdMobTest
@@ -34,8 +42,18 @@ open class BaseActivity : AppCompatActivity() {
     protected val mDisposable = CompositeDisposable()
     //---------------------- End Access Protected ----------------------
 
+    //----------------------   Access Public   ----------------------
+    var firebaseAnalytics: FirebaseAnalytics? = null
+    var localeManager: LocaleManager? = null
+    //---------------------- End Access Public ----------------------
+
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= 33) {
+            localeManager =
+                getSystemService(Context.LOCALE_SERVICE) as LocaleManager
+        }
         requestConfiguration = when (isTestAdmob()) {
             true -> {
                 val deviceId = "F479D985133C6B3E3794DD9D1EF08219"
@@ -57,6 +75,17 @@ open class BaseActivity : AppCompatActivity() {
         MobileAds.setRequestConfiguration(requestConfiguration)
         MobileAds.initialize(this) {
 
+        }
+        if (hasPermissions(
+                arrayOf(
+                    Manifest.permission.INTERNET,
+                    Manifest.permission.ACCESS_NETWORK_STATE,
+                    Manifest.permission.WAKE_LOCK
+                )
+            )
+        ) {
+            firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+            firebaseAnalytics?.setUserId(TextUtils.NA)
         }
     }
 

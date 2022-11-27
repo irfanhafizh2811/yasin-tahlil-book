@@ -13,6 +13,10 @@
     <string name="text_arabic_allahu_akbar" translatable="false">اَللّهُ اَكْبَرُ</string>
 
     <!-- Text -->
+    <string name="label_your_dhikr">Your Dhikr</string>
+    <string name="label_popular_dhikr">Popular Dhikr</string>
+    <string name="label_info_fav_dhikr">You Can Add\nYour Favorite Dhikr</string>
+    <string name="label_info_add_dhikr">You can add\nany dhikr you want</string>
     <string name="label_count">Count</string>
     <string name="label_tasbeeh">Tasbeeh</string>
     <string name="label_reset">Reset</string>
@@ -37,7 +41,6 @@
     <string name="label_picker_flowers">Flower</string>
     <string name="label_picker_leaves">Leaves</string>
     <string name="label_rating_and_review_apps">Rating and Review MyDhikr Apps</string>
-    <string name="label_our_aplications">Our Aplications</string>
     <string name="label_our_applications">Our Applications</string>
     <string name="label_vibration">Vibration</string>
     <string name="label_sound">Sound</string>
@@ -62,5 +65,9 @@
     <string name="label_notification_text">Don\'t forget to dhikr with MyDhikr Apps...</string>
     <string name="label_cancel">Cancel</string>
     <string name="label_save">Simpan</string>
+    <string name="label_next">Next</string>
+    <string name="label_skip_guide">Skip, I Understand</string>
     <string name="label_hint_add_dhikr">Type the dhikr you want to add</string>
+    <string name="label_info_change_theme">You can change \nthe theme you like</string>
+    <string name="label_set_target_dhikr">Set your dhikr target</string>
 </resources>
