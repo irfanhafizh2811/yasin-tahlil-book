@@ -60,4 +60,11 @@
     <string name="label_hint_add_dhikr">Введите зикр, который хотите добавить</string>
     <string name="label_info_change_theme">Вы можете изменить тему,\nкоторая вам нравится</string>
     <string name="label_set_target_dhikr">Установите цель зикра</string>
+
+    <!--************************ Section Dhikr ************************-->
+    <string name="label_dhikr_morning">Morning Dhikr</string>
+    <string name="label_dhikr_evening">Evening Dhikr</string>
+    <string name="label_prayer_morning">Morning Prayer</string>
+    <string name="label_prayer_evening">Evening Prayer</string>
+    <!--************************ End Section Dhikr ************************-->
 </resources>

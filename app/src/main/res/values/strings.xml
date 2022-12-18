@@ -70,4 +70,21 @@
     <string name="label_hint_add_dhikr">Type the dhikr you want to add</string>
     <string name="label_info_change_theme">You can change \nthe theme you like</string>
     <string name="label_set_target_dhikr">Set your dhikr target</string>
+
+    <!--************************ Section Dhikr ************************-->
+    <string name="label_dhikr_morning">Morning Dhikr</string>
+    <string name="label_dhikr_evening">Evening Dhikr</string>
+    <string name="label_prayer_morning">Morning Prayer</string>
+    <string name="label_prayer_evening">Evening Prayer</string>
+    <!--************************ End Section Dhikr ************************-->
+
+
+    <!--************************ Section Analytic ************************-->
+    <string name="analytic_morning" translatable="false">Morning Dhikr</string>
+    <string name="analytic_evening" translatable="false">Evening Dhikr</string>
+    <string name="analytic_morning_complete" translatable="false">Morning Dhikr Complete</string>
+    <string name="analytic_evening_complete" translatable="false">Evening Dhikr Complete</string>
+    <string name="analytic_morning_pray" translatable="false">Morning Pray Complete</string>
+    <string name="analytic_evening_pray" translatable="false">Evening Pray Complete</string>
+    <!--************************ End Section Analytic ************************-->
 </resources>

@@ -3,7 +3,7 @@ package com.icaali.tasbeeh.extension.common
 import android.content.Context
 import android.util.Patterns
 import android.util.TypedValue
-import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.utils.TextUtils
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat

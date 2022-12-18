@@ -19,7 +19,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.BuildConfig
-import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.utils.TextUtils
 import com.icaali.tasbeeh.extension.activty.hasPermissions
 import com.icaali.tasbeeh.extension.ads.loadAd
 import com.icaali.tasbeeh.extension.ads.loadAdMob

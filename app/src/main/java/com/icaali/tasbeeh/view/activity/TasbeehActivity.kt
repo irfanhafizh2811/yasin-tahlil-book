@@ -11,8 +11,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.common.TextUtils
-import com.icaali.tasbeeh.database.table.Dhikr
+import com.icaali.tasbeeh.utils.TextUtils
 import com.icaali.tasbeeh.extension.activty.isCustomType
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
@@ -21,7 +20,6 @@ import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
-import com.icaali.tasbeeh.view.Tasbeeh
 import com.icaali.tasbeeh.view.dialog.*
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeFactory
@@ -36,7 +34,9 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 import com.google.android.gms.ads.MobileAds
+import com.icaali.tasbeeh.database.table.Tasbeeh
 import com.icaali.tasbeeh.extension.activty.hasPermissions
+import com.icaali.tasbeeh.utils.TasbeehConst
 
 class TasbeehActivity : BaseActivity() {
 
@@ -59,7 +59,7 @@ class TasbeehActivity : BaseActivity() {
 
     //------------------------------------   Section Lazy   ------------------------------------
     private val tvCounters by lazy {
-        listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter4, tvCounter5)
+        listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter5)
     }
     private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
@@ -82,7 +82,7 @@ class TasbeehActivity : BaseActivity() {
     private val guideTasbeehDialog by lazy { GuideTasbeehDialog(this, guidePref) }
     //------------------------------------ Section Lazy ------------------------------------
 
-    private var dhikr = Dhikr(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
+    private var dhikr = Tasbeeh(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
     private var theme: Theme? = null
     internal var type = TextUtils.BLANK
 
@@ -100,7 +100,6 @@ class TasbeehActivity : BaseActivity() {
                 .pulse()
                 .start()
             confirmationDialog.apply {
-//                setOnDismissListener { loadAdMobInterstitial() }
                 setOnPositiveListener { reset() }
             }.show()
         }
@@ -143,18 +142,18 @@ class TasbeehActivity : BaseActivity() {
 
     private fun setViewTypeCustom() {
         if (isCustomType())
-            intent?.getParcelableExtra<Dhikr>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
+            intent?.getParcelableExtra<com.icaali.tasbeeh.database.table.Tasbeeh>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
     }
 
     private fun initTasbeeh() {
         with(counterPreference) {
             val value = when (type) {
-                Tasbeeh.CUSTOM -> dhikr.count
-                Tasbeeh.SUBHANALLAH -> subhanallah
-                Tasbeeh.ALHAMDULILLAH -> alhamdulillah
-                Tasbeeh.LAILAHAILALLAH -> lailahailallah
-                Tasbeeh.ALLAHU_AKBAR -> allahukkbar
-                Tasbeeh.ASTAGHFIRULLAH -> astaghfirullah
+                TasbeehConst.CUSTOM -> dhikr.count
+                TasbeehConst.SUBHANALLAH -> subhanallah
+                TasbeehConst.ALHAMDULILLAH -> alhamdulillah
+                TasbeehConst.LAILAHAILALLAH -> lailahailallah
+                TasbeehConst.ALLAHU_AKBAR -> allahukkbar
+                TasbeehConst.ASTAGHFIRULLAH -> astaghfirullah
                 else -> 0
             }
             tvTargetCounter?.text = target.toString()
@@ -194,7 +193,6 @@ class TasbeehActivity : BaseActivity() {
                 dismiss()
                 confirmationDialog.apply {
                     setTitle(R.string.label_delete)
-//                    setOnDismissListener { loadAdMobInterstitial() }
                     setText(getString(R.string.label_message_delete_confirm))
                     setOnPositiveListener {
                         dhikrViewModel.delete(dhikr)
@@ -204,7 +202,6 @@ class TasbeehActivity : BaseActivity() {
             }
             setOnDismissListener {
                 if (isGuide) guideTasbeehDialog.show()
-//                else loadAdMobInterstitial()
             }
         }.show()
     }
@@ -233,23 +230,23 @@ class TasbeehActivity : BaseActivity() {
 
     private fun getDzikirImage(): Drawable? {
         return when (type) {
-            Tasbeeh.SUBHANALLAH -> getDrawableCompat(
+            TasbeehConst.SUBHANALLAH -> getDrawableCompat(
                 R.drawable.ic_subhanallah,
                 theme?.tintColorAccent ?: R.color.textHintOutputDefault
             )
-            Tasbeeh.ALHAMDULILLAH -> getDrawableCompat(
+            TasbeehConst.ALHAMDULILLAH -> getDrawableCompat(
                 R.drawable.ic_alhamdulillah,
                 theme?.tintColorAccent ?: R.color.textHintOutputDefault
             )
-            Tasbeeh.ALLAHU_AKBAR -> getDrawableCompat(
+            TasbeehConst.ALLAHU_AKBAR -> getDrawableCompat(
                 R.drawable.ic_allahu_akbar,
                 theme?.tintColorAccent ?: R.color.textHintOutputDefault
             )
-            Tasbeeh.ASTAGHFIRULLAH -> getDrawableCompat(
+            TasbeehConst.ASTAGHFIRULLAH -> getDrawableCompat(
                 R.drawable.ic_astagfirllah,
                 theme?.tintColorAccent ?: R.color.textHintOutputDefault
             )
-            Tasbeeh.LAILAHAILALLAH -> getDrawableCompat(
+            TasbeehConst.LAILAHAILALLAH -> getDrawableCompat(
                 R.drawable.ic_laailaahaillallah,
                 theme?.tintColorAccent ?: R.color.textHintOutputDefault
             )
@@ -262,19 +259,19 @@ class TasbeehActivity : BaseActivity() {
 
     private fun reset() {
         when (type) {
-            Tasbeeh.SUBHANALLAH -> {
+            TasbeehConst.SUBHANALLAH -> {
                 counterPreference.subhanallah = 0
             }
-            Tasbeeh.ALHAMDULILLAH -> {
+            TasbeehConst.ALHAMDULILLAH -> {
                 counterPreference.alhamdulillah = 0
             }
-            Tasbeeh.LAILAHAILALLAH -> {
+            TasbeehConst.LAILAHAILALLAH -> {
                 counterPreference.lailahailallah = 0
             }
-            Tasbeeh.ALLAHU_AKBAR -> {
+            TasbeehConst.ALLAHU_AKBAR -> {
                 counterPreference.allahukkbar = 0
             }
-            Tasbeeh.ASTAGHFIRULLAH -> {
+            TasbeehConst.ASTAGHFIRULLAH -> {
                 counterPreference.astaghfirullah = 0
             }
         }
@@ -284,27 +281,27 @@ class TasbeehActivity : BaseActivity() {
     private fun count() {
         with(counterPreference) {
             val count = when (type) {
-                Tasbeeh.CUSTOM -> {
+                TasbeehConst.CUSTOM -> {
                     dhikr.count += 1
                     dhikr.count
                 }
-                Tasbeeh.SUBHANALLAH -> {
+                TasbeehConst.SUBHANALLAH -> {
                     subhanallah += 1
                     subhanallah
                 }
-                Tasbeeh.ALHAMDULILLAH -> {
+                TasbeehConst.ALHAMDULILLAH -> {
                     alhamdulillah += 1
                     alhamdulillah
                 }
-                Tasbeeh.LAILAHAILALLAH -> {
+                TasbeehConst.LAILAHAILALLAH -> {
                     lailahailallah += 1
                     lailahailallah
                 }
-                Tasbeeh.ALLAHU_AKBAR -> {
+                TasbeehConst.ALLAHU_AKBAR -> {
                     allahukkbar += 1
                     allahukkbar
                 }
-                Tasbeeh.ASTAGHFIRULLAH -> {
+                TasbeehConst.ASTAGHFIRULLAH -> {
                     astaghfirullah += 1
                     astaghfirullah
                 }

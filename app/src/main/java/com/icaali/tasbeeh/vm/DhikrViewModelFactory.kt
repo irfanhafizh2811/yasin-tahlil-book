@@ -2,12 +2,12 @@ package com.icaali.tasbeeh.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.icaali.tasbeeh.database.table.Dhikr
-import com.icaali.tasbeeh.repository.DhikrRepository
+import com.icaali.tasbeeh.database.table.Tasbeeh
+import com.icaali.tasbeeh.repository.TasbeehRepository
 
-class DhikrViewModelFactory(private val repository: DhikrRepository) : ViewModelProvider.Factory {
+class DhikrViewModelFactory(private val repository: TasbeehRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(Dhikr::class.java)) {
+        if (modelClass.isAssignableFrom(Tasbeeh::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return DhikrViewModel(repository) as T
         }

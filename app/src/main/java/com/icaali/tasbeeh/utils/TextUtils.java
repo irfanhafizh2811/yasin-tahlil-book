@@ -1,4 +1,4 @@
-package com.icaali.tasbeeh.common;
+package com.icaali.tasbeeh.utils;
 
 /**
  * Created by irfanbrader on 8/16/17.

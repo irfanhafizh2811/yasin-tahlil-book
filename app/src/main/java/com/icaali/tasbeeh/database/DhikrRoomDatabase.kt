@@ -3,10 +3,10 @@ package com.icaali.tasbeeh.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.icaali.tasbeeh.database.dao.DhikrDao
-import com.icaali.tasbeeh.database.table.Dhikr
+import com.icaali.tasbeeh.database.table.Tasbeeh
 
 @Database(
-    entities = [Dhikr::class],
+    entities = [Tasbeeh::class],
     version = 1,
     exportSchema = false
 )

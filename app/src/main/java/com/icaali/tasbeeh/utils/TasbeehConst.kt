@@ -1,6 +1,6 @@
-package com.icaali.tasbeeh.view
+package com.icaali.tasbeeh.utils
 
-object Tasbeeh {
+object TasbeehConst {
     const val CUSTOM = "CUSTOM"
     const val SUBHANALLAH = "SUBHANALLAH"
     const val ALHAMDULILLAH = "ALHAMDULILLAH"

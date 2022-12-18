@@ -1,6 +1,7 @@
 package com.icaali.tasbeeh.view.activity
 
 import android.os.Bundle
+import androidx.annotation.StringRes
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.preference.GuidePreference
 import io.reactivex.Completable
@@ -22,6 +23,16 @@ fun BaseActivity.logAnalytic(event: String, key: String, value: String) {
     val bundle = Bundle()
     bundle.putString(key, value)
     firebaseAnalytics?.logEvent(event, bundle)
+}
+
+
+fun BaseActivity.logSelectContent(@StringRes resString: Int) {
+    val value = getString(resString)
+    logAnalytic(
+        FirebaseAnalytics.Event.SELECT_CONTENT,
+        FirebaseAnalytics.Param.CONTENT,
+        value
+    )
 }
 
 fun BaseActivity.logSelectContent(value: String) {

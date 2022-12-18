@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "dhirk_table")
 @Parcelize
-data class Dhikr(
+data class Tasbeeh(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: String,
     @ColumnInfo(name = "arabic") val arabic: String,

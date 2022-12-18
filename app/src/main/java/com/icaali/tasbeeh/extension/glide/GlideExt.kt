@@ -15,7 +15,7 @@ import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.RequestOptions
-import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.utils.TextUtils
 import com.icaali.tasbeeh.extension.common.extension
 
 /**

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--************* End Section Font Title *************-->
+    <dimen name="font_title_size_small">22sp</dimen>
+    <dimen name="font_title_size_regular">23sp</dimen>
+    <dimen name="font_title_size_large">25sp</dimen>
+    <dimen name="font_title_size_huge">27sp</dimen>
+    <!--*************************************************-->
+
+    <!--************* End Section Font Arabic *************-->
+    <dimen name="font_arabic_size_small">21sp</dimen>
+    <dimen name="font_arabic_size_regular">23sp</dimen>
+    <dimen name="font_arabic_size_large">25sp</dimen>
+    <dimen name="font_arabic_size_huge">27sp</dimen>
+    <!--***************************************************-->
+
+    <!--************** Section Font Mean **************-->
+    <dimen name="font_mean_size_small">12sp</dimen>
+    <dimen name="font_mean_size_regular">13sp</dimen>
+    <dimen name="font_mean_size_large">14sp</dimen>
+    <dimen name="font_mean_size_huge">18sp</dimen>
+
+    <dimen name="font_mean_line_small">22sp</dimen>
+    <dimen name="font_mean_line_regular">23sp</dimen>
+    <dimen name="font_mean_line_large">25sp</dimen>
+    <dimen name="font_mean_line_huge">27sp</dimen>
+
+    <dimen name="font_mean_spacing_small">0.023</dimen>
+    <dimen name="font_mean_spacing_regular">0.023</dimen>
+    <dimen name="font_mean_spacing_normal">0.023</dimen>
+    <dimen name="font_mean_spacing_huge">0.023</dimen>
+    <!--*************************************************-->
+</resources>

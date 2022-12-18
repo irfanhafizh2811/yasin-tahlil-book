@@ -10,14 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.MobileAds
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.extension.activty.openPlaystore
-import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.LanguagePreference
 import com.icaali.tasbeeh.preference.SettingPreference
-import com.icaali.tasbeeh.view.Tasbeeh
-import com.icaali.tasbeeh.view.adapter.DhikrAdapter
+import com.icaali.tasbeeh.utils.TasbeehConst
+import com.icaali.tasbeeh.view.adapter.TasbeehAdapter
 import com.icaali.tasbeeh.view.dialog.AddCustomDialog
 import com.icaali.tasbeeh.view.dialog.GuideMainDialog
 import com.icaali.tasbeeh.view.dialog.LanguageDialog
@@ -37,25 +36,23 @@ class MainActivity : BaseActivity() {
         private const val MYDHIKR_INSTAGRAM_URL = "https://www.instagram.com/mydhikr.apps/"
     }
 
+    //***************** public variable *****************
     val languagePreference by inject<LanguagePreference>()
-    private val counterPreference: CounterPreference by inject()
+    val counterPreference: CounterPreference by inject()
+    //***************************************************
+
+    //***************** private variable *****************
     private val settingPreference by inject<SettingPreference>()
-    internal val dhikrViewModel: DhikrViewModel by viewModel()
+    private val dhikrViewModel: DhikrViewModel by viewModel()
     private val addCustomDialog by lazy { AddCustomDialog(this) }
     private val moreDialog by lazy { MoreDialog(this, settingPreference) }
     private val mainGuideDialog by lazy { GuideMainDialog(this, guidePref) }
-    private var languageDialog: LanguageDialog? = null
+    //***************************************************
 
     private val dhikrAdapter by lazy {
-        DhikrAdapter {
+        TasbeehAdapter {
             logSelectContent(it.latin)
-            startActivity(
-                intentFor<TasbeehActivity>(
-                    TasbeehActivity.TYPE_EXTRA to Tasbeeh.CUSTOM,
-                    TasbeehActivity.TASBEEH_LATIN_EXTRA to it.latin,
-                    TasbeehActivity.TASBEEH_DHIKR_EXTRA to it
-                )
-            )
+            startActivityTasbeeh(it)
         }
     }
 
@@ -64,48 +61,23 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         cvSubhanallah?.setOnClickListener {
             logSelectContent(getString(R.string.text_latin_subhanallah))
-            startActivity(
-                intentFor<TasbeehActivity>(
-                    TasbeehActivity.TYPE_EXTRA to Tasbeeh.SUBHANALLAH,
-                    TasbeehActivity.TASBEEH_LATIN_EXTRA to getString(R.string.text_latin_subhanallah)
-                )
-            )
+            startActivityTasbeeh(TasbeehConst.SUBHANALLAH)
         }
         cvAlhamdulillah?.setOnClickListener {
             logSelectContent(getString(R.string.text_latin_alhamdulillah))
-            startActivity(
-                intentFor<TasbeehActivity>(
-                    TasbeehActivity.TYPE_EXTRA to Tasbeeh.ALHAMDULILLAH,
-                    TasbeehActivity.TASBEEH_LATIN_EXTRA to getString(R.string.text_latin_alhamdulillah)
-                )
-            )
+            startActivityTasbeeh(TasbeehConst.ALHAMDULILLAH)
         }
         cvAllahuAkbar?.setOnClickListener {
             logSelectContent(getString(R.string.text_latin_allahu_akbar))
-            startActivity(
-                intentFor<TasbeehActivity>(
-                    TasbeehActivity.TYPE_EXTRA to Tasbeeh.ALLAHU_AKBAR,
-                    TasbeehActivity.TASBEEH_LATIN_EXTRA to getString(R.string.text_latin_allahu_akbar)
-                )
-            )
+            startActivityTasbeeh(TasbeehConst.ALLAHU_AKBAR)
         }
         cvAstaghfirullah?.setOnClickListener {
             logSelectContent(getString(R.string.text_latin_astaghfirullah))
-            startActivity(
-                intentFor<TasbeehActivity>(
-                    TasbeehActivity.TYPE_EXTRA to Tasbeeh.ASTAGHFIRULLAH,
-                    TasbeehActivity.TASBEEH_LATIN_EXTRA to getString(R.string.text_latin_astaghfirullah)
-                )
-            )
+            startActivityTasbeeh(TasbeehConst.ASTAGHFIRULLAH)
         }
         cvLaailaahaillallah?.setOnClickListener {
             logSelectContent(getString(R.string.text_latin_laailaahaillallah))
-            startActivity(
-                intentFor<TasbeehActivity>(
-                    TasbeehActivity.TYPE_EXTRA to Tasbeeh.LAILAHAILALLAH,
-                    TasbeehActivity.TASBEEH_LATIN_EXTRA to getString(R.string.text_latin_laailaahaillallah)
-                )
-            )
+            startActivityTasbeeh(TasbeehConst.LAILAHAILALLAH)
         }
         rvAddDhikr.apply {
             layoutManager = LinearLayoutManager(this@MainActivity).apply { reverseLayout = true }
@@ -116,10 +88,11 @@ class MainActivity : BaseActivity() {
             addCustomDialog.setOnPositiveListener {
                 logAdd(it.latin)
                 dhikrViewModel.insert(it)
-                loadAdMobInterstitial()
+                if (mainGuideDialog.isShowingAll()) loadAdMobInterstitial()
             }.show()
         }
-
+        cvDhikrMorning?.setOnClickListener { onStartDhikrActivity(true) }
+        cvDhikrEvening?.setOnClickListener { onStartDhikrActivity(false) }
         dhikrViewModel.dhikrs.observe(this) {
             when {
                 it.isEmpty() -> {
@@ -158,49 +131,15 @@ class MainActivity : BaseActivity() {
         })
     }
 
+    private fun onStartDhikrActivity(isMorning: Boolean) {
+        if (isMorning) logSelectContent(R.string.analytic_morning)
+        else logSelectContent(R.string.analytic_evening)
+        startActivity(intentFor<DhikrActivity>(DhikrActivity.DHIKR_INTENT_EXTRA to isMorning))
+    }
+
     override fun onResume() {
         super.onResume()
-        tvSubhanallahCount?.text =
-            getString(R.string.label_counter_x, counterPreference.subhanallah)
-        tvAlhamdulillahCount?.text =
-            getString(R.string.label_counter_x, counterPreference.alhamdulillah)
-        tvAllahuAkbarCount?.text =
-            getString(R.string.label_counter_x, counterPreference.allahukkbar)
-        tvAstaghfirullahCount?.text =
-            getString(R.string.label_counter_x, counterPreference.astaghfirullah)
-        tvLaailaahaillallahCount?.text =
-            getString(R.string.label_counter_x, counterPreference.lailahailallah)
-
-        ivSubhanallah?.setImageDrawable(
-            getDrawableCompat(
-                R.drawable.ic_subhanallah,
-                android.R.color.black
-            )
-        )
-        ivAlhamdulillah?.setImageDrawable(
-            getDrawableCompat(
-                R.drawable.ic_alhamdulillah,
-                android.R.color.black
-            )
-        )
-        ivAllahuAkbar?.setImageDrawable(
-            getDrawableCompat(
-                R.drawable.ic_allahu_akbar,
-                android.R.color.black
-            )
-        )
-        ivAstaghfirullah?.setImageDrawable(
-            getDrawableCompat(
-                R.drawable.ic_astagfirllah,
-                android.R.color.black
-            )
-        )
-        ivLaailaahaillallah?.setImageDrawable(
-            getDrawableCompat(
-                R.drawable.ic_laailaahaillallah,
-                android.R.color.black
-            )
-        )
+        sync()
     }
 
     private fun showLanguageDialog() {

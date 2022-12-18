@@ -2,7 +2,7 @@ package com.icaali.tasbeeh.deps
 
 import androidx.room.Room
 import com.icaali.tasbeeh.database.DhikrRoomDatabase
-import com.icaali.tasbeeh.repository.DhikrRepository
+import com.icaali.tasbeeh.repository.TasbeehRepository
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
@@ -14,5 +14,5 @@ val databaseModule = module {
             "dhikr_database"
         ).build()
     }
-    single { DhikrRepository(get<DhikrRoomDatabase>().dhikrDao()) }
+    single { TasbeehRepository(get<DhikrRoomDatabase>().dhikrDao()) }
 }

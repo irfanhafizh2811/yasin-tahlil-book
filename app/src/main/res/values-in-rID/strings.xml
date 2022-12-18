@@ -51,4 +51,11 @@
     <string name="label_info_change_theme">Anda bisa mengubah \nsesuai tema yang anda inginkan</string>
     <string name="label_set_target_dhikr">Bikin target zikir anda</string>
     <string name="label_skip_guide">Lewati, Saya Mengerti</string>
+
+    <!--************************ Section Dhikr ************************-->
+    <string name="label_dhikr_morning">Zikir Pagi</string>
+    <string name="label_dhikr_evening">Zikir Petang</string>
+    <string name="label_prayer_morning">Doa Pagi</string>
+    <string name="label_prayer_evening">Doa Petang</string>
+    <!--************************ End Section Dhikr ************************-->
 </resources>

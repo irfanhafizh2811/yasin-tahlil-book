@@ -17,4 +17,10 @@
     <color name="colorBackgroundTarget">#B3000000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#2B2B2B</color>
+
+    <!--*********************** Section Dhikr ***********************-->
+    <color name="colorAccentMorningDhikr">#0E3A6A</color>
+    <color name="colorAccentEveningDhikr">#86550C</color>
+    cbe8f5
+    <!--*********************** End Section Dhikr ***********************-->
 </resources>

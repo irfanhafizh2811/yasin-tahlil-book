@@ -36,7 +36,6 @@
 -dontwarn java.lang.invoke.*
 -dontwarn javax.annotation.**
 -dontwarn javax.inject.**
--dontwarn sun.misc.Unsafe
 -dontwarn org.slf4j.**
 
 -keepattributes *Annotation*
@@ -52,15 +51,11 @@
 -keep class javax.inject.* { *; }
 
 #ANDROID_COMPONENT
--keep class android.support.v7.widget.LinearLayoutManager {
-    public protected *;
-}
 -keep class android.support.design.** { *; }
 -keep interface android.support.design.** { *; }
 -keep public class android.support.design.R$* { *; }
 -keep class android.support.v7.widget.** { *; }
 -keep public class * extends android.app.Activity
--keep public class * extends android.support.v7.app.AppCompatActivity
 -keep public class * extends android.support.v7.widget.** { *;}
 -keep interface android.support.v7.** { *; }
 -keep class android.support.v7.** { *; }
@@ -75,7 +70,6 @@
 -keep public class * extends android.app.Service {
 *;
 }
--keep public class * extends android.support.v4.app.Fragment
 -keepclasseswithmembernames class * {
    native <methods>;
 }
@@ -117,8 +111,6 @@
 -keep class **$$ModuleAdapter
 -keep class **$$InjectAdapter
 -keep class **$$StaticInjection
--dontnote dagger.Lazy
--keepnames class dagger.Lazy
 
 #GLIDE
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -129,8 +121,6 @@
 }
 
 #OKIO
--keep class sun.misc.Unsafe { *; }
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
 
 #OKHTTP
@@ -151,12 +141,6 @@
 -keepclasseswithmembers class * {
     @retrofit2.http.* <methods>;
 }
--dontnote retrofit2.Platform
--dontnote retrofit2.Platform$IOS$MainThreadExecutor
--dontwarn retrofit2.Platform$Java8
--dontwarn retrofit.RxSupport*
--dontwarn retrofit.appengine.UrlFetchClient
--dontnote retrofit.http.RestMethod
 -keepclasseswithmembers class * {
     @retrofit2.* <methods>;
 }
@@ -171,39 +155,10 @@
     public private protected *;
 }
 -keep class com.google.appengine.** { *; }
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
 -keep class com.google.gson.* { *; }
 -keep class com.google.inject.* { *; }
--keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 -keepclassmembers enum * { *; }
--keep,allowobfuscation @interface com.google.gson.annotations.*
--dontnote com.google.gson.annotations.Expose
--keepclassmembers class * {
-    @com.google.gson.annotations.Expose <fields>;
-}
--keepclasseswithmembers,allowobfuscation,includedescriptorclasses class * {
-    @com.google.gson.annotations.Expose <fields>;
-}
--dontnote com.google.gson.annotations.SerializedName
--keepclasseswithmembers,allowobfuscation,includedescriptorclasses class * {
-    @com.google.gson.annotations.SerializedName <fields>;
-}
--keepclassmembers enum * {
-    @com.google.gson.annotations.SerializedName <fields>;
-}
-
-# Eventbus
--keepclassmembers class ** {
-    @org.greenrobot.eventbus.Subscribe <methods>;
-}
--keep enum org.greenrobot.eventbus.ThreadMode { *; }
-# Eventbus Only required if you use AsyncExecutor
--keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
-    <init>(java.lang.Throwable);
-}
 
 # Mixpanel
 -dontwarn com.mixpanel.**
@@ -214,47 +169,6 @@
 # exclude module register and service
 -dontwarn com.redkendi.consumer.consumerapp.ui.register.worker.**
 -dontwarn com.redkendi.consumer.consumerapp.service.**
-
-# MoEngage SDK
--keep class com.moe.pushlibrary.activities.** { *; }
--keep class com.moe.pushlibrary.MoEHelper
--keep class com.moengage.locationlibrary.GeofenceIntentService
--keep class com.moe.pushlibrary.InstallReceiver
--keep class com.moe.pushlibrary.providers.MoEProvider
--keep class com.moe.pushlibrary.models.** { *;}
--keep class com.moengage.core.GeoTask
--keep class com.moengage.location.GeoManager
--keep class com.moengage.inapp.InAppManager
--keep class com.moengage.push.PushManager
--keep class com.moengage.inapp.InAppController
--keep class com.moe.pushlibrary.AppUpdateReceiver
--keep class com.moengage.core.MoEAlarmReceiver
--keep class com.moengage.core.MoEngage
--keep class com.moengage.pushbase.activities.PushTracker
--keep class com.moengage.pushbase.activities.SnoozeTracker
--keep class com.moengage.pushbase.push.MoEPushWorker
--keep class com.moe.pushlibrary.MoEWorker
--keep class com.moengage.addon.trigger.DTHandlerImpl
--keep class com.moengage.core.MoEDTManager
--keep class com.moengage.core.MoEDTManager.DTHandler
--keep class com.moengage.addon.messaging.MessagingHandlerImpl
--keep class com.moengage.push.MoEMessagingManager
--dontwarn com.moengage.location.GeoManager
--dontwarn com.moengage.core.GeoTask
--dontwarn com.moengage.receiver.*
--dontwarn com.moengage.worker.*
--dontwarn com.moengage.inapp.ViewEngine
--keep class com.delight.**  { *; }
-
-# MoEngange GCM
--keep class com.moengage.receiver.MoEInstanceIDListener
--keep class com.moengage.worker.MoEGCMListenerService
--keep class com.moengage.push.gcm.PushHandlerImpl
-
-# MoEngage FCM
--keep class com.moengage.firebase.MoEngaeFireBaseMessagingService
--keep class com.moengage.firebase.MoEngageFireBaseInstanceIdService
--keep class com.moengage.firebase.PushHandlerImpl
 
  # Add this global rule
 -keepattributes Signature
@@ -271,3 +185,18 @@
 -dontwarn com.uxcam.**
 
 -keep class androidx.core.app.CoreComponentFactory { *; }
+
+##---------------Begin: proguard configuration for Gson  ----------
+# Gson uses generic type information stored in a class file when working with fields. Proguard
+# removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-dontwarn sun.misc.**
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { <fields>; }

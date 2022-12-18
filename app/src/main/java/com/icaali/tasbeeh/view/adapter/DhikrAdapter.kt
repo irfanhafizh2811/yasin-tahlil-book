@@ -1,28 +1,32 @@
 package com.icaali.tasbeeh.view.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import com.icaali.tasbeeh.database.table.Dhikr
+import androidx.recyclerview.widget.RecyclerView
+import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.model.Dhikr
+import com.icaali.tasbeeh.utils.FontSize
 import com.icaali.tasbeeh.view.holder.DhikrHolder
 
-class DhikrAdapter(val onClickListener: (Dhikr) -> Unit) :
-    ListAdapter<Dhikr, DhikrHolder>(DhikrComparator()) {
+class DhikrAdapter : RecyclerView.Adapter<DhikrHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DhikrHolder =
-        DhikrHolder.create(parent)
+    var dhikrs: ArrayList<Dhikr> = arrayListOf()
+    lateinit var fontSize: FontSize
+    var dhikrHolder: DhikrHolder? = null
 
-    override fun onBindViewHolder(holder: DhikrHolder, position: Int) =
-        holder.bind(onClickListener, getItem(position))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DhikrHolder = DhikrHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.item_dhikr, parent, false)
+    )
 
-    class DhikrComparator : DiffUtil.ItemCallback<Dhikr>() {
-        override fun areItemsTheSame(oldItem: Dhikr, newItem: Dhikr): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Dhikr, newItem: Dhikr): Boolean {
-            return oldItem.id == newItem.id
-        }
+    override fun onBindViewHolder(holder: DhikrHolder, position: Int) {
+        dhikrHolder = holder.bind(dhikrs[position], fontSize)
     }
 
+    override fun getItemCount(): Int = dhikrs.size
+
+    fun sync(dhikrs: ArrayList<Dhikr>): DhikrAdapter {
+        this.dhikrs = dhikrs
+        notifyItemRangeChanged(0, dhikrs.size)
+        return this
+    }
 }

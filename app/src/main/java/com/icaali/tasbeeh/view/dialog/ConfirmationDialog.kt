@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.common.TextUtils
+import com.icaali.tasbeeh.utils.TextUtils
 import kotlinx.android.synthetic.main.dialog_bottom_confirmation.*
 
 class ConfirmationDialog(context: Context) : BottomSheetDialog(context) {

@@ -1,5 +1,7 @@
 package com.icaali.tasbeeh.preference
 
+import com.icaali.tasbeeh.utils.FontSize
+
 class SettingPreference(val corePreference: CorePreference) {
 
     companion object {
@@ -8,6 +10,7 @@ class SettingPreference(val corePreference: CorePreference) {
         private const val SHOW_POPUP_AGAIN = "show_popup_again"
         private const val NOTIFICATION = "notification"
         private const val TIME_NOTIFICATION = "time_notification"
+        private const val FONT_SIZE = "font_size"
     }
 
     var vibrate: Boolean
@@ -30,4 +33,7 @@ class SettingPreference(val corePreference: CorePreference) {
         set(value) = corePreference.setLong(TIME_NOTIFICATION, value)
         get() = corePreference.getLong(TIME_NOTIFICATION, 0)
 
+    var fontSize: FontSize
+        set(value) = corePreference.setString(FONT_SIZE, value.name)
+        get() = FontSize.valueOf(corePreference.getString(FONT_SIZE, FontSize.REGULAR.name))
 }
