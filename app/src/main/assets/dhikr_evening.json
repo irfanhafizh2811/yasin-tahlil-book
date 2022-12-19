@@ -31,21 +31,21 @@
     {
       "surah": "Al-Ikhlas",
       "prayer": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ • قُلْ هُوَ اللّٰهُ اَحَدٌۚ • اَللّٰهُ الصَّمَدُۚ • لَمْ يَلِدْ وَلَمْ يُوْلَدْۙ • وَلَمْ يَكُنْ لَّهٗ كُفُوًا اَحَدٌ",
-      "mean_ind": "Aku berlindung kepada Allah yang Maha Mendengar lagi Maha Mengetahui dari godaan syetan yang terkutuk.",
+      "mean_ind": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Katakanlah (Muhammad), “Dialah Allah, Yang Maha Esa. Allah tempat meminta segala sesuatu. (Allah) tidak beranak dan tidak pula diperanakkan. Dan tidak ada sesuatu yang setara dengan Dia.",
       "mean_eng": "",
       "times": 3
     },
     {
       "surah": "Al-Falaq",
       "prayer": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ • قُلْ اَعُوْذُ بِرَبِّ الْفَلَقِۙ • مِنْ شَرِّ مَا خَلَقَۙ • وَمِنْ شَرِّ غَاسِقٍ اِذَا وَقَبَۙ • وَمِنْ شَرِّ النَّفّٰثٰتِ فِى الْعُقَدِۙ • وَمِنْ شَرِّ حَاسِدٍ اِذَا حَسَدَ",
-      "mean_ind": "Aku berlindung kepada Allah yang Maha Mendengar lagi Maha Mengetahui dari godaan syetan yang terkutuk.",
+      "mean_ind": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Katakanlah, “Aku berlindung kepada Tuhan yang menguasai subuh (fajar), dari kejahatan (makhluk yang) Dia ciptakan, dan dari kejahatan malam apabila telah gelap gulita, dan dari kejahatan (perempuan-perempuan) penyihir yang meniup pada buhul-buhul (talinya), dan dari kejahatan orang yang dengki apabila dia dengki.",
       "mean_eng": "",
       "times": 3
     },
     {
       "surah": "An-Nas",
       "prayer": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ • قُلْ اَعُوْذُ بِرَبِّ النَّاسِۙ • مَلِكِ النَّاسِۙ • اِلٰهِ النَّاسِۙ • مِنْ شَرِّ الْوَسْوَاسِ ەۙ الْخَنَّاسِۖ • الَّذِيْ يُوَسْوِسُ فِيْ صُدُوْرِ النَّاسِۙ • مِنَ الْجِنَّةِ وَالنَّاسِ",
-      "mean_ind": "Aku berlindung kepada Allah yang Maha Mendengar lagi Maha Mengetahui dari godaan syetan yang terkutuk.",
+      "mean_ind": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Katakanlah, “Aku berlindung kepada Tuhannya manusia, Raja manusia, sembahan manusia, dari kejahatan (bisikan) setan yang bersembunyi, yang membisikkan (kejahatan) ke dalam dada manusia, dari (golongan) jin dan manusia.",
       "mean_eng": "",
       "times": 3
     },
@@ -58,7 +58,7 @@
     },
     {
       "surah": "Doa Petang 2",
-      "prayer": "أَمْسَيْنَا عَلَى فِطْرَةِ الإِسْلَامِ وَعَلَى كَلِمَةِ الْإِخْلَاصِ ، وَعَلَى دِيْنِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ ، وَعَلَى مِلَّةِ  أَبِيْنَا إِبْرَاهٍيْمَ حَنِيْفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِيْنَ",
+      "prayer": "أَمْسَيْنَا عَلَى فِطْرَةِ الإِسْلَامِ وَعَلَى كَلِمَةِ الْإِخْلَاصِ ، وَعَلَى دِيْنِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ ، وَعَلَى مِلَّةِ  أَبِيْنَا إِبْرَاهِيْمَ حَنِيْفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِيْنَ",
       "mean_ind": "Di waktu sore kami memegang agama Islam, kalimat ikhlas, agama Nabi kita Muhammad shallallahu ‘alaihi wa sallam, dan agama ayah kami Ibrahim, yang berdiri di atas jalan yang lurus, muslim dan tidak tergolong orang-orang musyrik.",
       "mean_eng": "",
       "times": 3
@@ -205,14 +205,14 @@
     },
     {
       "surah": "Doa Petang",
-      "prayer": " أَللَّهُمَّ إِنَّ هَذَا إِقْبَالُ نَهَارِكَ وَإِدْبَارُ لَيْلِكَ وَأَصْوَاتُ دُعَاتِكَ فَاغْفِرْ لِي",
+      "prayer": "أَللَّهُمَّ إِنَّ هَذَا إِقْبَالُ لَيْلِكَ وَإِدْبَارُ نَهَارِكَ وَأَصْوَاتُ دُعَاتِكَ فَاغْفِرْ لِي",
       "mean_ind": "Ya Allah, sesungguhnya ini adalah sore-Mu yang telah menjelang dan malam-Mu yang telah berlalu serta suara-suara penyeru-Mu, maka ampunilah aku.",
       "mean_eng": "",
       "times": 0
     },
     {
       "surah": "Doa Robithoh",
-      "prayer": "اَللَّهُمَّ إِنَّكَ تَعْلَمُ أَنَّ هَذِهِ الْقُلُوْبَ، قَدِ اجْتَمَعَتْ عَلَى مَحَبَّتِكَ وَالْتَقَتْ عَلَى طَاعَتِكَ، وَتَوَحَّدَتْ عَلَى دَعْوَتِكَ وَتَعَاهَدَتْ عَلَى نُصْرَةِ شَرِيْعَتِكَ فَوَثِّقِ اللَّهُمَّ رَابِطَتَهَا، وَأَدِمْ وُدَّهَا، وَاهْدِهَا سُبُلَهَا وَامْلَأَهَا بِنُوْرِكَ الَّذِيْ لاَ يَخْبُوْا وَاشْرَحْ صُدُوْرَهَا بِفَيْضِ الْإِيْمَانِ بِكَ ، وَجَمِيْلِ التَّوَكُّلِ عَلَيْكَ وَاَحْيِهَا بِمَعْرِفَتِكَ، وَأَمِتْهَا عَلَى الشَّهَادَةِ فِيْ سَبِيْلِكَ إِنَّكَ نِعْمَ الْمَوْلَى وَنِعْمَ النَّصِيْر اَللَّهُمَّ أَمِيْنَ وَصَلَّ اللَّهُمَّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ",
+      "prayer": "اَللَّهُمَّ إِنَّكَ تَعْلَمُ أَنَّ هَذِهِ الْقُلُوْبَ، قَدِ اجْتَمَعَتْ عَلَى مَحَبَّتِكَ وَالْتَقَتْ عَلَى طَاعَتِكَ، وَتَوَحَّدَتْ عَلَى دَعْوَتِكَ وَتَعَاهَدَتْ عَلَى نُصْرَةِ شَرِيْعَتِكَ فَوَثِّقِ اللَّهُمَّ رَابِطَتَهَا، وَأَدِمْ وُدَّهَا، وَاهْدِهَا سُبُلَهَا وَامْلَأَهَا بِنُوْرِكَ الَّذِيْ لاَ يَخْبُوْا وَاشْرَحْ صُدُوْرَهَا بِفَيْضِ الْإِيْمَانِ بِكَ ، وَجَمِيْلِ التَّوَكُّلِ عَلَيْكَ وَاَحْيِهَا بِمَعْرِفَتِكَ، وَأَمِتْهَا عَلَى الشَّهَادَةِ فِيْ سَبِيْلِكَ إِنَّكَ نِعْمَ الْمَوْلَى وَنِعْمَ النَّصِيْر، اَللَّهُمَّ أَمِيْنَ ، وَصَلَّ اللَّهُمَّ عَلَى سَيِّدِنَا مُحَمَّدٍ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلِّمْ",
       "mean_ind": "Ya Allah, sesungguhnya Engkau mengetahui hatikami. Kami telah berkumpul karena cinta-Mu. Dan berjumpa dalam ketaatan pada-Mu. Dan bersatu dalam dakwah-Mu. Dan berpadu dalam membela syariat-Mu. Maka ya Allah, kuatkanlah ikatannya. Dan kekalkanlah cintanya. Dan tunjukkanlah jalannya. Dan penuhilah ia dengan cahaya yang tiada redup. Dan lapangkanlah dada-dada dengan iman yang berlimpah kepada-Mu. Dan indahnya takwa kepada-Mu. Dan hidupkan ia dengan ma'rifat-Mu. Dan matikan ia dalam syahid di jalan-Mu. Sesungguhnya Engkau sebaik-baik pelindung dan sebaik-baik penolong. Ya Allah, kabulkanlah. Ya Allah berikanlah sholawat dan salam kepada pemimpin kami Muhammad, kepada keluarga dan para sahabatnya.",
       "mean_eng": "",
       "times": 0
