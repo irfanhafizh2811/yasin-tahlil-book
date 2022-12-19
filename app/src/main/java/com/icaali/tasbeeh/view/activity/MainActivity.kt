@@ -15,6 +15,7 @@ import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.LanguagePreference
 import com.icaali.tasbeeh.preference.SettingPreference
+import com.icaali.tasbeeh.utils.Analytic
 import com.icaali.tasbeeh.utils.TasbeehConst
 import com.icaali.tasbeeh.view.adapter.TasbeehAdapter
 import com.icaali.tasbeeh.view.dialog.AddCustomDialog
@@ -47,6 +48,7 @@ class MainActivity : BaseActivity() {
     private val addCustomDialog by lazy { AddCustomDialog(this) }
     private val moreDialog by lazy { MoreDialog(this, settingPreference) }
     private val mainGuideDialog by lazy { GuideMainDialog(this, guidePref) }
+    private var hasShownGuide = false
     //***************************************************
 
     private val dhikrAdapter by lazy {
@@ -88,7 +90,7 @@ class MainActivity : BaseActivity() {
             addCustomDialog.setOnPositiveListener {
                 logAdd(it.latin)
                 dhikrViewModel.insert(it)
-                if (mainGuideDialog.isShowingAll()) loadAdMobInterstitial()
+                if (!hasShownGuide) loadAdMobInterstitial()
             }.show()
         }
         cvDhikrMorning?.setOnClickListener { onStartDhikrActivity(true) }
@@ -116,7 +118,10 @@ class MainActivity : BaseActivity() {
                 setOnSelectedListener {
                     when (it) {
                         MoreDialog.Menu.LANGUAGE -> showLanguageDialog()
-                        MoreDialog.Menu.RATING_AND_REVIEW -> openPlaystore(packageName)
+                        MoreDialog.Menu.RATING_AND_REVIEW -> {
+                            openPlaystore(packageName)
+                            logClick(Analytic.CLICK_RATING_AND_REVIEW)
+                        }
                         MoreDialog.Menu.SHARE -> shareMyDhikr()
                         MoreDialog.Menu.INSTAGRAM -> openInstagramMyDhikr()
                     }
@@ -125,9 +130,12 @@ class MainActivity : BaseActivity() {
             }
         }
         mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
-            if (!mainGuideDialog.isShowingAll()) mainGuideDialog.apply {
-                onTapTargetListener = { addCustomDialog.show() }
-            }.show()
+            if (!mainGuideDialog.isShowingAll()) {
+                mainGuideDialog.apply {
+                    onTapTargetListener = { addCustomDialog.show() }
+                }.show()
+                hasShownGuide = true
+            }
         })
     }
 
@@ -144,7 +152,7 @@ class MainActivity : BaseActivity() {
 
     private fun showLanguageDialog() {
         localeManager?.let {
-            LanguageDialog(this, languagePreference, it).show()
+            LanguageDialog(this, languagePreference, it, firebaseAnalytics).show()
         }
     }
 
@@ -156,6 +164,7 @@ class MainActivity : BaseActivity() {
             putExtra(Intent.EXTRA_TEXT, shareText)
         }
         startActivity(Intent.createChooser(shareIntent, getString(R.string.label_share_text)))
+        logClick(Analytic.CLICK_SHARE_APP)
     }
 
     private fun openInstagramMyDhikr() {
@@ -174,5 +183,6 @@ class MainActivity : BaseActivity() {
             }
         }
         builder.launchUrl(this, builder.intent.data)
+        logClick(Analytic.CLICK_DIRECT_INSTAGRAM)
     }
 }

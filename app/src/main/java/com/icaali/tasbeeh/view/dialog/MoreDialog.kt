@@ -71,11 +71,7 @@ class MoreDialog(context: Context, private val settingPreference: SettingPrefere
     }
 
     private fun setTextSwitch(view: TextView, isChecked: Boolean) {
-        view.text = if (isChecked) {
-            context.getString(R.string.label_on)
-        } else {
-            context.getString(R.string.label_off)
-        }
+        view.text = if (isChecked) context.getString(R.string.label_on)
+        else context.getString(R.string.label_off)
     }
-
 }

@@ -51,7 +51,7 @@ fun BaseActivity.logCount(value: String) {
     )
 }
 
-fun BaseActivity.logTheme(value: String) {
+fun BaseActivity.logClick(value: String) {
     logAnalytic(
         FirebaseAnalytics.Event.VIEW_PROMOTION,
         FirebaseAnalytics.Param.CREATIVE_NAME,

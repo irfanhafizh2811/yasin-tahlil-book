@@ -36,12 +36,13 @@ import java.util.concurrent.TimeUnit
 import com.google.android.gms.ads.MobileAds
 import com.icaali.tasbeeh.database.table.Tasbeeh
 import com.icaali.tasbeeh.extension.activty.hasPermissions
+import com.icaali.tasbeeh.utils.Analytic
 import com.icaali.tasbeeh.utils.TasbeehConst
 
 class TasbeehActivity : BaseActivity() {
 
     companion object {
-        const val MAX_VOLUME = 100
+        const val MAX_VOLUME = 15F
         const val THROTTLE_FIRST = 100L
         const val TYPE_EXTRA = "TYPE_EXTRA"
         const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
@@ -64,7 +65,7 @@ class TasbeehActivity : BaseActivity() {
     private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
-    private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
+    private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference, firebaseAnalytics) }
     private val targetChangeInformationDialog by lazy {
         TargetChangeInformationDialog(
             this,
@@ -75,6 +76,7 @@ class TasbeehActivity : BaseActivity() {
         TargetDhikrDialog(this) {
             counterPreference.target = it
             tvTargetCounter?.text = it.toString()
+            logClick(Analytic.TARGET_DHIKR.plus(it.toString()))
             if (settingPreference.showPopupAgain)
                 targetChangeInformationDialog.show()
         }
@@ -142,7 +144,7 @@ class TasbeehActivity : BaseActivity() {
 
     private fun setViewTypeCustom() {
         if (isCustomType())
-            intent?.getParcelableExtra<com.icaali.tasbeeh.database.table.Tasbeeh>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
+            intent?.getParcelableExtra<Tasbeeh>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
     }
 
     private fun initTasbeeh() {
@@ -175,7 +177,7 @@ class TasbeehActivity : BaseActivity() {
         themesPickDialog.apply {
             setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
             setOnPositiveListener { themeSelected ->
-                logTheme(themeSelected.type.name)
+                logClick(themeSelected.type.name)
                 themesPreference.type = themeSelected.type
                 selectedTheme()
             }
@@ -276,6 +278,7 @@ class TasbeehActivity : BaseActivity() {
             }
         }
         setTextCounter(0)
+        logClick(Analytic.CLICK_RESET_DHIKR)
     }
 
     private fun count() {
@@ -385,6 +388,7 @@ class TasbeehActivity : BaseActivity() {
                     R.raw.sound_click
                 }
             ).apply {
+                setVolume(MAX_VOLUME, MAX_VOLUME)
                 setOnCompletionListener {
                     it.release()
                 }

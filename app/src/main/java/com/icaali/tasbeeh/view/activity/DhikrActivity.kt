@@ -102,6 +102,7 @@ class DhikrActivity : BaseActivity() {
         with(viewPagerDhikr) {
             adapter = dhikrAdapter.apply {
                 fontSize = settingPreference.fontSize
+                analytics = firebaseAnalytics
             }
             offscreenPageLimit = 1
             registerOnPageChangeCallback(onPageChangeCallback())
