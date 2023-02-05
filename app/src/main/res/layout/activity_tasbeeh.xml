@@ -27,26 +27,64 @@
             app:srcCompat="@drawable/ic_arrow_back"
             tools:ignore="ContentDescription" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/llThemes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="?android:actionBarItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/llMore"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/ivThemes"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_theme"
                 tools:ignore="ContentDescription" />
 
-        </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvNewTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#9D2121"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toStartOf="@id/ivThemes"
+                app:layout_constraintStart_toStartOf="@id/ivThemes"
+                app:layout_constraintTop_toTopOf="@id/ivThemes"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="0.25dp"
+                    android:paddingBottom="0.5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="1dp"
+                        android:text="@string/label_new"
+                        android:textAlignment="gravity"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/font_new_size" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/llMore"
@@ -62,8 +100,8 @@
 
             <ImageView
                 android:id="@+id/ivMore"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 app:srcCompat="@drawable/ic_more_new"
                 tools:ignore="ContentDescription" />
 
@@ -171,7 +209,7 @@
             android:id="@+id/ivCounterSkinBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="64dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -292,9 +330,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="40dp"
-            app:layout_constraintBottom_toTopOf="@+id/fabCount"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="44dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCounterSkinBox"
             tools:ignore="ContentDescription"
             tools:srcCompat="@drawable/ic_reset_flowers" />
 

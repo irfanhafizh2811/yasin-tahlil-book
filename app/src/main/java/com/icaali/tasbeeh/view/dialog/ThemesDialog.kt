@@ -39,7 +39,7 @@ class ThemesDialog(context: Context) : BottomSheetDialog(context) {
     ): ThemesDialog {
         adapter.themes = themes
         adapter.type = type
-        adapter.notifyDataSetChanged()
+        adapter.notifyItemRangeChanged(0, adapter.themes.size)
         return this
     }
 

@@ -7,57 +7,36 @@ import com.icaali.tasbeeh.R
 
 class ThemeFlowers : BaseTheme() {
 
-    override var type: ThemeType
-        get() = ThemeType.FLOWERS
-        set(value) {}
+    override fun themeType(): ThemeType = ThemeType.FLOWERS
 
-    override var textStringRes: Int
-        @StringRes
-        get() = R.string.label_picker_flowers
-        set(value) {}
+    @StringRes
+    override fun textStringRes(): Int = R.string.label_picker_flowers
 
-    override var iconImageRes: Int
-        @DrawableRes
-        get() = R.drawable.ic_picker_flower
-        set(value) {}
+    @DrawableRes
+    override fun iconImageRes(): Int = R.drawable.ic_picker_flower
 
-    override var outputImageRes: Int
-        @DrawableRes
-        get() = R.drawable.bg_output_flowers
-        set(value) {}
+    @DrawableRes
+    override fun outputImageRes(): Int = R.drawable.bg_output_flowers
 
-    override var outputHintColorRes: Int
-        @ColorRes
-        get() = R.color.textHintOutputFlowers
-        set(value) {}
+    @ColorRes
+    override fun outputHintColorRes(): Int = R.color.textHintOutputFlowers
 
-    override var resetImageRes: Int
-        @DrawableRes
-        get() = R.drawable.ic_reset_flowers
-        set(value) {}
+    @DrawableRes
+    override fun resetImageRes(): Int = R.drawable.ic_reset_flowers
 
-    override var counterImageRes: Int
-        @DrawableRes
-        get() = R.drawable.ic_counter_flowers
-        set(value) {}
+    @DrawableRes
+    override fun counterImageRes(): Int = R.drawable.ic_counter_flowers
 
-    override var backgroundDigitalImageRes: Int
-        @DrawableRes
-        get() = R.drawable.bg_tasbeeh_digital_flowers
-        set(value) {}
+    @DrawableRes
+    override fun backgroundDigitalImageRes(): Int = R.drawable.bg_tasbeeh_digital_flowers
 
-    override var backgroundScreenImageRes: Int
-        @DrawableRes
-        get() = R.drawable.bg_counter_screen_flowers
-        set(value) {}
+    @DrawableRes
+    override fun backgroundScreenImageRes(): Int = R.drawable.bg_counter_screen_flowers
 
-    override var tintColorAccent: Int
-        @ColorRes
-        get() = android.R.color.white
-        set(value) {}
+    @ColorRes
+    override fun tintColorAccent(): Int = android.R.color.white
 
-    override var backgroundTargetCounterImageRes: Int
-        get() = R.drawable.bg_target_counter_flowers
-        set(value) {}
-
+    @DrawableRes
+    override fun backgroundTargetCounterImageRes(): Int = R.drawable.bg_target_counter_flowers
+    
 }

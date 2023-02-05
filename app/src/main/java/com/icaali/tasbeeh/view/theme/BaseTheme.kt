@@ -5,48 +5,43 @@ import androidx.annotation.DrawableRes
 
 abstract class BaseTheme : Theme {
 
-    override var type: ThemeType
-        get() = ThemeType.DEFAULT
-        set(value) {}
+    private var visibleNewBadge: Boolean = false
 
-    override var textStringRes: Int
-        @DrawableRes
-        get() = 0
-        set(value) {}
+    override fun themeType(): ThemeType = ThemeType.DEFAULT
 
-    override var iconImageRes: Int
-        @DrawableRes
-        get() = 0
-        set(value) {}
+    @DrawableRes
+    override fun textStringRes(): Int = 0
 
-    override var outputImageRes: Int
-        @DrawableRes
-        get() = 0
-        set(value) {}
+    @DrawableRes
+    override fun iconImageRes(): Int = 0
 
-    override var outputHintColorRes: Int
-        @ColorRes
-        get() = 0
-        set(value) {}
+    @DrawableRes
+    override fun outputImageRes(): Int = 0
 
-    override var resetImageRes: Int
-        @DrawableRes
-        get() = 0
-        set(value) {}
+    @ColorRes
+    override fun outputHintColorRes(): Int = 0
 
-    override var counterImageRes: Int
-        @DrawableRes
-        get() = 0
-        set(value) {}
+    @DrawableRes
+    override fun resetImageRes(): Int = 0
 
-    override var backgroundDigitalImageRes: Int
-        @DrawableRes
-        get() = 0
-        set(value) {}
+    @DrawableRes
+    override fun counterImageRes(): Int = 0
 
-    override var tintColorAccent: Int
-        @ColorRes
-        get() = 0
-        set(value) {}
+    @DrawableRes
+    override fun backgroundDigitalImageRes(): Int = 0
 
+    @ColorRes
+    override fun tintColorAccent(): Int = 0
+
+    @DrawableRes
+    override fun backgroundScreenImageRes(): Int = 0
+
+    @DrawableRes
+    override fun backgroundTargetCounterImageRes(): Int = 0
+
+    override fun isVisibleNewBadge(): Boolean = visibleNewBadge
+
+    override fun setVisibleNewBad(isVisible: Boolean) {
+        this.visibleNewBadge = isVisible
+    }
 }

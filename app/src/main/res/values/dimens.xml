@@ -30,4 +30,6 @@
     <dimen name="font_mean_spacing_normal">0.023</dimen>
     <dimen name="font_mean_spacing_huge">0.023</dimen>
     <!--*************************************************-->
+
+    <dimen name="font_new_size">8sp</dimen>
 </resources>

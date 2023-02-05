@@ -11,6 +11,10 @@
     <color name="textHintOutputFlowers">#f7d4d4</color>
     <color name="textHintOutputLeaves">#f5f5f5</color>
     <color name="textHintOutputBlackWhite">#c1c5cc</color>
+    <color name="textHintOutputYellow">#FFD5A1</color>
+    <color name="textHintOutputKaaba">#FFDA89</color>
+    <color name="textHintOutputRamadhan">#FFD5A1</color>
+    <color name="textHintOutputEidAlFitr">#FFDA89</color>
 
     <color name="colorRedPrimary">#C20202</color>
 

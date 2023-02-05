@@ -9,9 +9,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import androidx.core.view.isVisible
 import com.github.florent37.viewanimator.ViewAnimator
+import com.google.android.gms.ads.MobileAds
 import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.utils.TextUtils
+import com.icaali.tasbeeh.database.table.Tasbeeh
+import com.icaali.tasbeeh.extension.activty.hasPermissions
 import com.icaali.tasbeeh.extension.activty.isCustomType
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
@@ -20,10 +23,11 @@ import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
+import com.icaali.tasbeeh.utils.Analytic
+import com.icaali.tasbeeh.utils.TasbeehConst
+import com.icaali.tasbeeh.utils.TextUtils
 import com.icaali.tasbeeh.view.dialog.*
-import com.icaali.tasbeeh.view.theme.Theme
-import com.icaali.tasbeeh.view.theme.ThemeFactory
-import com.icaali.tasbeeh.view.theme.ThemeType
+import com.icaali.tasbeeh.view.theme.*
 import com.icaali.tasbeeh.vm.DhikrViewModel
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -33,11 +37,6 @@ import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
-import com.google.android.gms.ads.MobileAds
-import com.icaali.tasbeeh.database.table.Tasbeeh
-import com.icaali.tasbeeh.extension.activty.hasPermissions
-import com.icaali.tasbeeh.utils.Analytic
-import com.icaali.tasbeeh.utils.TasbeehConst
 
 class TasbeehActivity : BaseActivity() {
 
@@ -174,18 +173,27 @@ class TasbeehActivity : BaseActivity() {
     }
 
     private fun showThemeDialog(isGuide: Boolean = false) {
+        val themes = ThemeFactory.themes.apply {
+            setVisibleBadgeNewThemes(themesPreference)
+        }
         themesPickDialog.apply {
-            setItemThemes(ThemeFactory.themes, theme?.type ?: ThemeType.DEFAULT)
+            setItemThemes(themes, theme?.themeType() ?: ThemeType.DEFAULT)
             setOnPositiveListener { themeSelected ->
-                logClick(themeSelected.type.name)
-                themesPreference.type = themeSelected.type
+                logClick(themeSelected.themeType().name)
+                themesPreference.type = themeSelected.themeType()
                 selectedTheme()
             }
             setOnDismissListener {
+                cvNewTheme.isVisible = themesPreference.anyNewContent()
                 if (isGuide) guideTasbeehDialog.show()
                 else loadAdMobInterstitial()
             }
         }.show()
+    }
+
+    override fun onResume() {
+        cvNewTheme.isVisible = themesPreference.anyNewContent()
+        super.onResume()
     }
 
     private fun showMoreDialog(isGuide: Boolean = false) {
@@ -211,22 +219,23 @@ class TasbeehActivity : BaseActivity() {
     private fun selectedTheme() {
         theme = ThemeFactory.generate(themesPreference.type)
         theme?.run {
+            if (themesPreference.anyNewContent()) updateNewThemePref(this, themesPreference)
             if (!isCustomType()) ivDzikir?.setImageDrawable(getDzikirImage())
 
-            clRootLayout?.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes)
-            ivSkin?.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes))
-            fabCount?.setImageDrawable(getDrawableCompat(counterImageRes))
-            fabReset?.setImageDrawable(getDrawableCompat(resetImageRes))
-            ivCounterSkinBox?.setImageDrawable(getDrawableCompat(outputImageRes))
-            tvHintCounter?.textColor = getColorCompat(outputHintColorRes)
+            clRootLayout?.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes())
+            ivSkin?.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes()))
+            fabCount?.setImageDrawable(getDrawableCompat(counterImageRes()))
+            fabReset?.setImageDrawable(getDrawableCompat(resetImageRes()))
+            ivCounterSkinBox?.setImageDrawable(getDrawableCompat(outputImageRes()))
+            tvHintCounter?.textColor = getColorCompat(outputHintColorRes())
 
-            ivBack?.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent))
-            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent))
-            ivThemes?.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent))
-            tvDzikir?.textColor = getColorCompat(tintColorAccent)
+            ivBack?.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent()))
+            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent()))
+            ivThemes?.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent()))
+            tvDzikir?.textColor = getColorCompat(tintColorAccent())
 
-            ivTargetCounter?.setImageDrawable(getDrawableCompat(backgroundTargetCounterImageRes))
-            tvTargetCounter?.textColor = getColorCompat(outputHintColorRes)
+            ivTargetCounter?.setImageDrawable(getDrawableCompat(backgroundTargetCounterImageRes()))
+            tvTargetCounter?.textColor = getColorCompat(outputHintColorRes())
         }
     }
 
@@ -234,27 +243,27 @@ class TasbeehActivity : BaseActivity() {
         return when (type) {
             TasbeehConst.SUBHANALLAH -> getDrawableCompat(
                 R.drawable.ic_subhanallah,
-                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+                theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
             TasbeehConst.ALHAMDULILLAH -> getDrawableCompat(
                 R.drawable.ic_alhamdulillah,
-                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+                theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
             TasbeehConst.ALLAHU_AKBAR -> getDrawableCompat(
                 R.drawable.ic_allahu_akbar,
-                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+                theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
             TasbeehConst.ASTAGHFIRULLAH -> getDrawableCompat(
                 R.drawable.ic_astagfirllah,
-                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+                theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
             TasbeehConst.LAILAHAILALLAH -> getDrawableCompat(
                 R.drawable.ic_laailaahaillallah,
-                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+                theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
             else -> getDrawableCompat(
                 R.drawable.ic_subhanallah,
-                theme?.tintColorAccent ?: R.color.textHintOutputDefault
+                theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
         }
     }

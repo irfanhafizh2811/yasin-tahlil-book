@@ -37,6 +37,10 @@
     <string name="label_picker_default">تقصير</string>
     <string name="label_picker_flowers">ورد</string>
     <string name="label_picker_leaves">اوراق اشجار</string>
+    <string name="label_picker_eid_al_fitr">عيد الفطر</string>
+    <string name="label_picker_yellow">أصفر</string>
+    <string name="label_picker_kaaba">الكعبة</string>
+    <string name="label_picker_ramadhan">رمضان</string>
     <string name="label_rating_and_review_apps">تقييم ومراجعة تطبيقات ذكري</string>
     <string name="label_our_applications">تطبيقاتنا</string>
     <string name="label_vibration">اهتزاز</string>

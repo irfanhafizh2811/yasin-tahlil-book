@@ -4,6 +4,7 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.extension.context.getColorCompat
@@ -27,15 +28,16 @@ class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
 
         fun bind(theme: Theme, type: ThemeType) {
             with(view) {
-                ivTheme.setImageDrawable(context.getDrawableCompat(theme.iconImageRes))
-                tvTheme.text = getString(theme.textStringRes)
-                when (theme.type) {
+                ivTheme.setImageDrawable(context.getDrawableCompat(theme.iconImageRes()))
+                tvTheme.text = getString(theme.textStringRes())
+                when (theme.themeType()) {
                     type -> selected(this)
                     else -> unselected(this)
                 }
                 cvTheme.setOnClickListener {
                     onItemClickListener.invoke(theme)
                 }
+                cvNewTheme.isVisible = theme.isVisibleNewBadge()
             }
         }
 
@@ -62,7 +64,6 @@ class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
                 }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeVH =

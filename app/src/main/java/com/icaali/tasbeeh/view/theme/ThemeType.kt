@@ -4,5 +4,9 @@ enum class ThemeType {
     DEFAULT,
     FLOWERS,
     LEAVES,
-    BLACK_WHITE
+    BLACK_WHITE,
+    YELLOW,
+    KAABA,
+    RAMADHAN,
+    EID_AL_FITR
 }

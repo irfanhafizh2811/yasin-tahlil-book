@@ -40,6 +40,10 @@
     <string name="label_picker_default">Default</string>
     <string name="label_picker_flowers">Flower</string>
     <string name="label_picker_leaves">Leaves</string>
+    <string name="label_picker_eid_al_fitr">Eid Al-Fitr</string>
+    <string name="label_picker_yellow">Yellow</string>
+    <string name="label_picker_kaaba">Kaaba</string>
+    <string name="label_picker_ramadhan">Ramadhan</string>
     <string name="label_rating_and_review_apps">Rating and Review MyDhikr Apps</string>
     <string name="label_our_applications">Our Applications</string>
     <string name="label_vibration">Vibration</string>
@@ -86,5 +90,6 @@
     <string name="analytic_evening_complete" translatable="false">Evening Dhikr Complete</string>
     <string name="analytic_morning_pray" translatable="false">Morning Pray Complete</string>
     <string name="analytic_evening_pray" translatable="false">Evening Pray Complete</string>
+    <string name="label_new" translatable="false">New</string>
     <!--************************ End Section Analytic ************************-->
 </resources>

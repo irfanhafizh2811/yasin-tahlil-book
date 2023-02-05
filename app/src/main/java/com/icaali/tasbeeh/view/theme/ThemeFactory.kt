@@ -6,11 +6,15 @@ object ThemeFactory {
         ThemeDefault(),
         ThemeFlowers(),
         ThemeLeaves(),
-        ThemeBlackWhite()
+        ThemeBlackWhite(),
+        ThemeYellow(),
+        ThemeKaaba(),
+        ThemeRamadhan(),
+        ThemeEidAlFitr()
     )
 
     fun generate(themeType: ThemeType): Theme? = themes.find {
-        themeType == it.type
+        themeType == it.themeType()
     }
 
 }

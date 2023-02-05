@@ -30,6 +30,10 @@
     <string name="label_picker_default">По умолчанию</string>
     <string name="label_picker_flowers">Цветок</string>
     <string name="label_picker_leaves">Листья</string>
+    <string name="label_picker_eid_al_fitr">Ид аль-Фитр</string>
+    <string name="label_picker_yellow">Желтый</string>
+    <string name="label_picker_kaaba">Кааба</string>
+    <string name="label_picker_ramadhan">Рамадан</string>
     <string name="label_rating_and_review_apps">Оценка и обзор приложений MyDhikr</string>
     <string name="label_our_applications">Наши приложения</string>
     <string name="label_vibration">Вибрация</string>

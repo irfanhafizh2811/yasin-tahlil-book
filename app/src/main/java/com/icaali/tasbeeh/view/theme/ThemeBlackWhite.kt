@@ -7,57 +7,36 @@ import com.icaali.tasbeeh.R
 
 class ThemeBlackWhite : BaseTheme() {
 
-    override var type: ThemeType
-        get() = ThemeType.BLACK_WHITE
-        set(value) {}
+    override fun themeType(): ThemeType = ThemeType.BLACK_WHITE
 
-    override var textStringRes: Int
-        @StringRes
-        get() = R.string.label_picker_black_white
-        set(value) {}
+    @StringRes
+    override fun textStringRes(): Int = R.string.label_picker_black_white
 
-    override var iconImageRes: Int
-        @DrawableRes
-        get() = R.drawable.ic_picker_black_white
-        set(value) {}
+    @DrawableRes
+    override fun iconImageRes(): Int = R.drawable.ic_picker_black_white
 
-    override var outputImageRes: Int
-        @DrawableRes
-        get() = R.drawable.bg_output_black_white
-        set(value) {}
+    @DrawableRes
+    override fun outputImageRes(): Int = R.drawable.bg_output_black_white
 
-    override var outputHintColorRes: Int
-        @ColorRes
-        get() = R.color.textHintOutputBlackWhite
-        set(value) {}
+    @ColorRes
+    override fun outputHintColorRes(): Int = R.color.textHintOutputBlackWhite
 
-    override var resetImageRes: Int
-        @DrawableRes
-        get() = R.drawable.ic_reset_black_white
-        set(value) {}
+    @DrawableRes
+    override fun resetImageRes(): Int = R.drawable.ic_reset_black_white
 
-    override var counterImageRes: Int
-        @DrawableRes
-        get() = R.drawable.ic_counter_black_white
-        set(value) {}
+    @DrawableRes
+    override fun counterImageRes(): Int = R.drawable.ic_counter_black_white
 
-    override var backgroundDigitalImageRes: Int
-        @DrawableRes
-        get() = R.drawable.bg_tasbeeh_digital_black_white
-        set(value) {}
+    @DrawableRes
+    override fun backgroundDigitalImageRes(): Int = R.drawable.bg_tasbeeh_digital_black_white
 
-    override var backgroundScreenImageRes: Int
-        @DrawableRes
-        get() = R.drawable.bg_counter_screen_black_white
-        set(value) {}
+    @DrawableRes
+    override fun backgroundScreenImageRes(): Int = R.drawable.bg_counter_screen_black_white
 
-    override var tintColorAccent: Int
-        @ColorRes
-        get() = android.R.color.black
-        set(value) {}
+    @ColorRes
+    override fun tintColorAccent(): Int = android.R.color.black
 
-    override var backgroundTargetCounterImageRes: Int
-        get() = R.drawable.bg_target_counter_black_white
-        set(value) {}
+    @DrawableRes
+    override fun backgroundTargetCounterImageRes(): Int = R.drawable.bg_target_counter_black_white
 
 }

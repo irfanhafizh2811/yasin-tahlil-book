@@ -21,6 +21,10 @@
     <string name="label_picker_flowers">Bunga</string>
     <string name="label_picker_black_white">Hitam Putih</string>
     <string name="label_picker_default">Utama</string>
+    <string name="label_picker_eid_al_fitr">Idul Fitri</string>
+    <string name="label_picker_yellow">Kuning</string>
+    <string name="label_picker_kaaba">Ka\'bah</string>
+    <string name="label_picker_ramadhan">Ramadhan</string>
     <string name="label_more">Lainnya</string>
     <string name="label_themes">Tema</string>
     <string name="label_choose_themes">Pilih Tema</string>

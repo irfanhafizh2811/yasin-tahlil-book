@@ -30,6 +30,10 @@
     <string name="label_picker_default">Varsayılan</string>
     <string name="label_picker_flowers">Çiçek</string>
     <string name="label_picker_leaves">Yapraklar</string>
+    <string name="label_picker_eid_al_fitr">Eid Al-Fitr</string>
+    <string name="label_picker_yellow">Sarı</string>
+    <string name="label_picker_kaaba">Kabe</string>
+    <string name="label_picker_ramadhan">Ramazan</string>
     <string name="label_rating_and_review_apps">MyDhikr Uygulamalarını Derecelendirin ve İnceleyin</string>
     <string name="label_our_applications">Uygulamalarımız</string>
     <string name="label_vibration">Titreşim</string>
