@@ -25,7 +25,6 @@ fun BaseActivity.logAnalytic(event: String, key: String, value: String) {
     firebaseAnalytics?.logEvent(event, bundle)
 }
 
-
 fun BaseActivity.logSelectContent(@StringRes resString: Int) {
     val value = getString(resString)
     logAnalytic(

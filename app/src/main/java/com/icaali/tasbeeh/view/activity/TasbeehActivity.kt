@@ -52,7 +52,6 @@ class TasbeehActivity : BaseActivity() {
 
     //----------------------------------   Dependency Inject   ----------------------------------
     private val counterPreference by inject<CounterPreference>()
-    private val themesPreference by inject<ThemesPreference>()
     private val settingPreference by inject<SettingPreference>()
     private val dhikrViewModel: DhikrViewModel by viewModel()
     //---------------------------------- End Dependency Inject ----------------------------------
@@ -85,7 +84,9 @@ class TasbeehActivity : BaseActivity() {
 
     private var dhikr = Tasbeeh(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
     private var theme: Theme? = null
+
     internal var type = TextUtils.BLANK
+    internal val themesPreference by inject<ThemesPreference>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -404,5 +405,17 @@ class TasbeehActivity : BaseActivity() {
             }
             mp.start()
         }
+    }
+
+    private fun hasInputSurveyTheme(): Boolean = listOf(
+        ThemeType.KAABA,
+        ThemeType.EID_AL_FITR
+    ).any { it == themesPreference.type } && themesPreference.hasThemeSurvey
+
+    override fun finish() {
+        if (hasInputSurveyTheme()) createThemeSurvey().apply {
+            setOnDismissListener { super.finish() }
+        }.show()
+        else super.finish()
     }
 }

@@ -10,6 +10,7 @@ class ThemesPreference(val corePreference: CorePreference) {
         const val THEME_NEW_CONTENT_KAABA = "theme_new_content_kaaba"
         const val THEME_NEW_CONTENT_RAMADHAN = "theme_new_content_ramadhan"
         const val THEME_NEW_CONTENT_EID_AL_FITR = "theme_new_content_eid_al_fitr"
+        const val THEME_SURVEY = "theme_survey"
     }
 
     fun anyNewContent(): Boolean = listOf(
@@ -67,5 +68,11 @@ class ThemesPreference(val corePreference: CorePreference) {
         get() = corePreference.getBoolean(THEME_NEW_CONTENT_EID_AL_FITR, true)
         set(value) {
             corePreference.setBoolean(THEME_NEW_CONTENT_EID_AL_FITR, value)
+        }
+
+    var hasThemeSurvey: Boolean
+        get() = corePreference.getBoolean(THEME_SURVEY, true)
+        set(value) {
+            corePreference.setBoolean(THEME_SURVEY, value)
         }
 }
