@@ -27,7 +27,7 @@ fun ImageView.loadFromUri(imageUri: Uri?) {
         .dontAnimate()
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
     Glide.with(this.context)
-        .load(imageUri ?: TextUtils.BLANK)
+        .load(imageUri ?: "")
         .apply(options)
         .into(this)
 }
@@ -46,7 +46,7 @@ fun ImageView.loadFromUriWithRounded(
         .priority(Priority.IMMEDIATE)
         .transform(CenterCrop(), RoundedCorners(radius))
     Glide.with(this.context)
-        .load(imageUri ?: TextUtils.BLANK)
+        .load(imageUri ?: "")
         .apply(options)
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
@@ -86,13 +86,13 @@ fun ImageView.loadFromUrl(imageUrl: String?) {
         isGif -> {
             Glide.with(this.context)
                 .asGif()
-                .load(imageUrl ?: TextUtils.BLANK)
+                .load(imageUrl ?: "")
                 .apply(options)
                 .into(this)
         }
         else -> {
             Glide.with(this.context)
-                .load(imageUrl ?: TextUtils.BLANK)
+                .load(imageUrl ?: "")
                 .apply(options)
                 .into(this)
         }
@@ -113,7 +113,7 @@ fun ImageView.loadFromUrlListener(
         isGif -> {
             Glide.with(this.context)
                 .asGif()
-                .load(imageUrl ?: TextUtils.BLANK)
+                .load(imageUrl ?: "")
                 .apply(options)
                 .listener(object : RequestListener<GifDrawable> {
                     override fun onLoadFailed(
@@ -142,7 +142,7 @@ fun ImageView.loadFromUrlListener(
         }
         else -> {
             Glide.with(this.context)
-                .load(imageUrl ?: TextUtils.BLANK)
+                .load(imageUrl ?: "")
                 .apply(options)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -199,7 +199,7 @@ fun ImageView.loadFromUrlWithPlaceholder(
         isGif -> {
             Glide.with(this.context)
                 .asGif()
-                .load(imageUrl ?: TextUtils.BLANK)
+                .load(imageUrl ?: "")
                 .apply(options)
                 .listener(object : RequestListener<GifDrawable> {
                     override fun onLoadFailed(
@@ -230,7 +230,7 @@ fun ImageView.loadFromUrlWithPlaceholder(
         }
         else -> {
             Glide.with(this.context)
-                .load(imageUrl ?: TextUtils.BLANK)
+                .load(imageUrl ?: "")
                 .apply(options)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -277,7 +277,7 @@ fun ImageView.loadFromUrlWithPlaceholder(
     when {
         isGif -> Glide.with(this.context)
             .asGif()
-            .load(imageUrl ?: TextUtils.BLANK)
+            .load(imageUrl ?: "")
             .apply(options)
             .listener(object : RequestListener<GifDrawable> {
                 override fun onLoadFailed(
@@ -306,7 +306,7 @@ fun ImageView.loadFromUrlWithPlaceholder(
             .error(errorPlaceholder)
             .into(this)
         else -> Glide.with(this.context)
-            .load(imageUrl ?: TextUtils.BLANK)
+            .load(imageUrl ?: "")
             .apply(options)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
@@ -354,7 +354,7 @@ fun ImageView.loadFromUrlWithRounded(
     when {
         isGif -> Glide.with(this.context)
             .asGif()
-            .load(imageUrl ?: TextUtils.BLANK)
+            .load(imageUrl ?: "")
             .apply(options)
             .listener(object : RequestListener<GifDrawable> {
                 override fun onLoadFailed(
@@ -383,7 +383,7 @@ fun ImageView.loadFromUrlWithRounded(
             .error(errorPlaceholder)
             .into(this)
         else -> Glide.with(this.context)
-            .load(imageUrl ?: TextUtils.BLANK)
+            .load(imageUrl ?: "")
             .apply(options)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(

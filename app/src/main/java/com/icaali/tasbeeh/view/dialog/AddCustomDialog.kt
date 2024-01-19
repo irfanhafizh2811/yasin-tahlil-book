@@ -37,7 +37,7 @@ class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
                         null == dhikr ->
                             Tasbeeh(
                                 id = latinDhikr,
-                                arabic = TextUtils.BLANK,
+                                arabic = "",
                                 latin = latinDhikr,
                                 count = 0
                             )
@@ -59,7 +59,7 @@ class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
 
     override fun show() {
         super.show()
-        edtAddDhikr.setText(TextUtils.BLANK)
+        edtAddDhikr.setText("")
     }
 
 }

@@ -30,9 +30,9 @@ class ConfirmationDialog(context: Context) : BottomSheetDialog(context) {
     }
 
     fun setText(
-        messageText: String = TextUtils.BLANK,
-        positiveText: String = TextUtils.BLANK,
-        negativeText: String = TextUtils.BLANK
+        messageText: String = "",
+        positiveText: String = "",
+        negativeText: String = ""
     ): ConfirmationDialog {
         if (messageText.isNotBlank()) tvMessage?.text = messageText
         if (positiveText.isNotBlank()) btnPositive?.text = positiveText

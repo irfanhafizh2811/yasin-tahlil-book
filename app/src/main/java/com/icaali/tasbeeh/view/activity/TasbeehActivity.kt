@@ -82,15 +82,15 @@ class TasbeehActivity : BaseActivity() {
     private val guideTasbeehDialog by lazy { GuideTasbeehDialog(this, guidePref) }
     //------------------------------------ Section Lazy ------------------------------------
 
-    private var dhikr = Tasbeeh(TextUtils.BLANK, TextUtils.BLANK, TextUtils.BLANK, 0)
+    private var dhikr = Tasbeeh("", "", "", 0)
     private var theme: Theme? = null
 
-    internal var type = TextUtils.BLANK
+    internal var type = ""
     internal val themesPreference by inject<ThemesPreference>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        type = intent?.getStringExtra(TYPE_EXTRA) ?: TextUtils.BLANK
+        type = intent?.getStringExtra(TYPE_EXTRA) ?: ""
         setContentView(R.layout.activity_tasbeeh)
         setViewTypeCustom()
         selectedTheme()
@@ -120,7 +120,7 @@ class TasbeehActivity : BaseActivity() {
                         .duration(THROTTLE_FIRST)
                         .start()
                     count()
-                    logCount(intent?.getStringExtra(TASBEEH_LATIN_EXTRA) ?: TextUtils.BLANK)
+                    logCount(intent?.getStringExtra(TASBEEH_LATIN_EXTRA) ?: "")
                 }
         )
         mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {

@@ -36,10 +36,10 @@ class SurveyDialog(context: Context) : BottomSheetDialog(context) {
     }
 
     fun setText(
-        titleText: String = TextUtils.BLANK,
-        messageText: String = TextUtils.BLANK,
-        positiveText: String = TextUtils.BLANK,
-        negativeText: String = TextUtils.BLANK,
+        titleText: String = "",
+        messageText: String = "",
+        positiveText: String = "",
+        negativeText: String = "",
         @DrawableRes positiveIcon: Int? = null
     ): SurveyDialog {
         if (messageText.isNotBlank()) tvTitle?.text = titleText

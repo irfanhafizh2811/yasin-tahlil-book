@@ -8,7 +8,7 @@ apply plugin: 'com.google.gms.google-services'
 
 ext.majorVersion = 1
 ext.minorVersion = 4
-ext.patchVersion = 0
+ext.patchVersion = 1
 ext.preRelease = ""
 
 //if (new File('sign.gradle').exists()) {

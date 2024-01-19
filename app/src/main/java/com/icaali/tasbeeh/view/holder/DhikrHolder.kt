@@ -19,7 +19,7 @@ class DhikrHolder(
 ) : RecyclerView.ViewHolder(itemView) {
 
     val typeUnit = TypedValue.COMPLEX_UNIT_PX
-    var surah: String = TextUtils.BLANK
+    var surah: String = ""
 
     companion object {
         const val ALFATIHAH = "Al-Fatihah"

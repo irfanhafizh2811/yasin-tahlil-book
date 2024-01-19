@@ -27,21 +27,21 @@ fun String.isEmail(): Boolean {
 
 fun String.convertPhoneFormat(countryCode: String): String {
     if (this.isNotEmpty()) {
-        var result = this.trim().replace("\\s".toRegex(), TextUtils.BLANK)
+        var result = this.trim().replace("\\s".toRegex(), "")
         if (result.startsWith('0', true)) {
             result = countryCode + result.substring(1)
         }
         return result
     }
-    return TextUtils.BLANK
+    return ""
 }
 
-fun Long.convertToCurrency(currencyType: String = TextUtils.BLANK): String {
+fun Long.convertToCurrency(currencyType: String = ""): String {
     val value = NumberFormat.getNumberInstance().format(this).replace(',', '.')
     return currencyType + value
 }
 
-fun Int.convertToCurrency(currencyType: String = TextUtils.BLANK): String {
+fun Int.convertToCurrency(currencyType: String = ""): String {
     val value = NumberFormat.getNumberInstance().format(this).replace(',', '.')
     return currencyType + value
 }
@@ -55,7 +55,7 @@ fun String.convertDate(inputFormat: String = "yyyy-MM-dd", outputFormat: String 
     } catch (e: Exception) {
         e.printStackTrace()
     }
-    return TextUtils.BLANK
+    return ""
 }
 
 fun Double.doubleToString(decimalPattern: String = "#.#"): String {
