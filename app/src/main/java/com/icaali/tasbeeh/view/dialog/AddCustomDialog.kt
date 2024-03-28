@@ -5,51 +5,52 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.utils.TextUtils
 import com.icaali.tasbeeh.database.table.Tasbeeh
+import com.icaali.tasbeeh.databinding.DialogBottomAddCustomDhikrBinding
 import com.icaali.tasbeeh.extension.text.charCountingListener
-import kotlinx.android.synthetic.main.dialog_bottom_add_custom_dhikr.*
 
 class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
 
+    private lateinit var binding: DialogBottomAddCustomDhikrBinding
     var dhikr: Tasbeeh? = null
     private var onPositiveListener: ((Tasbeeh) -> Unit)? = null
 
     init {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.dialog_bottom_add_custom_dhikr, clContainer, false
-        )
-        setContentView(view)
+        binding = DialogBottomAddCustomDhikrBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        btnCancel?.apply {
-            setOnClickListener { dismiss() }
-            text = context.getString(R.string.label_cancel)
-        }
-        btnSave?.apply {
-            text = context.getString(R.string.label_save)
-            setOnClickListener {
-                if (edtAddDhikr.text.toString().isNotBlank()) {
-                    val latinDhikr = edtAddDhikr.text.toString()
-                    val tasbeeh = when {
-                        null == dhikr ->
-                            Tasbeeh(
-                                id = latinDhikr,
-                                arabic = "",
-                                latin = latinDhikr,
-                                count = 0
-                            )
-                        else -> dhikr
+        with(binding) {
+            btnCancel.apply {
+                setOnClickListener { dismiss() }
+                text = context.getString(R.string.label_cancel)
+            }
+            btnSave.apply {
+                text = context.getString(R.string.label_save)
+                setOnClickListener {
+                    if (edtAddDhikr.text.toString().isNotBlank()) {
+                        val latinDhikr = edtAddDhikr.text.toString()
+                        val tasbeeh = when {
+                            null == dhikr ->
+                                Tasbeeh(
+                                    id = latinDhikr,
+                                    arabic = "",
+                                    latin = latinDhikr,
+                                    count = 0
+                                )
+
+                            else -> dhikr
+                        }
+                        tasbeeh?.let { onPositiveListener?.invoke(it) }
+                        dismiss()
                     }
-                    tasbeeh?.let { onPositiveListener?.invoke(it) }
-                    dismiss()
                 }
             }
+            ivClose.setOnClickListener { dismiss() }
+            edtAddDhikr.charCountingListener { tvCounterChar.text = "$it/300" }
         }
-        ivClose?.setOnClickListener { dismiss() }
-        edtAddDhikr.charCountingListener { tvCounterChar.setText("$it/300") }
     }
 
     fun setOnPositiveListener(onPositiveListener: (Tasbeeh) -> Unit): BottomSheetDialog {
@@ -59,7 +60,7 @@ class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
 
     override fun show() {
         super.show()
-        edtAddDhikr.setText("")
+        binding.edtAddDhikr.setText("")
     }
 
 }

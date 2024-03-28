@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.ActivityDhikrBinding
 import com.icaali.tasbeeh.extension.common.clazz
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
@@ -12,7 +13,6 @@ import com.icaali.tasbeeh.model.DhikrDaily
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.utils.FontSize
 import com.icaali.tasbeeh.view.adapter.DhikrAdapter
-import kotlinx.android.synthetic.main.activity_dhikr.*
 import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
 
@@ -24,6 +24,7 @@ class DhikrActivity : BaseActivity() {
         const val DHIKR_EVENING = "dhikr_evening.json"
     }
 
+    private lateinit var binding: ActivityDhikrBinding
     private var isEvening = false
     private var currentPage: Int = 0
     private lateinit var currentFontSize: FontSize
@@ -57,32 +58,35 @@ class DhikrActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isEvening = !intent.getBooleanExtra(DHIKR_INTENT_EXTRA, false)
-        setContentView(R.layout.activity_dhikr)
+        binding = ActivityDhikrBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         onUIView()
         setViewPager()
-        ivBack?.setOnClickListener { finish() }
-        ivNext?.setOnClickListener { setNextEvent() }
-        ivPrev?.setOnClickListener { setPrevEvent() }
-        tvPlusSize?.setOnClickListener { onRaiseFont() }
-        tvMinusSize?.setOnClickListener { onLowerFont() }
-        loadBanner(adViewContainer)
+        with(binding) {
+            ivBack.setOnClickListener { finish() }
+            ivNext.setOnClickListener { setNextEvent() }
+            ivPrev.setOnClickListener { setPrevEvent() }
+            tvPlusSize.setOnClickListener { onRaiseFont() }
+            tvMinusSize.setOnClickListener { onLowerFont() }
+            loadBanner(adViewContainer)
+        }
     }
 
-    private fun onUIView() {
+    private fun onUIView() = with(binding) {
         window.setBackgroundDrawable(
             if (!isEvening) getDrawableCompat(R.drawable.bg_activity_dhikr_morning)
             else getDrawableCompat(R.drawable.bg_activity_dhikr_evening)
         )
-        ivDhikrTime?.setImageDrawable(
+        ivDhikrTime.setImageDrawable(
             if (!isEvening) getDrawableCompat(R.drawable.ic_footer_sun)
             else getDrawableCompat(R.drawable.ic_footer_evening)
         )
-        tvTitle?.text = if (!isEvening) getString(R.string.label_dhikr_morning)
+        tvTitle.text = if (!isEvening) getString(R.string.label_dhikr_morning)
         else getString(R.string.label_dhikr_evening)
         onUILabelColor()
     }
 
-    private fun onUILabelColor() {
+    private fun onUILabelColor() = with(binding) {
         val textColorPlus = getColorCompat(
             if (settingPreference.fontSize == FontSize.HUGE) R.color.themeUnselected
             else R.color.colorBlack
@@ -97,7 +101,7 @@ class DhikrActivity : BaseActivity() {
         tvMinusSizeSymbol.setTextColor(textColorMinus)
     }
 
-    private fun setViewPager() {
+    private fun setViewPager() = with(binding) {
         currentFontSize = settingPreference.fontSize
         with(viewPagerDhikr) {
             adapter = dhikrAdapter.apply {
@@ -134,28 +138,28 @@ class DhikrActivity : BaseActivity() {
         onUpdateFont(false)
     }
 
-    private fun setNextEvent() {
+    private fun setNextEvent() = with(binding) {
         if (!hasNext()) nextScreen()
         else viewPagerDhikr.currentItem = nextPage()
     }
 
-    private fun setPrevEvent() {
+    private fun setPrevEvent() = with(binding) {
         if (!hasPrev()) return
         else viewPagerDhikr.currentItem = prevPage()
     }
 
-    private fun onViewPageChanged() {
+    private fun onViewPageChanged() = with(binding) {
         onUpdateNext()
         onUpdatePrev()
         val page = (currentPage + 1).toString()
         tvPage.text = page.plus("/").plus(totalPage().toString())
     }
 
-    private fun onUpdateNext() = with(ivNext) {
+    private fun onUpdateNext() = with(binding.ivNext) {
         setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, R.color.colorBlack))
     }
 
-    private fun onUpdatePrev() = with(ivPrev) {
+    private fun onUpdatePrev() = with(binding.ivPrev) {
         isClickable = hasPrev()
         setImageDrawable(
             if (hasPrev()) getDrawableCompat(R.drawable.ic_arrow_back, R.color.colorBlack)

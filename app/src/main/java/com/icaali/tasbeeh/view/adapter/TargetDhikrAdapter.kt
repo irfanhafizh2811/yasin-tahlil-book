@@ -1,20 +1,20 @@
 package com.icaali.tasbeeh.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.ItemTargetDhikrBinding
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.model.TargetDhikr
-import kotlinx.android.synthetic.main.item_target_dhikr.view.*
 import org.jetbrains.anko.backgroundDrawable
 import org.jetbrains.anko.textColor
 
 class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<TargetDhikrAdapter.TargetDhikrViewHolder>() {
 
+    private lateinit var binding: ItemTargetDhikrBinding
     private var targetDhikr = mutableListOf<TargetDhikr>(
         TargetDhikr("3x", 3),
         TargetDhikr("33x", 33),
@@ -23,16 +23,16 @@ class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
     )
 
     class TargetDhikrViewHolder(
-        val view: View,
+        private val binding: ItemTargetDhikrBinding,
         private val onItemClickListener: (Int) -> Unit
-    ) : RecyclerView.ViewHolder(view) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(target: TargetDhikr) {
-            with(view) {
+            with(binding) {
                 tvTargetDhikr.text = target.name
                 when (target.isSelected) {
-                    true -> selected(this)
-                    else -> unselected(this)
+                    true -> selected()
+                    else -> unselected()
                 }
                 clTargetDhikr.setOnClickListener {
                     onItemClickListener.invoke(target.count)
@@ -40,8 +40,8 @@ class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
             }
         }
 
-        private fun selected(view: View) {
-            with(view) {
+        private fun selected() {
+            with(binding) {
                 tvTargetDhikr.run {
                     backgroundDrawable = context.getDrawableCompat(R.drawable.bg_btn_negative)
                     textColor = context.getColorCompat(android.R.color.white)
@@ -49,8 +49,8 @@ class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
             }
         }
 
-        private fun unselected(view: View) {
-            with(view) {
+        private fun unselected() {
+            with(binding) {
                 tvTargetDhikr.run {
                     backgroundDrawable = context.getDrawableCompat(R.drawable.bg_unselected_grey)
                     textColor = context.getColorCompat(android.R.color.black)
@@ -60,16 +60,13 @@ class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TargetDhikrViewHolder =
-        TargetDhikrViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_target_dhikr,
-                parent, false
-            )
-        ) { targetCount ->
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TargetDhikrViewHolder {
+        binding = ItemTargetDhikrBinding.inflate(LayoutInflater.from(parent.context))
+        return TargetDhikrViewHolder(binding) { targetCount ->
             selectedTarget(targetCount)
             onTargetClickListener.invoke(targetCount)
         }
+    }
 
     fun selectedTarget(targetCount: Int) {
         targetDhikr.forEachIndexed { index, targetDhikr ->

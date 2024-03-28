@@ -7,11 +7,12 @@ import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.DialogBottomMoreBinding
+import com.icaali.tasbeeh.databinding.DialogBottomMoreTasbeehBinding
 import com.icaali.tasbeeh.extension.primitive.switchOnOff
 import com.icaali.tasbeeh.extension.view.goneIf
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.utils.Analytic
-import kotlinx.android.synthetic.main.dialog_bottom_more_tasbeeh.*
 
 class MoreTasbeehDialog(
     context: Context,
@@ -20,41 +21,43 @@ class MoreTasbeehDialog(
 ) :
     BottomSheetDialog(context) {
 
+    private lateinit var binding: DialogBottomMoreTasbeehBinding
     private var onClickDeleteTasbeeh: (() -> Unit)? = null
 
     init {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.dialog_bottom_more_tasbeeh, clContainer, false
-        )
-        setContentView(view)
+        binding = DialogBottomMoreTasbeehBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        swVibration.run {
-            isChecked = settingPreference.vibrate
-            setOnCheckedChangeListener { _, isChecked ->
-                settingPreference.vibrate = isChecked
-                setTextSwitch(tvLabelSwitchVibration, isChecked)
-                log(Analytic.CLICK_VIBRATION, isChecked)
-            }
-        }
-        setTextSwitch(tvLabelSwitchVibration, settingPreference.vibrate)
-        swSound.run {
-            isChecked = settingPreference.sound
-            setOnCheckedChangeListener { _, isChecked ->
-                settingPreference.sound = isChecked
-                setTextSwitch(tvLabelSwitchSound, isChecked)
-                log(Analytic.CLICK_SOUND, isChecked)
-            }
-        }
+        with(binding) {
 
-        setTextSwitch(tvLabelSwitchSound, settingPreference.sound)
-        llDeleteTasbeeh.setOnClickListener {
-            onClickDeleteTasbeeh?.invoke()
-            log()
+            swVibration.run {
+                isChecked = settingPreference.vibrate
+                setOnCheckedChangeListener { _, isChecked ->
+                    settingPreference.vibrate = isChecked
+                    setTextSwitch(tvLabelSwitchVibration, isChecked)
+                    log(Analytic.CLICK_VIBRATION, isChecked)
+                }
+            }
+            setTextSwitch(tvLabelSwitchVibration, settingPreference.vibrate)
+            swSound.run {
+                isChecked = settingPreference.sound
+                setOnCheckedChangeListener { _, isChecked ->
+                    settingPreference.sound = isChecked
+                    setTextSwitch(tvLabelSwitchSound, isChecked)
+                    log(Analytic.CLICK_SOUND, isChecked)
+                }
+            }
+
+            setTextSwitch(tvLabelSwitchSound, settingPreference.sound)
+            llDeleteTasbeeh.setOnClickListener {
+                onClickDeleteTasbeeh?.invoke()
+                log()
+            }
+            ivClose?.setOnClickListener { dismiss() }
         }
-        ivClose?.setOnClickListener { dismiss() }
     }
 
     private fun log(valueParam: String, isChecked: Boolean) {
@@ -85,7 +88,7 @@ class MoreTasbeehDialog(
         this.onClickDeleteTasbeeh = onClickDeleteTasbeeh
     }
 
-    fun showButtonDelete(show: Boolean) {
+    fun showButtonDelete(show: Boolean) = with(binding) {
         llDeleteTasbeeh.goneIf(!show)
     }
 

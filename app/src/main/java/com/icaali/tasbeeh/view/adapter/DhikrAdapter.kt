@@ -4,22 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.ItemDhikrBinding
 import com.icaali.tasbeeh.model.Dhikr
 import com.icaali.tasbeeh.utils.FontSize
 import com.icaali.tasbeeh.view.holder.DhikrHolder
 
 class DhikrAdapter : RecyclerView.Adapter<DhikrHolder>() {
 
+    private lateinit var binding: ItemDhikrBinding
     var dhikrs: ArrayList<Dhikr> = arrayListOf()
     lateinit var fontSize: FontSize
     var analytics: FirebaseAnalytics? = null
     var dhikrHolder: DhikrHolder? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DhikrHolder = DhikrHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_dhikr, parent, false),
-        analytics
-    )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DhikrHolder {
+        binding = ItemDhikrBinding.inflate(LayoutInflater.from(parent.context))
+        return DhikrHolder(binding, analytics)
+    }
 
     override fun onBindViewHolder(holder: DhikrHolder, position: Int) {
         dhikrHolder = holder.bind(dhikrs[position], fontSize)

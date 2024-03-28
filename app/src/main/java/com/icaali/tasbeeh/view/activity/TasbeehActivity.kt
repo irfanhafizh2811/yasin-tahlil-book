@@ -14,6 +14,7 @@ import com.github.florent37.viewanimator.ViewAnimator
 import com.google.android.gms.ads.MobileAds
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.database.table.Tasbeeh
+import com.icaali.tasbeeh.databinding.ActivityTasbeehBinding
 import com.icaali.tasbeeh.extension.activty.hasPermissions
 import com.icaali.tasbeeh.extension.activty.isCustomType
 import com.icaali.tasbeeh.extension.context.getColorCompat
@@ -25,13 +26,11 @@ import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
 import com.icaali.tasbeeh.utils.Analytic
 import com.icaali.tasbeeh.utils.TasbeehConst
-import com.icaali.tasbeeh.utils.TextUtils
 import com.icaali.tasbeeh.view.dialog.*
 import com.icaali.tasbeeh.view.theme.*
 import com.icaali.tasbeeh.vm.DhikrViewModel
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_tasbeeh.*
 import org.jetbrains.anko.backgroundDrawable
 import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
@@ -50,6 +49,8 @@ class TasbeehActivity : BaseActivity() {
         const val VIBRATE_CLICK_DURATION = 500L
     }
 
+    private lateinit var binding: ActivityTasbeehBinding
+
     //----------------------------------   Dependency Inject   ----------------------------------
     private val counterPreference by inject<CounterPreference>()
     private val settingPreference by inject<SettingPreference>()
@@ -58,7 +59,13 @@ class TasbeehActivity : BaseActivity() {
 
     //------------------------------------   Section Lazy   ------------------------------------
     private val tvCounters by lazy {
-        listOf(tvCounter1, tvCounter2, tvCounter3, tvCounter4, tvCounter5)
+        listOf(
+            binding.tvCounter1,
+            binding.tvCounter2,
+            binding.tvCounter3,
+            binding.tvCounter4,
+            binding.tvCounter5
+        )
     }
     private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
@@ -73,7 +80,7 @@ class TasbeehActivity : BaseActivity() {
     private val targetDhikrDialog by lazy {
         TargetDhikrDialog(this) {
             counterPreference.target = it
-            tvTargetCounter?.text = it.toString()
+            binding.tvTargetCounter.text = it.toString()
             logClick(Analytic.TARGET_DHIKR.plus(it.toString()))
             if (settingPreference.showPopupAgain)
                 targetChangeInformationDialog.show()
@@ -91,60 +98,64 @@ class TasbeehActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         type = intent?.getStringExtra(TYPE_EXTRA) ?: ""
-        setContentView(R.layout.activity_tasbeeh)
+        binding = ActivityTasbeehBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setViewTypeCustom()
         selectedTheme()
         setupDialog()
-        ivBack?.setOnClickListener { finish() }
-
-        fabReset?.setOnClickListener {
-            ViewAnimator.animate(fabReset)
-                .pulse()
-                .start()
-            confirmationDialog.apply {
-                setOnPositiveListener { reset() }
-            }.show()
-        }
-        tvDzikir?.text = intent?.getStringExtra(TASBEEH_LATIN_EXTRA)
-        initTasbeeh()
-        mDisposable.add(
-            RxView.clicks(fabCount)
-                .throttleFirst(
-                    THROTTLE_FIRST,
-                    TimeUnit.MILLISECONDS,
-                    AndroidSchedulers.mainThread()
-                )
-                .subscribe {
-                    ViewAnimator.animate(fabCount)
-                        .pulse()
-                        .duration(THROTTLE_FIRST)
-                        .start()
-                    count()
-                    logCount(intent?.getStringExtra(TASBEEH_LATIN_EXTRA) ?: "")
-                }
-        )
-        mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
-            if (!guideTasbeehDialog.isShowingAll()) guideTasbeehDialog.apply {
-                onTapTargetListener = {
-                    when {
-                        guidePref.hasShownPickTheme && !guidePref.hasShownVibrateSound ->
-                            showThemeDialog(true)
-                        guidePref.hasShownVibrateSound && !guidePref.hasShownDhikrTarget ->
-                            showMoreDialog(true)
-                        else -> showTargetDialog()
+        with(binding) {
+            ivBack.setOnClickListener { finish() }
+            fabReset.setOnClickListener {
+                ViewAnimator.animate(fabReset)
+                    .pulse()
+                    .start()
+                confirmationDialog.apply {
+                    setOnPositiveListener { reset() }
+                }.show()
+            }
+            tvDzikir.text = intent?.getStringExtra(TASBEEH_LATIN_EXTRA)
+            initTasbeeh()
+            mDisposable.add(
+                RxView.clicks(fabCount)
+                    .throttleFirst(
+                        THROTTLE_FIRST,
+                        TimeUnit.MILLISECONDS,
+                        AndroidSchedulers.mainThread()
+                    )
+                    .subscribe {
+                        ViewAnimator.animate(fabCount)
+                            .pulse()
+                            .duration(THROTTLE_FIRST)
+                            .start()
+                        count()
+                        logCount(intent?.getStringExtra(TASBEEH_LATIN_EXTRA) ?: "")
                     }
-                }
-            }.show()
-        })
-        loadBanner(adViewContainer)
+            )
+            mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
+                if (!guideTasbeehDialog.isShowingAll()) guideTasbeehDialog.apply {
+                    onTapTargetListener = {
+                        when {
+                            guidePref.hasShownPickTheme && !guidePref.hasShownVibrateSound ->
+                                showThemeDialog(true)
+
+                            guidePref.hasShownVibrateSound && !guidePref.hasShownDhikrTarget ->
+                                showMoreDialog(true)
+
+                            else -> showTargetDialog()
+                        }
+                    }
+                }.show()
+            })
+            loadBanner(adViewContainer)
+        }
         MobileAds.openAdInspector(this) {
             // Error will be non-null if ad inspector closed due to an error.
         }
     }
 
     private fun setViewTypeCustom() {
-        if (isCustomType())
-            intent?.getParcelableExtra<Tasbeeh>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
+//        if (isCustomType())
+//            intent?.getParcelableExtra<Tasbeeh>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
     }
 
     private fun initTasbeeh() {
@@ -158,15 +169,15 @@ class TasbeehActivity : BaseActivity() {
                 TasbeehConst.ASTAGHFIRULLAH -> astaghfirullah
                 else -> 0
             }
-            tvTargetCounter?.text = target.toString()
+            binding.tvTargetCounter.text = target.toString()
             setTextCounter(value)
         }
     }
 
     private fun setupDialog() {
-        clTargetCounter?.setOnClickListener { showTargetDialog() }
-        llThemes?.setOnClickListener { showThemeDialog() }
-        llMore?.setOnClickListener { showMoreDialog() }
+        binding.clTargetCounter.setOnClickListener { showTargetDialog() }
+        binding.llThemes.setOnClickListener { showThemeDialog() }
+        binding.llMore.setOnClickListener { showMoreDialog() }
     }
 
     private fun showTargetDialog() {
@@ -185,7 +196,7 @@ class TasbeehActivity : BaseActivity() {
                 selectedTheme()
             }
             setOnDismissListener {
-                cvNewTheme.isVisible = themesPreference.anyNewContent()
+                binding.cvNewTheme.isVisible = themesPreference.anyNewContent()
                 if (isGuide) guideTasbeehDialog.show()
                 else loadAdMobInterstitial()
             }
@@ -193,7 +204,7 @@ class TasbeehActivity : BaseActivity() {
     }
 
     override fun onResume() {
-        cvNewTheme.isVisible = themesPreference.anyNewContent()
+        binding.cvNewTheme.isVisible = themesPreference.anyNewContent()
         super.onResume()
     }
 
@@ -217,26 +228,25 @@ class TasbeehActivity : BaseActivity() {
         }.show()
     }
 
-    private fun selectedTheme() {
+    private fun selectedTheme() = with(binding) {
         theme = ThemeFactory.generate(themesPreference.type)
         theme?.run {
             if (themesPreference.anyNewContent()) updateNewThemePref(this, themesPreference)
-            if (!isCustomType()) ivDzikir?.setImageDrawable(getDzikirImage())
+            if (!isCustomType()) ivDzikir.setImageDrawable(getDzikirImage())
+            clRootLayout.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes())
+            ivSkin.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes()))
+            fabCount.setImageDrawable(getDrawableCompat(counterImageRes()))
+            fabReset.setImageDrawable(getDrawableCompat(resetImageRes()))
+            ivCounterSkinBox.setImageDrawable(getDrawableCompat(outputImageRes()))
+            tvHintCounter.textColor = getColorCompat(outputHintColorRes())
 
-            clRootLayout?.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes())
-            ivSkin?.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes()))
-            fabCount?.setImageDrawable(getDrawableCompat(counterImageRes()))
-            fabReset?.setImageDrawable(getDrawableCompat(resetImageRes()))
-            ivCounterSkinBox?.setImageDrawable(getDrawableCompat(outputImageRes()))
-            tvHintCounter?.textColor = getColorCompat(outputHintColorRes())
+            ivBack.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent()))
+            ivMore.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent()))
+            ivThemes.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent()))
+            tvDzikir.textColor = getColorCompat(tintColorAccent())
 
-            ivBack?.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent()))
-            ivMore?.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent()))
-            ivThemes?.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent()))
-            tvDzikir?.textColor = getColorCompat(tintColorAccent())
-
-            ivTargetCounter?.setImageDrawable(getDrawableCompat(backgroundTargetCounterImageRes()))
-            tvTargetCounter?.textColor = getColorCompat(outputHintColorRes())
+            ivTargetCounter.setImageDrawable(getDrawableCompat(backgroundTargetCounterImageRes()))
+            tvTargetCounter.textColor = getColorCompat(outputHintColorRes())
         }
     }
 
@@ -246,22 +256,27 @@ class TasbeehActivity : BaseActivity() {
                 R.drawable.ic_subhanallah,
                 theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
+
             TasbeehConst.ALHAMDULILLAH -> getDrawableCompat(
                 R.drawable.ic_alhamdulillah,
                 theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
+
             TasbeehConst.ALLAHU_AKBAR -> getDrawableCompat(
                 R.drawable.ic_allahu_akbar,
                 theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
+
             TasbeehConst.ASTAGHFIRULLAH -> getDrawableCompat(
                 R.drawable.ic_astagfirllah,
                 theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
+
             TasbeehConst.LAILAHAILALLAH -> getDrawableCompat(
                 R.drawable.ic_laailaahaillallah,
                 theme?.tintColorAccent() ?: R.color.textHintOutputDefault
             )
+
             else -> getDrawableCompat(
                 R.drawable.ic_subhanallah,
                 theme?.tintColorAccent() ?: R.color.textHintOutputDefault
@@ -274,15 +289,19 @@ class TasbeehActivity : BaseActivity() {
             TasbeehConst.SUBHANALLAH -> {
                 counterPreference.subhanallah = 0
             }
+
             TasbeehConst.ALHAMDULILLAH -> {
                 counterPreference.alhamdulillah = 0
             }
+
             TasbeehConst.LAILAHAILALLAH -> {
                 counterPreference.lailahailallah = 0
             }
+
             TasbeehConst.ALLAHU_AKBAR -> {
                 counterPreference.allahukkbar = 0
             }
+
             TasbeehConst.ASTAGHFIRULLAH -> {
                 counterPreference.astaghfirullah = 0
             }
@@ -298,26 +317,32 @@ class TasbeehActivity : BaseActivity() {
                     dhikr.count += 1
                     dhikr.count
                 }
+
                 TasbeehConst.SUBHANALLAH -> {
                     subhanallah += 1
                     subhanallah
                 }
+
                 TasbeehConst.ALHAMDULILLAH -> {
                     alhamdulillah += 1
                     alhamdulillah
                 }
+
                 TasbeehConst.LAILAHAILALLAH -> {
                     lailahailallah += 1
                     lailahailallah
                 }
+
                 TasbeehConst.ALLAHU_AKBAR -> {
                     allahukkbar += 1
                     allahukkbar
                 }
+
                 TasbeehConst.ASTAGHFIRULLAH -> {
                     astaghfirullah += 1
                     astaghfirullah
                 }
+
                 else -> 0
             }
 
@@ -336,9 +361,9 @@ class TasbeehActivity : BaseActivity() {
         }
     }
 
-    private fun setTextCounter(counter: Int) {
-        var textCounter = counter.toString()
-        tvHintCounter?.text = when (textCounter.length == 1 &&
+    private fun setTextCounter(counter: Int) = with(binding) {
+        val textCounter = counter.toString()
+        tvHintCounter.text = when (textCounter.length == 1 &&
                 textCounter.contains("1")) {
             false -> getString(R.string.label_text_counter_hint)
             else -> {
@@ -357,6 +382,7 @@ class TasbeehActivity : BaseActivity() {
                     textView.text = textCounter.reversed()[index].toString()
                     textView.visible()
                 }
+
                 else ->
                     textView.gone()
             }

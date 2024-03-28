@@ -1,18 +1,17 @@
 package com.icaali.tasbeeh.view.holder
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.database.table.Tasbeeh
-import kotlinx.android.synthetic.main.item_tasbeeh.view.*
+import com.icaali.tasbeeh.databinding.ItemTasbeehBinding
 
-class TasbeehHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TasbeehHolder(private val binding: ItemTasbeehBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(onClickListener: (Tasbeeh) -> Unit, dhikr: Tasbeeh) {
         val (_, _, latin, count) = dhikr
-        with(itemView) {
+        with(binding) {
             tvDhikrLatin.text = latin
             tvDhikrCount.text = "$count".plus("x")
             cvDhikr.setOnClickListener { onClickListener(dhikr) }
@@ -21,9 +20,8 @@ class TasbeehHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
         fun create(parent: ViewGroup): TasbeehHolder {
-            val view: View = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_tasbeeh, parent, false)
-            return TasbeehHolder(view)
+            val binding = ItemTasbeehBinding.inflate(LayoutInflater.from(parent.context))
+            return TasbeehHolder(binding)
         }
     }
 }

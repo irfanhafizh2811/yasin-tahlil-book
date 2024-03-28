@@ -11,20 +11,20 @@ import android.util.DisplayMetrics
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.RequestConfiguration
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.icaali.tasbeeh.BuildConfig
-import com.icaali.tasbeeh.utils.TextUtils
+import com.icaali.tasbeeh.app.BuildConfig
 import com.icaali.tasbeeh.extension.activty.hasPermissions
 import com.icaali.tasbeeh.extension.ads.loadAd
 import com.icaali.tasbeeh.extension.ads.loadAdMob
 import com.icaali.tasbeeh.extension.ads.loadAdMobTest
 import com.icaali.tasbeeh.preference.GuidePreference
+import com.icaali.tasbeeh.utils.TextUtils
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 

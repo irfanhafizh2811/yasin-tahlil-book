@@ -8,7 +8,6 @@ import com.icaali.tasbeeh.database.table.Tasbeeh
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.preference.LanguagePreference
 import com.icaali.tasbeeh.utils.TasbeehConst
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
 import java.util.Locale
 
@@ -46,7 +45,7 @@ fun MainActivity.startActivityTasbeeh(type: String) {
     startActivity(intent)
 }
 
-fun MainActivity.sync() {
+fun MainActivity.sync() = with(binding) {
     val counter = R.string.label_counter_x
     tvSubhanallahCount?.text = getString(counter, counterPreference.subhanallah)
     tvAlhamdulillahCount?.text = getString(counter, counterPreference.alhamdulillah)

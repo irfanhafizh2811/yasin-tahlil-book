@@ -2,37 +2,36 @@ package com.icaali.tasbeeh.view.adapter
 
 import android.graphics.Typeface
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.ItemThemeBinding
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
-import com.icaali.tasbeeh.extension.view.getString
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeType
-import kotlinx.android.synthetic.main.item_theme.view.*
 import org.jetbrains.anko.textColor
 
 class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
     RecyclerView.Adapter<ThemeAdapter.ThemeVH>() {
 
+    private lateinit var binding: ItemThemeBinding
     var themes = mutableListOf<Theme>()
     var type = ThemeType.DEFAULT
 
     class ThemeVH(
-        val onItemClickListener: (Theme) -> Unit,
-        val view: View
-    ) : RecyclerView.ViewHolder(view) {
+        private val onItemClickListener: (Theme) -> Unit,
+        private val binding: ItemThemeBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(theme: Theme, type: ThemeType) {
-            with(view) {
-                ivTheme.setImageDrawable(context.getDrawableCompat(theme.iconImageRes()))
-                tvTheme.text = getString(theme.textStringRes())
+            with(binding) {
+                ivTheme.setImageDrawable(root.context.getDrawableCompat(theme.iconImageRes()))
+                tvTheme.text = root.context.getString(theme.textStringRes())
                 when (theme.themeType()) {
-                    type -> selected(this)
-                    else -> unselected(this)
+                    type -> selected()
+                    else -> unselected()
                 }
                 cvTheme.setOnClickListener {
                     onItemClickListener.invoke(theme)
@@ -41,10 +40,10 @@ class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
             }
         }
 
-        private fun selected(view: View) {
-            with(view) {
+        private fun selected() {
+            with(binding) {
                 cvTheme.setCardBackgroundColor(
-                    context.getColorCompat(R.color.themeSelected)
+                    root.context.getColorCompat(R.color.themeSelected)
                 )
                 tvTheme.run {
                     typeface = Typeface.DEFAULT_BOLD
@@ -53,10 +52,10 @@ class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
             }
         }
 
-        private fun unselected(view: View) {
-            with(view) {
+        private fun unselected() {
+            with(binding) {
                 cvTheme.setCardBackgroundColor(
-                    context.getColorCompat(R.color.themeUnselected)
+                    root.context.getColorCompat(R.color.themeUnselected)
                 )
                 tvTheme.run {
                     typeface = Typeface.DEFAULT
@@ -66,14 +65,10 @@ class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeVH =
-        ThemeVH(
-            onItemClickListener,
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_theme,
-                parent, false
-            )
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeVH {
+        binding = ItemThemeBinding.inflate(LayoutInflater.from(parent.context))
+        return ThemeVH(onItemClickListener, binding)
+    }
 
     override fun getItemCount(): Int = themes.size
 

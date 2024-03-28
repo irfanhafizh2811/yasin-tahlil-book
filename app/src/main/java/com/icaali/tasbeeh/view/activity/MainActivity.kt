@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.MobileAds
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.ActivityMainBinding
 import com.icaali.tasbeeh.extension.activty.openPlaystore
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
@@ -23,9 +24,6 @@ import com.icaali.tasbeeh.view.dialog.GuideMainDialog
 import com.icaali.tasbeeh.view.dialog.LanguageDialog
 import com.icaali.tasbeeh.view.dialog.MoreDialog
 import com.icaali.tasbeeh.vm.DhikrViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.adViewContainer
-import kotlinx.android.synthetic.main.activity_main.llMore
 import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,6 +34,8 @@ class MainActivity : BaseActivity() {
         private const val CHROME_PACKAGE_NAME = "com.android.chrome"
         private const val MYDHIKR_INSTAGRAM_URL = "https://www.instagram.com/mydhikr.apps/"
     }
+
+    lateinit var binding: ActivityMainBinding
 
     //***************** public variable *****************
     val languagePreference by inject<LanguagePreference>()
@@ -60,83 +60,90 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        cvSubhanallah?.setOnClickListener {
-            logSelectContent(getString(R.string.text_latin_subhanallah))
-            startActivityTasbeeh(TasbeehConst.SUBHANALLAH)
-        }
-        cvAlhamdulillah?.setOnClickListener {
-            logSelectContent(getString(R.string.text_latin_alhamdulillah))
-            startActivityTasbeeh(TasbeehConst.ALHAMDULILLAH)
-        }
-        cvAllahuAkbar?.setOnClickListener {
-            logSelectContent(getString(R.string.text_latin_allahu_akbar))
-            startActivityTasbeeh(TasbeehConst.ALLAHU_AKBAR)
-        }
-        cvAstaghfirullah?.setOnClickListener {
-            logSelectContent(getString(R.string.text_latin_astaghfirullah))
-            startActivityTasbeeh(TasbeehConst.ASTAGHFIRULLAH)
-        }
-        cvLaailaahaillallah?.setOnClickListener {
-            logSelectContent(getString(R.string.text_latin_laailaahaillallah))
-            startActivityTasbeeh(TasbeehConst.LAILAHAILALLAH)
-        }
-        rvAddDhikr.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity).apply { reverseLayout = true }
-            adapter = dhikrAdapter
-        }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        with(binding) {
 
-        cvAddDhikr?.setOnClickListener {
-            addCustomDialog.setOnPositiveListener {
-                logAdd(it.latin)
-                dhikrViewModel.insert(it)
-                if (!hasShownGuide) loadAdMobInterstitial()
-            }.show()
-        }
-        cvDhikrMorning?.setOnClickListener { onStartDhikrActivity(true) }
-        cvDhikrEvening?.setOnClickListener { onStartDhikrActivity(false) }
-        dhikrViewModel.dhikrs.observe(this) {
-            when {
-                it.isEmpty() -> {
-                    rvAddDhikr.gone()
-                    tvYourDhikr.gone()
-                }
-                else -> {
-                    rvAddDhikr.visible()
-                    tvYourDhikr.visible()
-                    dhikrAdapter.submitList(it)
-                }
+            cvSubhanallah?.setOnClickListener {
+                logSelectContent(getString(R.string.text_latin_subhanallah))
+                startActivityTasbeeh(TasbeehConst.SUBHANALLAH)
             }
-            loadBanner(adViewContainer)
-            MobileAds.openAdInspector(this) {
-                // Error will be non-null if ad inspector closed due to an error.
+            cvAlhamdulillah?.setOnClickListener {
+                logSelectContent(getString(R.string.text_latin_alhamdulillah))
+                startActivityTasbeeh(TasbeehConst.ALHAMDULILLAH)
             }
-        }
+            cvAllahuAkbar?.setOnClickListener {
+                logSelectContent(getString(R.string.text_latin_allahu_akbar))
+                startActivityTasbeeh(TasbeehConst.ALLAHU_AKBAR)
+            }
+            cvAstaghfirullah?.setOnClickListener {
+                logSelectContent(getString(R.string.text_latin_astaghfirullah))
+                startActivityTasbeeh(TasbeehConst.ASTAGHFIRULLAH)
+            }
+            cvLaailaahaillallah?.setOnClickListener {
+                logSelectContent(getString(R.string.text_latin_laailaahaillallah))
+                startActivityTasbeeh(TasbeehConst.LAILAHAILALLAH)
+            }
+            rvAddDhikr.apply {
+                layoutManager =
+                    LinearLayoutManager(this@MainActivity).apply { reverseLayout = true }
+                adapter = dhikrAdapter
+            }
 
-        llMore?.setOnClickListener {
-            moreDialog.apply {
-                setOnSelectedListener {
-                    when (it) {
-                        MoreDialog.Menu.LANGUAGE -> showLanguageDialog()
-                        MoreDialog.Menu.RATING_AND_REVIEW -> {
-                            openPlaystore(packageName)
-                            logClick(Analytic.CLICK_RATING_AND_REVIEW)
-                        }
-                        MoreDialog.Menu.SHARE -> shareMyDhikr()
-                        MoreDialog.Menu.INSTAGRAM -> openInstagramMyDhikr()
+            cvAddDhikr?.setOnClickListener {
+                addCustomDialog.setOnPositiveListener {
+                    logAdd(it.latin)
+                    dhikrViewModel.insert(it)
+                    if (!hasShownGuide) loadAdMobInterstitial()
+                }.show()
+            }
+            cvDhikrMorning?.setOnClickListener { onStartDhikrActivity(true) }
+            cvDhikrEvening?.setOnClickListener { onStartDhikrActivity(false) }
+            dhikrViewModel.dhikrs.observe(this@MainActivity) {
+                when {
+                    it.isEmpty() -> {
+                        rvAddDhikr.gone()
+                        tvYourDhikr.gone()
+                    }
+
+                    else -> {
+                        rvAddDhikr.visible()
+                        tvYourDhikr.visible()
+                        dhikrAdapter.submitList(it)
                     }
                 }
-                show()
+                loadBanner(adViewContainer)
+                MobileAds.openAdInspector(this@MainActivity) {
+                    // Error will be non-null if ad inspector closed due to an error.
+                }
             }
+
+            llMore?.setOnClickListener {
+                moreDialog.apply {
+                    setOnSelectedListener {
+                        when (it) {
+                            MoreDialog.Menu.LANGUAGE -> showLanguageDialog()
+                            MoreDialog.Menu.RATING_AND_REVIEW -> {
+                                openPlaystore(packageName)
+                                logClick(Analytic.CLICK_RATING_AND_REVIEW)
+                            }
+
+                            MoreDialog.Menu.SHARE -> shareMyDhikr()
+                            MoreDialog.Menu.INSTAGRAM -> openInstagramMyDhikr()
+                        }
+                    }
+                    show()
+                }
+            }
+            mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
+                if (!mainGuideDialog.isShowingAll()) {
+                    mainGuideDialog.apply {
+                        onTapTargetListener = { addCustomDialog.show() }
+                    }.show()
+                    hasShownGuide = true
+                }
+            })
         }
-        mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
-            if (!mainGuideDialog.isShowingAll()) {
-                mainGuideDialog.apply {
-                    onTapTargetListener = { addCustomDialog.show() }
-                }.show()
-                hasShownGuide = true
-            }
-        })
     }
 
     private fun onStartDhikrActivity(isMorning: Boolean) {

@@ -3,17 +3,16 @@ android.variantFilter { variant ->
         variant.getFlavors().each {flavor ->
             println("debug loop flavor : ${flavor.name}")
             variant.setIgnore(false)
-//            if (flavor.name.contains('staging')
-//                    || flavor.name.contains('alpha')
-//                    || flavor.name.contains('production')) {
-//                variant.setIgnore(true)
-//            }
+            if (flavor.name.contains('staging')
+                    || flavor.name.contains('alpha')) {
+                variant.setIgnore(true)
+            }
         }
     }
     else if (variant.buildType.name == "release") {
         variant.getFlavors().each {flavor ->
             println("release loop flavor : ${flavor.name}")
-            if (flavor.name.contains('dev')) {
+            if (flavor.name.contains('development')) {
                 variant.setIgnore(true)
             }
         }

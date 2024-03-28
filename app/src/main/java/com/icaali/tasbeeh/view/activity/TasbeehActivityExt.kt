@@ -12,6 +12,7 @@ fun TasbeehActivity.updateNewThemePref(theme: Theme, themesPreference: ThemesPre
         ThemeType.KAABA -> themesPreference.hasNewContentKaaba = false
         ThemeType.RAMADHAN -> themesPreference.hasNewContentRamadhan = false
         ThemeType.EID_AL_FITR -> themesPreference.hasNewContentEidAlFitr = false
+        else -> {}
     }
 }
 

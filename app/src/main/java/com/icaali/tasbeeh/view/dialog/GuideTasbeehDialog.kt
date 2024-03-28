@@ -2,37 +2,44 @@ package com.icaali.tasbeeh.view.dialog
 
 import android.content.Context
 import android.os.Bundle
-import com.icaali.tasbeeh.R
+import android.view.LayoutInflater
+import com.icaali.tasbeeh.databinding.DialogGuideTasbeehBinding
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.GuidePreference
-import kotlinx.android.synthetic.main.dialog_guide_tasbeeh.*
 
 class GuideTasbeehDialog(context: Context, guidePref: GuidePreference) : GuideDialog(
     context,
     guidePref
 ) {
 
+    private lateinit var binding: DialogGuideTasbeehBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_guide_tasbeeh)
-        btnNext?.setOnClickListener {
-            when {
-                !guidePref.hasShownPickTheme -> showTheme()
-                guidePref.hasShownPickTheme && !guidePref.hasShownVibrateSound ->
-                    showVibrateSound()
-                guidePref.hasShownVibrateSound && !guidePref.hasShownDhikrTarget ->
-                    showTarget()
-                else -> dismiss()
+        binding = DialogGuideTasbeehBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
+        with(binding) {
+            btnNext.setOnClickListener {
+                when {
+                    !guidePref.hasShownPickTheme -> showTheme()
+                    guidePref.hasShownPickTheme && !guidePref.hasShownVibrateSound ->
+                        showVibrateSound()
+
+                    guidePref.hasShownVibrateSound && !guidePref.hasShownDhikrTarget ->
+                        showTarget()
+
+                    else -> dismiss()
+                }
+                onNextListener?.invoke()
             }
-            onNextListener?.invoke()
-        }
-        btnSkip?.setOnClickListener {
-            onCompleted(Screen.TASBEEH)
+            btnSkip.setOnClickListener {
+                onCompleted(Screen.TASBEEH)
+            }
         }
     }
 
-    private fun showTheme() {
+    private fun showTheme() = with(binding) {
         clThemeGuide.visible()
         clVibrateSoundGuide.gone()
         clTargetDhikrGuide.gone()
@@ -44,7 +51,7 @@ class GuideTasbeehDialog(context: Context, guidePref: GuidePreference) : GuideDi
         }
     }
 
-    private fun showVibrateSound() {
+    private fun showVibrateSound() = with(binding) {
         clThemeGuide.gone()
         clVibrateSoundGuide.visible()
         clTargetDhikrGuide.gone()
@@ -56,7 +63,7 @@ class GuideTasbeehDialog(context: Context, guidePref: GuidePreference) : GuideDi
         }
     }
 
-    private fun showTarget() {
+    private fun showTarget() = with(binding) {
         clThemeGuide.gone()
         clVibrateSoundGuide.gone()
         clTargetDhikrGuide.visible()

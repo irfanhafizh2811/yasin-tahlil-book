@@ -10,11 +10,11 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.DialogLanguageBinding
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.LanguagePreference
 import com.icaali.tasbeeh.utils.Analytic
-import kotlinx.android.synthetic.main.dialog_language.*
 import org.jetbrains.anko.textColor
 import java.util.Locale
 
@@ -25,11 +25,11 @@ class LanguageDialog(
     val analytic: FirebaseAnalytics?
 ) : BottomSheetDialog(context) {
 
+    private lateinit var binding: DialogLanguageBinding
+
     init {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.dialog_language, clContainer, false
-        )
-        setContentView(view)
+        binding = DialogLanguageBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,18 +43,21 @@ class LanguageDialog(
                         LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_ENGLISH))
                     log(LanguagePreference.LANGUAGE_ENGLISH)
                 }
+
                 language.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
                     languagePreference.language = LanguagePreference.LANGUAGE_INDONESIA
                     localManager.applicationLocales =
                         LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_INDONESIA))
                     log(LanguagePreference.LANGUAGE_INDONESIA)
                 }
+
                 language.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
                     languagePreference.language = LanguagePreference.LANGUAGE_TURKEY
                     localManager.applicationLocales =
                         LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_TURKEY))
                     log(LanguagePreference.LANGUAGE_TURKEY)
                 }
+
                 language.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
                     languagePreference.language = LanguagePreference.LANGUAGE_SAUDI_ARABIA
                     localManager.applicationLocales =
@@ -74,35 +77,39 @@ class LanguageDialog(
         })
     }
 
-    fun updateView(languageActive: String) {
-        tv_indonesia.textColor = ContextCompat.getColor(context, R.color.colorBlack)
-        tv_english.textColor = ContextCompat.getColor(context, R.color.colorBlack)
-        tv_turkey.textColor = ContextCompat.getColor(context, R.color.colorBlack)
-        tv_saudi_arabia.textColor = ContextCompat.getColor(context, R.color.colorBlack)
-        iv_active_indonesia.gone()
-        iv_active_english.gone()
-        iv_active_turkey.gone()
-        iv_active_saudi_arabia.gone()
+    fun updateView(languageActive: String) = with(binding) {
+        tvIndonesia.textColor = ContextCompat.getColor(context, R.color.colorBlack)
+        tvEnglish.textColor = ContextCompat.getColor(context, R.color.colorBlack)
+        tvTurkey.textColor = ContextCompat.getColor(context, R.color.colorBlack)
+        tvSaudiArabia.textColor = ContextCompat.getColor(context, R.color.colorBlack)
+        ivActiveIndonesia.gone()
+        ivActiveEnglish.gone()
+        ivActiveTurkey.gone()
+        ivActiveSaudiArabia.gone()
         when {
             languageActive.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
-                tv_indonesia.textColor = ContextCompat.getColor(context, R.color.colorAccent)
-                iv_active_indonesia.visible()
+                tvIndonesia.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                ivActiveIndonesia.visible()
             }
+
             languageActive.contains(LanguagePreference.LANGUAGE_RUSSIAN) -> {
-                tv_russian.textColor = ContextCompat.getColor(context, R.color.colorAccent)
-                iv_active_russian.visible()
+                tvRussian.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                ivActiveRussian.visible()
             }
+
             languageActive.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
-                tv_turkey.textColor = ContextCompat.getColor(context, R.color.colorAccent)
-                iv_active_turkey.visible()
+                tvTurkey.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                ivActiveTurkey.visible()
             }
+
             languageActive.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
-                tv_saudi_arabia.textColor = ContextCompat.getColor(context, R.color.colorAccent)
-                iv_active_saudi_arabia.visible()
+                tvSaudiArabia.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                ivActiveSaudiArabia.visible()
             }
+
             languageActive.contains(LanguagePreference.LANGUAGE_ENGLISH) -> {
-                tv_english.textColor = ContextCompat.getColor(context, R.color.colorAccent)
-                iv_active_english.visible()
+                tvEnglish.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                ivActiveEnglish.visible()
             }
         }
     }

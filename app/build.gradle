@@ -1,28 +1,44 @@
-apply from: "$rootDir/dependencies.gradle"
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'koin'
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.android.application'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-kapt'
+//apply plugin: 'koin'
+//apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.firebase.crashlytics'
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+    id("com.google.firebase.crashlytics")
+    id 'com.google.gms.google-services'
+}
 
 ext.majorVersion = 1
 ext.minorVersion = 4
 ext.patchVersion = 1
 ext.preRelease = ""
 
-//if (new File('sign.gradle').exists()) {
-    apply from: '../sign.gradle'
-//}
+apply from: '../sign.gradle'
+apply from: "../dependencies.gradle"
+apply from: '../variant_filter.gradle'
+
+ext {
+    buildToolsVersion = "30.0.0"
+    minSdkVersion = 21
+    targetSdkVersion = 33
+    compileSdkVersion = 33
+}
 
 android {
-    compileSdkVersion 33
+
+    compileSdk = 34
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.icaali.tasbeeh"
-        minSdkVersion project.ext.minSdkVersion
-        targetSdkVersion project.ext.targetSdkVersion
+        minSdk project.ext.minSdkVersion
+        targetSdk project.ext.targetSdkVersion
         versionCode generateVersionCode()
         versionName generateVersionName()
         vectorDrawables.useSupportLibrary = true
@@ -48,6 +64,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
     flavorDimensions "env"
     productFlavors {
         production {
@@ -69,17 +89,14 @@ android {
             outputFileName = "Tasbeeh-${generateVersionName()}-${variant.flavorName}-${variant.buildType.name}.apk"
         }
     }
-}
-
-androidExtensions {
-    experimental = true
+    namespace 'com.icaali.tasbeeh'
 }
 
 apply from: '../variant_filter.gradle'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'
     testImplementation 'junit:junit:4.12'
@@ -102,15 +119,16 @@ dependencies {
     implementation libraries.playServiceAds
 
     //Dependency Injection
-    implementation libraries.koinCore
-    implementation libraries.koinCoreExt
-    implementation libraries.koinFragment
-    implementation libraries.koinWorkManager
+//    implementation libraries.koinCore
+//    implementation libraries.koinCoreExt
+//    implementation libraries.koinFragment
+//    implementation libraries.koinWorkManager
+    implementation("io.insert-koin:koin-android:3.4.3")
 //    implementation libraries.koinWorkCompose
-    implementation libraries.koinWorkManager
-    implementation libraries.koinScope
-    implementation libraries.koinViewModel
-    implementation libraries.koinAndroidExt
+//    implementation libraries.koinWorkManager
+//    implementation libraries.koinScope
+//    implementation libraries.koinViewModel
+//    implementation libraries.koinAndroidExt
 
     //Rx
     implementation libraries.rxJava2
@@ -139,10 +157,16 @@ dependencies {
     //ViewAnimator
     implementation 'com.github.florent37:viewanimator:1.1.0'
 
-    // Room components
-    implementation "androidx.room:room-ktx:2.4.3"
-    kapt "androidx.room:room-compiler:2.4.3"
-    androidTestImplementation "androidx.room:room-testing:2.4.3"
+    //Architecture Component
+
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation "android.arch.persistence.room:rxjava2:1.1.1"
+    implementation 'androidx.room:room-ktx:2.6.1'
+    ksp "androidx.room:room-compiler:2.6.1"
+
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    implementation "android.arch.lifecycle:compiler:1.1.1"
+    implementation "androidx.paging:paging-runtime:3.2.1"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
@@ -168,7 +192,7 @@ dependencies {
     // Testing
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
-    androidTestImplementation ("androidx.test.espresso:espresso-core:1.0.0", {
+    androidTestImplementation("androidx.test.espresso:espresso-core:1.0.0", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestImplementation "androidx.test.ext:junit:1.1.3"

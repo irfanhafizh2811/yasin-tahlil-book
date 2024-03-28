@@ -4,29 +4,28 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.utils.TextUtils
-import kotlinx.android.synthetic.main.dialog_bottom_confirmation.*
+import com.icaali.tasbeeh.databinding.DialogBottomConfirmationBinding
 
 class ConfirmationDialog(context: Context) : BottomSheetDialog(context) {
 
+    private lateinit var binding: DialogBottomConfirmationBinding
     private var onPositiveListener: (() -> Unit)? = null
 
     init {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.dialog_bottom_confirmation, clContainer, false
-        )
-        setContentView(view)
+        binding = DialogBottomConfirmationBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        btnNegative?.setOnClickListener { dismiss() }
-        btnPositive?.setOnClickListener {
-            onPositiveListener?.invoke()
-            dismiss()
+        with(binding) {
+            btnNegative.setOnClickListener { dismiss() }
+            btnPositive.setOnClickListener {
+                onPositiveListener?.invoke()
+                dismiss()
+            }
+            ivClose.setOnClickListener { dismiss() }
         }
-        ivClose?.setOnClickListener { dismiss() }
     }
 
     fun setText(
@@ -34,9 +33,11 @@ class ConfirmationDialog(context: Context) : BottomSheetDialog(context) {
         positiveText: String = "",
         negativeText: String = ""
     ): ConfirmationDialog {
-        if (messageText.isNotBlank()) tvMessage?.text = messageText
-        if (positiveText.isNotBlank()) btnPositive?.text = positiveText
-        if (negativeText.isNotBlank()) btnNegative?.text = negativeText
+        with(binding) {
+            if (messageText.isNotBlank()) tvMessage.text = messageText
+            if (positiveText.isNotBlank()) btnPositive.text = positiveText
+            if (negativeText.isNotBlank()) btnNegative.text = negativeText
+        }
         return this
     }
 

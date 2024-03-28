@@ -4,12 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.DialogBottomTargetDhikrBinding
 import com.icaali.tasbeeh.view.adapter.TargetDhikrAdapter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.dialog_bottom_target_dhikr.*
 import java.util.concurrent.TimeUnit
 
 class TargetDhikrDialog(
@@ -21,52 +20,53 @@ class TargetDhikrDialog(
         private const val DELAY = 400L
     }
 
+    private lateinit var binding: DialogBottomTargetDhikrBinding
     private val compositeDisposable = CompositeDisposable()
     private val adapter by lazy {
         TargetDhikrAdapter {
-            etTargetDhikr?.setText(it.toString())
+            binding.etTargetDhikr.setText(it.toString())
         }
     }
 
     init {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.dialog_bottom_target_dhikr, clContainer, false
-        )
-        setContentView(view)
+        binding = DialogBottomTargetDhikrBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ivClose?.setOnClickListener { dismiss() }
-        rvTargetDhikr?.adapter = adapter
-        btnCancel?.setOnClickListener {
-            dismiss()
-        }
-        btnSave?.setOnClickListener {
-            val targetCount = etTargetDhikr?.text?.toString().orEmpty()
-            if (targetCount.isNotEmpty()) {
-                onPositiveListener.invoke(targetCount.toInt())
+        with(binding) {
+            ivClose.setOnClickListener { dismiss() }
+            rvTargetDhikr.adapter = adapter
+            btnCancel.setOnClickListener {
                 dismiss()
             }
-        }
-
-        compositeDisposable.addAll(
-            RxTextView.afterTextChangeEvents(etTargetDhikr)
-                .debounce(DELAY, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    val targetCount = it?.editable()?.toString().orEmpty()
-                    adapter.selectedTarget(
-                        if (targetCount.isEmpty()) 0
-                        else targetCount.toInt()
-                    )
+            btnSave.setOnClickListener {
+                val targetCount = etTargetDhikr.text?.toString().orEmpty()
+                if (targetCount.isNotEmpty()) {
+                    onPositiveListener.invoke(targetCount.toInt())
+                    dismiss()
                 }
-        )
+            }
+
+            compositeDisposable.addAll(
+                RxTextView.afterTextChangeEvents(etTargetDhikr)
+                    .debounce(DELAY, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        val targetCount = it?.editable()?.toString().orEmpty()
+                        adapter.selectedTarget(
+                            if (targetCount.isEmpty()) 0
+                            else targetCount.toInt()
+                        )
+                    }
+            )
+        }
     }
 
-    fun show(targetCount: Int) {
+    fun show(targetCount: Int) = with(binding) {
         if (targetCount != 0) {
-            etTargetDhikr?.setText(targetCount.toString())
+            etTargetDhikr.setText(targetCount.toString())
             adapter.selectedTarget(targetCount)
         }
         show()

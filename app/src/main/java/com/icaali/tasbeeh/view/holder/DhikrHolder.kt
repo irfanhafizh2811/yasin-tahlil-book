@@ -2,21 +2,19 @@ package com.icaali.tasbeeh.view.holder
 
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.ItemDhikrBinding
 import com.icaali.tasbeeh.model.Dhikr
 import com.icaali.tasbeeh.utils.Analytic
 import com.icaali.tasbeeh.utils.FontSize
-import com.icaali.tasbeeh.utils.TextUtils
-import kotlinx.android.synthetic.main.item_dhikr.view.*
 
 class DhikrHolder(
-    itemView: View,
-    val analytic: FirebaseAnalytics? = null
-) : RecyclerView.ViewHolder(itemView) {
+    private val binding: ItemDhikrBinding,
+    private val analytic: FirebaseAnalytics? = null
+) : RecyclerView.ViewHolder(binding.root) {
 
     val typeUnit = TypedValue.COMPLEX_UNIT_PX
     var surah: String = ""
@@ -25,14 +23,14 @@ class DhikrHolder(
         const val ALFATIHAH = "Al-Fatihah"
     }
 
-    fun bind(dhikr: Dhikr, fontSize: FontSize): DhikrHolder = with(itemView) {
+    fun bind(dhikr: Dhikr, fontSize: FontSize): DhikrHolder = with(binding) {
         val (surah, prayer, meanInd, _, count) = dhikr
         this@DhikrHolder.surah = surah
         onUITaawudz()
-        tvSurah?.text = surah
-        tvArabic?.text = prayer
-        tvLatin?.text = meanInd
-        tvCount?.apply {
+        tvSurah.text = surah
+        tvArabic.text = prayer
+        tvLatin.text = meanInd
+        tvCount.apply {
             text = count.toString().plus("x")
             isVisible = count > 0
         }
@@ -40,7 +38,7 @@ class DhikrHolder(
         return this@DhikrHolder
     }
 
-    private fun onUITaawudz() = with(itemView) {
+    private fun onUITaawudz() = with(binding) {
         clTaawudz.isVisible = surah.contains(ALFATIHAH)
     }
 
@@ -53,51 +51,51 @@ class DhikrHolder(
         }
     }
 
-    private fun updateSizeSmall() = with(itemView) {
-        val res = context.resources
-        tvSurah?.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_small))
-        tvArabic?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_small))
-        tvLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_small))
-        tvCount?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_small))
+    private fun updateSizeSmall() = with(binding) {
+        val res = root.context.resources
+        tvSurah.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_small))
+        tvArabic.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_small))
+        tvLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_small))
+        tvCount.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_small))
         if (!surah.contains(ALFATIHAH)) return@with
-        tvTaawudz?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_small))
-        tvTaawudzLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_small))
+        tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_small))
+        tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_small))
         log(FontSize.SMALL.name)
     }
 
-    private fun updateSizeRegular() = with(itemView) {
-        val res = context.resources
-        tvSurah?.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_regular))
-        tvArabic?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_regular))
-        tvLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_regular))
-        tvCount?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_regular))
+    private fun updateSizeRegular() = with(binding) {
+        val res = root.context.resources
+        tvSurah.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_regular))
+        tvArabic.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_regular))
+        tvLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_regular))
+        tvCount.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_regular))
         if (!surah.contains(ALFATIHAH)) return@with
-        tvTaawudz?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_regular))
-        tvTaawudzLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_regular))
+        tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_regular))
+        tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_regular))
         log(FontSize.REGULAR.name)
     }
 
-    private fun updateSizeLarge() = with(itemView) {
-        val res = context.resources
-        tvSurah?.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_large))
-        tvArabic?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_large))
-        tvLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_large))
-        tvCount?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_large))
+    private fun updateSizeLarge() = with(binding) {
+        val res = root.context.resources
+        tvSurah.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_large))
+        tvArabic.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_large))
+        tvLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_large))
+        tvCount.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_large))
         if (!surah.contains(ALFATIHAH)) return@with
-        tvTaawudz?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_large))
-        tvTaawudzLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_large))
+        tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_large))
+        tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_large))
         log(FontSize.LARGE.name)
     }
 
-    private fun updateSizeHuge() = with(itemView) {
-        val res = context.resources
-        tvSurah?.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_huge))
-        tvArabic?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_huge))
-        tvLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_huge))
-        tvCount?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_huge))
+    private fun updateSizeHuge() = with(binding) {
+        val res = root.context.resources
+        tvSurah.setTextSize(typeUnit, res.getDimension(R.dimen.font_title_size_huge))
+        tvArabic.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_huge))
+        tvLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_huge))
+        tvCount.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_huge))
         if (!surah.contains(ALFATIHAH)) return@with
-        tvTaawudz?.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_huge))
-        tvTaawudzLatin?.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_huge))
+        tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_huge))
+        tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_huge))
         log(FontSize.HUGE.name)
     }
 

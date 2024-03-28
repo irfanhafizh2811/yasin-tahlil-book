@@ -7,20 +7,18 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import com.github.florent37.viewanimator.ViewAnimator
-import com.icaali.tasbeeh.R
-import com.icaali.tasbeeh.app.TasbeehApp
+import com.icaali.tasbeeh.databinding.ActivitySplashBinding
 import com.icaali.tasbeeh.extension.view.visible
-import com.icaali.tasbeeh.preference.CorePreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.receiver.NotificationReceiver
 import com.icaali.tasbeeh.remote.CoreRemoteConfig
-import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
 import java.util.*
 
 class SplashActivity : BaseActivity() {
 
+    private lateinit var binding: ActivitySplashBinding
     private val coreRemoteConfig by inject<CoreRemoteConfig>()
     private val settingPreference by inject<SettingPreference>()
 
@@ -33,24 +31,27 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         coreRemoteConfig.remoteConfig.fetchAndActivate()
-        setContentView(R.layout.activity_splash)
-        tvBismillah?.visible()
-        ivBismillah?.visible()
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        with(binding){
 
-        ViewAnimator.animate(tvBismillah).apply {
-            fadeIn()
-            duration(ANIMATION_TEXT_DURATION)
-            onStop {
-                startActivity(intentFor<MainActivity>())
-                finish()
-            }
-        }.start()
-        ViewAnimator.animate(ivBismillah).apply {
-            fadeIn()
-            duration(ANIMATION_IMAGE_DURATION)
-        }.start()
+            tvBismillah?.visible()
+            ivBismillah?.visible()
 
-        schedulePushNotification()
+            ViewAnimator.animate(tvBismillah).apply {
+                fadeIn()
+                duration(ANIMATION_TEXT_DURATION)
+                onStop {
+                    startActivity(intentFor<MainActivity>())
+                    finish()
+                }
+            }.start()
+            ViewAnimator.animate(ivBismillah).apply {
+                fadeIn()
+                duration(ANIMATION_IMAGE_DURATION)
+            }.start()
+            schedulePushNotification()
+        }
     }
 
     private fun schedulePushNotification() {

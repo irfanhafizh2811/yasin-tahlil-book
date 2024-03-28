@@ -5,34 +5,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.annotation.DrawableRes
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.icaali.tasbeeh.R
+import com.icaali.tasbeeh.databinding.DialogBottomSurveyBinding
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
-import com.icaali.tasbeeh.utils.TextUtils
-import kotlinx.android.synthetic.main.dialog_bottom_confirmation.*
 
 class SurveyDialog(context: Context) : BottomSheetDialog(context) {
 
+    private lateinit var binding: DialogBottomSurveyBinding
     private var onPositiveListener: (() -> Unit)? = null
     private var onNegativeListener: (() -> Unit)? = null
 
     init {
-        val view = LayoutInflater.from(context).inflate(
-            R.layout.dialog_bottom_survey, clContainer, false
-        )
-        setContentView(view)
+        binding = DialogBottomSurveyBinding.inflate(LayoutInflater.from(context))
+        setContentView(binding.root)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        btnNegative?.setOnClickListener {
-            onNegativeListener?.invoke()
-            dismiss()
+        with(binding) {
+            btnNegative.setOnClickListener {
+                onNegativeListener?.invoke()
+                dismiss()
+            }
+            btnPositive.setOnClickListener {
+                onPositiveListener?.invoke()
+                dismiss()
+            }
+            ivClose.setOnClickListener { dismiss() }
         }
-        btnPositive?.setOnClickListener {
-            onPositiveListener?.invoke()
-            dismiss()
-        }
-        ivClose?.setOnClickListener { dismiss() }
     }
 
     fun setText(
@@ -42,14 +41,16 @@ class SurveyDialog(context: Context) : BottomSheetDialog(context) {
         negativeText: String = "",
         @DrawableRes positiveIcon: Int? = null
     ): SurveyDialog {
-        if (messageText.isNotBlank()) tvTitle?.text = titleText
-        if (messageText.isNotBlank()) tvMessage?.text = messageText
-        if (positiveText.isNotBlank()) btnPositive?.text = positiveText
-        if (negativeText.isNotBlank()) btnNegative?.text = negativeText
-        positiveIcon?.let {
-            btnPositive.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                context.getDrawableCompat(it), null, null, null
-            )
+        with(binding) {
+            if (messageText.isNotBlank()) tvTitle.text = titleText
+            if (messageText.isNotBlank()) tvMessage.text = messageText
+            if (positiveText.isNotBlank()) btnPositive.text = positiveText
+            if (negativeText.isNotBlank()) btnNegative.text = negativeText
+            positiveIcon?.let {
+                btnPositive.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    context.getDrawableCompat(it), null, null, null
+                )
+            }
         }
         return this
     }
