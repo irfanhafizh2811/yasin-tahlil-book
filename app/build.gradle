@@ -16,7 +16,7 @@ plugins {
 
 ext.majorVersion = 1
 ext.minorVersion = 4
-ext.patchVersion = 1
+ext.patchVersion = 2
 ext.preRelease = ""
 
 apply from: '../sign.gradle'
@@ -31,10 +31,7 @@ ext {
 }
 
 android {
-
     compileSdk = 34
-    buildToolsVersion "30.0.3"
-
     defaultConfig {
         applicationId "com.icaali.tasbeeh"
         minSdk project.ext.minSdkVersion
@@ -97,12 +94,10 @@ apply from: '../variant_filter.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.7.9'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.8'
 
     //Android Support Dependencies
     implementation supportDependencies.appCompat
@@ -140,22 +135,11 @@ dependencies {
     implementation libraries.rxBindingPlatformKotlin
     implementation libraries.rxBindingSupportKotlin
 
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:29.3.0')
-    // Declare the dependency for the Analytics library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-analytics'
-    //Firebase
-    implementation 'com.google.firebase:firebase-config:21.0.1'
-    implementation 'com.google.firebase:firebase-database:20.0.3'
-    implementation 'com.google.firebase:firebase-core:20.1.0'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.8'
-
     //Glide
     implementation libraries.glide
 
     //ViewAnimator
-    implementation 'com.github.florent37:viewanimator:1.1.0'
+    implementation 'com.github.florent37:viewanimator:1.1.2'
 
     //Architecture Component
 
@@ -190,14 +174,22 @@ dependencies {
     implementation 'uk.co.samuelwall:material-tap-target-prompt:3.3.2'
 
     // Testing
-    testImplementation "junit:junit:4.12"
-    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.arch.core:core-testing:2.2.0"
     androidTestImplementation("androidx.test.espresso:espresso-core:1.0.0", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation "androidx.test.ext:junit:1.1.3"
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
 
-    implementation 'androidx.work:work-runtime-ktx:2.7.0'
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
+//    implementation("com.google.firebase:firebase-core")
+    implementation("com.google.firebase:firebase-config")
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-database")
 }
 
 private Integer generateVersionCode() {

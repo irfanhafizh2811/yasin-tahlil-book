@@ -20,7 +20,8 @@ class TargetDhikrDialog(
         private const val DELAY = 400L
     }
 
-    private lateinit var binding: DialogBottomTargetDhikrBinding
+    private var binding: DialogBottomTargetDhikrBinding =
+        DialogBottomTargetDhikrBinding.inflate(LayoutInflater.from(context))
     private val compositeDisposable = CompositeDisposable()
     private val adapter by lazy {
         TargetDhikrAdapter {
@@ -29,7 +30,6 @@ class TargetDhikrDialog(
     }
 
     init {
-        binding = DialogBottomTargetDhikrBinding.inflate(LayoutInflater.from(context))
         setContentView(binding.root)
     }
 
@@ -53,6 +53,7 @@ class TargetDhikrDialog(
                 RxTextView.afterTextChangeEvents(etTargetDhikr)
                     .debounce(DELAY, TimeUnit.MILLISECONDS)
                     .observeOn(AndroidSchedulers.mainThread())
+                    .doOnError { e -> e.printStackTrace() }
                     .subscribe {
                         val targetCount = it?.editable()?.toString().orEmpty()
                         adapter.selectedTarget(
