@@ -8,13 +8,11 @@ import android.os.LocaleList
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.databinding.DialogLanguageBinding
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.LanguagePreference
-import com.icaali.tasbeeh.utils.Analytic
 import org.jetbrains.anko.textColor
 import java.util.Locale
 
@@ -22,7 +20,6 @@ class LanguageDialog(
     context: Context,
     val languagePreference: LanguagePreference,
     val localManager: LocaleManager,
-    val analytic: FirebaseAnalytics?
 ) : BottomSheetDialog(context) {
 
     private lateinit var binding: DialogLanguageBinding
@@ -41,40 +38,28 @@ class LanguageDialog(
                     languagePreference.language = LanguagePreference.LANGUAGE_ENGLISH
                     localManager.applicationLocales =
                         LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_ENGLISH))
-                    log(LanguagePreference.LANGUAGE_ENGLISH)
                 }
 
                 language.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
                     languagePreference.language = LanguagePreference.LANGUAGE_INDONESIA
                     localManager.applicationLocales =
                         LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_INDONESIA))
-                    log(LanguagePreference.LANGUAGE_INDONESIA)
                 }
 
                 language.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
                     languagePreference.language = LanguagePreference.LANGUAGE_TURKEY
                     localManager.applicationLocales =
                         LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_TURKEY))
-                    log(LanguagePreference.LANGUAGE_TURKEY)
                 }
 
                 language.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
                     languagePreference.language = LanguagePreference.LANGUAGE_SAUDI_ARABIA
                     localManager.applicationLocales =
                         LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_SAUDI_ARABIA))
-                    log(LanguagePreference.LANGUAGE_SAUDI_ARABIA)
                 }
             }
             dismiss()
         }
-    }
-
-    private fun log(language: String) {
-        val event = FirebaseAnalytics.Event.VIEW_PROMOTION
-        val keyParam = FirebaseAnalytics.Param.CREATIVE_NAME
-        analytic?.logEvent(event, Bundle().apply {
-            putString(keyParam, Analytic.CLICK_LANGUAGE.plus(language))
-        })
     }
 
     fun updateView(languageActive: String) = with(binding) {

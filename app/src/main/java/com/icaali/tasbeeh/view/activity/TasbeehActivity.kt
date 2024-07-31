@@ -24,7 +24,6 @@ import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.preference.ThemesPreference
-import com.icaali.tasbeeh.utils.Analytic
 import com.icaali.tasbeeh.utils.TasbeehConst
 import com.icaali.tasbeeh.view.dialog.*
 import com.icaali.tasbeeh.view.theme.*
@@ -70,7 +69,7 @@ class TasbeehActivity : BaseActivity() {
     private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
     private val confirmationDialog by lazy { ConfirmationDialog(this) }
     private val themesPickDialog by lazy { ThemesDialog(this) }
-    private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference, firebaseAnalytics) }
+    private val moreDialog by lazy { MoreTasbeehDialog(this, settingPreference) }
     private val targetChangeInformationDialog by lazy {
         TargetChangeInformationDialog(
             this,
@@ -81,7 +80,6 @@ class TasbeehActivity : BaseActivity() {
         TargetDhikrDialog(this) {
             counterPreference.target = it
             binding.tvTargetCounter.text = it.toString()
-            logClick(Analytic.TARGET_DHIKR.plus(it.toString()))
             if (settingPreference.showPopupAgain)
                 targetChangeInformationDialog.show()
         }
@@ -128,7 +126,6 @@ class TasbeehActivity : BaseActivity() {
                             .duration(THROTTLE_FIRST)
                             .start()
                         count()
-                        logCount(intent?.getStringExtra(TASBEEH_LATIN_EXTRA) ?: "")
                     }
             )
             mDisposable.addAll(observeGuide(DHIKR_SECOND_DELAY, guidePref) {
@@ -191,7 +188,6 @@ class TasbeehActivity : BaseActivity() {
         themesPickDialog.apply {
             setItemThemes(themes, theme?.themeType() ?: ThemeType.DEFAULT)
             setOnPositiveListener { themeSelected ->
-                logClick(themeSelected.themeType().name)
                 themesPreference.type = themeSelected.themeType()
                 selectedTheme()
             }
@@ -307,7 +303,6 @@ class TasbeehActivity : BaseActivity() {
             }
         }
         setTextCounter(0)
-        logClick(Analytic.CLICK_RESET_DHIKR)
     }
 
     private fun count() {

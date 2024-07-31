@@ -1,19 +1,15 @@
 package com.icaali.tasbeeh.view.holder
 
-import android.os.Bundle
 import android.util.TypedValue
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.databinding.ItemDhikrBinding
 import com.icaali.tasbeeh.model.Dhikr
-import com.icaali.tasbeeh.utils.Analytic
 import com.icaali.tasbeeh.utils.FontSize
 
 class DhikrHolder(
     private val binding: ItemDhikrBinding,
-    private val analytic: FirebaseAnalytics? = null
 ) : RecyclerView.ViewHolder(binding.root) {
 
     val typeUnit = TypedValue.COMPLEX_UNIT_PX
@@ -60,7 +56,6 @@ class DhikrHolder(
         if (!surah.contains(ALFATIHAH)) return@with
         tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_small))
         tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_small))
-        log(FontSize.SMALL.name)
     }
 
     private fun updateSizeRegular() = with(binding) {
@@ -72,7 +67,6 @@ class DhikrHolder(
         if (!surah.contains(ALFATIHAH)) return@with
         tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_regular))
         tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_regular))
-        log(FontSize.REGULAR.name)
     }
 
     private fun updateSizeLarge() = with(binding) {
@@ -84,7 +78,6 @@ class DhikrHolder(
         if (!surah.contains(ALFATIHAH)) return@with
         tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_large))
         tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_large))
-        log(FontSize.LARGE.name)
     }
 
     private fun updateSizeHuge() = with(binding) {
@@ -96,14 +89,5 @@ class DhikrHolder(
         if (!surah.contains(ALFATIHAH)) return@with
         tvTaawudz.setTextSize(typeUnit, res.getDimension(R.dimen.font_arabic_size_huge))
         tvTaawudzLatin.setTextSize(typeUnit, res.getDimension(R.dimen.font_mean_size_huge))
-        log(FontSize.HUGE.name)
-    }
-
-    private fun log(size: String) {
-        val event = FirebaseAnalytics.Event.VIEW_PROMOTION
-        val keyParam = FirebaseAnalytics.Param.CREATIVE_NAME
-        analytic?.logEvent(event, Bundle().apply {
-            putString(keyParam, Analytic.CLICK_FONT_SIZE.plus(size))
-        })
     }
 }

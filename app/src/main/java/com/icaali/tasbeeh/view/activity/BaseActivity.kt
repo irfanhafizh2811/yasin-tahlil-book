@@ -17,7 +17,6 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.icaali.tasbeeh.app.BuildConfig
 import com.icaali.tasbeeh.extension.activty.hasPermissions
 import com.icaali.tasbeeh.extension.ads.loadAd
@@ -43,7 +42,6 @@ open class BaseActivity : AppCompatActivity() {
     //---------------------- End Access Protected ----------------------
 
     //----------------------   Access Public   ----------------------
-    var firebaseAnalytics: FirebaseAnalytics? = null
     var localeManager: LocaleManager? = null
     //---------------------- End Access Public ----------------------
 
@@ -56,14 +54,13 @@ open class BaseActivity : AppCompatActivity() {
         }
         requestConfiguration = when (isTestAdmob()) {
             true -> {
-                val deviceId = "F479D985133C6B3E3794DD9D1EF08219"
                 RequestConfiguration.Builder()
-                    .setTestDeviceIds(listOf(deviceId))
                     .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
                     .setTagForUnderAgeOfConsent(RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_FALSE)
                     .setTagForChildDirectedTreatment(RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_FALSE)
                     .build()
             }
+
             else -> {
                 RequestConfiguration.Builder()
                     .setMaxAdContentRating(RequestConfiguration.MAX_AD_CONTENT_RATING_G)
@@ -84,8 +81,6 @@ open class BaseActivity : AppCompatActivity() {
                 )
             )
         ) {
-            firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-            firebaseAnalytics?.setUserId(TextUtils.NA)
         }
     }
 
@@ -105,6 +100,7 @@ open class BaseActivity : AppCompatActivity() {
                     mInterstitialAd?.show(this)
                 }
             }
+
             else -> {
                 if (isProductionRelease())
                     loadAd(this@BaseActivity) {
@@ -135,6 +131,7 @@ open class BaseActivity : AppCompatActivity() {
                     true -> {
                         loadAdMobTest(this@BaseActivity, getAdBannerSize()) {}
                     }
+
                     else -> {
                         if (isProductionRelease())
                             loadAdMob(this@BaseActivity, getAdBannerSize()) {}
@@ -156,10 +153,12 @@ open class BaseActivity : AppCompatActivity() {
                 this,
                 adWidth
             )
+
             Configuration.ORIENTATION_LANDSCAPE -> AdSize.getLandscapeAnchoredAdaptiveBannerAdSize(
                 this,
                 adWidth
             )
+
             else -> AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
                 this,
                 adWidth

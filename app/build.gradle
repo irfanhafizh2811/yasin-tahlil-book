@@ -54,7 +54,6 @@ android {
             signingConfig signingConfigs.release
             debuggable false
             minifyEnabled true
-            zipAlignEnabled true
             shrinkResources true
             crunchPngs true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -111,19 +110,21 @@ dependencies {
     implementation libraries.gson
 
     //Ads
-    implementation libraries.playServiceAds
+//    implementation libraries.playServiceAds
+    implementation("com.google.android.gms:play-services-ads:23.2.0")
+
 
     //Dependency Injection
 //    implementation libraries.koinCore
 //    implementation libraries.koinCoreExt
 //    implementation libraries.koinFragment
 //    implementation libraries.koinWorkManager
-    implementation("io.insert-koin:koin-android:3.4.3")
 //    implementation libraries.koinWorkCompose
 //    implementation libraries.koinWorkManager
 //    implementation libraries.koinScope
 //    implementation libraries.koinViewModel
 //    implementation libraries.koinAndroidExt
+    implementation("io.insert-koin:koin-android:3.4.3")
 
     //Rx
     implementation libraries.rxJava2
@@ -184,9 +185,7 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
 
     // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
-    implementation("com.google.firebase:firebase-analytics")
-//    implementation("com.google.firebase:firebase-core")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-config")
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-database")

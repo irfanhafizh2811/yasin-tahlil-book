@@ -57,7 +57,6 @@ fun AdView.loadAdMobTest(
 ) {
     try {
         adUnitId = context.getString(R.string.id_unit_banner_sample_test)
-        val deviceId = "3200cbcb466bb599"
         val extras = Bundle()
         extras.putString("max_ad_content_rating", "G")
         val adRequest = AdRequest.Builder()

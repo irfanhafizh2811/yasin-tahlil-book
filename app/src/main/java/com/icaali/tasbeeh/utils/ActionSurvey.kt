@@ -1,6 +1,6 @@
 package com.icaali.tasbeeh.utils
 
-object Analytic {
+object ActionSurvey {
 
     const val TARGET_DHIKR = "TARGET_DHIKR : "
 

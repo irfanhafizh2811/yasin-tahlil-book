@@ -1,7 +1,7 @@
 package com.icaali.tasbeeh.view.activity
 
 import com.icaali.tasbeeh.preference.ThemesPreference
-import com.icaali.tasbeeh.utils.Analytic
+import com.icaali.tasbeeh.utils.ActionSurvey
 import com.icaali.tasbeeh.view.dialog.SurveyDialog
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeType
@@ -24,11 +24,10 @@ fun TasbeehActivity.createThemeSurvey() = SurveyDialog(this).apply {
         positiveText = "Like",
         negativeText = "Dislike"
     )
-    setOnPositiveListener { inputSurveyTheme(Analytic.LIKE_THEME_FULL_BACKGROUND) }
-    setOnNegativeListener { inputSurveyTheme(Analytic.DISLIKE_THEME_FULL_BACKGROUND) }
+    setOnPositiveListener { inputSurveyTheme(ActionSurvey.LIKE_THEME_FULL_BACKGROUND) }
+    setOnNegativeListener { inputSurveyTheme(ActionSurvey.DISLIKE_THEME_FULL_BACKGROUND) }
 }
 
 fun TasbeehActivity.inputSurveyTheme(log: String) {
-    logClick(log)
     themesPreference.hasThemeSurvey = false
 }

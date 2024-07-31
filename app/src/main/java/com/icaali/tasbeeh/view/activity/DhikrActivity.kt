@@ -51,7 +51,6 @@ class DhikrActivity : BaseActivity() {
             super.onPageSelected(position)
             currentPage = position
             onViewPageChanged()
-            trackCompleteAnalytic()
         }
     }
 
@@ -106,7 +105,6 @@ class DhikrActivity : BaseActivity() {
         with(viewPagerDhikr) {
             adapter = dhikrAdapter.apply {
                 fontSize = settingPreference.fontSize
-                analytics = firebaseAnalytics
             }
             offscreenPageLimit = 1
             registerOnPageChangeCallback(onPageChangeCallback())
@@ -187,10 +185,5 @@ class DhikrActivity : BaseActivity() {
                 DhikrCompleteActivity.DHIKR_INTENT_EXTRA to isEvening
             )
         )
-    }
-
-    private fun trackCompleteAnalytic() {
-        if (!hasNext() && isEvening) logSelectContent(R.string.analytic_evening_complete)
-        if (!hasNext() && !isEvening) logSelectContent(R.string.analytic_morning_complete)
     }
 }

@@ -16,7 +16,6 @@ import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
 import com.icaali.tasbeeh.preference.LanguagePreference
 import com.icaali.tasbeeh.preference.SettingPreference
-import com.icaali.tasbeeh.utils.Analytic
 import com.icaali.tasbeeh.utils.TasbeehConst
 import com.icaali.tasbeeh.view.adapter.TasbeehAdapter
 import com.icaali.tasbeeh.view.dialog.AddCustomDialog
@@ -53,7 +52,6 @@ class MainActivity : BaseActivity() {
 
     private val dhikrAdapter by lazy {
         TasbeehAdapter {
-            logSelectContent(it.latin)
             startActivityTasbeeh(it)
         }
     }
@@ -65,23 +63,18 @@ class MainActivity : BaseActivity() {
         with(binding) {
 
             cvSubhanallah?.setOnClickListener {
-                logSelectContent(getString(R.string.text_latin_subhanallah))
                 startActivityTasbeeh(TasbeehConst.SUBHANALLAH)
             }
             cvAlhamdulillah?.setOnClickListener {
-                logSelectContent(getString(R.string.text_latin_alhamdulillah))
                 startActivityTasbeeh(TasbeehConst.ALHAMDULILLAH)
             }
             cvAllahuAkbar?.setOnClickListener {
-                logSelectContent(getString(R.string.text_latin_allahu_akbar))
                 startActivityTasbeeh(TasbeehConst.ALLAHU_AKBAR)
             }
             cvAstaghfirullah?.setOnClickListener {
-                logSelectContent(getString(R.string.text_latin_astaghfirullah))
                 startActivityTasbeeh(TasbeehConst.ASTAGHFIRULLAH)
             }
             cvLaailaahaillallah?.setOnClickListener {
-                logSelectContent(getString(R.string.text_latin_laailaahaillallah))
                 startActivityTasbeeh(TasbeehConst.LAILAHAILALLAH)
             }
             rvAddDhikr.apply {
@@ -92,7 +85,6 @@ class MainActivity : BaseActivity() {
 
             cvAddDhikr?.setOnClickListener {
                 addCustomDialog.setOnPositiveListener {
-                    logAdd(it.latin)
                     dhikrViewModel.insert(it)
                     if (!hasShownGuide) loadAdMobInterstitial()
                 }.show()
@@ -125,7 +117,6 @@ class MainActivity : BaseActivity() {
                             MoreDialog.Menu.LANGUAGE -> showLanguageDialog()
                             MoreDialog.Menu.RATING_AND_REVIEW -> {
                                 openPlaystore(packageName)
-                                logClick(Analytic.CLICK_RATING_AND_REVIEW)
                             }
 
                             MoreDialog.Menu.SHARE -> shareMyDhikr()
@@ -147,8 +138,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onStartDhikrActivity(isMorning: Boolean) {
-        if (isMorning) logSelectContent(R.string.analytic_morning)
-        else logSelectContent(R.string.analytic_evening)
         startActivity(intentFor<DhikrActivity>(DhikrActivity.DHIKR_INTENT_EXTRA to isMorning))
     }
 
@@ -159,7 +148,7 @@ class MainActivity : BaseActivity() {
 
     private fun showLanguageDialog() {
         localeManager?.let {
-            LanguageDialog(this, languagePreference, it, firebaseAnalytics).show()
+            LanguageDialog(this, languagePreference, it).show()
         }
     }
 
@@ -171,7 +160,6 @@ class MainActivity : BaseActivity() {
             putExtra(Intent.EXTRA_TEXT, shareText)
         }
         startActivity(Intent.createChooser(shareIntent, getString(R.string.label_share_text)))
-        logClick(Analytic.CLICK_SHARE_APP)
     }
 
     private fun openInstagramMyDhikr() {
@@ -189,7 +177,8 @@ class MainActivity : BaseActivity() {
                 builder.intent.setPackage(CHROME_PACKAGE_NAME)
             }
         }
-        builder.launchUrl(this, builder.intent.data)
-        logClick(Analytic.CLICK_DIRECT_INSTAGRAM)
+        builder.intent.data?.let { uri ->
+            builder.launchUrl(this, uri)
+        }
     }
 }

@@ -33,7 +33,6 @@ class DhikrCompleteActivity : BaseActivity() {
         with(binding) {
             onUIView()
             loadBanner(adViewContainer)
-            trackCompleteAnalytic()
         }
     }
 
@@ -62,10 +61,5 @@ class DhikrCompleteActivity : BaseActivity() {
         text = pray
         textColor = if (!isEvening) getColorCompat(R.color.colorAccentMorningDhikr)
         else getColorCompat(R.color.colorAccentEveningDhikr)
-    }
-
-    private fun trackCompleteAnalytic() {
-        if (isEvening) logSelectContent(R.string.analytic_evening_pray)
-        if (!isEvening) logSelectContent(R.string.analytic_morning_pray)
     }
 }
