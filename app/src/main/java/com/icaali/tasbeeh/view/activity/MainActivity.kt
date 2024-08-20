@@ -11,6 +11,7 @@ import com.google.android.gms.ads.MobileAds
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.databinding.ActivityMainBinding
 import com.icaali.tasbeeh.extension.activty.openPlaystore
+import com.icaali.tasbeeh.extension.common.clazz
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.CounterPreference
@@ -23,7 +24,6 @@ import com.icaali.tasbeeh.view.dialog.GuideMainDialog
 import com.icaali.tasbeeh.view.dialog.LanguageDialog
 import com.icaali.tasbeeh.view.dialog.MoreDialog
 import com.icaali.tasbeeh.vm.DhikrViewModel
-import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -138,7 +138,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onStartDhikrActivity(isMorning: Boolean) {
-        startActivity(intentFor<DhikrActivity>(DhikrActivity.DHIKR_INTENT_EXTRA to isMorning))
+        val intent = Intent(this, clazz<DhikrActivity>())
+        intent.putExtra(DhikrActivity.DHIKR_INTENT_EXTRA, isMorning)
     }
 
     override fun onResume() {

@@ -1,12 +1,12 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.databinding.ActivityDhikrCompleteBinding
+import com.icaali.tasbeeh.extension.common.clazz
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.textColor
 import java.util.Random
 
 class DhikrCompleteActivity : BaseActivity() {
@@ -48,7 +48,7 @@ class DhikrCompleteActivity : BaseActivity() {
         btnAmin.setOnClickListener {
             loadAdMobInterstitial()
             finishAffinity()
-            startActivity<MainActivity>()
+            startActivity(Intent(this@DhikrCompleteActivity, clazz<MainActivity>()))
         }
         ivPrayer.setImageDrawable(
             if (!isEvening) getDrawableCompat(R.drawable.ic_footer_pray_morning)
@@ -59,7 +59,9 @@ class DhikrCompleteActivity : BaseActivity() {
 
     private fun onUIPrayer() = with(binding.tvPrayer) {
         text = pray
-        textColor = if (!isEvening) getColorCompat(R.color.colorAccentMorningDhikr)
-        else getColorCompat(R.color.colorAccentEveningDhikr)
+        setTextColor(
+            if (!isEvening) getColorCompat(R.color.colorAccentMorningDhikr)
+            else getColorCompat(R.color.colorAccentEveningDhikr)
+        )
     }
 }

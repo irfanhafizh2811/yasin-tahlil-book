@@ -43,7 +43,7 @@ class TasbeehRepository(private val dhikrDao: DhikrDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun getDhikrs() {
-        dhikrDao.getDhikrs()
+    suspend fun getDhikrs(): Flow<List<Tasbeeh>> {
+        return dhikrDao.getDhikrs()
     }
 }

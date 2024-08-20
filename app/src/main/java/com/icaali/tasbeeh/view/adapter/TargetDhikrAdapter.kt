@@ -8,8 +8,6 @@ import com.icaali.tasbeeh.databinding.ItemTargetDhikrBinding
 import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.model.TargetDhikr
-import org.jetbrains.anko.backgroundDrawable
-import org.jetbrains.anko.textColor
 
 class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<TargetDhikrAdapter.TargetDhikrViewHolder>() {
@@ -43,8 +41,8 @@ class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
         private fun selected() {
             with(binding) {
                 tvTargetDhikr.run {
-                    backgroundDrawable = context.getDrawableCompat(R.drawable.bg_btn_negative)
-                    textColor = context.getColorCompat(android.R.color.white)
+                    setBackgroundResource(R.drawable.bg_btn_negative)
+                    setTextColor(context.getColorCompat(android.R.color.white))
                 }
             }
         }
@@ -52,8 +50,8 @@ class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
         private fun unselected() {
             with(binding) {
                 tvTargetDhikr.run {
-                    backgroundDrawable = context.getDrawableCompat(R.drawable.bg_unselected_grey)
-                    textColor = context.getColorCompat(android.R.color.black)
+                    setBackgroundResource(R.drawable.bg_unselected_grey)
+                    setTextColor(context.getColorCompat(android.R.color.black))
                 }
             }
         }
@@ -61,7 +59,7 @@ class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TargetDhikrViewHolder {
-        binding = ItemTargetDhikrBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ItemTargetDhikrBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TargetDhikrViewHolder(binding) { targetCount ->
             selectedTarget(targetCount)
             onTargetClickListener.invoke(targetCount)

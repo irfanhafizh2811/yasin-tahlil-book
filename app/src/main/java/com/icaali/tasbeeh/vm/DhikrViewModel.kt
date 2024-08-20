@@ -3,6 +3,8 @@ package com.icaali.tasbeeh.vm
 import androidx.lifecycle.*
 import com.icaali.tasbeeh.database.table.Tasbeeh
 import com.icaali.tasbeeh.repository.TasbeehRepository
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class DhikrViewModel(private val repository: TasbeehRepository) : ViewModel() {

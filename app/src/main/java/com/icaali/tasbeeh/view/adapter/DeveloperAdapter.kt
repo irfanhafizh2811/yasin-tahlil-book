@@ -31,7 +31,7 @@ class DeveloperAdapter(private val onItemClickListener: (Application) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeveloperVH {
-        binding = ItemApplicationBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ItemApplicationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DeveloperVH(onItemClickListener, binding)
     }
 

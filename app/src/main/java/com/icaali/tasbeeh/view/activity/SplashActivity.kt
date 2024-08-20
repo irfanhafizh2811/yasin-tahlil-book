@@ -12,11 +12,11 @@ import androidx.annotation.RequiresApi
 import com.github.florent37.viewanimator.ViewAnimator
 import com.icaali.tasbeeh.databinding.ActivitySplashBinding
 import com.icaali.tasbeeh.extension.activty.hasPermissions
+import com.icaali.tasbeeh.extension.common.clazz
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.receiver.NotificationReceiver
 import com.icaali.tasbeeh.remote.CoreRemoteConfig
-import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
 import java.util.*
 
@@ -61,7 +61,7 @@ class SplashActivity : BaseActivity() {
                 fadeIn()
                 duration(ANIMATION_TEXT_DURATION)
                 onStop {
-                    startActivity(intentFor<MainActivity>())
+                    startActivity(Intent(this@SplashActivity, clazz<MainActivity>()))
                     finish()
                 }
             }.start()

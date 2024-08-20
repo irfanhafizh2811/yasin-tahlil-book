@@ -11,6 +11,7 @@ class SettingPreference(val corePreference: CorePreference) {
         private const val NOTIFICATION = "notification"
         private const val TIME_NOTIFICATION = "time_notification"
         private const val FONT_SIZE = "font_size"
+        private const val HAS_RATING = "has_rating"
     }
 
     var vibrate: Boolean
@@ -28,6 +29,10 @@ class SettingPreference(val corePreference: CorePreference) {
     var notification: Boolean
         set(value) = corePreference.setBoolean(NOTIFICATION, value)
         get() = corePreference.getBoolean(NOTIFICATION, true)
+
+    var noHasSubmitRating: Boolean
+        set(value) = corePreference.setBoolean(HAS_RATING, value)
+        get() = corePreference.getBoolean(HAS_RATING, true)
 
     var timeNotification: Long
         set(value) = corePreference.setLong(TIME_NOTIFICATION, value)

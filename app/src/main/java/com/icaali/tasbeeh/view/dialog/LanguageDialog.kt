@@ -13,7 +13,6 @@ import com.icaali.tasbeeh.databinding.DialogLanguageBinding
 import com.icaali.tasbeeh.extension.view.gone
 import com.icaali.tasbeeh.extension.view.visible
 import com.icaali.tasbeeh.preference.LanguagePreference
-import org.jetbrains.anko.textColor
 import java.util.Locale
 
 class LanguageDialog(
@@ -63,37 +62,37 @@ class LanguageDialog(
     }
 
     fun updateView(languageActive: String) = with(binding) {
-        tvIndonesia.textColor = ContextCompat.getColor(context, R.color.colorBlack)
-        tvEnglish.textColor = ContextCompat.getColor(context, R.color.colorBlack)
-        tvTurkey.textColor = ContextCompat.getColor(context, R.color.colorBlack)
-        tvSaudiArabia.textColor = ContextCompat.getColor(context, R.color.colorBlack)
+        tvIndonesia.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
+        tvEnglish.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
+        tvTurkey.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
+        tvSaudiArabia.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
         ivActiveIndonesia.gone()
         ivActiveEnglish.gone()
         ivActiveTurkey.gone()
         ivActiveSaudiArabia.gone()
         when {
             languageActive.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
-                tvIndonesia.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                tvIndonesia.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
                 ivActiveIndonesia.visible()
             }
 
             languageActive.contains(LanguagePreference.LANGUAGE_RUSSIAN) -> {
-                tvRussian.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                tvRussian.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
                 ivActiveRussian.visible()
             }
 
             languageActive.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
-                tvTurkey.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                tvTurkey.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
                 ivActiveTurkey.visible()
             }
 
             languageActive.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
-                tvSaudiArabia.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                tvSaudiArabia.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
                 ivActiveSaudiArabia.visible()
             }
 
             languageActive.contains(LanguagePreference.LANGUAGE_ENGLISH) -> {
-                tvEnglish.textColor = ContextCompat.getColor(context, R.color.colorAccent)
+                tvEnglish.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
                 ivActiveEnglish.visible()
             }
         }

@@ -16,7 +16,7 @@ class DhikrAdapter : RecyclerView.Adapter<DhikrHolder>() {
     var dhikrHolder: DhikrHolder? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DhikrHolder {
-        binding = ItemDhikrBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ItemDhikrBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DhikrHolder(binding)
     }
 

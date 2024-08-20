@@ -20,7 +20,7 @@ class TasbeehHolder(private val binding: ItemTasbeehBinding) :
 
     companion object {
         fun create(parent: ViewGroup): TasbeehHolder {
-            val binding = ItemTasbeehBinding.inflate(LayoutInflater.from(parent.context))
+            val binding = ItemTasbeehBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return TasbeehHolder(binding)
         }
     }

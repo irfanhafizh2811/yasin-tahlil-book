@@ -11,7 +11,6 @@ import com.icaali.tasbeeh.extension.context.getColorCompat
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.view.theme.Theme
 import com.icaali.tasbeeh.view.theme.ThemeType
-import org.jetbrains.anko.textColor
 
 class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
     RecyclerView.Adapter<ThemeAdapter.ThemeVH>() {
@@ -47,7 +46,7 @@ class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
                 )
                 tvTheme.run {
                     typeface = Typeface.DEFAULT_BOLD
-                    textColor = context.getColorCompat(R.color.themeSelected)
+                    setTextColor(context.getColorCompat(R.color.themeSelected))
                 }
             }
         }
@@ -59,14 +58,14 @@ class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
                 )
                 tvTheme.run {
                     typeface = Typeface.DEFAULT
-                    textColor = context.getColorCompat(R.color.themeUnselected)
+                    setTextColor(context.getColorCompat(R.color.themeUnselected))
                 }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeVH {
-        binding = ItemThemeBinding.inflate(LayoutInflater.from(parent.context))
+        binding = ItemThemeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ThemeVH(onItemClickListener, binding)
     }
 

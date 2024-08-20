@@ -1,24 +1,23 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.LocaleList
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.database.table.Tasbeeh
+import com.icaali.tasbeeh.extension.common.clazz
 import com.icaali.tasbeeh.extension.context.getDrawableCompat
 import com.icaali.tasbeeh.preference.LanguagePreference
 import com.icaali.tasbeeh.utils.TasbeehConst
-import org.jetbrains.anko.intentFor
 import java.util.Locale
 
 fun MainActivity.startActivityTasbeeh(tasbeeh: Tasbeeh) {
-    startActivity(
-        intentFor<TasbeehActivity>(
-            TasbeehActivity.TYPE_EXTRA to TasbeehConst.CUSTOM,
-            TasbeehActivity.TASBEEH_LATIN_EXTRA to tasbeeh.latin,
-            TasbeehActivity.TASBEEH_DHIKR_EXTRA to tasbeeh
-        )
-    )
+    val intent = Intent(this, clazz<TasbeehActivity>())
+    intent.putExtra(TasbeehActivity.TYPE_EXTRA, TasbeehConst.CUSTOM)
+    intent.putExtra(TasbeehActivity.TASBEEH_LATIN_EXTRA, tasbeeh.latin)
+    intent.putExtra(TasbeehActivity.TASBEEH_DHIKR_EXTRA_ID, tasbeeh.id)
+    startActivity(intent)
 }
 
 fun MainActivity.startActivityTasbeeh(type: String) {
@@ -38,10 +37,9 @@ fun MainActivity.startActivityTasbeeh(type: String) {
         TasbeehConst.LAILAHAILALLAH -> getString(R.string.text_latin_laailaahaillallah)
         else -> getString(R.string.text_latin_subhanallah)
     }
-    val intent = intentFor<TasbeehActivity>(
-        TasbeehActivity.TYPE_EXTRA to typeExtra,
-        TasbeehActivity.TASBEEH_LATIN_EXTRA to latin
-    )
+    val intent = Intent(this, clazz<TasbeehActivity>())
+    intent.putExtra(TasbeehActivity.TYPE_EXTRA, typeExtra)
+    intent.putExtra(TasbeehActivity.TASBEEH_LATIN_EXTRA, latin)
     startActivity(intent)
 }
 
@@ -67,18 +65,22 @@ fun MainActivity.setLanguage() {
                 localeManager?.applicationLocales =
                     LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_ENGLISH))
             }
+
             languagePreference.language.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
                 localeManager?.applicationLocales =
                     LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_TURKEY))
             }
+
             languagePreference.language.contains(LanguagePreference.LANGUAGE_RUSSIAN) -> {
                 localeManager?.applicationLocales =
                     LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_RUSSIAN))
             }
+
             languagePreference.language.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
                 localeManager?.applicationLocales =
                     LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_SAUDI_ARABIA))
             }
+
             languagePreference.language.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
                 localeManager?.applicationLocales =
                     LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_INDONESIA))
@@ -91,18 +93,23 @@ fun MainActivity.getIcon(tasbeeh: String): Drawable? = when (tasbeeh) {
     TasbeehConst.SUBHANALLAH -> getDrawableCompat(
         R.drawable.ic_subhanallah, android.R.color.black
     )
+
     TasbeehConst.ALHAMDULILLAH -> getDrawableCompat(
         R.drawable.ic_alhamdulillah, android.R.color.black
     )
+
     TasbeehConst.ALLAHU_AKBAR -> getDrawableCompat(
         R.drawable.ic_allahu_akbar, android.R.color.black
     )
+
     TasbeehConst.ASTAGHFIRULLAH -> getDrawableCompat(
         R.drawable.ic_astagfirllah, android.R.color.black
     )
+
     TasbeehConst.LAILAHAILALLAH -> getDrawableCompat(
         R.drawable.ic_laailaahaillallah, android.R.color.black
     )
+
     else -> getDrawableCompat(
         R.drawable.ic_subhanallah, android.R.color.black
     )

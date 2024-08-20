@@ -10,7 +10,7 @@ import androidx.annotation.StringRes
 import androidx.core.app.ActivityCompat.startPostponedEnterTransition
 import com.icaali.tasbeeh.extension.context.getCurrentActivity
 import com.google.android.material.snackbar.Snackbar
-import org.jetbrains.anko.contentView
+import com.icaali.tasbeeh.extension.activty.getContentView
 
 /**
  * Created by irfanbrader on 9/7/17.
@@ -66,7 +66,7 @@ inline fun View.showSnackbar(
 fun Snackbar.showCompat(context: Context) {
     val curActivity = context.getCurrentActivity()
     if (!this.isShownOrQueued) {
-        curActivity?.contentView?.viewTreeObserver?.let {
+        curActivity?.getContentView()?.viewTreeObserver?.let {
             it.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     this@showCompat.show()

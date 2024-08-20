@@ -12,6 +12,7 @@ import android.os.Vibrator
 import androidx.core.view.isVisible
 import com.github.florent37.viewanimator.ViewAnimator
 import com.google.android.gms.ads.MobileAds
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.icaali.tasbeeh.R
 import com.icaali.tasbeeh.database.table.Tasbeeh
 import com.icaali.tasbeeh.databinding.ActivityTasbeehBinding
@@ -30,23 +31,11 @@ import com.icaali.tasbeeh.view.theme.*
 import com.icaali.tasbeeh.vm.DhikrViewModel
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import org.jetbrains.anko.backgroundDrawable
-import org.jetbrains.anko.textColor
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 class TasbeehActivity : BaseActivity() {
-
-    companion object {
-        const val MAX_VOLUME = 15F
-        const val THROTTLE_FIRST = 100L
-        const val TYPE_EXTRA = "TYPE_EXTRA"
-        const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
-        const val TASBEEH_DHIKR_EXTRA = "TASBEEH_DHIKR_EXTRA"
-        const val VIBRATE_TARGET_DURATION = 2000L
-        const val VIBRATE_CLICK_DURATION = 500L
-    }
 
     private lateinit var binding: ActivityTasbeehBinding
 
@@ -57,6 +46,9 @@ class TasbeehActivity : BaseActivity() {
     //---------------------------------- End Dependency Inject ----------------------------------
 
     //------------------------------------   Section Lazy   ------------------------------------
+    private val reviewManager by lazy {
+        ReviewManagerFactory.create(this)
+    }
     private val tvCounters by lazy {
         listOf(
             binding.tvCounter1,
@@ -151,8 +143,15 @@ class TasbeehActivity : BaseActivity() {
     }
 
     private fun setViewTypeCustom() {
-//        if (isCustomType())
-//            intent?.getParcelableExtra<Tasbeeh>(TASBEEH_DHIKR_EXTRA)?.let { dhikr = it }
+        if (isCustomType()) {
+            dhikrViewModel.dhikrs.observe(this) { listTasbeeh ->
+                if (listTasbeeh.isEmpty()) return@observe
+                val id = intent.getStringExtra(TASBEEH_DHIKR_EXTRA_ID)
+                listTasbeeh.find { it.id == id }?.let { tasbeeh ->
+                    dhikr = tasbeeh
+                }
+            }
+        }
     }
 
     private fun initTasbeeh() {
@@ -229,20 +228,20 @@ class TasbeehActivity : BaseActivity() {
         theme?.run {
             if (themesPreference.anyNewContent()) updateNewThemePref(this, themesPreference)
             if (!isCustomType()) ivDzikir.setImageDrawable(getDzikirImage())
-            clRootLayout.backgroundDrawable = getDrawableCompat(backgroundScreenImageRes())
+            clRootLayout.setBackgroundResource(backgroundScreenImageRes())
             ivSkin.setImageDrawable(getDrawableCompat(backgroundDigitalImageRes()))
             fabCount.setImageDrawable(getDrawableCompat(counterImageRes()))
             fabReset.setImageDrawable(getDrawableCompat(resetImageRes()))
             ivCounterSkinBox.setImageDrawable(getDrawableCompat(outputImageRes()))
-            tvHintCounter.textColor = getColorCompat(outputHintColorRes())
+            tvHintCounter.setTextColor(getColorCompat(outputHintColorRes()))
 
             ivBack.setImageDrawable(getDrawableCompat(R.drawable.ic_arrow_back, tintColorAccent()))
             ivMore.setImageDrawable(getDrawableCompat(R.drawable.ic_more_new, tintColorAccent()))
             ivThemes.setImageDrawable(getDrawableCompat(R.drawable.ic_theme, tintColorAccent()))
-            tvDzikir.textColor = getColorCompat(tintColorAccent())
+            tvDzikir.setTextColor(getColorCompat(tintColorAccent()))
 
             ivTargetCounter.setImageDrawable(getDrawableCompat(backgroundTargetCounterImageRes()))
-            tvTargetCounter.textColor = getColorCompat(outputHintColorRes())
+            tvTargetCounter.setTextColor(getColorCompat(outputHintColorRes()))
         }
     }
 
@@ -303,6 +302,7 @@ class TasbeehActivity : BaseActivity() {
             }
         }
         setTextCounter(0)
+        requestRatingReviewPlaystore()
     }
 
     private fun count() {
@@ -438,5 +438,32 @@ class TasbeehActivity : BaseActivity() {
             setOnDismissListener { super.finish() }
         }.show()
         else super.finish()
+    }
+
+    private fun requestRatingReviewPlaystore() {
+        if (settingPreference.noHasSubmitRating) {
+            val request = reviewManager.requestReviewFlow()
+            request.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val reviewInfo = task.result
+                    val flow = reviewManager.launchReviewFlow(this, reviewInfo)
+                    flow.addOnCompleteListener {
+                        settingPreference.noHasSubmitRating = false
+                    }
+                } else {
+                    task.exception?.let { it.printStackTrace() }
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val MAX_VOLUME = 15F
+        const val THROTTLE_FIRST = 100L
+        const val TYPE_EXTRA = "TYPE_EXTRA"
+        const val TASBEEH_LATIN_EXTRA = "TASBEEH_LATIN_EXTRA"
+        const val TASBEEH_DHIKR_EXTRA_ID = "TASBEEH_DHIKR_EXTRA_ID"
+        const val VIBRATE_TARGET_DURATION = 2000L
+        const val VIBRATE_CLICK_DURATION = 500L
     }
 }

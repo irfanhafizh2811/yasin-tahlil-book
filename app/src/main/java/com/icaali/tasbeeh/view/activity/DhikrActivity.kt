@@ -1,5 +1,6 @@
 package com.icaali.tasbeeh.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
@@ -13,7 +14,6 @@ import com.icaali.tasbeeh.model.DhikrDaily
 import com.icaali.tasbeeh.preference.SettingPreference
 import com.icaali.tasbeeh.utils.FontSize
 import com.icaali.tasbeeh.view.adapter.DhikrAdapter
-import org.jetbrains.anko.intentFor
 import org.koin.android.ext.android.inject
 
 class DhikrActivity : BaseActivity() {
@@ -180,10 +180,8 @@ class DhikrActivity : BaseActivity() {
     }
 
     private fun nextScreen() {
-        startActivity(
-            intentFor<DhikrCompleteActivity>(
-                DhikrCompleteActivity.DHIKR_INTENT_EXTRA to isEvening
-            )
-        )
+        val intent = Intent(this, clazz<DhikrCompleteActivity>())
+        intent.putExtra(DhikrCompleteActivity.DHIKR_INTENT_EXTRA, isEvening)
+        startActivity(intent)
     }
 }

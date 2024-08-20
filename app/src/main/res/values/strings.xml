@@ -80,16 +80,6 @@
     <string name="label_dhikr_evening">Evening Dhikr</string>
     <string name="label_prayer_morning">Morning Prayer</string>
     <string name="label_prayer_evening">Evening Prayer</string>
-    <!--************************ End Section Dhikr ************************-->
-
-
-    <!--************************ Section Analytic ************************-->
-    <string name="analytic_morning" translatable="false">Morning Dhikr</string>
-    <string name="analytic_evening" translatable="false">Evening Dhikr</string>
-    <string name="analytic_morning_complete" translatable="false">Morning Dhikr Complete</string>
-    <string name="analytic_evening_complete" translatable="false">Evening Dhikr Complete</string>
-    <string name="analytic_morning_pray" translatable="false">Morning Pray Complete</string>
-    <string name="analytic_evening_pray" translatable="false">Evening Pray Complete</string>
     <string name="label_new" translatable="false">New</string>
-    <!--************************ End Section Analytic ************************-->
+    <!--************************ End Section Dhikr ************************-->
 </resources>
