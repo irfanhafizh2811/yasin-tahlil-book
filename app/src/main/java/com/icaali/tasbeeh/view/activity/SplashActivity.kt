@@ -26,19 +26,17 @@ class SplashActivity : BaseActivity() {
     private val coreRemoteConfig by inject<CoreRemoteConfig>()
     private val settingPreference by inject<SettingPreference>()
 
-    // Register a launcher for requesting exact alarm permission
-    @RequiresApi(Build.VERSION_CODES.S)
-    private val requestExactAlarmPermissionLauncher =
+    private val requestExactAlarmPermissionLauncher by lazy {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             // Handle the result of the permission request here
-            if (alarmManager.canScheduleExactAlarms()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                alarmManager.canScheduleExactAlarms()
+            } else {
                 // Permission granted, proceed with scheduling the exact alarm
                 schedulePushNotification()
-            } else {
-                // Permission denied, handle accordingly
-                // Show a message to the user explaining why the permission is needed
             }
         }
+    }
 
     private lateinit var alarmManager: AlarmManager
 

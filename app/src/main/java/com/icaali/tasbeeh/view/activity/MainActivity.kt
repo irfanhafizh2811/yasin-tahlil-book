@@ -61,7 +61,6 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         with(binding) {
-
             cvSubhanallah?.setOnClickListener {
                 startActivityTasbeeh(TasbeehConst.SUBHANALLAH)
             }
@@ -82,15 +81,14 @@ class MainActivity : BaseActivity() {
                     LinearLayoutManager(this@MainActivity).apply { reverseLayout = true }
                 adapter = dhikrAdapter
             }
-
-            cvAddDhikr?.setOnClickListener {
+            cvAddDhikr.setOnClickListener {
                 addCustomDialog.setOnPositiveListener {
                     dhikrViewModel.insert(it)
                     if (!hasShownGuide) loadAdMobInterstitial()
                 }.show()
             }
-            cvDhikrMorning?.setOnClickListener { onStartDhikrActivity(true) }
-            cvDhikrEvening?.setOnClickListener { onStartDhikrActivity(false) }
+            cvDhikrMorning.setOnClickListener { onStartDhikrActivity(true) }
+            cvDhikrEvening.setOnClickListener { onStartDhikrActivity(false) }
             dhikrViewModel.dhikrs.observe(this@MainActivity) {
                 when {
                     it.isEmpty() -> {
@@ -110,7 +108,7 @@ class MainActivity : BaseActivity() {
                 }
             }
 
-            llMore?.setOnClickListener {
+            llMore.setOnClickListener {
                 moreDialog.apply {
                     setOnSelectedListener {
                         when (it) {
@@ -140,6 +138,7 @@ class MainActivity : BaseActivity() {
     private fun onStartDhikrActivity(isMorning: Boolean) {
         val intent = Intent(this, clazz<DhikrActivity>())
         intent.putExtra(DhikrActivity.DHIKR_INTENT_EXTRA, isMorning)
+        startActivity(intent)
     }
 
     override fun onResume() {
