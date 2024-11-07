@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Мой Зикр</string>
+    <string name="app_name">аль мульк</string>
 
     <!-- Text -->
     <string name="label_your_dhikr">Ваш Зикр</string>
@@ -71,4 +71,14 @@
     <string name="label_prayer_morning">Morning Prayer</string>
     <string name="label_prayer_evening">Evening Prayer</string>
     <!--************************ End Section Dhikr ************************-->
+
+
+    <!--************************ Section Surah ************************-->
+    <string name="label_surah_mean_al_mulk">Суверенитет</string>
+    <string name="label_surah_mean_al_baqarah">Телка</string>
+    <string name="label_surah_mean_al_waqiah">Неизбежное</string>
+    <string name="label_surah_mean_ar_rahman">Милосердный</string>
+    <string name="label_surah_mean_ar_yasin">Ясин</string>
+    <string name="label_number_of_ayah">Cтих %d</string>
+    <!--************************ End Section Surah ************************-->
 </resources>

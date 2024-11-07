@@ -1,0 +1,474 @@
+{
+  "surah_name": "Ar Rahman",
+  "surah_arabic": "اَلرَّحْمٰنُۙ",
+  "surah": [
+    {
+      "verse_arabic": "اَلرَّحْمٰنُۙ",
+      "verse_latin": "Ar-raḥmān(u).",
+      "mean_ind": "(Allah) Yang Maha Pengasih,",
+      "mean_eng": "The Most Compassionate"
+    },
+    {
+      "verse_arabic": "عَلَّمَ الْقُرْاٰنَۗ",
+      "verse_latin": "‘Allamal-qur'ān(a).",
+      "mean_ind": "telah mengajarkan Al-Qur’an.",
+      "mean_eng": "taught the Quran,"
+    },
+    {
+      "verse_arabic": "خَلَقَ الْاِنْسَانَۙ",
+      "verse_latin": "Khalaqal-insān(a).",
+      "mean_ind": "Dia menciptakan manusia.",
+      "mean_eng": "created humanity,"
+    },
+    {
+      "verse_arabic": "عَلَّمَهُ الْبَيَانَ",
+      "verse_latin": "‘Allamahul-bayān(a).",
+      "mean_ind": "Dia mengajarinya pandai menjelaskan.",
+      "mean_eng": "˹and˺ taught them speech."
+    },
+    {
+      "verse_arabic": "اَلشَّمْسُ وَالْقَمَرُ بِحُسْبَانٍۙ",
+      "verse_latin": "Asy-syamsu wal-qamaru biḥusbān(in).",
+      "mean_ind": "Matahari dan bulan (beredar) sesuai dengan perhitungan.",
+      "mean_eng": "The sun and the moon ˹travel˺ with precision."
+    },
+    {
+      "verse_arabic": "وَّالنَّجْمُ وَالشَّجَرُ يَسْجُدَانِ",
+      "verse_latin": "Wan-najmu wasy-syajaru yasjudān(i).",
+      "mean_ind": "Tetumbuhan dan pepohonan tunduk (kepada-Nya).",
+      "mean_eng": "The stars and the trees bow down ˹in submission˺."
+    },
+    {
+      "verse_arabic": "وَالسَّمَاۤءَ رَفَعَهَا وَوَضَعَ الْمِيْزَانَۙ",
+      "verse_latin": "Was-samā'a rafa‘ahā wa waḍa‘al-mīzān(a).",
+      "mean_ind": "Langit telah Dia tinggikan dan Dia telah menciptakan timbangan (keadilan dan keseimbangan)",
+      "mean_eng": "As for the sky, He raised it ˹high˺, and set the balance ˹of justice˺"
+    },
+    {
+      "verse_arabic": "اَلَّا تَطْغَوْا فِى الْمِيْزَانِ",
+      "verse_latin": "Allā taṭgau fil-mīzān(i).",
+      "mean_ind": "agar kamu tidak melampaui batas dalam timbangan itu.",
+      "mean_eng": "so that you do not defraud the scales."
+    },
+    {
+      "verse_arabic": "وَاَقِيْمُوا الْوَزْنَ بِالْقِسْطِ وَلَا تُخْسِرُوا الْمِيْزَانَ",
+      "verse_latin": "Wa aqīmul-wazna bil-qisṭi wa lā tukhsirul-mīzān(a).",
+      "mean_ind": "Tegakkanlah timbangan itu dengan adil dan janganlah kamu mengurangi timbangan itu.",
+      "mean_eng": "Weigh with justice, and do not give short measure."
+    },
+    {
+      "verse_arabic": "وَالْاَرْضَ وَضَعَهَا لِلْاَنَامِۙ",
+      "verse_latin": "Wal-arḍa waḍa‘ahā lil-anām(i).",
+      "mean_ind": "Bumi telah Dia bentangkan untuk makhluk(-Nya).",
+      "mean_eng": "He laid out the earth for all beings."
+    },
+    {
+      "verse_arabic": "فِيْهَا فَاكِهَةٌ وَّالنَّخْلُ ذَاتُ الْاَكْمَامِۖ",
+      "verse_latin": "Fīhā fākihatuw wan-nakhlu żātul-akmām(i).",
+      "mean_ind": "Padanya terdapat buah-buahan dan pohon kurma yang mempunyai kelopak mayang,",
+      "mean_eng": "In it are fruit, palm trees with date stalks,"
+    },
+    {
+      "verse_arabic": "وَالْحَبُّ ذُو الْعَصْفِ وَالرَّيْحَانُۚ",
+      "verse_latin": "Wal-ḥabbu żul-‘aṣfi war-raiḥān(u).",
+      "mean_ind": "biji-bijian yang berkulit, dan bunga-bunga yang harum baunya.",
+      "mean_eng": "and grain with husks, and aromatic plants."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you ˹humans and jinn˺ both deny?"
+    },
+    {
+      "verse_arabic": "خَلَقَ الْاِنْسَانَ مِنْ صَلْصَالٍ كَالْفَخَّارِ",
+      "verse_latin": "Khalaqal-insāna min ṣalṣālin kal-fakhkhār(i).",
+      "mean_ind": "Dia telah menciptakan manusia dari tanah kering seperti tembikar.",
+      "mean_eng": "He created humankind from ˹sounding˺ clay like pottery,"
+    },
+    {
+      "verse_arabic": "وَخَلَقَ الْجَاۤنَّ مِنْ مَّارِجٍ مِّنْ نَّارٍۚ",
+      "verse_latin": "Wa khalaqal-jānna mim mārijim min nār(in).",
+      "mean_ind": "Dia juga telah menciptakan jin dari nyala api tanpa asap.",
+      "mean_eng": "and created jinn from a ˹smokeless˺ flame of fire."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "رَبُّ الْمَشْرِقَيْنِ وَرَبُّ الْمَغْرِبَيْنِۚ",
+      "verse_latin": "Rabbul-masyriqaini wa rabbul-magribain(i).",
+      "mean_ind": "(Dialah) Tuhan kedua tempat terbit (matahari pada musim panas dan musim dingin) dan Tuhan kedua tempat terbenam (matahari pada kedua musim itu).",
+      "mean_eng": "˹He is˺ Lord of the two easts and the two wests."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "مَرَجَ الْبَحْرَيْنِ يَلْتَقِيٰنِۙ",
+      "verse_latin": "Marajal-baḥraini yaltaqiyān(i).",
+      "mean_ind": "Dia membiarkan dua laut (tawar dan asin) bertemu.",
+      "mean_eng": "He merges the two bodies of ˹fresh and salt˺ water,"
+    },
+    {
+      "verse_arabic": "بَيْنَهُمَا بَرْزَخٌ لَّا يَبْغِيٰنِۚ",
+      "verse_latin": "Bainahumā barzakhul lā yabgiyān(i).",
+      "mean_ind": "Di antara keduanya ada pembatas yang tidak dilampaui oleh masing-masing.",
+      "mean_eng": "yet between them is a barrier they never cross."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "يَخْرُجُ مِنْهُمَا اللُّؤْلُؤُ وَالْمَرْجَانُۚ",
+      "verse_latin": "Yakhruju minhumal-lu'lu'u wal-marjān(u).",
+      "mean_ind": "Dari keduanya keluar mutiara dan marjan.",
+      "mean_eng": "Out of both ˹waters˺ come forth pearls and coral."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "وَلَهُ الْجَوَارِ الْمُنْشَاٰتُ فِى الْبَحْرِ كَالْاَعْلَامِۚ",
+      "verse_latin": "Wa lahul-jawāril-munsya'ātu fil-baḥri kal-a‘lām(i).",
+      "mean_ind": "Milik-Nyalah (bahtera) buatan manusia yang berlayar di laut laksana gunung-gunung.",
+      "mean_eng": "To Him belong the ships with raised sails, sailing through the seas like mountains."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ ࣖ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "كُلُّ مَنْ عَلَيْهَا فَانٍۖ",
+      "verse_latin": "Kullu man ‘alaihā fān(in).",
+      "mean_ind": "Semua yang ada di atasnya (bumi) itu akan binasa.",
+      "mean_eng": "Every being on earth is bound to perish."
+    },
+    {
+      "verse_arabic": "وَّيَبْقٰى وَجْهُ رَبِّكَ ذُو الْجَلٰلِ وَالْاِكْرَامِۚ",
+      "verse_latin": "Wa yabqā wajhu rabbika żul-jalāli wal-ikrām(i).",
+      "mean_ind": "(Akan tetapi,) wajah (zat) Tuhanmu yang memiliki kebesaran dan kemuliaan tetap kekal.",
+      "mean_eng": "Only your Lord Himself, full of Majesty and Honour, will remain ˹forever˺."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "يَسْـَٔلُهٗ مَنْ فِى السَّمٰوٰتِ وَالْاَرْضِۗ كُلَّ يَوْمٍ هُوَ فِيْ شَأْنٍۚ",
+      "verse_latin": "Yas'aluhū man fis-samāwāti wal-arḍ(i), kulla yaumin huwa fī sya'n(in).",
+      "mean_ind": "Siapa yang ada di langit dan bumi selalu meminta kepada-Nya. Setiap hari Dia menangani urusan.",
+      "mean_eng": "All those in the heavens and the earth are dependent on Him. Day in and day out He has something to bring about."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "سَنَفْرُغُ لَكُمْ اَيُّهَ الثَّقَلٰنِۚ",
+      "verse_latin": "Sanafrugu lakum ayyuhaṡ-ṡaqalān(i).",
+      "mean_ind": "Kami akan mencurahkan perhatian kepadamu, wahai manusia dan jin.",
+      "mean_eng": "We will soon attend to you ˹for judgment˺, O  two multitudes ˹of jinn and humans˺!"
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "يٰمَعْشَرَ الْجِنِّ وَالْاِنْسِ اِنِ اسْتَطَعْتُمْ اَنْ تَنْفُذُوْا مِنْ اَقْطَارِ السَّمٰوٰتِ وَالْاَرْضِ فَانْفُذُوْاۗ لَا تَنْفُذُوْنَ اِلَّا بِسُلْطٰنٍۚ",
+      "verse_latin": "Yā ma‘syaral-jinni wal-insi inistaṭa‘tum an tanfużū min aqṭāris-samāwāti wal-arḍi fanfużū, lā tanfużūna illā bisulṭān(in).",
+      "mean_ind": "Wahai segenap jin dan manusia, jika kamu sanggup menembus (melintasi) penjuru langit dan bumi, tembuslah. Kamu tidak akan mampu menembusnya, kecuali dengan kekuatan (dari Allah).",
+      "mean_eng": "O  assembly of jinn and humans! If you can penetrate beyond the realms of the heavens and the earth, then do so. ˹But˺ you cannot do that without ˹Our˺ authority."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "يُرْسَلُ عَلَيْكُمَا شُوَاظٌ مِّنْ نَّارٍۙ وَّنُحَاسٌ فَلَا تَنْتَصِرَانِۚ",
+      "verse_latin": "Yursalu ‘alaikumā syuwāẓum min nār(in), wa nuḥāsun falā tantaṣirān(i).",
+      "mean_ind": "Kepadamu, (wahai jin dan manusia,) disemburkan nyala api dan (ditumpahkan) cairan tembaga panas sehingga kamu tidak dapat menyelamatkan diri.",
+      "mean_eng": "Flames of fire and ˹molten˺ copper will be sent against you, and you will not be able to defend one another."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فَاِذَا انْشَقَّتِ السَّمَاۤءُ فَكَانَتْ وَرْدَةً كَالدِّهَانِۚ",
+      "verse_latin": "Fa iżansyaqqatis-samā'u fa kānat wardatan kad-dihān(i).",
+      "mean_ind": "Maka, apabila langit terbelah, lalu (warnanya) menjadi merah mawar seperti (kilauan) minyak, (terjadilah kengerian yang hebat).",
+      "mean_eng": "˹How horrible will it be˺ when the heavens will split apart, becoming rose-red like ˹burnt˺ oil!"
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فَيَوْمَئِذٍ لَّا يُسْـَٔلُ عَنْ ذَنْۢبِهٖٓ اِنْسٌ وَّلَا جَاۤنٌّۚ",
+      "verse_latin": "Fa yauma'iżil lā yus'alu ‘an żambihī insuw wa lā jānn(un).",
+      "mean_ind": "Maka, pada hari itu manusia dan jin tidak ditanya tentang dosanya.",
+      "mean_eng": "On that Day there will be no need for any human or jinn to be asked about their sins."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "يُعْرَفُ الْمُجْرِمُوْنَ بِسِيْمٰهُمْ فَيُؤْخَذُ بِالنَّوَاصِيْ وَالْاَقْدَامِۚ",
+      "verse_latin": "Yu‘raful-mujrimūna bisīmāhum fa yu'khażu bin-nawāṣī wal-iqdām(i).",
+      "mean_ind": "Para pendosa dikenali dengan tanda-tandanya, lalu direnggut ubun-ubun dan kakinya.",
+      "mean_eng": "The wicked will be recognized by their appearance, then will be seized by ˹their˺ forelocks and feet."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "هٰذِهٖ جَهَنَّمُ الَّتِيْ يُكَذِّبُ بِهَا الْمُجْرِمُوْنَۘ",
+      "verse_latin": "Hāżihī jahannamul-latī yukażżibu bihal-mujrimūn(a).",
+      "mean_ind": "Inilah (neraka) Jahanam yang didustakan oleh para pendosa.",
+      "mean_eng": "˹They will be told,˺ “This is the Hell which the wicked denied.”"
+    },
+    {
+      "verse_arabic": "يَطُوْفُوْنَ بَيْنَهَا وَبَيْنَ حَمِيْمٍ اٰنٍۚ",
+      "verse_latin": "Yaṭūfūna bainahā wa baina ḥamīmin ān(in).",
+      "mean_ind": "Mereka bolak-balik di antaranya (api neraka) dan air mendidih yang sangat panas.",
+      "mean_eng": "They will alternate between its flames and scalding water."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ ࣖ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "وَلِمَنْ خَافَ مَقَامَ رَبِّهٖ جَنَّتٰنِۚ",
+      "verse_latin": "Wa liman khāfa maqāma rabbihī jannatān(i).",
+      "mean_ind": "Bagi siapa yang takut pada keagungan Tuhannya disediakan dua surga.",
+      "mean_eng": "And whoever is in awe of standing before their Lord will have two Gardens."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۙ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "ذَوَاتَآ اَفْنَانٍۚ",
+      "verse_latin": "Żawātā afnān(in).",
+      "mean_ind": "Kedua surga itu mempunyai (pepohonan) yang bercabang-cabang.",
+      "mean_eng": "˹Both will be˺ with lush branches."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fabi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فِيْهِمَا عَيْنٰنِ تَجْرِيٰنِۚ",
+      "verse_latin": "Fīhimā ‘aināni tajriyān(i).",
+      "mean_ind": "Di dalam kedua (surga) itu terdapat dua mata air yang memancar.",
+      "mean_eng": "In each ˹Garden˺ will be two flowing springs."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فِيْهِمَا مِنْ كُلِّ فَاكِهَةٍ زَوْجٰنِۚ",
+      "verse_latin": "Fīhimā min kulli fākihatin zaujān(i).",
+      "mean_ind": "Di dalam kedua (surga) itu terdapat aneka buah-buahan yang berpasang-pasangan.",
+      "mean_eng": "In each will be two types of every fruit."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "مُتَّكِـِٕيْنَ عَلٰى فُرُشٍۢ بَطَاۤىِٕنُهَا مِنْ اِسْتَبْرَقٍۗ وَجَنَا الْجَنَّتَيْنِ دَانٍۚ",
+      "verse_latin": "Muttaki'īna ‘alā furusyim baṭā'inuhā min istabraq(in), wa janal-jannataini dān(in).",
+      "mean_ind": "Mereka berbaring di atas permadani yang bagian dalamnya (terbuat) dari sutera tebal. Buah-buahan di kedua surga itu (dapat) dipetik dari dekat.",
+      "mean_eng": "Those ˹believers˺ will recline on furnishings lined with rich brocade. And the fruit of both Gardens will hang within reach."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فِيْهِنَّ قٰصِرٰتُ الطَّرْفِۙ لَمْ يَطْمِثْهُنَّ اِنْسٌ قَبْلَهُمْ وَلَا جَاۤنٌّۚ",
+      "verse_latin": "Fīhinna qāṣirātuṭ-ṭarf(i), lam yaṭmiṡhunna insun qablahum wa lā jānn(un).",
+      "mean_ind": "Di dalamnya ada (bidadari) yang membatasi pandangan (hanya untuk pasangannya) yang tidak pernah disentuh oleh manusia sebelum mereka dan tidak (pula) oleh jin.",
+      "mean_eng": "In both ˹Gardens˺ will be maidens of modest gaze, who no human or jinn has ever touched before."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "كَاَنَّهُنَّ الْيَاقُوْتُ وَالْمَرْجَانُۚ",
+      "verse_latin": "Ka'annahunnal-yāqūtu wal-marjān(u).",
+      "mean_ind": "Seakan-akan mereka itu permata yakut dan marjan.",
+      "mean_eng": "Those ˹maidens˺ will be ˹as elegant˺ as rubies and coral."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "هَلْ جَزَاۤءُ الْاِحْسَانِ اِلَّا الْاِحْسَانُۚ",
+      "verse_latin": "Hal jazā'ul-iḥsāni illal-iḥsān(u).",
+      "mean_ind": "Adakah balasan kebaikan selain kebaikan (pula)?",
+      "mean_eng": "Is there any reward for goodness except goodness?"
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "وَمِنْ دُوْنِهِمَا جَنَّتٰنِۚ",
+      "verse_latin": "Wa min dūnihimā jannatān(i).",
+      "mean_ind": "Selain dari kedua (surga) itu ada dua surga (lagi).",
+      "mean_eng": "And below these two ˹Gardens˺ will be two others."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۙ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "مُدْهَاۤمَّتٰنِۚ",
+      "verse_latin": "Mudhāmmatān(i).",
+      "mean_ind": "Kedua surga itu (terlihat warnanya) hijau tua.",
+      "mean_eng": "Both will be dark green."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فِيْهِمَا عَيْنٰنِ نَضَّاخَتٰنِۚ",
+      "verse_latin": "Fīhimā ‘aināni naḍḍākhatān(i).",
+      "mean_ind": "Di dalam keduanya ada dua mata air yang memancar tanpa henti.",
+      "mean_eng": "In each will be two gushing springs."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فِيْهِمَا فَاكِهَةٌ وَّنَخْلٌ وَّرُمَّانٌۚ",
+      "verse_latin": "Fīhimā fākihatuw wa nakhluw wa rummān(un).",
+      "mean_ind": "Di dalam keduanya ada buah-buahan (antara lain) kurma dan delima.",
+      "mean_eng": "In both will be fruit, palm trees, and pomegranates."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "فِيْهِنَّ خَيْرٰتٌ حِسَانٌۚ",
+      "verse_latin": "Fīhinna khairātun ḥisān(un).",
+      "mean_ind": "Di dalamnya ada (bidadari) yang mulia (akhlaknya) lagi jelita.",
+      "mean_eng": "In all Gardens will be noble, pleasant mates."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "حُوْرٌ مَّقْصُوْرٰتٌ فِى الْخِيَامِۚ",
+      "verse_latin": "Ḥūrum maqṣūrātun fil-khiyām(i).",
+      "mean_ind": "Bidadari-bidadari yang dipingit dalam kemah-kemah.",
+      "mean_eng": "˹They will be˺ maidens with gorgeous eyes, reserved in pavilions."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "لَمْ يَطْمِثْهُنَّ اِنْسٌ قَبْلَهُمْ وَلَا جَاۤنٌّۚ",
+      "verse_latin": "Lam yaṭmiṡhunna insun qablahum wa lā jānn(un).",
+      "mean_ind": "Mereka tidak pernah disentuh oleh manusia sebelum mereka dan tidak (pula) oleh jin.",
+      "mean_eng": "No human or jinn has ever touched these ˹maidens˺ before."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "مُتَّكِـِٕيْنَ عَلٰى رَفْرَفٍ خُضْرٍ وَّعَبْقَرِيٍّ حِسَانٍۚ",
+      "verse_latin": "Muttaki'īna ‘alā rafrafin khuḍriw wa ‘abqariyyin ḥisān(in).",
+      "mean_ind": "Mereka bertelekan pada bantal-bantal yang hijau dan permadani-permadani yang indah.",
+      "mean_eng": "All ˹believers˺ will be reclining on green cushions and splendid carpets."
+    },
+    {
+      "verse_arabic": "فَبِاَيِّ اٰلَاۤءِ رَبِّكُمَا تُكَذِّبٰنِۚ",
+      "verse_latin": "Fa bi'ayyi ālā'i rabbikumā tukażżibān(i).",
+      "mean_ind": "Maka, nikmat Tuhanmu manakah yang kamu dustakan (wahai jin dan manusia)?",
+      "mean_eng": "Then which of your Lord’s favours will you both deny?"
+    },
+    {
+      "verse_arabic": "تَبٰرَكَ اسْمُ رَبِّكَ ذِى الْجَلٰلِ وَالْاِكْرَامِ ࣖ",
+      "verse_latin": "Tabārakasmu rabbika żil-jalāli wal-ikrām(i).",
+      "mean_ind": "Mahaberkah nama Tuhanmu Pemilik keagungan dan kemuliaan.",
+      "mean_eng": "Blessed is the Name of your Lord, full of Majesty and Honour."
+    }
+  ]
+}

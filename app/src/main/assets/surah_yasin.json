@@ -1,0 +1,504 @@
+{
+  "surah_name": "Yasin",
+  "surah_arabic": "يٰسۤ",
+  "surah": [
+    {
+      "verse_arabic": "يٰسۤ ۚ",
+      "verse_latin": "Yā sīn.",
+      "mean_ind": "Yā Sīn.",
+      "mean_eng": "Yâ-Sĩn."
+    },
+    {
+      "verse_arabic": "وَالْقُرْاٰنِ الْحَكِيْمِۙ",
+      "verse_latin": "Wal-qur'ānil-ḥakīm(i).",
+      "mean_ind": "Demi Al-Qur’an yang penuh hikmah,",
+      "mean_eng": "By the Quran, rich in wisdom!"
+    },
+    {
+      "verse_arabic": "اِنَّكَ لَمِنَ الْمُرْسَلِيْنَۙ",
+      "verse_latin": "Innaka laminal-mursalīn(a).",
+      "mean_ind": "sesungguhnya engkau (Nabi Muhammad) benar-benar salah seorang dari rasul-rasul",
+      "mean_eng": "You ˹O Prophet˺ are truly one of the messengers"
+    },
+    {
+      "verse_arabic": "عَلٰى صِرَاطٍ مُّسْتَقِيْمٍۗ",
+      "verse_latin": "‘Alā ṣirāṭim mustaqīm(in).",
+      "mean_ind": "(yang berada) di atas jalan yang lurus,",
+      "mean_eng": "upon the Straight Path."
+    },
+    {
+      "verse_arabic": "تَنْزِيْلَ الْعَزِيْزِ الرَّحِيْمِۙ",
+      "verse_latin": "Tanzīlal-‘azīzir-raḥīm(i).",
+      "mean_ind": "(sebagai wahyu) yang diturunkan oleh (Allah) Yang Mahaperkasa lagi Maha Penyayang,",
+      "mean_eng": "˹This is˺ a revelation from the Almighty, Most Merciful,"
+    },
+    {
+      "verse_arabic": "لِتُنْذِرَ قَوْمًا مَّآ اُنْذِرَ اٰبَاۤؤُهُمْ فَهُمْ غٰفِلُوْنَ",
+      "verse_latin": "Litunżira qaumam mā unżira ābā'uhum fahum gāfilūn(a).",
+      "mean_ind": "agar engkau (Nabi Muhammad) memberi peringatan kepada suatu kaum yang nenek moyang mereka belum pernah diberi peringatan, sehingga mereka lalai.",
+      "mean_eng": "so that you may warn a people whose forefathers were not warned, and so are heedless."
+    },
+    {
+      "verse_arabic": "لَقَدْ حَقَّ الْقَوْلُ عَلٰٓى اَكْثَرِهِمْ فَهُمْ لَا يُؤْمِنُوْنَ",
+      "verse_latin": "Laqad ḥaqqal-qaulu ‘alā akṡarihim fahum lā yu'minūn(a).",
+      "mean_ind": "Sungguh, benar-benar berlaku perkataan (ketetapan takdir) terhadap kebanyakan mereka, maka mereka tidak akan beriman.",
+      "mean_eng": "The decree ˹of torment˺ has already been justified against most of them, for they will never believe."
+    },
+    {
+      "verse_arabic": "اِنَّا جَعَلْنَا فِيْٓ اَعْنَاقِهِمْ اَغْلٰلًا فَهِيَ اِلَى الْاَذْقَانِ فَهُمْ مُّقْمَحُوْنَ",
+      "verse_latin": "Innā ja‘alnā fī a‘nāqihim aglālan fa hiya ilal-ażqāni fahum muqmaḥūn(a).",
+      "mean_ind": "Sesungguhnya Kami telah memasang belenggu di leher mereka, lalu (tangan mereka yang terbelenggu diangkat) ke dagu, karena itu mereka tertengadah.",
+      "mean_eng": "˹It is as if˺ We have put shackles around their necks up to their chins, so their heads are forced up,"
+    },
+    {
+      "verse_arabic": "وَجَعَلْنَا مِنْۢ بَيْنِ اَيْدِيْهِمْ سَدًّا وَّمِنْ خَلْفِهِمْ سَدًّا فَاَغْشَيْنٰهُمْ فَهُمْ لَا يُبْصِرُوْنَ",
+      "verse_latin": "Wa ja‘alnā mim baini aidīhim saddaw wa min khalfihim saddan fa agsyaināhum fahum lā yubṣirūn(a).",
+      "mean_ind": "Kami memasang penghalang di hadapan mereka dan di belakang mereka, sehingga Kami menutupi (pandangan) mereka. Mereka pun tidak dapat melihat.",
+      "mean_eng": "and have placed a barrier before them and a barrier behind them and covered them ˹all˺ up, so they fail to see ˹the truth˺."
+    },
+    {
+      "verse_arabic": "وَسَوَاۤءٌ عَلَيْهِمْ ءَاَنْذَرْتَهُمْ اَمْ لَمْ تُنْذِرْهُمْ لَا يُؤْمِنُوْنَ",
+      "verse_latin": "Wa sawā'un ‘alaihim a'anżartahum am lam tunżirhum lā yu'minūn(a).",
+      "mean_ind": "Sama saja bagi mereka, apakah engkau (Nabi Muhammad) memberi peringatan kepada mereka atau tidak. Mereka (tetap) tidak akan beriman.",
+      "mean_eng": "It is the same whether you warn them or not—they will never believe."
+    },
+    {
+      "verse_arabic": "اِنَّمَا تُنْذِرُ مَنِ اتَّبَعَ الذِّكْرَ وَخَشِيَ الرَّحْمٰنَ بِالْغَيْبِۚ فَبَشِّرْهُ بِمَغْفِرَةٍ وَّاَجْرٍ كَرِيْمٍ",
+      "verse_latin": "Innamā tunżiru manittaba‘aż-żikra wa khasyiyar-raḥmāna bil-gaib(i), fa basysyirhu bimagfiratiw wa ajrin karīm(in).",
+      "mean_ind": "Sesungguhnya engkau (Nabi Muhammad) hanya (bisa) memberi peringatan kepada orang-orang yang mau mengikutinya dan yang takut kepada Tuhan Yang Maha Pengasih tanpa melihat-Nya. Berilah mereka kabar gembira dengan ampunan dan pahala yang mulia.",
+      "mean_eng": "You can only warn those who follow the Reminder and are in awe of the Most Compassionate without seeing Him. So give them good news of forgiveness and an honourable reward."
+    },
+    {
+      "verse_arabic": "اِنَّا نَحْنُ نُحْيِ الْمَوْتٰى وَنَكْتُبُ مَا قَدَّمُوْا وَاٰثَارَهُمْۗ وَكُلَّ شَيْءٍ اَحْصَيْنٰهُ فِيْٓ اِمَامٍ مُّبِيْنٍ ࣖ",
+      "verse_latin": "Innā naḥnu nuḥyil-mautā wa naktubu mā qaddamū wa āṡārahum, wa kulla syai'in aḥṣaināhu fī imāmim mubīn(in).",
+      "mean_ind": "Sesungguhnya Kamilah yang menghidupkan orang-orang yang mati dan Kami (pulalah) yang mencatat apa yang telah mereka kerjakan dan bekas-bekas yang mereka (tinggalkan). Segala sesuatu Kami kumpulkan dalam kitab induk yang nyata (Lauh Mahfuz).",
+      "mean_eng": "It is certainly We Who resurrect the dead, and write what they send forth and what they leave behind. Everything is listed by Us in a perfect Record. "
+    },
+    {
+      "verse_arabic": "وَاضْرِبْ لَهُمْ مَّثَلًا اَصْحٰبَ الْقَرْيَةِۘ اِذْ جَاۤءَهَا الْمُرْسَلُوْنَۚ",
+      "verse_latin": "Waḍrib lahum maṡalan aṣḥābal-qaryah(ti), iż jā'ahal-mursalūn(a).",
+      "mean_ind": "Buatlah suatu perumpamaan bagi mereka (kaum kafir Makkah), yaitu penduduk suatu negeri, ketika para utusan datang kepada mereka,",
+      "mean_eng": "Give them an example ˹O Prophet˺ of the residents of a town, when the messengers came to them."
+    },
+    {
+      "verse_arabic": "اِذْ اَرْسَلْنَآ اِلَيْهِمُ اثْنَيْنِ فَكَذَّبُوْهُمَا فَعَزَّزْنَا بِثَالِثٍ فَقَالُوْٓا اِنَّآ اِلَيْكُمْ مُّرْسَلُوْنَ",
+      "verse_latin": "Iż arsalnā ilaihimuṡnaini fa każżabūhumā fa ‘azzaznā biṡāliṡin faqālū innā ilaikum mursalūn(a).",
+      "mean_ind": "(yaitu) ketika Kami mengutus kepada mereka dua orang utusan, lalu mereka mendustakan keduanya. Kemudian Kami menguatkan dengan (utusan) yang ketiga. Maka, ketiga (utusan itu) berkata, “Sesungguhnya kami adalah orang-orang yang diutus kepadamu.”",
+      "mean_eng": "We sent them two messengers, but they rejected both. So We reinforced ˹the two˺ with a third, and they declared, “We have indeed been sent to you ˹as messengers˺.”"
+    },
+    {
+      "verse_arabic": "قَالُوْا مَآ اَنْتُمْ اِلَّا بَشَرٌ مِّثْلُنَاۙ وَمَآ اَنْزَلَ الرَّحْمٰنُ مِنْ شَيْءٍۙ اِنْ اَنْتُمْ اِلَّا تَكْذِبُوْنَ",
+      "verse_latin": "Qālū mā antum illā basyarum miṡlunā, wa mā anzalar-raḥmānu min syai'(in), in antum illā takżibūn(a).",
+      "mean_ind": "Mereka (penduduk negeri) menjawab, “Kamu tidak lain hanyalah manusia seperti kami. (Allah) Yang Maha Pengasih tidak (pernah) menurunkan sesuatu apa pun. Kamu hanyalah berdusta.”",
+      "mean_eng": "The people replied, “You are only humans like us, and the Most Compassionate has not revealed anything. You are simply lying!”"
+    },
+    {
+      "verse_arabic": "قَالُوْا رَبُّنَا يَعْلَمُ اِنَّآ اِلَيْكُمْ لَمُرْسَلُوْنَ",
+      "verse_latin": "Qālū rabbunā ya‘lamu innā ilaikum lamursalūn(a).",
+      "mean_ind": "Mereka (para rasul) berkata, “Tuhan kami mengetahui bahwa sesungguhnya kami benar-benar para utusan(-Nya) kepadamu.",
+      "mean_eng": "The messengers responded, “Our Lord knows that we have truly been sent to you."
+    },
+    {
+      "verse_arabic": "وَمَا عَلَيْنَآ اِلَّا الْبَلٰغُ الْمُبِيْنُ",
+      "verse_latin": "Wa mā ‘alainā illal-balāgul-mubīn(u).",
+      "mean_ind": "Adapun kewajiban kami hanyalah menyampaikan (perintah Allah) yang jelas.”",
+      "mean_eng": "And our duty is only to deliver ˹the message˺ clearly.”"
+    },
+    {
+      "verse_arabic": "قَالُوْٓا اِنَّا تَطَيَّرْنَا بِكُمْۚ لَىِٕنْ لَّمْ تَنْتَهُوْا لَنَرْجُمَنَّكُمْ وَلَيَمَسَّنَّكُمْ مِّنَّا عَذَابٌ اَلِيْمٌ",
+      "verse_latin": "Qālū innā taṭayyarnā bikum, la'il lam tantahū lanarjumannakum wa layamassannakum minnā ‘ażābun alīm(un).",
+      "mean_ind": "Mereka (penduduk negeri) menjawab, “Sesungguhnya kami bernasib malang karenamu. Sungguh, jika kamu tidak berhenti (menyeru kami), niscaya kami merajam kamu dan kamu pasti akan merasakan siksaan yang pedih dari kami.”",
+      "mean_eng": "The people replied, “We definitely see you as a bad omen for us. If you do not desist, we will certainly stone you ˹to death˺ and you will be touched with a painful punishment from us.”"
+    },
+    {
+      "verse_arabic": "قَالُوْا طَاۤىِٕرُكُمْ مَّعَكُمْۗ اَىِٕنْ ذُكِّرْتُمْۗ بَلْ اَنْتُمْ قَوْمٌ مُّسْرِفُوْنَ",
+      "verse_latin": "Qālū ṭā'irukum ma‘akum, a'in żukkirtum, bal antum qaumum musrifūn(a).",
+      "mean_ind": "Mereka (para rasul) berkata, “Kemalangan kamu itu (akibat perbuatan) kamu sendiri. Apakah karena kamu diberi peringatan, (lalu kamu menjadi malang)? Sebenarnya kamu adalah kaum yang melampaui batas.”",
+      "mean_eng": "The messengers said, “Your bad omen lies within yourselves. Are you saying this because you are reminded ˹of the truth˺? In fact, you are a transgressing people.”"
+    },
+    {
+      "verse_arabic": "وَجَاۤءَ مِنْ اَقْصَا الْمَدِيْنَةِ رَجُلٌ يَّسْعٰى قَالَ يٰقَوْمِ اتَّبِعُوا الْمُرْسَلِيْنَۙ",
+      "verse_latin": "Wa jā'a min aqṣal-madīnati rajuluy yas‘ā qāla yā qaumittabi‘ul-mursalīn(a).",
+      "mean_ind": "Datanglah dengan bergegas dari ujung kota, seorang laki-laki. Dia berkata, “Wahai kaumku, ikutilah para rasul itu!",
+      "mean_eng": "Then from the farthest end of the city a man came, rushing. He advised, “O my people! Follow the messengers."
+    },
+    {
+      "verse_arabic": "اتَّبِعُوْا مَنْ لَّا يَسْـَٔلُكُمْ اَجْرًا وَّهُمْ مُّهْتَدُوْنَ ۔",
+      "verse_latin": "Ittabi‘ū mal lā yas'alukum ajraw wa hum muhtadūn(a).",
+      "mean_ind": "Ikutilah orang yang tidak meminta imbalan (dalam berdakwah) kepadamu. Mereka adalah orang-orang yang mendapat petunjuk.",
+      "mean_eng": "Follow those who ask no reward of you, and are ˹rightly˺ guided."
+    },
+    {
+      "verse_arabic": "وَمَا لِيَ لَآ اَعْبُدُ الَّذِيْ فَطَرَنِيْ وَاِلَيْهِ تُرْجَعُوْنَ",
+      "verse_latin": "Wa mā liya lā a‘budul-lażī faṭaranī wa ilaihi turja‘ūn(a).",
+      "mean_ind": "Apa (alasanku) untuk tidak menyembah (Allah) yang telah menciptakanku dan hanya kepada-Nyalah kamu akan dikembalikan.",
+      "mean_eng": "And why should I not worship the One Who has originated me, and to Whom you will be returned."
+    },
+    {
+      "verse_arabic": "ءَاَتَّخِذُ مِنْ دُوْنِهٖٓ اٰلِهَةً اِنْ يُّرِدْنِ الرَّحْمٰنُ بِضُرٍّ لَّا تُغْنِ عَنِّيْ شَفَاعَتُهُمْ شَيْـًٔا وَّلَا يُنْقِذُوْنِۚ",
+      "verse_latin": "A'attakhiżu min dūnihī ālihatan iy yuridnir-raḥmānu biḍurril lā tugni ‘annī syafā‘atuhum syai'aw wa lā yunqiżūn(i).",
+      "mean_ind": "Mengapa aku (harus) mengambil sembahan-sembahan selain-Nya? Jika (Allah) Yang Maha Pengasih menghendaki bencana terhadapku, pasti pertolongan mereka tidak berguna sama sekali bagi diriku dan mereka (juga) tidak dapat menyelamatkanku.",
+      "mean_eng": "How could I take besides Him other gods whose intercession would not be of any benefit to me, nor could they save me if the Most Compassionate intended to harm me?"
+    },
+    {
+      "verse_arabic": "اِنِّيْٓ اِذًا لَّفِيْ ضَلٰلٍ مُّبِيْنٍ",
+      "verse_latin": "Innī iżal lafī ḍalālim mubīn(in).",
+      "mean_ind": "Sesungguhnya aku (jika berbuat) begitu, pasti berada dalam kesesatan yang nyata.",
+      "mean_eng": "Indeed, I would then be clearly astray."
+    },
+    {
+      "verse_arabic": "اِنِّيْٓ اٰمَنْتُ بِرَبِّكُمْ فَاسْمَعُوْنِۗ",
+      "verse_latin": "Innī āmantu birabbikum fasma‘ūn(i).",
+      "mean_ind": "Sesungguhnya aku telah beriman kepada Tuhanmu. Maka, dengarkanlah (pengakuan)-ku.”",
+      "mean_eng": "I do believe in your Lord, so listen to me.”"
+    },
+    {
+      "verse_arabic": "قِيْلَ ادْخُلِ الْجَنَّةَ ۗقَالَ يٰلَيْتَ قَوْمِيْ يَعْلَمُوْنَۙ",
+      "verse_latin": "Qīladkhulil-jannah(ta), qāla yā laita qaumī ya‘lamūn(a).",
+      "mean_ind": "Dikatakan (kepadanya), “Masuklah ke surga.” Dia (laki-laki itu) berkata, “Aduhai, sekiranya kaumku mengetahui",
+      "mean_eng": "˹But they killed him, then˺ he was told ˹by the angels˺, “Enter Paradise!” He said, “If only my people knew"
+    },
+    {
+      "verse_arabic": "بِمَا غَفَرَ لِيْ رَبِّيْ وَجَعَلَنِيْ مِنَ الْمُكْرَمِيْنَ",
+      "verse_latin": "Bimā gafaralī rabbī wa ja‘alanī minal-mukramīn(a).",
+      "mean_ind": "(bagaimana) Tuhanku mengampuniku dan menjadikanku termasuk orang-orang yang dimuliakan.”",
+      "mean_eng": "of how my Lord has forgiven me, and made me one of the honourable.”"
+    },
+    {
+      "verse_arabic": "۞ وَمَآ اَنْزَلْنَا عَلٰى قَوْمِهٖ مِنْۢ بَعْدِهٖ مِنْ جُنْدٍ مِّنَ السَّمَاۤءِ وَمَا كُنَّا مُنْزِلِيْنَ",
+      "verse_latin": "Wa mā anzalnā ‘alā qaumihī mim ba‘dihī min jundim minas-samā'i wa mā kunnā munzilīn(a).",
+      "mean_ind": "Setelah dia (dibunuh), Kami tidak menurunkan satu pasukan pun dari langit kepada kaumnya dan Kami tidak perlu menurunkannya.",
+      "mean_eng": "We did not send any soldiers from the heavens against his people after his death, nor did We need to."
+    },
+    {
+      "verse_arabic": "اِنْ كَانَتْ اِلَّا صَيْحَةً وَّاحِدَةً فَاِذَا هُمْ خٰمِدُوْنَ",
+      "verse_latin": "In kānat illā ṣaiḥataw wāḥidatan fa'iżā hum khāmidūn(a).",
+      "mean_ind": "(Azab mereka) itu cukup dengan satu teriakan saja. Maka, seketika itu mereka mati.",
+      "mean_eng": "All it took was one ˹mighty˺ blast, and they were extinguished at once."
+    },
+    {
+      "verse_arabic": "يٰحَسْرَةً عَلَى الْعِبَادِۚ مَا يَأْتِيْهِمْ مِّنْ رَّسُوْلٍ اِلَّا كَانُوْا بِهٖ يَسْتَهْزِءُوْنَ",
+      "verse_latin": "Yā ḥasratan ‘alal-‘ibād(i), mā ya'tīhim mir rasūlin illā kānū bihī yastahzi'ūn(a).",
+      "mean_ind": "Alangkah besar penyesalan diri para hamba itu. Setiap datang seorang rasul kepada mereka, mereka selalu memperolok-olokkannya.",
+      "mean_eng": "Oh pity, such beings! No messenger ever came to them without being mocked."
+    },
+    {
+      "verse_arabic": "اَلَمْ يَرَوْا كَمْ اَهْلَكْنَا قَبْلَهُمْ مِّنَ الْقُرُوْنِ اَنَّهُمْ اِلَيْهِمْ لَا يَرْجِعُوْنَ",
+      "verse_latin": "Alam yarau kam ahlaknā qablahum minal-qurūni annahum ilaihim lā yarji‘ūn(a).",
+      "mean_ind": "Tidakkah mereka mengetahui berapa banyak umat sebelum mereka yang telah Kami binasakan. Mereka (setelah binasa) tidak ada yang kembali kepada mereka (di dunia).",
+      "mean_eng": "Have the deniers not considered how many peoples We destroyed before them who never came back to life again?"
+    },
+    {
+      "verse_arabic": "وَاِنْ كُلٌّ لَّمَّا جَمِيْعٌ لَّدَيْنَا مُحْضَرُوْنَ ࣖ",
+      "verse_latin": "Wa in kullul lammā jamī‘ul ladainā muḥḍarūn(a).",
+      "mean_ind": "Tidak ada satu (umat) pun, kecuali semuanya akan dihadirkan kepada Kami (untuk dihisab).",
+      "mean_eng": "Yet they will all be brought before Us."
+    },
+    {
+      "verse_arabic": "وَاٰيَةٌ لَّهُمُ الْاَرْضُ الْمَيْتَةُ ۖاَحْيَيْنٰهَا وَاَخْرَجْنَا مِنْهَا حَبًّا فَمِنْهُ يَأْكُلُوْنَ",
+      "verse_latin": "Wa āyatul lahumul-arḍul-maitah(tu), aḥyaināhā wa akhrajnā minhā ḥabban faminhu ya'kulūn(a).",
+      "mean_ind": "Suatu tanda (kekuasaan-Nya) bagi mereka adalah bumi yang mati (tandus lalu) Kami menghidupkannya dan mengeluarkan darinya biji-bijian kemudian dari (biji-bijian) itu mereka makan.",
+      "mean_eng": "There is a sign for them in the dead earth: We give it life, producing grain from it for them to eat."
+    },
+    {
+      "verse_arabic": "وَجَعَلْنَا فِيْهَا جَنّٰتٍ مِّنْ نَّخِيْلٍ وَّاَعْنَابٍ وَّفَجَّرْنَا فِيْهَا مِنَ الْعُيُوْنِۙ",
+      "verse_latin": "Wa ja‘alnā fīhā jannātim min nakhīliw wa a‘nābiw wa fajjarnā fīhā minal-‘uyūn(i).",
+      "mean_ind": "Kami (juga) menjadikan padanya (bumi) kebun-kebun kurma dan anggur serta Kami memancarkan padanya beberapa mata air",
+      "mean_eng": "And We have placed in it gardens of palm trees and grapevines, and caused springs to gush forth in it,"
+    },
+    {
+      "verse_arabic": "لِيَأْكُلُوْا مِنْ ثَمَرِهٖۙ وَمَا عَمِلَتْهُ اَيْدِيْهِمْ ۗ اَفَلَا يَشْكُرُوْنَ",
+      "verse_latin": "Liya'kulū min ṡamarihī wa mā ‘amilathu aidīhim, afalā yasykurūn(a).",
+      "mean_ind": "agar mereka dapat makan dari buahnya, dan dari hasil usaha tangan mereka. Mengapa mereka tidak bersyukur?",
+      "mean_eng": "so that they may eat from its fruit, which they had no hand in making. Will they not then give thanks?"
+    },
+    {
+      "verse_arabic": "سُبْحٰنَ الَّذِيْ خَلَقَ الْاَزْوَاجَ كُلَّهَا مِمَّا تُنْۢبِتُ الْاَرْضُ وَمِنْ اَنْفُسِهِمْ وَمِمَّا لَا يَعْلَمُوْنَ",
+      "verse_latin": "Subḥānal-lażī khalaqal-azwāja kullahā mimmā tumbitul-arḍu wa min anfusihim wa mimmā lā ya‘lamūn(a).",
+      "mean_ind": "Mahasuci (Allah) yang telah menciptakan semuanya berpasang-pasangan, baik dari apa yang ditumbuhkan oleh bumi dan dari diri mereka sendiri maupun dari apa yang tidak mereka ketahui.",
+      "mean_eng": "Glory be to the One Who created all ˹things in˺ pairs—˹be it˺ what the earth produces, their genders, or what they do not know!"
+    },
+    {
+      "verse_arabic": "وَاٰيَةٌ لَّهُمُ الَّيْلُ ۖنَسْلَخُ مِنْهُ النَّهَارَ فَاِذَا هُمْ مُّظْلِمُوْنَۙ",
+      "verse_latin": "Wa āyatul lahumul-lailu naslakhu minhun-nahāra fa'iżā hum muẓlimūn(a).",
+      "mean_ind": "Suatu tanda juga (atas kekuasaan Allah) bagi mereka adalah malam. Kami pisahkan siang dari (malam) itu. Maka, seketika itu mereka (berada dalam) kegelapan.",
+      "mean_eng": "There is also a sign for them in the night: We strip from it daylight, then—behold!—they are in darkness."
+    },
+    {
+      "verse_arabic": "وَالشَّمْسُ تَجْرِيْ لِمُسْتَقَرٍّ لَّهَا ۗذٰلِكَ تَقْدِيْرُ الْعَزِيْزِ الْعَلِيْمِۗ",
+      "verse_latin": "Wasy-syamsu tajrī limustaqarril lahā, żālika taqdīrul-‘azīzil-‘alīm(i).",
+      "mean_ind": "(Suatu tanda juga atas kekuasaan Allah bagi mereka adalah) matahari yang berjalan di tempat peredarannya. Demikianlah ketetapan (Allah) Yang Mahaperkasa lagi Maha Mengetahui.",
+      "mean_eng": "The sun travels for its fixed term. That is the design of the Almighty, All-Knowing."
+    },
+    {
+      "verse_arabic": "وَالْقَمَرَ قَدَّرْنٰهُ مَنَازِلَ حَتّٰى عَادَ كَالْعُرْجُوْنِ الْقَدِيْمِ",
+      "verse_latin": "Wal-qamara qaddarnāhu manāzila ḥattā ‘āda kal-‘urjūnil-qadīm(i).",
+      "mean_ind": "(Begitu juga) bulan, Kami tetapkan bagi(-nya) tempat-tempat peredaran sehingga (setelah ia sampai ke tempat peredaran yang terakhir,) kembalilah ia seperti bentuk tandan yang tua.",
+      "mean_eng": "As for the moon, We have ordained ˹precise˺ phases for it, until it ends up like an old, curved palm stalk."
+    },
+    {
+      "verse_arabic": "لَا الشَّمْسُ يَنْۢبَغِيْ لَهَآ اَنْ تُدْرِكَ الْقَمَرَ وَلَا الَّيْلُ سَابِقُ النَّهَارِ ۗوَكُلٌّ فِيْ فَلَكٍ يَّسْبَحُوْنَ",
+      "verse_latin": "Lasy-syamsu yambagī lahā an tudrikal-qamara wa lal-lailu sābiqun-nahār(i), wa kullun fī falakiy yasbaḥūn(a).",
+      "mean_ind": "Tidaklah mungkin bagi matahari mengejar bulan dan malam pun tidak dapat mendahului siang. Masing-masing beredar pada garis edarnya.",
+      "mean_eng": "It is not for the sun to catch up with the moon, nor does the night outrun the day. Each is travelling in an orbit of their own."
+    },
+    {
+      "verse_arabic": "وَاٰيَةٌ لَّهُمْ اَنَّا حَمَلْنَا ذُرِّيَّتَهُمْ فِى الْفُلْكِ الْمَشْحُوْنِۙ",
+      "verse_latin": "Wa āyatul lahum annā ḥamalnā żurriyyatahum fil-fulkil-masyḥūn(i).",
+      "mean_ind": "Suatu tanda (kebesaran Allah) bagi mereka adalah bahwa Kami mengangkut keturunan mereka dalam kapal yang penuh muatan.",
+      "mean_eng": "Another sign for them is that We carried their ancestors ˹with Noah˺ in the fully loaded Ark,"
+    },
+    {
+      "verse_arabic": "وَخَلَقْنَا لَهُمْ مِّنْ مِّثْلِهٖ مَا يَرْكَبُوْنَ",
+      "verse_latin": "Wa khalaqnā lahum mim miṡlihī mā yarkabūn(a).",
+      "mean_ind": "(Begitu juga) Kami menciptakan untuk mereka dari jenis itu angkutan (lain) yang mereka kendarai.",
+      "mean_eng": "and created for them similar things to ride in."
+    },
+    {
+      "verse_arabic": "وَاِنْ نَّشَأْ نُغْرِقْهُمْ فَلَا صَرِيْخَ لَهُمْ وَلَاهُمْ يُنْقَذُوْنَۙ",
+      "verse_latin": "Wa in nasya' nugriqhum falā ṣarīkha lahum wa lā hum yunqażūn(a).",
+      "mean_ind": "Jika Kami menghendaki, Kami akan menenggelamkan mereka. Kemudian, tidak ada penolong bagi mereka dan tidak (pula) mereka diselamatkan.",
+      "mean_eng": "If We willed, We could drown them: then no one would respond to their cries, nor would they be rescued—"
+    },
+    {
+      "verse_arabic": "اِلَّا رَحْمَةً مِّنَّا وَمَتَاعًا اِلٰى حِيْنٍ",
+      "verse_latin": "Illā raḥmatam minnā wa matā‘an ilā ḥīn(in).",
+      "mean_ind": "Akan tetapi, (Kami menyelamatkan mereka) karena rahmat yang besar dari Kami dan untuk memberi mereka kesenangan hidup sampai waktu tertentu.",
+      "mean_eng": "except by mercy from Us, allowing them enjoyment for a ˹little˺ while."
+    },
+    {
+      "verse_arabic": "وَاِذَا قِيْلَ لَهُمُ اتَّقُوْا مَا بَيْنَ اَيْدِيْكُمْ وَمَا خَلْفَكُمْ لَعَلَّكُمْ تُرْحَمُوْنَ",
+      "verse_latin": "Wa iżā qīla lahumuttaqū mā baina aidīkum wa mā khalfakum la‘allakum turḥamūn(a).",
+      "mean_ind": "Ketika dikatakan kepada mereka, “Takutlah kamu akan (siksa) yang ada di hadapanmu (di dunia) dan azab yang ada di belakangmu (akhirat) agar kamu mendapat rahmat,” (maka mereka berpaling).",
+      "mean_eng": "˹Still they turn away˺ when it is said to them, “Beware of what is ahead of you ˹in the Hereafter˺ and what is behind you ˹of destroyed nations˺ so you may be shown mercy.”"
+    },
+    {
+      "verse_arabic": "وَمَا تَأْتِيْهِمْ مِّنْ اٰيَةٍ مِّنْ اٰيٰتِ رَبِّهِمْ اِلَّا كَانُوْا عَنْهَا مُعْرِضِيْنَ",
+      "verse_latin": "Wa mā ta'tīhim min āyatim min āyāti rabbihim illā kānū ‘anhā mu‘riḍīn(a).",
+      "mean_ind": "Tidak satu pun dari tanda-tanda (kebesaran) Tuhan datang kepada mereka, kecuali mereka berpaling darinya.",
+      "mean_eng": "Whenever a sign comes to them from their Lord, they turn away from it."
+    },
+    {
+      "verse_arabic": "وَاِذَا قِيْلَ لَهُمْ اَنْفِقُوْا مِمَّا رَزَقَكُمُ اللّٰهُ ۙقَالَ الَّذِيْنَ كَفَرُوْا لِلَّذِيْنَ اٰمَنُوْٓا اَنُطْعِمُ مَنْ لَّوْ يَشَاۤءُ اللّٰهُ اَطْعَمَهٗٓ ۖاِنْ اَنْتُمْ اِلَّا فِيْ ضَلٰلٍ مُّبِيْنٍ",
+      "verse_latin": "Wa iżā qīla lahum anfiqū mimmā razaqakumullāh(u), qālal-lażīna kafarū lil-lażīna āmanū anuṭ‘imu mal lau yasyā'ullāhu aṭ‘amah(ū), in antum illā fī ḍalālim mubīn(in).",
+      "mean_ind": "Apabila dikatakan kepada mereka, “Infakkanlah sebagian rezeki yang diberikan Allah kepadamu,” orang-orang yang kufur itu berkata kepada orang-orang yang beriman, “Apakah pantas kami memberi makan kepada orang-orang yang jika Allah menghendaki, Dia akan memberinya makan? Kamu benar-benar dalam kesesatan yang nyata.”",
+      "mean_eng": "And when it is said to them, “Donate from what Allah has provided for you,” the disbelievers say to the believers, “Why should we feed those whom Allah could have fed if He wanted to? You are clearly astray!”"
+    },
+    {
+      "verse_arabic": "وَيَقُوْلُوْنَ مَتٰى هٰذَا الْوَعْدُ اِنْ كُنْتُمْ صٰدِقِيْنَ",
+      "verse_latin": "Wa yaqūlūna matā hāżal-wa‘du in kuntum ṣādiqīn(a).",
+      "mean_ind": "Mereka berkata, “Kapankah janji (hari Kebangkitan) ini (terjadi) jika kamu orang-orang benar?”",
+      "mean_eng": "And they ask ˹the believers˺, “When will this threat come to pass, if what you say is true?”"
+    },
+    {
+      "verse_arabic": "مَا يَنْظُرُوْنَ اِلَّا صَيْحَةً وَّاحِدَةً تَأْخُذُهُمْ وَهُمْ يَخِصِّمُوْنَ",
+      "verse_latin": "Mā yanẓurūna illā ṣaiḥataw wāḥidatan ta'khużuhum wa hum yakhiṣṣimūn(a).",
+      "mean_ind": "Mereka hanya menunggu satu teriakan yang akan membinasakan mereka saat mereka (sibuk) bertengkar (tentang urusan dunia).",
+      "mean_eng": "They must be awaiting a single Blast, which will seize them while they are ˹entrenched˺ in ˹worldly˺ disputes."
+    },
+    {
+      "verse_arabic": "فَلَا يَسْتَطِيْعُوْنَ تَوْصِيَةً وَّلَآ اِلٰٓى اَهْلِهِمْ يَرْجِعُوْنَ ࣖ",
+      "verse_latin": "Falā yastaṭī‘ūna tauṣiyataw wa lā ilā ahlihim yarji‘ūn(a).",
+      "mean_ind": "Oleh sebab itu, mereka tidak dapat berwasiat dan tidak dapat kembali kepada keluarganya.",
+      "mean_eng": "Then they will not be able to make a ˹last˺ will, nor can they return to their own people."
+    },
+    {
+      "verse_arabic": "وَنُفِخَ فِى الصُّوْرِ فَاِذَا هُمْ مِّنَ الْاَجْدَاثِ اِلٰى رَبِّهِمْ يَنْسِلُوْنَ",
+      "verse_latin": "Wa nufikha fiṣ-ṣūri fa'iżā hum minal-ajdāṡi ilā rabbihim yansilūn(a).",
+      "mean_ind": "Sangkakala pun ditiup dan seketika itu mereka bergerak cepat dari kuburnya menuju kepada Tuhannya.",
+      "mean_eng": "The Trumpet will be blown ˹a second time˺, then—behold!—they will rush from the graves to their Lord."
+    },
+    {
+      "verse_arabic": "قَالُوْا يٰوَيْلَنَا مَنْۢ بَعَثَنَا مِنْ مَّرْقَدِنَا ۜهٰذَا مَا وَعَدَ الرَّحْمٰنُ وَصَدَقَ الْمُرْسَلُوْنَ",
+      "verse_latin": "Qālū yā wailanā mam ba‘aṡanā mim marqadinā…hāżā mā wa‘adar-raḥmānu wa ṣadaqal-mursalūn(a).",
+      "mean_ind": "Mereka berkata, “Celakalah kami! Siapakah yang membangkitkan kami dari tempat tidur kami (kubur)?” (Lalu, dikatakan kepada mereka,) “Inilah yang dijanjikan (Allah) Yang Maha Pengasih dan benarlah para rasul(-Nya).”",
+      "mean_eng": "They will cry, “Woe to us! Who has raised us up from our place of rest? This must be what the Most Compassionate warned us of; the messengers told the truth!”"
+    },
+    {
+      "verse_arabic": "اِنْ كَانَتْ اِلَّا صَيْحَةً وَّاحِدَةً فَاِذَا هُمْ جَمِيْعٌ لَّدَيْنَا مُحْضَرُوْنَ",
+      "verse_latin": "In kānat illā ṣaiḥataw wāḥidatan fa'iżā hum jamī‘ul ladainā muḥḍarūn(a).",
+      "mean_ind": "Teriakan itu hanya sekali saja, maka seketika itu mereka semua dihadapkan kepada Kami (untuk dihisab).",
+      "mean_eng": "It will only take one Blast, then at once they will all be brought before Us."
+    },
+    {
+      "verse_arabic": "فَالْيَوْمَ لَا تُظْلَمُ نَفْسٌ شَيْـًٔا وَّلَا تُجْزَوْنَ اِلَّا مَا كُنْتُمْ تَعْمَلُوْنَ",
+      "verse_latin": "Fal-yauma lā tuẓlamu nafsun syai'aw wa lā tujzauna illā mā kuntum ta‘malūn(a).",
+      "mean_ind": "Pada hari itu tidak ada sama sekali orang yang dirugikan sedikit pun. Kamu tidak akan diberi balasan, kecuali atas apa yang telah kamu kerjakan.",
+      "mean_eng": "On that Day no soul will be wronged in the least, nor will you be rewarded except for what you used to do."
+    },
+    {
+      "verse_arabic": "اِنَّ اَصْحٰبَ الْجَنَّةِ الْيَوْمَ فِيْ شُغُلٍ فٰكِهُوْنَ ۚ",
+      "verse_latin": "Inna aṣḥābal-jannatil-yauma fī syugulin fākihūn(a).",
+      "mean_ind": "Sesungguhnya penghuni surga pada hari itu berada dalam kesibukan (sehingga tidak sempat berpikir tentang penghuni neraka) lagi bersenang-senang.",
+      "mean_eng": "Indeed, on that Day the residents of Paradise will be busy enjoying themselves."
+    },
+    {
+      "verse_arabic": "هُمْ وَاَزْوَاجُهُمْ فِيْ ظِلٰلٍ عَلَى الْاَرَاۤىِٕكِ مُتَّكِـُٔوْنَ ۚ",
+      "verse_latin": "Hum wa azwājuhum fī ẓilālin ‘alal-arā'iki muttaki'ūn(a).",
+      "mean_ind": "Mereka dan pasangan-pasangannya berada dalam tempat yang teduh sambil berbaring di atas ranjang berkelambu.",
+      "mean_eng": "They and their spouses will be in ˹cool˺ shade, reclining on ˹canopied˺ couches."
+    },
+    {
+      "verse_arabic": "لَهُمْ فِيْهَا فَاكِهَةٌ وَّلَهُمْ مَّا يَدَّعُوْنَ ۚ",
+      "verse_latin": "Lahum fīhā fākihatuw wa lahum mā yadda‘ūn(a).",
+      "mean_ind": "Di (surga) itu mereka memperoleh buah-buahan dan apa saja yang mereka inginkan.",
+      "mean_eng": "There they will have fruits and whatever they desire."
+    },
+    {
+      "verse_arabic": "سَلٰمٌۗ قَوْلًا مِّنْ رَّبٍّ رَّحِيْمٍ",
+      "verse_latin": "Salāmun qaulam mir rabbir raḥīm(in).",
+      "mean_ind": "(Kepada mereka dikatakan,) “Salam sejahtera” sebagai ucapan dari Tuhan Yang Maha Penyayang.",
+      "mean_eng": "And “Peace!” will be ˹their˺ greeting from the Merciful Lord."
+    },
+    {
+      "verse_arabic": "وَامْتَازُوا الْيَوْمَ اَيُّهَا الْمُجْرِمُوْنَ",
+      "verse_latin": "Wamtāzul-yauma ayyuhal-mujrimūn(a).",
+      "mean_ind": "(Dikatakan kepada orang-orang kafir,) “Berpisahlah kamu (dari orang-orang mukmin) pada hari ini, wahai para pendurhaka!",
+      "mean_eng": "˹Then the disbelievers will be told,˺ “Step away ˹from the believers˺ this Day, O  wicked ones!"
+    },
+    {
+      "verse_arabic": "۞ اَلَمْ اَعْهَدْ اِلَيْكُمْ يٰبَنِيْٓ اٰدَمَ اَنْ لَّا تَعْبُدُوا الشَّيْطٰنَۚ اِنَّهٗ لَكُمْ عَدُوٌّ مُّبِيْنٌ",
+      "verse_latin": "Alam a‘had ilaikum yā banī ādama allā ta‘budusy-syaiṭān(a), innahū lakum ‘aduwwum mubīn(un).",
+      "mean_ind": "Bukankah Aku telah berpesan kepadamu dengan sungguh-sungguh, wahai anak cucu Adam, bahwa janganlah kamu menyembah setan? Sesungguhnya setan itu musuh yang nyata bagi kamu.",
+      "mean_eng": "Did I not command you, O  Children of Adam, not to follow Satan, for he is truly your sworn enemy,"
+    },
+    {
+      "verse_arabic": "وَاَنِ اعْبُدُوْنِيْ ۗهٰذَا صِرَاطٌ مُّسْتَقِيْمٌ",
+      "verse_latin": "Wa ani‘budūnī, hāżā ṣirāṭum mustaqīm(un).",
+      "mean_ind": "(Begitu juga bahwa) sembahlah Aku. Inilah jalan yang lurus.”",
+      "mean_eng": "but to worship Me ˹alone˺? This is the Straight Path."
+    },
+    {
+      "verse_arabic": "وَلَقَدْ اَضَلَّ مِنْكُمْ جِبِلًّا كَثِيْرًا ۗاَفَلَمْ تَكُوْنُوْا تَعْقِلُوْنَ",
+      "verse_latin": "Wa laqad aḍalla minkum jibillan kaṡīrā(n), afalam takūnū ta‘qilūn(a).",
+      "mean_ind": "Sungguh, ia (setan itu) benar-benar telah menyesatkan sangat banyak orang dari kamu. Maka, apakah kamu tidak mengerti?",
+      "mean_eng": "Yet he already misled great multitudes of you. Did you not have any sense?"
+    },
+    {
+      "verse_arabic": "هٰذِهٖ جَهَنَّمُ الَّتِيْ كُنْتُمْ تُوْعَدُوْنَ",
+      "verse_latin": "Hāżihī jahannamul-latī kuntum tū‘adūn(a).",
+      "mean_ind": "Inilah (neraka) Jahanam yang dahulu telah diperingatkan kepadamu.",
+      "mean_eng": "This is the Hell you were warned of."
+    },
+    {
+      "verse_arabic": "اِصْلَوْهَا الْيَوْمَ بِمَا كُنْتُمْ تَكْفُرُوْنَ",
+      "verse_latin": "Iṣlauhal-yauma bimā kuntum takfurūn(a).",
+      "mean_ind": "Masuklah ke dalamnya pada hari ini karena dahulu kamu mengingkarinya.",
+      "mean_eng": "Burn in it Today for your disbelief.”"
+    },
+    {
+      "verse_arabic": "اَلْيَوْمَ نَخْتِمُ عَلٰٓى اَفْوَاهِهِمْ وَتُكَلِّمُنَآ اَيْدِيْهِمْ وَتَشْهَدُ اَرْجُلُهُمْ بِمَا كَانُوْا يَكْسِبُوْنَ",
+      "verse_latin": "Al-yauma nakhtimu ‘alā afwāhihim wa tukallimunā aidīhim wa tasyhadu arjuluhum bimā kānū yaksibūn(a).",
+      "mean_ind": "Pada hari ini Kami membungkam mulut mereka. Tangan merekalah yang berkata kepada Kami dan kaki merekalah yang akan bersaksi terhadap apa yang dahulu mereka kerjakan.",
+      "mean_eng": "On this Day We will seal their mouths, their hands will speak to Us, and their feet will testify to what they used to commit."
+    },
+    {
+      "verse_arabic": "وَلَوْ نَشَاۤءُ لَطَمَسْنَا عَلٰٓى اَعْيُنِهِمْ فَاسْتَبَقُوا الصِّرَاطَ فَاَنّٰى يُبْصِرُوْنَ",
+      "verse_latin": "Wa lau nasyā'u laṭamasnā ‘alā a‘yunihim fastabaquṣ-ṣirāṭa fa annā yubṣirūn(a).",
+      "mean_ind": "Seandainya Kami menghendaki, pastilah Kami akan menghapus penglihatan (membutakan) mereka sehingga mereka berlomba-lomba (mencari) jalan (selamat). Maka, bagaimana mungkin mereka dapat melihat?",
+      "mean_eng": "Had We willed, We could have easily blinded their eyes, so they would struggle to find their way. How then could they see?"
+    },
+    {
+      "verse_arabic": "وَلَوْ نَشَاۤءُ لَمَسَخْنٰهُمْ عَلٰى مَكَانَتِهِمْ فَمَا اسْتَطَاعُوْا مُضِيًّا وَّلَا يَرْجِعُوْنَ ࣖ",
+      "verse_latin": "Wa lau nasyā'u lamasakhnāhum ‘alā makānatihim famastaṭā‘ū muḍiyyaw wa lā yarji‘ūn(a).",
+      "mean_ind": "Seandainya Kami menghendaki, pastilah Kami akan mengubah bentuk mereka di tempat mereka berada, sehingga mereka tidak sanggup meneruskan perjalanan dan juga tidak sanggup pulang kembali.",
+      "mean_eng": "And had We willed, We could have transfigured them on the spot, so they could neither progress forward nor turn back."
+    },
+    {
+      "verse_arabic": "وَمَنْ نُّعَمِّرْهُ نُنَكِّسْهُ فِى الْخَلْقِۗ اَفَلَا يَعْقِلُوْنَ",
+      "verse_latin": "Wa man nu‘ammirhu nunakkishu fil-khalq(i), afalā ya‘qilūn(a).",
+      "mean_ind": "Siapa yang Kami panjangkan umurnya niscaya Kami balik proses penciptaannya (dari kuat menuju lemah). Maka, apakah mereka tidak mengerti?",
+      "mean_eng": "And whoever We grant a long life, We reverse them in development. Will they not then understand?"
+    },
+    {
+      "verse_arabic": "وَمَا عَلَّمْنٰهُ الشِّعْرَ وَمَا يَنْۢبَغِيْ لَهٗ ۗاِنْ هُوَ اِلَّا ذِكْرٌ وَّقُرْاٰنٌ مُّبِيْنٌ ۙ",
+      "verse_latin": "Wa mā ‘allamnāhusy-syi‘ra wa mā yambagī lah(ū), in huwa illā żikruw wa qur'ānum mubīn(un).",
+      "mean_ind": "Kami tidak mengajarkan syair kepadanya (Nabi Muhammad) dan (bersyair) itu tidaklah pantas baginya. (Wahyu yang Kami turunkan kepadanya) itu tidak lain hanyalah pelajaran dan Al-Qur’an yang jelas,",
+      "mean_eng": "We have not taught him poetry, nor is it fitting for him. This ˹Book˺ is only a Reminder and a clear Quran"
+    },
+    {
+      "verse_arabic": "لِّيُنْذِرَ مَنْ كَانَ حَيًّا وَّيَحِقَّ الْقَوْلُ عَلَى الْكٰفِرِيْنَ",
+      "verse_latin": "Liyunżira man kāna ḥayyaw wa yaḥiqqal-qaulu ‘alal-kāfirīn(a).",
+      "mean_ind": "agar dia (Nabi Muhammad) memberi peringatan kepada orang-orang yang hidup (hatinya) dan agar ketetapan (azab) terhadap orang-orang kafir itu menjadi pasti.",
+      "mean_eng": "to warn whoever is ˹truly˺ alive and fulfil the decree ˹of torment˺ against the disbelievers."
+    },
+    {
+      "verse_arabic": "اَوَلَمْ يَرَوْا اَنَّا خَلَقْنَا لَهُمْ مِّمَّا عَمِلَتْ اَيْدِيْنَآ اَنْعَامًا فَهُمْ لَهَا مٰلِكُوْنَ",
+      "verse_latin": "Awalam yarau annā khalaqnā lahum mimmā ‘amilat aidīnā an‘āman fahum lahā mālikūn(a).",
+      "mean_ind": "Tidakkah mereka mengetahui bahwa Kami telah menciptakan untuk mereka hewan-hewan ternak dari ciptaan tangan Kami (sendiri), lalu mereka menjadi pemiliknya?",
+      "mean_eng": "Do they not see that We singlehandedly created for them, among other things, cattle which are under their control?"
+    },
+    {
+      "verse_arabic": "وَذَلَّلْنٰهَا لَهُمْ فَمِنْهَا رَكُوْبُهُمْ وَمِنْهَا يَأْكُلُوْنَ",
+      "verse_latin": "Wa żallalnāhā lahum fa minhā rakūbuhum wa minhā ya'kulūn(a).",
+      "mean_ind": "Kami menjadikannya (hewan-hewan itu) tunduk kepada mereka. Sebagian di antaranya menjadi tunggangan mereka dan sebagian (lagi) mereka makan.",
+      "mean_eng": "And We have subjected these ˹animals˺ to them, so they may ride some and eat others."
+    },
+    {
+      "verse_arabic": "وَلَهُمْ فِيْهَا مَنَافِعُ وَمَشَارِبُۗ اَفَلَا يَشْكُرُوْنَ",
+      "verse_latin": "Wa lahum fīhā manāfi‘u wa masyārib(u), afalā yasykurūn(a).",
+      "mean_ind": "Pada dirinya (hewan-hewan ternak itu) terdapat berbagai manfaat dan minuman untuk mereka. Apakah mereka tidak bersyukur?",
+      "mean_eng": "And they derive from them other benefits and drinks. Will they not then give thanks?"
+    },
+    {
+      "verse_arabic": "وَاتَّخَذُوْا مِنْ دُوْنِ اللّٰهِ اٰلِهَةً لَّعَلَّهُمْ يُنْصَرُوْنَ ۗ",
+      "verse_latin": "Wattakhażū min dūnillāhi ālihatal la‘allahum yunṣarūn(a).",
+      "mean_ind": "Mereka menjadikan sesembahan selain Allah agar mereka mendapat pertolongan.",
+      "mean_eng": "Still they have taken other gods besides Allah, hoping to be helped ˹by them˺."
+    },
+    {
+      "verse_arabic": "لَا يَسْتَطِيْعُوْنَ نَصْرَهُمْۙ وَهُمْ لَهُمْ جُنْدٌ مُّحْضَرُوْنَ",
+      "verse_latin": "Lā yastaṭī‘ūna naṣrahum, wa hum lahum jundum muḥḍarūn(a).",
+      "mean_ind": "(Sesembahan) itu tidak mampu menolong mereka, padahal (sesembahan) itu adalah tentara yang dihadirkan untuk menjaganya.",
+      "mean_eng": "They cannot help the pagans, even though they serve the idols as dedicated guards."
+    },
+    {
+      "verse_arabic": "فَلَا يَحْزُنْكَ قَوْلُهُمْ ۘاِنَّا نَعْلَمُ مَا يُسِرُّوْنَ وَمَا يُعْلِنُوْنَ",
+      "verse_latin": "Falā yaḥzunka qauluhum, innā na‘lamu mā yusirrūna wa mā yu‘linūn(a).",
+      "mean_ind": "Maka, jangan sampai ucapan mereka membuat engkau (Nabi Muhammad) bersedih hati. Sesungguhnya Kami mengetahui apa yang mereka rahasiakan dan apa yang mereka nyatakan.",
+      "mean_eng": "So do not let their words grieve you ˹O Prophet˺. Indeed, We ˹fully˺ know what they conceal and what they reveal."
+    },
+    {
+      "verse_arabic": "اَوَلَمْ يَرَ الْاِنْسَانُ اَنَّا خَلَقْنٰهُ مِنْ نُّطْفَةٍ فَاِذَا هُوَ خَصِيْمٌ مُّبِيْنٌ",
+      "verse_latin": "Awalam yaral-insānu annā khalaqnāhu min nuṭfatin fa'iżā huwa khaṣīmum mubīn(un).",
+      "mean_ind": "Tidakkah manusia mengetahui bahwa Kami menciptakannya dari setetes mani? Kemudian tiba-tiba saja dia menjadi musuh yang nyata.",
+      "mean_eng": "Do people not see that We have created them from a sperm-drop, then—behold!—they openly challenge ˹Us˺?"
+    },
+    {
+      "verse_arabic": "وَضَرَبَ لَنَا مَثَلًا وَّنَسِيَ خَلْقَهٗۗ قَالَ مَنْ يُّحْيِ الْعِظَامَ وَهِيَ رَمِيْمٌ",
+      "verse_latin": "Wa ḍaraba lanā maṡalaw wa nasiya khalqah(ū), qāla may yuḥyil-‘iẓāma wa hiya ramīm(un).",
+      "mean_ind": "Dia membuat perumpamaan bagi Kami dan melupakan asal penciptaannya. Dia berkata, “Siapakah yang bisa menghidupkan tulang-belulang yang telah hancur luluh?”",
+      "mean_eng": "And they argue with Us—forgetting they were created—saying, “Who will give life to decayed bones?”"
+    },
+    {
+      "verse_arabic": "قُلْ يُحْيِيْهَا الَّذِيْٓ اَنْشَاَهَآ اَوَّلَ مَرَّةٍ ۗوَهُوَ بِكُلِّ خَلْقٍ عَلِيْمٌ ۙ",
+      "verse_latin": "Qul yuḥyīhal-lażī ansya'ahā awwala marrah(tin), wa huwa bikulli khalqin ‘alīm(un).",
+      "mean_ind": "Katakanlah (Nabi Muhammad), “Yang akan menghidupkannya adalah Zat yang menciptakannya pertama kali. Dia Maha Mengetahui setiap makhluk.",
+      "mean_eng": "Say, ˹O Prophet,˺ “They will be revived by the One Who produced them the first time, for He has ˹perfect˺ knowledge of every created being."
+    },
+    {
+      "verse_arabic": "الَّذِيْ جَعَلَ لَكُمْ مِّنَ الشَّجَرِ الْاَخْضَرِ نَارًاۙ فَاِذَآ اَنْتُمْ مِّنْهُ تُوْقِدُوْنَ",
+      "verse_latin": "Allażī ja‘ala lakum minasy-syajaril-akhḍari nārā(n), fa'iżā antum minhu tūqidūn(a).",
+      "mean_ind": "(Dialah) yang menjadikan api untukmu dari kayu yang hijau. Kemudian, seketika itu kamu menyalakan (api) darinya.”",
+      "mean_eng": "˹He is the One˺ Who gives you fire from green trees, and—behold!—you kindle ˹fire˺ from them."
+    },
+    {
+      "verse_arabic": "اَوَلَيْسَ الَّذِيْ خَلَقَ السَّمٰوٰتِ وَالْاَرْضَ بِقٰدِرٍ عَلٰٓى اَنْ يَّخْلُقَ مِثْلَهُمْ ۗبَلٰى وَهُوَ الْخَلّٰقُ الْعَلِيْمُ",
+      "verse_latin": "Awa laisal-lażī khalaqas-samāwāti wal-arḍa biqādirin ‘alā ay yakhluqa miṡlahum, balā wa huwal-khallāqul-‘alīm(u).",
+      "mean_ind": "Bukankah Zat yang menciptakan langit dan bumi mampu menciptakan manusia yang serupa mereka itu (di akhirat kelak)? Benar. Dialah yang Maha Banyak Mencipta lagi Maha Mengetahui.",
+      "mean_eng": "Can the One Who created the heavens and the earth not ˹easily˺ resurrect these ˹deniers˺?” Yes ˹He can˺! For He is the Master Creator, All-Knowing."
+    },
+    {
+      "verse_arabic": "اِنَّمَآ اَمْرُهٗٓ اِذَآ اَرَادَ شَيْـًٔاۖ اَنْ يَّقُوْلَ لَهٗ كُنْ فَيَكُوْنُ",
+      "verse_latin": "Innamā amruhū iżā arāda syai'an ay yaqūla lahū kun fa yakūn(u).",
+      "mean_ind": "Sesungguhnya ketetapan-Nya, jika Dia menghendaki sesuatu, Dia hanya berkata kepadanya, “Jadilah!” Maka, jadilah (sesuatu) itu.",
+      "mean_eng": "All it takes, when He wills something ˹to be˺, is simply to say to it: “Be!” And it is!"
+    },
+    {
+      "verse_arabic": "فَسُبْحٰنَ الَّذِيْ بِيَدِهٖ مَلَكُوْتُ كُلِّ شَيْءٍ وَّاِلَيْهِ تُرْجَعُوْنَ ࣖ",
+      "verse_latin": "Fa subḥānal-lażī biyadihī malakūtu kulli syai'iw wa ilaihi turja‘ūn(a).",
+      "mean_ind": "Maka, Mahasuci (Allah) yang di tangan-Nya kekuasaan atas segala sesuatu dan kepada-Nya kamu dikembalikan.",
+      "mean_eng": "So glory be to the One in Whose Hands is the authority over all things, and to Whom ˹alone˺ you will ˹all˺ be returned."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Benim Zikrim</string>
+    <string name="app_name">Al Mülk</string>
 
     <!-- Text -->
     <string name="label_your_dhikr">Zikiriniz</string>
@@ -65,11 +65,19 @@
     <string name="label_info_change_theme">Beğendiğiniz temayı değiştirebilirsiniz</string>
     <string name="label_set_target_dhikr">Zikir hedefinizi belirleyin</string>
 
-
     <!--************************ Section Dhikr ************************-->
     <string name="label_dhikr_morning">Morning Dhikr</string>
     <string name="label_dhikr_evening">Evening Dhikr</string>
     <string name="label_prayer_morning">Morning Prayer</string>
     <string name="label_prayer_evening">Evening Prayer</string>
     <!--************************ End Section Dhikr ************************-->
+
+    <!--************************ Section Surah ************************-->
+    <string name="label_surah_mean_al_mulk">Egemenlik</string>
+    <string name="label_surah_mean_al_baqarah">Düve</string>
+    <string name="label_surah_mean_al_waqiah">Kaçınılmaz</string>
+    <string name="label_surah_mean_ar_rahman">Merhametli</string>
+    <string name="label_surah_mean_ar_yasin">Yasin</string>
+    <string name="label_number_of_ayah">Ayet %d</string>
+    <!--************************ End Section Surah ************************-->
 </resources>

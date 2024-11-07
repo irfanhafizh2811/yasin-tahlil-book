@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryPurple">
+
+        <TextView
+            android:id="@+id/tvAddSizeDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Add size text arabic, latin and mean"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/clPlusSize"
+            app:layout_constraintEnd_toStartOf="@+id/clPlusSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/clPlusSize" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPlusSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:minHeight="56dp"
+            android:paddingHorizontal="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/clMinusSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvPlusSize"
+                style="@style/TextView.Shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:text="A"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textColor="@color/themeUnselected" />
+
+            <TextView
+                android:id="@+id/tvPlusSizeSymbol"
+                style="@style/TextView.Shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/tvPlusSize"
+                app:layout_constraintEnd_toEndOf="@id/tvPlusSize"
+                app:layout_constraintTop_toTopOf="@id/tvPlusSize"
+                tools:textColor="@color/themeUnselected" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDarkPurple"
+            app:layout_constraintBottom_toTopOf="@id/clMinusSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clPlusSize" />
+
+        <TextView
+            android:id="@+id/tvMinusSizeDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Minus size text arabic, latin and mean"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/clMinusSize"
+            app:layout_constraintEnd_toStartOf="@+id/clMinusSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/clMinusSize" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMinusSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:minHeight="56dp"
+            android:paddingHorizontal="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/scLatin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clPlusSize">
+
+            <TextView
+                android:id="@+id/tvMinusSize"
+                style="@style/TextView.Shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:text="A"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMinusSizeSymbol"
+                style="@style/TextView.Shadow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/tvMinusSize"
+                app:layout_constraintEnd_toEndOf="@id/tvMinusSize"
+                app:layout_constraintTop_toTopOf="@id/tvMinusSize" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDarkPurple"
+            app:layout_constraintBottom_toTopOf="@id/scLatin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clMinusSize" />
+
+        <TextView
+            android:id="@+id/tvLatin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Show latin text of quran"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/scLatin"
+            app:layout_constraintEnd_toStartOf="@+id/scLatin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scLatin" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/scLatin"
+            style="@style/Widget.AppCompat.DrawerArrowToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/scTranslate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clMinusSize"
+            app:thumbTint="@color/colorAccentPurple"
+            app:thumbTintMode="src_atop"
+            app:trackTint="@color/colorAccentPurpleTrack"
+            tools:checked="true" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDarkPurple"
+            app:layout_constraintBottom_toTopOf="@id/scLatin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scTranslate" />
+
+        <TextView
+            android:id="@+id/tvTranslate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Show translate text of quran"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/scTranslate"
+            app:layout_constraintEnd_toStartOf="@+id/scTranslate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scTranslate" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/scTranslate"
+            style="@style/Widget.AppCompat.DrawerArrowToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scLatin"
+            app:thumbTint="@color/colorAccentPurple"
+            app:thumbTintMode="src_atop"
+            tools:checked="false" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/clParent"
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingHorizontal="20dp">
+
+    <ImageView
+        android:id="@+id/ivEndOfAyah"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_rub_al_hizb"
+        app:tint="@color/colorPrimaryPurple" />
+
+    <TextView
+        android:id="@+id/tvEndOfAyah"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:fontFamily="@font/font_izmir_bold"
+        android:gravity="center"
+        android:textAlignment="gravity"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivEndOfAyah"
+        app:layout_constraintEnd_toEndOf="@id/ivEndOfAyah"
+        app:layout_constraintStart_toStartOf="@id/ivEndOfAyah"
+        app:layout_constraintTop_toTopOf="@id/ivEndOfAyah"
+        tools:text="56" />
+
+    <TextView
+        android:id="@+id/tv_surah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/font_izmir_bold"
+        android:textColor="@color/colorGreyShine"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_verses"
+        app:layout_constraintStart_toEndOf="@id/ivEndOfAyah"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Al Baqarah" />
+
+    <TextView
+        android:id="@+id/tv_verses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/font_izmir_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivEndOfAyah"
+        app:layout_constraintTop_toBottomOf="@id/tv_surah"
+        tools:text="MECCA • 286 Verses" />
+
+    <TextView
+        android:id="@+id/tvArabic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/font_scheherazade_new_regular"
+        android:paddingTop="6dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="الْبَقَرَة" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_unselected_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

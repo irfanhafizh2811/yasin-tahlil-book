@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2B3137</color>
+    <color name="colorPrimary">#00113f</color>
     <color name="colorPrimaryDark">#0e3a6a</color>
     <color name="colorAccent">#d9b04b</color>
+
+    <color name="colorPrimaryPurple">#672CBB</color>
+    <color name="colorPrimaryDarkPurple">#5B29AE</color>
+    <color name="colorAccentPurple">#F4B40E</color>
+    <color name="colorAccentPurpleTrack">#65F4B40E</color>
 
     <color name="themeSelected">#b2782a</color>
     <color name="themeUnselected">#bcb5b9</color>
@@ -21,6 +26,7 @@
     <color name="colorBackgroundTarget">#B3000000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#2B2B2B</color>
+    <color name="colorGreyShine">#FF454545</color>
 
     <!--*********************** Section Dhikr ***********************-->
     <color name="colorAccentMorningDhikr">#0E3A6A</color>

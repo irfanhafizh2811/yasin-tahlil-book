@@ -3,16 +3,16 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-            storePassword "tasbeeh2020"
-            keyAlias 'tasbeeh-debug-key'
-            keyPassword 'tasbeeh2020'
+            storePassword "almulk2024"
+            keyAlias 'almulk-debug-key'
+            keyPassword 'almulk2024'
             storeFile file("debug-key.jks")
         }
         release {
-            storePassword "tasbeeh2021"
-            keyAlias 'tasbeeh-release-key2'
-            keyPassword 'tasbeeh2021'
-            storeFile file('release-key2.jks')
+            storePassword "almulk2024"
+            keyAlias 'almulk-release-key'
+            keyPassword 'almulk2024'
+            storeFile file('release-key.jks')
         }
     }
 }

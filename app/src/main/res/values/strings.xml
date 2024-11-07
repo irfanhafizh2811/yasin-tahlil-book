@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyDhikr</string>
+    <string name="app_name">Al Mulk</string>
     <string name="id_unit_interstitial" translatable="false">ca-app-pub-5079073523461972/7622404494</string>
     <string name="id_unit_interstitial_sample_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="id_unit_banner" translatable="false">ca-app-pub-5079073523461972/8857837804</string>
@@ -36,14 +36,14 @@
     <string name="label_choose_themes">Choose Themes</string>
     <string name="label_themes">Themes</string>
     <string name="label_more">More</string>
-    <string name="label_picker_black_white">BlackWhite</string>
-    <string name="label_picker_default">Default</string>
-    <string name="label_picker_flowers">Flower</string>
-    <string name="label_picker_leaves">Leaves</string>
     <string name="label_picker_eid_al_fitr">Eid Al-Fitr</string>
     <string name="label_picker_yellow">Yellow</string>
     <string name="label_picker_kaaba">Kaaba</string>
     <string name="label_picker_ramadhan">Ramadhan</string>
+    <string name="label_picker_black_white">BlackWhite</string>
+    <string name="label_picker_default">Default</string>
+    <string name="label_picker_flowers">Flower</string>
+    <string name="label_picker_leaves">Leaves</string>
     <string name="label_rating_and_review_apps">Rating and Review MyDhikr Apps</string>
     <string name="label_our_applications">Our Applications</string>
     <string name="label_vibration">Vibration</string>
@@ -80,6 +80,26 @@
     <string name="label_dhikr_evening">Evening Dhikr</string>
     <string name="label_prayer_morning">Morning Prayer</string>
     <string name="label_prayer_evening">Evening Prayer</string>
-    <string name="label_new" translatable="false">New</string>
     <!--************************ End Section Dhikr ************************-->
+
+
+    <!--************************ Section Analytic ************************-->
+    <string name="analytic_morning" translatable="false">Morning Dhikr</string>
+    <string name="analytic_evening" translatable="false">Evening Dhikr</string>
+    <string name="analytic_morning_complete" translatable="false">Morning Dhikr Complete</string>
+    <string name="analytic_evening_complete" translatable="false">Evening Dhikr Complete</string>
+    <string name="analytic_morning_pray" translatable="false">Morning Pray Complete</string>
+    <string name="analytic_evening_pray" translatable="false">Evening Pray Complete</string>
+    <!--************************ End Section Analytic ************************-->
+
+
+    <!--************************ Section Surah ************************-->
+    <string name="label_surah_mean_al_mulk">The Sovereignty</string>
+    <string name="label_surah_mean_al_baqarah">The Heifer or The Cow</string>
+    <string name="label_surah_mean_al_waqiah">The Inevitable</string>
+    <string name="label_surah_mean_ar_rahman">The Merciful</string>
+    <string name="label_surah_mean_ar_yasin">Yasin</string>
+    <string name="label_number_of_ayah">Verse %d</string>
+    <string name="label_new" translatable="false">New</string>
+    <!--************************ End Section Surah ************************-->
 </resources>

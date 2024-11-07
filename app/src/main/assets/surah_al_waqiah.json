@@ -1,0 +1,582 @@
+{
+  "surah_name": "Al Waqiah",
+  "surah_arabic": "الْوَاقِعَةُۙ",
+  "surah": [
+    {
+      "verse_arabic": "اِذَا وَقَعَتِ الْوَاقِعَةُۙ",
+      "verse_latin": "Iżā waqa‘atil-wāqi‘ah(tu).",
+      "mean_ind": "Apabila terjadi hari Kiamat (yang pasti terjadi),",
+      "mean_eng": "When the Inevitable Event takes place,"
+    },
+    {
+      "verse_arabic": "لَيْسَ لِوَقْعَتِهَا كَاذِبَةٌ ۘ",
+      "verse_latin": "Laisa liwaq‘atihā kāżibah(tun).",
+      "mean_ind": "tidak ada seorang pun yang (dapat) mendustakan terjadinya.",
+      "mean_eng": "then no one can deny it has come."
+    },
+    {
+      "verse_arabic": "خَافِضَةٌ رَّافِعَةٌ",
+      "verse_latin": "Khāfiḍatur rāfi‘ah(tun).",
+      "mean_ind": "(Kejadian itu) merendahkan (satu golongan) dan meninggikan (golongan yang lain).",
+      "mean_eng": "It will debase ˹some˺ and elevate ˹others˺."
+    },
+    {
+      "verse_arabic": "اِذَا رُجَّتِ الْاَرْضُ رَجًّاۙ",
+      "verse_latin": "Iżā rujjatil-arḍu rajjā(n).",
+      "mean_ind": "Apabila bumi diguncangkan sedahsyat-dahsyatnya",
+      "mean_eng": "When the earth will be violently shaken,"
+    },
+    {
+      "verse_arabic": "وَّبُسَّتِ الْجِبَالُ بَسًّاۙ",
+      "verse_latin": "Wa bussatil-jibālu bassā(n).",
+      "mean_ind": "dan gunung-gunung dihancurkan sehancur-hancurnya,",
+      "mean_eng": "and the mountains will be crushed to pieces,"
+    },
+    {
+      "verse_arabic": "فَكَانَتْ هَبَاۤءً مُّنْۢبَثًّاۙ",
+      "verse_latin": "Fa kānat habā'am mumbaṡṡā(n).",
+      "mean_ind": "jadilah ia debu yang beterbangan.",
+      "mean_eng": "becoming scattered ˹particles of˺ dust,"
+    },
+    {
+      "verse_arabic": "وَّكُنْتُمْ اَزْوَاجًا ثَلٰثَةً ۗ",
+      "verse_latin": "Wa kuntum azwājan ṡalāṡah(tan).",
+      "mean_ind": "Kamu menjadi tiga golongan,",
+      "mean_eng": "you will ˹all˺ be ˹divided into˺ three groups:"
+    },
+    {
+      "verse_arabic": "فَاَصْحٰبُ الْمَيْمَنَةِ ەۙ مَآ اَصْحٰبُ الْمَيْمَنَةِ ۗ",
+      "verse_latin": "Fa aṣḥābul-maimanah(ti), mā aṣḥābul-maimanah(ti).",
+      "mean_ind": "yaitu golongan kanan, alangkah mulianya golongan kanan itu",
+      "mean_eng": "the people of the right, how ˹blessed˺ will they be;"
+    },
+    {
+      "verse_arabic": "وَاَصْحٰبُ الْمَشْـَٔمَةِ ەۙ مَآ اَصْحٰبُ الْمَشْـَٔمَةِ ۗ",
+      "verse_latin": "Wa aṣḥābul-masy'amah(ti), mā aṣḥābul-masy'amah(ti).",
+      "mean_ind": "dan golongan kiri, alangkah sengsaranya golongan kiri itu.",
+      "mean_eng": "the people of the left, how ˹miserable˺ will they be;"
+    },
+    {
+      "verse_arabic": "وَالسّٰبِقُوْنَ السّٰبِقُوْنَۙ",
+      "verse_latin": "Was-sābiqūnas-sābiqūn(a).",
+      "mean_ind": "Selain itu, (golongan ketiga adalah) orang-orang yang paling dahulu (beriman). Merekalah yang paling dahulu (masuk surga).",
+      "mean_eng": "and the foremost ˹in faith˺ will be the foremost ˹in Paradise˺."
+    },
+    {
+      "verse_arabic": "اُولٰۤىِٕكَ الْمُقَرَّبُوْنَۚ",
+      "verse_latin": "Ulā'ikal-muqarrabūn(a).",
+      "mean_ind": "Mereka itulah orang-orang yang didekatkan (kepada Allah).",
+      "mean_eng": "They are the ones nearest ˹to Allah˺,"
+    },
+    {
+      "verse_arabic": "فِيْ جَنّٰتِ النَّعِيْمِ",
+      "verse_latin": "Fī jannātin-na‘īm(i).",
+      "mean_ind": "(Mereka) berada dalam surga (yang penuh) kenikmatan.",
+      "mean_eng": "in the Gardens of Bliss."
+    },
+    {
+      "verse_arabic": "ثُلَّةٌ مِّنَ الْاَوَّلِيْنَۙ",
+      "verse_latin": "Ṡullatum minal-awwalīn(a).",
+      "mean_ind": "(Mereka adalah) segolongan besar dari orang-orang yang terdahulu",
+      "mean_eng": "˹They will be˺ a multitude from earlier generations"
+    },
+    {
+      "verse_arabic": "وَقَلِيْلٌ مِّنَ الْاٰخِرِيْنَۗ",
+      "verse_latin": "Wa qalīlum minal-ākhirīn(a).",
+      "mean_ind": "dan sedikit dari orang-orang yang (datang) kemudian.",
+      "mean_eng": "and a few from later generations."
+    },
+    {
+      "verse_arabic": "عَلٰى سُرُرٍ مَّوْضُوْنَةٍۙ",
+      "verse_latin": "‘Alā sururim mauḍūnah(tin).",
+      "mean_ind": "(Mereka berada) di atas dipan-dipan yang bertatahkan emas dan permata",
+      "mean_eng": "˹All will be˺ on jewelled thrones,"
+    },
+    {
+      "verse_arabic": "مُّتَّكِـِٕيْنَ عَلَيْهَا مُتَقٰبِلِيْنَ",
+      "verse_latin": "Muttaki'īna ‘alaihā mutaqābilīn(a).",
+      "mean_ind": "seraya bersandar di atasnya saling berhadapan.",
+      "mean_eng": "reclining face to face."
+    },
+    {
+      "verse_arabic": "يَطُوْفُ عَلَيْهِمْ وِلْدَانٌ مُّخَلَّدُوْنَۙ",
+      "verse_latin": "Yaṭūfu ‘alaihim wildānum mukhalladūn(a).",
+      "mean_ind": "Mereka dikelilingi oleh anak-anak yang selalu muda",
+      "mean_eng": "They will be waited on by eternal youths"
+    },
+    {
+      "verse_arabic": "بِاَكْوَابٍ وَّاَبَارِيْقَۙ وَكَأْسٍ مِّنْ مَّعِيْنٍۙ",
+      "verse_latin": "Bi'akwābiw wa abārīq(a), wa ka'sim mim ma‘īn(in).",
+      "mean_ind": "dengan (membawa) gelas, kendi, dan seloki (berisi minuman yang diambil) dari sumber yang mengalir.",
+      "mean_eng": "with cups, pitchers, and a drink ˹of pure wine˺ from a flowing stream,"
+    },
+    {
+      "verse_arabic": "لَّا يُصَدَّعُوْنَ عَنْهَا وَلَا يُنْزِفُوْنَۙ",
+      "verse_latin": "Lā yuṣadda‘ūna ‘anhā wa lā yunzifūn(a).",
+      "mean_ind": "Mereka tidak pening karenanya dan tidak pula mabuk.",
+      "mean_eng": "that will cause them neither headache nor intoxication."
+    },
+    {
+      "verse_arabic": "وَفَاكِهَةٍ مِّمَّا يَتَخَيَّرُوْنَۙ",
+      "verse_latin": "Wa fākihatim mimmā yatakhayyarūn(a).",
+      "mean_ind": "(Mereka menyuguhkan pula) buah-buahan yang mereka pilih",
+      "mean_eng": "˹They will also be served˺ any fruit they choose"
+    },
+    {
+      "verse_arabic": "وَلَحْمِ طَيْرٍ مِّمَّا يَشْتَهُوْنَۗ",
+      "verse_latin": "Wa laḥmi ṭairim mimmā yasytahūn(a).",
+      "mean_ind": "dan daging burung yang mereka sukai.",
+      "mean_eng": "and meat from any bird they desire."
+    },
+    {
+      "verse_arabic": "وَحُوْرٌ عِيْنٌۙ",
+      "verse_latin": "Wa ḥūrun ‘īn(un).",
+      "mean_ind": "Ada bidadari yang bermata indah",
+      "mean_eng": "And ˹they will have˺ maidens with gorgeous eyes,"
+    },
+    {
+      "verse_arabic": "كَاَمْثَالِ اللُّؤْلُؤِ الْمَكْنُوْنِۚ",
+      "verse_latin": "Ka'amṡālil-lu'lu'il-maknūn(i).",
+      "mean_ind": "laksana mutiara yang tersimpan dengan baik",
+      "mean_eng": "like pristine pearls,"
+    },
+    {
+      "verse_arabic": "جَزَاۤءًۢ بِمَا كَانُوْا يَعْمَلُوْنَ",
+      "verse_latin": "Jazā'am bimā kānū ya‘malūn(a).",
+      "mean_ind": "sebagai balasan atas apa yang selama ini mereka kerjakan.",
+      "mean_eng": "˹all˺ as a reward for what they used to do."
+    },
+    {
+      "verse_arabic": "لَا يَسْمَعُوْنَ فِيْهَا لَغْوًا وَّلَا تَأْثِيْمًاۙ",
+      "verse_latin": "Lā yasma‘ūna fīhā lagwaw wa lā ta'ṡīmā(n).",
+      "mean_ind": "Di sana mereka tidak mendengar percakapan yang sia-sia dan tidak (pula) percakapan yang menimbulkan dosa,",
+      "mean_eng": "There they will never hear any idle or sinful talk—"
+    },
+    {
+      "verse_arabic": "اِلَّا قِيْلًا سَلٰمًا سَلٰمًا",
+      "verse_latin": "Illā qīlan salāman salāmā(n).",
+      "mean_ind": "kecuali (yang mereka dengar hanyalah) ucapan, “Salam… salam.”",
+      "mean_eng": "only good and virtuous speech."
+    },
+    {
+      "verse_arabic": "وَاَصْحٰبُ الْيَمِيْنِ ەۙ مَآ اَصْحٰبُ الْيَمِيْنِۗ",
+      "verse_latin": "Wa aṣḥābul-yamīn(i), mā aṣḥābul-yamīn(i).",
+      "mean_ind": "Golongan kanan, alangkah mulianya golongan kanan itu.",
+      "mean_eng": "And the people of the right—how ˹blessed˺ will they be!"
+    },
+    {
+      "verse_arabic": "فِيْ سِدْرٍ مَّخْضُوْدٍۙ",
+      "verse_latin": "Fī sidrim makhḍūd(in).",
+      "mean_ind": "(Mereka) berada di antara pohon bidara yang tidak berduri,",
+      "mean_eng": "˹They will be˺ amid thornless lote trees,"
+    },
+    {
+      "verse_arabic": "وَّطَلْحٍ مَّنْضُوْدٍۙ",
+      "verse_latin": "Wa ṭalḥim manḍūd(in).",
+      "mean_ind": "pohon pisang yang (buahnya) bersusun-susun,",
+      "mean_eng": "clusters of bananas,"
+    },
+    {
+      "verse_arabic": "وَّظِلٍّ مَّمْدُوْدٍۙ",
+      "verse_latin": "Wa ẓillim mamdūd(in).",
+      "mean_ind": "naungan yang terbentang luas,",
+      "mean_eng": "extended shade,"
+    },
+    {
+      "verse_arabic": "وَّمَاۤءٍ مَّسْكُوْبٍۙ",
+      "verse_latin": "Wa mā'im maskūb(in).",
+      "mean_ind": "air yang tercurah,",
+      "mean_eng": "flowing water,"
+    },
+    {
+      "verse_arabic": "وَّفَاكِهَةٍ كَثِيْرَةٍۙ",
+      "verse_latin": "Wa fākihatin kaṡīrah(tin).",
+      "mean_ind": "buah-buahan yang banyak",
+      "mean_eng": "abundant fruit—"
+    },
+    {
+      "verse_arabic": "لَّا مَقْطُوْعَةٍ وَّلَا مَمْنُوْعَةٍۙ",
+      "verse_latin": "Lā maqṭū‘atiw wa lā mamnū‘ah(tin).",
+      "mean_ind": "yang tidak berhenti berbuah dan tidak terlarang memetiknya,",
+      "mean_eng": "never out of season nor forbidden—"
+    },
+    {
+      "verse_arabic": "وَّفُرُشٍ مَّرْفُوْعَةٍۗ",
+      "verse_latin": "Wa furusyim marfū‘ah(tin).",
+      "mean_ind": "dan kasur-kasur yang tebal lagi empuk.",
+      "mean_eng": "and elevated furnishings."
+    },
+    {
+      "verse_arabic": "اِنَّآ اَنْشَأْنٰهُنَّ اِنْشَاۤءًۙ",
+      "verse_latin": "Innā ansya'nāhunna insyā'ā(n).",
+      "mean_ind": "Sesungguhnya Kami menciptakan mereka (bidadari itu) secara langsung,",
+      "mean_eng": "Indeed, We will have perfectly created their mates,"
+    },
+    {
+      "verse_arabic": "فَجَعَلْنٰهُنَّ اَبْكَارًاۙ",
+      "verse_latin": "Faja‘alnāhunna abkārā(n).",
+      "mean_ind": "lalu Kami jadikan mereka perawan-perawan",
+      "mean_eng": "making them virgins,"
+    },
+    {
+      "verse_arabic": "عُرُبًا اَتْرَابًاۙ",
+      "verse_latin": "‘Uruban atrābā(n).",
+      "mean_ind": "yang penuh cinta (lagi) sebaya umurnya,",
+      "mean_eng": "loving and of equal age,"
+    },
+    {
+      "verse_arabic": "لِّاَصْحٰبِ الْيَمِيْنِۗ",
+      "verse_latin": "Li'aṣḥābil-yamīn(i).",
+      "mean_ind": "(diperuntukkan) bagi golongan kanan,",
+      "mean_eng": "for the people of the right,"
+    },
+    {
+      "verse_arabic": "ثُلَّةٌ مِّنَ الْاَوَّلِيْنَۙ",
+      "verse_latin": "Ṡullatum minal-awwalīn(a).",
+      "mean_ind": "(yaitu) segolongan besar dari orang-orang yang terdahulu",
+      "mean_eng": "˹who will be˺ a multitude from earlier generations"
+    },
+    {
+      "verse_arabic": "وَثُلَّةٌ مِّنَ الْاٰخِرِيْنَۗ ࣖ",
+      "verse_latin": "Wa ṡullatum minal-ākhirīn(a).",
+      "mean_ind": "dan segolongan besar (pula) dari orang-orang yang kemudian.",
+      "mean_eng": "and a multitude from later generations."
+    },
+    {
+      "verse_arabic": "وَاَصْحٰبُ الشِّمَالِ ەۙ مَآ اَصْحٰبُ الشِّمَالِۗ",
+      "verse_latin": "Wa aṣḥābusy-syimāl(i), mā aṣḥābusy-syimāl(i).",
+      "mean_ind": "Golongan kiri, alangkah sengsaranya golongan kiri itu.",
+      "mean_eng": "And the people of the left—how ˹miserable˺ will they be!"
+    },
+    {
+      "verse_arabic": "فِيْ سَمُوْمٍ وَّحَمِيْمٍۙ",
+      "verse_latin": "Fī samūmiw wa ḥamīm(in).",
+      "mean_ind": "(Mereka berada) dalam siksaan angin yang sangat panas, air yang mendidih,",
+      "mean_eng": "˹They will be˺ in scorching heat and boiling water,"
+    },
+    {
+      "verse_arabic": "وَّظِلٍّ مِّنْ يَّحْمُوْمٍۙ",
+      "verse_latin": "Wa ẓillim miy yaḥmūm(in).",
+      "mean_ind": "dan naungan asap hitam",
+      "mean_eng": "in the shade of black smoke,"
+    },
+    {
+      "verse_arabic": "لَّا بَارِدٍ وَّلَا كَرِيْمٍ",
+      "verse_latin": "Lā bāridiw wa lā karīm(in).",
+      "mean_ind": "yang tidak sejuk dan tidak menyenangkan.",
+      "mean_eng": "neither cool nor refreshing."
+    },
+    {
+      "verse_arabic": "اِنَّهُمْ كَانُوْا قَبْلَ ذٰلِكَ مُتْرَفِيْنَۚ",
+      "verse_latin": "Innahum kānū qabla żālika mutrafīn(a).",
+      "mean_ind": "Sesungguhnya mereka sebelum itu hidup bermewah-mewah.",
+      "mean_eng": "Indeed, before this ˹torment˺ they were spoiled by luxury,"
+    },
+    {
+      "verse_arabic": "وَكَانُوْا يُصِرُّوْنَ عَلَى الْحِنْثِ الْعَظِيْمِۚ",
+      "verse_latin": "Wa kānū yuṣirrūna ‘alal-ḥinṡil-‘aẓīm(i).",
+      "mean_ind": "Mereka terus-menerus mengerjakan dosa yang besar.",
+      "mean_eng": "and persisted in the worst of sin."
+    },
+    {
+      "verse_arabic": "وَكَانُوْا يَقُوْلُوْنَ ەۙ اَىِٕذَا مِتْنَا وَكُنَّا تُرَابًا وَّعِظَامًا ءَاِنَّا لَمَبْعُوْثُوْنَۙ",
+      "verse_latin": "Wa kānū yaqūlūn(a), a'iżā mitnā wa kunnā turābaw wa ‘iẓāman a'innā lamab‘ūṡūn(a).",
+      "mean_ind": "Mereka berkata, “Apabila kami telahmati menjadi tanah dan tulang-belulang, apakah kami benar-benar akan dibangkitkan (kembali)?",
+      "mean_eng": "They used to ask ˹mockingly˺, “When we are dead and reduced to dust and bones, will we really be resurrected?"
+    },
+    {
+      "verse_arabic": "اَوَاٰبَاۤؤُنَا الْاَوَّلُوْنَ",
+      "verse_latin": "Awa'ābā'unal-awwalūn(a).",
+      "mean_ind": "Apakah nenek moyang kami yang terdahulu (akan dibangkitkan pula)?”",
+      "mean_eng": "And our forefathers as well?”"
+    },
+    {
+      "verse_arabic": "قُلْ اِنَّ الْاَوَّلِيْنَ وَالْاٰخِرِيْنَۙ",
+      "verse_latin": "Qul innal-awwalīna wal-ākhirīn(a).",
+      "mean_ind": "Katakanlah (Nabi Muhammad), “Sesungguhnya orang-orang yang terdahulu dan yang kemudian",
+      "mean_eng": "Say, ˹O Prophet,˺ “Most certainly, earlier and later generations"
+    },
+    {
+      "verse_arabic": "لَمَجْمُوْعُوْنَۙ اِلٰى مِيْقَاتِ يَوْمٍ مَّعْلُوْمٍ",
+      "verse_latin": "Lamajmū‘ūn(a), ilā mīqāti yaumim ma‘lūm(in).",
+      "mean_ind": "benar-benar akan dikumpulkan pada waktu tertentu, yaitu hari yang sudah diketahui.",
+      "mean_eng": "will surely be gathered ˹together˺ for the appointed Day."
+    },
+    {
+      "verse_arabic": "ثُمَّ اِنَّكُمْ اَيُّهَا الضَّاۤ لُّوْنَ الْمُكَذِّبُوْنَۙ",
+      "verse_latin": "Ṡumma innakum ayyuhaḍ-ḍāllūnal-mukażżibūn(a).",
+      "mean_ind": "Kemudian, sesungguhnya kamu, wahai orang-orang sesat lagi pendusta,",
+      "mean_eng": "Then you, O  misguided deniers,"
+    },
+    {
+      "verse_arabic": "لَاٰكِلُوْنَ مِنْ شَجَرٍ مِّنْ زَقُّوْمٍۙ",
+      "verse_latin": "La'ākilūna min syajarim min zaqqūm(in).",
+      "mean_ind": "pasti akan memakan pohon zaqum.",
+      "mean_eng": "will certainly eat from ˹the fruit of˺ the trees of Zaqqûm,"
+    },
+    {
+      "verse_arabic": "فَمَالِـُٔوْنَ مِنْهَا الْبُطُوْنَۚ",
+      "verse_latin": "Fa māli'ūna minhal-buṭūn(a).",
+      "mean_ind": "Lalu, kamu akan memenuhi perut-perutmu dengannya.",
+      "mean_eng": "filling up ˹your˺ bellies with it."
+    },
+    {
+      "verse_arabic": "فَشٰرِبُوْنَ عَلَيْهِ مِنَ الْحَمِيْمِۚ",
+      "verse_latin": "Fasyāribūna ‘alaihi minal-ḥamīm(i).",
+      "mean_ind": "Setelah itu, untuk penawarnya (zaqum) kamu akan meminum air yang sangat panas.",
+      "mean_eng": "Then on top of that you will drink boiling water—"
+    },
+    {
+      "verse_arabic": "فَشٰرِبُوْنَ شُرْبَ الْهِيْمِۗ",
+      "verse_latin": "Fa syāribūna syurbal-hīm(i).",
+      "mean_ind": "Maka, kamu minum bagaikan unta yang sangat haus.",
+      "mean_eng": "and you will drink ˹it˺ like thirsty camels do.”"
+    },
+    {
+      "verse_arabic": "هٰذَا نُزُلُهُمْ يَوْمَ الدِّيْنِۗ",
+      "verse_latin": "Hāżā nuzuluhum yaumad-dīn(i).",
+      "mean_ind": "Inilah hidangan (untuk) mereka pada hari Pembalasan.”",
+      "mean_eng": "This will be their accommodation on the Day of Judgment."
+    },
+    {
+      "verse_arabic": "نَحْنُ خَلَقْنٰكُمْ فَلَوْلَا تُصَدِّقُوْنَ",
+      "verse_latin": "Naḥnu khalaqnākum falau lā tuṣaddiqūn(a).",
+      "mean_ind": "Kami telah menciptakanmu. Mengapa kamu tidak membenarkan (hari Kebangkitan)?",
+      "mean_eng": "It is We Who created you. Will you not then believe ˹in resurrection˺?"
+    },
+    {
+      "verse_arabic": "اَفَرَءَيْتُمْ مَّا تُمْنُوْنَۗ",
+      "verse_latin": "Afa ra'aitum mā tumnūn(a).",
+      "mean_ind": "Apakah kamu memperhatikan apa yang kamu pancarkan (sperma)?",
+      "mean_eng": "Have you considered what you ejaculate?"
+    },
+    {
+      "verse_arabic": "ءَاَنْتُمْ تَخْلُقُوْنَهٗٓ اَمْ نَحْنُ الْخٰلِقُوْنَ",
+      "verse_latin": "A'antum takhluqūnahū am naḥnul-khāliqūn(a).",
+      "mean_ind": "Apakah kamu yang menciptakannya atau Kami Penciptanya?",
+      "mean_eng": "Is it you who create ˹a child out of˺ it, or is it We Who do so?"
+    },
+    {
+      "verse_arabic": "نَحْنُ قَدَّرْنَا بَيْنَكُمُ الْمَوْتَ وَمَا نَحْنُ بِمَسْبُوْقِيْنَۙ",
+      "verse_latin": "Naḥnu qaddarnā bainakumul-mauta wa mā naḥnu bimasbūqīn(a).",
+      "mean_ind": "Kami telah menentukan kematian di antara kamu dan Kami tidak lemah",
+      "mean_eng": "We have ordained death for ˹all of˺ you, and We cannot be prevented"
+    },
+    {
+      "verse_arabic": "عَلٰٓى اَنْ نُّبَدِّلَ اَمْثَالَكُمْ وَنُنْشِئَكُمْ فِيْ مَا لَا تَعْلَمُوْنَ",
+      "verse_latin": "‘Alā an nubaddila amṡālakum wa nunsyi'akum fī mā lā ta‘lamūn(a).",
+      "mean_ind": "untuk mengubah bentukmu (di hari Kiamat) dan menciptakanmu kelak dalam keadaan yang tidak kamu ketahui.",
+      "mean_eng": "from transforming and recreating you in forms unknown to you."
+    },
+    {
+      "verse_arabic": "وَلَقَدْ عَلِمْتُمُ النَّشْاَةَ الْاُوْلٰى فَلَوْلَا تَذَكَّرُوْنَ",
+      "verse_latin": "Wa laqad ‘alimtumun-nasy'atal-ūlā falau lā tażakkarūn(a).",
+      "mean_ind": "Sungguh, kamu benar-benar telah mengetahui penciptaan yang pertama. Mengapa kamu tidak mengambil pelajaran?",
+      "mean_eng": "You already know how you were first created. Will you not then be mindful?"
+    },
+    {
+      "verse_arabic": "اَفَرَءَيْتُمْ مَّا تَحْرُثُوْنَۗ",
+      "verse_latin": "Afara'aitum mā taḥruṡūn(a).",
+      "mean_ind": "Apakah kamu memperhatikan benih yang kamu tanam?",
+      "mean_eng": "Have you considered what you sow?"
+    },
+    {
+      "verse_arabic": "ءَاَنْتُمْ تَزْرَعُوْنَهٗٓ اَمْ نَحْنُ الزّٰرِعُوْنَ",
+      "verse_latin": "A'antum tazra‘ūnahū am naḥnuz-zāri‘ūn(a).",
+      "mean_ind": "Apakah kamu yang menumbuhkannya atau Kami yang menumbuhkan?",
+      "mean_eng": "Is it you who cause it to grow, or is it We Who do so?"
+    },
+    {
+      "verse_arabic": "لَوْ نَشَاۤءُ لَجَعَلْنٰهُ حُطَامًا فَظَلْتُمْ تَفَكَّهُوْنَۙ",
+      "verse_latin": "Lau nasyā'u laja‘alnāhu ḥuṭāman fa ẓaltum tafakkahūn(a).",
+      "mean_ind": "Seandainya Kami berkehendak, Kami benar-benar menjadikannya hancur sehingga kamu menjadi heran tercengang,",
+      "mean_eng": "If We willed, We could simply reduce this ˹harvest˺ to chaff, leaving you to lament,"
+    },
+    {
+      "verse_arabic": "اِنَّا لَمُغْرَمُوْنَۙ",
+      "verse_latin": "Innā lamugramūn(a).",
+      "mean_ind": "(sambil berkata,) “Sesungguhnya kami benar-benar menderita kerugian.",
+      "mean_eng": "“We have truly suffered a ˹great˺ loss."
+    },
+    {
+      "verse_arabic": "بَلْ نَحْنُ مَحْرُوْمُوْنَ",
+      "verse_latin": "Bal naḥnu maḥrūmūn(a).",
+      "mean_ind": "Bahkan, kami tidak mendapat hasil apa pun.”",
+      "mean_eng": "In fact, we have been deprived ˹of our livelihood˺.”"
+    },
+    {
+      "verse_arabic": "اَفَرَءَيْتُمُ الْمَاۤءَ الَّذِيْ تَشْرَبُوْنَۗ",
+      "verse_latin": "Afa ra'aitumul-mā'al-lażī tasyrabūn(a).",
+      "mean_ind": "Apakah kamu memperhatikan air yang kamu minum?",
+      "mean_eng": "Have you considered the water you drink?"
+    },
+    {
+      "verse_arabic": "ءَاَنْتُمْ اَنْزَلْتُمُوْهُ مِنَ الْمُزْنِ اَمْ نَحْنُ الْمُنْزِلُوْنَ",
+      "verse_latin": "A'antum anzaltumūhu minal-muzni am naḥnul-munzilūn(a).",
+      "mean_ind": "Apakah kamu yang menurunkannya dari awan atau Kami yang menurunkan?",
+      "mean_eng": "Is it you who bring it down from the clouds, or is it We Who do so?"
+    },
+    {
+      "verse_arabic": "لَوْ نَشَاۤءُ جَعَلْنٰهُ اُجَاجًا فَلَوْلَا تَشْكُرُوْنَ",
+      "verse_latin": "Lau nasyā'u ja‘alnāhu ujājan falau lā tasykurūn(a).",
+      "mean_ind": "Seandainya Kami berkehendak, Kami menjadikannya asin. Mengapa kamu tidak bersyukur?",
+      "mean_eng": "If We willed, We could make it salty. Will you not then give thanks?"
+    },
+    {
+      "verse_arabic": "اَفَرَءَيْتُمُ النَّارَ الَّتِيْ تُوْرُوْنَۗ",
+      "verse_latin": "Afa ra'aitumun-nāral-latī tūrūn(a).",
+      "mean_ind": "Apakah kamu memperhatikan api yang kamu nyalakan?",
+      "mean_eng": "Have you considered the fire you kindle?"
+    },
+    {
+      "verse_arabic": "ءَاَنْتُمْ اَنْشَأْتُمْ شَجَرَتَهَآ اَمْ نَحْنُ الْمُنْشِـُٔوْنَ",
+      "verse_latin": "A'antum ansya'tum syajaratahā am naḥnul-munsyi'ūn(a).",
+      "mean_ind": "Apakah kamu yang menumbuhkan kayunya atau Kami yang menumbuhkan?",
+      "mean_eng": "Is it you who produce its trees, or is it We Who do so?"
+    },
+    {
+      "verse_arabic": "نَحْنُ جَعَلْنٰهَا تَذْكِرَةً وَّمَتَاعًا لِّلْمُقْوِيْنَۚ",
+      "verse_latin": "Naḥnu ja‘alnāhā tażkirataw wa matā‘al lil-muqwīn(a).",
+      "mean_ind": "Kami menjadikannya (api itu) sebagai peringatan dan manfaat bagi para musafir.",
+      "mean_eng": "We have made it ˹as˺ a reminder ˹of the Hellfire˺ and a provision for the travellers."
+    },
+    {
+      "verse_arabic": "فَسَبِّحْ بِاسْمِ رَبِّكَ الْعَظِيْمِ ࣖ",
+      "verse_latin": "Fa sabbiḥ bismi rabbikal-‘aẓīm(i).",
+      "mean_ind": "Maka, bertasbihlah dengan (menyebut) nama Tuhanmu Yang Mahaagung.",
+      "mean_eng": "So glorify the Name of your Lord, the Greatest."
+    },
+    {
+      "verse_arabic": "۞ فَلَآ اُقْسِمُ بِمَوٰقِعِ النُّجُوْمِ",
+      "verse_latin": "Falā uqsimu bimawāqi‘in-nujūm(i).",
+      "mean_ind": "Aku bersumpah demi tempat beredarnya bintang-bintang.",
+      "mean_eng": "So I do swear by the positions of the stars—"
+    },
+    {
+      "verse_arabic": "وَاِنَّهٗ لَقَسَمٌ لَّوْ تَعْلَمُوْنَ عَظِيْمٌۙ",
+      "verse_latin": "Wa innahū laqasamul lau ta‘lamūna ‘aẓīm(un).",
+      "mean_ind": "Sesungguhnya itu benar-benar sumpah yang sangat besar seandainya kamu mengetahui.",
+      "mean_eng": "and this, if only you knew, is indeed a great oath—"
+    },
+    {
+      "verse_arabic": "اِنَّهٗ لَقُرْاٰنٌ كَرِيْمٌۙ",
+      "verse_latin": "Innahū laqur'ānun karīm(un).",
+      "mean_ind": "Sesungguhnya ia benar-benar Al-Qur’an yang sangat mulia,",
+      "mean_eng": "that this is truly a noble Quran,"
+    },
+    {
+      "verse_arabic": "فِيْ كِتٰبٍ مَّكْنُوْنٍۙ",
+      "verse_latin": "Fī kitābim maknūn(in).",
+      "mean_ind": "dalam Kitab yang terpelihara.",
+      "mean_eng": "in a well-preserved Record,"
+    },
+    {
+      "verse_arabic": "لَّا يَمَسُّهٗٓ اِلَّا الْمُطَهَّرُوْنَۗ",
+      "verse_latin": "Lā yamassuhū illal-muṭahharūn(a).",
+      "mean_ind": "Tidak ada yang menyentuhnya, kecuali para hamba (Allah) yang disucikan.",
+      "mean_eng": "touched by none except the purified ˹angels˺."
+    },
+    {
+      "verse_arabic": "تَنْزِيْلٌ مِّنْ رَّبِّ الْعٰلَمِيْنَ",
+      "verse_latin": "Tanzīlum mir rabbil-‘ālamīn(a).",
+      "mean_ind": "(Al-Qur’an) diturunkan dari Tuhan seluruh alam.",
+      "mean_eng": "˹It is˺ a revelation from the Lord of all worlds."
+    },
+    {
+      "verse_arabic": "اَفَبِهٰذَا الْحَدِيْثِ اَنْتُمْ مُّدْهِنُوْنَۙ",
+      "verse_latin": "Afa biḥāżal-ḥadīṡi antum mudhinūn(a).",
+      "mean_ind": "Apakah kamu menganggap remeh berita ini (Al-Qur’an)",
+      "mean_eng": "How can you then take this message lightly,"
+    },
+    {
+      "verse_arabic": "وَتَجْعَلُوْنَ رِزْقَكُمْ اَنَّكُمْ تُكَذِّبُوْنَ",
+      "verse_latin": "Wa taj‘alūna rizqakum annakum tukażżibūn(a).",
+      "mean_ind": "dan kamu menjadikan rezeki yang kamu terima (dari Allah) justru untuk mendustakan (Al-Qur’an)?",
+      "mean_eng": "and repay ˹Allah for˺ your provisions with denial?"
+    },
+    {
+      "verse_arabic": "فَلَوْلَآ اِذَا بَلَغَتِ الْحُلْقُوْمَۙ",
+      "verse_latin": "Falau lā iżā balagatil-ḥulqūm(a).",
+      "mean_ind": "Kalau begitu, mengapa (kamu) tidak (menahan nyawa) ketika telah sampai di kerongkongan,",
+      "mean_eng": "Why then ˹are you helpless˺ when the soul ˹of a dying person˺ reaches ˹their˺ throat,"
+    },
+    {
+      "verse_arabic": "وَاَنْتُمْ حِيْنَىِٕذٍ تَنْظُرُوْنَۙ",
+      "verse_latin": "Wa antum ḥīna'iżin tanẓurūn(a).",
+      "mean_ind": "padahal kamu ketika itu melihat (orang yang sedang sekarat)?",
+      "mean_eng": "while you are looking on?"
+    },
+    {
+      "verse_arabic": "وَنَحْنُ اَقْرَبُ اِلَيْهِ مِنْكُمْ وَلٰكِنْ لَّا تُبْصِرُوْنَ",
+      "verse_latin": "Wa naḥnu aqrabu ilaihi minkum wa lākil lā tubṣirūn(a).",
+      "mean_ind": "Kami lebih dekat kepadanya (orang yang sedang sekarat) daripada kamu, tetapi kamu tidak melihat.",
+      "mean_eng": "And We are nearer to such a person than you, but you cannot see."
+    },
+    {
+      "verse_arabic": "فَلَوْلَآ اِنْ كُنْتُمْ غَيْرَ مَدِيْنِيْنَۙ",
+      "verse_latin": "Falau lā in kuntum gaira madīnīn(a).",
+      "mean_ind": "Maka, mengapa jika kamu tidak diberi balasan,",
+      "mean_eng": "Now, if you are not subject to Our Will ˹as you claim˺,"
+    },
+    {
+      "verse_arabic": "تَرْجِعُوْنَهَآ اِنْ كُنْتُمْ صٰدِقِيْنَ",
+      "verse_latin": "Tarji‘ūnahā in kuntum ṣādiqīn(a).",
+      "mean_ind": "kamu tidak mengembalikannya (nyawa itu) jika kamu orang-orang yang benar?",
+      "mean_eng": "bring that soul back, if what you say is true."
+    },
+    {
+      "verse_arabic": "فَاَمَّآ اِنْ كَانَ مِنَ الْمُقَرَّبِيْنَۙ",
+      "verse_latin": "Fa ammā in kāna minal-muqarrabīn(a).",
+      "mean_ind": "Jika dia (orang yang mati) itu termasuk yang didekatkan (kepada Allah),",
+      "mean_eng": "So, if the deceased is one of those brought near ˹to Us˺,"
+    },
+    {
+      "verse_arabic": "فَرَوْحٌ وَّرَيْحَانٌ ەۙ وَّجَنَّتُ نَعِيْمٍ",
+      "verse_latin": "Fa rauḥuw wa raiḥān(un), wa jannatu na‘īm(in).",
+      "mean_ind": "dia memperoleh ketenteraman, rezeki, dan surga (yang penuh) kenikmatan.",
+      "mean_eng": "then ˹such a person will have˺ serenity, fragrance, and a Garden of Bliss."
+    },
+    {
+      "verse_arabic": "وَاَمَّآ اِنْ كَانَ مِنْ اَصْحٰبِ الْيَمِيْنِۙ",
+      "verse_latin": "Wa ammā in kāna min aṣḥābil-yamīn(i).",
+      "mean_ind": "Jika dia (termasuk) golongan kanan,",
+      "mean_eng": "And if the deceased is one of the people of the right,"
+    },
+    {
+      "verse_arabic": "فَسَلٰمٌ لَّكَ مِنْ اَصْحٰبِ الْيَمِيْنِۗ",
+      "verse_latin": "Fa salāmul laka min aṣḥābil-yamīn(i).",
+      "mean_ind": "“Salam bagimu” dari (sahabatmu,) golongan kanan.",
+      "mean_eng": "then ˹they will be told,˺ “Greetings to you from the people of the right.”"
+    },
+    {
+      "verse_arabic": "وَاَمَّآ اِنْ كَانَ مِنَ الْمُكَذِّبِيْنَ الضَّاۤلِّيْنَۙ",
+      "verse_latin": "Wa ammā in kāna minal-mukażżibīnaḍ-ḍāllīn(a).",
+      "mean_ind": "Jika dia termasuk golongan para pendusta lagi sesat,",
+      "mean_eng": "But if such person is one of the misguided deniers,"
+    },
+    {
+      "verse_arabic": "فَنُزُلٌ مِّنْ حَمِيْمٍۙ",
+      "verse_latin": "Fa nuzulum min ḥamīm(in).",
+      "mean_ind": "jamuannya berupa air mendidih",
+      "mean_eng": "then their accommodation will be boiling water ˹to drink˺"
+    },
+    {
+      "verse_arabic": "وَّتَصْلِيَةُ جَحِيْمٍ",
+      "verse_latin": "Wa taṣliyatu jaḥīm(in).",
+      "mean_ind": "dan dibakar oleh (neraka) Jahim.",
+      "mean_eng": "and burning in Hellfire."
+    },
+    {
+      "verse_arabic": "اِنَّ هٰذَا لَهُوَ حَقُّ الْيَقِيْنِۚ",
+      "verse_latin": "Inna hāżā lahuwal-ḥaqqul-yaqīn(i).",
+      "mean_ind": "Sesungguhnya ini benar-benar merupakan hakulyakin.",
+      "mean_eng": "Indeed, this is the absolute truth."
+    },
+    {
+      "verse_arabic": "فَسَبِّحْ بِاسْمِ رَبِّكَ الْعَظِيْمِ ࣖ",
+      "verse_latin": "Fa sabbiḥ bismi rabbikal-‘aẓīm(i).",
+      "mean_ind": "Maka, bertasbihlah dengan (menyebut) nama Tuhanmu Yang Mahaagung.",
+      "mean_eng": "So glorify the Name of your Lord, the Greatest."
+    }
+  ]
+}

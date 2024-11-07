@@ -15,8 +15,8 @@ plugins {
 }
 
 ext.majorVersion = 1
-ext.minorVersion = 4
-ext.patchVersion = 5
+ext.minorVersion = 0
+ext.patchVersion = 0
 ext.preRelease = ""
 
 apply from: '../sign.gradle'
@@ -33,7 +33,7 @@ ext {
 android {
     compileSdk = 34
     defaultConfig {
-        applicationId "com.icaali.tasbeeh"
+        applicationId "com.icaali.almulk"
         minSdk project.ext.minSdkVersion
         targetSdk project.ext.targetSdkVersion
         versionCode generateVersionCode()
@@ -68,7 +68,7 @@ android {
     productFlavors {
         production {
             dimension "env"
-            applicationId "com.icaali.tasbeeh"
+            applicationId "com.icaali.almulk"
         }
     }
 
@@ -82,10 +82,10 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "Tasbeeh-${generateVersionName()}-${variant.flavorName}-${variant.buildType.name}.apk"
+            outputFileName = "AlMulk-${generateVersionName()}-${variant.flavorName}-${variant.buildType.name}.apk"
         }
     }
-    namespace 'com.icaali.tasbeeh'
+    namespace 'com.icaali.almulk'
 }
 
 apply from: '../variant_filter.gradle'
@@ -93,6 +93,7 @@ apply from: '../variant_filter.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.gms:play-services-measurement-api:22.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.8'
 
@@ -125,11 +126,7 @@ dependencies {
     //Glide
     implementation libraries.glide
 
-    //ViewAnimator
-    implementation 'com.github.florent37:viewanimator:1.1.2'
-
     //Architecture Component
-
     implementation("androidx.room:room-runtime:2.6.1")
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
     implementation 'androidx.room:room-ktx:2.6.1'
@@ -176,6 +173,12 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.android.play:review-ktx:2.0.1")
+
+    //Expandable Layout
+    implementation "com.github.skydoves:expandablelayout:1.0.7"
+
+    //Animator
+    implementation 'com.github.florent37:viewanimator:v1.1.2'
 }
 
 private Integer generateVersionCode() {

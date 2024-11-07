@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ذِكْر</string>
+    <string name="app_name">الْبَقَرَة</string>
 
     <!-- Text Arabic -->
     <string name="text_arabic_allah" translatable="false">ُ لِلَّه</string>
@@ -36,11 +36,11 @@
     <string name="label_picker_black_white">أسود أبيض</string>
     <string name="label_picker_default">تقصير</string>
     <string name="label_picker_flowers">ورد</string>
-    <string name="label_picker_leaves">اوراق اشجار</string>
     <string name="label_picker_eid_al_fitr">عيد الفطر</string>
     <string name="label_picker_yellow">أصفر</string>
     <string name="label_picker_kaaba">الكعبة</string>
     <string name="label_picker_ramadhan">رمضان</string>
+    <string name="label_picker_leaves">اوراق اشجار</string>
     <string name="label_rating_and_review_apps">تقييم ومراجعة تطبيقات ذكري</string>
     <string name="label_our_applications">تطبيقاتنا</string>
     <string name="label_vibration">اهتزاز</string>
@@ -78,4 +78,14 @@
     <string name="label_prayer_morning">Morning Prayer</string>
     <string name="label_prayer_evening">Evening Prayer</string>
     <!--************************ End Section Dhikr ************************-->
+
+
+    <!--************************ Section Surah ************************-->
+    <string name="label_surah_mean_al_mulk">The Sovereignty</string>
+    <string name="label_surah_mean_al_baqarah">The Heifer or The Cow</string>
+    <string name="label_surah_mean_al_waqiah">The Inevitable</string>
+    <string name="label_surah_mean_ar_rahman">The Merciful</string>
+    <string name="label_surah_mean_ar_yasin">Yasin</string>
+    <string name="label_number_of_ayah">Verse %d</string>
+    <!--************************ End Section Surah ************************-->
 </resources>
