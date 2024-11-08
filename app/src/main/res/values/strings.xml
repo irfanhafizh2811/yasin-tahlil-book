@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Al Mulk</string>
-    <string name="id_unit_interstitial" translatable="false">ca-app-pub-5079073523461972/7622404494</string>
+    <string name="id_unit_interstitial" translatable="false">ca-app-pub-5079073523461972/1742849787</string>
     <string name="id_unit_interstitial_sample_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="id_unit_banner" translatable="false">ca-app-pub-5079073523461972/8857837804</string>
+    <string name="id_unit_banner" translatable="false">ca-app-pub-5079073523461972/3491045724</string>
     <string name="id_unit_banner_sample_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
 
     <!-- Text Arabic -->
