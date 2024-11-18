@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.almulk.R
-import com.icaali.almulk.database.table.Tasbeeh
+import com.icaali.almulk.database.entity.TasbeehEntity
 import com.icaali.almulk.databinding.DialogBottomAddCustomDhikrBinding
 import com.icaali.almulk.extension.text.charCountingListener
 
 class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
 
     private lateinit var binding: DialogBottomAddCustomDhikrBinding
-    var dhikr: Tasbeeh? = null
-    private var onPositiveListener: ((Tasbeeh) -> Unit)? = null
+    var dhikr: TasbeehEntity? = null
+    private var onPositiveListener: ((TasbeehEntity) -> Unit)? = null
 
     init {
         binding = DialogBottomAddCustomDhikrBinding.inflate(LayoutInflater.from(context))
@@ -32,9 +32,9 @@ class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
                 setOnClickListener {
                     if (edtAddDhikr.text.toString().isNotBlank()) {
                         val latinDhikr = edtAddDhikr.text.toString()
-                        val tasbeeh = when {
+                        val tasbeehEntity = when {
                             null == dhikr ->
-                                Tasbeeh(
+                                TasbeehEntity(
                                     id = latinDhikr,
                                     arabic = "",
                                     latin = latinDhikr,
@@ -43,7 +43,7 @@ class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
 
                             else -> dhikr
                         }
-                        tasbeeh?.let { onPositiveListener?.invoke(it) }
+                        tasbeehEntity?.let { onPositiveListener?.invoke(it) }
                         dismiss()
                     }
                 }
@@ -53,7 +53,7 @@ class AddCustomDialog(context: Context) : BottomSheetDialog(context) {
         }
     }
 
-    fun setOnPositiveListener(onPositiveListener: (Tasbeeh) -> Unit): BottomSheetDialog {
+    fun setOnPositiveListener(onPositiveListener: (TasbeehEntity) -> Unit): BottomSheetDialog {
         this.onPositiveListener = onPositiveListener
         return this
     }

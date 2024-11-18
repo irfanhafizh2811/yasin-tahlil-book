@@ -5,18 +5,18 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.LocaleList
 import com.icaali.almulk.R
-import com.icaali.almulk.database.table.Tasbeeh
+import com.icaali.almulk.database.entity.TasbeehEntity
 import com.icaali.almulk.extension.common.clazz
 import com.icaali.almulk.extension.context.getDrawableCompat
 import com.icaali.almulk.preference.LanguagePreference
 import com.icaali.almulk.utils.TasbeehConst
 import java.util.Locale
 
-fun MainActivity.startActivityTasbeeh(tasbeeh: Tasbeeh) {
+fun MainActivity.startActivityTasbeeh(tasbeehEntity: TasbeehEntity) {
     val intent = Intent(this, clazz<TasbeehActivity>())
     intent.putExtra(TasbeehActivity.TYPE_EXTRA, TasbeehConst.CUSTOM)
-    intent.putExtra(TasbeehActivity.TASBEEH_LATIN_EXTRA, tasbeeh.latin)
-    intent.putExtra(TasbeehActivity.TASBEEH_DHIKR_EXTRA_ID, tasbeeh.id)
+    intent.putExtra(TasbeehActivity.TASBEEH_LATIN_EXTRA, tasbeehEntity.latin)
+    intent.putExtra(TasbeehActivity.TASBEEH_DHIKR_EXTRA_ID, tasbeehEntity.id)
     startActivity(intent)
 }
 

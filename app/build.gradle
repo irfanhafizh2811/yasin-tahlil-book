@@ -1,11 +1,3 @@
-//apply plugin: 'com.android.application'
-//apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'kotlin-kapt'
-//apply plugin: 'koin'
-//apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.google.firebase.crashlytics'
-
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'

@@ -1,7 +1,7 @@
 package com.icaali.almulk.vm
 
 import androidx.lifecycle.*
-import com.icaali.almulk.database.table.Tasbeeh
+import com.icaali.almulk.database.entity.TasbeehEntity
 import com.icaali.almulk.repository.TasbeehRepository
 import kotlinx.coroutines.launch
 
@@ -11,20 +11,20 @@ class DhikrViewModel(private val repository: TasbeehRepository) : ViewModel() {
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val dhikrs: LiveData<List<Tasbeeh>> = repository.dhikrs.asLiveData()
+    val dhikrs: LiveData<List<TasbeehEntity>> = repository.dhikrs.asLiveData()
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(dhikr: Tasbeeh) = viewModelScope.launch {
+    fun insert(dhikr: TasbeehEntity) = viewModelScope.launch {
         repository.insert(dhikr)
     }
 
-    fun update(dhikr: Tasbeeh) = viewModelScope.launch {
+    fun update(dhikr: TasbeehEntity) = viewModelScope.launch {
         repository.update(dhikr)
     }
 
-    fun delete(dhikr: Tasbeeh) = viewModelScope.launch {
+    fun delete(dhikr: TasbeehEntity) = viewModelScope.launch {
         repository.delete(dhikr)
     }
 

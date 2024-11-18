@@ -1,11 +1,11 @@
-package com.icaali.almulk.database.table
+package com.icaali.almulk.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "dhirk_table")
-data class Tasbeeh(
+data class TasbeehEntity(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: String,
     @ColumnInfo(name = "arabic") val arabic: String,

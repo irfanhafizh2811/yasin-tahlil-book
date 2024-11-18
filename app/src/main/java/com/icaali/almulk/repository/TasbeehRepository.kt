@@ -2,7 +2,7 @@ package com.icaali.almulk.repository
 
 import androidx.annotation.WorkerThread
 import com.icaali.almulk.database.dao.DhikrDao
-import com.icaali.almulk.database.table.Tasbeeh
+import com.icaali.almulk.database.entity.TasbeehEntity
 import kotlinx.coroutines.flow.Flow
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO
@@ -11,26 +11,26 @@ class TasbeehRepository(private val dhikrDao: DhikrDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    val dhikrs: Flow<List<Tasbeeh>> = dhikrDao.getDhikrs()
+    val dhikrs: Flow<List<TasbeehEntity>> = dhikrDao.getDhikrs()
 
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(dhikr: Tasbeeh) {
+    suspend fun insert(dhikr: TasbeehEntity) {
         dhikrDao.insert(dhikr)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun update(dhikr: Tasbeeh) {
+    suspend fun update(dhikr: TasbeehEntity) {
         dhikrDao.update(dhikr)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun delete(dhikr: Tasbeeh) {
+    suspend fun delete(dhikr: TasbeehEntity) {
         dhikrDao.delete(dhikr)
     }
 
@@ -43,7 +43,7 @@ class TasbeehRepository(private val dhikrDao: DhikrDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun getDhikrs(): Flow<List<Tasbeeh>> {
+    suspend fun getDhikrs(): Flow<List<TasbeehEntity>> {
         return dhikrDao.getDhikrs()
     }
 }

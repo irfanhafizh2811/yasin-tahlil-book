@@ -3,13 +3,13 @@ package com.icaali.almulk.view.holder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.icaali.almulk.database.table.Tasbeeh
+import com.icaali.almulk.database.entity.TasbeehEntity
 import com.icaali.almulk.databinding.ItemTasbeehBinding
 
 class TasbeehHolder(private val binding: ItemTasbeehBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(onClickListener: (Tasbeeh) -> Unit, dhikr: Tasbeeh) {
+    fun bind(onClickListener: (TasbeehEntity) -> Unit, dhikr: TasbeehEntity) {
         val (_, _, latin, count) = dhikr
         with(binding) {
             tvDhikrLatin.text = latin

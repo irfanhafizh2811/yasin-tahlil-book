@@ -14,7 +14,7 @@ import com.github.florent37.viewanimator.ViewAnimator
 import com.google.android.gms.ads.MobileAds
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.icaali.almulk.R
-import com.icaali.almulk.database.table.Tasbeeh
+import com.icaali.almulk.database.entity.TasbeehEntity
 import com.icaali.almulk.databinding.ActivityTasbeehBinding
 import com.icaali.almulk.extension.activty.hasPermissions
 import com.icaali.almulk.extension.activty.isCustomType
@@ -79,7 +79,7 @@ class TasbeehActivity : BaseActivity() {
     private val guideTasbeehDialog by lazy { GuideTasbeehDialog(this, guidePref) }
     //------------------------------------ Section Lazy ------------------------------------
 
-    private var dhikr = Tasbeeh("", "", "", 0)
+    private var dhikr = TasbeehEntity("", "", "", 0)
     private var theme: Theme? = null
 
     internal var type = ""
