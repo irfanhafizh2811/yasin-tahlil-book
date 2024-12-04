@@ -71,5 +71,8 @@
     <string name="label_surah_mean_ar_rahman">Maha Pengasih</string>
     <string name="label_surah_mean_ar_yasin">Yasin</string>
     <string name="label_number_of_ayah">Ayat %d</string>
+    <string name="label_surah_al_mulk">Surat Al Mulk</string>
+    <string name="list_of_the_surah">Daftar Surat Surat</string>
+    <string name="label_read">Read</string>
     <!--************************ End Section Surah ************************-->
 </resources>

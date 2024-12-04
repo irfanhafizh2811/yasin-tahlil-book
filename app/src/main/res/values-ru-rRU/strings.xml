@@ -80,5 +80,8 @@
     <string name="label_surah_mean_ar_rahman">Милосердный</string>
     <string name="label_surah_mean_ar_yasin">Ясин</string>
     <string name="label_number_of_ayah">Cтих %d</string>
+    <string name="label_surah_al_mulk">Surah Al Mulk</string>
+    <string name="list_of_the_surah">List of the surah</string>
+    <string name="label_read">Read</string>
     <!--************************ End Section Surah ************************-->
 </resources>

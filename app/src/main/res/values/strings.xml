@@ -101,5 +101,8 @@
     <string name="label_surah_mean_ar_yasin">Yasin</string>
     <string name="label_number_of_ayah">Verse %d</string>
     <string name="label_new" translatable="false">New</string>
+    <string name="label_surah_al_mulk">Surat Al Mulk</string>
+    <string name="list_of_the_surah">List of the surah</string>
+    <string name="label_read">Read</string>
     <!--************************ End Section Surah ************************-->
 </resources>

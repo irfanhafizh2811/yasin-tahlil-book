@@ -32,9 +32,9 @@ class MainSurahActivity : BaseActivity() {
         setContentView(binding.root)
         val surahName = surah.surahQuran.name.replace(TextUtils.UNDERSCORE, TextUtils.EMPTY_SPACE)
         with(binding) {
-            tvTitleAlMulk.text = surahName
+//            tvTitleAlMulk.text = getString(R.string.label_surah_al_mulk)
             tvArabicSurah.text = surah.arabic
-            tvTitleAlMulkMean.text = getString(R.string.label_surah_mean_al_mulk)
+//            tvTitleAlMulkMean.text = getString(R.string.label_surah_mean_al_mulk)
             cvRead.setOnClickListener { startActivitySurah(SurahQuran.AL_MULK.name) }
         }
         updateLastRead()
