@@ -12,6 +12,8 @@ class SettingPreference(val corePreference: CorePreference) {
         private const val TIME_NOTIFICATION = "time_notification"
         private const val FONT_SIZE = "font_size"
         private const val HAS_RATING = "has_rating"
+        private const val SHOW_QURAN_LATIN = "show_quran"
+        private const val SHOW_QURAN_TRANSLATION = "show_translation"
     }
 
     var vibrate: Boolean
@@ -41,4 +43,12 @@ class SettingPreference(val corePreference: CorePreference) {
     var fontSize: FontSize
         set(value) = corePreference.setString(FONT_SIZE, value.name)
         get() = FontSize.valueOf(corePreference.getString(FONT_SIZE, FontSize.REGULAR.name))
+
+    var showQuranLatin: Boolean
+        set(value) = corePreference.setBoolean(SHOW_QURAN_LATIN, value)
+        get() = corePreference.getBoolean(SHOW_QURAN_LATIN, true)
+
+    var showQuranTranslation: Boolean
+        set(value) = corePreference.setBoolean(SHOW_QURAN_TRANSLATION, value)
+        get() = corePreference.getBoolean(SHOW_QURAN_TRANSLATION, true)
 }

@@ -1,19 +1,13 @@
 package com.icaali.almulk.view.activity
 
-import android.Manifest
 import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import com.github.florent37.viewanimator.ViewAnimator
+import com.asliri.viewanimator.ViewAnimator
 import com.icaali.almulk.databinding.ActivitySplashBinding
-import com.icaali.almulk.extension.activty.hasPermissions
 import com.icaali.almulk.extension.common.clazz
 import com.icaali.almulk.extension.view.visible
 import com.icaali.almulk.preference.SettingPreference
-import com.icaali.almulk.receiver.NotificationReceiver
 import com.icaali.almulk.remote.CoreRemoteConfig
 import org.koin.android.ext.android.inject
 

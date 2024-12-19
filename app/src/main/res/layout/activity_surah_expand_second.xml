@@ -16,9 +16,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Add size text arabic, latin and mean"
+            android:text="Increase text size for Arabic, Latin, and Translations"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/clPlusSize"
             app:layout_constraintEnd_toStartOf="@+id/clPlusSize"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,9 +74,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Minus size text arabic, latin and mean"
+            android:text="Decrease text size for Arabic, Latin, and Translations"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/clMinusSize"
             app:layout_constraintEnd_toStartOf="@+id/clMinusSize"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,9 +130,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Show latin text of quran"
+            android:text="Show Quran text in Latin characters"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/scLatin"
             app:layout_constraintEnd_toStartOf="@+id/scLatin"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +140,6 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/scLatin"
-            style="@style/Widget.AppCompat.DrawerArrowToggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="56dp"
@@ -150,7 +149,6 @@
             app:layout_constraintTop_toBottomOf="@id/clMinusSize"
             app:thumbTint="@color/colorAccentPurple"
             app:thumbTintMode="src_atop"
-            app:trackTint="@color/colorAccentPurpleTrack"
             tools:checked="true" />
 
         <View
@@ -168,9 +166,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Show translate text of quran"
+            android:text="Show The Quran Translations"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/scTranslate"
             app:layout_constraintEnd_toStartOf="@+id/scTranslate"
             app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +186,7 @@
             app:layout_constraintTop_toBottomOf="@id/scLatin"
             app:thumbTint="@color/colorAccentPurple"
             app:thumbTintMode="src_atop"
-            tools:checked="false" />
+            tools:checked="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

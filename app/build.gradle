@@ -17,7 +17,7 @@ apply from: '../variant_filter.gradle'
 
 ext {
     buildToolsVersion = "30.0.0"
-    minSdkVersion = 21
+    minSdkVersion = 24
     targetSdkVersion = 34
     compileSdkVersion = 34
 }
@@ -83,7 +83,7 @@ android {
 apply from: '../variant_filter.gradle'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.gms:play-services-measurement-api:22.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
@@ -168,9 +168,6 @@ dependencies {
 
     //Expandable Layout
     implementation "com.github.skydoves:expandablelayout:1.0.7"
-
-    //Animator
-    implementation 'com.github.florent37:viewanimator:v1.1.2'
 }
 
 private Integer generateVersionCode() {

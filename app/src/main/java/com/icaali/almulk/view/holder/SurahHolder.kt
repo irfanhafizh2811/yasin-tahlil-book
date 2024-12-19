@@ -20,9 +20,19 @@ class SurahHolder(
     val typeUnit = TypedValue.COMPLEX_UNIT_PX
     var surahName: String = TextUtils.BLANK
     private var isFirstAyah = posItem <= 0
+    var visibleLatinQuran = true
+    var visibleTranslationQuran = true
 
-    fun bind(verse: Verse, fontSize: FontSize, posItem: Int): SurahHolder = with(binding) {
+    fun bind(
+        verse: Verse,
+        fontSize: FontSize,
+        posItem: Int,
+        visibleLatinQuran: Boolean,
+        visibleTranslationQuran: Boolean
+    ): SurahHolder = with(binding) {
         this@SurahHolder.posItem = posItem
+        this@SurahHolder.visibleLatinQuran = visibleLatinQuran
+        this@SurahHolder.visibleTranslationQuran = visibleTranslationQuran
         isFirstAyah = posItem == 0
         val (arabic, latin, meanIndo) = verse
         this@SurahHolder.surahName =
@@ -31,6 +41,8 @@ class SurahHolder(
         tvLatin.text = latin
         tvMean.text = meanIndo
         tvEndOfAyah.text = (posItem + 1).toString().numberArabic()
+        tvLatin.isVisible = visibleLatinQuran
+        tvMean.isVisible = visibleTranslationQuran
         onUITaawudz()
         updateSize(fontSize)
         return this@SurahHolder

@@ -20,6 +20,8 @@ class SurahAdapter : RecyclerView.Adapter<SurahHolder>() {
     var surahInterface: SurahInterface = SurahFactory.generate(SurahQuran.AL_MULK)
     var onBindListener: ((Pair<SurahInterface, Int>) -> Unit)? = null
     var enableLastRead = false
+    var showLatinQuran = false
+    var showTranslationQuran = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurahHolder = SurahHolder(
         ItemSurahVerseBinding.inflate(LayoutInflater.from(parent.context), parent, false),
@@ -27,7 +29,13 @@ class SurahAdapter : RecyclerView.Adapter<SurahHolder>() {
     )
 
     override fun onBindViewHolder(holder: SurahHolder, position: Int) {
-        surahHolder = holder.bind(verses[position], fontSize, position)
+        surahHolder = holder.bind(
+            verse = verses[position],
+            fontSize = fontSize,
+            posItem = position,
+            visibleLatinQuran = showLatinQuran,
+            visibleTranslationQuran = showTranslationQuran,
+        )
         if (enableLastRead) {
             Log.d("Surah Last Read:", "Start Bind $position")
             onBindListener?.invoke(Pair(surahInterface, position))

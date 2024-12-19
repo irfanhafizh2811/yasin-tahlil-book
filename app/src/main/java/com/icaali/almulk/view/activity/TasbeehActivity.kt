@@ -10,7 +10,7 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.core.view.isVisible
-import com.github.florent37.viewanimator.ViewAnimator
+import com.asliri.viewanimator.ViewAnimator
 import com.google.android.gms.ads.MobileAds
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.icaali.almulk.R
