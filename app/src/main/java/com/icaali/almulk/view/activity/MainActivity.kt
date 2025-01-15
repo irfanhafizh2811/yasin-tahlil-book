@@ -14,9 +14,9 @@ import com.icaali.almulk.extension.activty.openPlaystore
 import com.icaali.almulk.extension.common.clazz
 import com.icaali.almulk.extension.view.gone
 import com.icaali.almulk.extension.view.visible
-import com.icaali.almulk.preference.CounterPreference
-import com.icaali.almulk.preference.LanguagePreference
-import com.icaali.almulk.preference.SettingPreference
+import com.icaali.almulk.data.preference.CounterPreference
+import com.icaali.almulk.data.preference.LanguagePreference
+import com.icaali.almulk.data.preference.SettingPreference
 import com.icaali.almulk.utils.TasbeehConst
 import com.icaali.almulk.view.adapter.TasbeehAdapter
 import com.icaali.almulk.view.dialog.AddCustomDialog

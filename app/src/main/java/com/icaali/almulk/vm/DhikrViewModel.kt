@@ -1,7 +1,7 @@
 package com.icaali.almulk.vm
 
 import androidx.lifecycle.*
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import com.icaali.almulk.repository.TasbeehRepository
 import kotlinx.coroutines.launch
 

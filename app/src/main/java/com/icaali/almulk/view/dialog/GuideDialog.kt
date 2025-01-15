@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.Window
 import androidx.core.content.ContextCompat
 import com.icaali.almulk.R
-import com.icaali.almulk.preference.GuidePreference
+import com.icaali.almulk.data.preference.GuidePreference
 
 open class GuideDialog(context: Context, val guidePref: GuidePreference)
     : Dialog(context, android.R.style.Theme_Light_NoTitleBar_Fullscreen) {

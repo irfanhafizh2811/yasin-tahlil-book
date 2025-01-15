@@ -5,10 +5,10 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.LocaleList
 import com.icaali.almulk.R
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import com.icaali.almulk.extension.common.clazz
 import com.icaali.almulk.extension.context.getDrawableCompat
-import com.icaali.almulk.preference.LanguagePreference
+import com.icaali.almulk.data.preference.LanguagePreference
 import com.icaali.almulk.utils.TasbeehConst
 import java.util.Locale
 

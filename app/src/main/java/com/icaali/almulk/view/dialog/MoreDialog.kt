@@ -9,7 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.almulk.R
 import com.icaali.almulk.databinding.DialogBottomMoreBinding
 import com.icaali.almulk.extension.view.gone
-import com.icaali.almulk.preference.SettingPreference
+import com.icaali.almulk.data.preference.SettingPreference
 
 class MoreDialog(context: Context, private val settingPreference: SettingPreference) :
     BottomSheetDialog(context) {

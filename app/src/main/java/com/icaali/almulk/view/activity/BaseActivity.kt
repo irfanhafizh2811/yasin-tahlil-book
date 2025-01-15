@@ -22,7 +22,7 @@ import com.icaali.almulk.extension.activty.hasPermissions
 import com.icaali.almulk.extension.ads.loadAd
 import com.icaali.almulk.extension.ads.loadAdMob
 import com.icaali.almulk.extension.ads.loadAdMobTest
-import com.icaali.almulk.preference.GuidePreference
+import com.icaali.almulk.data.preference.GuidePreference
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 

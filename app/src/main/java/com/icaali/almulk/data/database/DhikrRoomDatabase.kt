@@ -1,9 +1,9 @@
-package com.icaali.almulk.database
+package com.icaali.almulk.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.icaali.almulk.database.dao.DhikrDao
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.dao.DhikrDao
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 
 @Database(
     entities = [TasbeehEntity::class],

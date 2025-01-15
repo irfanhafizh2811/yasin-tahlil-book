@@ -1,4 +1,4 @@
-package com.icaali.almulk.preference
+package com.icaali.almulk.data.preference
 
 import com.icaali.almulk.utils.FontSize
 

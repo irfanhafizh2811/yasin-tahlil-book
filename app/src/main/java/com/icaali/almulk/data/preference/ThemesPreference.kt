@@ -1,4 +1,4 @@
-package com.icaali.almulk.preference
+package com.icaali.almulk.data.preference
 
 import com.icaali.almulk.view.theme.ThemeType
 
@@ -30,7 +30,7 @@ class ThemesPreference(val corePreference: CorePreference) {
             ThemeType.KAABA.name -> ThemeType.KAABA
             ThemeType.RAMADHAN.name -> ThemeType.RAMADHAN
             ThemeType.EID_AL_FITR.name -> ThemeType.EID_AL_FITR
-            else -> ThemeType.DEFAULT
+            else -> ThemeType.RAMADHAN
         }
         set(value) {
             val typeText = when (value) {

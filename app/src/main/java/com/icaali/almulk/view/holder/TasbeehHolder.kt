@@ -3,7 +3,7 @@ package com.icaali.almulk.view.holder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import com.icaali.almulk.databinding.ItemTasbeehBinding
 
 class TasbeehHolder(private val binding: ItemTasbeehBinding) :

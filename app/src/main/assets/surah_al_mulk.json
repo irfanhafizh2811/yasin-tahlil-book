@@ -5,13 +5,13 @@
     {
       "verse_arabic": "تَبٰرَكَ الَّذِيْ بِيَدِهِ الْمُلْكُۖ وَهُوَ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌۙ",
       "verse_latin": "Tabārakal-lażī biyadihil-mulk(u), wa huwa ‘alā kulli syai'in qadīr(un).",
-      "mean_ind": "Mahaberkah Zat yang menguasai (segala) kerajaan dan Dia Mahakuasa atas segala sesuatu,",
+      "mean_ind": "Maha Berkah Zat yang menguasai (segala) kerajaan dan Dia Maha Kuasa atas segala sesuatu,",
       "mean_eng": "Blessed is the One in Whose Hands rests all authority. And He is Most Capable of everything."
     },
     {
       "verse_arabic": "الَّذِيْ خَلَقَ الْمَوْتَ وَالْحَيٰوةَ لِيَبْلُوَكُمْ اَيُّكُمْ اَحْسَنُ عَمَلًاۗ وَهُوَ الْعَزِيْزُ الْغَفُوْرُۙ",
       "verse_latin": "Allażī khalaqal-mauta wal-ḥayāta liyabluwakum ayyukum aḥsanu ‘amalā(n), wa huwal-‘azīzul-gafūr(u).",
-      "mean_ind": "yaitu yang menciptakan kematian dan kehidupan untuk menguji kamu, siapa di antara kamu yang lebih baik amalnya. Dia Mahaperkasa lagi Maha Pengampun.",
+      "mean_ind": "yaitu yang menciptakan kematian dan kehidupan untuk menguji kamu, siapa di antara kamu yang lebih baik amalnya. Dia Maha Perkasa lagi Maha Pengampun.",
       "mean_eng": "˹He is the One˺ Who created death and life in order to test which of you is best in deeds. And He is the Almighty, All-Forgiving."
     },
     {
@@ -51,7 +51,7 @@
       "mean_eng": "almost bursting in fury. Every time a group is cast into it, its keepers will ask them, “Did a warner not come to you?”"
     },
     {
-      "verse_arabic": "قَالُوْا بَلٰى قَدْ جَاۤءَنَا نَذِيْرٌ ەۙ فَكَذَّبْنَا وَقُلْنَا مَا نَزَّلَ اللّٰهُ مِنْ شَيْءٍۖ اِنْ اَنْتُمْ اِلَّا فِيْ ضَلٰلٍ كَبِيْرٍ",
+      "verse_arabic": "تَكَادُ تَمَيَّزُ مِنَ الْغَيْظِۗ كُلَّمَآ اُلْقِيَ فِيْهَا فَوْجٌ سَاَلَهُمْ خَزَنَتُهَآ اَلَمْ يَأْتِكُمْ نَذِيْرٌۙ",
       "verse_latin": "Qālū balā qad jā'anā nażīr(un), fa każżabnā wa qulnā mā nazzalallāhu min syai'(in), in antum illā fī ḍalālin kabīr(in).",
       "mean_ind": "Mereka menjawab, “Pernah! Sungguh, seorang pemberi peringatan telah datang kepada kami, tetapi kami mendustakan(-nya) dan mengatakan, ‘Allah tidak menurunkan sesuatu apa pun.’” (Para malaikat berkata,) “Kamu tidak lain hanyalah (berada) dalam kesesatan yang besar.”",
       "mean_eng": "They will reply, “Yes, a warner did come to us, but we denied and said, ‘Allah has revealed nothing. You are extremely astray.’”"
@@ -81,9 +81,9 @@
       "mean_eng": "Whether you speak secretly or openly—He surely knows best what is ˹hidden˺ in the heart."
     },
     {
-      "verse_arabic": "اَلَا يَعْلَمُ مَنْ خَلَقَۗ وَهُوَ اللَّطِيْفُ الْخَبِيْرُ ࣖ",
+      "verse_arabic": "اَلَا يَعْلَمُ مَنْ خَلَقَۗ وَهُوَ اللَّطِيْفُ الْخَبِيْرُ",
       "verse_latin": "Alā ya‘lamu man khalaq(a), wa huwal-laṭīful-khabīr(u).",
-      "mean_ind": "Apakah (pantas) Zat yang menciptakan itu tidak mengetahui, sedangkan Dia (juga) Mahahalus lagi Maha Mengetahui?",
+      "mean_ind": "Apakah (pantas) Zat yang menciptakan itu tidak mengetahui, sedangkan Dia (juga) Maha Halus lagi Maha Mengetahui?",
       "mean_eng": "How could He not know His Own creation? For He ˹alone˺ is the Most Subtle, All-Aware."
     },
     {
@@ -153,7 +153,7 @@
       "mean_eng": "˹Still˺ they ask ˹the believers˺, “When will this threat come to pass, if what you say is true?”"
     },
     {
-      "verse_arabic": "قُلْ اِنَّمَا الْعِلْمُ عِنْدَ اللّٰهِ ۖوَاِنَّمَآ اَنَا۠ نَذِيْرٌ مُّبِيْنٌ",
+      "verse_arabic": "قُلْ اِنَّمَا الْعِلْمُ عِنْدَ اللّٰهِ ۖوَاِنَّمَآ اَنَا۠ نَذِيْرٌ مُّبِيْنٌ",
       "verse_latin": "Qul innamal-‘ilmu ‘indallāh(i), wa innamā ana nażīrum mubīn(un).",
       "mean_ind": "Katakanlah (Nabi Muhammad), “Sesungguhnya ilmu (tentang hari Kiamat itu) hanya ada pada Allah. Aku hanyalah seorang pemberi peringatan yang jelas.”",
       "mean_eng": "Say, ˹O Prophet,˺ “That knowledge is with Allah alone, and I am only sent with a clear warning.”"
@@ -177,7 +177,7 @@
       "mean_eng": "Say, “He is the Most Compassionate—in Him ˹alone˺ we believe, and in Him ˹alone˺ we trust. You will soon know who is clearly astray.”"
     },
     {
-      "verse_arabic": "قُلْ اَرَءَيْتُمْ اِنْ اَصْبَحَ مَاۤؤُكُمْ غَوْرًا فَمَنْ يَّأْتِيْكُمْ بِمَاۤءٍ مَّعِيْنٍ ࣖ",
+      "verse_arabic": "قُلْ اَرَءَيْتُمْ اِنْ اَصْبَحَ مَاۤؤُكُمْ غَوْرًا فَمَنْ يَّأْتِيْكُمْ بِمَاۤءٍ مَّعِيْنٍ",
       "verse_latin": "Qul ara'aitum in aṣbaḥa mā'ukum gauran famay ya'tīkum bimā'im ma‘īn(in).",
       "mean_ind": "Katakanlah (Nabi Muhammad), “Terangkanlah kepadaku jika (sumber) air kamu surut ke dalam tanah, siapa yang akan memberimu air yang mengalir?”",
       "mean_eng": "Say, “Consider this: if your water were to sink ˹into the earth˺, then who ˹else˺ could bring you flowing water?”"

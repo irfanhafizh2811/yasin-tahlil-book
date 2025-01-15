@@ -1,6 +1,6 @@
 package com.icaali.almulk.view.activity
 
-import com.icaali.almulk.preference.ThemesPreference
+import com.icaali.almulk.data.preference.ThemesPreference
 import com.icaali.almulk.utils.ActionSurvey
 import com.icaali.almulk.view.dialog.SurveyDialog
 import com.icaali.almulk.view.theme.Theme

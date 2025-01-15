@@ -5,7 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.icaali.almulk.databinding.DialogTargetChangeInformationBinding
-import com.icaali.almulk.preference.SettingPreference
+import com.icaali.almulk.data.preference.SettingPreference
 
 class TargetChangeInformationDialog(
     context: Context,

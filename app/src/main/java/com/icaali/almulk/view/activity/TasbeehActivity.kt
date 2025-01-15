@@ -14,7 +14,7 @@ import com.asliri.viewanimator.ViewAnimator
 import com.google.android.gms.ads.MobileAds
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.icaali.almulk.R
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import com.icaali.almulk.databinding.ActivityTasbeehBinding
 import com.icaali.almulk.extension.activty.hasPermissions
 import com.icaali.almulk.extension.activty.isCustomType
@@ -22,9 +22,9 @@ import com.icaali.almulk.extension.context.getColorCompat
 import com.icaali.almulk.extension.context.getDrawableCompat
 import com.icaali.almulk.extension.view.gone
 import com.icaali.almulk.extension.view.visible
-import com.icaali.almulk.preference.CounterPreference
-import com.icaali.almulk.preference.SettingPreference
-import com.icaali.almulk.preference.ThemesPreference
+import com.icaali.almulk.data.preference.CounterPreference
+import com.icaali.almulk.data.preference.SettingPreference
+import com.icaali.almulk.data.preference.ThemesPreference
 import com.icaali.almulk.utils.TasbeehConst
 import com.icaali.almulk.view.dialog.*
 import com.icaali.almulk.view.theme.*

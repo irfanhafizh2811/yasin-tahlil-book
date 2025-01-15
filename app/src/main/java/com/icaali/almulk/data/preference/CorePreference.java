@@ -1,4 +1,4 @@
-package com.icaali.almulk.preference;
+package com.icaali.almulk.data.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;

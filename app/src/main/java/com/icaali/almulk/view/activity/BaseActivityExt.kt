@@ -1,6 +1,6 @@
 package com.icaali.almulk.view.activity
 
-import com.icaali.almulk.preference.GuidePreference
+import com.icaali.almulk.data.preference.GuidePreference
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

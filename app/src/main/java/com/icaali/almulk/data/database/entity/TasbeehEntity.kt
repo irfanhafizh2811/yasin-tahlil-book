@@ -1,4 +1,4 @@
-package com.icaali.almulk.database.entity
+package com.icaali.almulk.data.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

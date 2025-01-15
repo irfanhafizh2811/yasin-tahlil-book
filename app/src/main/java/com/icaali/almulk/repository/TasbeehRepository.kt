@@ -1,8 +1,8 @@
 package com.icaali.almulk.repository
 
 import androidx.annotation.WorkerThread
-import com.icaali.almulk.database.dao.DhikrDao
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.dao.DhikrDao
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import kotlinx.coroutines.flow.Flow
 
 // Declares the DAO as a private property in the constructor. Pass in the DAO

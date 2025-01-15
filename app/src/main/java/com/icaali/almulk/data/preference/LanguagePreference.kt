@@ -1,4 +1,4 @@
-package com.icaali.almulk.preference
+package com.icaali.almulk.data.preference
 
 class LanguagePreference(val corePreference: CorePreference) {
 

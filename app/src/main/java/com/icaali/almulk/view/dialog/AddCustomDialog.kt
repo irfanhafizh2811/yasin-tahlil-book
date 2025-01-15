@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.almulk.R
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import com.icaali.almulk.databinding.DialogBottomAddCustomDhikrBinding
 import com.icaali.almulk.extension.text.charCountingListener
 

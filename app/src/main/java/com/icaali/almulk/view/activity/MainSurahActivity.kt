@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.icaali.almulk.R
 import com.icaali.almulk.databinding.ActivityMainSurahBinding
 import com.icaali.almulk.extension.common.clazz
-import com.icaali.almulk.preference.SurahPreference
+import com.icaali.almulk.data.preference.SurahPreference
 import com.icaali.almulk.utils.TextUtils
 import com.icaali.almulk.view.adapter.MainSurahAdapter
 import com.icaali.almulk.view.surah.SurahFactory

@@ -8,7 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.icaali.almulk.R
 import com.icaali.almulk.databinding.DialogBottomMoreTasbeehBinding
 import com.icaali.almulk.extension.view.goneIf
-import com.icaali.almulk.preference.SettingPreference
+import com.icaali.almulk.data.preference.SettingPreference
 
 class MoreTasbeehDialog(
     context: Context,

@@ -1,6 +1,6 @@
 package com.icaali.almulk.view.theme
 
-import com.icaali.almulk.preference.ThemesPreference
+import com.icaali.almulk.data.preference.ThemesPreference
 
 fun MutableList<Theme>.setVisibleBadgeNewThemes(themesPreference: ThemesPreference) {
     forEach {

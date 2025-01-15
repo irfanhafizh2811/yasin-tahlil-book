@@ -12,8 +12,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.icaali.almulk.R
 import com.icaali.almulk.app.TasbeehApp.Companion.CHANNEL_ID
-import com.icaali.almulk.preference.CorePreference
-import com.icaali.almulk.preference.SettingPreference
+import com.icaali.almulk.data.preference.CorePreference
+import com.icaali.almulk.data.preference.SettingPreference
 import com.icaali.almulk.view.activity.MainActivity
 import java.util.*
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import com.icaali.almulk.databinding.DialogGuideTasbeehBinding
 import com.icaali.almulk.extension.view.gone
 import com.icaali.almulk.extension.view.visible
-import com.icaali.almulk.preference.GuidePreference
+import com.icaali.almulk.data.preference.GuidePreference
 
 class GuideTasbeehDialog(context: Context, guidePref: GuidePreference) : GuideDialog(
     context,

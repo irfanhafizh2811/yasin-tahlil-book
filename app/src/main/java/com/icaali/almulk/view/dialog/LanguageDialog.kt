@@ -12,7 +12,7 @@ import com.icaali.almulk.R
 import com.icaali.almulk.databinding.DialogLanguageBinding
 import com.icaali.almulk.extension.view.gone
 import com.icaali.almulk.extension.view.visible
-import com.icaali.almulk.preference.LanguagePreference
+import com.icaali.almulk.data.preference.LanguagePreference
 import java.util.Locale
 
 class LanguageDialog(

@@ -17,8 +17,8 @@ import com.icaali.almulk.extension.context.readJsonAssetToString
 import com.icaali.almulk.extension.view.gone
 import com.icaali.almulk.extension.view.visible
 import com.icaali.almulk.model.Surah
-import com.icaali.almulk.preference.SettingPreference
-import com.icaali.almulk.preference.SurahPreference
+import com.icaali.almulk.data.preference.SettingPreference
+import com.icaali.almulk.data.preference.SurahPreference
 import com.icaali.almulk.utils.FontSize
 import com.icaali.almulk.utils.TextUtils
 import com.icaali.almulk.view.adapter.SurahAdapter

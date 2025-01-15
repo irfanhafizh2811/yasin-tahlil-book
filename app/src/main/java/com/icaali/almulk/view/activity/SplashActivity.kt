@@ -7,7 +7,7 @@ import com.asliri.viewanimator.ViewAnimator
 import com.icaali.almulk.databinding.ActivitySplashBinding
 import com.icaali.almulk.extension.common.clazz
 import com.icaali.almulk.extension.view.visible
-import com.icaali.almulk.preference.SettingPreference
+import com.icaali.almulk.data.preference.SettingPreference
 import com.icaali.almulk.remote.CoreRemoteConfig
 import org.koin.android.ext.android.inject
 

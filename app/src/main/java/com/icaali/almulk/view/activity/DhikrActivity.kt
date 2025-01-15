@@ -11,7 +11,7 @@ import com.icaali.almulk.extension.context.getColorCompat
 import com.icaali.almulk.extension.context.getDrawableCompat
 import com.icaali.almulk.extension.context.readJsonAssetToString
 import com.icaali.almulk.model.DhikrDaily
-import com.icaali.almulk.preference.SettingPreference
+import com.icaali.almulk.data.preference.SettingPreference
 import com.icaali.almulk.utils.FontSize
 import com.icaali.almulk.view.adapter.DhikrAdapter
 import org.koin.android.ext.android.inject

@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.icaali.almulk.databinding.DialogGuideMainBinding
-import com.icaali.almulk.preference.GuidePreference
+import com.icaali.almulk.data.preference.GuidePreference
 
 class GuideMainDialog(context: Context, guidePref: GuidePreference) : GuideDialog(
     context,

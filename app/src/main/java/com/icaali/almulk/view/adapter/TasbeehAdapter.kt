@@ -3,7 +3,7 @@ package com.icaali.almulk.view.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import com.icaali.almulk.view.holder.TasbeehHolder
 
 class TasbeehAdapter(val onClickListener: (TasbeehEntity) -> Unit) :

@@ -1,7 +1,7 @@
-package com.icaali.almulk.database.dao
+package com.icaali.almulk.data.database.dao
 
 import androidx.room.*
-import com.icaali.almulk.database.entity.TasbeehEntity
+import com.icaali.almulk.data.database.entity.TasbeehEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
