@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.icaali.almulk">
+    package="com.quran.almulk">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <application
-        android:name="com.icaali.almulk.app.TasbeehApp"
+        android:name=".app.AlMulkApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Al Mulk"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.icaali.almulk.view.activity.SplashActivity"
+            android:name=".view.activity.SplashActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:noHistory="false"
@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name="com.icaali.almulk.view.activity.MainActivity"
+            android:name=".view.activity.MainActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:noHistory="false"
@@ -36,7 +36,7 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.icaali.almulk.view.activity.TasbeehActivity"
+            android:name=".view.activity.TasbeehActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:noHistory="false"
@@ -44,21 +44,21 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.icaali.almulk.view.activity.DeveloperAppsActivity"
+            android:name=".view.activity.DeveloperAppsActivity"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.icaali.almulk.view.activity.DhikrActivity"
+            android:name=".view.activity.DhikrActivity"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.icaali.almulk.view.activity.DhikrCompleteActivity"
+            android:name=".view.activity.DhikrCompleteActivity"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
@@ -66,14 +66,14 @@
 
 
         <activity
-            android:name="com.icaali.almulk.view.activity.SurahActivity"
+            android:name=".view.activity.SurahActivity"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.icaali.almulk.view.activity.MainSurahActivity"
+            android:name=".view.activity.MainSurahActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:noHistory="false"
@@ -87,9 +87,7 @@
 
         <!-- Receiver -->
         <receiver
-            android:name="com.icaali.almulk.receiver.NotificationReceiver"
+            android:name=".receiver.NotificationReceiver"
             android:enabled="true" />
-
     </application>
-
 </manifest>

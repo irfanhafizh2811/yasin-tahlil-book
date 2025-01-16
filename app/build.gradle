@@ -8,7 +8,7 @@ plugins {
 
 ext.majorVersion = 1
 ext.minorVersion = 0
-ext.patchVersion = 2
+ext.patchVersion = 0
 ext.preRelease = ""
 
 apply from: '../sign.gradle'
@@ -25,7 +25,7 @@ ext {
 android {
     compileSdk = 34
     defaultConfig {
-        applicationId "com.icaali.almulk"
+        applicationId "com.quran.almulk"
         minSdk project.ext.minSdkVersion
         targetSdk project.ext.targetSdkVersion
         versionCode generateVersionCode()
@@ -60,7 +60,7 @@ android {
     productFlavors {
         production {
             dimension "env"
-            applicationId "com.icaali.almulk"
+            applicationId "com.quran.almulk"
         }
     }
 
@@ -77,7 +77,7 @@ android {
             outputFileName = "AlMulk-${generateVersionName()}-${variant.flavorName}-${variant.buildType.name}.apk"
         }
     }
-    namespace 'com.icaali.almulk'
+    namespace 'com.quran.almulk'
 }
 
 apply from: '../variant_filter.gradle'

@@ -1,4 +1,4 @@
-package com.icaali.almulk
+package com.quran.almulk
 
 import org.junit.Test
 

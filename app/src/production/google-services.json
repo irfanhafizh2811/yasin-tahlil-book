@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1024075989667",
-    "project_id": "icaali-muslim-apps",
-    "storage_bucket": "icaali-muslim-apps.firebasestorage.app"
+    "project_number": "440504191851",
+    "project_id": "surah-almulk",
+    "storage_bucket": "surah-almulk.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1024075989667:android:104b359a0ee9f630727516",
+        "mobilesdk_app_id": "1:440504191851:android:6465cd12b7a3f730a0da2e",
         "android_client_info": {
-          "package_name": "com.icaali.almulk"
+          "package_name": "com.quran.almulk"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDQVk9rQAdv3EclCjwA4LxfqSX-dixuvWw"
+          "current_key": "AIzaSyCzVhUjzZRFY32encdTqP3qd9RFzZfJAtc"
         }
       ],
       "services": {
