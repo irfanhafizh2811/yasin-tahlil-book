@@ -176,7 +176,7 @@
 # This rule will properly ProGuard all the model classes in
 # the package com.yourcompany.models. Modify to fit the structure
 # of your app.
--keepclassmembers class com.quran.almulk.** {
+-keepclassmembers class com.quran.surah_almulk.** {
   *;
 }
 
