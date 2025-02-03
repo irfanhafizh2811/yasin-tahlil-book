@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.gson.Gson
 import com.quran.surah_almulk.R
 import com.quran.surah_almulk.databinding.ActivitySurahBinding
@@ -53,6 +54,9 @@ class SurahActivity : BaseActivity() {
 
     private val surahPref by inject<SurahPreference>()
     private val settingPreference by inject<SettingPreference>()
+    private val reviewManager by lazy {
+        ReviewManagerFactory.create(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +68,24 @@ class SurahActivity : BaseActivity() {
         setContentView(binding.root)
         setSurahView()
         scrollLastRead()
+        requestRatingReviewPlaystore()
+    }
+
+    private fun requestRatingReviewPlaystore() {
+        if (settingPreference.noHasSubmitRating) {
+            val request = reviewManager.requestReviewFlow()
+            request.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val reviewInfo = task.result
+                    val flow = reviewManager.launchReviewFlow(this, reviewInfo)
+                    flow.addOnCompleteListener {
+                        settingPreference.noHasSubmitRating = false
+                    }
+                } else {
+                    task.exception?.let { it.printStackTrace() }
+                }
+            }
+        }
     }
 
     private fun isMaxSize(): Boolean = currentFontSize == FontSize.HUGE

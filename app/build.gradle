@@ -8,7 +8,7 @@ plugins {
 
 ext.majorVersion = 1
 ext.minorVersion = 0
-ext.patchVersion = 1
+ext.patchVersion = 2
 ext.preRelease = ""
 
 apply from: '../sign.gradle'
@@ -164,7 +164,7 @@ dependencies {
     implementation("com.google.firebase:firebase-config")
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-database")
-    implementation("com.google.android.play:review-ktx:2.0.1")
+    implementation("com.google.android.play:review-ktx:2.0.2")
 
     //Expandable Layout
     implementation "com.github.skydoves:expandablelayout:1.0.7"
