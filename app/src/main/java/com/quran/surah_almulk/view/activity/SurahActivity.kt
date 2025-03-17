@@ -215,6 +215,31 @@ class SurahActivity : BaseActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (settingPreference.noHasSubmitRating) {
+            requestRatingReviewPlaystore()
+            return
+        }
+        super.onBackPressed()
+    }
+
+    private fun requestRatingReviewPlaystore() {
+        if (settingPreference.noHasSubmitRating) {
+            val request = reviewManager.requestReviewFlow()
+            request.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val reviewInfo = task.result
+                    val flow = reviewManager.launchReviewFlow(this, reviewInfo)
+                    flow.addOnCompleteListener {
+                        settingPreference.noHasSubmitRating = false
+                    }
+                } else {
+                    task.exception?.let { it.printStackTrace() }
+                }
+            }
+        }
+    }
+
     companion object {
         const val SURAH_INTENT_EXTRA = "SURAH_INTENT_EXTRA"
         const val READ_LAST_SURAH_INTENT_EXTRA = "READ_LAST_SURAH_INTENT_EXTRA"

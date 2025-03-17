@@ -37,7 +37,7 @@
                         android:id="@+id/tv_arabic_surah"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/font_scheherazade_new_bold"
+                        android:fontFamily="@font/font_lpmq_isep_misbah"
                         android:text="الْمُلْك"
                         android:textColor="@android:color/white"
                         android:textSize="38sp"

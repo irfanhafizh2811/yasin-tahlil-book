@@ -8,7 +8,7 @@ plugins {
 
 ext.majorVersion = 1
 ext.minorVersion = 0
-ext.patchVersion = 2
+ext.patchVersion = 3
 ext.preRelease = ""
 
 apply from: '../sign.gradle'
