@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.quran.surah_almulk.databinding.ItemDhikrBinding
-import com.quran.surah_almulk.model.Dhikr
+import com.quran.surah_almulk.data.model.Dhikr
 import com.quran.surah_almulk.utils.FontSize
 import com.quran.surah_almulk.view.holder.DhikrHolder
 

@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryPurple</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkPurple</item>
+        <item name="colorPrimary">@color/colorPrimaryDarkMale</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkMale</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>

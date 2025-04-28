@@ -104,5 +104,16 @@
     <string name="label_surah_al_mulk">Surat Al Mulk</string>
     <string name="list_of_the_surah">List of the surah</string>
     <string name="label_read">Read</string>
+    <string name="surah_al_baqarah" translatable="false">Surah Al Baqarah</string>
+    <string name="label_surah_al_baqarah" translatable="false">Surah Al Baqarah</string>
+    <string name="label_assalamualaikum" translatable="false">Assalamualaikum</string>
+    <string name="label_salam_person" translatable="false">Shaahibul Qur\'an</string>
+    <string name="label_lets_read" translatable="false">Let\'s Read</string>
+    <string name="label_quran_everyday" translatable="false">Quran Everyday</string>
+    <string name="label_welcome_to" translatable="false">Welcome to</string>
+    <string name="label_your_quran" translatable="false">Your Quran</string>
+    <string name="label_on_board_start" translatable="false">Let\'s Get Started!</string>
+    <string name="label_female" translatable="false">Female</string>
+    <string name="label_male" translatable="false">Male</string>
     <!--************************ End Section Surah ************************-->
 </resources>

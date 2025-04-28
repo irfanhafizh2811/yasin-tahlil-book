@@ -1,6 +1,6 @@
 package com.quran.surah_almulk.data.preference
 
-import com.quran.surah_almulk.view.theme.ThemeType
+import com.quran.surah_almulk.data.model.theme.ThemeType
 
 class ThemesPreference(val corePreference: CorePreference) {
 

@@ -11,21 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.gson.Gson
 import com.quran.surah_almulk.R
+import com.quran.surah_almulk.data.model.Surah
+import com.quran.surah_almulk.data.model.surah.SurahInterface
+import com.quran.surah_almulk.data.model.surah.SurahQuran
+import com.quran.surah_almulk.data.preference.SettingPreference
+import com.quran.surah_almulk.data.preference.SurahPreference
 import com.quran.surah_almulk.databinding.ActivitySurahBinding
 import com.quran.surah_almulk.extension.common.clazz
 import com.quran.surah_almulk.extension.context.getColorCompat
 import com.quran.surah_almulk.extension.context.readJsonAssetToString
 import com.quran.surah_almulk.extension.view.gone
 import com.quran.surah_almulk.extension.view.visible
-import com.quran.surah_almulk.model.Surah
-import com.quran.surah_almulk.data.preference.SettingPreference
-import com.quran.surah_almulk.data.preference.SurahPreference
 import com.quran.surah_almulk.utils.FontSize
 import com.quran.surah_almulk.utils.TextUtils
 import com.quran.surah_almulk.view.adapter.SurahAdapter
-import com.quran.surah_almulk.view.surah.SurahFactory
-import com.quran.surah_almulk.view.surah.SurahInterface
-import com.quran.surah_almulk.view.surah.SurahQuran
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -64,28 +63,11 @@ class SurahActivity : BaseActivity() {
         surahName = intent.getStringExtra(SURAH_INTENT_EXTRA)
             ?.replace(TextUtils.EMPTY_SPACE, TextUtils.UNDERSCORE) ?: SurahQuran.AL_MULK.name
         isReadLast = intent.getBooleanExtra(READ_LAST_SURAH_INTENT_EXTRA, false)
-        surah = SurahFactory.generate(SurahQuran.valueOf(surahName))
+        surah = com.quran.surah_almulk.data.model.surah.SurahFactory.generate(SurahQuran.valueOf(surahName))
         setContentView(binding.root)
         setSurahView()
         scrollLastRead()
         requestRatingReviewPlaystore()
-    }
-
-    private fun requestRatingReviewPlaystore() {
-        if (settingPreference.noHasSubmitRating) {
-            val request = reviewManager.requestReviewFlow()
-            request.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val reviewInfo = task.result
-                    val flow = reviewManager.launchReviewFlow(this, reviewInfo)
-                    flow.addOnCompleteListener {
-                        settingPreference.noHasSubmitRating = false
-                    }
-                } else {
-                    task.exception?.let { it.printStackTrace() }
-                }
-            }
-        }
     }
 
     private fun isMaxSize(): Boolean = currentFontSize == FontSize.HUGE
@@ -94,7 +76,7 @@ class SurahActivity : BaseActivity() {
     private fun setSurahView() = with(binding) {
         data = Gson().fromJson(readJsonAssetToString(surah.sourceJson), clazz<Surah>())
         rvSurah.also {
-            val surahModel = SurahFactory.generate(SurahQuran.valueOf(surahName))
+            val surahModel = com.quran.surah_almulk.data.model.surah.SurahFactory.generate(SurahQuran.valueOf(surahName))
             it.layoutManager = LinearLayoutManager(this@SurahActivity)
             it.adapter = surahAdapter.apply {
                 onBindListener = { surah -> latestSurahPref(surah) }

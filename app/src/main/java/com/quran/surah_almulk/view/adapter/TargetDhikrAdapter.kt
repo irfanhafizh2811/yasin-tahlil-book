@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.quran.surah_almulk.R
 import com.quran.surah_almulk.databinding.ItemTargetDhikrBinding
 import com.quran.surah_almulk.extension.context.getColorCompat
-import com.quran.surah_almulk.model.TargetDhikr
+import com.quran.surah_almulk.data.model.TargetDhikr
 
 class TargetDhikrAdapter(private val onTargetClickListener: (Int) -> Unit) :
     RecyclerView.Adapter<TargetDhikrAdapter.TargetDhikrViewHolder>() {

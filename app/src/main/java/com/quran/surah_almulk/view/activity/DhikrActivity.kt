@@ -10,7 +10,7 @@ import com.quran.surah_almulk.extension.common.clazz
 import com.quran.surah_almulk.extension.context.getColorCompat
 import com.quran.surah_almulk.extension.context.getDrawableCompat
 import com.quran.surah_almulk.extension.context.readJsonAssetToString
-import com.quran.surah_almulk.model.DhikrDaily
+import com.quran.surah_almulk.data.model.DhikrDaily
 import com.quran.surah_almulk.data.preference.SettingPreference
 import com.quran.surah_almulk.utils.FontSize
 import com.quran.surah_almulk.view.adapter.DhikrAdapter

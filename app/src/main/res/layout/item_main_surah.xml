@@ -17,17 +17,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_rub_al_hizb"
-        app:tint="@color/colorPrimaryPurple" />
+        app:srcCompat="@drawable/ic_bg_number"
+        app:tint="@color/colorAccentFemale" />
 
     <TextView
         android:id="@+id/tvEndOfAyah"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:fontFamily="@font/font_izmir_bold"
+        android:fontFamily="@font/font_inter_bold"
         android:gravity="center"
         android:textAlignment="gravity"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/ivEndOfAyah"
         app:layout_constraintEnd_toEndOf="@id/ivEndOfAyah"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/font_izmir_bold"
+        android:fontFamily="@font/font_inter_bold"
         android:textColor="@color/colorGreyShine"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_verses"
@@ -49,16 +49,29 @@
         tools:text="Al Baqarah" />
 
     <TextView
-        android:id="@+id/tv_verses"
+        android:id="@+id/tv_name_surah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/font_izmir_light"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/font_inter_reg"
+        android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivEndOfAyah"
         app:layout_constraintTop_toBottomOf="@id/tv_surah"
-        tools:text="MECCA • 286 Verses" />
+        tools:text="Cow" />
+
+    <TextView
+        android:id="@+id/tv_verses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/font_inter_reg"
+        app:layout_constraintBottom_toBottomOf="@id/tv_name_surah"
+        app:layout_constraintStart_toEndOf="@id/tv_name_surah"
+        app:layout_constraintTop_toTopOf="@id/tv_name_surah"
+        tools:text="• 286 Verses" />
 
     <TextView
         android:id="@+id/tvArabic"
@@ -66,14 +79,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
         android:fontFamily="@font/font_lpmq_isep_misbah"
-        android:lineSpacingExtra="10dp"
         android:paddingTop="6dp"
         android:textColor="@color/colorBlack"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="الْبَقَرَة" />
+        tools:text="الْبَقَرَة"
+        tools:textColor="@color/colorAccentFemale" />
 
     <View
         android:layout_width="match_parent"

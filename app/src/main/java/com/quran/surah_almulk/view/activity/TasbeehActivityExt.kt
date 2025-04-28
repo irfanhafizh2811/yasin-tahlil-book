@@ -1,12 +1,11 @@
 package com.quran.surah_almulk.view.activity
 
+import com.quran.surah_almulk.data.model.theme.ThemeType
 import com.quran.surah_almulk.data.preference.ThemesPreference
 import com.quran.surah_almulk.utils.ActionSurvey
 import com.quran.surah_almulk.view.dialog.SurveyDialog
-import com.quran.surah_almulk.view.theme.Theme
-import com.quran.surah_almulk.view.theme.ThemeType
 
-fun TasbeehActivity.updateNewThemePref(theme: Theme, themesPreference: ThemesPreference) {
+fun TasbeehActivity.updateNewThemePref(theme: com.quran.surah_almulk.data.model.theme.Theme, themesPreference: ThemesPreference) {
     when (theme.themeType()) {
         ThemeType.YELLOW -> themesPreference.hasNewContentYellow = false
         ThemeType.KAABA -> themesPreference.hasNewContentKaaba = false

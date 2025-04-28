@@ -8,7 +8,7 @@ plugins {
 
 ext.majorVersion = 1
 ext.minorVersion = 0
-ext.patchVersion = 3
+ext.patchVersion = 4
 ext.preRelease = ""
 
 apply from: '../sign.gradle'
@@ -55,6 +55,7 @@ android {
     buildFeatures {
         viewBinding true
         dataBinding true
+        buildConfig true
     }
     flavorDimensions "env"
     productFlavors {
@@ -85,7 +86,6 @@ apply from: '../variant_filter.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.gms:play-services-measurement-api:22.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.8'
 
@@ -165,6 +165,7 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.android.play:review-ktx:2.0.2")
+    implementation("com.google.firebase:firebase-analytics")
 
     //Expandable Layout
     implementation "com.github.skydoves:expandablelayout:1.0.7"

@@ -17,12 +17,13 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.quran.surah_almulk.app.BuildConfig
+import com.quran.surah_almulk.BuildConfig
+import com.quran.surah_almulk.R
+import com.quran.surah_almulk.data.preference.GuidePreference
 import com.quran.surah_almulk.extension.activty.hasPermissions
 import com.quran.surah_almulk.extension.ads.loadAd
 import com.quran.surah_almulk.extension.ads.loadAdMob
-import com.quran.surah_almulk.extension.ads.loadAdMobTest
-import com.quran.surah_almulk.data.preference.GuidePreference
+import com.quran.surah_almulk.extension.view.gone
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 
@@ -92,52 +93,30 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun loadAdMobInterstitial() {
-        when (isTestAdmob()) {
-            true -> {
-                loadAdMobTest(this@BaseActivity) {
-                    mInterstitialAd = it
-                    mInterstitialAd?.show(this)
+        if (isProductionRelease()) loadAd(this@BaseActivity) {
+            mInterstitialAd = it
+            mInterstitialAd?.fullScreenContentCallback = object :
+                FullScreenContentCallback() {
+
+                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                    super.onAdFailedToShowFullScreenContent(p0)
+                    mInterstitialAd = null
                 }
             }
-
-            else -> {
-                if (isProductionRelease())
-                    loadAd(this@BaseActivity) {
-                        mInterstitialAd = it
-                        mInterstitialAd?.fullScreenContentCallback = object :
-                            FullScreenContentCallback() {
-                            override fun onAdShowedFullScreenContent() {
-                                super.onAdShowedFullScreenContent()
-                            }
-
-                            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                                super.onAdFailedToShowFullScreenContent(p0)
-                                mInterstitialAd = null
-                            }
-                        }
-                        mInterstitialAd?.show(this)
-                    }
-            }
+            mInterstitialAd?.show(this)
         }
     }
 
-    protected fun loadBanner(adViewContainer: FrameLayout) {
-        adViewContainer.apply {
-            removeAllViews()
-            addView(mAdView)
-            with(mAdView) {
-                when (isTestAdmob()) {
-                    true -> {
-                        loadAdMobTest(this@BaseActivity, getAdBannerSize()) {}
-                    }
-
-                    else -> {
-                        if (isProductionRelease())
-                            loadAdMob(this@BaseActivity, getAdBannerSize()) {}
-                    }
-                }
-            }
+    protected fun loadBanner(adViewContainer: FrameLayout) = if (isProductionRelease()) {
+        adViewContainer.removeAllViews()
+        val adView = AdView(this@BaseActivity).apply {
+            setAdSize(getAdBannerSize())
+            adUnitId = getString(R.string.id_unit_banner)
         }
+        adView.loadAdMob(this@BaseActivity, getAdBannerSize()) {}
+        adViewContainer.addView(adView)
+    } else {
+        adViewContainer.gone()
     }
 
     private fun getAdBannerSize(): AdSize {

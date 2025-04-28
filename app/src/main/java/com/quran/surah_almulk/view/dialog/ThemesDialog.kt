@@ -4,10 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.quran.surah_almulk.data.model.theme.Theme
+import com.quran.surah_almulk.data.model.theme.ThemeType
 import com.quran.surah_almulk.databinding.DialogBottomThemesPickerBinding
 import com.quran.surah_almulk.view.adapter.ThemeAdapter
-import com.quran.surah_almulk.view.theme.Theme
-import com.quran.surah_almulk.view.theme.ThemeType
 
 class ThemesDialog(context: Context) : BottomSheetDialog(context) {
 

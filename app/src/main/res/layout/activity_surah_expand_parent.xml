@@ -18,11 +18,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryDarkPurple">
+            android:layout_height="?attr/actionBarSize">
 
             <ImageView
-                android:id="@+id/ivBack"
+                android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -31,24 +30,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_back"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:tint="@color/colorPrimaryDarkFemale" />
 
             <TextView
-                android:id="@+id/tvSurah"
+                android:id="@+id/tv_surah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/font_izmir_bold"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
+                android:fontFamily="@font/font_courgette_regular"
+                android:text="@string/label_surah_al_mulk"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Al Mulk" />
+                tools:textColor="@color/colorPrimaryDarkFemale" />
 
             <LinearLayout
-                android:id="@+id/llMore"
+                android:id="@+id/ll_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -61,11 +61,12 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/ivMore"
+                    android:id="@+id/iv_more"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:srcCompat="@drawable/ic_setting"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"
+                    tools:tint="@color/colorPrimaryDarkFemale" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

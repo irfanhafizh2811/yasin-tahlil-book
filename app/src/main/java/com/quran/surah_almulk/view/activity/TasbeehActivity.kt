@@ -13,8 +13,15 @@ import androidx.core.view.isVisible
 import com.asliri.viewanimator.ViewAnimator
 import com.google.android.gms.ads.MobileAds
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.jakewharton.rxbinding2.view.RxView
 import com.quran.surah_almulk.R
 import com.quran.surah_almulk.data.database.entity.TasbeehEntity
+import com.quran.surah_almulk.data.model.theme.ThemeFactory
+import com.quran.surah_almulk.data.model.theme.ThemeType
+import com.quran.surah_almulk.data.model.theme.setVisibleBadgeNewThemes
+import com.quran.surah_almulk.data.preference.CounterPreference
+import com.quran.surah_almulk.data.preference.SettingPreference
+import com.quran.surah_almulk.data.preference.ThemesPreference
 import com.quran.surah_almulk.databinding.ActivityTasbeehBinding
 import com.quran.surah_almulk.extension.activty.hasPermissions
 import com.quran.surah_almulk.extension.activty.isCustomType
@@ -22,14 +29,14 @@ import com.quran.surah_almulk.extension.context.getColorCompat
 import com.quran.surah_almulk.extension.context.getDrawableCompat
 import com.quran.surah_almulk.extension.view.gone
 import com.quran.surah_almulk.extension.view.visible
-import com.quran.surah_almulk.data.preference.CounterPreference
-import com.quran.surah_almulk.data.preference.SettingPreference
-import com.quran.surah_almulk.data.preference.ThemesPreference
 import com.quran.surah_almulk.utils.TasbeehConst
-import com.quran.surah_almulk.view.dialog.*
-import com.quran.surah_almulk.view.theme.*
+import com.quran.surah_almulk.view.dialog.ConfirmationDialog
+import com.quran.surah_almulk.view.dialog.GuideTasbeehDialog
+import com.quran.surah_almulk.view.dialog.MoreTasbeehDialog
+import com.quran.surah_almulk.view.dialog.TargetChangeInformationDialog
+import com.quran.surah_almulk.view.dialog.TargetDhikrDialog
+import com.quran.surah_almulk.view.dialog.ThemesDialog
 import com.quran.surah_almulk.vm.DhikrViewModel
-import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -80,7 +87,7 @@ class TasbeehActivity : BaseActivity() {
     //------------------------------------ Section Lazy ------------------------------------
 
     private var dhikr = TasbeehEntity("", "", "", 0)
-    private var theme: Theme? = null
+    private var theme: com.quran.surah_almulk.data.model.theme.Theme? = null
 
     internal var type = ""
     internal val themesPreference by inject<ThemesPreference>()

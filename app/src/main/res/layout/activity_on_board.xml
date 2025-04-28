@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/font_inter_reg"
+        android:text="@string/label_welcome_to"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_your_quran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/font_courgette_regular"
+        android:text="@string/label_surah_al_mulk"
+        android:textColor="@color/colorAccentMale"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_welcome" />
+
+    <TextView
+        android:id="@+id/tv_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/font_inter_bold"
+        android:letterSpacing="0.04"
+        android:text="Choose Your Theme?"
+        android:textColor="#433D3E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_your_quran"
+        app:layout_constraintStart_toStartOf="@id/tv_your_quran"
+        app:layout_constraintTop_toBottomOf="@id/tv_your_quran" />
+
+    <ImageView
+        android:id="@+id/iv_char_gender_female"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_theme_char_female"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="@id/iv_theme_char_female"
+        app:layout_constraintStart_toStartOf="@id/iv_theme_char_female"
+        app:layout_constraintTop_toTopOf="@id/iv_theme_char_female"
+        app:srcCompat="@drawable/bg_char_main_quran" />
+
+    <ImageView
+        android:id="@+id/iv_theme_char_female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_theme"
+        app:srcCompat="@drawable/ic_char_female" />
+
+    <TextView
+        android:id="@+id/tv_female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/font_inter_bold"
+        android:text="@string/label_female"
+        android:textColor="@color/textHintOutputBlackWhite"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_theme_char_female"
+        app:layout_constraintStart_toStartOf="@id/iv_theme_char_female"
+        app:layout_constraintTop_toBottomOf="@id/iv_theme_char_female" />
+
+    <ImageView
+        android:id="@+id/iv_char_gender_male"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_theme_char_male"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="@id/iv_theme_char_male"
+        app:layout_constraintStart_toStartOf="@id/iv_theme_char_male"
+        app:layout_constraintTop_toTopOf="@id/iv_theme_char_male"
+        app:srcCompat="@drawable/bg_char_main_quran" />
+
+    <ImageView
+        android:id="@+id/iv_theme_char_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="70dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_theme"
+        app:srcCompat="@drawable/ic_char_male" />
+
+
+    <TextView
+        android:id="@+id/tv_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/font_inter_bold"
+        android:text="@string/label_male"
+        android:textColor="@color/textHintOutputBlackWhite"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/iv_theme_char_male"
+        app:layout_constraintStart_toStartOf="@id/iv_theme_char_male"
+        app:layout_constraintTop_toBottomOf="@id/iv_theme_char_male" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bg_btn_fill_accent"
+        android:minWidth="800dp"
+        android:text="@string/label_on_board_start"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/iv_theme_char_male"
+        app:layout_constraintStart_toStartOf="@id/iv_char_gender_female"
+        app:layout_constraintTop_toBottomOf="@id/tv_female"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

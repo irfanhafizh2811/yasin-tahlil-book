@@ -4,26 +4,35 @@ import android.util.TypedValue
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.quran.surah_almulk.R
+import com.quran.surah_almulk.data.model.User
+import com.quran.surah_almulk.data.model.Verse
+import com.quran.surah_almulk.data.model.gender.Gender
+import com.quran.surah_almulk.data.model.surah.SurahInterface
 import com.quran.surah_almulk.databinding.ItemSurahVerseBinding
+import com.quran.surah_almulk.extension.context.getColorCompat
+import com.quran.surah_almulk.extension.context.getDrawableCompat
+import com.quran.surah_almulk.extension.image.setTint
 import com.quran.surah_almulk.extension.text.numberArabic
-import com.quran.surah_almulk.model.Verse
 import com.quran.surah_almulk.utils.FontSize
 import com.quran.surah_almulk.utils.TextUtils
-import com.quran.surah_almulk.view.surah.SurahInterface
 
 class SurahHolder(
     val binding: ItemSurahVerseBinding,
     val surahInterface: SurahInterface
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    var posItem: Int = 0
-    val typeUnit = TypedValue.COMPLEX_UNIT_PX
-    var surahName: String = TextUtils.BLANK
+    private var user: User = User()
+    private var surahName: String = TextUtils.BLANK
+    private var surahNameArab: String = TextUtils.BLANK
+    private var posItem: Int = 0
+    private val typeUnit = TypedValue.COMPLEX_UNIT_PX
     private var isFirstAyah = posItem <= 0
-    var visibleLatinQuran = true
-    var visibleTranslationQuran = true
+    private var visibleLatinQuran = true
+    private var visibleTranslationQuran = true
 
     fun bind(
+        surahInterface: SurahInterface,
+        user: User,
         verse: Verse,
         fontSize: FontSize,
         posItem: Int,
@@ -33,28 +42,47 @@ class SurahHolder(
         this@SurahHolder.posItem = posItem
         this@SurahHolder.visibleLatinQuran = visibleLatinQuran
         this@SurahHolder.visibleTranslationQuran = visibleTranslationQuran
+        this@SurahHolder.user = user
         isFirstAyah = posItem == 0
         val (arabic, latin, meanIndo) = verse
         this@SurahHolder.surahName =
             surahInterface.surahQuran.name.replace(TextUtils.UNDERSCORE, TextUtils.EMPTY_SPACE)
+        tvSurahArabic.text = surahInterface.arabic
         tvArabic.text = arabic
         tvLatin.text = latin
         tvMean.text = meanIndo
         tvEndOfAyah.text = (posItem + 1).toString().numberArabic()
         tvLatin.isVisible = visibleLatinQuran
         tvMean.isVisible = visibleTranslationQuran
+        ivEndOfAyah.setTint(getGenderColorRes())
+        tvLatin.setTextColor(getGenderColor())
         onUITaawudz()
         updateSize(fontSize)
         return this@SurahHolder
     }
 
     private fun onUITaawudz() = with(binding) {
-        cvTaawudz.isVisible = isFirstAyah
+        cvSurah.isVisible = isFirstAyah
         if (!isFirstAyah) return@with
         tvSurah.text = surahName
         tvSurahMean.text = root.context.getString(surahInterface.mean)
         tvInfo.text = "${surahInterface.typeSurah.name.uppercase()} • ${surahInterface.verses}"
+        cvSurah.setCardBackgroundColor(getGenderColor())
+        ivCharSurahStart.setImageDrawable(getGenderDrawable())
+        ivCharSurahEnd.setImageDrawable(getGenderDrawable())
     }
+
+    private fun getGenderDrawable() =
+        if (user.gender == Gender.MALE) getDrawableCompat(R.drawable.ic_char_gender_male)
+        else getDrawableCompat(R.drawable.ic_char_gender_female)
+
+    private fun getGenderColor() =
+        if (user.gender == Gender.MALE) getColorCompat(R.color.colorAccentMale)
+        else getColorCompat(R.color.colorAccentFemale)
+
+    private fun getGenderColorRes() =
+        if (user.gender == Gender.MALE) R.color.colorAccentMale
+        else R.color.colorAccentFemale
 
     private fun updateSize(fontSize: FontSize) {
         when (fontSize) {

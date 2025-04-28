@@ -26,9 +26,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.quran.surah_almulk.view.activity.MainActivity"
+            android:name="com.quran.surah_almulk.view.activity.MainQuranActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:noHistory="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.quran.surah_almulk.view.activity.OnBoardActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:noHistory="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name="com.quran.surah_almulk.view.activity.QuranSurahActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:noHistory="false"
@@ -67,14 +80,6 @@
 
         <activity
             android:name="com.quran.surah_almulk.view.activity.SurahActivity"
-            android:launchMode="singleTop"
-            android:noHistory="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-
-        <activity
-            android:name="com.quran.surah_almulk.view.activity.MainSurahActivity"
-            android:exported="true"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"

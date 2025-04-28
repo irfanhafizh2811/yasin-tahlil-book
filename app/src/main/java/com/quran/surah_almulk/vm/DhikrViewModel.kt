@@ -2,7 +2,7 @@ package com.quran.surah_almulk.vm
 
 import androidx.lifecycle.*
 import com.quran.surah_almulk.data.database.entity.TasbeehEntity
-import com.quran.surah_almulk.repository.TasbeehRepository
+import com.quran.surah_almulk.data.repository.TasbeehRepository
 import kotlinx.coroutines.launch
 
 class DhikrViewModel(private val repository: TasbeehRepository) : ViewModel() {

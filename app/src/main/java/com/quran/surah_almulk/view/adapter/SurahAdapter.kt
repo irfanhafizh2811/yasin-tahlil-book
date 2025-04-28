@@ -4,13 +4,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.quran.surah_almulk.data.model.User
+import com.quran.surah_almulk.data.model.Verse
+import com.quran.surah_almulk.data.model.surah.SurahFactory
+import com.quran.surah_almulk.data.model.surah.SurahInterface
+import com.quran.surah_almulk.data.model.surah.SurahQuran
 import com.quran.surah_almulk.databinding.ItemSurahVerseBinding
-import com.quran.surah_almulk.model.Verse
 import com.quran.surah_almulk.utils.FontSize
 import com.quran.surah_almulk.view.holder.SurahHolder
-import com.quran.surah_almulk.view.surah.SurahFactory
-import com.quran.surah_almulk.view.surah.SurahInterface
-import com.quran.surah_almulk.view.surah.SurahQuran
 
 class SurahAdapter : RecyclerView.Adapter<SurahHolder>() {
 
@@ -22,6 +23,7 @@ class SurahAdapter : RecyclerView.Adapter<SurahHolder>() {
     var enableLastRead = false
     var showLatinQuran = false
     var showTranslationQuran = false
+    var user: User = User()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurahHolder = SurahHolder(
         ItemSurahVerseBinding.inflate(LayoutInflater.from(parent.context), parent, false),
@@ -30,6 +32,8 @@ class SurahAdapter : RecyclerView.Adapter<SurahHolder>() {
 
     override fun onBindViewHolder(holder: SurahHolder, position: Int) {
         surahHolder = holder.bind(
+            surahInterface,
+            user = user,
             verse = verses[position],
             fontSize = fontSize,
             posItem = position,

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.quran.surah_almulk.databinding.ItemApplicationBinding
 import com.quran.surah_almulk.extension.glide.loadFromUrl
-import com.quran.surah_almulk.model.Application
+import com.quran.surah_almulk.data.model.Application
 
 class DeveloperAdapter(private val onItemClickListener: (Application) -> Unit) :
     RecyclerView.Adapter<DeveloperAdapter.DeveloperVH>() {

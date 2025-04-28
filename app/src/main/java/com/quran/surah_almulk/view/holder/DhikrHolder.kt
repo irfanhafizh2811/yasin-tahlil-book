@@ -5,7 +5,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.quran.surah_almulk.R
 import com.quran.surah_almulk.databinding.ItemDhikrBinding
-import com.quran.surah_almulk.model.Dhikr
+import com.quran.surah_almulk.data.model.Dhikr
 import com.quran.surah_almulk.utils.FontSize
 
 class DhikrHolder(

@@ -15,6 +15,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -25,7 +26,21 @@ import java.io.InputStreamReader
 
 fun Context.getColorCompat(@ColorRes colorId: Int) = ContextCompat.getColor(this, colorId)
 
-fun Context.getDrawableCompat(@DrawableRes drawableId: Int) = AppCompatResources.getDrawable(this, drawableId)
+fun ViewHolder.getColorCompat(@ColorRes colorId: Int) =
+    ContextCompat.getColor(this.itemView.context, colorId)
+
+fun Context.getDrawableCompat(@DrawableRes drawableId: Int) =
+    AppCompatResources.getDrawable(this, drawableId)
+
+fun ViewHolder.getDrawableCompat(@DrawableRes drawableId: Int) =
+    AppCompatResources.getDrawable(this.itemView.context, drawableId)
+
+
+fun ViewHolder.getDrawableCompat(@DrawableRes drawableId: Int, @ColorRes colorRes: Int) =
+    AppCompatResources.getDrawable(itemView.context, drawableId)?.apply {
+        val drawable = DrawableCompat.wrap(this)
+        DrawableCompat.setTint(drawable, getColorCompat(colorRes))
+    }
 
 fun Context.getDrawableCompat(@DrawableRes drawableId: Int, @ColorRes colorRes: Int) =
     AppCompatResources.getDrawable(this, drawableId)?.apply {

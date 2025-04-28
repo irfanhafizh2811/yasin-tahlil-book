@@ -3,7 +3,7 @@ package com.quran.surah_almulk.remote
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.gson.Gson
 import com.quran.surah_almulk.extension.common.clazz
-import com.quran.surah_almulk.model.DeveloperApp
+import com.quran.surah_almulk.data.model.DeveloperApp
 
 class SourceAppsRemoteConfig(firebaseRemoteConfig: FirebaseRemoteConfig) {
 

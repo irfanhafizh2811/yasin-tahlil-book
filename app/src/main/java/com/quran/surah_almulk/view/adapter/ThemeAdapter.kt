@@ -6,25 +6,24 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.quran.surah_almulk.R
+import com.quran.surah_almulk.data.model.theme.ThemeType
 import com.quran.surah_almulk.databinding.ItemThemeBinding
 import com.quran.surah_almulk.extension.context.getColorCompat
 import com.quran.surah_almulk.extension.context.getDrawableCompat
-import com.quran.surah_almulk.view.theme.Theme
-import com.quran.surah_almulk.view.theme.ThemeType
 
-class ThemeAdapter(val onItemClickListener: (Theme) -> Unit) :
+class ThemeAdapter(val onItemClickListener: (com.quran.surah_almulk.data.model.theme.Theme) -> Unit) :
     RecyclerView.Adapter<ThemeAdapter.ThemeVH>() {
 
     private lateinit var binding: ItemThemeBinding
-    var themes = mutableListOf<Theme>()
+    var themes = mutableListOf<com.quran.surah_almulk.data.model.theme.Theme>()
     var type = ThemeType.DEFAULT
 
     class ThemeVH(
-        private val onItemClickListener: (Theme) -> Unit,
+        private val onItemClickListener: (com.quran.surah_almulk.data.model.theme.Theme) -> Unit,
         private val binding: ItemThemeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(theme: Theme, type: ThemeType) {
+        fun bind(theme: com.quran.surah_almulk.data.model.theme.Theme, type: ThemeType) {
             with(binding) {
                 ivTheme.setImageDrawable(root.context.getDrawableCompat(theme.iconImageRes()))
                 tvTheme.text = root.context.getString(theme.textStringRes())

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_side_menu" />
+
+            <TextView
+                android:id="@+id/tv_title_quran"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/font_courgette_regular"
+                android:gravity="center"
+                android:paddingEnd="16dp"
+                android:text="@string/label_surah_al_mulk"
+                android:textAlignment="gravity"
+                android:textSize="30sp"
+                tools:textColor="@color/colorAccentFemale" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_search"
+                tools:visibility="gone" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_salam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/font_inter_reg"
+        android:text="@string/label_assalamualaikum"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_salam_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/font_inter_extra_bold"
+        android:text="@string/label_salam_person"
+        android:textColor="#433D3E"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_salam"
+        tools:targetApi="p" />
+
+    <ImageView
+        android:id="@+id/iv_bg_char_quran"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintDimensionRatio="312:120"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_salam_person"
+        app:srcCompat="@drawable/bg_main_top_banner_female"
+        tools:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/iv_char_read_quran"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bg_char_quran"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/iv_bg_char_quran"
+        app:layout_constraintTop_toTopOf="@id/iv_bg_char_quran"
+        app:srcCompat="@drawable/ic_char_gender_female" />
+
+    <TextView
+        android:id="@+id/tv_title_main_quran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/font_inter_reg"
+        android:text="@string/label_lets_read"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/iv_bg_char_quran"
+        app:layout_constraintTop_toTopOf="@id/iv_bg_char_quran" />
+
+    <TextView
+        android:id="@+id/tv_desc_main_quran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/font_inter_extra_bold"
+        android:text="@string/label_surah_al_mulk"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/iv_bg_char_quran"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_main_quran" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_read"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/colorAccentMale"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_bg_char_quran"
+        app:layout_constraintStart_toStartOf="@id/tv_desc_main_quran"
+        app:layout_constraintTop_toBottomOf="@id/tv_desc_main_quran">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/font_inter_bold"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="7dp"
+            android:text="@string/label_read"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_surah"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/fl_ads_banner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_bg_char_quran"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_main_surah" />
+
+    <FrameLayout
+        android:id="@+id/fl_ads_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:minHeight="?android:actionBarSize"
+        android:visibility="visible"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_min="0dp"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

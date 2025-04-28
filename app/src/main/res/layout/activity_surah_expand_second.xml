@@ -7,9 +7,10 @@
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_tools_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryPurple">
+        tools:background="@color/colorPrimaryDarkFemale">
 
         <TextView
             android:id="@+id/tvAddSizeDesc"
@@ -63,7 +64,8 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDarkPurple"
+            android:alpha="0.3"
+            android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="@id/clMinusSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +104,8 @@
                 android:text="A"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/tvMinusSizeSymbol"
@@ -111,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textSize="18sp"
+                tools:textColor="@android:color/white"
                 app:layout_constraintBottom_toTopOf="@id/tvMinusSize"
                 app:layout_constraintEnd_toEndOf="@id/tvMinusSize"
                 app:layout_constraintTop_toTopOf="@id/tvMinusSize" />
@@ -119,7 +123,8 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDarkPurple"
+            android:alpha="0.3"
+            android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="@id/scLatin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,14 +152,15 @@
             app:layout_constraintBottom_toTopOf="@+id/scTranslate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clMinusSize"
-            app:thumbTint="@color/colorAccentPurple"
+            app:thumbTint="@android:color/white"
             app:thumbTintMode="src_atop"
             tools:checked="true" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDarkPurple"
+            android:alpha="0.3"
+            android:background="@android:color/white"
             app:layout_constraintBottom_toTopOf="@id/scLatin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,9 +190,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/scLatin"
-            app:thumbTint="@color/colorAccentPurple"
+            app:thumbTint="@android:color/white"
             app:thumbTintMode="src_atop"
             tools:checked="true" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

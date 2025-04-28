@@ -3,107 +3,117 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#0DC2B6BE">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvTaawudz"
+        android:id="@+id/cv_surah"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="24dp"
         android:visibility="gone"
+        app:cardBackgroundColor="@color/colorAccentMale"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_surah_dark_theme"
-            android:minHeight="160dp">
+            android:minHeight="140dp">
 
             <TextView
-                android:id="@+id/tvSurah"
+                android:id="@+id/tv_surah_arabic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/font_izmir_bold"
+                android:layout_marginBottom="6dp"
+                android:fontFamily="@font/font_lpmq_isep_misbah"
                 android:textColor="@android:color/white"
-                android:textSize="32sp"
-                android:textStyle="bold"
+                android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:text="الْبَقَرَة" />
+
+            <TextView
+                android:id="@+id/tv_surah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/font_inter_bold"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_surah_arabic"
                 tools:text="Al Mulk" />
 
             <TextView
-                android:id="@+id/tvSurahMean"
+                android:id="@+id/tv_surah_mean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/font_izmir_light"
+                android:fontFamily="@font/font_izmir_bold"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSurah"
+                app:layout_constraintTop_toBottomOf="@id/tv_surah"
                 tools:text="The Opening" />
 
             <View
-                android:id="@+id/vwDivider"
+                android:id="@+id/vw_divider"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginHorizontal="64dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="100dp"
+                android:layout_marginTop="4dp"
                 android:alpha="0.7"
                 android:background="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSurahMean" />
+                app:layout_constraintTop_toBottomOf="@id/tv_surah_mean" />
 
             <TextView
-                android:id="@+id/tvInfo"
+                android:id="@+id/tv_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/font_izmir_light"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/font_inter_reg"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/vwDivider"
+                app:layout_constraintTop_toBottomOf="@id/vw_divider"
                 tools:text="MECCA • 200 Verse" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="16dp"
-                android:paddingHorizontal="48dp"
-                android:paddingBottom="28dp"
-                android:scaleType="fitCenter"
+                android:id="@+id/iv_char_surah_start"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:alpha="0.2"
+                android:scaleX="-1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvInfo"
-                app:srcCompat="@drawable/ic_bismillah"
-                app:tint="@android:color/white" />
+                app:layout_constraintDimensionRatio="84:124"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_char_male" />
 
             <ImageView
-                android:layout_width="500dp"
-                android:layout_height="400dp"
-                android:alpha="0.1"
-                android:paddingStart="0dp"
-                android:paddingEnd="200dp"
-                android:paddingBottom="140dp"
+                android:id="@+id/iv_char_surah_end"
+                android:layout_width="80dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:alpha="0.2"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="84:124"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:srcCompat="@drawable/ic_quran" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_char_male" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -115,23 +125,23 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvArabic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvArabic"
-        app:srcCompat="@drawable/ic_rub_al_hizb"
-        app:tint="@color/themeSelected" />
+        app:srcCompat="@drawable/ic_bg_number"
+        app:tint="@color/colorPrimaryFemale" />
 
     <TextView
         android:id="@+id/tvEndOfAyah"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fontFamily="@font/font_scheherazade_new_bold"
+        android:fontFamily="@font/font_inter_bold"
         android:gravity="center"
         android:textAlignment="gravity"
-        android:textColor="@android:color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/ivEndOfAyah"
         app:layout_constraintEnd_toEndOf="@id/ivEndOfAyah"
         app:layout_constraintStart_toStartOf="@id/ivEndOfAyah"
         app:layout_constraintTop_toTopOf="@id/ivEndOfAyah"
-        tools:text="أ" />
+        tools:text="1"
+        tools:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/tvArabic"
@@ -140,13 +150,13 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/font_lpmq_isep_misbah"
-        android:lineSpacingExtra="10dp"
+        android:lineSpacingMultiplier="1.4"
         android:textColor="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivEndOfAyah"
-        app:layout_constraintTop_toBottomOf="@+id/cvTaawudz"
+        app:layout_constraintTop_toBottomOf="@+id/cv_surah"
         tools:text="تَبٰرَكَ الَّذِيْ بِيَدِهِ الْمُلْكُۖ وَهُوَ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌۙ"
-        tools:textSize="@dimen/font_arabic_size_small" />
+        tools:textSize="@dimen/font_arabic_size_large" />
 
     <TextView
         android:id="@+id/tvLatin"
@@ -155,15 +165,15 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="28dp"
+        android:fontFamily="@font/font_inter_bold"
         android:letterSpacing="@dimen/font_mean_spacing_huge"
-        android:lineHeight="20sp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="italic"
+        android:lineSpacingMultiplier="1.4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvArabic"
         tools:text="Tabārakal-lażī biyadihil-mulk(u), wa huwa ‘alā kulli syai'in qadīr(un)."
-        tools:textSize="@dimen/font_mean_size_regular" />
+        tools:textColor="@color/colorPrimaryFemale"
+        tools:textSize="@dimen/font_mean_size_large" />
 
     <TextView
         android:id="@+id/tvMean"
@@ -172,14 +182,15 @@
         android:layout_marginHorizontal="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="28dp"
-        android:lineHeight="24sp"
+        android:fontFamily="@font/font_inter_reg"
+        android:lineSpacingMultiplier="1.4"
         android:textColor="@color/colorBlack"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLatin"
         tools:text="Mahaberkah Zat yang menguasai (segala) kerajaan dan Dia Mahakuasa atas segala sesuatu,"
-        tools:textSize="@dimen/font_mean_size_regular" />
+        tools:textSize="@dimen/font_mean_size_large" />
 
     <View
         android:id="@+id/view_empty_space"
