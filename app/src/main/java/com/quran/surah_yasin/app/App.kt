@@ -14,7 +14,7 @@ import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class AlMulkApp : MultiDexApplication() {
+class App : MultiDexApplication() {
 
     companion object {
         const val CHANNEL_ID = "Tasbeeh.notification"
@@ -26,10 +26,10 @@ class AlMulkApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        FirebaseApp.initializeApp(this@AlMulkApp)
+        FirebaseApp.initializeApp(this@App)
         startKoin {
             modules(libraries)
-            androidContext(this@AlMulkApp)
+            androidContext(this@App)
         }
         createNotificationChannel()
     }

@@ -11,7 +11,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.quran.surah_yasin.R
-import com.quran.surah_yasin.app.AlMulkApp.Companion.CHANNEL_ID
+import com.quran.surah_yasin.app.App.Companion.CHANNEL_ID
 import com.quran.surah_yasin.data.preference.CorePreference
 import com.quran.surah_yasin.data.preference.SettingPreference
 import com.quran.surah_yasin.view.activity.MainActivity

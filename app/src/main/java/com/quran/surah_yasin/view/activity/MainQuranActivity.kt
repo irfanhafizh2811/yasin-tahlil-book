@@ -52,7 +52,7 @@ class MainQuranActivity : BaseActivity() {
                 cvRead.setCardBackgroundColor(getColorCompat(R.color.colorAccentMale))
             }
         }
-        cvRead.setOnClickListener { startActivitySurah(SurahQuran.AL_MULK.name) }
+        cvRead.setOnClickListener { startActivitySurah(SurahQuran.YASIN.name) }
         loadBanner(flAdsBanner)
     }
 

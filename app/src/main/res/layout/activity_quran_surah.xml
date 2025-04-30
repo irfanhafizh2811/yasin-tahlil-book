@@ -28,5 +28,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar_tools"
         tools:itemCount="3"
-        tools:listitem="@layout/item_quran_verse" />
+        tools:listitem="@layout/item_surah_verse" />
 </androidx.constraintlayout.widget.ConstraintLayout>

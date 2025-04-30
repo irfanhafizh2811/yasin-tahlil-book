@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/font_courgette_regular"
-        android:text="@string/label_surah_al_mulk"
+        android:text="@string/label_surah_yasin"
         android:textColor="@color/colorAccentMale"
         android:textSize="32sp"
         android:textStyle="bold"

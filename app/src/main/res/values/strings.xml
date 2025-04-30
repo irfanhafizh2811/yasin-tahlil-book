@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Al Mulk</string>
+    <string name="app_name">Yaseen</string>
     <string name="id_unit_interstitial" translatable="false">ca-app-pub-5079073523461972/1742849787</string>
     <string name="id_unit_interstitial_sample_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="id_unit_banner" translatable="false">ca-app-pub-5079073523461972/3491045724</string>
@@ -102,6 +102,7 @@
     <string name="label_number_of_ayah">Verse %d</string>
     <string name="label_new" translatable="false">New</string>
     <string name="label_surah_al_mulk">Surat Al Mulk</string>
+    <string name="label_surah_yasin" translatable="false">Surat Yasin</string>
     <string name="list_of_the_surah">List of the surah</string>
     <string name="label_read">Read</string>
     <string name="surah_al_baqarah" translatable="false">Surah Al Baqarah</string>

@@ -2,7 +2,7 @@
 <resources>
     <string name="okhttp_log_level" translatable="false">NONE</string>
     <string name="firebase_sender_id" translatable="false">836493472986</string>
-    <string name="app_name" translatable="false">MyDhikr</string>
+    <string name="app_name">Yaseen</string>
     <string name="app_env" translatable="false">production</string>
     <string name="firebase_realtime_database_collection_id" translatable="false">1qLTNuZ5qfS3iOItkS5GW4reruO_i46VMUPgH0shu270</string>
     <string name="id_addmob" translatable="false">ca-app-pub-5079073523461972~9127057853</string>
