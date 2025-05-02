@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.quran.surah_yasin",
+  "variantName": "productionRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 240010000,
+      "versionName": "1.0.0",
+      "outputFile": "Yasin-1.0.0-production-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

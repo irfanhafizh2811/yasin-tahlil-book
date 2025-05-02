@@ -1,17 +1,15 @@
-apply plugin: 'com.android.application'
-
 android {
     signingConfigs {
         debug {
-            storePassword "almulk2024"
-            keyAlias 'almulk-debug-key'
-            keyPassword 'almulk2024'
+            storePassword "yasin2025"
+            keyAlias 'yasin-debug-key'
+            keyPassword 'yasin2025'
             storeFile file("debug-key.jks")
         }
         release {
-            storePassword "almulk2024"
-            keyAlias 'almulk-release-key'
-            keyPassword 'almulk2024'
+            storePassword "yasin2025"
+            keyAlias 'yasin-release-key'
+            keyPassword 'yasin2025'
             storeFile file('release-key.jks')
         }
     }

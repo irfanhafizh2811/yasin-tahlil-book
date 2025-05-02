@@ -18,5 +18,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name='AlMulk'
+rootProject.name='Yasin'
 include ':app'
