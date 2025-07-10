@@ -7,9 +7,47 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:440504191851:android:6465cd12b7a3f730a0da2e",
+        "mobilesdk_app_id": "1:440504191851:android:ebac5a29f123242ca0da2e",
         "android_client_info": {
-          "package_name": "com.quran.surah_yasin"
+          "package_name": "com.app_muslim.surah_yasin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzVhUjzZRFY32encdTqP3qd9RFzZfJAtc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440504191851:android:9f88bde68c5716f6a0da2e",
+        "android_client_info": {
+          "package_name": "com.quran.surah_albaqarah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzVhUjzZRFY32encdTqP3qd9RFzZfJAtc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440504191851:android:91196c4e3aaaad4ba0da2e",
+        "android_client_info": {
+          "package_name": "com.quran.surah_almulk"
         }
       },
       "oauth_client": [],

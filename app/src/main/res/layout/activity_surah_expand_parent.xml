@@ -26,12 +26,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="?android:actionBarItemBackground"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_back"
-                tools:ignore="ContentDescription"
-                tools:tint="@color/colorPrimaryDarkFemale" />
+                app:tint="@color/colorGrayText"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_surah"
@@ -39,13 +40,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font_courgette_regular"
                 android:text="@string/label_surah_al_mulk"
+                android:textColor="@color/colorGrayText"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:textColor="@color/colorPrimaryDarkFemale" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/ll_more"
@@ -65,8 +66,8 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:srcCompat="@drawable/ic_setting"
-                    tools:ignore="ContentDescription"
-                    tools:tint="@color/colorPrimaryDarkFemale" />
+                    app:tint="@color/colorGrayText"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

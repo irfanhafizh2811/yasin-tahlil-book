@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.quran.surah_yasin">
+    package="com.app_muslim.surah_yasin">
 
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <application
-        android:name="com.quran.surah_yasin.app.App"
+        android:name="com.app_muslim.surah_yasin.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.quran.surah_yasin.view.activity.SplashActivity"
+            android:name=".view.activity.SplashActivity"
             android:exported="true"
             android:launchMode="singleTask"
             android:noHistory="false"
@@ -27,29 +27,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.quran.surah_yasin.view.activity.MainQuranActivity"
+            android:name=".view.activity.MainQuranActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.quran.surah_yasin.view.activity.OnBoardActivity"
+            android:name=".view.activity.OnBoardActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.quran.surah_yasin.view.activity.QuranSurahActivity"
-            android:hardwareAccelerated="true"
-            android:launchMode="singleTop"
-            android:noHistory="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-
-        <activity
-            android:name="com.quran.surah_yasin.view.activity.TasbeehActivity"
+            android:name=".view.activity.QuranSurahActivity"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:noHistory="false"
@@ -57,28 +49,36 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.quran.surah_yasin.view.activity.DeveloperAppsActivity"
+            android:name=".view.activity.TasbeehActivity"
+            android:hardwareAccelerated="true"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.quran.surah_yasin.view.activity.DhikrActivity"
+            android:name=".view.activity.DeveloperAppsActivity"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.quran.surah_yasin.view.activity.DhikrCompleteActivity"
+            android:name=".view.activity.DhikrActivity"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.quran.surah_yasin.view.activity.SurahActivity"
+            android:name=".view.activity.DhikrCompleteActivity"
+            android:launchMode="singleTop"
+            android:noHistory="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".view.activity.SurahActivity"
             android:launchMode="singleTop"
             android:noHistory="false"
             android:screenOrientation="portrait"
@@ -91,7 +91,7 @@
 
         <!-- Receiver -->
         <receiver
-            android:name="com.quran.surah_yasin.receiver.NotificationReceiver"
+            android:name=".receiver.NotificationReceiver"
             android:enabled="true" />
     </application>
 </manifest>

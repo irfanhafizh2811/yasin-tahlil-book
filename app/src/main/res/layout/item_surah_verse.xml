@@ -23,7 +23,36 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="140dp">
+            android:minHeight="150dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bg_container_surah" />
+
+            <ImageView
+                android:id="@+id/iv_bottom_container_2"
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/iv_bottom_container"
+                app:srcCompat="@drawable/bg_bottom_container_surah_2" />
+
+            <ImageView
+                android:id="@+id/iv_bottom_container"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/bg_bottom_container_surah" />
 
             <TextView
                 android:id="@+id/tv_surah_arabic"
@@ -65,55 +94,18 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_surah"
                 tools:text="The Opening" />
 
-            <View
-                android:id="@+id/vw_divider"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginHorizontal="100dp"
-                android:layout_marginTop="4dp"
-                android:alpha="0.7"
-                android:background="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_surah_mean" />
-
             <TextView
                 android:id="@+id/tv_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/font_inter_reg"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/vw_divider"
+                app:layout_constraintTop_toBottomOf="@id/tv_surah_mean"
                 tools:text="MECCA • 200 Verse" />
-
-            <ImageView
-                android:id="@+id/iv_char_surah_start"
-                android:layout_width="80dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:alpha="0.2"
-                android:scaleX="-1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="84:124"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_char_male" />
-
-            <ImageView
-                android:id="@+id/iv_char_surah_end"
-                android:layout_width="80dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="16dp"
-                android:alpha="0.2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="84:124"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_char_male" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -126,7 +118,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvArabic"
         app:srcCompat="@drawable/ic_bg_number"
-        app:tint="@color/colorPrimaryFemale" />
+        app:tint="@color/colorGrayText" />
 
     <TextView
         android:id="@+id/tvEndOfAyah"
@@ -135,13 +127,13 @@
         android:fontFamily="@font/font_inter_bold"
         android:gravity="center"
         android:textAlignment="gravity"
+        android:textColor="@android:color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/ivEndOfAyah"
         app:layout_constraintEnd_toEndOf="@id/ivEndOfAyah"
         app:layout_constraintStart_toStartOf="@id/ivEndOfAyah"
         app:layout_constraintTop_toTopOf="@id/ivEndOfAyah"
-        tools:text="1"
-        tools:textColor="@android:color/black" />
+        tools:text="1" />
 
     <TextView
         android:id="@+id/tvArabic"
@@ -168,11 +160,11 @@
         android:fontFamily="@font/font_inter_bold"
         android:letterSpacing="@dimen/font_mean_spacing_huge"
         android:lineSpacingMultiplier="1.4"
+        android:textColor="@color/colorGrayText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvArabic"
         tools:text="Tabārakal-lażī biyadihil-mulk(u), wa huwa ‘alā kulli syai'in qadīr(un)."
-        tools:textColor="@color/colorPrimaryFemale"
         tools:textSize="@dimen/font_mean_size_large" />
 
     <TextView

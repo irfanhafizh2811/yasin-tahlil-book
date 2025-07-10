@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3A9CD2</color>
-    <color name="colorPrimaryDark">#3A9CD2</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorPrimary">#094825</color>
+    <color name="colorPrimaryDark">#094825</color>
+    <color name="colorAccent">#DEAD55</color>
 
     <color name="colorPrimaryFemale">#F478A5</color>
     <color name="colorPrimaryDarkFemale">#F57BB2</color>
@@ -35,6 +35,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#2B2B2B</color>
     <color name="colorGreyShine">#FF454545</color>
+    <color name="colorGrayText">#949494</color>
 
     <!--*********************** Section Dhikr ***********************-->
     <color name="colorAccentMorningDhikr">#0E3A6A</color>

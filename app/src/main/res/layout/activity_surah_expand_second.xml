@@ -10,7 +10,7 @@
         android:id="@+id/cl_tools_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:background="@color/colorPrimaryDarkFemale">
+        android:background="@color/colorGrayText">
 
         <TextView
             android:id="@+id/tvAddSizeDesc"
@@ -114,10 +114,10 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textSize="18sp"
-                tools:textColor="@android:color/white"
                 app:layout_constraintBottom_toTopOf="@id/tvMinusSize"
                 app:layout_constraintEnd_toEndOf="@id/tvMinusSize"
-                app:layout_constraintTop_toTopOf="@id/tvMinusSize" />
+                app:layout_constraintTop_toTopOf="@id/tvMinusSize"
+                tools:textColor="@android:color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView

@@ -25,7 +25,7 @@ ext {
 android {
     compileSdk = 34
     defaultConfig {
-        applicationId "com.quran.surah_yasin"
+        applicationId "com.app_muslim.surah_yasin"
         minSdk project.ext.minSdkVersion
         targetSdk project.ext.targetSdkVersion
         versionCode generateVersionCode()
@@ -61,7 +61,7 @@ android {
     productFlavors {
         production {
             dimension "env"
-            applicationId "com.quran.surah_yasin"
+            applicationId "com.app_muslim.surah_yasin"
         }
     }
 
@@ -78,7 +78,7 @@ android {
             outputFileName = "Yasin-${generateVersionName()}-${variant.flavorName}-${variant.buildType.name}.apk"
         }
     }
-    namespace 'com.quran.surah_yasin'
+    namespace 'com.app_muslim.surah_yasin'
 }
 
 apply from: '../variant_filter.gradle'
