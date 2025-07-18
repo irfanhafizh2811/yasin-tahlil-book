@@ -4,9 +4,9 @@ import android.util.TypedValue
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.app_muslim.surah_yasin.R
-import com.app_muslim.surah_yasin.data.model.User
 import com.app_muslim.surah_yasin.data.model.Verse
 import com.app_muslim.surah_yasin.data.model.surah.SurahInterface
+import com.app_muslim.surah_yasin.data.preference.Language
 import com.app_muslim.surah_yasin.databinding.ItemSurahVerseBinding
 import com.app_muslim.surah_yasin.extension.text.numberArabic
 import com.app_muslim.surah_yasin.utils.FontSize
@@ -17,50 +17,55 @@ class SurahHolder(
     val surahInterface: SurahInterface
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private var user: User = User()
-    private var surahName: String = TextUtils.BLANK
-    private var surahNameArab: String = TextUtils.BLANK
-    private var posItem: Int = 0
-    private val typeUnit = TypedValue.COMPLEX_UNIT_PX
+    var posItem: Int = 0
+    val typeUnit = TypedValue.COMPLEX_UNIT_PX
+    var surahName: String = TextUtils.BLANK
     private var isFirstAyah = posItem <= 0
-    private var visibleLatinQuran = true
-    private var visibleTranslationQuran = true
+    var visibleLatinQuran = true
+    var visibleTranslationQuran = true
+    var language: Language = Language.INDONESIA
 
     fun bind(
-        surahInterface: SurahInterface,
-        user: User,
         verse: Verse,
         fontSize: FontSize,
         posItem: Int,
         visibleLatinQuran: Boolean,
-        visibleTranslationQuran: Boolean
+        visibleTranslationQuran: Boolean,
+        language: Language
     ): SurahHolder = with(binding) {
+        this@SurahHolder.language = language
         this@SurahHolder.posItem = posItem
         this@SurahHolder.visibleLatinQuran = visibleLatinQuran
         this@SurahHolder.visibleTranslationQuran = visibleTranslationQuran
-        this@SurahHolder.user = user
         isFirstAyah = posItem == 0
-        val (arabic, latin, meanIndo) = verse
+        val typeSurah = surahInterface.typeSurah.name
+        val verseCount = surahInterface.numberSurah.toString()
+        cvSurah.isVisible = isFirstAyah
+        tvSurahMean.text = surahInterface.surahQuran.name
+        tvSurahArabic.text = surahInterface.arabic
+        tvInfo.text = "$typeSurah • $verseCount Verse"
+        val (arabic, latin) = verse
         this@SurahHolder.surahName =
             surahInterface.surahQuran.name.replace(TextUtils.UNDERSCORE, TextUtils.EMPTY_SPACE)
-        tvSurahArabic.text = surahInterface.arabic
         tvArabic.text = arabic
         tvLatin.text = latin
-        tvMean.text = meanIndo
+        tvMean.text = getMeanTranslate(verse)
         tvEndOfAyah.text = (posItem + 1).toString().numberArabic()
-        tvLatin.isVisible = visibleLatinQuran
-        tvMean.isVisible = visibleTranslationQuran
-        onUITaawudz()
+        tvLatin.isVisible = visibleLatinQuran && language != Language.SAUDI_ARABIA
+        tvMean.isVisible = visibleTranslationQuran && language != Language.SAUDI_ARABIA
         updateSize(fontSize)
         return this@SurahHolder
     }
 
-    private fun onUITaawudz() = with(binding) {
-        cvSurah.isVisible = isFirstAyah
-        if (!isFirstAyah) return@with
-        tvSurah.text = surahName
-        tvSurahMean.text = root.context.getString(surahInterface.mean)
-        tvInfo.text = "${surahInterface.typeSurah.name.uppercase()} • ${surahInterface.verses} Verse"
+    private fun getMeanTranslate(verse: Verse): String {
+        return when (language) {
+            Language.ENGLISH -> verse.meanEng
+            Language.INDONESIA -> verse.meanInd
+            Language.MALAYSIA -> verse.meanMay
+            Language.TURKEY -> verse.meanTur
+            Language.RUSSIAN -> verse.meanRus
+            else -> verse.meanEng
+        }
     }
 
     private fun updateSize(fontSize: FontSize) {

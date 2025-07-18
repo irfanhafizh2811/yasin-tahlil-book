@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Increase text size for Arabic, Latin, and Translations"
+            android:text="@string/label_increase_size_text"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/clPlusSize"
@@ -76,7 +76,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Decrease text size for Arabic, Latin, and Translations"
+            android:text="@string/label_decrease_size_text"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/clMinusSize"
@@ -135,7 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Show Quran text in Latin characters"
+            android:text="@string/label_show_quran_text_in_latin"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/scLatin"
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Show The Quran Translations"
+            android:text="@string/label_show_quran_text_translations"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/scTranslate"
@@ -187,11 +187,49 @@
             android:layout_height="wrap_content"
             android:minHeight="56dp"
             android:padding="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/iv_language"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/scLatin"
             app:thumbTint="@android:color/white"
             app:thumbTintMode="src_atop"
             tools:checked="true" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:alpha="0.3"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/scTranslate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_language" />
+
+        <TextView
+            android:id="@+id/tv_language"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/label_choose_the_language_app"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_language"
+            app:layout_constraintEnd_toStartOf="@+id/iv_language"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_language" />
+
+        <ImageView
+            android:id="@+id/iv_language"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:minHeight="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scTranslate"
+            app:srcCompat="@drawable/ic_translate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

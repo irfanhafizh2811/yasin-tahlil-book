@@ -3,502 +3,834 @@
   "surah_arabic": "يٰسۤ",
   "surah": [
     {
+      "ayah": 1,
       "verse_arabic": "يٰسۤ ۚ",
       "verse_latin": "Yā sīn.",
       "mean_ind": "Yā Sīn.",
-      "mean_eng": "Yâ-Sĩn."
+      "mean_eng": "Yâ-Sĩn.",
+      "mean_rus": "Йа-Син.",
+      "mean_tur": "Yâ Sîn.",
+      "mean_may": "Yaa, Siin."
     },
     {
+      "ayah": 2,
       "verse_arabic": "وَالْقُرْاٰنِ الْحَكِيْمِۙ",
       "verse_latin": "Wal-qur'ānil-ḥakīm(i).",
       "mean_ind": "Demi Al-Qur’an yang penuh hikmah,",
-      "mean_eng": "By the Quran, rich in wisdom!"
+      "mean_eng": "By the wise Qur'an,",
+      "mean_rus": "Клянусь мудрым Кораном,",
+      "mean_tur": "Hikmet dolu Kur’an’a andolsun ki,",
+      "mean_may": "Demi Al-Quran yang mengandungi hikmat-hikmat dan kebenaran yang tetap kukuh,"
     },
     {
+      "ayah": 3,
       "verse_arabic": "اِنَّكَ لَمِنَ الْمُرْسَلِيْنَۙ",
       "verse_latin": "Innaka laminal-mursalīn(a).",
       "mean_ind": "sesungguhnya engkau (Nabi Muhammad) benar-benar salah seorang dari rasul-rasul",
-      "mean_eng": "You ˹O Prophet˺ are truly one of the messengers"
+      "mean_eng": "Lo! thou art of those sent",
+      "mean_rus": "Воистину, ты из числа посланных.",
+      "mean_tur": "Şüphesiz sen, gönderilenlerden (peygamberlersin).",
+      "mean_may": "Sesungguhnya kamu termasuk orang-orang yang diutus."
     },
     {
+      "ayah": 4,
       "verse_arabic": "عَلٰى صِرَاطٍ مُّسْتَقِيْمٍۗ",
       "verse_latin": "‘Alā ṣirāṭim mustaqīm(in).",
       "mean_ind": "(yang berada) di atas jalan yang lurus,",
-      "mean_eng": "upon the Straight Path."
+      "mean_eng": "On a straight path,",
+      "mean_rus": "на прямом пути.",
+      "mean_tur": "Doğru bir yol üzeresin.",
+      "mean_may": "Yang tetap di atas jalan yang lurus (ugama Islam)."
     },
     {
+      "ayah": 5,
       "verse_arabic": "تَنْزِيْلَ الْعَزِيْزِ الرَّحِيْمِۙ",
       "verse_latin": "Tanzīlal-‘azīzir-raḥīm(i).",
-      "mean_ind": "(sebagai wahyu) yang diturunkan oleh (Allah) Yang Mahaperkasa lagi Maha Penyayang,",
-      "mean_eng": "˹This is˺ a revelation from the Almighty, Most Merciful,"
+      "mean_ind": "(sebagai wahyu) yang diturunkan oleh (Allah) Yang Maha Perkasa lagi Maha Penyayang,",
+      "mean_eng": "A revelation of the Mighty, the Merciful,",
+      "mean_rus": "Он ниспослан Могущественным, Милосердным.",
+      "mean_tur": "Bu, güçlü ve merhametli olan Allah'ın indirdiği bir vahiydir.",
+      "mean_may": "Ia diturunkan oleh Allah Yang Maha Kuasa, lagi Maha Mengasihani."
     },
     {
-      "verse_arabic": "لِتُنْذِرَ قَوْمًا مَّآ اُنْذِرَ اٰبَاۤؤُهُمْ فَهُمْ غٰفِلُوْنَ",
+      "ayah": 6,
+      "verse_arabic": "لِتُنْذِرَ قَوْمًا مَّآ اُنْذِرَ اٰبَاۤؤُهُمْ فَهُمْ غٰفِلُوْنَ",
       "verse_latin": "Litunżira qaumam mā unżira ābā'uhum fahum gāfilūn(a).",
       "mean_ind": "agar engkau (Nabi Muhammad) memberi peringatan kepada suatu kaum yang nenek moyang mereka belum pernah diberi peringatan, sehingga mereka lalai.",
-      "mean_eng": "so that you may warn a people whose forefathers were not warned, and so are heedless."
+      "mean_eng": "That you may warn a people whose forefathers were not warned, so they are heedless.",
+      "mean_rus": "Чтобы ты предостерёг народ, отцы которого не были предостережены, и они пребывают в неведении.",
+      "mean_tur": "Ataları uyarılmamış olan ve bu yüzden gaflet içinde bulunan bir toplumu uyarasın diye.",
+      "mean_may": "Supaya engkau memberi peringatan dan amaran kepada kaum yang datuk neneknya telah lama tidak diberikan peringatan dan amaran; sebab itulah mereka lalai."
     },
     {
+      "ayah": 7,
       "verse_arabic": "لَقَدْ حَقَّ الْقَوْلُ عَلٰٓى اَكْثَرِهِمْ فَهُمْ لَا يُؤْمِنُوْنَ",
       "verse_latin": "Laqad ḥaqqal-qaulu ‘alā akṡarihim fahum lā yu'minūn(a).",
       "mean_ind": "Sungguh, benar-benar berlaku perkataan (ketetapan takdir) terhadap kebanyakan mereka, maka mereka tidak akan beriman.",
-      "mean_eng": "The decree ˹of torment˺ has already been justified against most of them, for they will never believe."
+      "mean_eng": "Already hath the judgment, (for their infidelity) proved true of most of them, for they believe not.",
+      "mean_rus": "Воистину, слово уже сбылось для большинства из них, и они не уверуют.",
+      "mean_tur": "And olsun ki, hüküm çoğunun aleyhine gerçekleşmiştir; artık inanmazlar.",
+      "mean_may": "Demi sesungguhnya, telah tetap hukuman seksa atas kebanyakan mereka, kerana mereka tidak mahu beriman."
     },
     {
+      "ayah": 8,
       "verse_arabic": "اِنَّا جَعَلْنَا فِيْٓ اَعْنَاقِهِمْ اَغْلٰلًا فَهِيَ اِلَى الْاَذْقَانِ فَهُمْ مُّقْمَحُوْنَ",
       "verse_latin": "Innā ja‘alnā fī a‘nāqihim aglālan fa hiya ilal-ażqāni fahum muqmaḥūn(a).",
       "mean_ind": "Sesungguhnya Kami telah memasang belenggu di leher mereka, lalu (tangan mereka yang terbelenggu diangkat) ke dagu, karena itu mereka tertengadah.",
-      "mean_eng": "˹It is as if˺ We have put shackles around their necks up to their chins, so their heads are forced up,"
+      "mean_eng": "Lo! We have put on their necks carcans reaching unto the chins, so that they are made stiff-necked.",
+      "mean_rus": "Мы наложили на их шеи оковы, доходящие до подбородков, и они с поднятыми головами.",
+      "mean_tur": "Biz onların boyunlarına, çenelerine kadar ulaşan halkalar geçirdik; bu yüzden başları yukarı kalkıktır.",
+      "mean_may": "Sesungguhnya Kami telah meletakkan belenggu di leher mereka, lalu belenggu itu sampai ke dagu mereka, maka mereka mendongak."
     },
     {
+      "ayah": 9,
       "verse_arabic": "وَجَعَلْنَا مِنْۢ بَيْنِ اَيْدِيْهِمْ سَدًّا وَّمِنْ خَلْفِهِمْ سَدًّا فَاَغْشَيْنٰهُمْ فَهُمْ لَا يُبْصِرُوْنَ",
       "verse_latin": "Wa ja‘alnā mim baini aidīhim saddaw wa min khalfihim saddan fa agsyaināhum fahum lā yubṣirūn(a).",
       "mean_ind": "Kami memasang penghalang di hadapan mereka dan di belakang mereka, sehingga Kami menutupi (pandangan) mereka. Mereka pun tidak dapat melihat.",
-      "mean_eng": "and have placed a barrier before them and a barrier behind them and covered them ˹all˺ up, so they fail to see ˹the truth˺."
+      "mean_eng": "And We have set a bar before them and a bar behind them, and (thus) have covered them so that they see not.",
+      "mean_rus": "И Мы поставили преграду перед ними и преграду за ними, и покрыли их, так что они не видят.",
+      "mean_tur": "Önlerine ve arkalarına setler koyduk ve onları örttük, böylece göremezler.",
+      "mean_may": "Kami telah mengadakan penghalang di depan mereka dan di belakang mereka, lalu Kami tutup mata mereka sehingga mereka tidak dapat melihat."
     },
     {
+      "ayah": 10,
       "verse_arabic": "وَسَوَاۤءٌ عَلَيْهِمْ ءَاَنْذَرْتَهُمْ اَمْ لَمْ تُنْذِرْهُمْ لَا يُؤْمِنُوْنَ",
       "verse_latin": "Wa sawā'un ‘alaihim a'anżartahum am lam tunżirhum lā yu'minūn(a).",
       "mean_ind": "Sama saja bagi mereka, apakah engkau (Nabi Muhammad) memberi peringatan kepada mereka atau tidak. Mereka (tetap) tidak akan beriman.",
-      "mean_eng": "It is the same whether you warn them or not—they will never believe."
+      "mean_eng": "Whether thou warn them or thou warn them not, it is alike for them, for they believe not.",
+      "mean_rus": "Им всё равно — предупреждаешь ты их или не предупреждаешь, они не уверуют.",
+      "mean_tur": "Onlar için bir, onları uyarırsan da uyarmazsan da, onlar iman etmezler.",
+      "mean_may": "Sama saja bagi mereka, apakah engkau memberi peringatan atau tidak, mereka tidak akan beriman."
     },
     {
+      "ayah": 11,
       "verse_arabic": "اِنَّمَا تُنْذِرُ مَنِ اتَّبَعَ الذِّكْرَ وَخَشِيَ الرَّحْمٰنَ بِالْغَيْبِۚ فَبَشِّرْهُ بِمَغْفِرَةٍ وَّاَجْرٍ كَرِيْمٍ",
       "verse_latin": "Innamā tunżiru manittaba‘aż-żikra wa khasyiyar-raḥmāna bil-gaib(i), fa basysyirhu bimagfiratiw wa ajrin karīm(in).",
       "mean_ind": "Sesungguhnya engkau (Nabi Muhammad) hanya (bisa) memberi peringatan kepada orang-orang yang mau mengikutinya dan yang takut kepada Tuhan Yang Maha Pengasih tanpa melihat-Nya. Berilah mereka kabar gembira dengan ampunan dan pahala yang mulia.",
-      "mean_eng": "You can only warn those who follow the Reminder and are in awe of the Most Compassionate without seeing Him. So give them good news of forgiveness and an honourable reward."
+      "mean_eng": "Thou warnest only him who followeth the Reminder and feareth the Beneficent in secret. To him bear tidings of forgiveness and a rich reward.",
+      "mean_rus": "Ты предупреждаешь только того, кто следует за Напоминанием и боится Милосердного в тайне. Возвестись ему прощение и щедрое воздаяние.",
+      "mean_tur": "Ancak zikre uyan ve Rahman’dan gizlice korkan kimseyi uyarırsın. Ona bağışlanma ve büyük bir ödül müjdelensin.",
+      "mean_may": "Sesungguhnya engkau hanya memberi peringatan kepada orang yang mengikuti peringatan itu dan takut kepada Yang Maha Penyayang dalam keadaan ghaib. Berilah dia kabar gembira dengan ampunan dan pahala yang mulia."
     },
     {
-      "verse_arabic": "اِنَّا نَحْنُ نُحْيِ الْمَوْتٰى وَنَكْتُبُ مَا قَدَّمُوْا وَاٰثَارَهُمْۗ وَكُلَّ شَيْءٍ اَحْصَيْنٰهُ فِيْٓ اِمَامٍ مُّبِيْنٍ ࣖ",
+      "ayah": 12,
+      "verse_arabic": "اِنَّا نَحْنُ نُحْيِ الْمَوْتٰى وَنَكْتُبُ مَا قَدَّمُوْا وَاٰثَارَهُمْۗ وَكُلَّ شَيْءٍ اَحْصَيْنٰهُ فِيْٓ اِمَامٍ مُّبِيْنٍ",
       "verse_latin": "Innā naḥnu nuḥyil-mautā wa naktubu mā qaddamū wa āṡārahum, wa kulla syai'in aḥṣaināhu fī imāmim mubīn(in).",
-      "mean_ind": "Sesungguhnya Kamilah yang menghidupkan orang-orang yang mati dan Kami (pulalah) yang mencatat apa yang telah mereka kerjakan dan bekas-bekas yang mereka (tinggalkan). Segala sesuatu Kami kumpulkan dalam kitab induk yang nyata (Lauh Mahfuz).",
-      "mean_eng": "It is certainly We Who resurrect the dead, and write what they send forth and what they leave behind. Everything is listed by Us in a perfect Record. "
+      "mean_ind": "Sesungguhnya Kamilah yang menghidupkan orang-orang yang mati dan Kami (pulalah) yang mencatat apa yang telah mereka kerjakan dan bekas-bekas yang mereka (tinggalkan). Segala sesuatu Kami kumpulkan dalam kitab induk yang nyata (Lauhulmahfuz).",
+      "mean_eng": "Lo! We it is Who bring the dead to life. We record that which they send before (them, and their footprints. And all things We have kept in a clear Register.",
+      "mean_rus": "Воистину, Мы оживляем мёртвых и записываем то, что они послали вперёд и следы их. И всё Мы исчислили в ясной Книге.",
+      "mean_tur": "Şüphesiz, biz ölüleri diriltiriz ve onların yaptıklarını ve bıraktıkları izleri yazarız. Her şeyi açık bir kitapta saydık.",
+      "mean_may": "Sesungguhnya Kami yang menghidupkan orang-orang mati dan Kami mencatat apa yang mereka kirimkan sebelumnya dan bekas-bekas mereka. Segala sesuatu Kami hitung dalam sebuah kitab yang nyata."
     },
     {
+      "ayah": 13,
       "verse_arabic": "وَاضْرِبْ لَهُمْ مَّثَلًا اَصْحٰبَ الْقَرْيَةِۘ اِذْ جَاۤءَهَا الْمُرْسَلُوْنَۚ",
       "verse_latin": "Waḍrib lahum maṡalan aṣḥābal-qaryah(ti), iż jā'ahal-mursalūn(a).",
       "mean_ind": "Buatlah suatu perumpamaan bagi mereka (kaum kafir Makkah), yaitu penduduk suatu negeri, ketika para utusan datang kepada mereka,",
-      "mean_eng": "Give them an example ˹O Prophet˺ of the residents of a town, when the messengers came to them."
+      "mean_eng": "Coin for them a similitude: The people of the city when those sent (from Allah) came unto them;",
+      "mean_rus": "Приведи им пример: жители города, когда к ним пришли посланники,",
+      "mean_tur": "Onlara bir misal ver: Elçiler geldiğinde bir kasaba halkı,",
+      "mean_may": "Buatkan mereka satu perumpamaan: Penduduk sebuah kampung ketika para utusan datang kepada mereka,"
     },
     {
-      "verse_arabic": "اِذْ اَرْسَلْنَآ اِلَيْهِمُ اثْنَيْنِ فَكَذَّبُوْهُمَا فَعَزَّزْنَا بِثَالِثٍ فَقَالُوْٓا اِنَّآ اِلَيْكُمْ مُّرْسَلُوْنَ",
+      "ayah": 14,
+      "verse_arabic": "اِذْ اَرْسَلْنَآ اِلَيْهِمُ اثْنَيْنِ فَكَذَّبُوْهُمَا فَعَزَّزْنَا بِثَالِثٍ فَقَالُوْٓا اِنَّآ اِلَيْكُمْ مُّرْسَلُوْنَ",
       "verse_latin": "Iż arsalnā ilaihimuṡnaini fa każżabūhumā fa ‘azzaznā biṡāliṡin faqālū innā ilaikum mursalūn(a).",
       "mean_ind": "(yaitu) ketika Kami mengutus kepada mereka dua orang utusan, lalu mereka mendustakan keduanya. Kemudian Kami menguatkan dengan (utusan) yang ketiga. Maka, ketiga (utusan itu) berkata, “Sesungguhnya kami adalah orang-orang yang diutus kepadamu.”",
-      "mean_eng": "We sent them two messengers, but they rejected both. So We reinforced ˹the two˺ with a third, and they declared, “We have indeed been sent to you ˹as messengers˺.”"
+      "mean_eng": "When We sent unto them twain, and they denied them both, so We reinforced them with a third, and they said: Lo! we have been sent unto you.",
+      "mean_rus": "Когда Мы послали им двоих, они оба отвергли их; тогда Мы укрепили их третьим, и они сказали: «Воистину, мы посланы к вам».",
+      "mean_tur": "Biz onlara iki elçi gönderdik, ikisini de yalanladılar. Sonra üçüncü birini güçlendirdik, onlar dediler ki: Biz size gönderilen elçileriz.",
+      "mean_may": "Ketika Kami utus kepada mereka dua orang utusan, lalu keduanya mereka dustakan. Kemudian Kami kuatkan dengan yang ketiga, lalu ketiganya berkata, 'Sesungguhnya kami adalah utusan yang diutus kepada kalian.'"
     },
     {
-      "verse_arabic": "قَالُوْا مَآ اَنْتُمْ اِلَّا بَشَرٌ مِّثْلُنَاۙ وَمَآ اَنْزَلَ الرَّحْمٰنُ مِنْ شَيْءٍۙ اِنْ اَنْتُمْ اِلَّا تَكْذِبُوْنَ",
+      "ayah": 15,
+      "verse_arabic": "قَالُوْا مَآ اَنْتُمْ اِلَّا بَشَرٌ مِّثْلُنَاۙ وَمَآ اَنْزَلَ الرَّحْمٰنُ مِنْ شَيْءٍۙ اِنْ اَنْتُمْ اِلَّا تَكْذِبُوْنَ",
       "verse_latin": "Qālū mā antum illā basyarum miṡlunā, wa mā anzalar-raḥmānu min syai'(in), in antum illā takżibūn(a).",
       "mean_ind": "Mereka (penduduk negeri) menjawab, “Kamu tidak lain hanyalah manusia seperti kami. (Allah) Yang Maha Pengasih tidak (pernah) menurunkan sesuatu apa pun. Kamu hanyalah berdusta.”",
-      "mean_eng": "The people replied, “You are only humans like us, and the Most Compassionate has not revealed anything. You are simply lying!”"
+      "mean_eng": "They said: Ye are but mortals like unto us. The Beneficent hath naught revealed. Ye do but lie!",
+      "mean_rus": "Они сказали: «Вы - только люди, подобные нам, и Милостивый ничего не ниспослал. Вы лишь лжёте!»",
+      "mean_tur": "Dediler ki: Siz ancak bizim gibi bir insansınız ve Rahman hiçbir şey indirmedi. Siz yalancısınız!",
+      "mean_may": "Mereka berkata: Kamu hanyalah manusia seperti kami dan Yang Maha Pengasih tidak menurunkan apa-apa. Kamu hanya berdusta!"
     },
     {
-      "verse_arabic": "قَالُوْا رَبُّنَا يَعْلَمُ اِنَّآ اِلَيْكُمْ لَمُرْسَلُوْنَ",
+      "ayah": 16,
+      "verse_arabic": "قَالُوْا رَبُّنَا يَعْلَمُ اِنَّآ اِلَيْكُمْ لَمُرْسَلُوْنَ",
       "verse_latin": "Qālū rabbunā ya‘lamu innā ilaikum lamursalūn(a).",
       "mean_ind": "Mereka (para rasul) berkata, “Tuhan kami mengetahui bahwa sesungguhnya kami benar-benar para utusan(-Nya) kepadamu.",
-      "mean_eng": "The messengers responded, “Our Lord knows that we have truly been sent to you."
+      "mean_eng": "They answered: Our Lord knoweth that we are indeed sent unto you,",
+      "mean_rus": "Они сказали: Наш Господь знает, что Мы действительно посланы к вам,",
+      "mean_tur": "Dediler ki: Rabbimiz bilir ki biz gerçekten size gönderilen elçileriz,",
+      "mean_may": "Mereka berkata, Tuhan kami mengetahui bahawa kami benar-benar utusan yang diutus kepada kamu,"
     },
     {
-      "verse_arabic": "وَمَا عَلَيْنَآ اِلَّا الْبَلٰغُ الْمُبِيْنُ",
+      "ayah": 17,
+      "verse_arabic": "وَمَا عَلَيْنَآ اِلَّا الْبَلٰغُ الْمُبِيْنُ",
       "verse_latin": "Wa mā ‘alainā illal-balāgul-mubīn(u).",
       "mean_ind": "Adapun kewajiban kami hanyalah menyampaikan (perintah Allah) yang jelas.”",
-      "mean_eng": "And our duty is only to deliver ˹the message˺ clearly.”"
+      "mean_eng": "And our duty is but plain conveyance (of the message).",
+      "mean_rus": "И наша обязанность — лишь ясное донесение (послания).",
+      "mean_tur": "Bizim üzerimize düşen sadece açıkça iletmektir.",
+      "mean_may": "Tanggungjawab kami hanyalah menyampaikan dengan jelas (amanat tersebut)."
     },
     {
+      "ayah": 18,
       "verse_arabic": "قَالُوْٓا اِنَّا تَطَيَّرْنَا بِكُمْۚ لَىِٕنْ لَّمْ تَنْتَهُوْا لَنَرْجُمَنَّكُمْ وَلَيَمَسَّنَّكُمْ مِّنَّا عَذَابٌ اَلِيْمٌ",
       "verse_latin": "Qālū innā taṭayyarnā bikum, la'il lam tantahū lanarjumannakum wa layamassannakum minnā ‘ażābun alīm(un).",
       "mean_ind": "Mereka (penduduk negeri) menjawab, “Sesungguhnya kami bernasib malang karenamu. Sungguh, jika kamu tidak berhenti (menyeru kami), niscaya kami merajam kamu dan kamu pasti akan merasakan siksaan yang pedih dari kami.”",
-      "mean_eng": "The people replied, “We definitely see you as a bad omen for us. If you do not desist, we will certainly stone you ˹to death˺ and you will be touched with a painful punishment from us.”"
+      "mean_eng": "(The people of the city) said: We augur ill of you. If ye desist not, we shall surely stone you, and grievous torture will befall you at our hands.",
+      "mean_rus": "Они сказали: «Мы считаем вас дурной приметой. Если вы не перестанете, мы обязательно забросаем вас камнями и постигнет вас от нас мучительное наказание.»",
+      "mean_tur": "Dediler ki: \"Biz size uğursuzluk getirdik. Eğer vazgeçmezseniz, sizi mutlaka taşlayacağız ve bizden size acı bir azap dokunacaktır.\"",
+      "mean_may": "Mereka berkata: \"Kami menganggap kamu membawa malang. Jika kamu tidak berhenti, kami akan melemparimu dengan batu dan azab yang pedih akan menimpa kamu dari kami.\""
     },
     {
+      "ayah": 19,
       "verse_arabic": "قَالُوْا طَاۤىِٕرُكُمْ مَّعَكُمْۗ اَىِٕنْ ذُكِّرْتُمْۗ بَلْ اَنْتُمْ قَوْمٌ مُّسْرِفُوْنَ",
       "verse_latin": "Qālū ṭā'irukum ma‘akum, a'in żukkirtum, bal antum qaumum musrifūn(a).",
       "mean_ind": "Mereka (para rasul) berkata, “Kemalangan kamu itu (akibat perbuatan) kamu sendiri. Apakah karena kamu diberi peringatan, (lalu kamu menjadi malang)? Sebenarnya kamu adalah kaum yang melampaui batas.”",
-      "mean_eng": "The messengers said, “Your bad omen lies within yourselves. Are you saying this because you are reminded ˹of the truth˺? In fact, you are a transgressing people.”"
+      "mean_eng": "They said: Your evil augury be with you! Is it because ye are reminded (of the truth)? Nay, but ye are froward folk!",
+      "mean_rus": "Они сказали: «Злая примета с вами! Неужели из-за напоминания вам? Нет, вы — люди, которые чрезмерно поступают.»",
+      "mean_tur": "Dediler ki: \"Uğursuzluğunuz sizinledir! Size uyarı yapıldığı için mi? Hayır, siz aşırı giden bir kavimsiniz!\"",
+      "mean_may": "Mereka berkata: \"Celaka kamu bersama kamu! Apakah karena kamu diberi peringatan? Tidak, sesungguhnya kamu adalah kaum yang melampaui batas.\""
     },
     {
+      "ayah": 20,
       "verse_arabic": "وَجَاۤءَ مِنْ اَقْصَا الْمَدِيْنَةِ رَجُلٌ يَّسْعٰى قَالَ يٰقَوْمِ اتَّبِعُوا الْمُرْسَلِيْنَۙ",
       "verse_latin": "Wa jā'a min aqṣal-madīnati rajuluy yas‘ā qāla yā qaumittabi‘ul-mursalīn(a).",
       "mean_ind": "Datanglah dengan bergegas dari ujung kota, seorang laki-laki. Dia berkata, “Wahai kaumku, ikutilah para rasul itu!",
-      "mean_eng": "Then from the farthest end of the city a man came, rushing. He advised, “O my people! Follow the messengers."
+      "mean_eng": "And there came from the uttermost part of the city a man running. He cried: O my people! Follow those who have been sent!",
+      "mean_rus": "И из крайней части города прибежал человек, он сказал: «О мой народ! Следуйте за посланниками!»",
+      "mean_tur": "Şehrin en uzak tarafından koşarak bir adam geldi ve dedi ki: «Ey kavmim! Peygamberleri takip edin!»",
+      "mean_may": "Datanglah dari penghujung bandar seorang lelaki berlari, dia berkata: Wahai kaumku, ikutlah para rasul itu!"
     },
     {
-      "verse_arabic": "اتَّبِعُوْا مَنْ لَّا يَسْـَٔلُكُمْ اَجْرًا وَّهُمْ مُّهْتَدُوْنَ ۔",
+      "ayah": 21,
+      "verse_arabic": "اتَّبِعُوْا مَنْ لَّا يَسْـَٔلُكُمْ اَجْرًا وَّهُمْ مُّهْتَدُوْنَ",
       "verse_latin": "Ittabi‘ū mal lā yas'alukum ajraw wa hum muhtadūn(a).",
       "mean_ind": "Ikutilah orang yang tidak meminta imbalan (dalam berdakwah) kepadamu. Mereka adalah orang-orang yang mendapat petunjuk.",
-      "mean_eng": "Follow those who ask no reward of you, and are ˹rightly˺ guided."
+      "mean_eng": "Follow those who ask of you no fee, and who are rightly guided.",
+      "mean_rus": "Следуйте за теми, кто не просит у вас вознаграждения, и которые находятся на правильном пути.",
+      "mean_tur": "Sizden herhangi bir ücret talep etmeyen ve doğru yola rehberlik edenleri takip edin.",
+      "mean_may": "Ikutilah mereka yang tidak meminta upah daripada kamu, dan mereka adalah orang yang mendapat petunjuk."
     },
     {
-      "verse_arabic": "وَمَا لِيَ لَآ اَعْبُدُ الَّذِيْ فَطَرَنِيْ وَاِلَيْهِ تُرْجَعُوْنَ",
+      "ayah": 22,
+      "verse_arabic": "وَمَا لِيَ لَآ اَعْبُدُ الَّذِيْ فَطَرَنِيْ وَاِلَيْهِ تُرْجَعُوْنَ",
       "verse_latin": "Wa mā liya lā a‘budul-lażī faṭaranī wa ilaihi turja‘ūn(a).",
-      "mean_ind": "Apa (alasanku) untuk tidak menyembah (Allah) yang telah menciptakanku dan hanya kepada-Nyalah kamu akan dikembalikan.",
-      "mean_eng": "And why should I not worship the One Who has originated me, and to Whom you will be returned."
+      "mean_ind": "Apa (alasanku) untuk tidak menyembah (Allah) yang telah menciptakanku dan hanya kepada-Nyalah kamu akan dikembalikan?",
+      "mean_eng": "For what cause should I not serve Him Who hath created me, and unto Whom ye will be brought back?",
+      "mean_rus": "Почему я не должен поклоняться Тому, Кто сотворил меня, и к Кому вы все возвратитесь?",
+      "mean_tur": "Beni yaratan ve dönüşünüz O'nadır diye neden Ona ibadet etmeyeyim?",
+      "mean_may": "Mengapakah aku tidak menyembah Dia yang menciptakan aku, dan hanya kepada-Nya kamu semua akan dikembalikan?"
     },
     {
+      "ayah": 23,
       "verse_arabic": "ءَاَتَّخِذُ مِنْ دُوْنِهٖٓ اٰلِهَةً اِنْ يُّرِدْنِ الرَّحْمٰنُ بِضُرٍّ لَّا تُغْنِ عَنِّيْ شَفَاعَتُهُمْ شَيْـًٔا وَّلَا يُنْقِذُوْنِۚ",
       "verse_latin": "A'attakhiżu min dūnihī ālihatan iy yuridnir-raḥmānu biḍurril lā tugni ‘annī syafā‘atuhum syai'aw wa lā yunqiżūn(i).",
       "mean_ind": "Mengapa aku (harus) mengambil sembahan-sembahan selain-Nya? Jika (Allah) Yang Maha Pengasih menghendaki bencana terhadapku, pasti pertolongan mereka tidak berguna sama sekali bagi diriku dan mereka (juga) tidak dapat menyelamatkanku.",
-      "mean_eng": "How could I take besides Him other gods whose intercession would not be of any benefit to me, nor could they save me if the Most Compassionate intended to harm me?"
+      "mean_eng": "Shall I take (other) gods in place of Him when, if the Beneficent should wish me any harm, their intercession will avail me naught, nor can they save?",
+      "mean_rus": "Неужели я возьму себе богов помимо Него? Если Милосердный пожелает мне зла, их заступничество ничем мне не поможет, и они не спасут меня.",
+      "mean_tur": "Rahman bana zarar vermek isterse, onların şefaatleri bana hiç fayda vermez ve beni kurtaramazlar; ben O'nun dışında başka ilahlar mı edinirim?",
+      "mean_may": "Adakah aku akan mengambil tuhan-tuhan selain Dia? Jika Allah Yang Maha Pemurah menghendaki kemudaratan ke atasku, maka syafaat mereka tidak akan memberi manfaat sedikit pun, dan mereka tidak dapat menyelamatkanku."
     },
     {
+      "ayah": 24,
       "verse_arabic": "اِنِّيْٓ اِذًا لَّفِيْ ضَلٰلٍ مُّبِيْنٍ",
       "verse_latin": "Innī iżal lafī ḍalālim mubīn(in).",
       "mean_ind": "Sesungguhnya aku (jika berbuat) begitu, pasti berada dalam kesesatan yang nyata.",
-      "mean_eng": "Indeed, I would then be clearly astray."
+      "mean_eng": "Then truly I should be in error manifest.",
+      "mean_rus": "Поистине, тогда я был бы в явном заблуждении.",
+      "mean_tur": "Gerçekten o zaman apaçık bir sapıklık içinde olurum.",
+      "mean_may": "Sesungguhnya jika aku berbuat demikian, maka aku benar-benar berada dalam kesesatan yang nyata."
     },
     {
+      "ayah": 25,
       "verse_arabic": "اِنِّيْٓ اٰمَنْتُ بِرَبِّكُمْ فَاسْمَعُوْنِۗ",
       "verse_latin": "Innī āmantu birabbikum fasma‘ūn(i).",
       "mean_ind": "Sesungguhnya aku telah beriman kepada Tuhanmu. Maka, dengarkanlah (pengakuan)-ku.”",
-      "mean_eng": "I do believe in your Lord, so listen to me.”"
+      "mean_eng": "Lo! I have believed in your Lord, so hear me!",
+      "mean_rus": "Поистине, я уверовал в вашего Господа, так слушайте меня!",
+      "mean_tur": "Şüphesiz ben sizin Rabbinize inandım, o halde beni dinleyin!",
+      "mean_may": "Sesungguhnya aku telah beriman kepada Tuhan kamu, maka dengarkanlah aku!"
     },
     {
+      "ayah": 26,
       "verse_arabic": "قِيْلَ ادْخُلِ الْجَنَّةَ ۗقَالَ يٰلَيْتَ قَوْمِيْ يَعْلَمُوْنَۙ",
       "verse_latin": "Qīladkhulil-jannah(ta), qāla yā laita qaumī ya‘lamūn(a).",
       "mean_ind": "Dikatakan (kepadanya), “Masuklah ke surga.” Dia (laki-laki itu) berkata, “Aduhai, sekiranya kaumku mengetahui",
-      "mean_eng": "˹But they killed him, then˺ he was told ˹by the angels˺, “Enter Paradise!” He said, “If only my people knew"
+      "mean_eng": "It was said (unto him): Enter paradise. He said: Would that my people knew",
+      "mean_rus": "Сказано ему: Войди в рай. Он сказал: Хотел бы я, чтобы мой народ знал.",
+      "mean_tur": "Ona denildi ki: Cennete gir. O dedi ki: Keşke kavmim bilseydi.",
+      "mean_may": "Dia dikatakan: Masuklah ke syurga. Dia berkata: Alangkah baiknya jika kaumku mengetahui."
     },
     {
+      "ayah": 27,
       "verse_arabic": "بِمَا غَفَرَ لِيْ رَبِّيْ وَجَعَلَنِيْ مِنَ الْمُكْرَمِيْنَ",
       "verse_latin": "Bimā gafaralī rabbī wa ja‘alanī minal-mukramīn(a).",
       "mean_ind": "(bagaimana) Tuhanku mengampuniku dan menjadikanku termasuk orang-orang yang dimuliakan.”",
-      "mean_eng": "of how my Lord has forgiven me, and made me one of the honourable.”"
+      "mean_eng": "With what (munificence) my Lord hath pardoned me and made me of the honoured ones!",
+      "mean_rus": "За то, что мой Господь простил меня и сделал меня из числа почтенных.",
+      "mean_tur": "Rabbimin beni affetmesi ve beni şerefli kimselerden kılması sebebiyle.",
+      "mean_may": "Kerana Tuhanku mengampuni aku dan menjadikan aku dari kalangan orang yang dimuliakan."
     },
     {
-      "verse_arabic": "۞ وَمَآ اَنْزَلْنَا عَلٰى قَوْمِهٖ مِنْۢ بَعْدِهٖ مِنْ جُنْدٍ مِّنَ السَّمَاۤءِ وَمَا كُنَّا مُنْزِلِيْنَ",
+      "ayah": 28,
+      "verse_arabic": "۞ وَمَآ اَنْزَلْنَا عَلٰى قَوْمِهٖ مِنْۢ بَعْدِهٖ مِنْ جُنْدٍ مِّنَ السَّمَاۤءِ وَمَا كُنَّا مُنْزِلِيْنَ",
       "verse_latin": "Wa mā anzalnā ‘alā qaumihī mim ba‘dihī min jundim minas-samā'i wa mā kunnā munzilīn(a).",
       "mean_ind": "Setelah dia (dibunuh), Kami tidak menurunkan satu pasukan pun dari langit kepada kaumnya dan Kami tidak perlu menurunkannya.",
-      "mean_eng": "We did not send any soldiers from the heavens against his people after his death, nor did We need to."
+      "mean_eng": "We sent not down against his people after him a host from heaven, nor do We ever send.",
+      "mean_rus": "Мы не посылали на его народ после него войско с небес, и не собираемся посылать.",
+      "mean_tur": "Onun ardından kavmine gökten bir ordu göndermedik ve göndermeyiz.",
+      "mean_may": "Selepas dia, Kami tidak menurunkan satu pasukan pun dari langit kepada kaumnya dan Kami tidak akan menurunkannya."
     },
     {
+      "ayah": 29,
       "verse_arabic": "اِنْ كَانَتْ اِلَّا صَيْحَةً وَّاحِدَةً فَاِذَا هُمْ خٰمِدُوْنَ",
       "verse_latin": "In kānat illā ṣaiḥataw wāḥidatan fa'iżā hum khāmidūn(a).",
       "mean_ind": "(Azab mereka) itu cukup dengan satu teriakan saja. Maka, seketika itu mereka mati.",
-      "mean_eng": "All it took was one ˹mighty˺ blast, and they were extinguished at once."
+      "mean_eng": "It was but one Shout, and lo! they were extinct.",
+      "mean_rus": "Это был лишь один громкий крик, и вот — они погибли.",
+      "mean_tur": "Tek bir ses oldu ve işte onlar sönüp gittiler.",
+      "mean_may": "Ia hanya dengan satu jeritan sahaja, lalu mereka pun binasa."
     },
     {
+      "ayah": 30,
       "verse_arabic": "يٰحَسْرَةً عَلَى الْعِبَادِۚ مَا يَأْتِيْهِمْ مِّنْ رَّسُوْلٍ اِلَّا كَانُوْا بِهٖ يَسْتَهْزِءُوْنَ",
       "verse_latin": "Yā ḥasratan ‘alal-‘ibād(i), mā ya'tīhim mir rasūlin illā kānū bihī yastahzi'ūn(a).",
       "mean_ind": "Alangkah besar penyesalan diri para hamba itu. Setiap datang seorang rasul kepada mereka, mereka selalu memperolok-olokkannya.",
-      "mean_eng": "Oh pity, such beings! No messenger ever came to them without being mocked."
+      "mean_eng": "Ah, the anguish for the bondmen! Never came there unto them a messenger but they did mock him!",
+      "mean_rus": "Горе же рабам! К ним не приходил ни один посланник, чтобы они не высмеивали его.",
+      "mean_tur": "Ah, kullar için ne büyük bir üzüntü! Onlara hiçbir elçi gelmedi ki onu alaya almasınlar.",
+      "mean_may": "Alangkah sedihnya bagi hamba-hamba itu! Tidak pernah datang seorang rasul kepada mereka kecuali mereka mengejeknya."
     },
     {
+      "ayah": 31,
       "verse_arabic": "اَلَمْ يَرَوْا كَمْ اَهْلَكْنَا قَبْلَهُمْ مِّنَ الْقُرُوْنِ اَنَّهُمْ اِلَيْهِمْ لَا يَرْجِعُوْنَ",
       "verse_latin": "Alam yarau kam ahlaknā qablahum minal-qurūni annahum ilaihim lā yarji‘ūn(a).",
-      "mean_ind": "Tidakkah mereka mengetahui berapa banyak umat sebelum mereka yang telah Kami binasakan. Mereka (setelah binasa) tidak ada yang kembali kepada mereka (di dunia).",
-      "mean_eng": "Have the deniers not considered how many peoples We destroyed before them who never came back to life again?"
+      "mean_ind": "Tidakkah mereka mengetahui berapa banyak umat sebelum mereka yang telah Kami binasakan? Mereka (setelah binasa) tidak ada yang kembali kepada mereka (di dunia).",
+      "mean_eng": "Have they not seen how many generations We destroyed before them, which indeed returned not unto them;",
+      "mean_rus": "Разве они не видели, сколько поколений Мы уничтожили до них, и они уже к ним не возвращаются?",
+      "mean_tur": "Onlar, öncekilerden kaç nesli helak ettiğimizi görmediler mi? Onlar asla onlara geri dönmezler.",
+      "mean_may": "Tidakkah mereka melihat berapa banyak generasi yang Kami binasakan sebelum mereka, yang sesungguhnya tidak kembali kepada mereka."
     },
     {
-      "verse_arabic": "وَاِنْ كُلٌّ لَّمَّا جَمِيْعٌ لَّدَيْنَا مُحْضَرُوْنَ ࣖ",
+      "ayah": 32,
+      "verse_arabic": "وَاِنْ كُلٌّ لَّمَّا جَمِيْعٌ لَّدَيْنَا مُحْضَرُوْنَ",
       "verse_latin": "Wa in kullul lammā jamī‘ul ladainā muḥḍarūn(a).",
       "mean_ind": "Tidak ada satu (umat) pun, kecuali semuanya akan dihadirkan kepada Kami (untuk dihisab).",
-      "mean_eng": "Yet they will all be brought before Us."
+      "mean_eng": "But all, without exception, will be brought before Us.",
+      "mean_rus": "И не будет ни одного из них, кого мы не соберем перед собой.",
+      "mean_tur": "Hiçbiri hariç tutulmaksızın hepsi mutlaka huzurumuza getirilir.",
+      "mean_may": "Tidak seorang pun dari mereka yang tidak akan dikumpulkan di hadapan Kami."
     },
     {
+      "ayah": 33,
       "verse_arabic": "وَاٰيَةٌ لَّهُمُ الْاَرْضُ الْمَيْتَةُ ۖاَحْيَيْنٰهَا وَاَخْرَجْنَا مِنْهَا حَبًّا فَمِنْهُ يَأْكُلُوْنَ",
       "verse_latin": "Wa āyatul lahumul-arḍul-maitah(tu), aḥyaināhā wa akhrajnā minhā ḥabban faminhu ya'kulūn(a).",
       "mean_ind": "Suatu tanda (kekuasaan-Nya) bagi mereka adalah bumi yang mati (tandus lalu) Kami menghidupkannya dan mengeluarkan darinya biji-bijian kemudian dari (biji-bijian) itu mereka makan.",
-      "mean_eng": "There is a sign for them in the dead earth: We give it life, producing grain from it for them to eat."
+      "mean_eng": "A token unto them is the dead earth. We revive it, and We bring forth from it grain so that they eat thereof;",
+      "mean_rus": "И знамение для них — мертвая земля: Мы оживляем её и извлекаем из неё зерно, из которого они едят.",
+      "mean_tur": "Onlar için bir delil de ölü topraktır; onu diriltir ve içinden yedikleri ürünler çıkarırız.",
+      "mean_may": "Satu tanda bagi mereka ialah bumi yang mati; Kami hidupkan kembali dan Kami keluarkan daripadanya biji-bijian yang mereka makan."
     },
     {
+      "ayah": 34,
       "verse_arabic": "وَجَعَلْنَا فِيْهَا جَنّٰتٍ مِّنْ نَّخِيْلٍ وَّاَعْنَابٍ وَّفَجَّرْنَا فِيْهَا مِنَ الْعُيُوْنِۙ",
       "verse_latin": "Wa ja‘alnā fīhā jannātim min nakhīliw wa a‘nābiw wa fajjarnā fīhā minal-‘uyūn(i).",
       "mean_ind": "Kami (juga) menjadikan padanya (bumi) kebun-kebun kurma dan anggur serta Kami memancarkan padanya beberapa mata air",
-      "mean_eng": "And We have placed in it gardens of palm trees and grapevines, and caused springs to gush forth in it,"
+      "mean_eng": "And We have placed therein gardens of the date-palm and grapes, and We have caused springs of water to gush forth therein,",
+      "mean_rus": "И Мы создали в ней сады из финиковых пальм и винограда, и пустили в ней ключи воды.",
+      "mean_tur": "Ve orada hurma ve üzüm bahçeleri yarattık ve oradan pınarlar fışkırttık.",
+      "mean_may": "Kami jadikan di dalamnya kebun-kebun dari pokok kurma dan anggur serta Kami pancarkan di dalamnya mata air."
     },
     {
+      "ayah": 35,
       "verse_arabic": "لِيَأْكُلُوْا مِنْ ثَمَرِهٖۙ وَمَا عَمِلَتْهُ اَيْدِيْهِمْ ۗ اَفَلَا يَشْكُرُوْنَ",
       "verse_latin": "Liya'kulū min ṡamarihī wa mā ‘amilathu aidīhim, afalā yasykurūn(a).",
       "mean_ind": "agar mereka dapat makan dari buahnya, dan dari hasil usaha tangan mereka. Mengapa mereka tidak bersyukur?",
-      "mean_eng": "so that they may eat from its fruit, which they had no hand in making. Will they not then give thanks?"
+      "mean_eng": "That they may eat of the fruit thereof, and their hands made it not. Will they not, then, give thanks?",
+      "mean_rus": "чтобы они ели плоды их и то, что сделали их руки. Разве же они не возблагодарят?",
+      "mean_tur": "Kendi elleriyle yapmadıkları ürünlerden yemeleri için. Hâlâ şükretmeyecekler mi?",
+      "mean_may": "Supaya mereka makan dari buah-buahannya dan dari apa yang dikerjakan oleh tangan mereka; maka patutkah mereka tidak bersyukur?"
     },
     {
+      "ayah": 36,
       "verse_arabic": "سُبْحٰنَ الَّذِيْ خَلَقَ الْاَزْوَاجَ كُلَّهَا مِمَّا تُنْۢبِتُ الْاَرْضُ وَمِنْ اَنْفُسِهِمْ وَمِمَّا لَا يَعْلَمُوْنَ",
       "verse_latin": "Subḥānal-lażī khalaqal-azwāja kullahā mimmā tumbitul-arḍu wa min anfusihim wa mimmā lā ya‘lamūn(a).",
-      "mean_ind": "Mahasuci (Allah) yang telah menciptakan semuanya berpasang-pasangan, baik dari apa yang ditumbuhkan oleh bumi dan dari diri mereka sendiri maupun dari apa yang tidak mereka ketahui.",
-      "mean_eng": "Glory be to the One Who created all ˹things in˺ pairs—˹be it˺ what the earth produces, their genders, or what they do not know!"
+      "mean_ind": "Maha Suci (Allah) yang telah menciptakan semuanya berpasang-pasangan, baik dari apa yang ditumbuhkan oleh bumi dan dari diri mereka sendiri maupun dari apa yang tidak mereka ketahui.",
+      "mean_eng": "Glory be to Him Who created all the sexual pairs, of that which the earth groweth, and of themselves, and of that which they know not!",
+      "mean_rus": "Пречист Тот, Кто сотворил все пары: из того, что произрастает земля, из них самих и из того, чего они не знают.",
+      "mean_tur": "Yeryüzünün bitirdiklerinden, kendi nefislerinden ve daha bilmedikleri nice şeylerden bütün çiftleri yaratan Allah'ın şanı yücedir.",
+      "mean_may": "Maha Suci Tuhan yang telah menciptakan makhluk-makhluk semuanya berpasangan; sama ada dari yang ditumbuhkan oleh bumi, atau dari diri mereka, ataupun dari apa yang mereka tidak mengetahuinya."
     },
     {
+      "ayah": 37,
       "verse_arabic": "وَاٰيَةٌ لَّهُمُ الَّيْلُ ۖنَسْلَخُ مِنْهُ النَّهَارَ فَاِذَا هُمْ مُّظْلِمُوْنَۙ",
       "verse_latin": "Wa āyatul lahumul-lailu naslakhu minhun-nahāra fa'iżā hum muẓlimūn(a).",
       "mean_ind": "Suatu tanda juga (atas kekuasaan Allah) bagi mereka adalah malam. Kami pisahkan siang dari (malam) itu. Maka, seketika itu mereka (berada dalam) kegelapan.",
-      "mean_eng": "There is also a sign for them in the night: We strip from it daylight, then—behold!—they are in darkness."
+      "mean_eng": "A token unto them is night. We strip it of the day, and lo! they are in darkness.",
+      "mean_rus": "И знамением для них — ночь. Мы снимаем с нее день, и вот — они оказываются во мраке.",
+      "mean_tur": "Onlara bir delil de gecedir; gündüzü ondan sıyırırız da karanlıkta kalıverirler.",
+      "mean_may": "Dan satu tanda (kekuasaan Allah) bagi mereka ialah malam; Kami tanggalkan siang daripadanya, maka dengan serta-merta mereka berada dalam kegelapan."
     },
     {
+      "ayah": 38,
       "verse_arabic": "وَالشَّمْسُ تَجْرِيْ لِمُسْتَقَرٍّ لَّهَا ۗذٰلِكَ تَقْدِيْرُ الْعَزِيْزِ الْعَلِيْمِۗ",
       "verse_latin": "Wasy-syamsu tajrī limustaqarril lahā, żālika taqdīrul-‘azīzil-‘alīm(i).",
-      "mean_ind": "(Suatu tanda juga atas kekuasaan Allah bagi mereka adalah) matahari yang berjalan di tempat peredarannya. Demikianlah ketetapan (Allah) Yang Mahaperkasa lagi Maha Mengetahui.",
-      "mean_eng": "The sun travels for its fixed term. That is the design of the Almighty, All-Knowing."
+      "mean_ind": "(Suatu tanda juga atas kekuasaan Allah bagi mereka adalah) matahari yang berjalan di tempat peredarannya. Demikianlah ketetapan (Allah) Yang Maha Perkasa lagi Maha Mengetahui.",
+      "mean_eng": "And the sun runneth on unto a resting-place for him. That is the measuring of the Mighty, the Wise.",
+      "mean_rus": "Солнце плывет к своему местопребыванию. Таково предустановление Могущественного, Знающего.",
+      "mean_tur": "Güneş de yörüngesinde yürüyüp gitmektedir. Bu, güçlü ve bilgin olan Allah'ın kanunudur.",
+      "mean_may": "Dan (sebahagian dari dalil yang tersebut ialah) matahari; ia kelihatan beredar ke tempat yang ditetapkan baginya; itu adalah takdir Tuhan yang Maha Kuasa, lagi Maha Mengetahui."
     },
     {
+      "ayah": 39,
       "verse_arabic": "وَالْقَمَرَ قَدَّرْنٰهُ مَنَازِلَ حَتّٰى عَادَ كَالْعُرْجُوْنِ الْقَدِيْمِ",
       "verse_latin": "Wal-qamara qaddarnāhu manāzila ḥattā ‘āda kal-‘urjūnil-qadīm(i).",
       "mean_ind": "(Begitu juga) bulan, Kami tetapkan bagi(-nya) tempat-tempat peredaran sehingga (setelah ia sampai ke tempat peredaran yang terakhir,) kembalilah ia seperti bentuk tandan yang tua.",
-      "mean_eng": "As for the moon, We have ordained ˹precise˺ phases for it, until it ends up like an old, curved palm stalk."
+      "mean_eng": "And for the moon We have appointed mansions till she return like an old shrivelled palm-leaf.",
+      "mean_rus": "А для луны Мы установили фазы, пока она не вернется, подобно старой изогнутой пальмовой ветви.",
+      "mean_tur": "Ay için de konaklar tayin ettik; nihayet o, eski hurma dalı gibi olur.",
+      "mean_may": "Dan bulan pula Kami takdirkan dia beredar melalui beberapa peringkat, sehingga di akhir peredarannya kelihatan kembalinya pula ke peringkat awalnya - (berbentuk melengkung) seperti tandan yang kering."
     },
     {
-      "verse_arabic": "لَا الشَّمْسُ يَنْۢبَغِيْ لَهَآ اَنْ تُدْرِكَ الْقَمَرَ وَلَا الَّيْلُ سَابِقُ النَّهَارِ ۗوَكُلٌّ فِيْ فَلَكٍ يَّسْبَحُوْنَ",
+      "ayah": 40,
+      "verse_arabic": "لَا الشَّمْسُ يَنْۢبَغِيْ لَهَآ اَنْ تُدْرِكَ الْقَمَرَ وَلَا الَّيْلُ سَابِقُ النَّهَارِ ۗوَكُلٌّ فِيْ فَلَكٍ يَّسْبَحُوْنَ",
       "verse_latin": "Lasy-syamsu yambagī lahā an tudrikal-qamara wa lal-lailu sābiqun-nahār(i), wa kullun fī falakiy yasbaḥūn(a).",
       "mean_ind": "Tidaklah mungkin bagi matahari mengejar bulan dan malam pun tidak dapat mendahului siang. Masing-masing beredar pada garis edarnya.",
-      "mean_eng": "It is not for the sun to catch up with the moon, nor does the night outrun the day. Each is travelling in an orbit of their own."
+      "mean_eng": "It is not for the sun to overtake the moon, nor does the night outstrip the day. They all float, each in an orbit.",
+      "mean_rus": "Солнцу не подобает догонять луну, и ночь не опережает день. Все они плывут по своим орбитам.",
+      "mean_tur": "Güneşin aya yetişmesi uygun değildir, gece de gündüzü geçemez. Her biri kendi yörüngesinde yüzmektedir.",
+      "mean_may": "Tidaklah dibenarkan bagi matahari mengejar bulan, dan malam pun tidak mendahului siang. Masing-masing beredar di dalam orbitnya."
     },
     {
+      "ayah": 41,
       "verse_arabic": "وَاٰيَةٌ لَّهُمْ اَنَّا حَمَلْنَا ذُرِّيَّتَهُمْ فِى الْفُلْكِ الْمَشْحُوْنِۙ",
       "verse_latin": "Wa āyatul lahum annā ḥamalnā żurriyyatahum fil-fulkil-masyḥūn(i).",
       "mean_ind": "Suatu tanda (kebesaran Allah) bagi mereka adalah bahwa Kami mengangkut keturunan mereka dalam kapal yang penuh muatan.",
-      "mean_eng": "Another sign for them is that We carried their ancestors ˹with Noah˺ in the fully loaded Ark,"
+      "mean_eng": "And a sign for them is that We carried their offspring in the laden ship.",
+      "mean_rus": "И знамение для них — то, что Мы несли их потомков в нагруженном корабле.",
+      "mean_tur": "Onlara bir delil de: Soylarını dolu gemiyle taşımamızdır.",
+      "mean_may": "Dan satu dalil lagi untuk mereka (insaf) ialah, Kami membawa belayar jenis keluarga mereka dalam bahtera yang penuh sarat."
     },
     {
+      "ayah": 42,
       "verse_arabic": "وَخَلَقْنَا لَهُمْ مِّنْ مِّثْلِهٖ مَا يَرْكَبُوْنَ",
       "verse_latin": "Wa khalaqnā lahum mim miṡlihī mā yarkabūn(a).",
       "mean_ind": "(Begitu juga) Kami menciptakan untuk mereka dari jenis itu angkutan (lain) yang mereka kendarai.",
-      "mean_eng": "and created for them similar things to ride in."
+      "mean_eng": "And have created for them of the like thereof whereon they ride.",
+      "mean_rus": "И Мы создали для них из подобного ему то, на чем они ездят.",
+      "mean_tur": "Ve onlar için onun benzerinden binecekleri şeyler yarattık.",
+      "mean_may": "Dan Kami ciptakan untuk mereka dari yang seumpamanya, yang mereka dapat menungganginya."
     },
     {
+      "ayah": 43,
       "verse_arabic": "وَاِنْ نَّشَأْ نُغْرِقْهُمْ فَلَا صَرِيْخَ لَهُمْ وَلَاهُمْ يُنْقَذُوْنَۙ",
       "verse_latin": "Wa in nasya' nugriqhum falā ṣarīkha lahum wa lā hum yunqażūn(a).",
       "mean_ind": "Jika Kami menghendaki, Kami akan menenggelamkan mereka. Kemudian, tidak ada penolong bagi mereka dan tidak (pula) mereka diselamatkan.",
-      "mean_eng": "If We willed, We could drown them: then no one would respond to their cries, nor would they be rescued—"
+      "mean_eng": "And if We will, We drown them, and there is no help for them, neither can they be saved;",
+      "mean_rus": "Если Мы захотим, Мы утопим их, и не будет у них спасителя, и они не будут спасены;",
+      "mean_tur": "Eğer dilersek, onları boğarız; onlara yardım edecek kimse yoktur ve onlar kurtarılamazlar;",
+      "mean_may": "Dan jika Kami kehendaki, Kami tenggelamkan mereka, maka tiada penolong bagi mereka dan mereka tidak dapat diselamatkan;"
     },
     {
+      "ayah": 44,
       "verse_arabic": "اِلَّا رَحْمَةً مِّنَّا وَمَتَاعًا اِلٰى حِيْنٍ",
-      "verse_latin": "Illā raḥmatam minnā wa matā‘an ilā ḥīn(in).",
+      "verse_latin": "Illā raḥmatan minnā wa matā‘an ilā ḥīn(in).",
       "mean_ind": "Akan tetapi, (Kami menyelamatkan mereka) karena rahmat yang besar dari Kami dan untuk memberi mereka kesenangan hidup sampai waktu tertentu.",
-      "mean_eng": "except by mercy from Us, allowing them enjoyment for a ˹little˺ while."
+      "mean_eng": "Unless by mercy from Us and as comfort for a while.",
+      "mean_rus": "Кроме как по милости от Нас и для удовольствия на некоторое время.",
+      "mean_tur": "Ancak katımızdan bir rahmet ve bir süreye kadar geçimlik olarak.",
+      "mean_may": "Kecuali dengan kemurahan dari pihak Kami memberi rahmat dan kesenangan hidup kepada mereka hingga ke suatu masa."
     },
     {
+      "ayah": 45,
       "verse_arabic": "وَاِذَا قِيْلَ لَهُمُ اتَّقُوْا مَا بَيْنَ اَيْدِيْكُمْ وَمَا خَلْفَكُمْ لَعَلَّكُمْ تُرْحَمُوْنَ",
       "verse_latin": "Wa iżā qīla lahumuttaqū mā baina aidīkum wa mā khalfakum la‘allakum turḥamūn(a).",
       "mean_ind": "Ketika dikatakan kepada mereka, “Takutlah kamu akan (siksa) yang ada di hadapanmu (di dunia) dan azab yang ada di belakangmu (akhirat) agar kamu mendapat rahmat,” (maka mereka berpaling).",
-      "mean_eng": "˹Still they turn away˺ when it is said to them, “Beware of what is ahead of you ˹in the Hereafter˺ and what is behind you ˹of destroyed nations˺ so you may be shown mercy.”"
+      "mean_eng": "When it is said unto them: Beware of that which is before you and that which is behind you, that haply ye may find mercy (they are heedless).",
+      "mean_rus": "Когда им говорят: «Остерегайтесь того, что перед вами, и того, что позади вас, — быть может, вы будете помилованы», они отворачиваются.",
+      "mean_tur": "Onlara: \"Önünüzdekinden ve arkanızdakinden sakının ki merhamet olunabilesiniz\" denildiğinde, yüz çevirirler.",
+      "mean_may": "Dan apabila dikatakan kepada mereka: \"Takutlah kamu akan apa yang di hadapan kamu dan apa yang di belakang kamu, supaya kamu beroleh rahmat\", mereka berpaling."
     },
     {
+      "ayah": 46,
       "verse_arabic": "وَمَا تَأْتِيْهِمْ مِّنْ اٰيَةٍ مِّنْ اٰيٰتِ رَبِّهِمْ اِلَّا كَانُوْا عَنْهَا مُعْرِضِيْنَ",
       "verse_latin": "Wa mā ta'tīhim min āyatim min āyāti rabbihim illā kānū ‘anhā mu‘riḍīn(a).",
       "mean_ind": "Tidak satu pun dari tanda-tanda (kebesaran) Tuhan datang kepada mereka, kecuali mereka berpaling darinya.",
-      "mean_eng": "Whenever a sign comes to them from their Lord, they turn away from it."
+      "mean_eng": "Never came a token of the tokens of their Lord to them, but they did turn away from it!",
+      "mean_rus": "И не приходит к ним ни одно знамение из знамений Господа их, чтобы они от них не отвратились.",
+      "mean_tur": "Rablerinin ayetlerinden onlara bir ayet geldiğinde, ondan yüz çevirirler.",
+      "mean_may": "Dan tidak datang kepada mereka satu tanda pun dari tanda-tanda Tuhan mereka, melainkan mereka berpaling daripadanya."
     },
     {
+      "ayah": 47,
       "verse_arabic": "وَاِذَا قِيْلَ لَهُمْ اَنْفِقُوْا مِمَّا رَزَقَكُمُ اللّٰهُ ۙقَالَ الَّذِيْنَ كَفَرُوْا لِلَّذِيْنَ اٰمَنُوْٓا اَنُطْعِمُ مَنْ لَّوْ يَشَاۤءُ اللّٰهُ اَطْعَمَهٗٓ ۖاِنْ اَنْتُمْ اِلَّا فِيْ ضَلٰلٍ مُّبِيْنٍ",
       "verse_latin": "Wa iżā qīla lahum anfiqū mimmā razaqakumullāh(u), qālal-lażīna kafarū lil-lażīna āmanū anuṭ‘imu mal lau yasyā'ullāhu aṭ‘amah(ū), in antum illā fī ḍalālim mubīn(in).",
       "mean_ind": "Apabila dikatakan kepada mereka, “Infakkanlah sebagian rezeki yang diberikan Allah kepadamu,” orang-orang yang kufur itu berkata kepada orang-orang yang beriman, “Apakah pantas kami memberi makan kepada orang-orang yang jika Allah menghendaki, Dia akan memberinya makan? Kamu benar-benar dalam kesesatan yang nyata.”",
-      "mean_eng": "And when it is said to them, “Donate from what Allah has provided for you,” the disbelievers say to the believers, “Why should we feed those whom Allah could have fed if He wanted to? You are clearly astray!”"
+      "mean_eng": "And when it is said unto them: Spend of that wherewith Allah hath provided you, those who disbelieve say unto those who believe: Shall we feed those whom Allah, if He willed, would feed? Ye are in naught else than error manifest.",
+      "mean_rus": "И когда им говорят: «Потратьте из того, чем наделил вас Аллах», неверующие говорят верующим: «Разве мы должны кормить тех, кого, если бы Аллах пожелал, Он бы сам накормил? Вы находитесь в явном заблуждении».",
+      "mean_tur": "Onlara: 'Allah'ın size verdiği rızıktan infak edin' denildiğinde, inkâr edenler iman edenlere şöyle derler: 'Allah dileseydi onu doyururdu; biz mi doyuracağız? Siz açık bir sapıklık içindesiniz.'",
+      "mean_may": "Dan apabila dikatakan kepada mereka: 'Dermakanlah sebahagian dari rezeki yang dikurniakan Allah kepada kamu', berkatalah orang-orang yang kafir itu kepada orang-orang yang beriman: 'Patutkah kami memberi makan kepada orang yang jika Allah kehendaki tentulah Ia akan memberinya makan? Kamu ini hanyalah berada dalam kesesatan yang nyata.'"
     },
     {
+      "ayah": 48,
       "verse_arabic": "وَيَقُوْلُوْنَ مَتٰى هٰذَا الْوَعْدُ اِنْ كُنْتُمْ صٰدِقِيْنَ",
       "verse_latin": "Wa yaqūlūna matā hāżal-wa‘du in kuntum ṣādiqīn(a).",
       "mean_ind": "Mereka berkata, “Kapankah janji (hari Kebangkitan) ini (terjadi) jika kamu orang-orang benar?”",
-      "mean_eng": "And they ask ˹the believers˺, “When will this threat come to pass, if what you say is true?”"
+      "mean_eng": "And they say: When will this promise be fulfilled, if ye are truthful?",
+      "mean_rus": "И они говорят: «Когда же исполнится это обещание, если вы говорите правду?»",
+      "mean_tur": "Ve derler ki: \"Eğer doğru söylüyorsanız, bu vaat ne zaman gerçekleşecek?\"",
+      "mean_may": "Dan mereka berkata: \"Bilakah datangnya janji ini (hari kebangkitan) jika kamu orang-orang yang benar?\""
     },
     {
+      "ayah": 49,
       "verse_arabic": "مَا يَنْظُرُوْنَ اِلَّا صَيْحَةً وَّاحِدَةً تَأْخُذُهُمْ وَهُمْ يَخِصِّمُوْنَ",
       "verse_latin": "Mā yanẓurūna illā ṣaiḥataw wāḥidatan ta'khużuhum wa hum yakhiṣṣimūn(a).",
       "mean_ind": "Mereka hanya menunggu satu teriakan yang akan membinasakan mereka saat mereka (sibuk) bertengkar (tentang urusan dunia).",
-      "mean_eng": "They must be awaiting a single Blast, which will seize them while they are ˹entrenched˺ in ˹worldly˺ disputes."
+      "mean_eng": "They await but one Shout, which will surprise them while they are disputing.",
+      "mean_rus": "Они ожидают лишь одного громкого крика, который настигнет их, пока они будут спорить.",
+      "mean_tur": "Onlar, yalnızca bir çığlık bekliyorlar; o çığlık onları, tartışırlarken yakalayacaktır.",
+      "mean_may": "Mereka tidak menunggu melainkan satu pekikan yang - (dengan secara mengejut) akan membinasakan mereka semasa mereka dalam keadaan leka bertengkar (merundingkan urusan dunia masing-masing)."
     },
     {
-      "verse_arabic": "فَلَا يَسْتَطِيْعُوْنَ تَوْصِيَةً وَّلَآ اِلٰٓى اَهْلِهِمْ يَرْجِعُوْنَ ࣖ",
+      "ayah": 50,
+      "verse_arabic": "فَلَا يَسْتَطِيْعُوْنَ تَوْصِيَةً وَّلَآ اِلٰٓى اَهْلِهِمْ يَرْجِعُوْنَ",
       "verse_latin": "Falā yastaṭī‘ūna tauṣiyataw wa lā ilā ahlihim yarji‘ūn(a).",
       "mean_ind": "Oleh sebab itu, mereka tidak dapat berwasiat dan tidak dapat kembali kepada keluarganya.",
-      "mean_eng": "Then they will not be able to make a ˹last˺ will, nor can they return to their own people."
+      "mean_eng": "Then they cannot make bequest, nor can they return to their own folk.",
+      "mean_rus": "И тогда они не смогут ни завещать, ни вернуться к своим семьям.",
+      "mean_tur": "Artık ne vasiyet edebilirler ne de ailelerine dönebilirler.",
+      "mean_may": "Maka dengan itu, mereka tidak berpeluang membuat sebarang pesanan (wasiat atau lainnya), dan tidak sempat kembali kepada keluarganya."
     },
     {
+      "ayah": 51,
       "verse_arabic": "وَنُفِخَ فِى الصُّوْرِ فَاِذَا هُمْ مِّنَ الْاَجْدَاثِ اِلٰى رَبِّهِمْ يَنْسِلُوْنَ",
       "verse_latin": "Wa nufikha fiṣ-ṣūri fa'iżā hum minal-ajdāṡi ilā rabbihim yansilūn(a).",
       "mean_ind": "Sangkakala pun ditiup dan seketika itu mereka bergerak cepat dari kuburnya menuju kepada Tuhannya.",
-      "mean_eng": "The Trumpet will be blown ˹a second time˺, then—behold!—they will rush from the graves to their Lord."
+      "mean_eng": "And the trumpet is blown and lo! from the graves they hie unto their Lord,",
+      "mean_rus": "И будет затрублено в Рог, и вот они устремляются из могил к своему Господу.",
+      "mean_tur": "Sûra üflenir; bir de bakarsın ki, onlar kabirlerinden kalkıp Rablerine doğru koşuyorlar.",
+      "mean_may": "Dan ditiuplah sangkakala, maka dengan serta-merta mereka keluar dari kubur masing-masing lalu segera menuju kepada Tuhan mereka."
     },
     {
-      "verse_arabic": "قَالُوْا يٰوَيْلَنَا مَنْۢ بَعَثَنَا مِنْ مَّرْقَدِنَا ۜهٰذَا مَا وَعَدَ الرَّحْمٰنُ وَصَدَقَ الْمُرْسَلُوْنَ",
-      "verse_latin": "Qālū yā wailanā mam ba‘aṡanā mim marqadinā…hāżā mā wa‘adar-raḥmānu wa ṣadaqal-mursalūn(a).",
+      "ayah": 52,
+      "verse_arabic": "قَالُوا يَا وَيْلَنَا مَن بَعَثَنَا مِن مَّرْقَدِنَا ۜ هَٰذَا مَا وَعَدَ الرَّحْمَٰنُ وَصَدَقَ الْمُرْسَلُونَ",
+      "verse_latin": "Qālū yā wailanā man baʿathanā min marqadinā hādhā mā waʿada ar-Raḥmānu wa ṣadaqa al-mursalūn(a).",
       "mean_ind": "Mereka berkata, “Celakalah kami! Siapakah yang membangkitkan kami dari tempat tidur kami (kubur)?” (Lalu, dikatakan kepada mereka,) “Inilah yang dijanjikan (Allah) Yang Maha Pengasih dan benarlah para rasul(-Nya).”",
-      "mean_eng": "They will cry, “Woe to us! Who has raised us up from our place of rest? This must be what the Most Compassionate warned us of; the messengers told the truth!”"
+      "mean_eng": "They will cry, “Woe to us! Who has raised us from our place of rest? This must be what the Most Compassionate warned us of; the messengers told the truth!”",
+      "mean_rus": "Они скажут: «Горе нам! Кто воскресил нас из нашего места отдыха?» Это то, что обещал Милостивый, и посланники говорили правду.",
+      "mean_tur": "Onlar, \"Eyvah bize! Bizi uyuduğumuz yerden kim kaldırdı? Bu, Rahmân’ın vaat ettiği ve peygamberlerin doğru söylediği şeydir,\" derler.",
+      "mean_may": "(Pada ketika itu) orang-orang yang tidak percayakan hidup semula berkata: \"Aduhai celakanya kami! Siapakah yang membangkitkan kami dari kubur tempat tidur kami?\" (Lalu dikatakan kepada mereka): \"Inilah dia yang telah dijanjikan oleh Allah Yang Maha Pemurah dan benarlah berita yang disampaikan oleh Rasul-rasul!\""
     },
     {
-      "verse_arabic": "اِنْ كَانَتْ اِلَّا صَيْحَةً وَّاحِدَةً فَاِذَا هُمْ جَمِيْعٌ لَّدَيْنَا مُحْضَرُوْنَ",
-      "verse_latin": "In kānat illā ṣaiḥataw wāḥidatan fa'iżā hum jamī‘ul ladainā muḥḍarūn(a).",
+      "ayah": 53,
+      "verse_arabic": "إِن كَانَتْ إِلَّا صَيْحَةًۭ وَٰحِدَةًۭ فَإِذَا هُمْ جَمِيعٌۭ لَّدَيْنَا مُحْضَرُونَ",
+      "verse_latin": "In kānat illā ṣaiḥatan wāḥidatan fa-iżā hum jamīʿun ladaynā muḥḍarūn.",
       "mean_ind": "Teriakan itu hanya sekali saja, maka seketika itu mereka semua dihadapkan kepada Kami (untuk dihisab).",
-      "mean_eng": "It will only take one Blast, then at once they will all be brought before Us."
+      "mean_eng": "It will only take one Blast, then at once they will all be brought before Us.",
+      "mean_rus": "Это будет всего лишь один вопль, и внезапно они все будут приведены к Нам.",
+      "mean_tur": "Bu sadece bir çığlık olacak ve aniden hepsi huzurumuza getirilecektir.",
+      "mean_may": "Hanyalah dengan berlakunya satu pekikan sahaja, maka dengan serta merta mereka dihimpunkan ke tempat perbicaraan Kami, semuanya dibawa hadir (untuk menerima balasan)."
     },
     {
+      "ayah": 54,
       "verse_arabic": "فَالْيَوْمَ لَا تُظْلَمُ نَفْسٌ شَيْـًٔا وَّلَا تُجْزَوْنَ اِلَّا مَا كُنْتُمْ تَعْمَلُوْنَ",
-      "verse_latin": "Fal-yauma lā tuẓlamu nafsun syai'aw wa lā tujzauna illā mā kuntum ta‘malūn(a).",
+      "verse_latin": "Fal-yauma lā tuẓlamu nafsun syai'an wa lā tujzauna illā mā kuntum ta‘malūn.",
       "mean_ind": "Pada hari itu tidak ada sama sekali orang yang dirugikan sedikit pun. Kamu tidak akan diberi balasan, kecuali atas apa yang telah kamu kerjakan.",
-      "mean_eng": "On that Day no soul will be wronged in the least, nor will you be rewarded except for what you used to do."
+      "mean_eng": "This day no soul is wronged in aught; nor are ye requited aught save what ye used to do.",
+      "mean_rus": "И сегодня ни на сколько душа не будет обижена. И воздадут вам только за то, что вы делали.",
+      "mean_tur": "Artık bugün hiçbir kimseye zerre kadar haksızlık edilmez ve yalnızca yaptıklarınızın karşılığını alırsınız.",
+      "mean_may": "Maka pada hari ini, tidak seorang pun akan dianiaya sedikit pun, dan kamu tidak akan dibalas kecuali dengan apa yang telah kamu kerjakan."
     },
     {
-      "verse_arabic": "اِنَّ اَصْحٰبَ الْجَنَّةِ الْيَوْمَ فِيْ شُغُلٍ فٰكِهُوْنَ ۚ",
+      "ayah": 55,
+      "verse_arabic": "اِنَّ اَصْحٰبَ الْجَنَّةِ الْيَوْمَ فِيْ شُغُلٍ فٰكِهُوْنَ",
       "verse_latin": "Inna aṣḥābal-jannatil-yauma fī syugulin fākihūn(a).",
       "mean_ind": "Sesungguhnya penghuni surga pada hari itu berada dalam kesibukan (sehingga tidak sempat berpikir tentang penghuni neraka) lagi bersenang-senang.",
-      "mean_eng": "Indeed, on that Day the residents of Paradise will be busy enjoying themselves."
+      "mean_eng": "Lo! those who merit paradise this day are happily employed,",
+      "mean_rus": "Воистину, обитатели рая в этот день заняты весельем и радостью.",
+      "mean_tur": "Şüphesiz, cennetlikler o gün meşgul ve neşelidirler.",
+      "mean_may": "Sesungguhnya penghuni syurga pada hari itu sibuk bergembira dan bersuka ria."
     },
     {
+      "ayah": 56,
       "verse_arabic": "هُمْ وَاَزْوَاجُهُمْ فِيْ ظِلٰلٍ عَلَى الْاَرَاۤىِٕكِ مُتَّكِـُٔوْنَ ۚ",
       "verse_latin": "Hum wa azwājuhum fī ẓilālin ‘alal-arā'iki muttaki'ūn(a).",
       "mean_ind": "Mereka dan pasangan-pasangannya berada dalam tempat yang teduh sambil berbaring di atas ranjang berkelambu.",
-      "mean_eng": "They and their spouses will be in ˹cool˺ shade, reclining on ˹canopied˺ couches."
+      "mean_eng": "They and their wives, in pleasant shade, on thrones reclining;",
+      "mean_rus": "Они и их супруги в тени, отдыхают на диванах,",
+      "mean_tur": "Onlar ve eşleri hoş gölgeler altında, tahtlarda yaslanmışlardır;",
+      "mean_may": "Mereka dan pasangan mereka berada di bawah naungan yang nyaman, bersandar di atas singgasana."
     },
     {
+      "ayah": 57,
       "verse_arabic": "لَهُمْ فِيْهَا فَاكِهَةٌ وَّلَهُمْ مَّا يَدَّعُوْنَ ۚ",
       "verse_latin": "Lahum fīhā fākihatuw wa lahum mā yadda‘ūn(a).",
       "mean_ind": "Di (surga) itu mereka memperoleh buah-buahan dan apa saja yang mereka inginkan.",
-      "mean_eng": "There they will have fruits and whatever they desire."
+      "mean_eng": "Theirs the fruit (of their good deeds) and theirs (all) that they ask;",
+      "mean_rus": "Им полагаются там плоды, и всё, что они пожелают;",
+      "mean_tur": "Orada onlar için meyveler ve diledikleri her şey vardır;",
+      "mean_may": "Mereka beroleh buah-buahan di sana dan apa saja yang mereka minta."
     },
     {
+      "ayah": 58,
       "verse_arabic": "سَلٰمٌۗ قَوْلًا مِّنْ رَّبٍّ رَّحِيْمٍ",
       "verse_latin": "Salāmun qaulam mir rabbir raḥīm(in).",
       "mean_ind": "(Kepada mereka dikatakan,) “Salam sejahtera” sebagai ucapan dari Tuhan Yang Maha Penyayang.",
-      "mean_eng": "And “Peace!” will be ˹their˺ greeting from the Merciful Lord."
+      "mean_eng": "The word from a Merciful Lord (for them) is: Peace!",
+      "mean_rus": "Слово от Милостивого Господа — мир!",
+      "mean_tur": "Merhametli Rabb'inden bir söz: Selam!",
+      "mean_may": "(Kepada mereka disampaikan,) \"Salam\" dari Tuhan Yang Maha Penyayang."
     },
     {
+      "ayah": 59,
       "verse_arabic": "وَامْتَازُوا الْيَوْمَ اَيُّهَا الْمُجْرِمُوْنَ",
       "verse_latin": "Wamtāzul-yauma ayyuhal-mujrimūn(a).",
       "mean_ind": "(Dikatakan kepada orang-orang kafir,) “Berpisahlah kamu (dari orang-orang mukmin) pada hari ini, wahai para pendurhaka!",
-      "mean_eng": "˹Then the disbelievers will be told,˺ “Step away ˹from the believers˺ this Day, O  wicked ones!"
+      "mean_eng": "But avaunt ye, O ye guilty, this day!",
+      "mean_rus": "Отойдите сегодня, о преступники!",
+      "mean_tur": "Bugün ayrılın, ey suçlular!",
+      "mean_may": "(Dikatakan kepada para pendosa,) \"Berpisahlah pada hari ini!\""
     },
     {
+      "ayah": 60,
       "verse_arabic": "۞ اَلَمْ اَعْهَدْ اِلَيْكُمْ يٰبَنِيْٓ اٰدَمَ اَنْ لَّا تَعْبُدُوا الشَّيْطٰنَۚ اِنَّهٗ لَكُمْ عَدُوٌّ مُّبِيْنٌ",
       "verse_latin": "Alam a‘had ilaikum yā banī ādama allā ta‘budusy-syaiṭān(a), innahū lakum ‘aduwwum mubīn(un).",
       "mean_ind": "Bukankah Aku telah berpesan kepadamu dengan sungguh-sungguh, wahai anak cucu Adam, bahwa janganlah kamu menyembah setan? Sesungguhnya setan itu musuh yang nyata bagi kamu.",
-      "mean_eng": "Did I not command you, O  Children of Adam, not to follow Satan, for he is truly your sworn enemy,"
+      "mean_eng": "Did I not charge you, O ye sons of Adam, that ye worship not the devil - Lo! he is your open foe! -",
+      "mean_rus": "Разве Я не повелел вам, о сыны Адама, чтобы вы не поклонялись сатане? Поистине, он явный враг вам.",
+      "mean_tur": "Ey Adem oğulları, size şeytana tapmayın demedim mi? Şüphesiz o sizin açık düşmanınızdır.",
+      "mean_may": "Tidakkah Aku telah berpesan kepada kalian, wahai anak-anak Adam, agar tidak menyembah setan? Sesungguhnya dia adalah musuh yang nyata bagi kalian."
     },
     {
+      "ayah": 61,
       "verse_arabic": "وَاَنِ اعْبُدُوْنِيْ ۗهٰذَا صِرَاطٌ مُّسْتَقِيْمٌ",
       "verse_latin": "Wa ani‘budūnī, hāżā ṣirāṭum mustaqīm(un).",
       "mean_ind": "(Begitu juga bahwa) sembahlah Aku. Inilah jalan yang lurus.”",
-      "mean_eng": "but to worship Me ˹alone˺? This is the Straight Path."
+      "mean_eng": "But that ye worship Me? That was the right path.",
+      "mean_rus": "И чтобы вы поклонялись Мне? Вот путь прямой.",
+      "mean_tur": "Ve Bana ibadet edin; bu doğru yoldur.",
+      "mean_may": "Dan sembahlah Aku; ini adalah jalan yang lurus."
     },
     {
+      "ayah": 62,
       "verse_arabic": "وَلَقَدْ اَضَلَّ مِنْكُمْ جِبِلًّا كَثِيْرًا ۗاَفَلَمْ تَكُوْنُوْا تَعْقِلُوْنَ",
       "verse_latin": "Wa laqad aḍalla minkum jibillan kaṡīrā(n), afalam takūnū ta‘qilūn(a).",
       "mean_ind": "Sungguh, ia (setan itu) benar-benar telah menyesatkan sangat banyak orang dari kamu. Maka, apakah kamu tidak mengerti?",
-      "mean_eng": "Yet he already misled great multitudes of you. Did you not have any sense?"
+      "mean_eng": "Yet he hath led astray of you a great multitude. Had ye then no sense?",
+      "mean_rus": "И (клянусь Я, что) действительно ввёл в заблуждение он [сатана] из вас число людей многих. Неужели не являетесь вы (о многобожники) разумеющими (чтобы не следовать за ним)?",
+      "mean_tur": "Gerçekten de o (şeytan), sizden birçok nesli saptırdı. Hâlâ akıl etmiyor musunuz?",
+      "mean_may": "Sesungguhnya dia (syaitan) telah menyesatkan ramai di antara kamu. Tidakkah kamu berakal?"
     },
     {
+      "ayah": 63,
       "verse_arabic": "هٰذِهٖ جَهَنَّمُ الَّتِيْ كُنْتُمْ تُوْعَدُوْنَ",
       "verse_latin": "Hāżihī jahannamul-latī kuntum tū‘adūn(a).",
       "mean_ind": "Inilah (neraka) Jahanam yang dahulu telah diperingatkan kepadamu.",
-      "mean_eng": "This is the Hell you were warned of."
+      "mean_eng": "This is hell which ye were promised (if ye followed him).",
+      "mean_rus": "Вот — геенна, которую вам обещали.",
+      "mean_tur": "İşte bu, size vaat edilen cehennemdir.",
+      "mean_may": "Inilah neraka yang telah dijanjikan kepada kamu."
     },
     {
+      "ayah": 64,
       "verse_arabic": "اِصْلَوْهَا الْيَوْمَ بِمَا كُنْتُمْ تَكْفُرُوْنَ",
       "verse_latin": "Iṣlauhal-yauma bimā kuntum takfurūn(a).",
       "mean_ind": "Masuklah ke dalamnya pada hari ini karena dahulu kamu mengingkarinya.",
-      "mean_eng": "Burn in it Today for your disbelief.”"
+      "mean_eng": "Burn therein this day for that ye disbelieved.",
+      "mean_rus": "Горите в ней сегодня за то, что не веровали!",
+      "mean_tur": "Bugün, inkârcılığınıza karşılık oraya girin.",
+      "mean_may": "Rasalah kamu bakarannya pada hari ini, disebabkan perbuatan kufur yang kamu telah lakukan!"
     },
     {
-      "verse_arabic": "اَلْيَوْمَ نَخْتِمُ عَلٰٓى اَفْوَاهِهِمْ وَتُكَلِّمُنَآ اَيْدِيْهِمْ وَتَشْهَدُ اَرْجُلُهُمْ بِمَا كَانُوْا يَكْسِبُوْنَ",
+      "ayah": 65,
+      "verse_arabic": "اَلْيَوْمَ نَخْتِمُ عَلٰٓى اَفْوَاهِهِمْ وَتُكَلِّمُنَآ اَيْدِيْهِمْ وَتَشْهَدُ اَرْجُلُهُمْ بِمَا كَانُوْا يَكْسِبُوْنَ",
       "verse_latin": "Al-yauma nakhtimu ‘alā afwāhihim wa tukallimunā aidīhim wa tasyhadu arjuluhum bimā kānū yaksibūn(a).",
       "mean_ind": "Pada hari ini Kami membungkam mulut mereka. Tangan merekalah yang berkata kepada Kami dan kaki merekalah yang akan bersaksi terhadap apa yang dahulu mereka kerjakan.",
-      "mean_eng": "On this Day We will seal their mouths, their hands will speak to Us, and their feet will testify to what they used to commit."
+      "mean_eng": "This day We seal up their mouths, and their hands speak out to Us and their feet bear witness as to what they used to earn.",
+      "mean_rus": "Сегодня Мы запечатаем их уста, и будут говорить с Нами их руки, и будут свидетельствовать их ноги о том, что они приобрели.",
+      "mean_tur": "Bugün ağızlarını mühürleriz, elleri bizimle konuşur ve ayakları, kazandıkları şeylere şahitlik eder.",
+      "mean_may": "Pada hari ini Kami meteraikan mulut mereka, dan tangan mereka akan berkata kepada Kami, dan kaki mereka akan menjadi saksi terhadap apa yang telah mereka lakukan."
     },
     {
+      "ayah": 66,
       "verse_arabic": "وَلَوْ نَشَاۤءُ لَطَمَسْنَا عَلٰٓى اَعْيُنِهِمْ فَاسْتَبَقُوا الصِّرَاطَ فَاَنّٰى يُبْصِرُوْنَ",
       "verse_latin": "Wa lau nasyā'u laṭamasnā ‘alā a‘yunihim fastabaquṣ-ṣirāṭa fa annā yubṣirūn(a).",
       "mean_ind": "Seandainya Kami menghendaki, pastilah Kami akan menghapus penglihatan (membutakan) mereka sehingga mereka berlomba-lomba (mencari) jalan (selamat). Maka, bagaimana mungkin mereka dapat melihat?",
-      "mean_eng": "Had We willed, We could have easily blinded their eyes, so they would struggle to find their way. How then could they see?"
+      "mean_eng": "And had We willed, We verily could have quenched their eyesight so that they should struggle for the way. Then how could they have seen?",
+      "mean_rus": "Если бы Мы пожелали, Мы бы стерли их глаза. Тогда они бы устремились по пути, но как бы они могли видеть?",
+      "mean_tur": "Eğer dileseydik, gözlerini silerdik. O zaman doğru yolu ararlardı, ama nasıl görebilirlerdi?",
+      "mean_may": "(Mata hati orang-orang yang menderhaka itu rosak) dan kalau Kami kehendaki, Kami berkuasa menghapuskan bentuk dan biji mata kepala mereka menjadi rata, sehingga masing-masing menerpa mencari-cari jalan (yang biasa mereka lalui). (Kiranya dijadikan demikian) maka bagaimanakah mereka dapat melihatnya?"
     },
     {
-      "verse_arabic": "وَلَوْ نَشَاۤءُ لَمَسَخْنٰهُمْ عَلٰى مَكَانَتِهِمْ فَمَا اسْتَطَاعُوْا مُضِيًّا وَّلَا يَرْجِعُوْنَ ࣖ",
+      "ayah": 67,
+      "verse_arabic": "وَلَوْ نَشَاۤءُ لَمَسَخْنٰهُمْ عَلٰى مَكَانَتِهِمْ فَمَا اسْتَطَاعُوْا مُضِيًّا وَّلَا يَرْجِعُوْنَ",
       "verse_latin": "Wa lau nasyā'u lamasakhnāhum ‘alā makānatihim famastaṭā‘ū muḍiyyaw wa lā yarji‘ūn(a).",
       "mean_ind": "Seandainya Kami menghendaki, pastilah Kami akan mengubah bentuk mereka di tempat mereka berada, sehingga mereka tidak sanggup meneruskan perjalanan dan juga tidak sanggup pulang kembali.",
-      "mean_eng": "And had We willed, We could have transfigured them on the spot, so they could neither progress forward nor turn back."
+      "mean_eng": "And had We willed, We verily could have fixed them in their place, making them powerless to go forward or turn back.",
+      "mean_rus": "Если бы Мы пожелали, то переменили бы их вид на этом же месте, и не могли бы они пойти или вернуться.",
+      "mean_tur": "Dilesek, onları oldukları yerde dondururduk da, ne ileri gidebilirler ve ne de geri dönebilirlerdi.",
+      "mean_may": "Dan jika Kami kehendaki, tentulah Kami akan mengubah mereka di tempat mereka berada, maka mereka tidak dapat maju dan tidak pula dapat kembali."
     },
     {
+      "ayah": 68,
       "verse_arabic": "وَمَنْ نُّعَمِّرْهُ نُنَكِّسْهُ فِى الْخَلْقِۗ اَفَلَا يَعْقِلُوْنَ",
       "verse_latin": "Wa man nu‘ammirhu nunakkishu fil-khalq(i), afalā ya‘qilūn(a).",
       "mean_ind": "Siapa yang Kami panjangkan umurnya niscaya Kami balik proses penciptaannya (dari kuat menuju lemah). Maka, apakah mereka tidak mengerti?",
-      "mean_eng": "And whoever We grant a long life, We reverse them in development. Will they not then understand?"
+      "mean_eng": "He whom we bring unto old age, We reverse him in creation (making him go back to weakness after strength). Have ye then no sense?",
+      "mean_rus": "Того, кого Мы удлиним жизнь, Мы обращаем вспять в творении (делая его слабым после силы). Разве они не размышляют?",
+      "mean_tur": "Ömrünü uzattığımız kimseyi yaratılışında tersine çeviririz (güçten zayıflığa geri döndürürüz). Acaba akıl etmiyorlar mı?",
+      "mean_may": "Sesiapa yang Kami panjangkan umurnya, Kami kembalikan dia dalam penciptaan (dari kuat kepada lemah). Adakah mereka tidak memikirkan?"
     },
     {
+      "ayah": 69,
       "verse_arabic": "وَمَا عَلَّمْنٰهُ الشِّعْرَ وَمَا يَنْۢبَغِيْ لَهٗ ۗاِنْ هُوَ اِلَّا ذِكْرٌ وَّقُرْاٰنٌ مُّبِيْنٌ ۙ",
       "verse_latin": "Wa mā ‘allamnāhusy-syi‘ra wa mā yambagī lah(ū), in huwa illā żikruw wa qur'ānum mubīn(un).",
-      "mean_ind": "Kami tidak mengajarkan syair kepadanya (Nabi Muhammad) dan (bersyair) itu tidaklah pantas baginya. (Wahyu yang Kami turunkan kepadanya) itu tidak lain hanyalah pelajaran dan Al-Qur’an yang jelas,",
-      "mean_eng": "We have not taught him poetry, nor is it fitting for him. This ˹Book˺ is only a Reminder and a clear Quran"
+      "mean_ind": "Kami tidak mengajarkan syair kepadanya (Nabi Muhammad) dan (bersyair) itu tidaklah pantas baginya. (Wahyu yang Kami turunkan kepadanya) itu tidak lain hanyalah pelajaran dan Al-Qur’an yang jelas",
+      "mean_eng": "And We have not taught him (Muhammad) poetry, nor is it meet for him. This is naught else than a Reminder and a Lecture making plain,",
+      "mean_rus": "И Мы не учили его поэзии, и это не подобает ему. Это не что иное, как напоминание и явное Писание.",
+      "mean_tur": "Ve ona şiir öğretmedik; ona yakışmaz. Bu, ancak bir öğüt ve açık bir Kur’andır.",
+      "mean_may": "Kami tidak mengajarkan kepadanya puisi, dan itu tidaklah sesuai baginya. Ini hanyalah peringatan dan Al-Qur’an yang jelas."
     },
     {
+      "ayah": 70,
       "verse_arabic": "لِّيُنْذِرَ مَنْ كَانَ حَيًّا وَّيَحِقَّ الْقَوْلُ عَلَى الْكٰفِرِيْنَ",
       "verse_latin": "Liyunżira man kāna ḥayyaw wa yaḥiqqal-qaulu ‘alal-kāfirīn(a).",
       "mean_ind": "agar dia (Nabi Muhammad) memberi peringatan kepada orang-orang yang hidup (hatinya) dan agar ketetapan (azab) terhadap orang-orang kafir itu menjadi pasti.",
-      "mean_eng": "to warn whoever is ˹truly˺ alive and fulfil the decree ˹of torment˺ against the disbelievers."
+      "mean_eng": "To warn whosoever liveth, and that the word may be fulfilled against the disbelievers.",
+      "mean_rus": "Чтобы предупредить тех, кто жив, и чтобы слово свершилось над неверующими.",
+      "mean_tur": "Yaşayanları uyarması ve sözün kafirlere karşı gerçekleşmesi için.",
+      "mean_may": "Supaya memberi peringatan kepada orang yang masih hidup dan agar ketetapan berlaku kepada orang kafir."
     },
     {
-      "verse_arabic": "اَوَلَمْ يَرَوْا اَنَّا خَلَقْنَا لَهُمْ مِّمَّا عَمِلَتْ اَيْدِيْنَآ اَنْعَامًا فَهُمْ لَهَا مٰلِكُوْنَ",
+      "ayah": 71,
+      "verse_arabic": "اَوَلَمْ يَرَوْا اَنَّا خَلَقْنَا لَهُمْ مِّمَّا عَمِلَتْ اَيْدِيْنَآ اَنْعَامًا فَهُمْ لَهَا مٰلِكُوْنَ",
       "verse_latin": "Awalam yarau annā khalaqnā lahum mimmā ‘amilat aidīnā an‘āman fahum lahā mālikūn(a).",
       "mean_ind": "Tidakkah mereka mengetahui bahwa Kami telah menciptakan untuk mereka hewan-hewan ternak dari ciptaan tangan Kami (sendiri), lalu mereka menjadi pemiliknya?",
-      "mean_eng": "Do they not see that We singlehandedly created for them, among other things, cattle which are under their control?"
+      "mean_eng": "Have they not seen how We have created for them of Our handiwork the cattle, so that they are their owners,",
+      "mean_rus": "Разве они не видели, что Мы создали для них из Наших рук скот, и они владеют им?",
+      "mean_tur": "Onlar görmediler mi ki, biz ellerimizle onlar için hayvanlar yarattık ve onlar onların sahibidir?",
+      "mean_may": "Adakah mereka tidak melihat bahawa Kami menciptakan untuk mereka binatang ternakan dari hasil kerja tangan Kami, lalu mereka menjadi pemiliknya?"
     },
     {
+      "ayah": 72,
       "verse_arabic": "وَذَلَّلْنٰهَا لَهُمْ فَمِنْهَا رَكُوْبُهُمْ وَمِنْهَا يَأْكُلُوْنَ",
       "verse_latin": "Wa żallalnāhā lahum fa minhā rakūbuhum wa minhā ya'kulūn(a).",
       "mean_ind": "Kami menjadikannya (hewan-hewan itu) tunduk kepada mereka. Sebagian di antaranya menjadi tunggangan mereka dan sebagian (lagi) mereka makan.",
-      "mean_eng": "And We have subjected these ˹animals˺ to them, so they may ride some and eat others."
+      "mean_eng": "And have subdued them unto them, so that some of them they have for riding, some for food?",
+      "mean_rus": "И Мы подчинили их им, так что одни служат им в езде, а другие — в еде.",
+      "mean_tur": "Biz onları onlara boyun eğdirdik; bazıları onların bineği, bazıları ise yiyecekleridir.",
+      "mean_may": "Kami jadikan binatang ternakan itu tunduk kepada mereka, ada yang mereka tunggangi dan ada yang mereka makan."
     },
     {
+      "ayah": 73,
       "verse_arabic": "وَلَهُمْ فِيْهَا مَنَافِعُ وَمَشَارِبُۗ اَفَلَا يَشْكُرُوْنَ",
       "verse_latin": "Wa lahum fīhā manāfi‘u wa masyārib(u), afalā yasykurūn(a).",
       "mean_ind": "Pada dirinya (hewan-hewan ternak itu) terdapat berbagai manfaat dan minuman untuk mereka. Apakah mereka tidak bersyukur?",
-      "mean_eng": "And they derive from them other benefits and drinks. Will they not then give thanks?"
+      "mean_eng": "Benefits and (divers) drinks have they from them. Will they not then give thanks?",
+      "mean_rus": "В них для них есть польза и напитки. Неужели они не благодарны?",
+      "mean_tur": "Onlardan onlar için çeşitli faydalar ve içecekler vardır. Acaba şükretmezler mi?",
+      "mean_may": "Di dalamnya terdapat berbagai manfaat dan minuman bagi mereka. Tidakkah mereka bersyukur?"
     },
     {
+      "ayah": 74,
       "verse_arabic": "وَاتَّخَذُوْا مِنْ دُوْنِ اللّٰهِ اٰلِهَةً لَّعَلَّهُمْ يُنْصَرُوْنَ ۗ",
       "verse_latin": "Wattakhażū min dūnillāhi ālihatal la‘allahum yunṣarūn(a).",
       "mean_ind": "Mereka menjadikan sesembahan selain Allah agar mereka mendapat pertolongan.",
-      "mean_eng": "Still they have taken other gods besides Allah, hoping to be helped ˹by them˺."
+      "mean_eng": "And they have taken (other) gods beside Allah, in order that they may be helped.",
+      "mean_rus": "Они взяли себе богов помимо Аллаха, чтобы они могли им помочь.",
+      "mean_tur": "Allah'tan başka tanrılar edindiler ki, onlardan yardım görsünler.",
+      "mean_may": "Mereka mengambil tuhan selain Allah supaya mereka mendapat pertolongan."
     },
     {
+      "ayah": 75,
       "verse_arabic": "لَا يَسْتَطِيْعُوْنَ نَصْرَهُمْۙ وَهُمْ لَهُمْ جُنْدٌ مُّحْضَرُوْنَ",
       "verse_latin": "Lā yastaṭī‘ūna naṣrahum, wa hum lahum jundum muḥḍarūn(a).",
       "mean_ind": "(Sesembahan) itu tidak mampu menolong mereka, padahal (sesembahan) itu adalah tentara yang dihadirkan untuk menjaganya.",
-      "mean_eng": "They cannot help the pagans, even though they serve the idols as dedicated guards."
+      "mean_eng": "It is not in their power to help them; but they (the worshippers) are unto them a host in arms.",
+      "mean_rus": "Они не могут им помочь, хотя сами служат им воинами, призванными к защите.",
+      "mean_tur": "Onlar (putlar) onların yardımına güç yetiremezler; ancak onlar için hazır bulundurulan askerlerdir.",
+      "mean_may": "Mereka tidak mampu menolong mereka, padahal mereka adalah tentara yang disiapkan untuk mereka."
     },
     {
+      "ayah": 76,
       "verse_arabic": "فَلَا يَحْزُنْكَ قَوْلُهُمْ ۘاِنَّا نَعْلَمُ مَا يُسِرُّوْنَ وَمَا يُعْلِنُوْنَ",
       "verse_latin": "Falā yaḥzunka qauluhum, innā na‘lamu mā yusirrūna wa mā yu‘linūn(a).",
       "mean_ind": "Maka, jangan sampai ucapan mereka membuat engkau (Nabi Muhammad) bersedih hati. Sesungguhnya Kami mengetahui apa yang mereka rahasiakan dan apa yang mereka nyatakan.",
-      "mean_eng": "So do not let their words grieve you ˹O Prophet˺. Indeed, We ˹fully˺ know what they conceal and what they reveal."
+      "mean_eng": "So let not their speech grieve thee (O Muhammad). Lo! We know what they conceal and what proclaim.",
+      "mean_rus": "Так пусть не огорчают тебя их слова; ведь Мы знаем, что они скрывают и что открыто выражают.",
+      "mean_tur": "Onların sözleri seni üzmesin; biz onların neyi gizlediklerini ve neyi açığa vurduklarını biliriz.",
+      "mean_may": "Janganlah ucapan mereka membuatmu bersedih; sesungguhnya Kami mengetahui apa yang mereka sembunyikan dan apa yang mereka nyatakan."
     },
     {
+      "ayah": 77,
       "verse_arabic": "اَوَلَمْ يَرَ الْاِنْسَانُ اَنَّا خَلَقْنٰهُ مِنْ نُّطْفَةٍ فَاِذَا هُوَ خَصِيْمٌ مُّبِيْنٌ",
       "verse_latin": "Awalam yaral-insānu annā khalaqnāhu min nuṭfatin fa'iżā huwa khaṣīmum mubīn(un).",
       "mean_ind": "Tidakkah manusia mengetahui bahwa Kami menciptakannya dari setetes mani? Kemudian tiba-tiba saja dia menjadi musuh yang nyata.",
-      "mean_eng": "Do people not see that We have created them from a sperm-drop, then—behold!—they openly challenge ˹Us˺?"
+      "mean_eng": "Hath not man seen that We have created him from a drop of seed? Yet lo! he is an open opponent.",
+      "mean_rus": "Разве человек не видит, что Мы создали его из капли жидкости? И вот он — явный враг.",
+      "mean_tur": "İnsan, onun bir damla sudan yaratıldığını görmez mi? Sonra da apaçık bir düşman olur.",
+      "mean_may": "Tidakkah manusia menyadari bahwa Kami menciptakannya dari setetes air mani? Namun ia menjadi musuh yang nyata."
     },
     {
+      "ayah": 78,
       "verse_arabic": "وَضَرَبَ لَنَا مَثَلًا وَّنَسِيَ خَلْقَهٗۗ قَالَ مَنْ يُّحْيِ الْعِظَامَ وَهِيَ رَمِيْمٌ",
       "verse_latin": "Wa ḍaraba lanā maṡalaw wa nasiya khalqah(ū), qāla may yuḥyil-‘iẓāma wa hiya ramīm(un).",
       "mean_ind": "Dia membuat perumpamaan bagi Kami dan melupakan asal penciptaannya. Dia berkata, “Siapakah yang bisa menghidupkan tulang-belulang yang telah hancur luluh?”",
-      "mean_eng": "And they argue with Us—forgetting they were created—saying, “Who will give life to decayed bones?”"
+      "mean_eng": "And he hath coined for Us a similitude, and hath forgotten the fact of his creation, saying: Who will revive these bones when they have rotted away?",
+      "mean_rus": "Он привёл нам пример и забыл о своём создании, говоря: «Кто оживит кости, когда они сгниют?»",
+      "mean_tur": "Bizim için bir misal verdi ve yaratılışını unuttu; dedi ki: 'Kemikleri kim diriltecek, onlar çürüdüğünde?'",
+      "mean_may": "Dia memberi perumpamaan kepada Kami dan lupa akan penciptaannya sendiri, berkata: 'Siapa yang akan menghidupkan tulang-tulang ini setelah hancur?'"
     },
     {
-      "verse_arabic": "قُلْ يُحْيِيْهَا الَّذِيْٓ اَنْشَاَهَآ اَوَّلَ مَرَّةٍ ۗوَهُوَ بِكُلِّ خَلْقٍ عَلِيْمٌ ۙ",
+      "ayah": 79,
+      "verse_arabic": "قُلْ يُحْيِيْهَا الَّذِيْٓ اَنْشَاَهَآ اَوَّلَ مَرَّةٍ ۗوَهُوَ بِكُلِّ خَلْقٍ عَلِيْمٌ ۙ",
       "verse_latin": "Qul yuḥyīhal-lażī ansya'ahā awwala marrah(tin), wa huwa bikulli khalqin ‘alīm(un).",
       "mean_ind": "Katakanlah (Nabi Muhammad), “Yang akan menghidupkannya adalah Zat yang menciptakannya pertama kali. Dia Maha Mengetahui setiap makhluk.",
-      "mean_eng": "Say, ˹O Prophet,˺ “They will be revived by the One Who produced them the first time, for He has ˹perfect˺ knowledge of every created being."
+      "mean_eng": "Say: He will revive them Who produced them at the first, for He is Knower of every creation,",
+      "mean_rus": "Скажи: «Тот, кто создал их в первый раз, оживит их снова. Он знает каждое творение».",
+      "mean_tur": "De ki: \"Onları ilk defa yaratan, onları tekrar diriltecektir. O, her yaratılıştan haberdardır.\"",
+      "mean_may": "Katakanlah, Dia yang menghidupkan kembali tulang belulang yang telah hancur adalah Dia yang menciptakannya pertama kali. Dia Maha Mengetahui segala makhluk."
     },
     {
-      "verse_arabic": "الَّذِيْ جَعَلَ لَكُمْ مِّنَ الشَّجَرِ الْاَخْضَرِ نَارًاۙ فَاِذَآ اَنْتُمْ مِّنْهُ تُوْقِدُوْنَ",
+      "ayah": 80,
+      "verse_arabic": "ۨالَّذِيْ جَعَلَ لَكُمْ مِّنَ الشَّجَرِ الْاَخْضَرِ نَارًاۙ فَاِذَآ اَنْتُمْ مِّنْهُ تُوْقِدُوْنَ",
       "verse_latin": "Allażī ja‘ala lakum minasy-syajaril-akhḍari nārā(n), fa'iżā antum minhu tūqidūn(a).",
       "mean_ind": "(Dialah) yang menjadikan api untukmu dari kayu yang hijau. Kemudian, seketika itu kamu menyalakan (api) darinya.”",
-      "mean_eng": "˹He is the One˺ Who gives you fire from green trees, and—behold!—you kindle ˹fire˺ from them."
+      "mean_eng": "Who hath appointed for you fire from the green tree, and behold! ye kindle from it.",
+      "mean_rus": "Тот, кто создал для вас огонь из зелёного дерева, и вот вы разжигаете его.",
+      "mean_tur": "O, size yeşil ağaçtan ateş çıkaran ve ondan tutuşturan Allah'tır.",
+      "mean_may": "Dialah yang menjadikan api untukmu dari kayu hijau, lalu kamu menyalakannya."
     },
     {
+      "ayah": 81,
       "verse_arabic": "اَوَلَيْسَ الَّذِيْ خَلَقَ السَّمٰوٰتِ وَالْاَرْضَ بِقٰدِرٍ عَلٰٓى اَنْ يَّخْلُقَ مِثْلَهُمْ ۗبَلٰى وَهُوَ الْخَلّٰقُ الْعَلِيْمُ",
       "verse_latin": "Awa laisal-lażī khalaqas-samāwāti wal-arḍa biqādirin ‘alā ay yakhluqa miṡlahum, balā wa huwal-khallāqul-‘alīm(u).",
       "mean_ind": "Bukankah Zat yang menciptakan langit dan bumi mampu menciptakan manusia yang serupa mereka itu (di akhirat kelak)? Benar. Dialah yang Maha Banyak Mencipta lagi Maha Mengetahui.",
-      "mean_eng": "Can the One Who created the heavens and the earth not ˹easily˺ resurrect these ˹deniers˺?” Yes ˹He can˺! For He is the Master Creator, All-Knowing."
+      "mean_eng": "Is not He Who created the heavens and the earth Able to create the like of them? Aye, that He is! for He is the All-Wise Creator,",
+      "mean_rus": "Разве Тот, Кто сотворил небеса и землю, не способен создать подобных им? Конечно, Он — Создатель, Всезнающий.",
+      "mean_tur": "Gökleri ve yeri yaratan O değil mi? Onlara benzerini yaratmaya gücü yetmez mi? Elbette O, her şeyi bilen, her şeyi yaratandır.",
+      "mean_may": "Bukankah Dia yang menciptakan langit dan bumi itu mampu menciptakan yang serupa dengan mereka? Benar, Dia Maha Pencipta lagi Maha Mengetahui."
     },
     {
-      "verse_arabic": "اِنَّمَآ اَمْرُهٗٓ اِذَآ اَرَادَ شَيْـًٔاۖ اَنْ يَّقُوْلَ لَهٗ كُنْ فَيَكُوْنُ",
+      "ayah": 82,
+      "verse_arabic": "اِنَّمَآ اَمْرُهٗٓ اِذَآ اَرَادَ شَيْـًٔاۖ اَنْ يَّقُوْلَ لَهٗ كُنْ فَيَكُوْنُ",
       "verse_latin": "Innamā amruhū iżā arāda syai'an ay yaqūla lahū kun fa yakūn(u).",
       "mean_ind": "Sesungguhnya ketetapan-Nya, jika Dia menghendaki sesuatu, Dia hanya berkata kepadanya, “Jadilah!” Maka, jadilah (sesuatu) itu.",
-      "mean_eng": "All it takes, when He wills something ˹to be˺, is simply to say to it: “Be!” And it is!"
+      "mean_eng": "But His command, when He intendeth a thing, is only that He saith unto it: Be! and it is.",
+      "mean_rus": "Когда Он желает чего-либо, то стоит Ему сказать: «Будь!» — и оно сбывается.",
+      "mean_tur": "Bir şeyi dilediği zaman, O'nun buyruğu sadece, o şeye 'Ol' demektir, hemen olur.",
+      "mean_may": "Sesungguhnya keadaan kekuasaanNya apabila Ia menghendaki adanya sesuatu, hanyalah Ia berfirman kepada (hakikat) benda itu: 'Jadilah engkau!'. Maka ia terus menjadi."
     },
     {
-      "verse_arabic": "فَسُبْحٰنَ الَّذِيْ بِيَدِهٖ مَلَكُوْتُ كُلِّ شَيْءٍ وَّاِلَيْهِ تُرْجَعُوْنَ ࣖ",
+      "ayah": 83,
+      "verse_arabic": "فَسُبْحٰنَ الَّذِيْ بِيَدِهٖ مَلَكُوْتُ كُلِّ شَيْءٍ وَّاِلَيْهِ تُرْجَعُوْنَ",
       "verse_latin": "Fa subḥānal-lażī biyadihī malakūtu kulli syai'iw wa ilaihi turja‘ūn(a).",
-      "mean_ind": "Maka, Mahasuci (Allah) yang di tangan-Nya kekuasaan atas segala sesuatu dan kepada-Nya kamu dikembalikan.",
-      "mean_eng": "So glory be to the One in Whose Hands is the authority over all things, and to Whom ˹alone˺ you will ˹all˺ be returned."
+      "mean_ind": "Maka, Maha Suci (Allah) yang di tangan-Nya kekuasaan atas segala sesuatu dan kepada-Nya kamu dikembalikan.",
+      "mean_eng": "Therefore, glory be to Him in Whose hand is the dominion over all things, and to Him you will be returned.",
+      "mean_rus": "Хвала же тому, в руке которого власть над всем, и к Нему вы будете возвращены!",
+      "mean_tur": "Her şeyin hükümranlığı elinde olan ve sizin de kendisine döneceğiniz Allah münezzehtir.",
+      "mean_may": "Maka Maha Suci Tuhan yang di tangan-Nya kekuasaan atas segala sesuatu, dan kepada-Nya kamu akan dikembalikan."
     }
   ]
 }

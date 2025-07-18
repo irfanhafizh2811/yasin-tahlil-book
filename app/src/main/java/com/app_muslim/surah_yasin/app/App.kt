@@ -6,22 +6,25 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import com.google.firebase.FirebaseApp
 import com.app_muslim.surah_yasin.R
 import com.app_muslim.surah_yasin.deps.libraries
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
+import com.app_muslim.surah_yasin.utils.TimerManager
+import com.google.common.eventbus.EventBus
+import com.google.firebase.FirebaseApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class App : MultiDexApplication() {
 
-    companion object {
-        const val CHANNEL_ID = "Tasbeeh.notification"
-    }
+    lateinit var eventBus: EventBus
+        private set
 
-    // No need to cancel this scope as it'll be torn down with the process
-    val applicationScope = CoroutineScope(SupervisorJob())
+    lateinit var timerManager: TimerManager
+        private set
+
+    init {
+        instance = this
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -32,6 +35,8 @@ class App : MultiDexApplication() {
             androidContext(this@App)
         }
         createNotificationChannel()
+        eventBus = EventBus()
+        timerManager = TimerManager(eventBus)
     }
 
     private fun createNotificationChannel() {
@@ -50,4 +55,9 @@ class App : MultiDexApplication() {
         }
     }
 
+    companion object {
+        lateinit var instance: App
+            private set
+        const val CHANNEL_ID = "Tasbeeh.notification"
+    }
 }

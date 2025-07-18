@@ -10,6 +10,15 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.app_muslim.surah_yasin.BuildConfig
+import com.app_muslim.surah_yasin.R
+import com.app_muslim.surah_yasin.app.App
+import com.app_muslim.surah_yasin.data.model.TimerEvent
+import com.app_muslim.surah_yasin.data.preference.GuidePreference
+import com.app_muslim.surah_yasin.extension.activty.hasPermissions
+import com.app_muslim.surah_yasin.extension.ads.loadAd
+import com.app_muslim.surah_yasin.extension.ads.loadAdMob
+import com.app_muslim.surah_yasin.extension.view.gone
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -17,14 +26,8 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.app_muslim.surah_yasin.BuildConfig
-import com.app_muslim.surah_yasin.R
-import com.app_muslim.surah_yasin.data.preference.GuidePreference
-import com.app_muslim.surah_yasin.extension.activty.hasPermissions
-import com.app_muslim.surah_yasin.extension.ads.loadAd
-import com.app_muslim.surah_yasin.extension.ads.loadAdMob
-import com.app_muslim.surah_yasin.extension.view.gone
 import io.reactivex.disposables.CompositeDisposable
+import org.greenrobot.eventbus.Subscribe
 import org.koin.android.ext.android.inject
 
 open class BaseActivity : AppCompatActivity() {
@@ -82,6 +85,16 @@ open class BaseActivity : AppCompatActivity() {
             )
         ) {
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        App.instance.eventBus.register(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        App.instance.eventBus.unregister(this)
     }
 
     protected fun isTestAdmob(): Boolean {
@@ -142,6 +155,11 @@ open class BaseActivity : AppCompatActivity() {
                 adWidth
             )
         }
+    }
+
+    @Subscribe
+    fun onTimerEvent(event: TimerEvent) {
+        loadAdMobInterstitial()
     }
 
     override fun onDestroy() {

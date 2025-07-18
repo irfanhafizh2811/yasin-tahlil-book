@@ -148,7 +148,7 @@ class MainActivity : BaseActivity() {
 
     private fun showLanguageDialog() {
         localeManager?.let {
-            LanguageDialog(this, languagePreference, it).show()
+            LanguageDialog(this, languagePreference.language).show()
         }
     }
 

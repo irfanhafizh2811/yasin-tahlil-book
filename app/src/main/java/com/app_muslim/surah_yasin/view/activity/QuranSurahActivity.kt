@@ -125,7 +125,6 @@ class QuranSurahActivity : BaseActivity() {
         rvSurah.also {
             it.layoutManager = LinearLayoutManager(this@QuranSurahActivity)
             it.adapter = surahAdapter.apply {
-                user = userData
                 onBindListener = { surah -> latestSurahPref(surah) }
                 fontSize = FontSize.LARGE
                 surahInterface = surahModel
@@ -149,7 +148,6 @@ class QuranSurahActivity : BaseActivity() {
             surahAdapter.apply {
                 showLatinQuran = checked
             }.sync(data?.surah ?: listOf())
-
         }
         scTranslate.setOnCheckedChangeListener { _, checked ->
             settingPreference.showQuranTranslation = checked

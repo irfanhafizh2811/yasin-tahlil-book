@@ -58,37 +58,6 @@ fun MainActivity.sync() = with(binding) {
     ivLaailaahaillallah?.setImageDrawable(getIcon(TasbeehConst.LAILAHAILALLAH))
 }
 
-fun MainActivity.setLanguage() {
-    if (Build.VERSION.SDK_INT >= 33) {
-        when {
-            languagePreference.language.contains(LanguagePreference.LANGUAGE_ENGLISH) -> {
-                localeManager?.applicationLocales =
-                    LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_ENGLISH))
-            }
-
-            languagePreference.language.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
-                localeManager?.applicationLocales =
-                    LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_TURKEY))
-            }
-
-            languagePreference.language.contains(LanguagePreference.LANGUAGE_RUSSIAN) -> {
-                localeManager?.applicationLocales =
-                    LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_RUSSIAN))
-            }
-
-            languagePreference.language.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
-                localeManager?.applicationLocales =
-                    LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_SAUDI_ARABIA))
-            }
-
-            languagePreference.language.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
-                localeManager?.applicationLocales =
-                    LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_INDONESIA))
-            }
-        }
-    }
-}
-
 fun MainActivity.getIcon(tasbeeh: String): Drawable? = when (tasbeeh) {
     TasbeehConst.SUBHANALLAH -> getDrawableCompat(
         R.drawable.ic_subhanallah, android.R.color.black

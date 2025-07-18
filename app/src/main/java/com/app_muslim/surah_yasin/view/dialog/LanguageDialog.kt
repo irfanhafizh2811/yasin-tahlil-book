@@ -1,27 +1,53 @@
 package com.app_muslim.surah_yasin.view.dialog
 
-import android.app.LocaleManager
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.os.LocaleList
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat
+import android.widget.RadioButton
+import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.app_muslim.surah_yasin.R
+import com.app_muslim.surah_yasin.data.preference.Language
 import com.app_muslim.surah_yasin.databinding.DialogLanguageBinding
-import com.app_muslim.surah_yasin.extension.view.gone
-import com.app_muslim.surah_yasin.extension.view.visible
-import com.app_muslim.surah_yasin.data.preference.LanguagePreference
-import java.util.Locale
+import com.app_muslim.surah_yasin.extension.context.getColorCompat
 
 class LanguageDialog(
-    context: Context,
-    val languagePreference: LanguagePreference,
-    val localManager: LocaleManager,
+    private val context: Context,
+    private var language: Language
 ) : BottomSheetDialog(context) {
 
     private lateinit var binding: DialogLanguageBinding
+    private var onListenerSelected: ((Language) -> Unit)? = null
+    private val listLL by lazy {
+        listOf(
+            binding.llIndonesia,
+            binding.llMalaysia,
+            binding.llEnglish,
+            binding.llSaudiArabia,
+            binding.llTurkey,
+            binding.llRussian
+        )
+    }
+    private val radioButtons by lazy {
+        listOf(
+            binding.rbIndonesia,
+            binding.rbMalaysia,
+            binding.rbEnglish,
+            binding.rbSaudiArabia,
+            binding.rbTurkey,
+            binding.rbRussian
+        )
+    }
+    private val textViews by lazy {
+        listOf(
+            binding.tvEnglish,
+            binding.tvMalaysia,
+            binding.tvIndonesia,
+            binding.tvSaudiArabia,
+            binding.tvTurkey,
+            binding.tvRussian
+        )
+    }
 
     init {
         binding = DialogLanguageBinding.inflate(LayoutInflater.from(context))
@@ -30,71 +56,135 @@ class LanguageDialog(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= 33) {
-            val language = languagePreference.language
-            when {
-                language.contains(LanguagePreference.LANGUAGE_ENGLISH) -> {
-                    languagePreference.language = LanguagePreference.LANGUAGE_ENGLISH
-                    localManager.applicationLocales =
-                        LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_ENGLISH))
-                }
+        setupView()
+    }
 
-                language.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
-                    languagePreference.language = LanguagePreference.LANGUAGE_INDONESIA
-                    localManager.applicationLocales =
-                        LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_INDONESIA))
-                }
+    fun selectedLanguage(onListenerSelected: (Language) -> Unit): LanguageDialog {
+        this.onListenerSelected = onListenerSelected
+        return this
+    }
 
-                language.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
-                    languagePreference.language = LanguagePreference.LANGUAGE_TURKEY
-                    localManager.applicationLocales =
-                        LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_TURKEY))
-                }
 
-                language.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
-                    languagePreference.language = LanguagePreference.LANGUAGE_SAUDI_ARABIA
-                    localManager.applicationLocales =
-                        LocaleList(Locale.forLanguageTag(LanguagePreference.LANGUAGE_SAUDI_ARABIA))
+    private fun setupView() = with(binding) {
+        ivClose.setOnClickListener { dismiss() }
+        btnNegative.setOnClickListener { dismiss() }
+        btnPositive.setOnClickListener {
+            onListenerSelected?.invoke(language)
+            dismiss()
+        }
+
+        // Setup initial selection
+        when (language) {
+            Language.ENGLISH -> {
+                selected(tvEnglish, rbEnglish)
+                rbEnglish.isChecked = true
+            }
+
+            Language.INDONESIA -> {
+                selected(tvIndonesia, rbIndonesia)
+                rbIndonesia.isChecked = true
+            }
+
+            Language.MALAYSIA -> {
+                selected(tvMalaysia, rbMalaysia)
+                rbMalaysia.isChecked = true
+            }
+
+            Language.TURKEY -> {
+                selected(tvTurkey, rbTurkey)
+                rbTurkey.isChecked = true
+            }
+
+            Language.SAUDI_ARABIA -> {
+                selected(tvSaudiArabia, rbSaudiArabia)
+                rbSaudiArabia.isChecked = true
+            }
+
+            Language.RUSSIAN -> {
+                selected(tvRussian, rbRussian)
+                rbRussian.isChecked = true
+            }
+        }
+
+        // Set checked change listeners
+        listLL.forEach { linearLayout ->
+            linearLayout.setOnClickListener {
+                when (linearLayout.id) {
+                    R.id.llIndonesia -> {
+                        language = Language.INDONESIA
+                        selected(tvIndonesia, rbIndonesia)
+                    }
+
+                    R.id.llMalaysia -> {
+                        language = Language.MALAYSIA
+                        selected(tvMalaysia, rbMalaysia)
+                    }
+
+                    R.id.llEnglish -> {
+                        language = Language.ENGLISH
+                        selected(tvEnglish, rbEnglish)
+                    }
+
+                    R.id.llTurkey -> {
+                        language = Language.TURKEY
+                        selected(tvTurkey, rbTurkey)
+                    }
+
+                    R.id.llSaudiArabia -> {
+                        language = Language.SAUDI_ARABIA
+                        selected(tvSaudiArabia, rbSaudiArabia)
+                    }
+
+                    R.id.llRussian -> {
+                        language = Language.RUSSIAN
+                        selected(tvRussian, rbRussian)
+                    }
                 }
             }
-            dismiss()
+        }
+        radioButtons.forEach { radioButton ->
+            radioButton.setOnClickListener {
+                when (radioButton.id) {
+                    R.id.rb_indonesia -> {
+                        language = Language.INDONESIA
+                        selected(tvIndonesia, rbIndonesia)
+                    }
+
+                    R.id.rb_malaysia -> {
+                        language = Language.MALAYSIA
+                        selected(tvMalaysia, rbMalaysia)
+                    }
+
+                    R.id.rb_english -> {
+                        language = Language.ENGLISH
+                        selected(tvEnglish, rbEnglish)
+                    }
+
+                    R.id.rb_turkey -> {
+                        language = Language.TURKEY
+                        selected(tvTurkey, rbTurkey)
+                    }
+
+                    R.id.rb_saudi_arabia -> {
+                        language = Language.SAUDI_ARABIA
+                        selected(tvSaudiArabia, rbSaudiArabia)
+                    }
+
+                    R.id.rb_russian -> {
+                        language = Language.RUSSIAN
+                        selected(tvRussian, rbRussian)
+                    }
+                }
+            }
         }
     }
 
-    fun updateView(languageActive: String) = with(binding) {
-        tvIndonesia.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
-        tvEnglish.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
-        tvTurkey.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
-        tvSaudiArabia.setTextColor(ContextCompat.getColor(context, R.color.colorBlack))
-        ivActiveIndonesia.gone()
-        ivActiveEnglish.gone()
-        ivActiveTurkey.gone()
-        ivActiveSaudiArabia.gone()
-        when {
-            languageActive.contains(LanguagePreference.LANGUAGE_INDONESIA) -> {
-                tvIndonesia.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
-                ivActiveIndonesia.visible()
-            }
-
-            languageActive.contains(LanguagePreference.LANGUAGE_RUSSIAN) -> {
-                tvRussian.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
-                ivActiveRussian.visible()
-            }
-
-            languageActive.contains(LanguagePreference.LANGUAGE_TURKEY) -> {
-                tvTurkey.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
-                ivActiveTurkey.visible()
-            }
-
-            languageActive.contains(LanguagePreference.LANGUAGE_SAUDI_ARABIA) -> {
-                tvSaudiArabia.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
-                ivActiveSaudiArabia.visible()
-            }
-
-            languageActive.contains(LanguagePreference.LANGUAGE_ENGLISH) -> {
-                tvEnglish.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
-                ivActiveEnglish.visible()
-            }
+    private fun selected(selectedText: TextView, selectedRb: RadioButton) {
+        textViews.forEach {
+            it.setTextColor(context.getColorCompat(R.color.colorBlack))
         }
+        radioButtons.forEach { it.isChecked = false }
+        selectedRb.isChecked = true
+        selectedText.setTextColor(context.getColorCompat(R.color.colorAccent))
     }
 }

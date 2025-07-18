@@ -14,6 +14,7 @@ import com.app_muslim.surah_yasin.R
 import com.app_muslim.surah_yasin.data.model.Surah
 import com.app_muslim.surah_yasin.data.model.surah.SurahInterface
 import com.app_muslim.surah_yasin.data.model.surah.SurahQuran
+import com.app_muslim.surah_yasin.data.preference.LanguagePreference
 import com.app_muslim.surah_yasin.data.preference.SettingPreference
 import com.app_muslim.surah_yasin.data.preference.SurahPreference
 import com.app_muslim.surah_yasin.databinding.ActivitySurahBinding
@@ -25,6 +26,8 @@ import com.app_muslim.surah_yasin.extension.view.visible
 import com.app_muslim.surah_yasin.utils.FontSize
 import com.app_muslim.surah_yasin.utils.TextUtils
 import com.app_muslim.surah_yasin.view.adapter.SurahAdapter
+import com.app_muslim.surah_yasin.view.dialog.LanguageDialog
+import com.app_muslim.surah_yasin.vm.LanguageViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -50,9 +53,13 @@ class SurahActivity : BaseActivity() {
     private val tvMinusSizeSymbol by lazy { appBarTools.findViewById<TextView>(R.id.tvMinusSizeSymbol) }
     private val scLatin by lazy { appBarTools.findViewById<SwitchCompat>(R.id.scLatin) }
     private val scTranslate by lazy { appBarTools.findViewById<SwitchCompat>(R.id.scTranslate) }
+    private val ivLanguage by lazy { appBarTools.findViewById<ImageView>(R.id.iv_language) }
+    private val tvLanguage by lazy { appBarTools.findViewById<TextView>(R.id.tv_language) }
 
     private val surahPref by inject<SurahPreference>()
+    private val languagePref by inject<LanguagePreference>()
     private val settingPreference by inject<SettingPreference>()
+    private val languageViewModel by inject<LanguageViewModel>()
     private val reviewManager by lazy {
         ReviewManagerFactory.create(this)
     }
@@ -76,6 +83,12 @@ class SurahActivity : BaseActivity() {
 
     private fun setSurahView() = with(binding) {
         data = Gson().fromJson(readJsonAssetToString(surah.sourceJson), clazz<Surah>())
+        observeViewModel()
+        setupView()
+        onUILabelColor()
+    }
+
+    private fun setupView() = with(binding) {
         rvSurah.also {
             val surahModel = com.app_muslim.surah_yasin.data.model.surah.SurahFactory.generate(
                 SurahQuran.valueOf(surahName)
@@ -103,7 +116,6 @@ class SurahActivity : BaseActivity() {
             surahAdapter.apply {
                 showLatinQuran = checked
             }.sync(data?.surah ?: listOf())
-
         }
         scTranslate.setOnCheckedChangeListener { _, checked ->
             settingPreference.showQuranTranslation = checked
@@ -111,7 +123,40 @@ class SurahActivity : BaseActivity() {
                 showTranslationQuran = checked
             }.sync(data?.surah ?: listOf())
         }
-        onUILabelColor()
+        ivLanguage.setOnClickListener {
+            if (isExpanded) {
+                appBarTools.expand()
+                appBarTools.collapse()
+                isExpanded = false
+            }
+            showLanguage()
+        }
+        tvLanguage.setOnClickListener {
+            if (isExpanded) {
+                appBarTools.expand()
+                appBarTools.collapse()
+                isExpanded = false
+            }
+            showLanguage()
+        }
+    }
+
+    private fun observeViewModel() {
+        languageViewModel.language.observe(this) {
+            surahAdapter.language = it
+            surahAdapter.sync(data?.surah ?: listOf())
+        }
+        languageViewModel.getLanguage()
+    }
+
+    private fun showLanguage() {
+        LanguageDialog(this, languagePref.language)
+            .selectedLanguage {
+                languageViewModel.setupLanguage(it)
+                surahAdapter.language = it
+                surahAdapter.sync(data?.surah ?: listOf())
+            }
+            .show()
     }
 
     private fun scrollLastRead() = with(binding) {

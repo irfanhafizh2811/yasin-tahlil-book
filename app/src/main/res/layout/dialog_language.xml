@@ -5,7 +5,8 @@
     android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:background="@drawable/bg_dialog">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -41,268 +42,368 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivClose" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llIndonesia"
+    <RadioGroup
+        android:id="@+id/rg_translate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnNegative"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vwDivider">
 
-        <ImageView
-            android:id="@+id/iv_flag_indonesia"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_country_indonesia"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_indonesia"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="0.01"
-            android:text="Indonesian - Bahasa"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_active_indonesia"
-            app:layout_constraintStart_toEndOf="@id/iv_flag_indonesia"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="lollipop"
-            tools:textColor="@color/colorAccent" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_active_indonesia"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_target_counter_default"
-            tools:ignore="ContentDescription" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llIndonesia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:visibility="visible">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llEnglish"
-        android:layout_width="match_parent"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_flag_indonesia"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_country_indonesia"
+                    app:civ_border_color="@color/colorIndonesia"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_indonesia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.01"
+                    android:text="Indonesian - Bahasa"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rb_indonesia"
+                    app:layout_constraintStart_toEndOf="@id/iv_flag_indonesia"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="lollipop"
+                    tools:textColor="@color/colorAccent" />
+
+                <RadioButton
+                    android:id="@+id/rb_indonesia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llMalaysia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:visibility="visible">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_flag_malaysia"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_country_malaysian"
+                    app:civ_border_color="@color/colorUS"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_malaysia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.01"
+                    android:text="Malaysia - Melayu"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rb_malaysia"
+                    app:layout_constraintStart_toEndOf="@id/iv_flag_malaysia"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="lollipop"
+                    tools:textColor="@color/colorBlack" />
+
+                <RadioButton
+                    android:id="@+id/rb_malaysia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llIndonesia">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_flag_english"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_country_united_states"
+                    app:civ_border_color="@color/colorUS"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_english"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.01"
+                    android:text="United States - English"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rb_english"
+                    app:layout_constraintStart_toEndOf="@id/iv_flag_english"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="lollipop"
+                    tools:textColor="@color/colorGrey" />
+
+                <RadioButton
+                    android:id="@+id/rb_english"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llSaudiArabia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llEnglish"
+                tools:visibility="visible">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_flag_saudi_arabia"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_country_saudi_arabia"
+                    app:civ_border_color="@color/colorSaudiArabia"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_saudi_arabia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.01"
+                    android:text="Saudi Arabia - Arabic"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rb_saudi_arabia"
+                    app:layout_constraintStart_toEndOf="@id/iv_flag_saudi_arabia"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="lollipop"
+                    tools:textColor="@color/colorGrey" />
+
+                <RadioButton
+                    android:id="@+id/rb_saudi_arabia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llTurkey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llSaudiArabia">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_flag_turkey"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_country_turkey"
+                    app:civ_border_color="@color/colorTurkey"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_turkey"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.01"
+                    android:text="Turkey - Turk"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rb_turkey"
+                    app:layout_constraintStart_toEndOf="@id/iv_flag_turkey"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="lollipop"
+                    tools:textColor="@color/colorGrey" />
+
+                <RadioButton
+                    android:id="@+id/rb_turkey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llRussian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/llTurkey">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_flag_russian"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_country_russian"
+                    app:civ_border_color="@color/colorRussian"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tv_russian"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.01"
+                    android:text="Russian - Russian"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rb_russian"
+                    app:layout_constraintStart_toEndOf="@id/iv_flag_russian"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:targetApi="lollipop"
+                    tools:textColor="@color/colorGrey" />
+
+                <RadioButton
+                    android:id="@+id/rb_russian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/btnNegative"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_btn_positive"
+        android:text="@string/label_no"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnPositive"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llIndonesia">
+        app:layout_constraintTop_toBottomOf="@id/rg_translate" />
 
-        <ImageView
-            android:id="@+id/iv_flag_english"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_country_united_kingdom"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_english"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="0.01"
-            android:text="United Kingdom - English"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_active_english"
-            app:layout_constraintStart_toEndOf="@id/iv_flag_english"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="lollipop"
-            tools:textColor="@color/colorGrey" />
-
-        <ImageView
-            android:id="@+id/iv_active_english"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_target_counter_default"
-            tools:ignore="ContentDescription"
-            tools:visibility="gone" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llSaudiArabia"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/btnPositive"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_btn_negative"
+        android:text="@string/label_yes"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/btnNegative"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llEnglish">
-
-        <ImageView
-            android:id="@+id/iv_flag_saudi_arabia"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_country_saudi_arabia"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_saudi_arabia"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="0.01"
-            android:text="Saudi Arabia - Arabic"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_active_saudi_arabia"
-            app:layout_constraintStart_toEndOf="@id/iv_flag_saudi_arabia"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="lollipop"
-            tools:textColor="@color/colorGrey" />
-
-        <ImageView
-            android:id="@+id/iv_active_saudi_arabia"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_target_counter_default"
-            tools:ignore="ContentDescription"
-            tools:visibility="gone" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llTurkey"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llSaudiArabia">
-
-        <ImageView
-            android:id="@+id/iv_flag_turkey"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_country_turkey"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_turkey"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="0.01"
-            android:text="Turkey - Turk"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_active_turkey"
-            app:layout_constraintStart_toEndOf="@id/iv_flag_turkey"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="lollipop"
-            tools:textColor="@color/colorGrey" />
-
-        <ImageView
-            android:id="@+id/iv_active_turkey"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_target_counter_default"
-            tools:ignore="ContentDescription"
-            tools:visibility="gone" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llRussian"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="start|center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llTurkey">
-
-        <ImageView
-            android:id="@+id/iv_flag_russian"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_country_russia"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_russian"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="0.01"
-            android:text="Russian - Russian"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_active_russian"
-            app:layout_constraintStart_toEndOf="@id/iv_flag_russian"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:targetApi="lollipop"
-            tools:textColor="@color/colorGrey" />
-
-        <ImageView
-            android:id="@+id/iv_active_russian"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_target_counter_default"
-            tools:ignore="ContentDescription"
-            tools:visibility="gone" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toEndOf="@id/btnNegative"
+        app:layout_constraintTop_toTopOf="@id/btnNegative" />
 </androidx.constraintlayout.widget.ConstraintLayout>

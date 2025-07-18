@@ -40,6 +40,11 @@
     <!--*********************** Section Dhikr ***********************-->
     <color name="colorAccentMorningDhikr">#0E3A6A</color>
     <color name="colorAccentEveningDhikr">#86550C</color>
-    cbe8f5
+    <color name="colorIndonesia">#ff0000</color>
+    <color name="colorBackgroundShimmer">#DDDDDD</color>
+    <color name="colorUS">#E2E2E2</color>
+    <color name="colorSaudiArabia">#005430</color>
+    <color name="colorTurkey">#e30a17</color>
+    <color name="colorRussian">#EEEEEE</color>
     <!--*********************** End Section Dhikr ***********************-->
 </resources>

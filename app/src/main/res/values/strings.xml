@@ -116,5 +116,10 @@
     <string name="label_on_board_start" translatable="false">Let\'s Get Started!</string>
     <string name="label_female" translatable="false">Female</string>
     <string name="label_male" translatable="false">Male</string>
+    <string name="label_increase_size_text">Increase text size for Arabic, Latin, and Translations</string>
+    <string name="label_decrease_size_text">Decrease text size for Arabic, Latin, and Translations</string>
+    <string name="label_show_quran_text_in_latin">Show Quran text in Latin characters</string>
+    <string name="label_show_quran_text_translations">Show The Quran Translations</string>
+    <string name="label_choose_the_language_app">Choose the Language of this App</string>
     <!--************************ End Section Surah ************************-->
 </resources>
