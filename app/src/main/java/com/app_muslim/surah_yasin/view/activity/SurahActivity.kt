@@ -82,8 +82,9 @@ class SurahActivity : BaseActivity() {
         requestRatingReviewPlaystore()
 
         setupWebView()
-        val htmlContent = createHtmlWithMutedYouTube()
-        binding.webView.loadDataWithBaseURL("https://www.youtube.com", htmlContent, "text/html", "UTF-8", null)
+        // Load YouTube URL directly instead of embed to avoid Error 15
+        val youtubeUrl = "https://www.youtube.com/watch?v=GFxvIiPmP40"
+        binding.webView.loadUrl(youtubeUrl)
     }
 
     private fun isMaxSize(): Boolean = currentFontSize == FontSize.HUGE
@@ -315,8 +316,8 @@ class SurahActivity : BaseActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                // Apply comprehensive muting after page loads
-                injectComprehensiveMuteScript()
+                // Apply comprehensive muting after YouTube page loads
+                injectYouTubeMuteScript()
             }
         }
 
@@ -508,57 +509,148 @@ class SurahActivity : BaseActivity() {
         """.trimIndent()
     }
 
-    private fun injectComprehensiveMuteScript() {
+    private fun injectYouTubeMuteScript() {
         val muteScript = """
             javascript:(function() {
                 try {
-                    // Mute all existing media
-                    document.querySelectorAll('video, audio').forEach(function(media) {
-                        media.muted = true;
-                        media.volume = 0;
-                        
-                        // Override properties to maintain muting
-                        Object.defineProperty(media, 'volume', {
-                            get: function() { return 0; },
-                            set: function(val) { /* ignore */ }
+                    // Function to mute all media elements
+                    function muteAllMedia() {
+                        // Mute all video and audio elements
+                        document.querySelectorAll('video, audio').forEach(function(media) {
+                            media.muted = true;
+                            media.volume = 0;
+                            
+                            // Override volume property
+                            Object.defineProperty(media, 'volume', {
+                                get: function() { return 0; },
+                                set: function(val) { /* ignore volume changes */ }
+                            });
+                            
+                            // Override muted property
+                            Object.defineProperty(media, 'muted', {
+                                get: function() { return true; },
+                                set: function(val) { /* keep muted */ }
+                            });
                         });
                         
-                        Object.defineProperty(media, 'muted', {
-                            get: function() { return true; },
-                            set: function(val) { /* ignore */ }
+                        // Try to click YouTube's mute button if it exists
+                        var muteButton = document.querySelector('.ytp-mute-button');
+                        if (muteButton && !muteButton.classList.contains('ytp-muted')) {
+                            muteButton.click();
+                        }
+                        
+                        // Try alternative mute button selectors
+                        var altMuteButtons = document.querySelectorAll('[aria-label*="Mute"], [title*="Mute"], .ytp-volume-area');
+                        altMuteButtons.forEach(function(btn) {
+                            if (btn && !btn.classList.contains('ytp-muted')) {
+                                btn.click();
+                            }
+                        });
+                        
+                        // Try to trigger autoplay if video is paused
+                        var playButton = document.querySelector('.ytp-play-button');
+                        if (playButton && playButton.getAttribute('aria-label') && 
+                            playButton.getAttribute('aria-label').includes('Play')) {
+                            playButton.click();
+                        }
+                    }
+                    
+                    // Override createElement to mute new elements
+                    var originalCreateElement = document.createElement;
+                    document.createElement = function(tagName) {
+                        var element = originalCreateElement.call(this, tagName);
+                        if (tagName.toLowerCase() === 'video' || tagName.toLowerCase() === 'audio') {
+                            element.muted = true;
+                            element.volume = 0;
+                            
+                            // Add event listeners
+                            element.addEventListener('loadstart', function() {
+                                this.muted = true;
+                                this.volume = 0;
+                            });
+                            
+                            element.addEventListener('canplay', function() {
+                                this.muted = true;
+                                this.volume = 0;
+                                // Try to autoplay
+                                this.play().catch(function(e) {
+                                    console.log('Autoplay failed:', e);
+                                });
+                            });
+                        }
+                        return element;
+                    };
+                    
+                    // Monitor for new elements
+                    var observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            mutation.addedNodes.forEach(function(node) {
+                                if (node.nodeType === 1) {
+                                    if (node.tagName === 'VIDEO' || node.tagName === 'AUDIO') {
+                                        node.muted = true;
+                                        node.volume = 0;
+                                        // Try to play
+                                        setTimeout(function() {
+                                            node.play().catch(function(e) {
+                                                console.log('Play failed:', e);
+                                            });
+                                        }, 100);
+                                    }
+                                    
+                                    // Check children
+                                    if (node.querySelectorAll) {
+                                        var mediaElements = node.querySelectorAll('video, audio');
+                                        mediaElements.forEach(function(media) {
+                                            media.muted = true;
+                                            media.volume = 0;
+                                            setTimeout(function() {
+                                                media.play().catch(function(e) {
+                                                    console.log('Child play failed:', e);
+                                                });
+                                            }, 100);
+                                        });
+                                    }
+                                }
+                            });
                         });
                     });
                     
-                    // YouTube-specific muting and autoplay
-                    var iframe = document.querySelector('iframe');
-                    if (iframe) {
-                        iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
-                        iframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[0]}', '*');
-                        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                    // Start observing
+                    if (document.body) {
+                        observer.observe(document.body, {
+                            childList: true,
+                            subtree: true
+                        });
                     }
                     
-                    // Try to click YouTube mute button
-                    var muteButton = document.querySelector('.ytp-mute-button');
-                    if (muteButton && !muteButton.classList.contains('ytp-muted')) {
-                        muteButton.click();
-                    }
+                    // Apply muting immediately
+                    muteAllMedia();
+                    
+                    // Apply muting with delays to catch YouTube's dynamic loading
+                    setTimeout(muteAllMedia, 500);
+                    setTimeout(muteAllMedia, 1500);
+                    setTimeout(muteAllMedia, 3000);
+                    setTimeout(muteAllMedia, 5000);
+                    
+                    // Continuous monitoring
+                    setInterval(muteAllMedia, 2000);
                     
                 } catch(e) {
-                    console.log('Comprehensive mute failed:', e);
+                    console.log('YouTube mute script error:', e);
                 }
             })();
         """
 
         binding.webView.evaluateJavascript(muteScript, null)
 
-        // Re-apply muting after delays to catch late-loading content
+        // Re-apply with additional delays for YouTube's async loading
         binding.webView.postDelayed({
             binding.webView.evaluateJavascript(muteScript, null)
-        }, 1000)
+        }, 2000)
 
         binding.webView.postDelayed({
             binding.webView.evaluateJavascript(muteScript, null)
-        }, 3000)
+        }, 5000)
     }
 
     override fun onResume() {
@@ -566,7 +658,7 @@ class SurahActivity : BaseActivity() {
         binding.webView.onResume()
         // Re-apply muting when app resumes
         binding.webView.postDelayed({
-            injectComprehensiveMuteScript()
+            injectYouTubeMuteScript()
         }, 500)
     }
 

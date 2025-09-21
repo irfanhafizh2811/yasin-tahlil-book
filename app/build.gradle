@@ -8,7 +8,7 @@ plugins {
 
 ext.majorVersion = 1
 ext.minorVersion = 0
-ext.patchVersion = 2
+ext.patchVersion = 4
 ext.preRelease = ""
 
 apply from: '../sign.gradle'
@@ -16,14 +16,13 @@ apply from: "../dependencies.gradle"
 apply from: '../variant_filter.gradle'
 
 ext {
-    buildToolsVersion = "30.0.0"
     minSdkVersion = 24
-    targetSdkVersion = 34
-    compileSdkVersion = 34
+    targetSdkVersion = 36
+    compileSdkVersion = 36
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 36
     defaultConfig {
         applicationId "com.app_muslim.surah_yasin"
         minSdk project.ext.minSdkVersion
