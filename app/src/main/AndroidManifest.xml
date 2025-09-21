@@ -2,10 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app_muslim.surah_yasin">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
     <application
         android:name="com.app_muslim.surah_yasin.app.App"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
