@@ -1,6 +1,8 @@
 package com.app_muslim.surah_yasin.view.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
@@ -67,6 +69,10 @@ class SurahActivity : BaseActivity() {
     private val reviewManager by lazy {
         ReviewManagerFactory.create(this)
     }
+
+    // Handler for delayed play functionality
+    private val delayHandler = Handler(Looper.getMainLooper())
+    private var isPageLoaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -288,8 +294,8 @@ class SurahActivity : BaseActivity() {
         // Enable DOM storage
         webSettings.domStorageEnabled = true
 
-        // Enable media playback without user gesture (required for autoplay)
-        webSettings.mediaPlaybackRequiresUserGesture = false
+        // DISABLE media playback without user gesture to prevent autoplay
+        webSettings.mediaPlaybackRequiresUserGesture = true
 
         // Allow mixed content
         webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
@@ -316,8 +322,13 @@ class SurahActivity : BaseActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                // Apply comprehensive muting after YouTube page loads
+                isPageLoaded = true
+
+                // Apply muting script first
                 injectYouTubeMuteScript()
+
+                // Schedule play button click after 1 second
+                scheduleDelayedPlay()
             }
         }
 
@@ -329,184 +340,88 @@ class SurahActivity : BaseActivity() {
         }
     }
 
-    private fun createHtmlWithMutedYouTube(): String {
-        return """
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    body {
-                        margin: 0;
-                        padding: 0;
-                        background-color: #000;
-                        font-family: Arial, sans-serif;
-                        overflow: hidden;
-                    }
-                    .container {
-                        width: 100%;
-                        height: 100vh;
-                        display: flex;
-                        flex-direction: column;
-                    }
-                    .video-container {
-                        position: relative;
-                        width: 100%;
-                        height: 100%;
-                        flex-grow: 1;
-                    }
-                    iframe {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        border: none;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <div class="video-container">
-                        <iframe
-                            id="youtubePlayer"
-                            src="https://www.youtube.com/embed/GFxvIiPmP40?mute=1&autoplay=1&controls=1&rel=0&enablejsapi=1&origin=https://www.youtube.com&playsinline=1"
-                            title="YouTube video player"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-                
-                <script>
-                    // Global muting variables
-                    let originalCreateElement = document.createElement;
-                    let mutingEnabled = true;
+    private fun scheduleDelayedPlay() {
+        delayHandler.postDelayed({
+            if (isPageLoaded) {
+                clickPlayButton()
+            }
+        }, (2000..10000).random().toLong())
+    }
+
+    private fun clickPlayButton() {
+        val clickPlayScript = """
+            javascript:(function() {
+                try {
+                    console.log('Attempting to click play button...');
                     
-                    // Override document.createElement to mute new media elements
-                    document.createElement = function(tagName) {
-                        let element = originalCreateElement.call(this, tagName);
-                        
-                        if (mutingEnabled && (tagName.toLowerCase() === 'video' || tagName.toLowerCase() === 'audio')) {
-                            element.muted = true;
-                            element.volume = 0;
-                            
-                            // Override volume and muted properties
-                            Object.defineProperty(element, 'volume', {
-                                get: function() { return 0; },
-                                set: function(val) { /* ignore volume changes */ }
-                            });
-                            
-                            Object.defineProperty(element, 'muted', {
-                                get: function() { return true; },
-                                set: function(val) { /* keep muted */ }
-                            });
-                            
-                            // Add event listeners to maintain muting
-                            element.addEventListener('loadstart', function() {
-                                this.muted = true;
-                                this.volume = 0;
-                            });
-                            
-                            element.addEventListener('canplay', function() {
-                                this.muted = true;
-                                this.volume = 0;
-                            });
-                        }
-                        
-                        return element;
-                    };
+                    // Try multiple selectors for the play button
+                    var playSelectors = [
+                        '.ytp-play-button',
+                        '.ytp-large-play-button',
+                        '[aria-label*="Play"]',
+                        '[title*="Play"]',
+                        'button[data-title-no-tooltip="Play"]',
+                        '.html5-main-video'
+                    ];
                     
-                    // Function to mute all existing media
-                    function muteAllMedia() {
-                        try {
-                            // Mute all video and audio elements
-                            document.querySelectorAll('video, audio').forEach(function(media) {
-                                media.muted = true;
-                                media.volume = 0;
-                                
-                                // Add event listeners to maintain muting
-                                media.addEventListener('volumechange', function() {
-                                    if (!this.muted) this.muted = true;
-                                    if (this.volume > 0) this.volume = 0;
-                                });
-                            });
+                    var playButtonClicked = false;
+                    
+                    for (var i = 0; i < playSelectors.length; i++) {
+                        var elements = document.querySelectorAll(playSelectors[i]);
+                        for (var j = 0; j < elements.length; j++) {
+                            var element = elements[j];
                             
-                            // YouTube iframe communication
-                            var iframe = document.getElementById('youtubePlayer');
-                            if (iframe) {
-                                iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
-                                iframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[0]}', '*');
+                            // Check if it's actually a play button (not pause)
+                            if (element.getAttribute('aria-label') && 
+                                element.getAttribute('aria-label').toLowerCase().includes('play')) {
+                                element.click();
+                                console.log('Clicked play button via selector: ' + playSelectors[i]);
+                                playButtonClicked = true;
+                                break;
                             }
                             
-                        } catch(e) {
-                            console.log('Muting error:', e);
-                        }
-                    }
-                    
-                    // Observer to watch for new media elements
-                    var observer = new MutationObserver(function(mutations) {
-                        mutations.forEach(function(mutation) {
-                            mutation.addedNodes.forEach(function(node) {
-                                if (node.nodeType === 1) { // Element node
-                                    if (node.tagName === 'VIDEO' || node.tagName === 'AUDIO') {
-                                        node.muted = true;
-                                        node.volume = 0;
-                                    }
-                                    // Check children
-                                    if (node.querySelectorAll) {
-                                        var mediaElements = node.querySelectorAll('video, audio');
-                                        mediaElements.forEach(function(media) {
-                                            media.muted = true;
-                                            media.volume = 0;
-                                        });
-                                    }
-                                }
-                            });
-                        });
-                    });
-                    
-                    // Start observing
-                    observer.observe(document.body, {
-                        childList: true,
-                        subtree: true
-                    });
-                    
-                    // Override Web Audio API
-                    try {
-                        if (window.AudioContext || window.webkitAudioContext) {
-                            var AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                            var originalCreateGain = AudioContextClass.prototype.createGain;
+                            // For video element, try to play directly
+                            if (element.tagName === 'VIDEO') {
+                                element.play().then(function() {
+                                    console.log('Video play() successful');
+                                    playButtonClicked = true;
+                                }).catch(function(e) {
+                                    console.log('Video play() failed:', e);
+                                });
+                            }
                             
-                            AudioContextClass.prototype.createGain = function() {
-                                var gainNode = originalCreateGain.call(this);
-                                gainNode.gain.value = 0;
-                                return gainNode;
-                            };
+                            // For buttons without specific aria-label
+                            if (element.classList.contains('ytp-play-button') || 
+                                element.classList.contains('ytp-large-play-button')) {
+                                element.click();
+                                console.log('Clicked play button via class');
+                                playButtonClicked = true;
+                                break;
+                            }
                         }
-                    } catch(e) {
-                        console.log('AudioContext override failed:', e);
+                        
+                        if (playButtonClicked) break;
                     }
                     
-                    // Apply muting immediately and repeatedly
-                    muteAllMedia();
+                    // Fallback: try to find and play any video element
+                    if (!playButtonClicked) {
+                        var videos = document.querySelectorAll('video');
+                        for (var k = 0; k < videos.length; k++) {
+                            videos[k].play().then(function() {
+                                console.log('Fallback video play successful');
+                            }).catch(function(e) {
+                                console.log('Fallback video play failed:', e);
+                            });
+                        }
+                    }
                     
-                    // Continuous muting
-                    setInterval(muteAllMedia, 500);
-                    
-                    // Mute on various events
-                    window.addEventListener('load', muteAllMedia);
-                    document.addEventListener('DOMContentLoaded', muteAllMedia);
-                    
-                    // Iframe load event
-                    document.getElementById('youtubePlayer').addEventListener('load', function() {
-                        setTimeout(muteAllMedia, 100);
-                    });
-                </script>
-            </body>
-            </html>
-        """.trimIndent()
+                } catch(e) {
+                    console.log('Click play button error:', e);
+                }
+            })();
+        """
+
+        binding.webView.evaluateJavascript(clickPlayScript, null)
     }
 
     private fun injectYouTubeMuteScript() {
@@ -546,13 +461,6 @@ class SurahActivity : BaseActivity() {
                                 btn.click();
                             }
                         });
-                        
-                        // Try to trigger autoplay if video is paused
-                        var playButton = document.querySelector('.ytp-play-button');
-                        if (playButton && playButton.getAttribute('aria-label') && 
-                            playButton.getAttribute('aria-label').includes('Play')) {
-                            playButton.click();
-                        }
                     }
                     
                     // Override createElement to mute new elements
@@ -572,10 +480,6 @@ class SurahActivity : BaseActivity() {
                             element.addEventListener('canplay', function() {
                                 this.muted = true;
                                 this.volume = 0;
-                                // Try to autoplay
-                                this.play().catch(function(e) {
-                                    console.log('Autoplay failed:', e);
-                                });
                             });
                         }
                         return element;
@@ -589,12 +493,6 @@ class SurahActivity : BaseActivity() {
                                     if (node.tagName === 'VIDEO' || node.tagName === 'AUDIO') {
                                         node.muted = true;
                                         node.volume = 0;
-                                        // Try to play
-                                        setTimeout(function() {
-                                            node.play().catch(function(e) {
-                                                console.log('Play failed:', e);
-                                            });
-                                        }, 100);
                                     }
                                     
                                     // Check children
@@ -603,11 +501,6 @@ class SurahActivity : BaseActivity() {
                                         mediaElements.forEach(function(media) {
                                             media.muted = true;
                                             media.volume = 0;
-                                            setTimeout(function() {
-                                                media.play().catch(function(e) {
-                                                    console.log('Child play failed:', e);
-                                                });
-                                            }, 100);
                                         });
                                     }
                                 }
@@ -630,10 +523,6 @@ class SurahActivity : BaseActivity() {
                     setTimeout(muteAllMedia, 500);
                     setTimeout(muteAllMedia, 1500);
                     setTimeout(muteAllMedia, 3000);
-                    setTimeout(muteAllMedia, 5000);
-                    
-                    // Continuous monitoring
-                    setInterval(muteAllMedia, 2000);
                     
                 } catch(e) {
                     console.log('YouTube mute script error:', e);
@@ -642,15 +531,6 @@ class SurahActivity : BaseActivity() {
         """
 
         binding.webView.evaluateJavascript(muteScript, null)
-
-        // Re-apply with additional delays for YouTube's async loading
-        binding.webView.postDelayed({
-            binding.webView.evaluateJavascript(muteScript, null)
-        }, 2000)
-
-        binding.webView.postDelayed({
-            binding.webView.evaluateJavascript(muteScript, null)
-        }, 5000)
     }
 
     override fun onResume() {
@@ -668,6 +548,8 @@ class SurahActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
+        // Clean up handler callbacks
+        delayHandler.removeCallbacksAndMessages(null)
         binding.webView.destroy()
         super.onDestroy()
     }
