@@ -28,6 +28,7 @@ import com.google.android.gms.ads.RequestConfiguration
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import io.reactivex.disposables.CompositeDisposable
 import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.koin.android.ext.android.inject
 
 open class BaseActivity : AppCompatActivity() {
@@ -157,13 +158,14 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    @Subscribe
-    fun onTimerEvent(event: TimerEvent) {
-        loadAdMobInterstitial()
-    }
-
     override fun onDestroy() {
         mDisposable.dispose()
         super.onDestroy()
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: TimerEvent) {
+        loadAdMobInterstitial()
     }
 }

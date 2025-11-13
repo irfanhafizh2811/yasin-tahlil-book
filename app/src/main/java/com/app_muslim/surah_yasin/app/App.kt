@@ -9,8 +9,8 @@ import androidx.multidex.MultiDexApplication
 import com.app_muslim.surah_yasin.R
 import com.app_muslim.surah_yasin.deps.libraries
 import com.app_muslim.surah_yasin.utils.TimerManager
-import com.google.common.eventbus.EventBus
 import com.google.firebase.FirebaseApp
+import org.greenrobot.eventbus.EventBus
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
