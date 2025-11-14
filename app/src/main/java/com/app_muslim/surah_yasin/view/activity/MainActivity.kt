@@ -112,7 +112,9 @@ class MainActivity : BaseActivity() {
                 moreDialog.apply {
                     setOnSelectedListener {
                         when (it) {
-                            MoreDialog.Menu.LANGUAGE -> showLanguageDialog()
+                            MoreDialog.Menu.LANGUAGE -> {
+
+                            }
                             MoreDialog.Menu.RATING_AND_REVIEW -> {
                                 openPlaystore(packageName)
                             }
@@ -144,12 +146,6 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         sync()
-    }
-
-    private fun showLanguageDialog() {
-        localeManager?.let {
-            LanguageDialog(this, languagePreference.language).show()
-        }
     }
 
     private fun shareMyDhikr() {

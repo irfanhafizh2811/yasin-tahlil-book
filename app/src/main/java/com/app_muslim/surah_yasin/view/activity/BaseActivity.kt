@@ -2,7 +2,6 @@ package com.app_muslim.surah_yasin.view.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.LocaleManager
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
@@ -46,16 +45,11 @@ open class BaseActivity : AppCompatActivity() {
     //---------------------- End Access Protected ----------------------
 
     //----------------------   Access Public   ----------------------
-    var localeManager: LocaleManager? = null
     //---------------------- End Access Public ----------------------
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= 33) {
-            localeManager =
-                getSystemService(Context.LOCALE_SERVICE) as LocaleManager
-        }
         requestConfiguration = when (isTestAdmob()) {
             true -> {
                 RequestConfiguration.Builder()
