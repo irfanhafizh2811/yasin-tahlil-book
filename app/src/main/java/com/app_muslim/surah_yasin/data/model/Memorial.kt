@@ -14,6 +14,7 @@ data class Memorial(
     val gender: Gender,
     val photoUrl: String? = null,
     val memorialMessage: String? = null,
+    val description: String? = memorialMessage, // Alias for repository compatibility
     val arabicMemorialMessage: String? = null,
     val privacy: PrivacyLevel = PrivacyLevel.PRIVATE,
     val createdBy: String, // User ID who created the memorial
@@ -21,6 +22,8 @@ data class Memorial(
     val createdAt: Date = Date(),
     val updatedAt: Date = Date(),
     val expirationDate: Date? = calculateExpirationDate(dateOfDeath), // 40-day Islamic tradition
+    val expiresAt: Date? = expirationDate, // Alias for repository compatibility
+    val duration: Int = 40, // Duration in days (Islamic tradition)
     val isExpired: Boolean = false,
     val totalPrayers: Int = 0,
     val totalParticipants: Int = 0,
@@ -192,4 +195,20 @@ fun Memorial.getAgeAtDeath(): Int? {
 fun Memorial.getFormattedName(): String {
     val baseName = if (arabicName.isNullOrBlank()) name else "$name ($arabicName)"
     return "$baseName ${gender.getPrayerSuffix()}"
+}
+
+// Extension function for Memorial companion object
+fun Memorial.Companion.fromFirestoreMap(data: Map<String, Any>): Memorial {
+    return Memorial(
+        id = data["id"] as? String ?: "",
+        name = data["name"] as? String ?: "",
+        arabicName = data["arabicName"] as? String,
+        dateOfDeath = data["dateOfDeath"] as? Date ?: Date(),
+        relationship = RelationshipType.valueOf(data["relationship"] as? String ?: "OTHER"),
+        gender = Gender.valueOf(data["gender"] as? String ?: "MALE"),
+        privacy = PrivacyLevel.valueOf(data["privacy"] as? String ?: "PRIVATE"),
+        createdBy = data["createdBy"] as? String ?: "",
+        createdAt = data["createdAt"] as? Date ?: Date(),
+        expirationDate = data["expirationDate"] as? Date
+    )
 }

@@ -4,8 +4,13 @@ import androidx.lifecycle.*
 import com.app_muslim.surah_yasin.data.database.entity.TasbeehEntity
 import com.app_muslim.surah_yasin.data.repository.TasbeehRepository
 import kotlinx.coroutines.launch
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DhikrViewModel(private val repository: TasbeehRepository) : ViewModel() {
+@HiltViewModel
+class DhikrViewModel @Inject constructor(
+    private val repository: TasbeehRepository
+) : ViewModel() {
 
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the

@@ -59,6 +59,14 @@ public class CorePreference {
         sharedPreference.edit().clear().commit();
     }
 
+    public void setFloat(String key, float value) {
+        sharedPreference.edit().putFloat(key, value).apply();
+    }
+
+    public float getFloat(String key, float defValue) {
+        return sharedPreference.getFloat(key, defValue);
+    }
+
     public boolean hasKey(String key) {
         return sharedPreference.contains(key);
     }

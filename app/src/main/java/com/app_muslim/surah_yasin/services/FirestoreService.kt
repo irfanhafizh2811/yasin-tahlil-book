@@ -7,8 +7,14 @@ import com.google.firebase.firestore.ktx.snapshots
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
+import com.app_muslim.surah_yasin.data.model.UserProfile
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FirestoreService(private val firestore: FirebaseFirestore) {
+@Singleton
+class FirestoreService @Inject constructor(
+    private val firestore: FirebaseFirestore
+) {
     
     companion object {
         private const val USERS_COLLECTION = "users"
@@ -18,7 +24,19 @@ class FirestoreService(private val firestore: FirebaseFirestore) {
         private const val USER_PROFILES_COLLECTION = "user_profiles"
     }
     
-    // User Profile Operations
+    // User Profile Operations (with UserProfile object support)
+    suspend fun createUserProfile(userProfile: UserProfile): Result<Unit> {
+        return try {
+            firestore.collection(USER_PROFILES_COLLECTION)
+                .document(userProfile.userId)
+                .set(userProfile.toFirestoreMap())
+                .await()
+            Result.success(Unit)
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
+    
     suspend fun createUserProfile(userId: String, profile: Map<String, Any>): Result<Unit> {
         return try {
             firestore.collection(USER_PROFILES_COLLECTION)

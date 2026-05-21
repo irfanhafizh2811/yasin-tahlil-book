@@ -10,14 +10,15 @@ import com.app_muslim.surah_yasin.services.FirestoreService
 import com.app_muslim.surah_yasin.data.preference.AuthPreference
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AuthViewModel : ViewModel(), KoinComponent {
-    
-    private val authService: FirebaseAuthService by inject()
-    private val firestoreService: FirestoreService by inject()
-    private val authPreference: AuthPreference by inject()
+@HiltViewModel
+class AuthViewModel @Inject constructor(
+    private val authService: FirebaseAuthService,
+    private val firestoreService: FirestoreService,
+    private val authPreference: AuthPreference
+) : ViewModel() {
     
     private val _authState = MutableLiveData<AuthState>(AuthState.Idle)
     val authState: LiveData<AuthState> = _authState
@@ -70,7 +71,7 @@ class AuthViewModel : ViewModel(), KoinComponent {
                 result.fold(
                     onSuccess = { user ->
                         // Update display name
-                        authService.updateUserProfile(displayName, null)
+                        authService.updateProfile(displayName, null)
                         _authState.value = AuthState.Success(user)
                     },
                     onFailure = { exception ->
@@ -328,21 +329,4 @@ class AuthViewModel : ViewModel(), KoinComponent {
     fun needsCulturalSetup(): Boolean {
         return authPreference.needsCulturalSetup()
     }
-}
-
-// Additional state classes for phone verification and password reset
-sealed class PhoneVerificationState {
-    object Idle : PhoneVerificationState()
-    object CodeSending : PhoneVerificationState()
-    data class CodeSent(val verificationId: String) : PhoneVerificationState()
-    object Verifying : PhoneVerificationState()
-    object Success : PhoneVerificationState()
-    data class Error(val message: String) : PhoneVerificationState()
-}
-
-sealed class PasswordResetState {
-    object Idle : PasswordResetState()
-    object Sending : PasswordResetState()
-    object Sent : PasswordResetState()
-    data class Error(val message: String) : PasswordResetState()
 }

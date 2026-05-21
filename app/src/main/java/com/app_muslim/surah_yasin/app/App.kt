@@ -8,15 +8,16 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import android.util.Log
 import com.app_muslim.surah_yasin.R
-import com.app_muslim.surah_yasin.deps.libraries
 import com.app_muslim.surah_yasin.utils.TimerManager
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import org.greenrobot.eventbus.EventBus
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class App : MultiDexApplication() {
 
     lateinit var eventBus: EventBus
@@ -36,14 +37,26 @@ class App : MultiDexApplication() {
         // Initialize Firebase App and App Check
         FirebaseApp.initializeApp(this@App)
         initializeFirebaseAppCheck()
+        initializeFirestore()
         
-        startKoin {
-            modules(libraries)
-            androidContext(this@App)
-        }
         createNotificationChannel()
         eventBus = EventBus()
         timerManager = TimerManager(eventBus)
+    }
+    
+    private fun initializeFirestore() {
+        try {
+            // Configure Firestore offline persistence for modular architecture
+            val settings = FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
+                .build()
+            
+            FirebaseFirestore.getInstance().firestoreSettings = settings
+            Log.d("TahlilApp", "Firestore offline persistence initialized for modular architecture")
+        } catch (e: Exception) {
+            Log.e("TahlilApp", "Failed to initialize Firestore settings", e)
+        }
     }
 
     private fun initializeFirebaseAppCheck() {

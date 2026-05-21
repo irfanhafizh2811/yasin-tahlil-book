@@ -8,8 +8,13 @@ import com.app_muslim.surah_yasin.data.model.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FirebaseAuthService(private val auth: FirebaseAuth) {
+@Singleton
+class FirebaseAuthService @Inject constructor(
+    private val auth: FirebaseAuth
+) {
     
     val currentUser: FirebaseUser?
         get() = auth.currentUser
@@ -74,6 +79,47 @@ class FirebaseAuthService(private val auth: FirebaseAuth) {
         } catch (exception: Exception) {
             Result.failure(exception)
         }
+    }
+    
+    // Method expected by AuthViewModel
+    suspend fun signInWithEmailAndPassword(email: String, password: String): Result<FirebaseUser> {
+        return signInWithEmail(email, password)
+    }
+    
+    // Method expected by AuthViewModel  
+    suspend fun createUserWithEmailAndPassword(email: String, password: String): Result<FirebaseUser> {
+        return try {
+            val result = auth.createUserWithEmailAndPassword(email, password).await()
+            Result.success(result.user!!)
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
+    
+    // Method expected by AuthViewModel
+    suspend fun startPhoneNumberVerification(phoneNumber: String): Result<String> {
+        return sendPhoneVerification(phoneNumber)
+    }
+    
+    // Method expected by AuthViewModel
+    suspend fun verifyPhoneNumberWithCode(verificationId: String, smsCode: String): Result<FirebaseUser> {
+        return try {
+            // This would use PhoneAuthProvider.getCredential(verificationId, smsCode)
+            // For now, return failure as it needs more implementation
+            Result.failure(Exception("Phone verification not fully implemented"))
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
+    
+    // Method expected by AuthViewModel
+    suspend fun sendPasswordResetEmail(email: String): Result<Unit> {
+        return resetPassword(email)
+    }
+    
+    // Method expected by AuthViewModel
+    fun getCurrentUser(): FirebaseUser? {
+        return currentUser
     }
     
     // Reset Password

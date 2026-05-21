@@ -18,5 +18,22 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name='Yasin'
+rootProject.name='Tahlil'
 include ':app'
+
+// Core modules
+include ':core:core-ui'
+include ':core:core-data'
+include ':core:core-firebase'
+include ':core:core-common'
+
+// Feature modules
+include ':feature:feature-tasbeeh'
+include ':feature:feature-memorial'
+include ':feature:feature-community'
+include ':feature:feature-auth'
+
+// Shared modules
+include ':shared:shared-preferences'
+include ':shared:shared-analytics'
+include ':shared:shared-resources'

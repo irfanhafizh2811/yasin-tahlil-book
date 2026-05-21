@@ -8,37 +8,57 @@ import com.app_muslim.surah_yasin.services.FirestoreService
 import com.app_muslim.surah_yasin.services.StorageService
 import com.app_muslim.surah_yasin.services.MessagingService
 import com.app_muslim.surah_yasin.data.preference.AuthPreference
+import com.app_muslim.surah_yasin.data.preference.CorePreference
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.messaging.FirebaseMessaging
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-val firebaseModule = module {
+@Module
+@InstallIn(SingletonComponent::class)
+object FirebaseModule {
     
     // Existing Remote Config Services
-    single { CoreRemoteConfig() }
-    single { InterstitialRemoteConfig(get<CoreRemoteConfig>().remoteConfig) }
-    single { SourceAppsRemoteConfig(get<CoreRemoteConfig>().remoteConfig) }
+    @Provides
+    @Singleton
+    fun provideCoreRemoteConfig(): CoreRemoteConfig = CoreRemoteConfig()
     
-    // Complete Firebase Ecosystem (2026 Latest)
+    @Provides
+    @Singleton
+    fun provideInterstitialRemoteConfig(coreRemoteConfig: CoreRemoteConfig): InterstitialRemoteConfig {
+        return InterstitialRemoteConfig(coreRemoteConfig.remoteConfig)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideSourceAppsRemoteConfig(coreRemoteConfig: CoreRemoteConfig): SourceAppsRemoteConfig {
+        return SourceAppsRemoteConfig(coreRemoteConfig.remoteConfig)
+    }
+    
     // Firebase SDK Instances
-    single { FirebaseAuth.getInstance() }
-    single { FirebaseFirestore.getInstance() }
-    single { FirebaseStorage.getInstance() }
-    single { FirebaseFunctions.getInstance() }
-    single { FirebaseMessaging.getInstance() }
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
     
-    // Firebase Services
-    single { FirebaseAuthService(get()) }
-    single { FirestoreService(get()) }
-    single { StorageService(get()) }
-    single { MessagingService(get()) }
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
     
-    // Authentication Preferences
-    single { AuthPreference(get()) }
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
     
-    // Note: Add Repository Layer when you create them:
-    // single<MemorialRepository> { MemorialRepositoryImpl(get(), get()) }
+    @Provides
+    @Singleton
+    fun provideFirebaseFunctions(): FirebaseFunctions = FirebaseFunctions.getInstance()
+    
+    @Provides
+    @Singleton
+    fun provideFirebaseMessaging(): FirebaseMessaging = FirebaseMessaging.getInstance()
 }

@@ -6,8 +6,15 @@ import com.app_muslim.surah_yasin.data.preference.Language
 import com.app_muslim.surah_yasin.data.preference.LanguagePreference
 import com.app_muslim.surah_yasin.extension.data.asLiveData
 import kotlinx.coroutines.launch
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import com.app_muslim.surah_yasin.coroutine.DispatcherProvider
 
-class LanguageViewModel(private val languagePreference: LanguagePreference) : BaseViewModel() {
+@HiltViewModel
+class LanguageViewModel @Inject constructor(
+    private val languagePreference: LanguagePreference,
+    dispatcher: DispatcherProvider
+) : BaseViewModel(dispatcher) {
 
     private val _language = MutableLiveData<Language>()
     val language = _language.asLiveData()
