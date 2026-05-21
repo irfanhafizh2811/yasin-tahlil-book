@@ -158,13 +158,49 @@ dependencies {
 
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
 
-    // Import the BoM for the Firebase platform
+    // Import the BoM for the Firebase platform (Latest 2026)
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
-    implementation("com.google.firebase:firebase-config")
-    implementation("com.google.firebase:firebase-crashlytics")
-    implementation("com.google.firebase:firebase-database")
-    implementation("com.google.android.play:review-ktx:2.0.2")
+    
+    // Complete Firebase Ecosystem Integration
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-config")
+    
+    // Firebase Authentication (Multi-provider)
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:21.2.0") // Google Sign-In
+    
+    // Cloud Firestore (NoSQL Database)
+    implementation("com.google.firebase:firebase-firestore")
+    
+    // Cloud Storage for Firebase
+    implementation("com.google.firebase:firebase-storage")
+    
+    // Cloud Functions for Firebase
+    implementation("com.google.firebase:firebase-functions")
+    
+    // Firebase Cloud Messaging
+    implementation("com.google.firebase:firebase-messaging")
+    
+    // Firebase Performance Monitoring
+    implementation("com.google.firebase:firebase-perf")
+    
+    // Firebase App Check (Anti-abuse)
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
+    
+    // Firebase In-App Messaging
+    implementation("com.google.firebase:firebase-inappmessaging-display")
+    
+    // Firebase Dynamic Links (for memorial sharing)
+    implementation("com.google.firebase:firebase-dynamic-links")
+    
+    // Firebase ML Kit (for content moderation - optional)
+    implementation("com.google.mlkit:text-recognition:16.0.0")
+    
+    // Remove deprecated Realtime Database, replace with Firestore
+    // implementation("com.google.firebase:firebase-database") // REMOVED - Using Firestore instead
+    
+    implementation("com.google.android.play:review-ktx:2.0.2")
 
     //Expandable Layout
     implementation "com.github.skydoves:expandablelayout:1.0.7"

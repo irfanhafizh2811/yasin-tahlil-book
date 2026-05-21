@@ -1,0 +1,58 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection - users can only read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Memorials collection - privacy-controlled access
+    match /memorials/{memorialId} {
+      allow read: if request.auth != null && (
+        // Memorial creator can always access
+        resource.data.createdBy == request.auth.uid ||
+        // Private memorials only for creator
+        (resource.data.privacy == 'private' && resource.data.createdBy == request.auth.uid) ||
+        // Family memorials for family members
+        (resource.data.privacy == 'family' && request.auth.uid in resource.data.familyMembers) ||
+        // Community memorials for authenticated users
+        resource.data.privacy == 'community'
+      );
+      
+      allow create: if request.auth != null && 
+        request.resource.data.keys().hasAll(['name', 'createdBy', 'privacy', 'createdAt']) &&
+        request.resource.data.createdBy == request.auth.uid;
+      
+      allow update: if request.auth != null && 
+        resource.data.createdBy == request.auth.uid &&
+        request.resource.data.createdBy == resource.data.createdBy;
+      
+      allow delete: if request.auth != null && 
+        resource.data.createdBy == request.auth.uid;
+    }
+    
+    // Prayer sessions - linked to memorials with same privacy rules
+    match /prayer_sessions/{sessionId} {
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid ||
+        // Can read if can read the associated memorial
+        exists(/databases/$(database)/documents/memorials/$(resource.data.memorialId))
+      );
+      
+      allow create, update: if request.auth != null && 
+        request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Global statistics - read-only for authenticated users
+    match /global_stats/{statId} {
+      allow read: if request.auth != null;
+      allow write: if false; // Only Cloud Functions can update stats
+    }
+    
+    // User profiles - users can only access their own
+    match /user_profiles/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

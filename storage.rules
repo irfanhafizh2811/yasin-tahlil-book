@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Memorial photos - privacy controlled
+    match /memorials/{memorialId}/{fileName} {
+      // Allow read based on memorial privacy settings
+      allow read: if request.auth != null && (
+        // Check if user has access to the memorial document
+        firestore.exists(/databases/(default)/documents/memorials/$(memorialId)) &&
+        firestore.get(/databases/(default)/documents/memorials/$(memorialId)).data.privacy == 'community'
+      ) || (
+        firestore.exists(/databases/(default)/documents/memorials/$(memorialId)) &&
+        firestore.get(/databases/(default)/documents/memorials/$(memorialId)).data.createdBy == request.auth.uid
+      ) || (
+        firestore.exists(/databases/(default)/documents/memorials/$(memorialId)) &&
+        firestore.get(/databases/(default)/documents/memorials/$(memorialId)).data.privacy == 'family' &&
+        request.auth.uid in firestore.get(/databases/(default)/documents/memorials/$(memorialId)).data.familyMembers
+      );
+      
+      // Allow upload only by memorial creator
+      allow write: if request.auth != null && 
+        firestore.exists(/databases/(default)/documents/memorials/$(memorialId)) &&
+        firestore.get(/databases/(default)/documents/memorials/$(memorialId)).data.createdBy == request.auth.uid &&
+        // File size limit (5MB)
+        request.resource.size < 5 * 1024 * 1024 &&
+        // Only image files
+        request.resource.contentType.matches('image/.*');
+    }
+    
+    // User profile photos
+    match /users/{userId}/profile/{fileName} {
+      allow read, write: if request.auth != null && request.auth.uid == userId &&
+        request.resource.size < 2 * 1024 * 1024 && // 2MB limit
+        request.resource.contentType.matches('image/.*');
+    }
+  }
+}
