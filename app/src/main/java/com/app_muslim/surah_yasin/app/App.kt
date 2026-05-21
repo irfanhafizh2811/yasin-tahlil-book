@@ -6,10 +6,13 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
+import android.util.Log
 import com.app_muslim.surah_yasin.R
 import com.app_muslim.surah_yasin.deps.libraries
 import com.app_muslim.surah_yasin.utils.TimerManager
 import com.google.firebase.FirebaseApp
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import org.greenrobot.eventbus.EventBus
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -29,7 +32,11 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        
+        // Initialize Firebase App and App Check
         FirebaseApp.initializeApp(this@App)
+        initializeFirebaseAppCheck()
+        
         startKoin {
             modules(libraries)
             androidContext(this@App)
@@ -37,6 +44,18 @@ class App : MultiDexApplication() {
         createNotificationChannel()
         eventBus = EventBus()
         timerManager = TimerManager(eventBus)
+    }
+
+    private fun initializeFirebaseAppCheck() {
+        try {
+            // Initialize Firebase App Check with Play Integrity for anti-abuse protection
+            FirebaseAppCheck.getInstance().installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance()
+            )
+            Log.d("TahlilApp", "Firebase App Check initialized successfully for Tahlil security")
+        } catch (e: Exception) {
+            Log.e("TahlilApp", "Failed to initialize Firebase App Check", e)
+        }
     }
 
     private fun createNotificationChannel() {

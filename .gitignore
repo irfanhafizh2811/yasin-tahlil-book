@@ -1,9 +1,70 @@
+# 🔥 Tahlil Project .gitignore
+
+# ===== Node.js / Firebase Functions =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Temporary folders
+tmp/
+temp/
+
+# ===== Firebase =====
+# Firebase cache
+.firebase/
+*-debug.log
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Firebase Functions build output
+functions/lib/
+functions/dist/
+
+# Firebase emulator data
+firebase-export-*/
+firestore-export-*/
+
+# ===== Android =====
 .DS_Store
 .externalNativeBuild
 
 # Built application files
 *.apk
 *.ap_
+*.aab
 
 # Files for the ART/Dalvik VM
 *.dex
@@ -15,7 +76,6 @@
 bin/
 gen/
 out/
-
 
 # Gradle files
 .gradle/
@@ -36,6 +96,49 @@ proguard/
 # Android Studio captures folder
 captures/
 
-# Intellij
+# Keystore files (IMPORTANT: Keep these secret!)
+*.jks
+*.keystore
+debug-key.jks
+release-key.jks
+
+# External native build folder
+.externalNativeBuild
+.cxx/
+
+# IntelliJ / Android Studio
 *.iml
-.idea
+.idea/
+*.ipr
+*.iws
+
+# ===== macOS =====
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ===== Project Specific =====
+# Secrets and credentials
+secrets/
+keys/
+credentials/
+*.pem
+*.key
+*.crt
+*.p12
+
+# Backup files
+*.orig
+*.backup
+*.bak
+*.swp
+*.swo
+
+# Cache directories
+.cache/
+cache/
+
+# Test results
+test-results/
+test-output/
