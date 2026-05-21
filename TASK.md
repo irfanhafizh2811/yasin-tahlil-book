@@ -1,14 +1,17 @@
 # 📋 Tahlil Development Task Checklist
 
 Tracks progress across all implementation phases.
-Source-of-truth design docs: [CLAUDE.md](CLAUDE.md) · [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md) · [FIREBASE_SETUP_GUIDE.md](DEVELOPMENT/FIREBASE_SETUP_GUIDE.md) · [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [SPRINT_TASK_BREAKDOWN.md](DEVELOPMENT/SPRINT_TASK_BREAKDOWN.md)
+Source-of-truth design docs: [CLAUDE.md](CLAUDE.md) · [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md) · [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md) · [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md) · [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [SPRINT_TASK_BREAKDOWN.md](DEVELOPMENT/SPRINT_TASK_BREAKDOWN.md)
 
 **Product Vision:** Transform existing Android Tasbeeh/Yasin app into "Tahlil" - a global Islamic memorial prayer platform where Muslims worldwide create memorials for deceased loved ones and perform collective prayers (Tahlil, Yasin, Fatihah) following authentic Islamic traditions.
 
-**Current Architecture:** 
-- **Existing**: Android Native (Kotlin + Room + Koin) with 240M+ users
-- **Adding**: Complete Firebase Ecosystem for memorial features
-- **Strategy**: Hybrid approach preserving existing functionality
+**Modern Architecture:** 
+- **Foundation**: Single Activity + Jetpack Compose + Navigation Component
+- **DI Framework**: Hilt 2.50 (replacing Koin 3.4.3)
+- **Modular Design**: :app, :core, :feature, :shared modules
+- **UI/UX**: Material Design 3 + Bottom Navigation
+- **Data Layer**: Room + Firestore hybrid with offline-first approach
+- **Strategy**: Preserve 240M+ users while modernizing architecture
 
 Monetization via in-app credits, Google auth, free vs paid tiers, backed by Firebase ecosystem. Creator Hub for sharing memorial presets.
 
@@ -42,6 +45,10 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 - [x] Plan complete Firebase ecosystem integration
 - [x] Create modern architecture specifications with latest 2026 technologies
 - [x] Design memorial prayer system with 40-day Islamic traditions
+- [x] Update to Single Activity + Jetpack Compose architecture
+- [x] Create modular design with :core, :feature, :shared modules
+- [x] Plan Hilt DI migration from Koin
+- [x] Design Navigation Component with Bottom Navigation
 
 ### P0.C — Documentation & Planning
 - [x] Complete 8 stakeholder meetings with detailed outcomes
@@ -97,61 +104,82 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 
 ---
 
-## Phase 2 — Authentication & User Management
+## Phase 2 — Modern Architecture Migration & Authentication
 
-**Objective:** Implement multi-provider authentication with Islamic cultural preferences and user profile management.
-**Knowledge anchors:** [FIREBASE_SETUP_GUIDE.md](DEVELOPMENT/FIREBASE_SETUP_GUIDE.md) · [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md)
+**Objective:** Migrate to Single Activity + Jetpack Compose architecture while implementing multi-provider authentication with Islamic cultural preferences.
+**Knowledge anchors:** [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md) · [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md)
 
-### P2.A — Authentication Implementation ✅ COMPLETED
-- [x] Create AuthActivity with Google, email, phone, and anonymous login
-- [x] Implement Islamic cultural setup wizard (language, region, traditions)
-- [x] Design authentication UI with Islamic themes
-- [x] Add multi-language support with RTL layout
-- [x] Integrate with existing user preferences system
+### P2.A — Modern Architecture Implementation **[PRIORITY 1]**
+- [ ] Create Single Activity (MainActivity.kt) with Navigation Component
+- [ ] Implement Bottom Navigation with 4 tabs (Tasbeeh, Memorial, Community, Profile)
+- [ ] Setup Jetpack Compose BOM 2024.02.00 and Material Design 3
+- [ ] Create modular project structure (:app, :core, :feature, :shared)
+- [ ] Migrate from Koin to Hilt 2.50 dependency injection **[BLOCKING]**
+- [ ] Setup Navigation Component with type-safe navigation
+- [ ] Create :core-ui module with reusable Compose components
+- [ ] Implement Material 3 theme with Islamic design elements
 
-### P2.B — User Profile Management
+### P2.B — Authentication Implementation (Compose) **[PRIORITY 2]**
+- [ ] Create :feature-auth module with Compose screens
+- [ ] Implement LoginScreen and RegisterScreen with Material 3
+- [ ] Add multi-provider authentication (Google, email, phone, anonymous)
+- [ ] Create AuthViewModel with Hilt DI and StateFlow **[DEPENDS ON P2.A]**
+- [ ] Implement Islamic cultural setup wizard in Compose
+- [ ] Add multi-language support with Compose RTL layout
+- [ ] Integrate authentication state with Navigation Component
+
+### P2.C — User Profile Management (Compose)
+- [ ] Create ProfileScreen in Compose with Material 3 components
 - [ ] Build user profile creation with Islamic preferences
-- [ ] Implement cultural region and prayer tradition selection
-- [ ] Add profile photo management with Islamic guidelines
-- [ ] Create privacy settings respecting Islamic family values
-- [ ] Sync user preferences with existing Room database
+- [ ] Implement cultural region and prayer tradition selection with Compose UI
+- [ ] Add profile photo management with CameraX and Compose integration
+- [ ] Create privacy settings UI respecting Islamic family values
+- [ ] Sync user preferences between Room database and Firestore
+- [ ] Setup preference repository with Repository pattern
 
-### P2.C — Session Management
-- [ ] Implement secure session persistence
-- [ ] Add automatic token refresh handling
-- [ ] Create guest mode with feature limitations
-- [ ] Build sign-out flow with state cleanup
-- [ ] Add account verification and security features
+### P2.D — Session Management (Modular)
+- [ ] Implement secure session persistence across modules
+- [ ] Add automatic Firebase token refresh in :core-firebase
+- [ ] Create guest mode with Navigation Component restrictions
+- [ ] Build sign-out flow with proper Compose state cleanup
+- [ ] Add account verification with Firebase Auth
+- [ ] Setup auth state management with Compose and Navigation
 
-**Exit criteria:** Users can authenticate through multiple providers, set Islamic cultural preferences, manage profiles, and maintain secure sessions.
+**Exit criteria:** Single Activity architecture implemented, Jetpack Compose migration complete, modular structure working, users can authenticate through multiple providers, set Islamic cultural preferences, manage profiles, and maintain secure sessions.
 
 ---
 
-## Phase 3 — Memorial Creation & Management
+## Phase 3 — Memorial Creation & Management (Modular Compose)
 
-**Objective:** Core memorial creation functionality with photo management, privacy controls, and Islamic traditions.
-**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md)
+**Objective:** Core memorial creation functionality with Compose UI, photo management, privacy controls, and Islamic traditions.
+**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
 
-### P3.A — Memorial Creation UI
-- [ ] Build MemorialActivity with Islamic design
-- [ ] Create memorial information form (name, dates, relationship)
-- [ ] Add Hijri calendar support for Islamic dates
-- [ ] Implement memorial message with Arabic text support
-- [ ] Design privacy level selection (private, family, community)
+### P3.A — Memorial Creation UI (Compose) **[PRIORITY 3]**
+- [ ] Create :feature-memorial module with Compose screens **[DEPENDS ON P2.A]**
+- [ ] Build CreateMemorialScreen with Material 3 components
+- [ ] Create memorial information form with Compose UI
+- [ ] Add Hijri calendar support with Compose date pickers
+- [ ] Implement memorial message with Arabic text and RTL support
+- [ ] Design privacy level selection with Compose radio buttons
+- [ ] Setup MemorialViewModel with Hilt DI and StateFlow **[DEPENDS ON P2.A]**
 
-### P3.B — Photo Management
-- [ ] Implement photo capture and gallery selection
-- [ ] Add photo cropping to memorial aspect ratio
-- [ ] Create Islamic frame overlay system
-- [ ] Build secure photo upload to Firebase Storage
-- [ ] Add photo optimization and compression
+### P3.B — Photo Management (Compose + CameraX)
+- [ ] Implement photo capture with CameraX and Compose integration
+- [ ] Add gallery selection with modern Android photo picker
+- [ ] Create photo cropping with Compose UI components
+- [ ] Build Islamic frame overlay system with Compose Canvas
+- [ ] Implement secure photo upload to Firebase Storage in :core-firebase
+- [ ] Add image optimization with Coil Compose
+- [ ] Create photo management repository in :core-data
 
-### P3.C — Memorial Management
-- [ ] Create memorial list view with privacy filtering
-- [ ] Implement memorial editing and updating
-- [ ] Add memorial deletion with confirmations
-- [ ] Build memorial sharing with privacy controls
-- [ ] Create memorial search and filtering
+### P3.C — Memorial Management (Compose Lists)
+- [ ] Create MemorialListScreen with Compose LazyColumn
+- [ ] Implement memorial editing with Navigation Component
+- [ ] Add memorial deletion with Compose AlertDialog confirmations
+- [ ] Build memorial sharing with Android Sharing Intent
+- [ ] Create memorial search with Compose search bar
+- [ ] Add filtering with Compose filter chips
+- [ ] Setup memorial repository with offline-first approach
 
 ### P3.D — Islamic Traditions Integration
 - [ ] Implement 40-day auto-expiration system
@@ -164,68 +192,78 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 
 ---
 
-## Phase 4 — Prayer Counter & Spiritual Features
+## Phase 4 — Prayer Counter & Spiritual Features (Compose Migration)
 
-**Objective:** Implement traditional Islamic prayer counter (Tahlil) with memorial prayer sessions and community features.
-**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · existing TasbeehActivity
+**Objective:** Migrate existing prayer counter to Compose and implement memorial prayer sessions with community features.
+**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
 
-### P4.A — Enhanced Prayer Counter
-- [ ] Upgrade existing TasbeehActivity for memorial prayers
-- [ ] Add memorial-specific prayer types (Tahlil, Yasin, Fatihah)
-- [ ] Implement haptic feedback and visual progress
-- [ ] Create prayer session tracking and history
-- [ ] Add offline prayer counting with sync
+### P4.A — Enhanced Prayer Counter (Compose Migration) **[PRIORITY 4]**
+- [ ] Create :feature-tasbeeh module from existing TasbeehActivity **[DEPENDS ON P2.A]**
+- [ ] Migrate TasbeehScreen to Jetpack Compose **[HIGH COMPLEXITY]**
+- [ ] Add memorial-specific prayer types (Tahlil, Yasin, Fatihah) in Compose UI
+- [ ] Implement haptic feedback with Android APIs and Compose animations
+- [ ] Create prayer session tracking with Room + Firestore sync
+- [ ] Add offline prayer counting with WorkManager sync
+- [ ] Setup TasbeehViewModel with Hilt DI **[DEPENDS ON P2.A]**
 
-### P4.B — Prayer Text Display
-- [ ] Display Arabic prayer text with proper RTL formatting
-- [ ] Add transliteration for pronunciation guidance
-- [ ] Show translation in user's selected language
-- [ ] Implement text scaling for accessibility
-- [ ] Use Islamic fonts and typography
+### P4.B — Prayer Text Display (Compose Typography)
+- [ ] Create Arabic text components in :core-ui with Compose Text
+- [ ] Implement proper RTL formatting with Compose BiDi support
+- [ ] Add transliteration with custom Compose text components
+- [ ] Show translation in user's selected language with string resources
+- [ ] Implement text scaling with Compose accessibility features
+- [ ] Use Islamic fonts (Noto Naskh Arabic, Amiri) in :shared-resources
+- [ ] Create reusable Islamic typography components
 
-### P4.C — Memorial Prayer Sessions
-- [ ] Connect prayer counter to specific memorials
-- [ ] Track prayer sessions per memorial
-- [ ] Implement prayer completion celebrations
-- [ ] Add prayer statistics and achievements
-- [ ] Create prayer reminders and notifications
+### P4.C — Memorial Prayer Sessions (Firebase Integration)
+- [ ] Connect Compose prayer counter to specific memorials in Firestore
+- [ ] Track prayer sessions per memorial with Repository pattern
+- [ ] Implement prayer completion celebrations with Compose animations
+- [ ] Add prayer statistics and achievements with StateFlow
+- [ ] Create prayer reminders with WorkManager and FCM
+- [ ] Setup memorial prayer repository in :core-data
 
-### P4.D — Community Prayer Features
-- [ ] Display global prayer participation statistics
-- [ ] Show real-time community prayer count
-- [ ] Create regional prayer leaderboards
-- [ ] Add family memorial sharing
-- [ ] Implement prayer milestone celebrations
+### P4.D — Community Prayer Features (Real-time Compose)
+- [ ] Display global prayer participation with Firestore real-time listeners
+- [ ] Show real-time community prayer count in Compose UI
+- [ ] Create regional prayer leaderboards with Compose LazyColumn
+- [ ] Add family memorial sharing through Navigation Component
+- [ ] Implement prayer milestone celebrations with Compose animations
+- [ ] Setup community data flow in :feature-community module
 
 **Exit criteria:** Enhanced prayer counter works with memorials, community features functional, Islamic prayer traditions properly implemented.
 
 ---
 
-## Phase 5 — Community Features & Global Statistics
+## Phase 5 — Community Features & Global Statistics (Compose + Firebase)
 
-**Objective:** Connect Muslims worldwide through shared memorial prayers and community engagement.
-**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [FIREBASE_SETUP_GUIDE.md](DEVELOPMENT/FIREBASE_SETUP_GUIDE.md)
+**Objective:** Connect Muslims worldwide through shared memorial prayers and community engagement using Compose UI and Firebase real-time features.
+**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md)
 
-### P5.A — Global Prayer Statistics
-- [ ] Implement real-time global prayer count display
-- [ ] Create world map visualization of participation
-- [ ] Add country and regional statistics
-- [ ] Build daily/weekly prayer analytics
-- [ ] Design community milestone celebrations
+### P5.A — Global Prayer Statistics (Compose + Firestore) **[PRIORITY 5]**
+- [ ] Create :feature-community module with CommunityScreen **[DEPENDS ON P2.A]**
+- [ ] Implement real-time global prayer count with Firestore listeners **[COMPLEX FIREBASE]**
+- [ ] Create world map visualization with Google Maps Compose **[HIGH COMPLEXITY]**
+- [ ] Add country and regional statistics with Compose charts
+- [ ] Build daily/weekly prayer analytics with Cloud Functions
+- [ ] Design community milestone celebrations with Compose animations
+- [ ] Setup real-time data flow with StateFlow and Compose State
 
-### P5.B — Memorial Sharing System
-- [ ] Create family invitation system for memorials
-- [ ] Implement social media sharing with Islamic values
-- [ ] Add memorial access permission management
-- [ ] Build sharing analytics for memorial creators
-- [ ] Create secure sharing links with expiration
+### P5.B — Memorial Sharing System (Compose + Firebase)
+- [ ] Create family invitation system with Compose UI forms
+- [ ] Implement social media sharing with Android Sharing Intent
+- [ ] Add memorial access permission management in Firestore
+- [ ] Build sharing analytics with Firebase Analytics
+- [ ] Create secure sharing links with Firebase Dynamic Links
+- [ ] Setup sharing repository in :core-firebase module
 
-### P5.C — Community Engagement
-- [ ] Build memorial discovery for community prayers
-- [ ] Create prayer participation tracking
-- [ ] Add community prayer leaderboards
-- [ ] Implement regional Islamic communities
-- [ ] Design respectful memorial interactions
+### P5.C — Community Engagement (Compose + Modular)
+- [ ] Build memorial discovery with Compose search and filtering
+- [ ] Create prayer participation tracking with Repository pattern
+- [ ] Add community prayer leaderboards with Compose lists
+- [ ] Implement regional Islamic communities in :feature-community
+- [ ] Design respectful memorial interactions with Material 3 components
+- [ ] Setup community engagement analytics
 
 **Exit criteria:** Global community features functional, memorial sharing system working, prayer statistics displaying real-time data.
 
@@ -236,12 +274,14 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 **Objective:** Optimize performance, validate Islamic cultural authenticity, and ensure accessibility compliance.
 **Knowledge anchors:** [CLAUDE.md](CLAUDE.md) · [DESIGN/CULTURAL_VALIDATION.md](DESIGN/CULTURAL_VALIDATION.md)
 
-### P6.A — Performance Optimization
-- [ ] Optimize prayer counter response time (<50ms)
-- [ ] Improve app startup to <3 seconds
-- [ ] Optimize photo upload performance
-- [ ] Implement efficient data caching
-- [ ] Add offline functionality testing
+### P6.A — Performance Optimization (Compose + Modular) **[PRIORITY 6 - CRITICAL]**
+- [ ] Optimize Compose prayer counter response time (<50ms) **[SUCCESS METRIC]**
+- [ ] Improve Single Activity app startup to <3 seconds **[SUCCESS METRIC]**
+- [ ] Optimize photo upload performance with Coil and Firebase Storage
+- [ ] Implement efficient data caching with Room + Firestore sync
+- [ ] Add offline functionality testing across all modules **[DEPENDS ON ALL FEATURES]**
+- [ ] Setup Compose performance monitoring and optimization **[PRODUCTION READY]**
+- [ ] Implement Baseline Profiles for startup optimization **[PRODUCTION READY]**
 
 ### P6.B — Cultural Validation
 - [ ] Validate Arabic text with Islamic scholars
@@ -257,12 +297,14 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 - [ ] Ensure RTL language support quality
 - [ ] Validate multi-language functionality
 
-### P6.D — Testing & Quality Assurance
-- [ ] Complete unit test coverage >90%
-- [ ] Run integration tests across all features
-- [ ] Perform cross-device compatibility testing
-- [ ] Execute performance benchmarking
-- [ ] Complete security audit
+### P6.D — Testing & Quality Assurance (Modular)
+- [ ] Complete unit test coverage >90% across all modules
+- [ ] Run Compose UI tests for all feature modules
+- [ ] Perform integration tests across modular architecture
+- [ ] Execute cross-device compatibility testing for Single Activity
+- [ ] Run performance benchmarking for Compose components
+- [ ] Complete security audit for Firebase + modular integration
+- [ ] Test Navigation Component and Bottom Navigation functionality
 
 **Exit criteria:** App meets performance requirements, cultural validation complete, accessibility compliant, comprehensive testing passed.
 
@@ -273,12 +315,13 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 **Objective:** Prepare for global production launch with monitoring, analytics, and launch strategy.
 **Knowledge anchors:** [SPRINT_TASK_BREAKDOWN.md](DEVELOPMENT/SPRINT_TASK_BREAKDOWN.md) · [CLAUDE.md](CLAUDE.md)
 
-### P7.A — Production Infrastructure
-- [ ] Set up production Firebase project
-- [ ] Deploy Cloud Functions for auto-expiration
-- [ ] Configure monitoring and alerting
-- [ ] Set up analytics and crash reporting
-- [ ] Implement backup and recovery systems
+### P7.A — Production Infrastructure (Modern Stack)
+- [ ] Set up production Firebase project with modular configuration
+- [ ] Deploy Cloud Functions for auto-expiration with Node.js 20
+- [ ] Configure monitoring and alerting for Single Activity app
+- [ ] Set up Firebase Analytics and Crashlytics for modular architecture
+- [ ] Implement backup and recovery systems for Room + Firestore
+- [ ] Setup App Bundle configuration for modular features
 
 ### P7.B — Release Preparation
 - [ ] Create production build configuration
@@ -294,12 +337,13 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 - [ ] Create launch metrics and success criteria
 - [ ] Plan post-launch monitoring and support
 
-### P7.D — Migration Strategy
-- [ ] Plan existing user data migration
-- [ ] Create feature introduction for existing users
-- [ ] Implement gradual feature rollout
-- [ ] Set up user feedback collection
-- [ ] Plan feature adoption tracking
+### P7.D — Migration Strategy (Architecture Transition)
+- [ ] Plan existing user data migration to modular architecture
+- [ ] Create feature introduction for new Single Activity UI
+- [ ] Implement gradual rollout of Jetpack Compose screens
+- [ ] Set up user feedback collection for modern UI/UX
+- [ ] Plan feature adoption tracking for new Bottom Navigation
+- [ ] Create migration guide for 240M+ existing users
 
 **Exit criteria:** Production environment ready, launch strategy defined, existing users can seamlessly access new memorial features.
 
@@ -307,11 +351,13 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 
 ## Success Criteria Summary
 
-### Technical Success Metrics
-- ✅ **Functionality**: 100% of MVP features implemented and tested
-- ✅ **Performance**: Prayer counter <50ms, app startup <3s, 99.9% uptime
-- ✅ **Quality**: >90% test coverage, <0.1% crash rate
-- ✅ **Security**: Firebase security rules deployed, no vulnerabilities
+### Technical Success Metrics (Modern Architecture)
+- ✅ **Architecture**: Single Activity + Jetpack Compose + Modular design implemented
+- ✅ **Functionality**: 100% of MVP features migrated to Compose and tested
+- ✅ **Performance**: Prayer counter <50ms, app startup <3s, Compose 60fps
+- ✅ **Quality**: >90% test coverage across all modules, <0.1% crash rate
+- ✅ **Security**: Firebase security rules deployed, Hilt DI secure, no vulnerabilities
+- ✅ **Navigation**: Bottom Navigation + Navigation Component working seamlessly
 
 ### Cultural Success Metrics  
 - ✅ **Authenticity**: >4.8/5 cultural appropriateness rating
@@ -336,22 +382,25 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Quick Reference
 
 ### 🚀 **Start Development NOW**
-1. Read [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md)
-2. Run: `firebase login && firebase projects:create tahlil-global-platform`
-3. Copy Firebase service code from integration guide
-4. Test: `./gradlew clean assembleDebug`
+1. Read [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
+2. Follow Single Activity + Jetpack Compose migration guide
+3. Read [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md)
+4. Setup modular project structure: `:app`, `:core`, `:feature`, `:shared`
+5. Migrate from Koin to Hilt dependency injection
+6. Test: `./gradlew clean assembleDebug`
 
 ### 📞 **Need Help?**
-- **Firebase Setup**: [FIREBASE_SETUP_GUIDE.md](DEVELOPMENT/FIREBASE_SETUP_GUIDE.md)
+- **Modular Architecture**: [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
+- **Firebase Integration**: [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md)
 - **Project Context**: [CLAUDE.md](CLAUDE.md)  
-- **Architecture**: [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md)
+- **Modern Architecture**: [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md)
 - **Team Tasks**: [SPRINT_TASK_BREAKDOWN.md](DEVELOPMENT/SPRINT_TASK_BREAKDOWN.md)
 
 ### 🔄 **Continue Development**
-For future sessions: "Continue Android Firebase development for Tahlil memorial prayer platform. Reference: TASK.md + CLAUDE.md"
+For future sessions: "Continue Single Activity + Jetpack Compose migration for Tahlil memorial prayer platform. Reference: TASK.md + MODULAR_ARCHITECTURE_GUIDE.md + CLAUDE.md"
 
 ---
 
-**Status**: 🚀 Ready for Phase 1 execution  
+**Status**: 🚀 Ready for Phase 2 execution (Modern Architecture Migration)  
 **Last Updated**: May 21, 2026  
-**Next**: Firebase foundation implementation
+**Next**: Single Activity + Jetpack Compose + Modular architecture implementation

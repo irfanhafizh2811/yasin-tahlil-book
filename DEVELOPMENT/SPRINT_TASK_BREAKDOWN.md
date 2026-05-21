@@ -7,6 +7,7 @@
 **Sprint Duration**: 2 weeks per sprint  
 **Team Velocity**: 80-100 story points per sprint  
 **Release Target**: 10 weeks (5 sprints)  
+**Architecture**: Single Activity + Jetpack Compose + Modular Design  
 
 ---
 
@@ -17,9 +18,9 @@ Establish cutting-edge Firebase ecosystem foundation with complete serverless ar
 
 ### 📈 Sprint Capacity
 - **Total Capacity**: 400 hours (8 team members × 50 hours)
-- **Story Points**: 95 points (increased for complete Firebase ecosystem integration)
-- **Sprint Buffer**: 20% for Firebase v10+ learning curve and modern architecture setup
-- **Technology Focus**: Firebase v10 Modular SDK, React Native 0.76.x, Expo 52
+- **Story Points**: 95 points (increased for modular architecture transition)
+- **Sprint Buffer**: 20% for Jetpack Compose migration and modular setup
+- **Technology Focus**: Single Activity + Navigation Component + Jetpack Compose + Hilt DI
 
 ---
 
@@ -34,13 +35,13 @@ SA-001: Complete Firebase Ecosystem Architecture Implementation
 ├─ Dependencies: None
 ├─ Firebase Services: ALL (Auth, Firestore, Storage, Functions, etc.)
 └─ Deliverables:
-    ├─ Firebase v10+ Modular SDK architecture specification
-    ├─ Complete serverless architecture with all Firebase services
-    ├─ React Native 0.76.x + Expo 52 integration plan
-    ├─ Firebase ecosystem service integration matrix
-    ├─ Performance benchmarks for each Firebase service
-    ├─ Islamic cultural integration into Firebase architecture
-    └─ Modern TypeScript 5.3+ integration patterns
+    ├─ Firebase Android SDK architecture with Hilt DI integration
+    ├─ Single Activity + Bottom Navigation Component setup
+    ├─ Jetpack Compose + Navigation graph implementation
+    ├─ Modular architecture design (:core, :feature, :shared modules)
+    ├─ Performance benchmarks for Compose + Firebase integration
+    ├─ Islamic cultural integration into modular design
+    └─ Modern Kotlin 2.0 + Coroutines patterns
 
 SA-002: Advanced Firestore Database & Security Implementation
 ├─ Priority: P0 (Blocker)
@@ -49,14 +50,14 @@ SA-002: Advanced Firestore Database & Security Implementation
 ├─ Dependencies: SA-001 completed
 ├─ Firebase Focus: Firestore + Security Rules + App Check
 └─ Deliverables:
-    ├─ Complete Firestore collection structure with sub-collections
-    ├─ Advanced security rules with custom claims
-    ├─ Islamic memorial prayer schema with cultural validation
-    ├─ Real-time synchronization architecture
-    ├─ Offline-first data architecture with MMKV
-    ├─ Firebase App Check anti-abuse implementation
-    ├─ Firestore index optimization for Islamic content queries
-    └─ Data validation rules for memorial and prayer content
+    ├─ Firestore collection structure for modular architecture
+    ├─ Advanced security rules with Android custom claims
+    ├─ Islamic memorial prayer schema with Room + Firestore sync
+    ├─ Real-time synchronization with Compose State
+    ├─ Offline-first data architecture with Room database
+    ├─ Firebase App Check integration with Android
+    ├─ Firestore index optimization for modular queries
+    └─ Repository pattern data validation with Use Cases
 
 SA-003: Firebase Services Integration & Cloud Functions Architecture
 ├─ Priority: P0 (Blocker)
@@ -65,14 +66,14 @@ SA-003: Firebase Services Integration & Cloud Functions Architecture
 ├─ Dependencies: SA-002 completed
 ├─ Firebase Focus: Functions v2 + FCM + Remote Config + Analytics
 └─ Deliverables:
-    ├─ Cloud Functions v2 with Node.js 20 runtime setup
+    ├─ Cloud Functions v2 integration with Android clients
     ├─ Memorial auto-expiration function (40-day Islamic tradition)
-    ├─ Prayer notification triggers with FCM
-    ├─ Daily analytics aggregation functions
-    ├─ Islamic content validation serverless functions
-    ├─ Remote Config for A/B testing and feature flags
-    ├─ Firebase Analytics event tracking architecture
-    └─ Crashlytics integration for error monitoring
+    ├─ FCM push notifications for Android with Compose integration
+    ├─ Daily analytics aggregation for modular features
+    ├─ Islamic content validation with ML Kit integration
+    ├─ Remote Config for feature module toggling
+    ├─ Firebase Analytics with custom events per module
+    └─ Crashlytics integration across all modules
 
 SA-004: Modern Development Environment & Firebase Emulator Setup
 ├─ Priority: P1 (Critical)
@@ -257,31 +258,31 @@ DTL-004: Testing Framework Setup
     └─ Automated testing in CI/CD
 ```
 
-#### 💻 Frontend Developer Tasks (80 hours total - 2 developers)
+#### 💻 Android Developer Tasks (80 hours total - 2 developers)
 ```
-FE-001: React Native + Expo Project Setup
+AD-001: Single Activity + Jetpack Compose Project Setup
 ├─ Priority: P0 (Blocker)
 ├─ Story Points: 8
 ├─ Hours: 16h (8h each developer)
 ├─ Dependencies: DTL-001 completed
 └─ Deliverables:
-    ├─ React Native 0.76.x + Expo 52 initialization
-    ├─ Navigation structure (React Navigation 7.x)
-    ├─ State management setup (Zustand 5.x)
-    ├─ Firebase SDK integration (v10+)
-    └─ Development environment testing
+    ├─ Single Activity architecture with MainActivity
+    ├─ Bottom Navigation with Navigation Component 2.7.6
+    ├─ Jetpack Compose BOM 2024.02.00 setup
+    ├─ Hilt DI integration (replacing existing Koin)
+    └─ Modular build structure (:app, :core, :feature)
 
-FE-002: Firebase SDK Integration
+AD-002: Firebase Android SDK Integration
 ├─ Priority: P0 (Blocker)
 ├─ Story Points: 10
 ├─ Hours: 20h (10h each developer)
 ├─ Dependencies: FB-001 completed
 └─ Deliverables:
-    ├─ Firebase Auth SDK integration
-    ├─ Firestore SDK setup and configuration
-    ├─ Storage SDK integration
-    ├─ Analytics and Crashlytics setup
-    ├─ Firebase configuration management
+    ├─ Firebase Android SDK with Hilt modules
+    ├─ Firestore integration in :core-firebase module
+    ├─ Cloud Storage integration
+    ├─ Analytics and Crashlytics Android setup
+    ├─ Firebase configuration across modules
 
 FE-003: Modern Design System with React Native Paper 5.x
 ├─ Priority: P1 (Critical)

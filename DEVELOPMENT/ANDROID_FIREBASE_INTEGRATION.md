@@ -1,37 +1,40 @@
-# 🔥 Android Firebase Integration Guide
-## Synchronizing Existing Android Project with Complete Firebase Ecosystem
+# 🔥 Modern Android Firebase Integration Guide
+## Single Activity + Jetpack Compose + Modular Firebase Integration
 
 ### 📋 Overview
 
-This guide integrates the complete Firebase ecosystem into your existing Android Tasbeeh/Yasin application while preserving your current architecture (Room database, Koin DI, MVVM, etc.).
+This guide integrates Firebase ecosystem into the modernized Android Tahlil application using Single Activity architecture, Jetpack Compose, Navigation Component, and modular design while maintaining existing functionality.
 
 ---
 
 ## 🎯 Current Project Analysis
 
-### ✅ **What You Already Have**
+### ✅ **Modern Architecture Foundation**
 ```kotlin
-// Current Architecture
+// Modern Android Architecture
 ├─ Package: com.app_muslim.surah_yasin
-├─ DI Framework: Koin 3.4.3
-├─ Database: Room 2.6.1 with RxJava2
-├─ Architecture: MVVM with LiveData
-├─ Firebase: Basic (Analytics, Crashlytics, Remote Config)
-├─ UI: View Binding + Material Design
-└─ Languages: Multi-language support
+├─ Architecture: Single Activity + Jetpack Compose
+├─ DI Framework: Hilt 2.50 (replacing Koin)
+├─ Database: Room 2.6.1 + Firestore (Hybrid)
+├─ Navigation: Navigation Component 2.7.6 (Bottom Nav)
+├─ UI: Jetpack Compose + Material Design 3
+├─ State Management: Compose State + ViewModel
+└─ Modular: :core, :feature, :shared modules
 ```
 
-### 🔄 **What We're Adding**
+### 🔄 **Firebase Integration with Modern Architecture**
 ```kotlin
-// Complete Firebase Ecosystem
-├─ Firebase Auth (Multi-provider)
-├─ Cloud Firestore (Memorial prayers)
-├─ Cloud Storage (Memorial photos)
-├─ Cloud Functions (Auto-expiration)
-├─ Firebase Messaging (Prayer notifications)
-├─ Firebase Performance Monitoring
-├─ App Check (Security)
-└─ Dynamic Links (Memorial sharing)
+// Complete Firebase Ecosystem with Modular Design
+├─ :core-firebase module structure
+│   ├─ Firebase Auth (Hilt integration)
+│   ├─ Cloud Firestore (Compose integration)
+│   ├─ Cloud Storage (Memorial photos)
+│   ├─ Cloud Functions (Auto-expiration)
+│   ├─ Firebase Messaging (FCM)
+│   └─ Performance + App Check
+├─ Navigation Component Firebase integration
+├─ Compose State + Firebase real-time updates
+└─ Bottom Navigation Firebase auth state
 ```
 
 ---
@@ -70,34 +73,39 @@ implementation("com.google.mlkit:text-recognition:16.0.0")
 
 ## 🏗️ Firebase Architecture Integration
 
-### 1️⃣ **Updated Firebase Module (Koin DI)**
+### 1️⃣ **Modern Firebase Module (Hilt DI)**
 
 ```kotlin
-// app/src/main/java/com/app_muslim/surah_yasin/deps/FirebaseModule.kt
-package com.app_muslim.surah_yasin.deps
+// core-firebase/di/FirebaseModule.kt
+package com.app_muslim.surah_yasin.core.firebase.di
 
-import com.app_muslim.surah_yasin.remote.CoreRemoteConfig
-import com.app_muslim.surah_yasin.remote.InterstitialRemoteConfig
-import com.app_muslim.surah_yasin.remote.SourceAppsRemoteConfig
-import com.app_muslim.surah_yasin.data.repository.FirebaseRepository
-import com.app_muslim.surah_yasin.data.repository.FirebaseRepositoryImpl
-import com.app_muslim.surah_yasin.data.repository.MemorialRepository
-import com.app_muslim.surah_yasin.data.repository.MemorialRepositoryImpl
-import com.app_muslim.surah_yasin.services.FirebaseAuthService
-import com.app_muslim.surah_yasin.services.FirestoreService
-import com.app_muslim.surah_yasin.services.StorageService
-import com.app_muslim.surah_yasin.services.MessagingService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.messaging.FirebaseMessaging
-import org.koin.dsl.module
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.app_muslim.surah_yasin.core.firebase.auth.AuthService
+import com.app_muslim.surah_yasin.core.firebase.firestore.MemorialService
+import com.app_muslim.surah_yasin.core.firebase.storage.StorageService
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-val firebaseModule = module {
+@Module
+@InstallIn(SingletonComponent::class)
+object FirebaseModule {
     
-    // Existing Remote Config
-    single { CoreRemoteConfig() }
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+    
+    @Provides
+    @Singleton
+    fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
     single { InterstitialRemoteConfig(get<CoreRemoteConfig>().remoteConfig) }
     single { SourceAppsRemoteConfig(get<CoreRemoteConfig>().remoteConfig) }
     
@@ -217,11 +225,11 @@ class FirebaseAuthService(private val auth: FirebaseAuth) {
 }
 ```
 
-### 3️⃣ **Memorial Data Models**
+### 3️⃣ **Memorial Data Models (Modular)**
 
 ```kotlin
-// app/src/main/java/com/app_muslim/surah_yasin/data/model/Memorial.kt
-package com.app_muslim.surah_yasin.data.model
+// core-common/models/Memorial.kt
+package com.app_muslim.surah_yasin.core.common.models
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.PropertyName
@@ -271,11 +279,11 @@ data class PrayerLocation(
 )
 ```
 
-### 4️⃣ **Firestore Service**
+### 4️⃣ **Firestore Service (Modular)**
 
 ```kotlin
-// app/src/main/java/com/app_muslim/surah_yasin/services/FirestoreService.kt
-package com.app_muslim.surah_yasin.services
+// core-firebase/firestore/MemorialService.kt
+package com.app_muslim.surah_yasin.core.firebase.firestore
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -442,11 +450,11 @@ class FirestoreService(private val firestore: FirebaseFirestore) {
 }
 ```
 
-### 5️⃣ **Memorial Repository Integration**
+### 5️⃣ **Memorial Repository Integration (Modular)**
 
 ```kotlin
-// app/src/main/java/com/app_muslim/surah_yasin/data/repository/MemorialRepository.kt
-package com.app_muslim.surah_yasin.data.repository
+// core-data/repository/MemorialRepository.kt
+package com.app_muslim.surah_yasin.core.data.repository
 
 import com.app_muslim.surah_yasin.data.model.Memorial
 import com.app_muslim.surah_yasin.data.model.MemorialPrayer
@@ -462,8 +470,8 @@ interface MemorialRepository {
     fun listenToMemorialUpdates(memorialId: String): Flow<Memorial?>
 }
 
-// app/src/main/java/com/app_muslim/surah_yasin/data/repository/MemorialRepositoryImpl.kt
-package com.app_muslim.surah_yasin.data.repository
+// feature-memorial/data/MemorialRepositoryImpl.kt
+package com.app_muslim.surah_yasin.feature.memorial.data
 
 import com.app_muslim.surah_yasin.services.FirestoreService
 import com.app_muslim.surah_yasin.services.StorageService
@@ -471,9 +479,10 @@ import com.app_muslim.surah_yasin.data.model.Memorial
 import com.app_muslim.surah_yasin.data.model.MemorialPrayer
 import kotlinx.coroutines.flow.Flow
 
-class MemorialRepositoryImpl(
-    private val firestoreService: FirestoreService,
-    private val storageService: StorageService
+class MemorialRepositoryImpl @Inject constructor(
+    private val firestoreService: MemorialService,
+    private val storageService: StorageService,
+    private val localDataSource: MemorialLocalDataSource
 ) : MemorialRepository {
     
     override suspend fun createMemorial(memorial: Memorial): Result<String> {
@@ -506,26 +515,34 @@ class MemorialRepositoryImpl(
 }
 ```
 
-### 6️⃣ **Updated TasbeehLibraries (Koin Setup)**
+### 6️⃣ **Application Setup (Hilt)**
 
 ```kotlin
-// app/src/main/java/com/app_muslim/surah_yasin/deps/TasbeehLibraries.kt
-package com.app_muslim.surah_yasin.deps
+// app/TahlilApplication.kt
+package com.app_muslim.surah_yasin
 
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 
-object TasbeehLibraries {
+@HiltAndroidApp
+class TahlilApplication : Application() {
     
-    fun init() {
-        startKoin {
-            modules(
-                databaseModule,
-                preferenceModule,
-                firebaseModule, // Updated with complete Firebase integration
-                viewModelModule
-            )
-        }
+    override fun onCreate() {
+        super.onCreate()
+        
+        // Initialize Firebase
+        FirebaseApp.initializeApp(this)
+        
+        // Configure Firestore offline persistence
+        val settings = FirebaseFirestoreSettings.Builder()
+            .setPersistenceEnabled(true)
+            .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
+            .build()
+        
+        FirebaseFirestore.getInstance().firestoreSettings = settings
     }
 }
 ```

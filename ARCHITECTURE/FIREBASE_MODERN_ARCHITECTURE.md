@@ -9,22 +9,26 @@ Complete modern serverless architecture leveraging the full Firebase ecosystem w
 
 ## 🏗️ Architecture Stack (2026 Latest Technologies)
 
-### 📱 **Frontend Architecture**
-```typescript
-// React Native 0.76.x with Expo 52
-├── React Native 0.76.5 (New Architecture/Fabric)
-├── Expo SDK 52 (Latest EAS Build & Updates)
-├── TypeScript 5.3+ (Latest with decorators)
-├── React Native Reanimated 3.8+ (Shared Element Transitions)
-├── React Native Gesture Handler 2.15+
-├── Expo Router v4 (File-based routing)
-└── React Native MMKV (Ultra-fast storage)
+### 📱 **Frontend Architecture (Single Activity + Jetpack Compose)**
+```kotlin
+// Android Native with Modern Architecture
+├── Single Activity Architecture (MainActivity only)
+├── Jetpack Compose BOM 2024.02.00 (UI Toolkit)
+├── Navigation Component 2.7.6 (Bottom Navigation)
+├── Kotlin 2.0 with Coroutines (Latest language features)
+├── Android API 35 (Android 15) targeting
+├── Material Design 3 (Material You theming)
+├── Hilt 2.50 (Dependency Injection replacement for Koin)
+└── Room 2.6.1 + Firestore (Hybrid offline-first storage)
 
-// State Management
-├── Zustand 4.5+ (Lightweight state management)
-├── TanStack Query v5 (Server state management)
-├── React Hook Form 7.52+ (Form state)
-└── Jotai 2.6+ (Atomic state for complex UI)
+// Modular Architecture
+├── :app (Single Activity host)
+├── :core-ui (Compose Design System)
+├── :feature-tasbeeh (Counter module)
+├── :feature-memorial (Firebase memorial module)
+├── :feature-community (Social features module)
+├── :feature-auth (Authentication module)
+└── :core-data (Repository + Firebase integration)
 ```
 
 ### 🔥 **Firebase Ecosystem (Complete Integration)**
@@ -45,35 +49,43 @@ Complete modern serverless architecture leveraging the full Firebase ecosystem w
 └── Extensions (Pre-built solutions)
 ```
 
-### 🎨 **UI/UX Technology Stack**
-```typescript
-// Modern UI Framework
-├── NativeBase 4.0+ / Gluestack UI (Design System)
-├── React Native Elements 4.0+
-├── React Native Paper 5.12+ (Material Design 3)
-├── Lottie React Native 6.5+ (Animations)
-├── React Native Skia 1.0+ (2D Graphics)
-├── React Native SVG 15.0+ (Vector graphics)
-└── Expo Linear Gradient (Beautiful gradients)
+### 🎨 **UI/UX Technology Stack (Jetpack Compose)**
+```kotlin
+// Modern Android UI Framework
+├── Jetpack Compose BOM 2024.02.00 (Declarative UI)
+├── Material Design 3 Components (Material You)
+├── Compose Animation 1.6.0 (Smooth transitions)
+├── Compose Navigation 2.7.6 (Type-safe navigation)
+├── Accompanist 0.32.0 (Compose utilities)
+├── Lottie Compose 6.3.0 (Animations)
+└── Coil Compose 2.5.0 (Image loading)
 
 // Typography & Internationalization
-├── React Native Super Grid 5.0+
-├── React Native RTL Support (Arabic/Urdu)
-├── i18next + react-i18next 23.8+
-├── Islamic Calendar integration
-└── Hijri Date calculations
+├── Compose Foundation Layout (Responsive grids)
+├── BiDi Support (Arabic/Urdu RTL layout)
+├── Android Localization (Multi-language)
+├── Islamic Calendar integration (Hijri dates)
+├── Custom Arabic fonts (Noto Naskh, Amiri)
+└── Cultural-appropriate UI components
 ```
 
-### ⚡ **Performance & Optimization**
-```typescript
+### ⚡ **Performance & Optimization (Android Native)**
+```kotlin
 // Performance Stack
-├── React Native Performance Monitor
-├── Flipper Integration (Development debugging)
-├── Expo Development Build (Custom dev clients)
-├── EAS Updates (Over-the-air updates)
-├── React Native Hermes Engine (JavaScript optimization)
-├── Metro bundler optimization
-└── Image optimization with Sharp
+├── Android Performance Monitor (Systrace)
+├── Android Studio Profiler (Memory, CPU, Network)
+├── Gradle Build Optimization (Build cache, parallel)
+├── R8 Code Shrinking (ProGuard replacement)
+├── Baseline Profiles (Startup optimization)
+├── App Bundle (Dynamic delivery)
+└── Image optimization (WebP, Vector Drawables)
+
+// Compose Performance
+├── Compose Compiler Metrics
+├── Composition Local (State management)
+├── Lazy layouts (LazyColumn, LazyGrid)
+├── Stable annotations (Recomposition control)
+└── Compose Preview (Development efficiency)
 ```
 
 ---
@@ -433,30 +445,54 @@ interface RemoteConfigFlags {
 
 ---
 
-## 📱 React Native Application Architecture
+## 📱 Android Native Application Architecture (Single Activity + Modular)
 
-### 🎯 **Project Structure**
-```typescript
-src/
-├── app/                          # Expo Router v4 (File-based routing)
-│   ├── (auth)/                   # Authentication flow
-│   ├── (tabs)/                   # Main app tabs
-│   ├── memorial/                 # Memorial creation/viewing
-│   └── _layout.tsx              # Root layout
-├── components/                   # Reusable UI components
-│   ├── ui/                      # Basic UI components
-│   ├── islamic/                 # Islamic-specific components
-│   └── forms/                   # Form components
-├── services/                    # Firebase services
-│   ├── auth.ts                  # Authentication service
-│   ├── firestore.ts            # Firestore operations
-│   ├── storage.ts               # Cloud Storage
-│   └── messaging.ts             # FCM integration
-├── hooks/                       # Custom React hooks
-├── utils/                       # Utility functions
-├── types/                       # TypeScript definitions
-├── constants/                   # App constants
-└── assets/                      # Static assets
+### 🎯 **Modular Project Structure**
+```kotlin
+// Root Project Structure
+app/
+├── :app (Single Activity Host)  # MainActivity with Navigation
+│   ├── MainActivity.kt           # Single Activity + Bottom Nav
+│   ├── MainNavigation.kt         # Navigation Component setup
+│   ├── di/                       # Hilt modules
+│   └── theme/                    # Material 3 theme
+├── :core                        # Core shared modules
+│   ├── :core-ui                  # Compose Design System
+│   │   ├── components/           # Reusable Compose components
+│   │   ├── theme/                # Material 3 + Islamic theming
+│   │   └── islamic/              # Islamic-specific UI components
+│   ├── :core-data                # Repository + Data sources
+│   │   ├── repository/           # Repository pattern
+│   │   ├── database/             # Room database
+│   │   └── firebase/             # Firebase data sources
+│   ├── :core-firebase            # Firebase services
+│   │   ├── auth/                 # Authentication service
+│   │   ├── firestore/            # Firestore operations
+│   │   ├── storage/              # Cloud Storage
+│   │   └── messaging/            # FCM integration
+│   └── :core-common              # Shared utilities
+│       ├── utils/                # Extension functions
+│       ├── models/               # Data models
+│       └── constants/            # App constants
+├── :feature                     # Feature modules
+│   ├── :feature-tasbeeh          # Prayer counter (existing)
+│   │   ├── presentation/         # Compose UI + ViewModels
+│   │   ├── domain/               # Use cases
+│   │   └── data/                 # Feature-specific data
+│   ├── :feature-memorial         # Firebase memorial system
+│   │   ├── presentation/         # Memorial Compose screens
+│   │   ├── domain/               # Memorial business logic
+│   │   └── data/                 # Firestore integration
+│   ├── :feature-community        # Social features
+│   │   ├── presentation/         # Community Compose screens
+│   │   └── data/                 # Community data sources
+│   └── :feature-auth             # Authentication
+│       ├── presentation/         # Auth Compose screens
+│       └── data/                 # Firebase Auth integration
+└── :shared                      # Shared resources
+    ├── :shared-preferences       # Settings & preferences
+    ├── :shared-analytics         # Analytics & tracking
+    └── :shared-resources         # Strings, assets, fonts
 ```
 
 ### 🔥 **Firebase Integration Setup**

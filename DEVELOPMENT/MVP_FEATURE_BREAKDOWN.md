@@ -64,14 +64,15 @@ Acceptance Criteria:
 □ Session management with secure tokens
 □ Password meets security requirements (8+ chars, mixed case, symbols)
 
-Development Tasks:
-├─ [Frontend] Registration form with validation (12h)
-├─ [Frontend] Login form with error handling (8h)
-├─ [Frontend] Password reset flow (6h)
-├─ [Backend] User authentication API (16h)
-├─ [Backend] JWT token management (8h)
-├─ [Backend] Email verification system (12h)
-└─ [Security] Authentication security review (4h)
+Development Tasks (Jetpack Compose + Modular):
+├─ [:feature-auth] Registration Compose screen with validation (10h)
+├─ [:feature-auth] Login Compose screen with error handling (8h)
+├─ [:feature-auth] Password reset Compose flow (6h)
+├─ [:core-firebase] Firebase Auth integration module (12h)
+├─ [:feature-auth] AuthViewModel with Hilt DI (8h)
+├─ [:feature-auth] Navigation Component integration (6h)
+├─ [:core-firebase] Email verification Firebase Functions (10h)
+└─ [Security] Firebase security rules review (4h)
 
 Definition of Done:
 □ All unit tests passing (>90% coverage)
@@ -85,19 +86,21 @@ Definition of Done:
 ```
 Story: As a Muslim from [region], I want to set my cultural preferences so the app respects my Islamic traditions.
 
-Technical Requirements:
-├─ Language selection (Arabic, English, Indonesian, Urdu, Turkish)
-├─ Regional Islamic tradition selection
-├─ RTL layout support for Arabic/Urdu
-├─ Cultural color theme application
-└─ Prayer preference configuration
+Technical Requirements (Jetpack Compose):
+├─ Language selection with Compose Dropdown (Arabic, English, Indonesian, Urdu, Turkish)
+├─ Regional Islamic tradition selection using Material 3 components
+├─ RTL layout support using Compose BiDi
+├─ Cultural color theme with Material You dynamic theming
+├─ Prayer preference configuration using Compose Preference library
+└─ Bottom navigation localization
 
 Acceptance Criteria:
-□ User can select from 20+ supported languages
-□ App interface adapts to RTL/LTR based on language
-□ Cultural themes applied based on regional selection
-□ Prayer tradition preferences saved and applied
-□ User can change preferences anytime in settings
+□ User can select from 20+ supported languages via Compose UI
+□ Single Activity UI adapts to RTL/LTR based on language
+□ Material 3 cultural themes applied based on regional selection
+□ Prayer tradition preferences saved in Room + Firebase sync
+□ User can change preferences anytime via bottom nav settings tab
+□ Navigation Component handles locale changes properly
 
 Development Tasks:
 ├─ [Frontend] Language selection interface (16h)
@@ -209,14 +212,14 @@ Acceptance Criteria:
 □ User can pause and resume prayer sessions
 □ Session completion celebrated with appropriate animation
 
-Development Tasks:
-├─ [Frontend] Prayer counter interface with animations (24h)
-├─ [Frontend] Haptic feedback implementation (8h)
-├─ [Frontend] Progress visualization (16h)
-├─ [Frontend] Offline functionality (20h)
-├─ [Backend] Prayer count storage and sync (16h)
-├─ [Backend] Prayer session management (12h)
-└─ [Testing] Counter accuracy and performance testing (8h)
+Development Tasks (Jetpack Compose + Modular):
+├─ [:feature-tasbeeh] Prayer counter Compose UI with animations (20h)
+├─ [:feature-tasbeeh] Haptic feedback using Android APIs (6h)
+├─ [:core-ui] Progress visualization Compose components (14h)
+├─ [:core-data] Room offline storage + Firestore sync (18h)
+├─ [:core-firebase] Prayer count Firebase integration (14h)
+├─ [:feature-tasbeeh] TasbeehViewModel with Hilt DI (10h)
+└─ [Testing] Compose UI tests + Repository tests (8h)
 
 Performance Requirements:
 □ Counter responds to taps within 50ms
@@ -245,12 +248,12 @@ Acceptance Criteria:
 □ Text size adjustable for different vision needs
 □ Font choices honor Islamic calligraphy traditions
 
-Development Tasks:
-├─ [Frontend] Arabic text rendering implementation (20h)
-├─ [Frontend] Multi-language text display (16h)
-├─ [Frontend] Typography and font implementation (12h)
-├─ [Frontend] Text accessibility features (8h)
-├─ [Backend] Prayer text content management (8h)
+Development Tasks (Jetpack Compose + Modular):
+├─ [:core-ui] Arabic text rendering with Compose Text (18h)
+├─ [:shared-resources] Multi-language string resources (14h)
+├─ [:core-ui] Islamic typography with custom fonts (12h)
+├─ [:core-ui] Accessibility features (TalkBack support) (8h)
+├─ [:core-firebase] Prayer text Firestore collection (8h)
 └─ [Cultural] Arabic text verification by scholars (16h)
 
 Cultural Validation:
@@ -281,13 +284,13 @@ Acceptance Criteria:
 □ User privacy completely protected
 □ Community achievements appropriately celebrated
 
-Development Tasks:
-├─ [Frontend] Statistics dashboard interface (20h)
-├─ [Frontend] World map visualization (24h)
-├─ [Frontend] Real-time updates implementation (16h)
-├─ [Backend] Prayer statistics aggregation (20h)
-├─ [Backend] Real-time data distribution (16h)
-└─ [Backend] Privacy-preserving analytics (12h)
+Development Tasks (Jetpack Compose + Modular):
+├─ [:feature-community] Statistics dashboard Compose screens (18h)
+├─ [:feature-community] World map with Google Maps Compose (22h)
+├─ [:core-firebase] Firestore real-time listeners (14h)
+├─ [:core-firebase] Cloud Functions statistics aggregation (18h)
+├─ [:core-firebase] Firebase Analytics integration (14h)
+└─ [:core-firebase] Privacy-preserving analytics (12h)
 
 Privacy Requirements:
 □ No personal identifiable information collected
@@ -316,13 +319,13 @@ Acceptance Criteria:
 □ Sharing links expire for security
 □ Memorial creator controls all sharing permissions
 
-Development Tasks:
-├─ [Frontend] Sharing interface with privacy options (20h)
-├─ [Frontend] Social media integration (16h)
-├─ [Frontend] Family invitation system (20h)
-├─ [Backend] Sharing permission management (16h)
-├─ [Backend] Secure link generation (12h)
-└─ [Backend] Sharing analytics (8h)
+Development Tasks (Jetpack Compose + Modular):
+├─ [:feature-memorial] Sharing Compose UI with privacy options (18h)
+├─ [:feature-memorial] Android Sharing Intent integration (14h)
+├─ [:feature-memorial] Family invitation Compose screens (18h)
+├─ [:core-firebase] Firestore security rules for sharing (14h)
+├─ [:core-firebase] Firebase Dynamic Links generation (12h)
+└─ [:shared-analytics] Sharing analytics tracking (8h)
 
 Cultural Considerations:
 □ Sharing options respect Islamic family privacy customs
@@ -337,32 +340,37 @@ Cultural Considerations:
 
 ### 🔥 Complete Firebase Ecosystem Integration
 
-#### Frontend Architecture (React Native 0.76.x + Expo 52)
+#### Frontend Architecture (Android Native + Single Activity + Jetpack Compose)
 ```
-Modern React Native Stack 2026:
-├─ React Native 0.76.5 (New Architecture/Fabric)
-├─ Expo SDK 52 (Latest EAS Build & Updates)
-├─ TypeScript 5.3+ (Latest with decorators)
-├─ State Management: Zustand 4.5+ (Ultra-lightweight)
-├─ Server State: TanStack Query v5 (React Query)
-├─ Navigation: Expo Router v4 (File-based routing)
-├─ UI Framework: NativeBase 4.0+ / Gluestack UI
-├─ Styling: React Native Paper 5.12+ (Material Design 3)
-├─ Storage: React Native MMKV (Ultra-fast)
-├─ Animations: React Native Reanimated 3.8+
-├─ Graphics: React Native Skia 1.0+ (2D Graphics)
-├─ Forms: React Hook Form 7.52+ + Zod validation
-├─ Camera: Expo Camera v15 + Image Picker
-├─ I18n: i18next 23.8+ (Multi-language)
-└─ Testing: Jest + Detox E2E + React Native Testing Library
+Modern Android Stack 2026:
+├─ Single Activity Architecture (MainActivity only)
+├─ Jetpack Compose BOM 2024.02.00 (Declarative UI)
+├─ Navigation Component 2.7.6 (Bottom Navigation)
+├─ Kotlin 2.0 + Coroutines (Latest language)
+├─ State Management: Compose State + ViewModel
+├─ Dependency Injection: Hilt 2.50 (replacing Koin)
+├─ UI Framework: Material Design 3 (Material You)
+├─ Data Layer: Room 2.6.1 + Firestore (Hybrid)
+├─ Networking: Retrofit 2.9+ + OkHttp 4.12+
+├─ Image Loading: Coil Compose 2.5.0
+├─ Animations: Compose Animation 1.6.0
+├─ Camera: CameraX 1.3.1 + Compose integration
+├─ I18n: Android Localization (Multi-language)
+└─ Testing: Compose Testing + JUnit5 + Espresso
+
+Modular Architecture:
+├─ :app (Single Activity Host)
+├─ :core (:core-ui, :core-data, :core-firebase, :core-common)
+├─ :feature (:feature-tasbeeh, :feature-memorial, :feature-community, :feature-auth)
+└─ :shared (:shared-preferences, :shared-analytics, :shared-resources)
 
 Performance Optimizations:
-├─ Hermes Engine (JavaScript optimization)
-├─ Flipper Integration (Development debugging)
-├─ EAS Updates (Over-the-air updates)
-├─ Metro bundler optimization
-├─ Image optimization with Sharp
-└─ React Native Performance Monitor
+├─ R8 Code Shrinking (ProGuard replacement)
+├─ Baseline Profiles (Startup optimization)
+├─ App Bundle (Dynamic delivery)
+├─ Compose Compiler Metrics
+├─ Image optimization (WebP, Vector Drawables)
+└─ Android Performance Monitor
 ```
 
 #### Complete Firebase Ecosystem Integration
