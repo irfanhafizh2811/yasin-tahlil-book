@@ -169,7 +169,7 @@ Minimum Size Requirements:
 ```css
 /* Marketing typography system */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;700&display=swap');
+/* Using existing font_lpmq_isep_misbah for Arabic text */
 
 /* Headline typography */
 .marketing-headline-1 {
@@ -191,7 +191,7 @@ Minimum Size Requirements:
 
 /* Arabic marketing typography */
 .marketing-arabic {
-  font-family: 'Noto Sans Arabic', serif;
+  font-family: 'font_lpmq_isep_misbah', serif;
   font-size: clamp(20px, 4vw, 36px);
   font-weight: 500;
   line-height: 1.6;

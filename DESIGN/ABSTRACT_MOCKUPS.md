@@ -442,7 +442,7 @@ Western: Subtle modern (#37474f), muted greens (#689f38)
 ```
 Arabic Script:
 ├── Sacred Text: Authentic Quranic font (Uthmani, KFGQPC)
-├── UI Text: Modern Arabic (Cairo, Noto Sans Arabic)
+├── UI Text: Modern Arabic (Cairo, font_lpmq_isep_misbah)
 ├── Decorative: Calligraphic elements (limited, respectful use)
 
 Latin Script:

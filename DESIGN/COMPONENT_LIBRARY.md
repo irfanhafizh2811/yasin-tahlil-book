@@ -176,7 +176,7 @@ fun PrayerTextCard(
 )
 
 Typography:
-- Arabic: 24sp, Noto Sans Arabic font
+- Arabic: 24sp, font_lpmq_isep_misbah font
 - Transliteration: 16sp, regular weight
 - Translation: 14sp, body2 style
 - Line height: 1.6x for readability
@@ -404,14 +404,14 @@ object TahlilTypography {
         fontSize = 24.sp,
         fontWeight = FontWeight.Normal,
         lineHeight = 36.sp,
-        fontFamily = FontFamily(Font(R.font.noto_sans_arabic))
+        fontFamily = FontFamily(Font(R.font.font_lpmq_isep_misbah))
     )
     
     val ArabicMedium = TextStyle(
         fontSize = 18.sp,
         fontWeight = FontWeight.Normal,
         lineHeight = 28.sp,
-        fontFamily = FontFamily(Font(R.font.noto_sans_arabic))
+        fontFamily = FontFamily(Font(R.font.font_lpmq_isep_misbah))
     )
 }
 ```

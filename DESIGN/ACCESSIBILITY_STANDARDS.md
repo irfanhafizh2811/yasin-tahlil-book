@@ -477,7 +477,7 @@
 .prayer-captions.arabic {
   direction: rtl;
   text-align: right;
-  font-family: 'Noto Sans Arabic', serif;
+  font-family: 'font_lpmq_isep_misbah', serif;
 }
 ```
 
@@ -832,7 +832,7 @@
 
 /* Arabic text accessibility */
 .arabic-text {
-  font-family: 'Noto Sans Arabic', 'Arabic UI Text', serif;
+  font-family: 'font_lpmq_isep_misbah', 'Arabic UI Text', serif;
   direction: rtl;
   text-align: right;
   line-height: 1.8; /* Increased for readability */

@@ -187,7 +187,7 @@ Sacred Text (Quranic Verses):
 └── Usage: Prayer reading, Quranic quotes
 
 Arabic UI Text:
-├── Font: Cairo / Noto Sans Arabic
+├── Font: font_lpmq_isep_misbah
 ├── Size: 16-24sp (hierarchy based)
 ├── Weight: Regular to Bold (semantic hierarchy)
 ├── Color: Dark gray (#424242) to Sacred Blue

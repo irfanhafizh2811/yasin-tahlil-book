@@ -133,7 +133,7 @@ Business Cards: Vertical stacked arrangement
 font-family: 'Roboto', 'Noto Sans', system-ui, sans-serif;
 
 /* Arabic Font Stack */
-font-family: 'Noto Sans Arabic', 'Arabic UI Text', 'Geeza Pro', serif;
+font-family: 'font_lpmq_isep_misbah', 'Arabic UI Text', 'Geeza Pro', serif;
 
 /* Headings */
 .heading-1 {

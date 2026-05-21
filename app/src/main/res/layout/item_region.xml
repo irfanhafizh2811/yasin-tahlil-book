@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardRegion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:checkable="true"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="2dp"
+    app:strokeColor="@color/selector_card_stroke">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <RadioButton
+            android:id="@+id/radioButtonRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:buttonTint="?attr/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textRegionName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textStyle="bold"
+                tools:text="Southeast Asia" />
+
+            <TextView
+                android:id="@+id/textRegionDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary"
+                tools:text="Traditional Islamic practices with local cultural integration" />
+
+            <TextView
+                android:id="@+id/textCountries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?android:attr/textColorSecondary"
+                android:drawableStart="@drawable/ic_location_24"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                tools:text="Indonesia, Malaysia, Thailand, Philippines" />
+
+            <TextView
+                android:id="@+id/textLanguages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?android:attr/textColorSecondary"
+                android:drawableStart="@drawable/ic_language_24"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                tools:text="Languages: Indonesian, Malay, Thai, English" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

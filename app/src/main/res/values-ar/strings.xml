@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App Name -->
+    <string name="app_name">تحليل</string>
+
+    <!-- Authentication Flow Strings -->
+    <string name="welcome_back">مرحباً بعودتك</string>
+    <string name="sign_in_to_continue_prayers">سجل الدخول لمتابعة رحلتك الروحية</string>
+    <string name="join_global_ummah">انضم إلى الأمة العالمية</string>
+    <string name="create_account_for_memorial_prayers">أنشئ حساباً للانضمام إلى صلوات التذكر حول العالم</string>
+    <string name="cultural_preferences">التفضيلات الثقافية</string>
+    <string name="customize_islamic_experience">خصص تجربتك الإسلامية</string>
+
+    <!-- Islamic Greetings -->
+    <string name="greeting_morning">صباح الخير، بارك الله في يومك</string>
+    <string name="greeting_afternoon">السلام عليكم ورحمة الله وبركاته</string>
+    <string name="greeting_evening">مساء الخير، جعله الله مساءً مباركاً</string>
+    <string name="greeting_general">مرحباً بكم في تحليل</string>
+
+    <!-- Authentication Actions -->
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="save_preferences">حفظ التفضيلات</string>
+    <string name="dont_have_account">ليس لديك حساب؟</string>
+    <string name="already_have_account">لديك حساب بالفعل؟</string>
+    <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="sign_in_with_google">متابعة مع جوجل</string>
+    <string name="sign_in_with_phone">تسجيل الدخول برقم الهاتف</string>
+    <string name="continue_as_guest">المتابعة كضيف</string>
+
+    <!-- Form Fields -->
+    <string name="name">الاسم الكامل</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="verification_code">رمز التحقق</string>
+
+    <!-- Validation Messages -->
+    <string name="email_required">البريد الإلكتروني مطلوب</string>
+    <string name="invalid_email">يرجى إدخال بريد إلكتروني صحيح</string>
+    <string name="password_required">كلمة المرور مطلوبة</string>
+    <string name="password_too_short">يجب أن تكون كلمة المرور 8 أحرف على الأقل</string>
+    <string name="passwords_dont_match">كلمات المرور غير متطابقة</string>
+    <string name="name_required">الاسم الكامل مطلوب</string>
+
+    <!-- Cultural Setup -->
+    <string name="select_language">اختر اللغة</string>
+    <string name="select_region">اختر المنطقة</string>
+    <string name="select_school">اختر المذهب</string>
+    <string name="select_islamic_region">اختر منطقتك الإسلامية</string>
+    <string name="select_school_of_thought">اختر المذهب الفقهي</string>
+
+    <!-- Region Names -->
+    <string name="southeast_asia_description">الممارسات الإسلامية التقليدية مع التكامل الثقافي المحلي</string>
+    <string name="middle_east_description">التقاليد الإسلامية الكلاسيكية والتراث الثقافي العربي</string>
+    <string name="south_asia_description">التراث الإسلامي الغني مع التقاليد الثقافية الهندية الإسلامية</string>
+    <string name="north_africa_description">التقاليد الإسلامية المغاربية مع التأثيرات البربرية والعربية</string>
+
+    <!-- School of Thought Descriptions -->
+    <string name="hanafi_description">يؤكد على المنطق والرأي في الفقه الإسلامي</string>
+    <string name="maliki_description">مبني على ممارسات أهل المدينة في عصر النبي</string>
+    <string name="shafi_description">منهج منتظم يوازن بين القرآن والحديث والمنطق</string>
+    <string name="hanbali_description">منهج محافظ يؤكد على القرآن والحديث</string>
+    <string name="jafari_description">الفقه الشيعي الاثني عشري تبعاً للأئمة الاثني عشر</string>
+
+    <!-- Cultural Options -->
+    <string name="show_arabic_text">إظهار النص العربي</string>
+    <string name="show_transliteration">إظهار النقل الصوتي</string>
+
+    <!-- Islamic Terms -->
+    <string name="ummah">الأمة</string>
+    <string name="tahlil">تهليل</string>
+    <string name="yasin">يس</string>
+    <string name="fatihah">الفاتحة</string>
+    <string name="dua">دعاء</string>
+    <string name="salah">صلاة</string>
+    <string name="dhikr">ذكر</string>
+    <string name="assalamu_alaikum">السلام عليكم</string>
+    <string name="wa_alaikum_salaam">وعليكم السلام</string>
+
+    <!-- Common Actions -->
+    <string name="confirm">تأكيد</string>
+    <string name="cancel">إلغاء</string>
+    <string name="continue_text">متابعة</string>
+    <string name="skip">تخطي</string>
+    <string name="back">رجوع</string>
+    <string name="next">التالي</string>
+    <string name="done">تم</string>
+
+</resources>

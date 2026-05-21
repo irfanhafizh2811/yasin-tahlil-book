@@ -641,7 +641,7 @@ val TahlilTypography = Typography(
         textDirection = TextDirection.Rtl
     ),
     headlineLarge = TextStyle(
-        fontFamily = NotoNaskhArabicFont,
+        fontFamily = font_lpmq_isep_misbahFont,
         fontWeight = FontWeight.SemiBold,
         fontSize = 32.sp,
         lineHeight = 40.sp,
@@ -649,7 +649,7 @@ val TahlilTypography = Typography(
         textDirection = TextDirection.Rtl
     ),
     bodyLarge = TextStyle(
-        fontFamily = NotoSansArabicFont,
+        fontFamily = font_lpmq_isep_misbahFont,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,

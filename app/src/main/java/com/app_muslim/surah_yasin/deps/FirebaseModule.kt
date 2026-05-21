@@ -7,6 +7,7 @@ import com.app_muslim.surah_yasin.services.FirebaseAuthService
 import com.app_muslim.surah_yasin.services.FirestoreService
 import com.app_muslim.surah_yasin.services.StorageService
 import com.app_muslim.surah_yasin.services.MessagingService
+import com.app_muslim.surah_yasin.data.preference.AuthPreference
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -34,6 +35,9 @@ val firebaseModule = module {
     single { FirestoreService(get()) }
     single { StorageService(get()) }
     single { MessagingService(get()) }
+    
+    // Authentication Preferences
+    single { AuthPreference(get()) }
     
     // Note: Add Repository Layer when you create them:
     // single<MemorialRepository> { MemorialRepositoryImpl(get(), get()) }

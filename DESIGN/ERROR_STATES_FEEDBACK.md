@@ -129,7 +129,7 @@
 
 /* Arabic error messages */
 .error-message.arabic {
-  font-family: 'Noto Sans Arabic', serif;
+  font-family: 'font_lpmq_isep_misbah', serif;
   direction: rtl;
   text-align: right;
   font-size: 18px;

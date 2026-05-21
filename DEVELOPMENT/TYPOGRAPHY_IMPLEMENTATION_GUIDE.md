@@ -15,35 +15,31 @@ This guide provides comprehensive instructions for implementing the approved typ
 export const arabicFonts = {
   // Primary: For Quran verses and sacred prayers
   primary: {
-    family: 'Noto Naskh Arabic',
-    weights: [400, 500, 600],
+    family: 'font_lpmq_isep_misbah',
     purpose: 'Quranic text, Tahlil prayers, religious content',
     features: {
       diacritics: true,
       contextualAlternates: true,
       ligatures: true,
       kashida: true,
-      openTypeFeatures: ['calt', 'liga', 'dlig', 'kern']
+      islamicOptimized: true
     },
     sources: {
-      regular: 'https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600',
-      local: './assets/fonts/NotoNaskhArabic-*.ttf'
+      local: '@font/font_lpmq_isep_misbah'
     }
   },
 
-  // Secondary: For UI text in Arabic
+  // Secondary: For UI text in Arabic (fallback to existing font)
   secondary: {
-    family: 'Noto Sans Arabic',
-    weights: [400, 500, 600, 700],
+    family: 'font_lpmq_isep_misbah',
     purpose: 'UI text, names, descriptions, navigation',
     features: {
       modernReadability: true,
       uiOptimized: true,
-      multipleWeights: true
+      islamicAuthenticity: true
     },
     sources: {
-      regular: 'https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700',
-      local: './assets/fonts/NotoSansArabic-*.ttf'
+      local: '@font/font_lpmq_isep_misbah'
     }
   },
 
@@ -129,13 +125,13 @@ export const latinFonts = {
 assets/
 ├── fonts/
 │   ├── arabic/
-│   │   ├── NotoNaskhArabic-Regular.ttf
-│   │   ├── NotoNaskhArabic-Medium.ttf
-│   │   ├── NotoNaskhArabic-SemiBold.ttf
-│   │   ├── NotoSansArabic-Regular.ttf
-│   │   ├── NotoSansArabic-Medium.ttf
-│   │   ├── NotoSansArabic-SemiBold.ttf
-│   │   ├── NotoSansArabic-Bold.ttf
+│   │   ├── font_lpmq_isep_misbah-Regular.ttf
+│   │   ├── font_lpmq_isep_misbah-Medium.ttf
+│   │   ├── font_lpmq_isep_misbah-SemiBold.ttf
+│   │   ├── font_lpmq_isep_misbah-Regular.ttf
+│   │   ├── font_lpmq_isep_misbah-Medium.ttf
+│   │   ├── font_lpmq_isep_misbah-SemiBold.ttf
+│   │   ├── font_lpmq_isep_misbah-Bold.ttf
 │   │   ├── Amiri-Regular.ttf
 │   │   └── Amiri-Bold.ttf
 │   ├── latin/
@@ -166,16 +162,8 @@ export interface FontLoadingState {
 
 export const useAppFonts = (): FontLoadingState => {
   const [fontsLoaded, fontError] = useFonts({
-    // Arabic Fonts - Noto Naskh Arabic
-    'NotoNaskhArabic-Regular': require('../assets/fonts/arabic/NotoNaskhArabic-Regular.ttf'),
-    'NotoNaskhArabic-Medium': require('../assets/fonts/arabic/NotoNaskhArabic-Medium.ttf'),
-    'NotoNaskhArabic-SemiBold': require('../assets/fonts/arabic/NotoNaskhArabic-SemiBold.ttf'),
-    
-    // Arabic Fonts - Noto Sans Arabic
-    'NotoSansArabic-Regular': require('../assets/fonts/arabic/NotoSansArabic-Regular.ttf'),
-    'NotoSansArabic-Medium': require('../assets/fonts/arabic/NotoSansArabic-Medium.ttf'),
-    'NotoSansArabic-SemiBold': require('../assets/fonts/arabic/NotoSansArabic-SemiBold.ttf'),
-    'NotoSansArabic-Bold': require('../assets/fonts/arabic/NotoSansArabic-Bold.ttf'),
+    // Arabic Font - Using existing font_lpmq_isep_misbah
+    'font_lpmq_isep_misbah': require('../assets/fonts/font_lpmq_isep_misbah.ttf'),
     
     // Arabic Fonts - Amiri
     'Amiri-Regular': require('../assets/fonts/arabic/Amiri-Regular.ttf'),
@@ -226,14 +214,14 @@ export const typography = {
   fontFamilies: {
     // Arabic families
     arabicPrimary: Platform.select({
-      ios: 'NotoNaskhArabic-Regular',
-      android: 'NotoNaskhArabic-Regular',
-      default: 'NotoNaskhArabic-Regular'
+      ios: 'font_lpmq_isep_misbah-Regular',
+      android: 'font_lpmq_isep_misbah-Regular',
+      default: 'font_lpmq_isep_misbah-Regular'
     }),
     arabicSecondary: Platform.select({
-      ios: 'NotoSansArabic-Regular',
-      android: 'NotoSansArabic-Regular', 
-      default: 'NotoSansArabic-Regular'
+      ios: 'font_lpmq_isep_misbah-Regular',
+      android: 'font_lpmq_isep_misbah-Regular', 
+      default: 'font_lpmq_isep_misbah-Regular'
     }),
     arabicDecorative: Platform.select({
       ios: 'Amiri-Regular',
@@ -266,7 +254,7 @@ export const typography = {
       fontSize: 22,
       lineHeight: 40,
       letterSpacing: 0.8,
-      fontFamily: 'NotoNaskhArabic-Regular',
+      fontFamily: 'font_lpmq_isep_misbah-Regular',
       textAlign: 'right' as const,
       writingDirection: 'rtl' as const,
       fontFeatureSettings: "'calt' 1, 'liga' 1, 'dlig' 1"
@@ -277,7 +265,7 @@ export const typography = {
       fontSize: 20,
       lineHeight: 36,
       letterSpacing: 0.6,
-      fontFamily: 'NotoNaskhArabic-Medium',
+      fontFamily: 'font_lpmq_isep_misbah-Medium',
       textAlign: 'right' as const,
       writingDirection: 'rtl' as const
     },
@@ -426,7 +414,7 @@ export const typography = {
       fontSize: 16,
       lineHeight: 28,
       letterSpacing: 0.3,
-      fontFamily: 'NotoSansArabic-Regular',
+      fontFamily: 'font_lpmq_isep_misbah-Regular',
       textAlign: 'right' as const,
       writingDirection: 'rtl' as const
     },
@@ -435,7 +423,7 @@ export const typography = {
       fontSize: 20,
       lineHeight: 32,
       letterSpacing: 0.2,
-      fontFamily: 'NotoSansArabic-SemiBold',
+      fontFamily: 'font_lpmq_isep_misbah-SemiBold',
       textAlign: 'right' as const,
       writingDirection: 'rtl' as const
     }
@@ -742,15 +730,15 @@ import { Asset } from 'expo-asset';
 export class FontLoader {
   private static criticalFonts = [
     'Inter-Regular',
-    'NotoSansArabic-Regular', 
-    'NotoNaskhArabic-Regular'
+    'font_lpmq_isep_misbah-Regular', 
+    'font_lpmq_isep_misbah-Regular'
   ];
 
   private static secondaryFonts = [
     'Inter-Medium',
     'Inter-SemiBold',
-    'NotoSansArabic-Medium',
-    'NotoNaskhArabic-Medium'
+    'font_lpmq_isep_misbah-Medium',
+    'font_lpmq_isep_misbah-Medium'
   ];
 
   private static decorativeFonts = [
@@ -824,14 +812,14 @@ LATIN_EXTENDED="U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+
 
 # Create optimized Arabic fonts
 echo "Optimizing Arabic fonts..."
-fonttools subset assets/fonts/arabic/NotoNaskhArabic-Regular.ttf \
+fonttools subset assets/fonts/arabic/font_lpmq_isep_misbah-Regular.ttf \
   --unicodes="$ARABIC_SUBSET" \
-  --output-file="assets/fonts/arabic/NotoNaskhArabic-Regular-optimized.ttf" \
+  --output-file="assets/fonts/arabic/font_lpmq_isep_misbah-Regular-optimized.ttf" \
   --flavor=woff2
 
-fonttools subset assets/fonts/arabic/NotoSansArabic-Regular.ttf \
+fonttools subset assets/fonts/arabic/font_lpmq_isep_misbah-Regular.ttf \
   --unicodes="$ARABIC_SUBSET" \
-  --output-file="assets/fonts/arabic/NotoSansArabic-Regular-optimized.ttf" \
+  --output-file="assets/fonts/arabic/font_lpmq_isep_misbah-Regular-optimized.ttf" \
   --flavor=woff2
 
 # Create optimized Latin fonts
@@ -843,7 +831,7 @@ fonttools subset assets/fonts/latin/Inter-Regular.ttf \
 
 echo "Font optimization complete!"
 echo "Original sizes vs optimized sizes:"
-du -h assets/fonts/arabic/NotoNaskhArabic-Regular.ttf assets/fonts/arabic/NotoNaskhArabic-Regular-optimized.ttf
+du -h assets/fonts/arabic/font_lpmq_isep_misbah-Regular.ttf assets/fonts/arabic/font_lpmq_isep_misbah-Regular-optimized.ttf
 du -h assets/fonts/latin/Inter-Regular.ttf assets/fonts/latin/Inter-Regular-optimized.ttf
 ```
 
@@ -860,7 +848,7 @@ export const getFontWithFallback = (
 ): string => {
   const arabicFallbacks = Platform.select({
     ios: [primaryFont, 'Arabic UI', 'PingFang SC', 'System'],
-    android: [primaryFont, 'Noto Sans Arabic', 'Roboto', 'System'],
+    android: [primaryFont, 'font_lpmq_isep_misbah', 'Roboto', 'System'],
     default: [primaryFont, 'Arial Unicode MS', 'sans-serif']
   });
 
@@ -898,7 +886,7 @@ describe('Islamic Typography Visual Tests', () => {
     const textElement = getByText(arabicText);
     expect(textElement).toBeTruthy();
     expect(textElement.props.style).toMatchObject({
-      fontFamily: 'NotoNaskhArabic-Regular',
+      fontFamily: 'font_lpmq_isep_misbah-Regular',
       textAlign: 'right',
       writingDirection: 'rtl'
     });

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Authentication Flow Strings -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_to_continue_prayers">Sign in to continue your spiritual journey</string>
+    <string name="join_global_ummah">Join the Global Ummah</string>
+    <string name="create_account_for_memorial_prayers">Create account to join memorial prayers worldwide</string>
+    <string name="cultural_preferences">Cultural Preferences</string>
+    <string name="customize_islamic_experience">Customize your Islamic experience</string>
+
+    <!-- Islamic Greetings -->
+    <string name="greeting_morning">Good morning. May Allah bless your day</string>
+    <string name="greeting_afternoon">As-Salamu Alaikum. Peace be upon you</string>
+    <string name="greeting_evening">Good evening. May Allah grant you peace</string>
+    <string name="greeting_general">Welcome to Tahlil</string>
+
+    <!-- Authentication Actions -->
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="save_preferences">Save Preferences</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in_with_google">Continue with Google</string>
+    <string name="sign_in_with_phone">Sign in with Phone</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+
+    <!-- Form Fields -->
+    <string name="name">Full Name</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="verification_code">Verification Code</string>
+
+    <!-- Validation Messages -->
+    <string name="email_required">Email address is required</string>
+    <string name="invalid_email">Please enter a valid email address</string>
+    <string name="password_required">Password is required</string>
+    <string name="password_too_short">Password must be at least 8 characters</string>
+    <string name="passwords_dont_match">Passwords do not match</string>
+    <string name="name_required">Full name is required</string>
+    <string name="phone_required">Phone number is required</string>
+    <string name="verification_code_required">Verification code is required</string>
+
+    <!-- Cultural Setup -->
+    <string name="select_language">Select Language</string>
+    <string name="select_region">Select Region</string>
+    <string name="select_school">Select School of Thought</string>
+    <string name="select_islamic_region">Select Your Islamic Region</string>
+    <string name="select_school_of_thought">Select School of Thought</string>
+    <string name="select_region_description">Choose your region to get culturally appropriate Islamic content and practices.</string>
+    <string name="select_school_description">Select your school of Islamic jurisprudence to personalize your prayer experience.</string>
+    <string name="school_selection_note">This helps us provide appropriate prayer timings, practices, and content. You can change this anytime in settings.</string>
+
+    <!-- Region Descriptions -->
+    <string name="southeast_asia_description">Traditional Islamic practices with local cultural integration</string>
+    <string name="middle_east_description">Classical Islamic traditions and Arabic cultural heritage</string>
+    <string name="south_asia_description">Rich Islamic heritage with Indo-Islamic cultural traditions</string>
+    <string name="north_africa_description">Maghrebi Islamic traditions with Berber and Arab influences</string>
+    <string name="sub_saharan_africa_description">African Islamic traditions with local cultural practices</string>
+    <string name="central_asia_description">Islamic traditions influenced by Turkic and Persian cultures</string>
+    <string name="europe_description">Modern Islamic practices adapted to European contexts</string>
+    <string name="north_america_description">Contemporary Islamic practices in Western settings</string>
+    <string name="south_america_description">Growing Islamic communities with diverse backgrounds</string>
+    <string name="oceania_description">Islamic communities in Pacific region</string>
+
+    <!-- School of Thought Descriptions -->
+    <string name="hanafi_description">Emphasizes reasoning and opinion (ra\'y) in Islamic jurisprudence</string>
+    <string name="maliki_description">Based on the practices of the people of Medina during Prophet\'s time</string>
+    <string name="shafi_description">Systematic approach balancing Quran, Hadith, and reasoning</string>
+    <string name="hanbali_description">Conservative approach emphasizing Quran and Hadith</string>
+    <string name="jafari_description">Twelver Shia jurisprudence following the twelve Imams</string>
+    <string name="other_school_description">Other Islamic traditions and regional variations</string>
+
+    <!-- Cultural Options -->
+    <string name="show_arabic_text">Show Arabic Text</string>
+    <string name="show_transliteration">Show Transliteration</string>
+    <string name="arabic_font_size">Arabic Font Size</string>
+    <string name="translation_font_size">Translation Font Size</string>
+
+    <!-- Authentication Status Messages -->
+    <string name="signing_in">Signing in…</string>
+    <string name="creating_account">Creating account…</string>
+    <string name="setting_up_profile">Setting up your profile…</string>
+    <string name="google_signin_failed">Google sign in failed. Please try again.</string>
+    <string name="phone_auth_coming_soon">Phone authentication will be available soon</string>
+    <string name="enter_email_for_reset">Enter your email address to reset password</string>
+    <string name="password_reset_sent">Password reset email sent. Check your inbox.</string>
+
+    <!-- Common Actions -->
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_text">Continue</string>
+    <string name="skip">Skip</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+
+    <!-- Islamic Terms -->
+    <string name="ummah">Ummah</string>
+    <string name="tahlil">Tahlil</string>
+    <string name="yasin">Yasin</string>
+    <string name="fatihah">Al-Fatihah</string>
+    <string name="dua">Dua</string>
+    <string name="salah">Salah</string>
+    <string name="dhikr">Dhikr</string>
+    <string name="barakallahu_feeki">Barakallahu feeki</string>
+    <string name="jazakallahu_khair">Jazakallahu khair</string>
+    <string name="assalamu_alaikum">As-salamu alaikum</string>
+    <string name="wa_alaikum_salaam">Wa alaikum as-salaam</string>
+
+    <!-- Privacy and Terms -->
+    <string name="privacy_agreement">By creating an account, you agree to our Privacy Policy and Terms of Service</string>
+    <string name="data_usage_islamic">Your data will be handled according to Islamic privacy principles</string>
+    <string name="community_guidelines">Follow Islamic community guidelines</string>
+
+</resources>

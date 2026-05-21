@@ -56,7 +56,7 @@ Technical Requirements:
 const arabicFonts = {
   // Primary Quranic/Prayer Text
   primary: {
-    family: 'Noto Naskh Arabic',
+    family: 'font_lpmq_isep_misbah',
     source: 'Google Fonts',
     sizes: ['16px', '20px', '24px', '28px'],
     weights: [400, 500, 600],
@@ -71,7 +71,7 @@ const arabicFonts = {
 
   // Secondary Arabic Text (Names, Descriptions)
   secondary: {
-    family: 'Noto Sans Arabic',
+    family: 'font_lpmq_isep_misbah',
     source: 'Google Fonts', 
     sizes: ['14px', '16px', '18px', '20px'],
     weights: [400, 500, 600, 700],
@@ -170,7 +170,7 @@ const latinFonts = {
 
 /* Prayer text specific */
 .prayer-text {
-  font-family: 'Noto Naskh Arabic', serif;
+  font-family: 'font_lpmq_isep_misbah', serif;
   font-size: var(--font-size-xl);
   line-height: var(--line-height-loose);
   font-feature-settings: 'dlig' 1, 'liga' 1, 'calt' 1;
@@ -186,15 +186,15 @@ const fontLoadingStrategy = {
   // Critical fonts (load immediately)
   critical: [
     'Inter-400',
-    'Noto Sans Arabic-400',
-    'Noto Naskh Arabic-400'
+    'font_lpmq_isep_misbah-400',
+    'font_lpmq_isep_misbah-400'
   ],
   
   // Important fonts (preload)
   preload: [
     'Inter-600',
-    'Noto Sans Arabic-600',
-    'Noto Naskh Arabic-500'
+    'font_lpmq_isep_misbah-600',
+    'font_lpmq_isep_misbah-500'
   ],
   
   // Optional fonts (lazy load)
@@ -426,12 +426,12 @@ import { useFonts } from 'expo-font';
 export const useAppFonts = () => {
   const [fontsLoaded] = useFonts({
     // Arabic Fonts
-    'NotoNaskhArabic-Regular': require('../assets/fonts/NotoNaskhArabic-Regular.ttf'),
-    'NotoNaskhArabic-Medium': require('../assets/fonts/NotoNaskhArabic-Medium.ttf'),
-    'NotoNaskhArabic-SemiBold': require('../assets/fonts/NotoNaskhArabic-SemiBold.ttf'),
-    'NotoSansArabic-Regular': require('../assets/fonts/NotoSansArabic-Regular.ttf'),
-    'NotoSansArabic-Medium': require('../assets/fonts/NotoSansArabic-Medium.ttf'),
-    'NotoSansArabic-SemiBold': require('../assets/fonts/NotoSansArabic-SemiBold.ttf'),
+    'font_lpmq_isep_misbah-Regular': require('../assets/fonts/font_lpmq_isep_misbah-Regular.ttf'),
+    'font_lpmq_isep_misbah-Medium': require('../assets/fonts/font_lpmq_isep_misbah-Medium.ttf'),
+    'font_lpmq_isep_misbah-SemiBold': require('../assets/fonts/font_lpmq_isep_misbah-SemiBold.ttf'),
+    'font_lpmq_isep_misbah-Regular': require('../assets/fonts/font_lpmq_isep_misbah-Regular.ttf'),
+    'font_lpmq_isep_misbah-Medium': require('../assets/fonts/font_lpmq_isep_misbah-Medium.ttf'),
+    'font_lpmq_isep_misbah-SemiBold': require('../assets/fonts/font_lpmq_isep_misbah-SemiBold.ttf'),
     'Amiri-Regular': require('../assets/fonts/Amiri-Regular.ttf'),
     'Amiri-Bold': require('../assets/fonts/Amiri-Bold.ttf'),
     
@@ -459,8 +459,8 @@ export const typography = {
   // Font families
   fonts: {
     // Arabic fonts
-    arabicPrimary: 'NotoNaskhArabic-Regular',
-    arabicSecondary: 'NotoSansArabic-Regular', 
+    arabicPrimary: 'font_lpmq_isep_misbah-Regular',
+    arabicSecondary: 'font_lpmq_isep_misbah-Regular', 
     arabicDecorative: 'Amiri-Regular',
     
     // Latin fonts
@@ -473,7 +473,7 @@ export const typography = {
   styles: {
     // Prayer text styles
     prayerText: {
-      fontFamily: 'NotoNaskhArabic-Regular',
+      fontFamily: 'font_lpmq_isep_misbah-Regular',
       fontSize: 20,
       lineHeight: 36,
       textAlign: 'right',
@@ -680,8 +680,8 @@ export const syncIslamicContent = functions.pubsub
 ### 🎯 Typography Decisions
 ```
 ✅ APPROVED: Font Selection
-├─ Arabic Primary: Noto Naskh Arabic (prayer text)
-├─ Arabic Secondary: Noto Sans Arabic (UI text)
+├─ Arabic Primary: font_lpmq_isep_misbah (prayer text)
+├─ Arabic Secondary: font_lpmq_isep_misbah (UI text)
 ├─ Arabic Decorative: Amiri (headers)
 ├─ Latin Primary: Inter (main UI)
 ├─ Latin Secondary: Source Sans Pro (body text)

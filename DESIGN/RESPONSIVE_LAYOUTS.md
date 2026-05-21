@@ -503,7 +503,7 @@ Desktop/Web (1025px+):
 [dir="rtl"] .arabic-text {
   text-align: right;
   direction: rtl;
-  font-family: 'Noto Sans Arabic', 'Arabic UI Text', serif;
+  font-family: 'font_lpmq_isep_misbah', 'Arabic UI Text', serif;
 }
 
 /* RTL responsive adjustments */
@@ -754,7 +754,7 @@ Desktop/Web (1025px+):
 .arabic-text {
   font-size: var(--arabic-base);
   line-height: var(--line-height-relaxed);
-  font-family: 'Noto Sans Arabic', serif;
+  font-family: 'font_lpmq_isep_misbah', serif;
 }
 
 .arabic-lg {

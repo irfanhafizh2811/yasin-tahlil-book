@@ -970,7 +970,7 @@ const styles = StyleSheet.create({
     lineHeight: 36,
     textAlign: 'center',
     color: '#1B5E20',
-    fontFamily: 'NotoSansArabic-Regular',
+    fontFamily: 'font_lpmq_isep_misbah-Regular',
     marginBottom: 16,
   },
   transliteration: {
