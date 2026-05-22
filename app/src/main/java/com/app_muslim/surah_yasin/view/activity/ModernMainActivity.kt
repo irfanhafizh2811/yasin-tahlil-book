@@ -8,17 +8,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.People
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentDestinationAsState
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -92,11 +93,12 @@ fun TahlilBottomNavigation(navController: NavController) {
     val items = listOf(
         BottomNavItem("tasbeeh", "Tasbeeh", Icons.Default.Favorite),
         BottomNavItem("memorial", "Memorial", Icons.Default.LocationOn),
-        BottomNavItem("community", "Community", Icons.Default.People),
+        BottomNavItem("community", "Community", Icons.Default.Home),
         BottomNavItem("profile", "Profile", Icons.Default.Person)
     )
     
-    val currentDestination by navController.currentDestinationAsState()
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = currentBackStackEntry?.destination
     
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surface,

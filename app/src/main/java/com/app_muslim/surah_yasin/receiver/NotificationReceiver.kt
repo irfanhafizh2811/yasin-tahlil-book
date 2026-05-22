@@ -14,7 +14,7 @@ import com.app_muslim.surah_yasin.R
 import com.app_muslim.surah_yasin.app.App.Companion.CHANNEL_ID
 import com.app_muslim.surah_yasin.data.preference.CorePreference
 import com.app_muslim.surah_yasin.data.preference.SettingPreference
-import com.app_muslim.surah_yasin.view.activity.MainActivity
+import com.app_muslim.surah_yasin.view.activity.ModernMainActivity
 import java.util.*
 
 class NotificationReceiver : BroadcastReceiver() {
@@ -34,7 +34,7 @@ class NotificationReceiver : BroadcastReceiver() {
     private fun showNotification(context: Context) {
         val settingPreference = SettingPreference(CorePreference.getInstance(context))
         if (settingPreference.notification) {
-            val intent = Intent(context, MainActivity::class.java).apply {
+            val intent = Intent(context, ModernMainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
             val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)

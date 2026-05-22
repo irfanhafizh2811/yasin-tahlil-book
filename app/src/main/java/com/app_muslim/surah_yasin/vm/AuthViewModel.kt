@@ -272,14 +272,14 @@ class AuthViewModel @Inject constructor(
      * Get current authenticated user
      */
     fun getCurrentUser(): FirebaseUser? {
-        return authService.getCurrentUser()
+        return authService.currentUser
     }
     
     /**
      * Check if user is authenticated
      */
     fun isUserAuthenticated(): Boolean {
-        return authService.getCurrentUser() != null
+        return authService.currentUser != null
     }
     
     /**
@@ -320,7 +320,7 @@ class AuthViewModel @Inject constructor(
      * Get current auth state from preferences
      */
     fun isUserLoggedIn(): Boolean {
-        return authPreference.isAuthenticated && authService.getCurrentUser() != null
+        return authPreference.isAuthenticated && authService.currentUser != null
     }
 
     /**

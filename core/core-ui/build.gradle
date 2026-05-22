@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk 36
+    compileSdk 34
     
     defaultConfig {
         minSdk 24
-        targetSdk 36
+        targetSdk 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -31,12 +31,23 @@ android {
     }
     
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
+    }
+    
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(11)
+        }
+    }
+
+    hilt {
+        enableAggregatingTask = true
+        enableExperimentalClasspathAggregation = false
     }
     
     namespace 'com.app_muslim.surah_yasin.core.ui'

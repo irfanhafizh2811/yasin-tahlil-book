@@ -117,10 +117,6 @@ class FirebaseAuthService @Inject constructor(
         return resetPassword(email)
     }
     
-    // Method expected by AuthViewModel
-    fun getCurrentUser(): FirebaseUser? {
-        return currentUser
-    }
     
     // Reset Password
     suspend fun resetPassword(email: String): Result<Unit> {

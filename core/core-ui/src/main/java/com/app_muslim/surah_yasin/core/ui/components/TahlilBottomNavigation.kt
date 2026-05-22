@@ -3,7 +3,7 @@ package com.app_muslim.surah_yasin.core.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.People
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.compose.currentDestinationAsState
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun TahlilBottomNavigation(
@@ -22,11 +22,12 @@ fun TahlilBottomNavigation(
     val items = listOf(
         BottomNavItem("tasbeeh", "Tasbeeh", Icons.Default.Favorite),
         BottomNavItem("memorial", "Memorial", Icons.Default.LocationOn),
-        BottomNavItem("community", "Community", Icons.Default.People),
+        BottomNavItem("community", "Community", Icons.Default.Home),
         BottomNavItem("profile", "Profile", Icons.Default.Person)
     )
     
-    val currentDestination by navController.currentDestinationAsState()
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = currentBackStackEntry?.destination
     
     NavigationBar(
         modifier = modifier,
