@@ -80,3 +80,14 @@ data class MemorialStats(
     val dailyPrayerCounts: Map<String, Long> = emptyMap(), // Date string to count
     val lastPrayerAt: Date? = null
 ) : Parcelable
+
+@Parcelize
+data class UserMemorialsSummary(
+    val totalMemorials: Long = 0,
+    val activeMemorials: Long = 0,
+    val expiredMemorials: Long = 0,
+    val totalPrayers: Long = 0,
+    val totalParticipants: Long = 0,
+    val mostPopularMemorial: MemorialData? = null,
+    val recentMemorial: MemorialData? = null
+) : Parcelable

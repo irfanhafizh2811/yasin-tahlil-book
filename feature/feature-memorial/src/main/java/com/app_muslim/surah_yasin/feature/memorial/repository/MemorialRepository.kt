@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.ktx.snapshots
 import com.google.firebase.firestore.QuerySnapshot
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -121,6 +122,56 @@ class MemorialRepository @Inject constructor(
             }
     }
 
+    fun getUserMemorialsWithFilter(
+        userId: String,
+        privacyLevel: PrivacyLevel? = null,
+        isActive: Boolean? = null,
+        limit: Int = 50
+    ): Flow<List<MemorialData>> {
+        var query = firestore.collection(MEMORIALS_COLLECTION)
+            .whereEqualTo("creatorId", userId)
+
+        privacyLevel?.let { 
+            query = query.whereEqualTo("privacyLevel", it.name)
+        }
+        
+        isActive?.let {
+            query = query.whereEqualTo("isActive", it)
+        }
+
+        return query
+            .orderBy("createdAt", Query.Direction.DESCENDING)
+            .limit(limit.toLong())
+            .snapshots()
+            .map { snapshot: QuerySnapshot ->
+                snapshot.documents.mapNotNull { it.toMemorialData() }
+            }
+    }
+
+    suspend fun searchMemorials(
+        userId: String,
+        searchQuery: String
+    ): List<MemorialData> {
+        // Since Firestore doesn't support full-text search natively,
+        // we'll fetch user memorials and filter client-side
+        val allMemorials = firestore.collection(MEMORIALS_COLLECTION)
+            .whereEqualTo("creatorId", userId)
+            .whereEqualTo("isActive", true)
+            .get()
+            .await()
+            .documents
+            .mapNotNull { it.toMemorialData() }
+
+        val searchTerm = searchQuery.lowercase()
+        return allMemorials.filter { memorial ->
+            memorial.deceasedName.lowercase().contains(searchTerm) ||
+            memorial.deceasedNameArabic?.lowercase()?.contains(searchTerm) == true ||
+            memorial.memorialMessage.lowercase().contains(searchTerm) ||
+            memorial.memorialMessageArabic?.lowercase()?.contains(searchTerm) == true ||
+            memorial.tags.any { it.lowercase().contains(searchTerm) }
+        }
+    }
+
     fun getPublicMemorials(): Flow<List<MemorialData>> {
         return firestore.collection(MEMORIALS_COLLECTION)
             .whereEqualTo("privacyLevel", PrivacyLevel.PUBLIC.name)
@@ -192,6 +243,110 @@ class MemorialRepository @Inject constructor(
             // Photo might already be deleted or URL is invalid
             throw IllegalArgumentException("Failed to delete photo: ${e.message}")
         }
+    }
+
+    suspend fun getMemorialStatistics(memorialId: String): MemorialStats {
+        val memorial = getMemorial(memorialId) 
+            ?: throw IllegalArgumentException("Memorial not found")
+
+        val participationSnapshot = firestore.collection(PARTICIPATION_COLLECTION)
+            .whereEqualTo("memorialId", memorialId)
+            .get()
+            .await()
+
+        val participations = participationSnapshot.documents.mapNotNull { doc ->
+            try {
+                MemorialParticipation(
+                    id = doc.getString("id") ?: "",
+                    memorialId = doc.getString("memorialId") ?: "",
+                    participantId = doc.getString("participantId") ?: "",
+                    participantName = doc.getString("participantName") ?: "",
+                    prayerType = doc.getString("prayerType")?.let { 
+                        try { PrayerType.valueOf(it) } catch (e: Exception) { PrayerType.TAHLIL }
+                    } ?: PrayerType.TAHLIL,
+                    participatedAt = doc.getDate("participatedAt") ?: Date(),
+                    prayerDuration = doc.getLong("prayerDuration") ?: 0,
+                    isVerified = doc.getBoolean("isVerified") ?: false,
+                    notes = doc.getString("notes") ?: ""
+                )
+            } catch (e: Exception) {
+                null
+            }
+        }
+
+        // Calculate statistics
+        val totalPrayers = participations.size.toLong()
+        val uniqueParticipants = participations.map { it.participantId }.distinct().size.toLong()
+        
+        val prayersByType = participations.groupBy { it.prayerType }
+            .mapValues { it.value.size.toLong() }
+
+        // Get region statistics from user profiles
+        val participantsByRegion = mutableMapOf<String, Long>()
+        val uniqueParticipantIds = participations.map { it.participantId }.distinct()
+        
+        for (participantId in uniqueParticipantIds) {
+            try {
+                val userProfile = firestore.collection("user_profiles")
+                    .document(participantId)
+                    .get()
+                    .await()
+                
+                val region = userProfile.getString("region") ?: "Unknown"
+                participantsByRegion[region] = (participantsByRegion[region] ?: 0) + 1
+            } catch (e: Exception) {
+                participantsByRegion["Unknown"] = (participantsByRegion["Unknown"] ?: 0) + 1
+            }
+        }
+
+        // Daily prayer counts (last 30 days)
+        val thirtyDaysAgo = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_MONTH, -30)
+        }.time
+
+        val recentParticipations = participations.filter { it.participatedAt.after(thirtyDaysAgo) }
+        val dailyPrayerCounts = recentParticipations.groupBy { participation ->
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(participation.participatedAt)
+        }.mapValues { it.value.size.toLong() }
+
+        val lastPrayerAt = participations.maxByOrNull { it.participatedAt }?.participatedAt
+
+        return MemorialStats(
+            totalPrayers = totalPrayers,
+            totalParticipants = uniqueParticipants,
+            prayersByType = prayersByType,
+            participantsByRegion = participantsByRegion,
+            dailyPrayerCounts = dailyPrayerCounts,
+            lastPrayerAt = lastPrayerAt
+        )
+    }
+
+    suspend fun getUserMemorialsSummary(userId: String): UserMemorialsSummary {
+        val memorials = firestore.collection(MEMORIALS_COLLECTION)
+            .whereEqualTo("creatorId", userId)
+            .get()
+            .await()
+            .documents
+            .mapNotNull { it.toMemorialData() }
+
+        val activeMemorials = memorials.filter { it.isActive && !isExpired(it.expiresAt) }
+        val expiredMemorials = memorials.filter { isExpired(it.expiresAt) }
+        val totalPrayers = memorials.sumOf { it.prayerCount }
+        val totalParticipants = memorials.sumOf { it.participantCount }
+
+        return UserMemorialsSummary(
+            totalMemorials = memorials.size.toLong(),
+            activeMemorials = activeMemorials.size.toLong(),
+            expiredMemorials = expiredMemorials.size.toLong(),
+            totalPrayers = totalPrayers,
+            totalParticipants = totalParticipants,
+            mostPopularMemorial = memorials.maxByOrNull { it.prayerCount },
+            recentMemorial = memorials.maxByOrNull { it.createdAt }
+        )
+    }
+
+    private fun isExpired(expiresAt: Date): Boolean {
+        return expiresAt.time < System.currentTimeMillis()
     }
 
     private suspend fun updateMemorialStatistics(memorialId: String) {
