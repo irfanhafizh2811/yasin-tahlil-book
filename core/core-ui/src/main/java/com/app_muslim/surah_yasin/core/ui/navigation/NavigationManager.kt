@@ -20,7 +20,7 @@ object NavigationRoutes {
     const val PROFILE = "profile"
     const val MEMORIAL_CREATE = "memorial_create"
     const val MEMORIAL_LIST = "memorial_list"
-    const val TASBEEH = "tasbeeh"
+    const val COMMUNITY_PRAYER = "community_prayer"
     
     // Guest mode restricted routes
     val GUEST_RESTRICTED_ROUTES = setOf(

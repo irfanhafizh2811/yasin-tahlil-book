@@ -81,7 +81,7 @@
                 android:layout_marginStart="16dp"
                 android:fontFamily="sans-serif"
                 android:letterSpacing="0.01"
-                android:text="@string/label_tasbeeh_message"
+                android:text="@string/label_memorial_message"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="normal"

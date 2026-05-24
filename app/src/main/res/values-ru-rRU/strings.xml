@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ясин</string>
+    <string name="app_name">Тахлил Поминовение</string>
 
     <!-- Text -->
     <string name="label_your_dhikr">Ваш Зикр</string>
@@ -8,10 +8,10 @@
     <string name="label_info_fav_dhikr">Вы можете добавить\nсвой любимый Зикр</string>
     <string name="label_info_add_dhikr">Вы можете добавить\nлюбой зикр, который хотите</string>
     <string name="label_count">Считать</string>
-    <string name="label_tasbeeh">Тасбих</string>
+    <string name="label_memorial">Память</string>
     <string name="label_reset">Перезагрузить</string>
     <string name="label_counter_x" translatable="false">%1$dx</string>
-    <string name="label_tasbeeh_message" translatable="false">У тебя сегодня был зикр?</string>
+    <string name="label_memorial_message" translatable="false">Помните своих близких с молитвой</string>
     <string name="text_latin_subhanallah" translatable="false">Subhanallah</string>
     <string name="text_latin_alhamdulillah" translatable="false">Alhamdulillah</string>
     <string name="text_latin_allahu_akbar" translatable="false">Allahu Akbar</string>

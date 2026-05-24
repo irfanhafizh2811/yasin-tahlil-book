@@ -10,30 +10,7 @@ enum class PrayerType(
     val description: String,
     val category: PrayerCategory
 ) {
-    // Tasbih (Praise)
-    SUBHAN_ALLAH(
-        "Subhan Allah",
-        "سُبْحَانَ ٱللَّٰهِ",
-        33,
-        "Glory be to Allah",
-        PrayerCategory.TASBIH
-    ),
-    
-    ALHAMDULILLAH(
-        "Alhamdulillah", 
-        "ٱلْحَمْدُ لِلَّٰهِ",
-        33,
-        "All praise is due to Allah",
-        PrayerCategory.TASBIH
-    ),
-    
-    ALLAHU_AKBAR(
-        "Allahu Akbar",
-        "ٱللَّٰهُ أَكْبَرُ", 
-        34,
-        "Allah is the Greatest",
-        PrayerCategory.TASBIH
-    ),
+    // Memorial-focused prayers removed individual counters
     
     // Dhikr (Remembrance)
     LA_ILAHA_ILLA_ALLAH(
@@ -133,7 +110,6 @@ enum class PrayerType(
      * Get recommended counts for different levels
      */
     fun getRecommendedCounts(): List<Int> = when (this) {
-        SUBHAN_ALLAH, ALHAMDULILLAH, ALLAHU_AKBAR -> listOf(33, 99, 300)
         LA_ILAHA_ILLA_ALLAH, ASTAGHFIRULLAH, LA_HAWLA_WALA_QUWWATA -> listOf(100, 300, 500, 1000)
         SALAWAT_IBRAHIM -> listOf(100, 300, 1000)
         TAHLIL_MAYIT -> listOf(1000, 3000, 7000)
@@ -161,7 +137,6 @@ enum class PrayerType(
 }
 
 enum class PrayerCategory(val displayName: String, val arabicName: String) {
-    TASBIH("Tasbih", "تَسْبِيح"),
     DHIKR("Dhikr", "ذِكْر"),
     SALAWAT("Salawat", "صَلَوَات"),
     DUA("Dua", "دُعَاء"),

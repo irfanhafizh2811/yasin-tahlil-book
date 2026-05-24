@@ -43,11 +43,7 @@ object PreferenceModule {
         return InterstitialPreference(corePreference, interstitialRemoteConfig)
     }
 
-    @Provides
-    @Singleton
-    fun provideCounterPreference(corePreference: CorePreference): CounterPreference {
-        return CounterPreference(corePreference)
-    }
+    // CounterPreference removed - no longer needed for memorial-focused app
 
     @Provides
     @Singleton

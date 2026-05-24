@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">يٰسۤ</string>
+    <string name="app_name">تهليل للذكرى</string>
 
     <!-- Text Arabic -->
     <string name="text_arabic_allah" translatable="false">ُ لِلَّه</string>
@@ -15,10 +15,10 @@
     <string name="label_info_add_dhikr">يمكنك إضافة أي ذكر تريده</string>
     <string name="label_info_fav_dhikr">يمكنك إضافة أي ذكر تريده</string>
     <string name="label_count">عدد</string>
-    <string name="label_tasbeeh">تسبيح</string>
+    <string name="label_memorial">ذكرى</string>
     <string name="label_reset">إعادة تعيين</string>
     <string name="label_counter_x" translatable="false">%1$dx</string>
-    <string name="label_tasbeeh_message" translatable="true">هل لديك ذكر اليوم؟</string>
+    <string name="label_memorial_message" translatable="true">اذكر أحباءك بالدعاء</string>
     <string name="text_latin_subhanallah" translatable="false">Subhanallah</string>
     <string name="text_latin_alhamdulillah" translatable="false">Alhamdulillah</string>
     <string name="text_latin_allahu_akbar" translatable="false">Allahu Akbar</string>

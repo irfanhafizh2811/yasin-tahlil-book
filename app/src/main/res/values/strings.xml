@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yaseen</string>
+    <string name="app_name">Tahlil Memorial</string>
     <string name="id_unit_interstitial" translatable="false">ca-app-pub-5079073523461972/1742849787</string>
     <string name="id_unit_interstitial_sample_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="id_unit_banner" translatable="false">ca-app-pub-5079073523461972/3491045724</string>
@@ -18,10 +18,10 @@
     <string name="label_info_fav_dhikr">You Can Add\nYour Favorite Dhikr</string>
     <string name="label_info_add_dhikr">You can add\nany dhikr you want</string>
     <string name="label_count">Count</string>
-    <string name="label_tasbeeh">Tasbeeh</string>
+    <string name="label_memorial">Memorial</string>
     <string name="label_reset">Reset</string>
     <string name="label_counter_x" translatable="false">%1$dx</string>
-    <string name="label_tasbeeh_message" translatable="false">Have you dhikr today?</string>
+    <string name="label_memorial_message" translatable="false">Remember your loved ones with prayer</string>
     <string name="text_latin_subhanallah" translatable="false">Subhanallah</string>
     <string name="text_latin_alhamdulillah" translatable="false">Alhamdulillah</string>
     <string name="text_latin_allahu_akbar" translatable="false">Allahu Akbar</string>
@@ -44,7 +44,7 @@
     <string name="label_picker_default">Default</string>
     <string name="label_picker_flowers">Flower</string>
     <string name="label_picker_leaves">Leaves</string>
-    <string name="label_rating_and_review_apps">Rating and Review MyDhikr Apps</string>
+    <string name="label_rating_and_review_apps">Rating and Review Tahlil Memorial App</string>
     <string name="label_our_applications">Our Applications</string>
     <string name="label_vibration">Vibration</string>
     <string name="label_sound">Sound</string>

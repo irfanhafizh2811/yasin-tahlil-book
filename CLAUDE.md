@@ -4,14 +4,14 @@
 ### 📋 Project Overview
 
 **Project Name**: Tahlil - Global Memorial Prayer Platform  
-**Original App**: Tasbeeh/Surah Yasin Android App  
-**Evolution**: From local Indonesian app to global Islamic memorial platform  
+**Original App**: Surah Yasin Android App (Prayer-focused)  
+**Evolution**: From prayer app to global Islamic memorial platform  
 **Platform**: Android Native (Existing) + Firebase Ecosystem  
 **Target Users**: 1.8 billion Muslims worldwide  
 
 ### 🎯 Project Vision
 
-Transform the existing Tasbeeh Android app into "Tahlil" - a global platform where Muslims worldwide can create memorials for deceased loved ones and perform collective prayers (Tahlil, Yasin, Fatihah) following authentic Islamic traditions.
+Transform the existing Surah Yasin Android app into "Tahlil" - a global memorial platform where Muslims worldwide can create memorials for deceased loved ones and perform collective prayers (Tahlil, Yasin, Fatihah) following authentic Islamic traditions.
 
 ---
 
@@ -26,7 +26,7 @@ Package: com.app_muslim.surah_yasin
 ├── UI: View Binding + Material Design
 ├── Firebase: Basic (Analytics, Crashlytics, Remote Config)
 ├── Languages: Multi-language support
-└── Features: Tasbeeh counter, Surah reading, Themes
+└── Features: Memorial prayers, Surah reading, Themes
 ```
 
 ### 🔥 **Firebase Ecosystem Integration (Completed)**
@@ -156,7 +156,7 @@ Firebase BOM: 33.1.2 (Latest 2026)
 ### 📱 **Technical Integration**
 
 **Hybrid Architecture Strategy:**
-- **Keep existing**: Room database for offline Tasbeeh, preferences, settings
+- **Keep existing**: Room database for offline memorial prayers, preferences, settings
 - **Add Firebase for**: Memorial prayers, authentication, community features
 - **Gradual migration**: Zero disruption to existing 240M+ users
 

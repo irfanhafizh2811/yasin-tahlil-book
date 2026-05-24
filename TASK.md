@@ -195,19 +195,22 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 
 ---
 
-## Phase 4 — Prayer Counter & Spiritual Features (Compose Migration)
+## Phase 4 — Memorial Prayer Features (Compose-First)
 
-**Objective:** Migrate existing prayer counter to Compose and implement memorial prayer sessions with community features.
+**Objective:** Build focused memorial prayer sessions with community features, removing traditional prayer counter functionality.
 **Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
 
-### P4.A — Enhanced Prayer Counter (Compose Migration) **[PRIORITY 4]**
-- [ ] Create :feature-tasbeeh module from existing TasbeehActivity **[DEPENDS ON P2.A]**
-- [ ] Migrate TasbeehScreen to Jetpack Compose **[HIGH COMPLEXITY]**
-- [ ] Add memorial-specific prayer types (Tahlil, Yasin, Fatihah) in Compose UI
-- [ ] Implement haptic feedback with Android APIs and Compose animations
-- [ ] Create prayer session tracking with Room + Firestore sync
-- [ ] Add offline prayer counting with WorkManager sync
-- [ ] Setup TasbeehViewModel with Hilt DI **[DEPENDS ON P2.A]**
+### P4.A — Memorial Prayer Sessions (Compose Implementation) **[READY FOR IMPLEMENTATION]**
+- [x] ✅ **Remove Legacy Tasbeeh/Prayer Counter System** - Successfully removed all Tasbih counter code, UI, and resources **[COMPLETED]**
+- [x] ✅ **Update App Branding** - Changed from "Tasbeeh" to "Tahlil Memorial" across all languages and resources **[COMPLETED]**  
+- [x] ✅ **Clean Navigation** - Updated bottom navigation to focus on Memorial, Community Prayer, and Profile **[COMPLETED]**
+- [x] ✅ **Compile Successfully** - App builds without errors after Tasbeeh removal **[COMPLETED]**
+- [ ] Create :feature-memorial-prayer module for focused memorial prayers **[DEPENDS ON P2.A]**
+- [ ] Build MemorialPrayerScreen with Jetpack Compose **[MEDIUM COMPLEXITY]**
+- [ ] Focus on memorial-specific prayer types (Tahlil, Yasin, Fatihah) in Compose UI
+- [ ] Implement prayer session tracking with Room + Firestore sync
+- [ ] Add memorial prayer analytics and progress tracking
+- [ ] Setup MemorialPrayerViewModel with Hilt DI **[DEPENDS ON P2.A]**
 
 ### P4.B — Prayer Text Display (Compose Typography)
 - [ ] Create Arabic text components in :core-ui with Compose Text

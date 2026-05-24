@@ -20,7 +20,6 @@ fun TahlilBottomNavigation(
     modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier
 ) {
     val items = listOf(
-        BottomNavItem("tasbeeh", "Tasbeeh", Icons.Default.Favorite),
         BottomNavItem("memorial", "Memorial", Icons.Default.LocationOn),
         BottomNavItem("community", "Community", Icons.Default.Home),
         BottomNavItem("profile", "Profile", Icons.Default.Person)

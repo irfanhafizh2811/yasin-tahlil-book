@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Yaseen</string>
+    <string name="app_name">Tahlil Anma</string>
 
     <!-- Text -->
     <string name="label_your_dhikr">Zikiriniz</string>
@@ -8,10 +8,10 @@
     <string name="label_info_fav_dhikr">Favori Zikrinizi\nEkleyebilirsiniz</string>
     <string name="label_info_add_dhikr">İstediğiniz zikri\nekleyebilirsiniz</string>
     <string name="label_count">Saymak</string>
-    <string name="label_tasbeeh">Tesbih</string>
+    <string name="label_memorial">Anma</string>
     <string name="label_reset">Sıfırla</string>
     <string name="label_counter_x" translatable="false">%1$dx</string>
-    <string name="label_tasbeeh_message" translatable="true">Bugün zikir var mı?</string>
+    <string name="label_memorial_message" translatable="true">Sevdiklerinizi dualarla anın</string>
     <string name="text_latin_subhanallah" translatable="false">Subhanallah</string>
     <string name="text_latin_alhamdulillah" translatable="false">Alhamdulillah</string>
     <string name="text_latin_allahu_akbar" translatable="false">Allahu Akbar</string>

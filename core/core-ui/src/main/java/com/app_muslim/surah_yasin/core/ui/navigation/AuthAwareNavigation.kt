@@ -232,13 +232,13 @@ fun AuthAwareBottomNavigation(
     val currentRoute = navBackStackEntry?.destination?.route
     
     NavigationBar {
-        // Tasbeeh - Always accessible
+        // Community Prayer - Always accessible
         NavigationBarItem(
             icon = { Icon(Icons.Default.Circle, contentDescription = null) },
-            label = { Text("Tasbeeh") },
-            selected = currentRoute == NavigationRoutes.TASBEEH,
+            label = { Text("Community") },
+            selected = currentRoute == NavigationRoutes.COMMUNITY_PRAYER,
             onClick = {
-                navController.navigate(NavigationRoutes.TASBEEH) {
+                navController.navigate(NavigationRoutes.COMMUNITY_PRAYER) {
                     popUpTo(navController.graph.startDestinationId) {
                         saveState = true
                     }
