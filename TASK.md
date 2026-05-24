@@ -137,13 +137,13 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 - [x] Sync user preferences between Room database and Firestore
 - [x] Setup preference repository with Repository pattern
 
-### P2.D — Session Management (Modular)
-- [ ] Implement secure session persistence across modules
-- [ ] Add automatic Firebase token refresh in :core-firebase
-- [ ] Create guest mode with Navigation Component restrictions
-- [ ] Build sign-out flow with proper Compose state cleanup
-- [ ] Add account verification with Firebase Auth
-- [ ] Setup auth state management with Compose and Navigation
+### P2.D — Session Management (Modular) **[COMPLETED]**
+- [x] Implement secure session persistence across modules
+- [x] Add automatic Firebase token refresh in :core-firebase
+- [x] Create guest mode with Navigation Component restrictions
+- [x] Build sign-out flow with proper Compose state cleanup
+- [x] Add account verification with Firebase Auth
+- [x] Setup auth state management with Compose and Navigation
 
 **Exit criteria:** Single Activity architecture implemented, Jetpack Compose migration complete, modular structure working, users can authenticate through multiple providers, set Islamic cultural preferences, manage profiles, and maintain secure sessions.
 

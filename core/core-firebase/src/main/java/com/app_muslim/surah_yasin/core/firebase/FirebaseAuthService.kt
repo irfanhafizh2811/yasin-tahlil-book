@@ -4,7 +4,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -144,13 +146,19 @@ class FirebaseAuthService @Inject constructor(
     
     
     // Auth state listener as Flow
-    fun getAuthStateFlow(): Flow<FirebaseUser?> = flow {
+    fun getAuthStateFlow(): Flow<FirebaseUser?> = callbackFlow {
         val listener = FirebaseAuth.AuthStateListener { auth ->
-            // This would emit user changes, but Flow implementation
-            // requires callback-to-flow conversion for proper implementation
+            trySend(auth.currentUser)
         }
-        // Proper implementation would use callbackFlow
-        emit(auth.currentUser)
+        
+        auth.addAuthStateListener(listener)
+        
+        // Emit current user immediately
+        trySend(auth.currentUser)
+        
+        awaitClose { 
+            auth.removeAuthStateListener(listener) 
+        }
     }
     
     // Update user profile

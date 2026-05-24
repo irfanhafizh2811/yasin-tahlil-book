@@ -71,16 +71,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(11)
+            languageVersion = JavaLanguageVersion.of(17)
         }
     }
 
@@ -112,6 +112,7 @@ dependencies {
     // Feature modules
     implementation project(':core:core-common')
     implementation project(':core:core-firebase')
+    implementation project(':core:core-ui')
     implementation project(':feature:feature-auth')
     implementation project(':feature:feature-profile')
 
