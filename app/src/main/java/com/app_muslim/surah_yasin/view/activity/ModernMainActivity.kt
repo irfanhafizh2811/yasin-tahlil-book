@@ -3,8 +3,9 @@ package com.app_muslim.surah_yasin.view.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.sp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
@@ -15,12 +16,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.app_muslim.surah_yasin.feature.auth.navigation.authGraph
+import com.app_muslim.surah_yasin.feature.auth.navigation.navigateToAuth
+import com.app_muslim.surah_yasin.feature.auth.viewmodel.AuthViewModel
+import com.app_muslim.surah_yasin.core.common.model.IslamicRegion
+import com.app_muslim.surah_yasin.core.common.model.SchoolOfThought
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -60,15 +68,44 @@ fun TahlilTheme(content: @Composable () -> Unit) {
 @Composable
 fun MainNavigation() {
     val navController = rememberNavController()
+    val authViewModel: AuthViewModel = hiltViewModel()
+    val uiState by authViewModel.uiState.collectAsStateWithLifecycle()
+    
+    // Determine start destination based on authentication state
+    val startDestination = if (uiState.isAuthenticated) "main" else "auth"
+    
+    NavHost(
+        navController = navController,
+        startDestination = startDestination
+    ) {
+        // Authentication Graph
+        authGraph(
+            navController = navController,
+            onAuthComplete = { region, school, language ->
+                // Save user preferences here
+                // For now, we'll just proceed to main app
+            }
+        )
+        
+        // Main App Graph
+        composable("main") {
+            MainAppContent(navController)
+        }
+    }
+}
+
+@Composable
+fun MainAppContent(navController: NavController) {
+    val bottomNavController = rememberNavController()
     
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            TahlilBottomNavigation(navController = navController)
+            TahlilBottomNavigation(navController = bottomNavController)
         }
     ) { paddingValues ->
         NavHost(
-            navController = navController,
+            navController = bottomNavController,
             startDestination = "tasbeeh",
             modifier = Modifier.padding(paddingValues)
         ) {
@@ -82,7 +119,10 @@ fun MainNavigation() {
                 CommunityScreen()
             }
             composable("profile") {
-                ProfileScreen()
+                ProfileScreen(onSignOut = {
+                    // Handle sign out - navigate back to auth
+                    navController.navigateToAuth()
+                })
             }
         }
     }
@@ -182,11 +222,54 @@ fun CommunityScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen() {
-    CenterAlignedTopAppBar(
-        title = {
-            Text("Profile")
+fun ProfileScreen(onSignOut: () -> Unit = {}) {
+    val authViewModel: AuthViewModel = hiltViewModel()
+    
+    Column(modifier = Modifier.fillMaxSize()) {
+        CenterAlignedTopAppBar(
+            title = {
+                Text("Profile")
+            }
+        )
+        
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp)
+        ) {
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "👤",
+                        fontSize = 64.sp
+                    )
+                    Text(
+                        text = "User Profile",
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    Text(
+                        text = "Profile management coming soon...",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    )
+                }
+            }
+            
+            OutlinedButton(
+                onClick = {
+                    authViewModel.handleAuthEvent(com.app_muslim.surah_yasin.feature.auth.model.AuthEvent.SignOut)
+                    onSignOut()
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Sign Out")
+            }
         }
-    )
-    // TODO: Implement Profile Compose UI
+    }
 }

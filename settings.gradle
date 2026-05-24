@@ -32,6 +32,7 @@ include ':feature:feature-tasbeeh'
 include ':feature:feature-memorial'
 include ':feature:feature-community'
 include ':feature:feature-auth'
+include ':feature:feature-profile'
 
 // Shared modules
 include ':shared:shared-preferences'

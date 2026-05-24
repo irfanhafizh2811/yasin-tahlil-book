@@ -1,0 +1,20 @@
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the proguardFiles
+# directive in build.gradle.
+
+# Firebase
+-keep class com.google.firebase.** { *; }
+
+# Hilt
+-keep class dagger.hilt.android.** { *; }
+
+# Compose
+-keep class androidx.compose.** { *; }
+
+# CameraX
+-keep class androidx.camera.** { *; }
+
+# Profile models
+-keep class com.app_muslim.surah_yasin.feature.profile.model.** { *; }

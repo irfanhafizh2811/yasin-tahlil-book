@@ -86,7 +86,11 @@ android {
 
     hilt {
         enableAggregatingTask = true
-        enableExperimentalClasspathAggregation = false
+    }
+    
+    // Configure annotation processors to ignore unrecognized options
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += ['-Xlint:-processing']
     }
 
     applicationVariants.all { variant ->
@@ -105,6 +109,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.8'
 
+    // Feature modules
+    implementation project(':core:core-common')
+    implementation project(':core:core-firebase')
+    implementation project(':feature:feature-auth')
+    implementation project(':feature:feature-profile')
+
     //Android Support Dependencies
     implementation supportDependencies.appCompat
     implementation supportDependencies.coreKotlin
@@ -122,9 +132,13 @@ dependencies {
     implementation platform('androidx.compose:compose-bom:2024.02.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.foundation:foundation'
+    implementation 'androidx.compose.foundation:foundation-layout'
     implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.material:material-icons-extended'
     implementation 'androidx.activity:activity-compose:1.8.2'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.7.0'
     
     // Navigation Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
