@@ -19,7 +19,7 @@ data class MemorialData(
     val privacyLevel: PrivacyLevel = PrivacyLevel.PRIVATE,
     val prayerType: PrayerType = PrayerType.TAHLIL,
     val createdAt: Date = Date(),
-    val expiresAt: Date = Date(), // 40 days from creation (Islamic tradition)
+    val expiresAt: Date? = null, // Optional memorial end date (null for permanent memorials)
     val isActive: Boolean = true,
     val prayerCount: Long = 0,
     val participantCount: Long = 0,

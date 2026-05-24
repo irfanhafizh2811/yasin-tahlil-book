@@ -586,14 +586,20 @@ private fun MemorialListItem(
                     
                     Spacer(modifier = Modifier.height(4.dp))
                     
-                    Text(
-                        text = formatExpiryDate(memorial.expiresAt),
+                    memorial.expiresAt?.let { expiryDate ->
+                        Text(
+                            text = formatExpiryDate(expiryDate),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (isExpiringSoon(expiryDate)) {
+                                MaterialTheme.colorScheme.error
+                            } else {
+                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                            }
+                        )
+                    } ?: Text(
+                        text = "Permanent memorial",
                         style = MaterialTheme.typography.bodySmall,
-                        color = if (isExpiringSoon(memorial.expiresAt)) {
-                            MaterialTheme.colorScheme.error
-                        } else {
-                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                        }
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }

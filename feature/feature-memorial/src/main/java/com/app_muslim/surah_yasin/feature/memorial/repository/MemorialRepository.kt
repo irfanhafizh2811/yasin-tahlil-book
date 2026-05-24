@@ -345,8 +345,8 @@ class MemorialRepository @Inject constructor(
         )
     }
 
-    private fun isExpired(expiresAt: Date): Boolean {
-        return expiresAt.time < System.currentTimeMillis()
+    private fun isExpired(expiresAt: Date?): Boolean {
+        return expiresAt?.time?.let { it < System.currentTimeMillis() } ?: false
     }
 
     private suspend fun updateMemorialStatistics(memorialId: String) {
@@ -483,7 +483,7 @@ class MemorialRepository @Inject constructor(
                     try { PrayerType.valueOf(it) } catch (e: Exception) { PrayerType.TAHLIL }
                 } ?: PrayerType.TAHLIL,
                 createdAt = getDate("createdAt") ?: Date(),
-                expiresAt = getDate("expiresAt") ?: Date(),
+                expiresAt = getDate("expiresAt"),
                 isActive = getBoolean("isActive") ?: true,
                 prayerCount = getLong("prayerCount") ?: 0,
                 participantCount = getLong("participantCount") ?: 0,

@@ -131,7 +131,7 @@ Firebase BOM: 33.1.2 (Latest 2026)
 
 **Memorial Prayer System:**
 ```kotlin
-// 40-day Islamic tradition auto-expiration
+// Permanent memorial remembrance system
 // Privacy levels: private, family, community
 // Prayer types: Tahlil, Yasin, Fatihah, Dua
 // Real-time global prayer statistics
@@ -261,7 +261,7 @@ npm run test:emulators
 - Regional Islamic law compliance
 
 **Technical Islamic Features:**
-- 40-day memorial expiration (Islamic tradition)
+- Permanent memorial remembrance system
 - Hijri calendar support
 - Prayer time calculations by region
 - Qibla direction integration

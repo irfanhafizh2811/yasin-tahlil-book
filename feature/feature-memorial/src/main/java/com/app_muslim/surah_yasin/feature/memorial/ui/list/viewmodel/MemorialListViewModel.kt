@@ -198,8 +198,8 @@ class MemorialListViewModel @Inject constructor(
         return filtered
     }
 
-    private fun isExpired(expiresAt: java.util.Date): Boolean {
-        return expiresAt.time < System.currentTimeMillis()
+    private fun isExpired(expiresAt: java.util.Date?): Boolean {
+        return expiresAt?.time?.let { it < System.currentTimeMillis() } ?: false
     }
 
     private suspend fun shareMemorialLink(memorial: MemorialData) {
