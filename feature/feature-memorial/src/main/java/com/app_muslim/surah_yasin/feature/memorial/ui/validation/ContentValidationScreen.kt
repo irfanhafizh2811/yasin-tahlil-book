@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app_muslim.surah_yasin.feature.memorial.model.*
+import com.app_muslim.surah_yasin.feature.memorial.ui.validation.viewmodel.ContentValidationViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,14 +78,15 @@ fun ContentValidationScreen(
                     }
                 )
             }
-        }
-    }
-
-    uiState.error?.let { error ->
-        LaunchedEffect(error) {
-            // Auto-clear error after some time
-            kotlinx.coroutines.delay(5000)
-            viewModel.clearError()
+            
+            // Handle error display
+            uiState.error?.let { error ->
+                LaunchedEffect(error) {
+                    // Auto-clear error after some time
+                    kotlinx.coroutines.delay(5000)
+                    viewModel.clearError()
+                }
+            }
         }
     }
 }

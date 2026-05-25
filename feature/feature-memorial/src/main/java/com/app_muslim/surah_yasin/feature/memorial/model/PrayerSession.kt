@@ -152,3 +152,111 @@ enum class EventSignificance {
     LOW,
     PERSONAL
 }
+
+@Parcelize
+data class CommunityParticipation(
+    val memorialId: String = "",
+    val totalParticipants: Int = 0,
+    val totalSessions: Int = 0,
+    val totalPrayers: Int = 0,
+    val averageSessionDuration: Long = 0,
+    val participantsByRegion: Map<String, Int> = emptyMap(),
+    val sessionsByDay: Map<String, Int> = emptyMap(),
+    val topParticipants: List<ParticipantStats> = emptyList(),
+    val recentSessions: List<PrayerSession> = emptyList(),
+    val participationTrend: ParticipationTrend = ParticipationTrend.STABLE,
+    val lastUpdated: Date = Date()
+) : Parcelable
+
+@Parcelize
+data class ParticipantStats(
+    val participantId: String = "",
+    val participantName: String = "",
+    val totalSessions: Int = 0,
+    val totalPrayers: Int = 0,
+    val averageDuration: Long = 0,
+    val lastSessionDate: Date? = null,
+    val rank: Int = 0
+) : Parcelable
+
+enum class ParticipationTrend {
+    INCREASING,
+    STABLE,
+    DECREASING
+}
+
+@Parcelize
+data class CommunityPrayerGroup(
+    val id: String = "",
+    val memorialId: String = "",
+    val name: String = "",
+    val description: String = "",
+    val organizer: String = "",
+    val members: List<GroupMember> = emptyList(),
+    val scheduledSessions: List<ScheduledPrayerSession> = emptyList(),
+    val createdAt: Date = Date(),
+    val isActive: Boolean = true,
+    val maxMembers: Int = 50,
+    val privacy: GroupPrivacy = GroupPrivacy.PUBLIC,
+    val requirements: GroupRequirements = GroupRequirements()
+) : Parcelable
+
+@Parcelize
+data class GroupMember(
+    val userId: String = "",
+    val name: String = "",
+    val role: GroupRole = GroupRole.MEMBER,
+    val joinedAt: Date = Date(),
+    val isActive: Boolean = true,
+    val totalSessions: Int = 0
+) : Parcelable
+
+@Parcelize
+data class ScheduledPrayerSession(
+    val id: String = "",
+    val title: String = "",
+    val description: String = "",
+    val scheduledTime: Date = Date(),
+    val duration: Long = 0,
+    val prayerType: PrayerType = PrayerType.TAHLIL,
+    val participants: List<String> = emptyList(),
+    val status: SessionStatus = SessionStatus.SCHEDULED,
+    val createdBy: String = ""
+) : Parcelable
+
+enum class GroupRole {
+    ORGANIZER,
+    MODERATOR,
+    MEMBER
+}
+
+enum class GroupPrivacy {
+    PUBLIC,
+    PRIVATE,
+    INVITE_ONLY
+}
+
+enum class SessionStatus {
+    SCHEDULED,
+    IN_PROGRESS,
+    COMPLETED,
+    CANCELLED
+}
+
+@Parcelize
+data class GroupRequirements(
+    val minimumAge: Int = 0,
+    val requiresVerification: Boolean = false,
+    val allowsGuests: Boolean = true,
+    val requiresIntroduction: Boolean = false,
+    val moderatorApproval: Boolean = false
+) : Parcelable
+
+enum class TimeRange {
+    LAST_24_HOURS,
+    LAST_7_DAYS,
+    LAST_30_DAYS,
+    LAST_90_DAYS,
+    LAST_YEAR,
+    ALL_TIME
+}

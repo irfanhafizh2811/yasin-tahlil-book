@@ -182,11 +182,8 @@ class PrayerTrackingRepository @Inject constructor(
         val communityGroup = CommunityPrayerGroup(
             id = groupId,
             memorialId = memorialId,
-            organizerId = currentUser.uid,
-            groupName = groupName,
-            participants = participants,
-            scheduledTime = scheduledTime,
-            prayerType = prayerType,
+            name = groupName,
+            organizer = currentUser.uid,
             createdAt = Date()
         )
 
@@ -292,14 +289,15 @@ class PrayerTrackingRepository @Inject constructor(
         memorialId: String
     ): CommunityParticipation {
         val uniqueParticipants = sessions.map { it.participantId }.distinct()
-        val totalPrayers = sessions.size.toLong()
+        val totalPrayers = sessions.sumOf { it.recitationCount }
         val participantsByRegion = sessions.groupBy { it.location?.country ?: "Unknown" }
-            .mapValues { it.value.map { session -> session.participantId }.distinct().size.toLong() }
+            .mapValues { it.value.map { session -> session.participantId }.distinct().size }
 
         return CommunityParticipation(
             memorialId = memorialId,
-            totalParticipants = uniqueParticipants.size.toLong(),
-            totalPrayers = totalPrayers,
+            totalParticipants = uniqueParticipants.size,
+            totalSessions = sessions.size,
+            totalPrayers = sessions.sumOf { it.recitationCount },
             participantsByRegion = participantsByRegion,
             recentSessions = sessions.take(10),
             averageSessionDuration = if (sessions.isNotEmpty()) 
@@ -371,6 +369,7 @@ class PrayerTrackingRepository @Inject constructor(
     private fun getTimeRangeCutoff(timeRange: TimeRange): Date {
         val calendar = Calendar.getInstance()
         when (timeRange) {
+            TimeRange.LAST_24_HOURS -> calendar.add(Calendar.HOUR_OF_DAY, -24)
             TimeRange.LAST_7_DAYS -> calendar.add(Calendar.DAY_OF_MONTH, -7)
             TimeRange.LAST_30_DAYS -> calendar.add(Calendar.DAY_OF_MONTH, -30)
             TimeRange.LAST_90_DAYS -> calendar.add(Calendar.DAY_OF_MONTH, -90)
@@ -432,16 +431,43 @@ class PrayerTrackingRepository @Inject constructor(
         return mapOf(
             "id" to id,
             "memorialId" to memorialId,
-            "organizerId" to organizerId,
-            "groupName" to groupName,
-            "participants" to participants,
-            "scheduledTime" to scheduledTime,
-            "prayerType" to prayerType.name,
-            "isActive" to isActive,
-            "maxParticipants" to maxParticipants,
-            "actualParticipants" to actualParticipants,
+            "name" to name,
+            "description" to description,
+            "organizer" to organizer,
+            "members" to members.map { member ->
+                mapOf(
+                    "userId" to member.userId,
+                    "name" to member.name,
+                    "role" to member.role.name,
+                    "joinedAt" to member.joinedAt,
+                    "isActive" to member.isActive,
+                    "totalSessions" to member.totalSessions
+                )
+            },
+            "scheduledSessions" to scheduledSessions.map { session ->
+                mapOf(
+                    "id" to session.id,
+                    "title" to session.title,
+                    "description" to session.description,
+                    "scheduledTime" to session.scheduledTime,
+                    "duration" to session.duration,
+                    "prayerType" to session.prayerType.name,
+                    "participants" to session.participants,
+                    "status" to session.status.name,
+                    "createdBy" to session.createdBy
+                )
+            },
             "createdAt" to createdAt,
-            "completedAt" to completedAt
+            "isActive" to isActive,
+            "maxMembers" to maxMembers,
+            "privacy" to privacy.name,
+            "requirements" to mapOf(
+                "minimumAge" to requirements.minimumAge,
+                "requiresVerification" to requirements.requiresVerification,
+                "allowsGuests" to requirements.allowsGuests,
+                "requiresIntroduction" to requirements.requiresIntroduction,
+                "moderatorApproval" to requirements.moderatorApproval
+            )
         )
     }
 
@@ -480,18 +506,15 @@ class PrayerTrackingRepository @Inject constructor(
             CommunityPrayerGroup(
                 id = getString("id") ?: "",
                 memorialId = getString("memorialId") ?: "",
-                organizerId = getString("organizerId") ?: "",
-                groupName = getString("groupName") ?: "",
-                participants = get("participants") as? List<String> ?: emptyList(),
-                scheduledTime = getDate("scheduledTime") ?: Date(),
-                prayerType = getString("prayerType")?.let { 
-                    try { PrayerType.valueOf(it) } catch (e: Exception) { PrayerType.TAHLIL }
-                } ?: PrayerType.TAHLIL,
-                isActive = getBoolean("isActive") ?: true,
-                maxParticipants = getLong("maxParticipants")?.toInt() ?: 50,
-                actualParticipants = get("actualParticipants") as? List<String> ?: emptyList(),
+                name = getString("name") ?: "",
+                description = getString("description") ?: "",
+                organizer = getString("organizer") ?: "",
                 createdAt = getDate("createdAt") ?: Date(),
-                completedAt = getDate("completedAt")
+                isActive = getBoolean("isActive") ?: true,
+                maxMembers = getLong("maxMembers")?.toInt() ?: 50,
+                privacy = getString("privacy")?.let {
+                    try { GroupPrivacy.valueOf(it) } catch (e: Exception) { GroupPrivacy.PUBLIC }
+                } ?: GroupPrivacy.PUBLIC
             )
         } catch (e: Exception) {
             null
@@ -499,13 +522,6 @@ class PrayerTrackingRepository @Inject constructor(
     }
 }
 
-enum class TimeRange {
-    LAST_7_DAYS,
-    LAST_30_DAYS,
-    LAST_90_DAYS,
-    LAST_YEAR,
-    ALL_TIME
-}
 
 // @Parcelize
 // Temporarily comment out Parcelable data classes to avoid dependency issues

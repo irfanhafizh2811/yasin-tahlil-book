@@ -114,6 +114,7 @@ dependencies {
     implementation project(':core:core-firebase')
     implementation project(':core:core-ui')
     implementation project(':feature:feature-auth')
+    implementation project(':feature:feature-memorial-prayer')
     implementation project(':feature:feature-profile')
 
     //Android Support Dependencies

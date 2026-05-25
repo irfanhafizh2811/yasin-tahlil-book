@@ -30,6 +30,7 @@ include ':core:core-common'
 // Feature modules
 include ':feature:feature-tasbeeh'
 include ':feature:feature-memorial'
+include ':feature:feature-memorial-prayer'
 include ':feature:feature-community'
 include ':feature:feature-auth'
 include ':feature:feature-profile'
