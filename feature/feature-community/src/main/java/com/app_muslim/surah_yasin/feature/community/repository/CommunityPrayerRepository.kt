@@ -15,6 +15,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.Timestamp
 import java.time.ZonedDateTime
 import java.time.Instant
+import java.time.LocalDate
+import java.time.DayOfWeek
 import java.time.ZoneId
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -621,6 +623,157 @@ class CommunityPrayerFirebaseRepository @Inject constructor(
     }
     
     // Helper functions to convert Firestore data to model objects
+    /**
+     * Get country-wise prayer statistics for world map visualization
+     */
+    fun getCountryPrayerStatsFlow(): Flow<List<CountryPrayerStats>> {
+        return firestore
+            .collection("country_stats")
+            .orderBy("total_prayers", Query.Direction.DESCENDING)
+            .snapshots()
+            .map { querySnapshot ->
+                querySnapshot.documents.mapNotNull { document ->
+                    try {
+                        CountryPrayerStats(
+                            countryCode = document.getString("country_code") ?: "",
+                            countryName = document.getString("country_name") ?: "",
+                            totalPrayers = document.getLong("total_prayers") ?: 0L,
+                            activeParticipants = document.getLong("active_participants") ?: 0L,
+                            popularPrayerTypes = (document.get("popular_prayer_types") as? List<Map<String, Any>>)?.map { 
+                                PrayerTypeCount(
+                                    prayerType = CommunityPrayerType.valueOf(it["prayer_type"] as String),
+                                    count = (it["count"] as Number).toLong(),
+                                    percentage = (it["percentage"] as Number).toFloat()
+                                )
+                            } ?: emptyList(),
+                            latitude = document.getDouble("latitude") ?: 0.0,
+                            longitude = document.getDouble("longitude") ?: 0.0,
+                            flag = document.getString("flag") ?: "",
+                            heatLevel = document.getDouble("heat_level")?.toFloat() ?: 0.0f,
+                            rank = document.getLong("rank")?.toInt() ?: 0,
+                            lastActiveAt = (document.getTimestamp("last_active_at")?.toDate()?.let { 
+                                ZonedDateTime.ofInstant(it.toInstant(), ZoneId.systemDefault()) 
+                            }) ?: ZonedDateTime.now()
+                        )
+                    } catch (e: Exception) {
+                        null // Skip malformed documents
+                    }
+                }
+            }
+            .catch { e ->
+                emit(emptyList())
+            }
+    }
+
+    /**
+     * Get daily prayer analytics for the last 30 days
+     */
+    fun getDailyPrayerAnalyticsFlow(daysBack: Int = 30): Flow<List<DailyPrayerAnalytics>> {
+        val startDate = LocalDate.now().minusDays(daysBack.toLong())
+        
+        return firestore
+            .collection("daily_analytics")
+            .whereGreaterThanOrEqualTo("date", startDate.toString())
+            .orderBy("date", Query.Direction.ASCENDING)
+            .snapshots()
+            .map { querySnapshot ->
+                querySnapshot.documents.mapNotNull { document ->
+                    try {
+                        DailyPrayerAnalytics(
+                            date = document.getString("date") ?: "",
+                            totalPrayers = document.getLong("total_prayers") ?: 0L,
+                            uniqueParticipants = document.getLong("unique_participants") ?: 0L,
+                            averageSessionDuration = document.getDouble("average_session_duration") ?: 0.0,
+                            prayerTypeBreakdown = (document.get("prayer_type_breakdown") as? Map<String, Long>)?.mapKeys { 
+                                CommunityPrayerType.valueOf(it.key) 
+                            } ?: emptyMap(),
+                            peakHour = document.getLong("peak_hour")?.toInt() ?: 12,
+                            regionsActive = document.getLong("regions_active")?.toInt() ?: 0,
+                            newMemorials = document.getLong("new_memorials") ?: 0L,
+                            completedSessions = document.getLong("completed_sessions") ?: 0L
+                        )
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+            }
+            .catch { e ->
+                emit(emptyList())
+            }
+    }
+
+    /**
+     * Get weekly prayer analytics for the last 12 weeks
+     */
+    fun getWeeklyPrayerAnalyticsFlow(weeksBack: Int = 12): Flow<List<WeeklyPrayerAnalytics>> {
+        val startWeek = LocalDate.now().minusWeeks(weeksBack.toLong()).with(DayOfWeek.MONDAY)
+        
+        return firestore
+            .collection("weekly_analytics")
+            .whereGreaterThanOrEqualTo("week_start_date", startWeek.toString())
+            .orderBy("week_start_date", Query.Direction.ASCENDING)
+            .snapshots()
+            .map { querySnapshot ->
+                querySnapshot.documents.mapNotNull { document ->
+                    try {
+                        WeeklyPrayerAnalytics(
+                            weekStartDate = document.getString("week_start_date") ?: "",
+                            totalPrayers = document.getLong("total_prayers") ?: 0L,
+                            averageDailyPrayers = document.getDouble("average_daily_prayers") ?: 0.0,
+                            uniqueParticipants = document.getLong("unique_participants") ?: 0L,
+                            growthRate = document.getDouble("growth_rate")?.toFloat() ?: 0.0f,
+                            topRegions = emptyList(), // This would need a separate query
+                            dailyBreakdown = emptyList(), // This would need a separate query
+                            milestones = emptyList() // This would need a separate query
+                        )
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+            }
+            .catch { e ->
+                emit(emptyList())
+            }
+    }
+
+    /**
+     * Get current active global milestones
+     */
+    fun getGlobalMilestonesFlow(): Flow<List<GlobalMilestone>> {
+        return firestore
+            .collection("global_milestones")
+            .whereEqualTo("is_active", true)
+            .orderBy("target_value", Query.Direction.ASCENDING)
+            .snapshots()
+            .map { querySnapshot ->
+                querySnapshot.documents.mapNotNull { document ->
+                    try {
+                        GlobalMilestone(
+                            milestoneId = document.id,
+                            type = MilestoneType.valueOf(document.getString("type") ?: "TOTAL_PRAYERS"),
+                            title = document.getString("title") ?: "",
+                            description = document.getString("description") ?: "",
+                            targetValue = document.getLong("target_value") ?: 0L,
+                            currentValue = document.getLong("current_value") ?: 0L,
+                            achievedAt = document.getTimestamp("achieved_at")?.toDate()?.let {
+                                ZonedDateTime.ofInstant(it.toInstant(), ZoneId.systemDefault())
+                            },
+                            isCompleted = document.getBoolean("is_completed") ?: false,
+                            celebrationMessage = document.getString("celebration_message") ?: "",
+                            participatingCountries = (document.get("participating_countries") as? List<String>) ?: emptyList(),
+                            icon = document.getString("icon") ?: "🎉"
+                        )
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+            }
+            .catch { e ->
+                emit(emptyList())
+            }
+    }
+
+    // Helper methods
     private fun createCommunitySessionFromFirestore(data: Map<String, Any>): CommunityPrayerSession {
         return CommunityPrayerSession(
             sessionId = data["sessionId"] as String,

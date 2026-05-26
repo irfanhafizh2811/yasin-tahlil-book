@@ -15,20 +15,112 @@ data class GlobalPrayerStats(
     val totalMemorials: Long = 0L,
     val activeRegions: Int = 0,
     val topPrayerType: String = "Tahlil",
-    val lastUpdated: ZonedDateTime = ZonedDateTime.now()
+    val lastUpdated: ZonedDateTime = ZonedDateTime.now(),
+    val dailyGrowth: Float = 0.0f,
+    val weeklyGrowth: Float = 0.0f,
+    val globalTrend: TrendDirection = TrendDirection.STABLE,
+    val peakHour: Int = 12, // Peak prayer hour (24-hour format)
+    val totalCountries: Int = 0,
+    val totalCities: Int = 0
 )
 
-// Regional Prayer Statistics  
+// Enhanced Regional Prayer Statistics with geographical data
 data class RegionalPrayerStats(
     val regionCode: String,
     val regionName: String,
     val countryCode: String,
+    val countryName: String,
     val activePrayers: Long = 0L,
     val totalParticipants: Long = 0L,
     val popularPrayerType: String = "Fatihah",
     val rank: Int = 0,
-    val percentageOfGlobal: Float = 0.0f
+    val percentageOfGlobal: Float = 0.0f,
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    val timeZone: String = "UTC",
+    val currentLocalTime: ZonedDateTime = ZonedDateTime.now(),
+    val dailyTrend: TrendDirection = TrendDirection.STABLE,
+    val flag: String = ""
 )
+
+// Country Prayer Statistics for world map visualization
+data class CountryPrayerStats(
+    val countryCode: String,
+    val countryName: String,
+    val totalPrayers: Long = 0L,
+    val activeParticipants: Long = 0L,
+    val popularPrayerTypes: List<PrayerTypeCount> = emptyList(),
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    val flag: String = "",
+    val heatLevel: Float = 0.0f, // 0.0 to 1.0 for heat map coloring
+    val rank: Int = 0,
+    val lastActiveAt: ZonedDateTime = ZonedDateTime.now()
+)
+
+// Prayer analytics models
+data class DailyPrayerAnalytics(
+    val date: String, // YYYY-MM-DD format
+    val totalPrayers: Long = 0L,
+    val uniqueParticipants: Long = 0L,
+    val averageSessionDuration: Double = 0.0, // in minutes
+    val prayerTypeBreakdown: Map<CommunityPrayerType, Long> = emptyMap(),
+    val peakHour: Int = 12,
+    val regionsActive: Int = 0,
+    val newMemorials: Long = 0L,
+    val completedSessions: Long = 0L
+)
+
+data class WeeklyPrayerAnalytics(
+    val weekStartDate: String, // YYYY-MM-DD format (Monday)
+    val totalPrayers: Long = 0L,
+    val averageDailyPrayers: Double = 0.0,
+    val uniqueParticipants: Long = 0L,
+    val growthRate: Float = 0.0f,
+    val topRegions: List<RegionalPrayerStats> = emptyList(),
+    val dailyBreakdown: List<DailyPrayerAnalytics> = emptyList(),
+    val milestones: List<GlobalMilestone> = emptyList()
+)
+
+// Global milestones for community celebrations
+data class GlobalMilestone(
+    val milestoneId: String,
+    val type: MilestoneType,
+    val title: String,
+    val description: String,
+    val targetValue: Long,
+    val currentValue: Long,
+    val achievedAt: ZonedDateTime? = null,
+    val isCompleted: Boolean = false,
+    val celebrationMessage: String = "",
+    val participatingCountries: List<String> = emptyList(),
+    val icon: String = "🎉"
+)
+
+// Prayer type count for analytics
+data class PrayerTypeCount(
+    val prayerType: CommunityPrayerType,
+    val count: Long,
+    val percentage: Float
+)
+
+// Trend direction for analytics
+enum class TrendDirection {
+    INCREASING,
+    DECREASING,
+    STABLE
+}
+
+// Milestone types
+enum class MilestoneType {
+    TOTAL_PRAYERS,
+    GLOBAL_PARTICIPANTS,
+    COUNTRIES_REACHED,
+    DAILY_PEAK,
+    COMMUNITY_SESSIONS,
+    MEMORIAL_CREATED,
+    FAMILY_SHARING
+}
 
 // Community Prayer Session
 data class CommunityPrayerSession(

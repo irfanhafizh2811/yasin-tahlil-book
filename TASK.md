@@ -246,14 +246,14 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 **Objective:** Connect Muslims worldwide through shared memorial prayers and community engagement using Compose UI and Firebase real-time features.
 **Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md)
 
-### P5.A — Global Prayer Statistics (Compose + Firestore) **[PRIORITY 5]**
-- [ ] Create :feature-community module with CommunityScreen **[DEPENDS ON P2.A]**
-- [ ] Implement real-time global prayer count with Firestore listeners **[COMPLEX FIREBASE]**
-- [ ] Create world map visualization with Google Maps Compose **[HIGH COMPLEXITY]**
-- [ ] Add country and regional statistics with Compose charts
-- [ ] Build daily/weekly prayer analytics with Cloud Functions
-- [ ] Design community milestone celebrations with Compose animations
-- [ ] Setup real-time data flow with StateFlow and Compose State
+### P5.A — Global Prayer Statistics (Compose + Firestore) ✅ **[COMPLETED]**
+- [x] Create :feature-community module with CommunityScreen **[COMPLETED]**
+- [x] Implement real-time global prayer count with Firestore listeners **[COMPLETED]**
+- [x] Create world map visualization with Google Maps Compose **[COMPLETED]**
+- [x] Add country and regional statistics with Compose charts **[COMPLETED]**
+- [x] Build daily/weekly prayer analytics with Cloud Functions **[COMPLETED]**
+- [x] Design community milestone celebrations with Compose animations **[COMPLETED]**
+- [x] Setup real-time data flow with StateFlow and Compose State **[COMPLETED]**
 
 ### P5.B — Memorial Sharing System (Compose + Firebase)
 - [ ] Create family invitation system with Compose UI forms
