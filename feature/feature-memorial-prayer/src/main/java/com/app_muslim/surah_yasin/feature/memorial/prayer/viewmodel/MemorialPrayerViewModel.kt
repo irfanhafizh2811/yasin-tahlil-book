@@ -8,6 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,6 +27,15 @@ class MemorialPrayerViewModel @Inject constructor(
     
     private val _currentSession = MutableStateFlow<MemorialPrayerSession?>(null)
     val currentSession: StateFlow<MemorialPrayerSession?> = _currentSession.asStateFlow()
+    
+    // Global prayer statistics flow
+    val globalPrayerStats: StateFlow<Map<String, Any>> = memorialPrayerRepository
+        .getGlobalPrayerStatsFlow()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyMap()
+        )
     
     fun handleEvent(event: MemorialPrayerEvent) {
         when (event) {
@@ -219,6 +230,57 @@ class MemorialPrayerViewModel @Inject constructor(
                 onFailure = { error ->
                     _uiState.value = _uiState.value.copy(
                         errorMessage = error.message
+                    )
+                }
+            )
+        }
+    }
+    
+    /**
+     * Get real-time prayer statistics flow for a memorial
+     */
+    fun getPrayerStatisticsFlow(memorialId: String): StateFlow<MemorialPrayerStats> {
+        return memorialPrayerRepository
+            .getPrayerStatisticsFlow(memorialId)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = MemorialPrayerStats(0, 0, 0, "Evening", PrayerType.FATIHAH, 0, 0)
+            )
+    }
+    
+    /**
+     * Get real-time recent sessions for a memorial
+     */
+    fun getRecentSessionsFlow(memorialId: String): StateFlow<List<MemorialPrayerSession>> {
+        return memorialPrayerRepository
+            .getRecentSessionsFlow(memorialId)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList()
+            )
+    }
+    
+    /**
+     * Sync offline data when network becomes available
+     */
+    fun syncOfflineData() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true)
+            
+            val result = memorialPrayerRepository.syncOfflineData()
+            result.fold(
+                onSuccess = {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        errorMessage = null
+                    )
+                },
+                onFailure = { error ->
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        errorMessage = "Sync failed: ${error.message}"
                     )
                 }
             )
