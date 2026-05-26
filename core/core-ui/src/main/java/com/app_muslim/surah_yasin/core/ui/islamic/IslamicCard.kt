@@ -89,41 +89,76 @@ fun IslamicPrayerCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    IslamicCard(
-        title = arabicText,
+    Card(
         onClick = onClick,
         modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp)),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp,
+            pressedElevation = 12.dp
+        )
     ) {
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        Text(
-            text = transliteration,
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.White.copy(alpha = 0.9f),
-            textAlign = TextAlign.Center
-        )
-        
-        Spacer(modifier = Modifier.height(8.dp))
-        
-        Text(
-            text = translation,
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color.White.copy(alpha = 0.8f),
-            textAlign = TextAlign.Center
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        Surface(
-            shape = RoundedCornerShape(20.dp),
-            color = IslamicGold.copy(alpha = 0.2f)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            IslamicGreen,
+                            IslamicLightGreen,
+                            IslamicGreen.copy(alpha = 0.8f)
+                        )
+                    )
+                )
+                .padding(20.dp)
         ) {
-            Text(
-                text = "$prayerCount prayers offered",
-                style = MaterialTheme.typography.labelMedium,
-                color = IslamicGold,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                // Arabic Text with proper RTL support
+                ArabicPrayerText(
+                    arabicText = arabicText,
+                    style = com.app_muslim.surah_yasin.core.ui.theme.IslamicTextStyles.ArabicPrayerMedium,
+                    color = Color.White
+                )
+                
+                Spacer(modifier = Modifier.height(12.dp))
+                
+                // Transliteration
+                TransliterationText(
+                    text = transliteration,
+                    style = com.app_muslim.surah_yasin.core.ui.theme.IslamicTextStyles.Transliteration,
+                    color = Color.White.copy(alpha = 0.9f)
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                // Translation
+                TranslationText(
+                    text = translation,
+                    style = com.app_muslim.surah_yasin.core.ui.theme.IslamicTextStyles.Translation,
+                    color = Color.White.copy(alpha = 0.8f)
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                Surface(
+                    shape = RoundedCornerShape(20.dp),
+                    color = IslamicGold.copy(alpha = 0.2f)
+                ) {
+                    Text(
+                        text = "$prayerCount prayers offered",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = IslamicGold,
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
+                    )
+                }
+            }
         }
     }
 }

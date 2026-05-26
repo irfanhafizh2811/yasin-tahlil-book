@@ -65,7 +65,7 @@ Complete modern serverless architecture leveraging the full Firebase ecosystem w
 ├── BiDi Support (Arabic/Urdu RTL layout)
 ├── Android Localization (Multi-language)
 ├── Islamic Calendar integration (Hijri dates)
-├── Custom Arabic fonts (Noto Naskh, Amiri)
+├── Custom Arabic fonts (Noto Naskh, font_lpmq_isep_misbah)
 └── Cultural-appropriate UI components
 ```
 
@@ -608,7 +608,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   arabicText: {
-    fontFamily: 'AmiriQuran',
+    fontFamily: 'font_lpmq_isep_misbahQuran',
     fontSize: 24,
     color: '#FFFFFF',
     textAlign: 'center',

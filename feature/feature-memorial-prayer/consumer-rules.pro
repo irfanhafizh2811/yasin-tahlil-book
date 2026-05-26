@@ -1,29 +1,16 @@
-# Consumer ProGuard rules for :feature-memorial-prayer
+# Consumer proguard rules for feature-memorial-prayer
 
-# Keep all model classes for Firebase serialization
--keep class com.app_muslim.surah_yasin.feature.memorial.prayer.model.** { *; }
+# Keep all classes in this feature module
+-keep class com.app_muslim.surah_yasin.feature.memorial.prayer.** { *; }
 
-# Keep Room entities and DAOs
--keep class com.app_muslim.surah_yasin.feature.memorial.prayer.repository.** { *; }
+# Hilt rules
+-keep class * extends dagger.hilt.android.lifecycle.HiltViewModel { *; }
+-keep class dagger.hilt.android.** { *; }
 
-# Keep Hilt generated classes
--keep class dagger.hilt.** { *; }
--keep class javax.inject.** { *; }
-
-# Keep Compose classes
+# Compose rules
 -keep class androidx.compose.** { *; }
+-dontwarn androidx.compose.**
 
-# Keep Navigation classes
--keep class androidx.navigation.** { *; }
-
-# Keep Firebase classes
+# Firebase rules
 -keep class com.google.firebase.** { *; }
-
-# Prevent obfuscation of ViewModel classes
--keep class com.app_muslim.surah_yasin.feature.memorial.prayer.viewmodel.** { *; }
-
-# Keep enum classes
--keepclassmembers enum com.app_muslim.surah_yasin.feature.memorial.prayer.model.** {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
+-keep class com.google.android.gms.** { *; }

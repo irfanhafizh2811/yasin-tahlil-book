@@ -212,14 +212,14 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 - [x] ✅ **Memorial Prayer Analytics** - Statistics, streaks, and progress tracking **[COMPLETED]**
 - [x] ✅ **MemorialPrayerViewModel** - Complete MVVM with Hilt DI and StateFlow **[COMPLETED]**
 
-### P4.B — Prayer Text Display (Compose Typography)
-- [ ] Create Arabic text components in :core-ui with Compose Text
-- [ ] Implement proper RTL formatting with Compose BiDi support
-- [ ] Add transliteration with custom Compose text components
-- [ ] Show translation in user's selected language with string resources
-- [ ] Implement text scaling with Compose accessibility features
-- [ ] Use Islamic fonts (Noto Naskh Arabic, Amiri) in :shared-resources
-- [ ] Create reusable Islamic typography components
+### P4.B — Prayer Text Display (Compose Typography) ✅ **[COMPLETED]**
+- [x] ✅ **Create Arabic text components in :core-ui with Compose Text** - ArabicPrayerText, TransliterationText, TranslationText components **[COMPLETED]**
+- [x] ✅ **Implement proper RTL formatting with Compose BiDi support** - BiDiText with automatic Arabic detection and RTL layout **[COMPLETED]**
+- [x] ✅ **Add transliteration with custom Compose text components** - PhoneticTransliteration with proper styling **[COMPLETED]**
+- [x] ✅ **Show translation in user's selected language with string resources** - MultiLanguageTranslation with 12+ language support **[COMPLETED]**
+- [x] ✅ **Implement text scaling with Compose accessibility features** - ScalableIslamicText with font scaling and zoom controls **[COMPLETED]**
+- [x] ✅ **Use font_lpmq_isep_misbah for Arabic content display** - Updated TahlilTypography with custom Arabic font **[COMPLETED]**
+- [x] ✅ **Create reusable Islamic typography components** - Complete component library with accessibility support **[COMPLETED]**
 
 ### P4.C — Memorial Prayer Sessions (Firebase Integration)
 - [ ] Connect Compose prayer counter to specific memorials in Firestore

@@ -238,7 +238,7 @@ Technical Requirements:
 ├─ Transliteration for pronunciation guidance
 ├─ Translation in user's selected language
 ├─ Text scaling for accessibility
-├─ Beautiful typography with Islamic fonts
+├─ Beautiful typography with font_lpmq_isep_misbah for Arabic content
 └─ Text highlighting during recitation
 
 Acceptance Criteria:

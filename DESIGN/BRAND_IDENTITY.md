@@ -195,7 +195,7 @@ Arabic UI Text:
 └── Usage: Names, interface elements, navigation
 
 Arabic Decorative:
-├── Font: Amiri / Traditional Calligraphy
+├── Font: font_lpmq_isep_misbah / Traditional Calligraphy
 ├── Size: 18-36sp (contextual)
 ├── Weight: Regular (preserving art form)
 ├── Color: Reverent Gold (#ffd54f)

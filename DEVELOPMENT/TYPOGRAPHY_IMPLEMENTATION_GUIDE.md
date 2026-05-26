@@ -45,7 +45,7 @@ export const arabicFonts = {
 
   // Decorative: For headers and cultural elements
   decorative: {
-    family: 'Amiri',
+    family: 'font_lpmq_isep_misbah',
     weights: [400, 700],
     purpose: 'Headers, titles, cultural decorations',
     features: {
@@ -54,8 +54,8 @@ export const arabicFonts = {
       historicalForms: true
     },
     sources: {
-      regular: 'https://fonts.googleapis.com/css2?family=Amiri:wght@400;700',
-      local: './assets/fonts/Amiri-*.ttf'
+      regular: 'https://fonts.googleapis.com/css2?family=font_lpmq_isep_misbah:wght@400;700',
+      local: './assets/fonts/font_lpmq_isep_misbah-*.ttf'
     }
   }
 };
@@ -132,8 +132,8 @@ assets/
 │   │   ├── font_lpmq_isep_misbah-Medium.ttf
 │   │   ├── font_lpmq_isep_misbah-SemiBold.ttf
 │   │   ├── font_lpmq_isep_misbah-Bold.ttf
-│   │   ├── Amiri-Regular.ttf
-│   │   └── Amiri-Bold.ttf
+│   │   ├── font_lpmq_isep_misbah-Regular.ttf
+│   │   └── font_lpmq_isep_misbah-Bold.ttf
 │   ├── latin/
 │   │   ├── Inter-Regular.ttf
 │   │   ├── Inter-Medium.ttf
@@ -165,9 +165,9 @@ export const useAppFonts = (): FontLoadingState => {
     // Arabic Font - Using existing font_lpmq_isep_misbah
     'font_lpmq_isep_misbah': require('../assets/fonts/font_lpmq_isep_misbah.ttf'),
     
-    // Arabic Fonts - Amiri
-    'Amiri-Regular': require('../assets/fonts/arabic/Amiri-Regular.ttf'),
-    'Amiri-Bold': require('../assets/fonts/arabic/Amiri-Bold.ttf'),
+    // Arabic Fonts - font_lpmq_isep_misbah
+    'font_lpmq_isep_misbah-Regular': require('../assets/fonts/arabic/font_lpmq_isep_misbah-Regular.ttf'),
+    'font_lpmq_isep_misbah-Bold': require('../assets/fonts/arabic/font_lpmq_isep_misbah-Bold.ttf'),
     
     // Latin Fonts - Inter
     'Inter-Regular': require('../assets/fonts/latin/Inter-Regular.ttf'),
@@ -224,9 +224,9 @@ export const typography = {
       default: 'font_lpmq_isep_misbah-Regular'
     }),
     arabicDecorative: Platform.select({
-      ios: 'Amiri-Regular',
-      android: 'Amiri-Regular',
-      default: 'Amiri-Regular'
+      ios: 'font_lpmq_isep_misbah-Regular',
+      android: 'font_lpmq_isep_misbah-Regular',
+      default: 'font_lpmq_isep_misbah-Regular'
     }),
     
     // Latin families
@@ -294,7 +294,7 @@ export const typography = {
       fontSize: 28,
       lineHeight: 42,
       letterSpacing: 0.5,
-      fontFamily: 'Amiri-Bold',
+      fontFamily: 'font_lpmq_isep_misbah-Bold',
       textAlign: 'center' as const,
       writingDirection: 'rtl' as const
     }
@@ -743,8 +743,8 @@ export class FontLoader {
 
   private static decorativeFonts = [
     'Inter-Bold',
-    'Amiri-Regular',
-    'Amiri-Bold',
+    'font_lpmq_isep_misbah-Regular',
+    'font_lpmq_isep_misbah-Bold',
     'JetBrainsMono-Regular'
   ];
 

@@ -148,7 +148,7 @@ app/
     ├── :shared-analytics        # Analytics & tracking
     │   └── AnalyticsManager.kt
     └── :shared-resources        # Strings, assets, fonts
-        ├── fonts/               # Islamic fonts (Noto Naskh, Amiri)
+        ├── fonts/               # font_lpmq_isep_misbah for Arabic content (Noto Naskh, font_lpmq_isep_misbah)
         ├── values/              # Multi-language strings
         └── drawable/            # Islamic assets and icons
 ```
@@ -453,14 +453,14 @@ val DarkColorScheme = darkColorScheme(
 // core-ui/theme/Typography.kt
 val IslamicTypography = Typography(
     headlineLarge = TextStyle(
-        fontFamily = FontFamily.Default, // Replace with Amiri font
+        fontFamily = FontFamily.Default, // Replace with font_lpmq_isep_misbah font
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
         lineHeight = 40.sp,
         letterSpacing = 0.sp
     ),
     bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default, // Replace with Noto Sans Arabic
+        fontFamily = FontFamily.Default, // Replace with font_lpmq_isep_misbah
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,

@@ -98,7 +98,7 @@ const sprint1Week2 = {
       'Content management system foundation'
     ],
     frontend: [
-      'Typography system implementation with Islamic fonts',
+      'Typography system implementation with font_lpmq_isep_misbah for Arabic content',
       'Design system foundation with Material Design 3',
       'State management setup with Zustand',
       'Firebase SDK integration'

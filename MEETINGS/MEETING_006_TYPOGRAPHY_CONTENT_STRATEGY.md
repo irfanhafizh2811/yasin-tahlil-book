@@ -84,7 +84,7 @@ const arabicFonts = {
 
   // Decorative Headers (Cultural Elements)
   decorative: {
-    family: 'Amiri',
+    family: 'font_lpmq_isep_misbah',
     source: 'Google Fonts',
     sizes: ['20px', '24px', '32px', '40px'],
     weights: [400, 700],
@@ -200,8 +200,8 @@ const fontLoadingStrategy = {
   // Optional fonts (lazy load)
   optional: [
     'Inter-700',
-    'Amiri-400',
-    'Amiri-700',
+    'font_lpmq_isep_misbah-400',
+    'font_lpmq_isep_misbah-700',
     'JetBrains Mono-400'
   ],
   
@@ -432,8 +432,8 @@ export const useAppFonts = () => {
     'font_lpmq_isep_misbah-Regular': require('../assets/fonts/font_lpmq_isep_misbah-Regular.ttf'),
     'font_lpmq_isep_misbah-Medium': require('../assets/fonts/font_lpmq_isep_misbah-Medium.ttf'),
     'font_lpmq_isep_misbah-SemiBold': require('../assets/fonts/font_lpmq_isep_misbah-SemiBold.ttf'),
-    'Amiri-Regular': require('../assets/fonts/Amiri-Regular.ttf'),
-    'Amiri-Bold': require('../assets/fonts/Amiri-Bold.ttf'),
+    'font_lpmq_isep_misbah-Regular': require('../assets/fonts/font_lpmq_isep_misbah-Regular.ttf'),
+    'font_lpmq_isep_misbah-Bold': require('../assets/fonts/font_lpmq_isep_misbah-Bold.ttf'),
     
     // Latin Fonts
     'Inter-Regular': require('../assets/fonts/Inter-Regular.ttf'),
@@ -461,7 +461,7 @@ export const typography = {
     // Arabic fonts
     arabicPrimary: 'font_lpmq_isep_misbah-Regular',
     arabicSecondary: 'font_lpmq_isep_misbah-Regular', 
-    arabicDecorative: 'Amiri-Regular',
+    arabicDecorative: 'font_lpmq_isep_misbah-Regular',
     
     // Latin fonts
     latinPrimary: 'Inter-Regular',
@@ -682,7 +682,7 @@ export const syncIslamicContent = functions.pubsub
 ✅ APPROVED: Font Selection
 ├─ Arabic Primary: font_lpmq_isep_misbah (prayer text)
 ├─ Arabic Secondary: font_lpmq_isep_misbah (UI text)
-├─ Arabic Decorative: Amiri (headers)
+├─ Arabic Decorative: font_lpmq_isep_misbah (headers)
 ├─ Latin Primary: Inter (main UI)
 ├─ Latin Secondary: Source Sans Pro (body text)
 └─ Monospace: JetBrains Mono (technical)

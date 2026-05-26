@@ -633,7 +633,7 @@ fun TahlilTheme(
 // Islamic Typography System
 val TahlilTypography = Typography(
     displayLarge = TextStyle(
-        fontFamily = AmiriFont,
+        fontFamily = font_lpmq_isep_misbahFont,
         fontWeight = FontWeight.Bold,
         fontSize = 57.sp,
         lineHeight = 64.sp,
@@ -661,7 +661,7 @@ tasks {
     "P3-001.1" {
         name = "Islamic Typography System"
         description = """
-            - Implement Arabic font families (Noto Naskh, Noto Sans, Amiri)
+            - Implement Arabic font families (Noto Naskh, Noto Sans, font_lpmq_isep_misbah)
             - Create RTL text rendering system
             - Set up responsive typography scales
             - Implement cultural font variations
