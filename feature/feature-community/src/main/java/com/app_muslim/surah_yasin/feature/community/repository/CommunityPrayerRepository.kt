@@ -55,6 +55,12 @@ interface CommunityPrayerRepository {
     // User Achievements
     suspend fun checkAndAwardBadges(userId: String): Result<List<PrayerBadge>>
     fun getUserBadgesFlow(userId: String): Flow<List<PrayerBadge>>
+    
+    // Global Statistics (P5.A)
+    fun getCountryPrayerStatsFlow(): Flow<List<CountryPrayerStats>>
+    fun getDailyPrayerAnalyticsFlow(daysBack: Int = 30): Flow<List<DailyPrayerAnalytics>>
+    fun getWeeklyPrayerAnalyticsFlow(weeksBack: Int = 12): Flow<List<WeeklyPrayerAnalytics>>
+    fun getGlobalMilestonesFlow(): Flow<List<GlobalMilestone>>
 }
 
 /**
@@ -115,6 +121,7 @@ class CommunityPrayerFirebaseRepository @Inject constructor(
                         regionCode = doc.id,
                         regionName = data["regionName"] as? String ?: doc.id,
                         countryCode = data["countryCode"] as? String ?: "",
+                        countryName = data["countryName"] as? String ?: "",
                         activePrayers = data["activePrayers"] as? Long ?: 0L,
                         totalParticipants = data["totalParticipants"] as? Long ?: 0L,
                         popularPrayerType = data["popularPrayerType"] as? String ?: "Fatihah",
@@ -626,7 +633,7 @@ class CommunityPrayerFirebaseRepository @Inject constructor(
     /**
      * Get country-wise prayer statistics for world map visualization
      */
-    fun getCountryPrayerStatsFlow(): Flow<List<CountryPrayerStats>> {
+    override fun getCountryPrayerStatsFlow(): Flow<List<CountryPrayerStats>> {
         return firestore
             .collection("country_stats")
             .orderBy("total_prayers", Query.Direction.DESCENDING)
@@ -646,8 +653,6 @@ class CommunityPrayerFirebaseRepository @Inject constructor(
                                     percentage = (it["percentage"] as Number).toFloat()
                                 )
                             } ?: emptyList(),
-                            latitude = document.getDouble("latitude") ?: 0.0,
-                            longitude = document.getDouble("longitude") ?: 0.0,
                             flag = document.getString("flag") ?: "",
                             heatLevel = document.getDouble("heat_level")?.toFloat() ?: 0.0f,
                             rank = document.getLong("rank")?.toInt() ?: 0,
@@ -668,7 +673,7 @@ class CommunityPrayerFirebaseRepository @Inject constructor(
     /**
      * Get daily prayer analytics for the last 30 days
      */
-    fun getDailyPrayerAnalyticsFlow(daysBack: Int = 30): Flow<List<DailyPrayerAnalytics>> {
+    override fun getDailyPrayerAnalyticsFlow(daysBack: Int): Flow<List<DailyPrayerAnalytics>> {
         val startDate = LocalDate.now().minusDays(daysBack.toLong())
         
         return firestore
@@ -705,7 +710,7 @@ class CommunityPrayerFirebaseRepository @Inject constructor(
     /**
      * Get weekly prayer analytics for the last 12 weeks
      */
-    fun getWeeklyPrayerAnalyticsFlow(weeksBack: Int = 12): Flow<List<WeeklyPrayerAnalytics>> {
+    override fun getWeeklyPrayerAnalyticsFlow(weeksBack: Int): Flow<List<WeeklyPrayerAnalytics>> {
         val startWeek = LocalDate.now().minusWeeks(weeksBack.toLong()).with(DayOfWeek.MONDAY)
         
         return firestore
@@ -739,7 +744,7 @@ class CommunityPrayerFirebaseRepository @Inject constructor(
     /**
      * Get current active global milestones
      */
-    fun getGlobalMilestonesFlow(): Flow<List<GlobalMilestone>> {
+    override fun getGlobalMilestonesFlow(): Flow<List<GlobalMilestone>> {
         return firestore
             .collection("global_milestones")
             .whereEqualTo("is_active", true)

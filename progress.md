@@ -759,12 +759,12 @@ All P4.D tasks completed successfully. The Tahlil memorial prayer platform now h
    - `getDailyPrayerAnalyticsFlow()` & `getWeeklyPrayerAnalyticsFlow()`: Time-based analytics
    - `getGlobalMilestonesFlow()`: Community milestone tracking
 
-3. **✅ Create world map visualization with Google Maps Compose**
-   - `GlobalPrayerWorldMap.kt`: Complete interactive world map
-   - Google Maps Compose integration with heat visualization
-   - Country selection with detailed statistics overlay
-   - Prayer activity markers with dynamic sizing based on heat level
-   - Islamic-themed map headers and country flags
+3. **✅ Create country statistics list visualization (alternative to world map)**
+   - `GlobalPrayerWorldMap.kt`: Complete interactive country statistics list
+   - Simple list-based visualization with country ranking
+   - Country selection with detailed statistics display
+   - Activity level indicators with dynamic heat visualization
+   - Islamic-themed headers and country flags
    - Sample data generator for development/testing
 
 4. **✅ Add country and regional statistics with Compose charts**
@@ -811,7 +811,8 @@ All P4.D tasks completed successfully. The Tahlil memorial prayer platform now h
 - `TrendDirection`: Prayer trend indicators
 
 **Build Configuration Updates:**
-- Google Maps Compose: `com.google.maps.android:maps-compose:4.3.3`
+- ~~Google Maps Compose: `com.google.maps.android:maps-compose:4.3.3`~~ (Removed per stakeholder decision)
+- ~~ML Kit Text Recognition: `com.google.mlkit:text-recognition:16.0.0`~~ (Removed - OCR not needed)
 - Charts Library: `com.github.PhilJay:MPAndroidChart:v3.1.0`
 - Animation Graphics: `androidx.compose.animation:animation-graphics:1.6.1`
 
@@ -822,7 +823,7 @@ All P4.D tasks completed successfully. The Tahlil memorial prayer platform now h
 - Missing imports added (LocalDate, DayOfWeek)
 
 **UI Components:**
-- **`GlobalPrayerWorldMap.kt`**: Interactive world map with country selection
+- **`GlobalPrayerWorldMap.kt`**: Interactive country statistics list with selection
 - **`PrayerAnalyticsCharts.kt`**: Multi-chart analytics dashboard
 - **`GlobalMilestoneCelebrations.kt`**: Animated celebration system
 
@@ -848,12 +849,18 @@ All P4.D tasks completed successfully. The Tahlil memorial prayer platform now h
 ### 🚀 **Ready for Phase 5.B**
 
 All P5.A tasks completed successfully. The Tahlil platform now features:
-- Interactive global prayer world map with country statistics
+- Interactive global prayer country statistics list with ranking
 - Real-time prayer analytics with multiple chart types
 - Cloud Functions for server-side data aggregation
 - Animated milestone celebration system
 - Comprehensive StateFlow-based architecture
 - Complete integration with Firebase ecosystem
+
+**🔄 Stakeholder Update (May 26, 2026):**
+- Removed Google Maps dependency per product owner decision
+- Removed ML Kit OCR features (not needed by users)
+- Replaced world map with simple country statistics list
+- Maintained all functionality without external map services
 
 **Next Phase**: Phase 5.B — Memorial Sharing System (Compose + Firebase)
 

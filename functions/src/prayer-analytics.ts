@@ -127,8 +127,6 @@ export const updateCountryStatistics = onDocumentCreated(
           country_name: countryName,
           total_prayers: (currentStats.total_prayers || 0) + 1,
           active_participants: await getActiveParticipantsCount(countryCode),
-          latitude: userData.latitude || getCountryLatitude(countryCode),
-          longitude: userData.longitude || getCountryLongitude(countryCode),
           flag: getCountryFlag(countryCode),
           last_active_at: FieldValue.serverTimestamp(),
           popular_prayer_types: await updatePopularPrayerTypes(
@@ -460,30 +458,6 @@ async function createMilestoneCelebration(milestone: any, currentValue: number):
 }
 
 // Country helper functions
-function getCountryLatitude(countryCode: string): number {
-  const coordinates: Record<string, [number, number]> = {
-    'ID': [-2.5, 118.0], // Indonesia
-    'SA': [23.8, 45.0],  // Saudi Arabia
-    'PK': [30.3, 69.3],  // Pakistan
-    'MY': [4.2, 101.9],  // Malaysia
-    'TR': [38.9, 35.2],  // Turkey
-    'EG': [26.8, 30.8],  // Egypt
-    'NG': [9.0, 8.0],    // Nigeria
-    'BD': [23.7, 90.4],  // Bangladesh
-    'IN': [20.6, 78.9],  // India
-    'IR': [32.4, 53.7]   // Iran
-  };
-  return coordinates[countryCode]?.[0] || 0;
-}
-
-function getCountryLongitude(countryCode: string): number {
-  const coordinates: Record<string, [number, number]> = {
-    'ID': [-2.5, 118.0], 'SA': [23.8, 45.0], 'PK': [30.3, 69.3],
-    'MY': [4.2, 101.9], 'TR': [38.9, 35.2], 'EG': [26.8, 30.8],
-    'NG': [9.0, 8.0], 'BD': [23.7, 90.4], 'IN': [20.6, 78.9], 'IR': [32.4, 53.7]
-  };
-  return coordinates[countryCode]?.[1] || 0;
-}
 
 function getCountryFlag(countryCode: string): string {
   const flags: Record<string, string> = {

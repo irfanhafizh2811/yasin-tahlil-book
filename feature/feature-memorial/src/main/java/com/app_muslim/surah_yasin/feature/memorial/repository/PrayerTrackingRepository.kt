@@ -404,8 +404,6 @@ class PrayerTrackingRepository @Inject constructor(
 
     private fun PrayerLocation.toFirestoreMap(): Map<String, Any?> {
         return mapOf(
-            "latitude" to latitude,
-            "longitude" to longitude,
             "city" to city,
             "country" to country,
             "mosque" to mosque,

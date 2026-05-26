@@ -35,8 +35,6 @@ data class RegionalPrayerStats(
     val popularPrayerType: String = "Fatihah",
     val rank: Int = 0,
     val percentageOfGlobal: Float = 0.0f,
-    val latitude: Double = 0.0,
-    val longitude: Double = 0.0,
     val timeZone: String = "UTC",
     val currentLocalTime: ZonedDateTime = ZonedDateTime.now(),
     val dailyTrend: TrendDirection = TrendDirection.STABLE,
@@ -50,8 +48,6 @@ data class CountryPrayerStats(
     val totalPrayers: Long = 0L,
     val activeParticipants: Long = 0L,
     val popularPrayerTypes: List<PrayerTypeCount> = emptyList(),
-    val latitude: Double = 0.0,
-    val longitude: Double = 0.0,
     val flag: String = "",
     val heatLevel: Float = 0.0f, // 0.0 to 1.0 for heat map coloring
     val rank: Int = 0,

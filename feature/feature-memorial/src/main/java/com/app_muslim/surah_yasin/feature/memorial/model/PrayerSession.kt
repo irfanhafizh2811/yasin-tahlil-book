@@ -27,8 +27,6 @@ data class PrayerSession(
 
 @Parcelize
 data class PrayerLocation(
-    val latitude: Double = 0.0,
-    val longitude: Double = 0.0,
     val city: String = "",
     val country: String = "",
     val mosque: String? = null,

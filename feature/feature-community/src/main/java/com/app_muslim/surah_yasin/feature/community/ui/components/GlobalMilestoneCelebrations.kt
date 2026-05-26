@@ -362,10 +362,8 @@ private fun AchievementBadge(
                                     Color(0xFFFFD700).copy(alpha = 0.3f),
                                     Color.Transparent
                                 )
-                            ),
-                            radius = 50f
-                        ),
-                    contentAlignment = Alignment.Center
+                            )
+                        )
                 )
                 
                 Text(

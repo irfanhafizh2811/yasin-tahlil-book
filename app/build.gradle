@@ -247,8 +247,6 @@ dependencies {
     // Firebase Dynamic Links (for memorial sharing)
     implementation("com.google.firebase:firebase-dynamic-links")
     
-    // Firebase ML Kit (for content moderation - optional)
-    implementation("com.google.mlkit:text-recognition:16.0.0")
     
     // Remove deprecated Realtime Database, replace with Firestore
     // implementation("com.google.firebase:firebase-database") // REMOVED - Using Firestore instead

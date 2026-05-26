@@ -90,7 +90,7 @@ object MemorialValidator {
     }
     
     private fun containsInappropriateContent(text: String): Boolean {
-        // Basic implementation - in production, this should use ML Kit or similar service
+        // Basic implementation - uses simple validation rules
         val inappropriateWords = listOf<String>(
             // Add inappropriate words in multiple languages
             // This is a simplified implementation

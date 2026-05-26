@@ -3,7 +3,10 @@ package com.app_muslim.surah_yasin.feature.community.ui.components
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -15,20 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.maps.android.compose.*
+import androidx.compose.ui.unit.Dp
 import com.app_muslim.surah_yasin.feature.community.model.*
 
 /**
- * Global Prayer World Map Component
- * Interactive world map showing prayer activity across countries with heat visualization
+ * Global Prayer Statistics List - Alternative to World Map
+ * Simple list-based visualization showing prayer activity across countries
  */
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -38,9 +37,6 @@ fun GlobalPrayerWorldMap(
     onCountrySelected: (CountryPrayerStats) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var mapLoaded by remember { mutableStateOf(false) }
-    val context = LocalContext.current
-    
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -51,62 +47,26 @@ fun GlobalPrayerWorldMap(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column {
-            // Map header
-            WorldMapHeader(
+            // Header
+            GlobalStatsHeader(
                 totalCountries = countryStats.size,
                 topCountry = countryStats.firstOrNull(),
                 selectedCountry = selectedCountry
             )
             
-            Box(
+            // Country List with statistics
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(1f),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Google Map
-                GoogleMap(
-                    modifier = Modifier.fillMaxSize(),
-                    cameraPositionState = rememberCameraPositionState {
-                        position = com.google.android.gms.maps.model.CameraPosition.fromLatLngZoom(
-                            LatLng(20.0, 0.0), // Center on global view
-                            2f
-                        )
-                    },
-                    onMapLoaded = {
-                        mapLoaded = true
-                    },
-                    properties = MapProperties(
-                        mapType = MapType.NORMAL,
-                        isMyLocationEnabled = false
-                    ),
-                    uiSettings = MapUiSettings(
-                        zoomControlsEnabled = true,
-                        mapToolbarEnabled = false,
-                        myLocationButtonEnabled = false
-                    )
-                ) {
-                    // Add markers for countries with prayer activity
-                    countryStats.forEach { country ->
-                        if (country.latitude != 0.0 && country.longitude != 0.0) {
-                            PrayerActivityMarker(
-                                position = LatLng(country.latitude, country.longitude),
-                                country = country,
-                                onMarkerClick = { onCountrySelected(country) }
-                            )
-                        }
-                    }
-                }
-                
-                // Loading overlay
-                if (!mapLoaded) {
-                    MapLoadingOverlay()
-                }
-                
-                // Country details overlay
-                selectedCountry?.let { country ->
-                    CountryDetailsOverlay(
+                items(countryStats) { country ->
+                    CountryStatsCard(
                         country = country,
-                        onDismiss = { onCountrySelected(CountryPrayerStats("", "")) }
+                        isSelected = selectedCountry?.countryCode == country.countryCode,
+                        onSelect = { onCountrySelected(country) }
                     )
                 }
             }
@@ -115,7 +75,7 @@ fun GlobalPrayerWorldMap(
 }
 
 @Composable
-private fun WorldMapHeader(
+private fun GlobalStatsHeader(
     totalCountries: Int,
     topCountry: CountryPrayerStats?,
     selectedCountry: CountryPrayerStats?,
@@ -180,28 +140,94 @@ private fun WorldMapHeader(
 }
 
 @Composable
-private fun PrayerActivityMarker(
-    position: LatLng,
+private fun CountryStatsCard(
     country: CountryPrayerStats,
-    onMarkerClick: () -> Unit
+    isSelected: Boolean,
+    onSelect: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    // Heat level determines marker size and color intensity
-    val markerSize = (20f + (country.heatLevel * 30f)).coerceIn(20f, 50f)
-    val markerColor = Color.lerp(
-        Color(0xFF4CAF50).copy(alpha = 0.6f),
-        Color(0xFFE91E63).copy(alpha = 0.9f),
-        country.heatLevel
+    val animatedElevation by animateDpAsState(
+        targetValue = if (isSelected) 12.dp else 4.dp,
+        animationSpec = tween(300), label = "elevation"
     )
     
-    Marker(
-        state = MarkerState(position = position),
-        title = country.countryName,
-        snippet = "${country.totalPrayers} prayers • ${country.activeParticipants} participants",
-        onClick = {
-            onMarkerClick()
-            true
+    val backgroundColor = if (isSelected) {
+        MaterialTheme.colorScheme.primaryContainer
+    } else {
+        MaterialTheme.colorScheme.surface
+    }
+    
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onSelect() },
+        colors = CardDefaults.cardColors(
+            containerColor = backgroundColor
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = animatedElevation)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.weight(1f)
+            ) {
+                // Country flag and rank
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CountryFlag(
+                        countryName = country.countryName,
+                        flag = country.flag
+                    )
+                    Text(
+                        text = "#${country.rank}",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                
+                // Country info
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = country.countryName,
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    
+                    Text(
+                        text = "${country.totalPrayers} prayers • ${country.activeParticipants} participants",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                    )
+                }
+            }
+            
+            // Activity level indicator
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                ActivityLevelIndicator(
+                    heatLevel = country.heatLevel,
+                    size = 32.dp
+                )
+                
+                Text(
+                    text = "${(country.heatLevel * 100).toInt()}%",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
         }
-    )
+    }
 }
 
 @Composable
@@ -237,243 +263,36 @@ private fun CountryFlag(
 }
 
 @Composable
-private fun MapLoadingOverlay(
+private fun ActivityLevelIndicator(
+    heatLevel: Float,
+    size: Dp,
     modifier: Modifier = Modifier
 ) {
+    val colors = listOf(
+        Color(0xFF4CAF50),
+        Color(0xFFFF9800),
+        Color(0xFFE91E63)
+    )
+    
+    val color = when {
+        heatLevel < 0.33f -> colors[0]
+        heatLevel < 0.66f -> colors[1]
+        else -> colors[2]
+    }
+    
     Box(
         modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)),
+            .size(width = size, height = size)
+            .clip(CircleShape)
+            .background(color.copy(alpha = 0.2f)),
         contentAlignment = Alignment.Center
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(48.dp),
-                color = MaterialTheme.colorScheme.primary
-            )
-            
-            Text(
-                text = "Loading global prayer map...",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-private fun CountryDetailsOverlay(
-    country: CountryPrayerStats,
-    onDismiss: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        AnimatedVisibility(
-            visible = true,
-            enter = slideInVertically(
-                initialOffsetY = { it },
-                animationSpec = tween(300, easing = EaseOutQuart)
-            ),
-            exit = slideOutVertically(
-                targetOffsetY = { it },
-                animationSpec = tween(300, easing = EaseInQuart)
-            )
-        ) {
-            CountryDetailsCard(
-                country = country,
-                onDismiss = onDismiss
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun CountryDetailsCard(
-    country: CountryPrayerStats,
-    onDismiss: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(20.dp)
-        ) {
-            // Header with country info
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    CountryFlag(
-                        countryName = country.countryName,
-                        flag = country.flag
-                    )
-                    
-                    Column {
-                        Text(
-                            text = country.countryName,
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold
-                        )
-                        
-                        Text(
-                            text = "Rank #${country.rank} globally",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                }
-                
-                IconButton(onClick = onDismiss) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Close"
-                    )
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            // Prayer statistics
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                CountryStatItem(
-                    icon = "🤲",
-                    label = "Total Prayers",
-                    value = "${country.totalPrayers}",
-                    modifier = Modifier.weight(1f)
-                )
-                
-                CountryStatItem(
-                    icon = "👥",
-                    label = "Participants",
-                    value = "${country.activeParticipants}",
-                    modifier = Modifier.weight(1f)
-                )
-                
-                CountryStatItem(
-                    icon = "🔥",
-                    label = "Activity Level",
-                    value = "${(country.heatLevel * 100).toInt()}%",
-                    modifier = Modifier.weight(1f)
-                )
-            }
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            // Popular prayer types
-            if (country.popularPrayerTypes.isNotEmpty()) {
-                Text(
-                    text = "Popular Prayer Types",
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold
-                )
-                
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                country.popularPrayerTypes.take(3).forEach { prayerTypeCount ->
-                    PrayerTypeProgressBar(
-                        prayerType = prayerTypeCount.prayerType,
-                        percentage = prayerTypeCount.percentage
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun CountryStatItem(
-    icon: String,
-    label: String,
-    value: String,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = icon,
-            fontSize = 20.sp
-        )
-        
-        Text(
-            text = value,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
-        )
-        
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-private fun PrayerTypeProgressBar(
-    prayerType: CommunityPrayerType,
-    percentage: Float,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = prayerType.displayName,
-            style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.width(60.dp)
-        )
-        
-        LinearProgressIndicator(
-            progress = percentage / 100f,
+        val innerSize = size * heatLevel.coerceAtLeast(0.3f)
+        Box(
             modifier = Modifier
-                .weight(1f)
-                .height(6.dp)
-                .clip(RoundedCornerShape(3.dp)),
-            color = when (prayerType) {
-                CommunityPrayerType.TAHLIL -> Color(0xFF4CAF50)
-                CommunityPrayerType.YASIN -> Color(0xFF2196F3)
-                CommunityPrayerType.FATIHAH -> Color(0xFFFF9800)
-                CommunityPrayerType.DHIKR -> Color(0xFF9C27B0)
-                CommunityPrayerType.DUA -> Color(0xFFE91E63)
-                CommunityPrayerType.QURAN -> Color(0xFF00BCD4)
-                CommunityPrayerType.COMMUNITY_PRAYER -> Color(0xFF795548)
-            }
-        )
-        
-        Text(
-            text = "${percentage.toInt()}%",
-            style = MaterialTheme.typography.labelSmall,
-            fontWeight = FontWeight.Medium,
-            modifier = Modifier.width(32.dp)
+                .size(width = innerSize, height = innerSize)
+                .clip(CircleShape)
+                .background(color)
         )
     }
 }
@@ -487,8 +306,6 @@ object WorldMapSampleData {
                 countryName = "Indonesia",
                 totalPrayers = 150000L,
                 activeParticipants = 25000L,
-                latitude = -2.5,
-                longitude = 118.0,
                 flag = "🇮🇩",
                 heatLevel = 0.95f,
                 rank = 1,
@@ -503,8 +320,6 @@ object WorldMapSampleData {
                 countryName = "Saudi Arabia",
                 totalPrayers = 120000L,
                 activeParticipants = 18000L,
-                latitude = 23.8,
-                longitude = 45.0,
                 flag = "🇸🇦",
                 heatLevel = 0.85f,
                 rank = 2
@@ -514,8 +329,6 @@ object WorldMapSampleData {
                 countryName = "Pakistan",
                 totalPrayers = 95000L,
                 activeParticipants = 15000L,
-                latitude = 30.3,
-                longitude = 69.3,
                 flag = "🇵🇰",
                 heatLevel = 0.75f,
                 rank = 3
@@ -525,8 +338,6 @@ object WorldMapSampleData {
                 countryName = "Malaysia",
                 totalPrayers = 75000L,
                 activeParticipants = 12000L,
-                latitude = 4.2,
-                longitude = 101.9,
                 flag = "🇲🇾",
                 heatLevel = 0.65f,
                 rank = 4
@@ -536,8 +347,6 @@ object WorldMapSampleData {
                 countryName = "Turkey",
                 totalPrayers = 60000L,
                 activeParticipants = 9000L,
-                latitude = 38.9,
-                longitude = 35.2,
                 flag = "🇹🇷",
                 heatLevel = 0.55f,
                 rank = 5

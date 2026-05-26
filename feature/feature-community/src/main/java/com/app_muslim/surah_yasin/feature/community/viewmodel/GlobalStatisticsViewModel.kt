@@ -2,6 +2,9 @@ package com.app_muslim.surah_yasin.feature.community.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.ui.graphics.vector.ImageVector
 import com.app_muslim.surah_yasin.feature.community.model.*
 import com.app_muslim.surah_yasin.feature.community.repository.CommunityPrayerRepository
 import com.app_muslim.surah_yasin.feature.community.ui.components.MilestoneCelebration
@@ -43,10 +46,16 @@ class GlobalStatisticsViewModel @Inject constructor(
                 communityRepository.getGlobalPrayerStatsFlow(),
                 communityRepository.getCountryPrayerStatsFlow(),
                 communityRepository.getGlobalMilestonesFlow(),
-                communityRepository.getDailyPrayerAnalyticsFlow(),
-                communityRepository.getWeeklyPrayerAnalyticsFlow(),
+                communityRepository.getDailyPrayerAnalyticsFlow(30),
+                communityRepository.getWeeklyPrayerAnalyticsFlow(12),
                 _selectedTimeframe
-            ) { globalStats, countryStats, milestones, dailyAnalytics, weeklyAnalytics, timeframe ->
+            ) { flows ->
+                val globalStats = flows[0] as GlobalPrayerStats
+                val countryStats = flows[1] as List<CountryPrayerStats>
+                val milestones = flows[2] as List<GlobalMilestone>
+                val dailyAnalytics = flows[3] as List<DailyPrayerAnalytics>
+                val weeklyAnalytics = flows[4] as List<WeeklyPrayerAnalytics>
+                val timeframe = flows[5] as AnalyticsTimeframe
                 
                 GlobalStatisticsUiState(
                     globalStats = globalStats,
@@ -260,11 +269,11 @@ sealed class GlobalStatisticsEvent {
 // Analytics timeframe enum
 enum class AnalyticsTimeframe(
     val displayName: String,
-    val icon: androidx.compose.ui.graphics.vector.ImageVector
+    val icon: ImageVector
 ) {
-    DAILY("Daily", androidx.compose.material.icons.Icons.Default.CalendarToday),
-    WEEKLY("Weekly", androidx.compose.material.icons.Icons.Default.CalendarViewWeek),
-    GEOGRAPHIC("Geographic", androidx.compose.material.icons.Icons.Default.Public)
+    DAILY("Daily", Icons.Default.DateRange),
+    WEEKLY("Weekly", Icons.Default.CalendarMonth),
+    GEOGRAPHIC("Geographic", Icons.Default.Language)
 }
 
 // Global trend data

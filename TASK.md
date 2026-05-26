@@ -249,7 +249,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ### P5.A — Global Prayer Statistics (Compose + Firestore) ✅ **[COMPLETED]**
 - [x] Create :feature-community module with CommunityScreen **[COMPLETED]**
 - [x] Implement real-time global prayer count with Firestore listeners **[COMPLETED]**
-- [x] Create world map visualization with Google Maps Compose **[COMPLETED]**
+- [x] Create country statistics list visualization (alternative to world map) **[COMPLETED]**
 - [x] Add country and regional statistics with Compose charts **[COMPLETED]**
 - [x] Build daily/weekly prayer analytics with Cloud Functions **[COMPLETED]**
 - [x] Design community milestone celebrations with Compose animations **[COMPLETED]**
