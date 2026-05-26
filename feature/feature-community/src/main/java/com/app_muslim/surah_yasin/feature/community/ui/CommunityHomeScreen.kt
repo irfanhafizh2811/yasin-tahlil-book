@@ -5,6 +5,7 @@ import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -15,10 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.delay
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app_muslim.surah_yasin.feature.community.model.*
@@ -86,6 +89,18 @@ fun CommunityHomeScreen(
                     regionalStats = uiState.regionalStats,
                     onNavigateToLeaderboard = onNavigateToLeaderboard
                 )
+            }
+            
+            // Prayer Milestone Celebrations
+            if (uiState.recentActivity.any { it.activityType == ActivityType.MILESTONE_REACHED }) {
+                item {
+                    PrayerMilestoneCelebration(
+                        milestones = uiState.recentActivity.filter { 
+                            it.activityType == ActivityType.MILESTONE_REACHED 
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
             }
             
             // Recent Prayer Activity Feed
@@ -826,4 +841,182 @@ private fun formatTimeAgo(timestamp: java.time.ZonedDateTime): String {
 private fun formatDateTime(timestamp: java.time.ZonedDateTime): String {
     val formatter = java.time.format.DateTimeFormatter.ofPattern("MMM dd, HH:mm")
     return timestamp.format(formatter)
+}
+
+@Composable
+private fun PrayerMilestoneCelebration(
+    milestones: List<PrayerActivityItem>,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Animated celebration header
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                CelebrationIcon()
+                
+                Text(
+                    text = "🎉 Prayer Milestones Reached!",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                
+                CelebrationIcon()
+            }
+            
+            Spacer(modifier = Modifier.height(12.dp))
+            
+            // Milestone items with animations
+            milestones.take(3).forEach { milestone ->
+                AnimatedMilestoneItem(milestone = milestone)
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+            
+            // View all milestones button
+            if (milestones.size > 3) {
+                TextButton(
+                    onClick = { /* Navigate to full milestones */ }
+                ) {
+                    Text("View all ${milestones.size} milestones")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CelebrationIcon() {
+    val infiniteTransition = rememberInfiniteTransition()
+    val rotation by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        )
+    )
+    
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.2f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = EaseInOut),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+    
+    Box(
+        modifier = Modifier
+            .size(24.dp)
+            .graphicsLayer {
+                rotationZ = rotation
+                scaleX = scale
+                scaleY = scale
+            }
+    ) {
+        Text(
+            text = "✨",
+            fontSize = 20.sp,
+            modifier = Modifier.align(Alignment.Center)
+        )
+    }
+}
+
+@Composable
+private fun AnimatedMilestoneItem(
+    milestone: PrayerActivityItem,
+    modifier: Modifier = Modifier
+) {
+    var isVisible by remember { mutableStateOf(false) }
+    
+    LaunchedEffect(Unit) {
+        delay(300) // Stagger the animation
+        isVisible = true
+    }
+    
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = slideInHorizontally(
+            initialOffsetX = { it },
+            animationSpec = tween(500, easing = EaseOutBack)
+        ) + fadeIn(animationSpec = tween(500))
+    ) {
+        Card(
+            modifier = modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White.copy(alpha = 0.9f)
+            )
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                // Milestone icon with glow effect
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                        .background(
+                            brush = Brush.radialGradient(
+                                colors = listOf(
+                                    Color(0xFFFFD700),
+                                    Color(0xFFFFA500)
+                                )
+                            )
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "🏆",
+                        fontSize = 20.sp
+                    )
+                }
+                
+                // Milestone details
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = milestone.message,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    
+                    Text(
+                        text = "by ${milestone.userDisplayName}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                    )
+                    
+                    milestone.prayerCount?.let { count ->
+                        Text(
+                            text = "$count prayers completed",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color(0xFF4CAF50)
+                        )
+                    }
+                }
+                
+                // Time indicator
+                Text(
+                    text = formatTimeAgo(milestone.timestamp),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                )
+            }
+        }
+    }
 }
