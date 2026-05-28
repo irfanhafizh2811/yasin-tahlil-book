@@ -9,8 +9,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.app_muslim.surah_yasin.feature.community.ui.CommunityHomeScreen
 import com.app_muslim.surah_yasin.feature.community.ui.PrayerLeaderboardScreen
+import com.app_muslim.surah_yasin.feature.community.ui.discovery.MemorialDiscoveryScreen
+import com.app_muslim.surah_yasin.feature.community.ui.leaderboards.CommunityLeaderboardScreen
 import com.app_muslim.surah_yasin.feature.community.viewmodel.CommunityHomeViewModel
 import com.app_muslim.surah_yasin.feature.community.viewmodel.PrayerLeaderboardViewModel
+import com.app_muslim.surah_yasin.feature.community.viewmodel.MemorialDiscoveryViewModel
+import com.app_muslim.surah_yasin.feature.community.viewmodel.CommunityLeaderboardViewModel
 
 /**
  * Community Feature Navigation Setup
@@ -21,14 +25,21 @@ import com.app_muslim.surah_yasin.feature.community.viewmodel.PrayerLeaderboardV
 object CommunityRoutes {
     const val COMMUNITY_HOME = "community_home"
     const val PRAYER_LEADERBOARD = "prayer_leaderboard"
+    const val COMMUNITY_LEADERBOARD = "community_leaderboard"
+    const val MEMORIAL_DISCOVERY = "memorial_discovery"
+    const val MEMORIAL_DISCOVERY_FILTER = "memorial_discovery_filter"
     const val COMMUNITY_SESSION = "community_session/{sessionId}"
     const val CREATE_SESSION = "create_session"
     const val FAMILY_MEMORIAL_SHARING = "family_memorial_sharing"
     const val USER_ACHIEVEMENTS = "user_achievements/{userId}"
+    const val MEMORIAL_DETAILS = "memorial_details/{memorialId}"
+    const val REGIONAL_COMMUNITIES = "regional_communities"
+    const val COMMUNITY_EVENTS = "community_events"
     
     // Route with arguments
     fun communitySessionRoute(sessionId: String) = "community_session/$sessionId"
     fun userAchievementsRoute(userId: String) = "user_achievements/$userId"
+    fun memorialDetailsRoute(memorialId: String) = "memorial_details/$memorialId"
 }
 
 /**
@@ -67,6 +78,41 @@ fun NavGraphBuilder.addCommunityNavigation(
             },
             onNavigateToProfile = { userId ->
                 navController.navigate(CommunityRoutes.userAchievementsRoute(userId))
+            },
+            viewModel = viewModel
+        )
+    }
+    
+    // Community Leaderboard Screen
+    composable(
+        route = CommunityRoutes.COMMUNITY_LEADERBOARD
+    ) {
+        val viewModel: CommunityLeaderboardViewModel = hiltViewModel()
+        CommunityLeaderboardScreen(
+            onNavigateBack = {
+                navController.popBackStack()
+            },
+            onNavigateToProfile = { userId ->
+                navController.navigate(CommunityRoutes.userAchievementsRoute(userId))
+            },
+            viewModel = viewModel
+        )
+    }
+    
+    // Memorial Discovery Screen
+    composable(
+        route = CommunityRoutes.MEMORIAL_DISCOVERY
+    ) {
+        val viewModel: MemorialDiscoveryViewModel = hiltViewModel()
+        MemorialDiscoveryScreen(
+            onNavigateToMemorial = { memorialId ->
+                navController.navigate(CommunityRoutes.memorialDetailsRoute(memorialId))
+            },
+            onNavigateToFilter = {
+                navController.navigate(CommunityRoutes.MEMORIAL_DISCOVERY_FILTER)
+            },
+            onNavigateBack = {
+                navController.popBackStack()
             },
             viewModel = viewModel
         )
@@ -182,6 +228,18 @@ object CommunityNavigationActions {
         navigate(CommunityRoutes.PRAYER_LEADERBOARD)
     }
     
+    fun NavController.navigateToCommunityLeaderboard() {
+        navigate(CommunityRoutes.COMMUNITY_LEADERBOARD)
+    }
+    
+    fun NavController.navigateToMemorialDiscovery() {
+        navigate(CommunityRoutes.MEMORIAL_DISCOVERY)
+    }
+    
+    fun NavController.navigateToMemorialDetails(memorialId: String) {
+        navigate(CommunityRoutes.memorialDetailsRoute(memorialId))
+    }
+    
     fun NavController.navigateToCommunitySession(sessionId: String) {
         navigate(CommunityRoutes.communitySessionRoute(sessionId))
     }
@@ -196,5 +254,13 @@ object CommunityNavigationActions {
     
     fun NavController.navigateToUserAchievements(userId: String) {
         navigate(CommunityRoutes.userAchievementsRoute(userId))
+    }
+    
+    fun NavController.navigateToRegionalCommunities() {
+        navigate(CommunityRoutes.REGIONAL_COMMUNITIES)
+    }
+    
+    fun NavController.navigateToCommunityEvents() {
+        navigate(CommunityRoutes.COMMUNITY_EVENTS)
     }
 }

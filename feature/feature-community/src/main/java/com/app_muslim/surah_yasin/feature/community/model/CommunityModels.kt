@@ -127,7 +127,7 @@ data class CommunityPrayerSession(
     val prayerType: CommunityPrayerType,
     val isPublic: Boolean = true,
     val regionCode: String,
-    val participants: List<PrayerParticipant> = emptyList(),
+    val participants: List<SessionParticipant> = emptyList(),
     val startTime: ZonedDateTime,
     val estimatedDuration: Long, // in minutes
     val targetPrayerCount: Int,
@@ -239,6 +239,7 @@ data class CommunityPrayerEvent(
 )
 
 enum class CommunityEventType {
+    GROUP_PRAYER,          // General group prayer session
     MEMORIAL_REMEMBRANCE,  // Special memorial prayer
     FRIDAY_GATHERING,      // Friday special prayers
     RAMADAN_SPECIAL,       // Ramadan community prayers
@@ -331,6 +332,152 @@ sealed class CommunityEvent {
     data class ChangeRegion(val regionCode: String) : CommunityEvent()
 }
 
+/**
+ * Memorial Interaction Models
+ */
+data class MemorialInteraction(
+    val interactionId: String,
+    val memorialId: String,
+    val userId: String,
+    val userName: String,
+    val interactionType: MemorialInteractionType,
+    val content: String,
+    val timestamp: ZonedDateTime,
+    val isPublic: Boolean = true,
+    val likes: Int = 0,
+    val replies: List<InteractionReply> = emptyList(),
+    val isAnonymous: Boolean = false,
+    val region: String,
+    val language: String = "en"
+)
+
+enum class MemorialInteractionType {
+    PRAYER_COMPLETION,
+    DUA_RECITATION,
+    REMEMBRANCE_MESSAGE,
+    GRATITUDE_EXPRESSION,
+    FAMILY_UPDATE,
+    COMMUNITY_SUPPORT
+}
+
+data class InteractionReply(
+    val replyId: String,
+    val userId: String,
+    val userName: String,
+    val content: String,
+    val timestamp: ZonedDateTime,
+    val isAnonymous: Boolean = false
+)
+
+/**
+ * Regional Communities
+ */
+data class RegionalIslamicCommunity(
+    val communityId: String,
+    val name: String,
+    val nameArabic: String? = null,
+    val region: String,
+    val country: String,
+    val city: String? = null,
+    val islamicSchool: IslamicSchoolOfThought = IslamicSchoolOfThought.GENERAL,
+    val language: String = "en",
+    val memberCount: Long = 0L,
+    val activeMemberCount: Long = 0L,
+    val totalMemorials: Long = 0L,
+    val totalPrayers: Long = 0L,
+    val weeklyGoal: Long = 1000L,
+    val currentWeekProgress: Long = 0L,
+    val isVerified: Boolean = false,
+    val createdAt: ZonedDateTime,
+    val lastActiveAt: ZonedDateTime,
+    val description: String = "",
+    val guidelines: List<String> = emptyList(),
+    val timeZone: String = "UTC"
+)
+
+enum class IslamicSchoolOfThought {
+    GENERAL, SUNNI, SHIA, HANAFI, MALIKI, SHAFI, HANBALI
+}
+
+enum class CommunitySessionType {
+    MEMORIAL_PRAYER, GROUP_DHIKR, QURAN_STUDY, COMMUNITY_DUA, SPECIAL_OCCASION
+}
+
+enum class SessionPrivacyLevel {
+    PUBLIC, FAMILY_ONLY, INVITED_ONLY, PRIVATE
+}
+
+enum class ParticipantRole {
+    HOST, PARTICIPANT, MODERATOR, GUEST
+}
+
+/**
+ * Session Participant Model
+ */
+data class SessionParticipant(
+    val userId: String,
+    val displayName: String,
+    val role: ParticipantRole = ParticipantRole.PARTICIPANT,
+    val joinedAt: ZonedDateTime,
+    val currentPrayerCount: Int = 0,
+    val isActive: Boolean = true,
+    val contributionPercentage: Float = 0.0f,
+    val regionCode: String,
+    val isAnonymous: Boolean = false
+)
+
+/**
+ * Prayer Participation Session
+ */
+data class PrayerParticipationSession(
+    val sessionId: String,
+    val memorialId: String,
+    val participantId: String,
+    val prayerType: CommunityPrayerType,
+    val startTime: ZonedDateTime,
+    val endTime: ZonedDateTime? = null,
+    val completedPrayers: Int = 0,
+    val targetPrayers: Int,
+    val isCompleted: Boolean = false,
+    val notes: String = "",
+    val region: String
+)
+
+/**
+ * Community Engagement Metrics
+ */
+data class CommunityEngagementMetrics(
+    val totalCommunities: Long = 0L,
+    val activeCommunities: Long = 0L,
+    val totalMembers: Long = 0L,
+    val activeMembers: Long = 0L,
+    val totalInteractions: Long = 0L,
+    val averageParticipationRate: Float = 0.0f,
+    val lastCalculated: ZonedDateTime
+)
+
+/**
+ * Community Events (Not to be confused with the UI Event sealed class)
+ */
+data class CommunityScheduledEvent(
+    val eventId: String,
+    val title: String,
+    val titleArabic: String? = null,
+    val description: String,
+    val type: CommunityEventType,
+    val scheduledTime: ZonedDateTime,
+    val duration: Long, // in minutes
+    val communityId: String? = null,
+    val region: String,
+    val participantLimit: Int? = null,
+    val currentParticipants: Int = 0,
+    val requirements: List<String> = emptyList(),
+    val tags: List<String> = emptyList(),
+    val isRecurring: Boolean = false,
+    val recurrencePattern: String? = null,
+    val isActive: Boolean = true
+)
+
 // Firebase Data Transfer Objects
 data class CommunityStatsFirestore(
     val totalActivePrayers: Long = 0L,
@@ -400,3 +547,180 @@ enum class FamilyTab(val displayName: String) {
     SHARED_MEMORIALS("Shared Memorials"),
     PRAYER_INVITATIONS("Prayer Invitations")
 }
+
+/**
+ * Memorial Discovery Models
+ */
+data class MemorialDiscoveryFilter(
+    val searchQuery: String = "",
+    val prayerType: CommunityPrayerType? = null,
+    val region: String? = null,
+    val privacyLevel: MemorialPrivacyLevel? = null,
+    val sortType: MemorialSortType = MemorialSortType.MOST_RECENT,
+    val hasActivePrayers: Boolean? = null,
+    val dateRange: DateRange? = null,
+    val minPrayerCount: Int? = null,
+    val maxResults: Int = 50
+)
+
+data class DiscoverableMemorial(
+    val memorialId: String,
+    val deceasedName: String,
+    val deceasedNameArabic: String? = null,
+    val photoUrl: String? = null,
+    val createdByUserId: String,
+    val createdByName: String,
+    val privacyLevel: MemorialPrivacyLevel,
+    val region: String,
+    val totalPrayers: Long = 0L,
+    val activePrayerCount: Long = 0L,
+    val participantCount: Int = 0,
+    val lastPrayerAt: ZonedDateTime? = null,
+    val createdAt: ZonedDateTime,
+    val description: String? = null,
+    val tags: List<String> = emptyList(),
+    val isVerified: Boolean = false,
+    val averageRating: Float = 0.0f,
+    val ratingCount: Int = 0
+)
+
+enum class MemorialSortType {
+    MOST_RECENT,
+    MOST_PRAYERS,
+    MOST_ACTIVE,
+    ALPHABETICAL,
+    NEAREST,
+    HIGHEST_RATED
+}
+
+enum class MemorialPrivacyLevel {
+    PUBLIC,
+    COMMUNITY,
+    FAMILY_ONLY,
+    PRIVATE
+}
+
+data class DateRange(
+    val startDate: ZonedDateTime,
+    val endDate: ZonedDateTime
+)
+
+/**
+ * Leaderboard Models
+ */
+data class LeaderboardCategory(
+    val categoryId: String,
+    val name: String,
+    val description: String,
+    val icon: String,
+    val sortBy: LeaderboardSortType,
+    val isActive: Boolean = true
+) {
+    companion object {
+        val TOTAL_PRAYERS = LeaderboardCategory("total_prayers", "Total Prayers", "Total prayers completed", "🤲", LeaderboardSortType.TOTAL_PRAYERS)
+        val MEMORIAL_PARTICIPATION = LeaderboardCategory("memorial_participation", "Memorial Participation", "Memorial sessions joined", "💜", LeaderboardSortType.PARTICIPATION_RATE)
+        val COMMUNITY_ENGAGEMENT = LeaderboardCategory("community_engagement", "Community Engagement", "Community interactions", "🤝", LeaderboardSortType.COMMUNITY_CONTRIBUTION)
+        val HELPING_FAMILIES = LeaderboardCategory("helping_families", "Helping Families", "Family support provided", "👨‍👩‍👧‍👦", LeaderboardSortType.COMMUNITY_CONTRIBUTION)
+        val CONSISTENCY = LeaderboardCategory("consistency", "Consistency", "Consistent prayer streaks", "📈", LeaderboardSortType.STREAK_DAYS)
+    }
+}
+
+data class LeaderboardEntry(
+    val userId: String,
+    val displayName: String,
+    val profilePictureUrl: String? = null,
+    val rank: Int,
+    val score: Long,
+    val previousRank: Int = rank,
+    val change: RankChange = RankChange.NO_CHANGE,
+    val regionCode: String,
+    val regionName: String,
+    val badges: List<String> = emptyList(),
+    val statistics: Map<String, Long> = emptyMap(),
+    val lastActiveAt: ZonedDateTime
+)
+
+enum class LeaderboardType {
+    GLOBAL,
+    REGIONAL,
+    COMMUNITY,
+    FAMILY
+}
+
+enum class LeaderboardSortType {
+    TOTAL_PRAYERS,
+    WEEKLY_PRAYERS,
+    MONTHLY_PRAYERS,
+    PARTICIPATION_RATE,
+    COMMUNITY_CONTRIBUTION,
+    STREAK_DAYS
+}
+
+enum class RankChange {
+    UP, DOWN, NO_CHANGE
+}
+
+data class CommunityLeaderboard(
+    val leaderboardId: String,
+    val type: LeaderboardType,
+    val category: LeaderboardCategory,
+    val timeFrame: LeaderboardTimeFrame,
+    val region: String? = null,
+    val entries: List<LeaderboardEntry> = emptyList(),
+    val totalEntries: Int = 0,
+    val lastUpdated: ZonedDateTime,
+    val isRealTime: Boolean = true
+)
+
+/**
+ * UI State Models for Leaderboards
+ */
+data class CommunityLeaderboardUiState(
+    val leaderboards: List<CommunityLeaderboard> = emptyList(),
+    val selectedTimeFrame: LeaderboardTimeFrame = LeaderboardTimeFrame.THIS_WEEK,
+    val selectedCategory: LeaderboardCategory? = null,
+    val selectedRegion: String = "global",
+    val userRank: LeaderboardEntry? = null,
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
+    val refreshEnabled: Boolean = true
+)
+
+/**
+ * Memorial Discovery UI State
+ */
+data class MemorialDiscoveryUiState(
+    val memorials: List<DiscoverableMemorial> = emptyList(),
+    val filter: MemorialDiscoveryFilter = MemorialDiscoveryFilter(),
+    val isLoading: Boolean = false,
+    val isLoadingMore: Boolean = false,
+    val errorMessage: String? = null,
+    val hasMoreResults: Boolean = true,
+    val totalResults: Int = 0
+)
+
+/**
+ * Additional Community Models
+ */
+data class CommunityPrayerStats(
+    val totalPrayers: Long = 0L,
+    val weeklyPrayers: Long = 0L,
+    val monthlyPrayers: Long = 0L,
+    val participationRate: Float = 0.0f,
+    val averageSessionDuration: Double = 0.0,
+    val topPrayerTypes: List<PrayerTypeCount> = emptyList(),
+    val streakDays: Int = 0,
+    val totalSessions: Long = 0L,
+    val completionRate: Float = 0.0f
+)
+
+data class PrayerProgress(
+    val sessionId: String,
+    val participantId: String,
+    val currentCount: Int = 0,
+    val targetCount: Int,
+    val startTime: ZonedDateTime,
+    val lastUpdateTime: ZonedDateTime,
+    val isCompleted: Boolean = false,
+    val completionPercentage: Float = 0.0f
+)
