@@ -39,3 +39,6 @@ include ':feature:feature-profile'
 include ':shared:shared-preferences'
 include ':shared:shared-analytics'
 include ':shared:shared-resources'
+
+// TODO: Performance optimization modules (baseline-profiles)
+// include ':baseline-profiles'

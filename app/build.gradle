@@ -5,6 +5,8 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id("com.google.firebase.crashlytics")
     id 'com.google.gms.google-services'
+    // TODO: Add baseline profile when testing infrastructure is ready
+    // id 'androidx.baselineprofile'
 }
 
 ext.majorVersion = 1
@@ -49,6 +51,22 @@ android {
             shrinkResources true
             crunchPngs true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // Performance optimizations for production
+            profileable true
+        }
+        
+        // Performance-optimized debug build
+        benchmark {
+            signingConfig signingConfigs.debug
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            profileable true
+            
+            // Enable baseline profile compilation for benchmarking
+            applicationIdSuffix ".benchmark"
         }
     }
 
@@ -62,6 +80,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
+    
+    // Compose compiler metrics for performance monitoring
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    
+    // TODO: Baseline profile configuration for startup optimization
+    // baselineProfile {
+    //     automaticGenerationDuringBuild = true
+    //     saveInSrc = true
+    // }
     flavorDimensions "env"
     productFlavors {
         production {
