@@ -20,6 +20,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.app_muslim.surah_yasin.feature.memorial.model.MemorialData
 import com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.ShareType
+import com.app_muslim.surah_yasin.core.firebase.sharing.SharingPlatform
 import java.text.SimpleDateFormat
 import java.util.*
 

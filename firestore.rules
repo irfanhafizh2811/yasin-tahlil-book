@@ -2,6 +2,27 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    
+    // Helper functions for memorial sharing access control
+    function hasValidFamilyAdminAccess(memorialId, userId) {
+      return exists(/databases/$(database)/documents/memorial_access/$(userId + '_' + memorialId)) &&
+             get(/databases/$(database)/documents/memorial_access/$(userId + '_' + memorialId)).data.permissions == 'FULL_ACCESS' &&
+             get(/databases/$(database)/documents/memorial_access/$(userId + '_' + memorialId)).data.is_active == true;
+    }
+    
+    function hasMemorialSharingPermissions(memorialId, userId) {
+      return exists(/databases/$(database)/documents/memorial_access/$(userId + '_' + memorialId)) &&
+             get(/databases/$(database)/documents/memorial_access/$(userId + '_' + memorialId)).data.permissions in ['PRAY_AND_VIEW', 'FULL_ACCESS'] &&
+             get(/databases/$(database)/documents/memorial_access/$(userId + '_' + memorialId)).data.is_active == true;
+    }
+    
+    function canAccessMemorial(memorialId, userId) {
+      let memorial = get(/databases/$(database)/documents/memorials/$(memorialId));
+      return memorial.data.createdBy == userId ||
+             (memorial.data.privacy == 'family' && userId in memorial.data.familyMembers) ||
+             memorial.data.privacy == 'community' ||
+             hasMemorialSharingPermissions(memorialId, userId);
+    }
     // Users collection - users can only read/write their own data
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
@@ -42,6 +63,101 @@ service cloud.firestore {
       
       allow create, update: if request.auth != null && 
         request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Memorial Invitations - Privacy controlled sharing system
+    match /memorial_invitations/{invitationId} {
+      allow read: if request.auth != null && (
+        // Inviter can always read their sent invitations
+        resource.data.inviter_id == request.auth.uid ||
+        // Invitee can read invitations sent to their email
+        resource.data.invitee_email == request.auth.token.email ||
+        // Memorial creator can read all invitations for their memorial
+        get(/databases/$(database)/documents/memorials/$(resource.data.memorial_id)).data.createdBy == request.auth.uid
+      );
+      
+      allow create: if request.auth != null && 
+        request.resource.data.inviter_id == request.auth.uid &&
+        // Must have access to the memorial to invite others
+        get(/databases/$(database)/documents/memorials/$(request.resource.data.memorial_id)).data.createdBy == request.auth.uid;
+      
+      allow update: if request.auth != null && (
+        // Inviter can update invitation status
+        resource.data.inviter_id == request.auth.uid ||
+        // Invitee can accept/decline invitations
+        (resource.data.invitee_email == request.auth.token.email && 
+         request.resource.data.keys().hasAny(['status', 'accepted_at', 'declined_at']))
+      );
+    }
+    
+    // Memorial Access - Who has access to which memorials
+    match /memorial_access/{accessId} {
+      allow read: if request.auth != null && (
+        // User can read their own access records
+        resource.data.user_id == request.auth.uid ||
+        // Memorial creator can read all access records for their memorial
+        get(/databases/$(database)/documents/memorials/$(resource.data.memorial_id)).data.createdBy == request.auth.uid
+      );
+      
+      allow create: if request.auth != null && 
+        // Only memorial creator or authorized family admin can grant access
+        (get(/databases/$(database)/documents/memorials/$(request.resource.data.memorial_id)).data.createdBy == request.auth.uid ||
+         hasValidFamilyAdminAccess(request.resource.data.memorial_id, request.auth.uid));
+      
+      allow update: if request.auth != null && 
+        // Only memorial creator can update access permissions
+        get(/databases/$(database)/documents/memorials/$(resource.data.memorial_id)).data.createdBy == request.auth.uid;
+      
+      allow delete: if request.auth != null && (
+        // Memorial creator can revoke any access
+        get(/databases/$(database)/documents/memorials/$(resource.data.memorial_id)).data.createdBy == request.auth.uid ||
+        // User can remove their own access
+        resource.data.user_id == request.auth.uid
+      );
+    }
+    
+    // Memorial Sharing Links - Secure dynamic link tracking
+    match /memorial_sharing_links/{linkId} {
+      allow read: if request.auth != null && 
+        resource.data.sharer_id == request.auth.uid;
+      
+      allow create: if request.auth != null && 
+        request.resource.data.sharer_id == request.auth.uid &&
+        // Must have sharing permissions for the memorial
+        (get(/databases/$(database)/documents/memorials/$(request.resource.data.memorial_id)).data.createdBy == request.auth.uid ||
+         hasMemorialSharingPermissions(request.resource.data.memorial_id, request.auth.uid));
+      
+      allow update: if request.auth != null && 
+        resource.data.sharer_id == request.auth.uid &&
+        // Only allow updating click_count and last_accessed
+        request.resource.data.keys().hasOnly(['click_count', 'last_accessed', 'is_active']);
+    }
+    
+    // Memorial Sharing Stats - Analytics for sharing
+    match /memorial_sharing_stats/{memorialId} {
+      allow read: if request.auth != null && 
+        // Memorial creator can view sharing stats
+        get(/databases/$(database)/documents/memorials/$(memorialId)).data.createdBy == request.auth.uid;
+      
+      allow write: if false; // Only Cloud Functions can update sharing stats
+    }
+    
+    // Memorial Sharing Settings - Privacy and sharing configuration
+    match /memorial_sharing_settings/{memorialId} {
+      allow read: if request.auth != null && 
+        // Memorial creator can view sharing settings
+        get(/databases/$(database)/documents/memorials/$(memorialId)).data.createdBy == request.auth.uid;
+      
+      allow create, update: if request.auth != null && 
+        // Only memorial creator can modify sharing settings
+        get(/databases/$(database)/documents/memorials/$(memorialId)).data.createdBy == request.auth.uid;
+    }
+    
+    // Sharing Events - Analytics tracking for sharing activities
+    match /sharing_events/{eventId} {
+      allow read: if false; // Events are write-only for privacy
+      allow create: if request.auth != null && 
+        request.resource.data.user_id == request.auth.uid;
     }
     
     // Global statistics - read-only for authenticated users

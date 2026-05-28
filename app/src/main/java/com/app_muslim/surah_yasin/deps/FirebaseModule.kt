@@ -13,11 +13,14 @@ import com.app_muslim.surah_yasin.data.preference.AuthPreference
 import com.app_muslim.surah_yasin.data.preference.CorePreference
 import com.app_muslim.surah_yasin.core.firebase.SessionManager
 import com.app_muslim.surah_yasin.core.ui.navigation.NavigationManager
+import com.app_muslim.surah_yasin.core.firebase.sharing.*
+import com.app_muslim.surah_yasin.core.firebase.analytics.SharingAnalyticsService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -96,4 +99,45 @@ object FirebaseModule {
     fun provideModernFirebaseAuthService(auth: FirebaseAuth): com.app_muslim.surah_yasin.core.firebase.FirebaseAuthService {
         return com.app_muslim.surah_yasin.core.firebase.FirebaseAuthService(auth)
     }
+    
+    // Firebase Analytics
+    @Provides
+    @Singleton
+    fun provideFirebaseAnalytics(@ApplicationContext context: Context): FirebaseAnalytics = 
+        FirebaseAnalytics.getInstance(context)
+    
+    // Memorial Sharing System
+    @Provides
+    @Singleton
+    fun provideMemorialSharingService(
+        firestore: FirebaseFirestore,
+        auth: FirebaseAuth,
+        analytics: FirebaseAnalytics
+    ): MemorialSharingService = MemorialSharingService(
+        firestore = firestore,
+        auth = auth,
+        analytics = analytics
+    )
+    
+    @Provides
+    @Singleton
+    fun provideMemorialSharingRepository(
+        sharingService: MemorialSharingService,
+        firestore: FirebaseFirestore,
+        auth: FirebaseAuth
+    ): MemorialSharingRepository = MemorialSharingRepositoryImpl(
+        sharingService = sharingService,
+        firestore = firestore,
+        auth = auth
+    )
+    
+    @Provides
+    @Singleton
+    fun provideSharingAnalyticsService(
+        firebaseAnalytics: FirebaseAnalytics,
+        auth: FirebaseAuth
+    ): SharingAnalyticsService = SharingAnalyticsService(
+        firebaseAnalytics = firebaseAnalytics,
+        auth = auth
+    )
 }
