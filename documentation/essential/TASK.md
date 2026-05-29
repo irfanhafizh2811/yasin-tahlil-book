@@ -1,7 +1,7 @@
 # 📋 Tahlil Development Task Checklist
 
 Tracks progress across all implementation phases.
-Source-of-truth design docs: [CLAUDE.md](CLAUDE.md) · [MODULAR_ARCHITECTURE_GUIDE.md](documentation/essential/architecture/MODULAR_ARCHITECTURE_GUIDE.md) · [FIREBASE_MODERN_ARCHITECTURE.md](documentation/essential/architecture/FIREBASE_MODERN_ARCHITECTURE.md) · [ANDROID_FIREBASE_INTEGRATION.md](documentation/essential/development/ANDROID_FIREBASE_INTEGRATION.md) · [MVP_FEATURE_BREAKDOWN.md](documentation/essential/development/MVP_FEATURE_BREAKDOWN.md) · [PROJECT_CONTINUATION_GUIDE.md](documentation/essential/development/PROJECT_CONTINUATION_GUIDE.md)
+Source-of-truth design docs: [CLAUDE.md](CLAUDE.md) · [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md) · [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md) · [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md) · [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [SPRINT_TASK_BREAKDOWN.md](DEVELOPMENT/SPRINT_TASK_BREAKDOWN.md)
 
 **Product Vision:** Transform existing Android Tasbeeh/Yasin app into "Tahlil" - a global Islamic memorial prayer platform where Muslims worldwide create memorials for deceased loved ones and perform collective prayers (Tahlil, Yasin, Fatihah) following authentic Islamic traditions.
 
@@ -69,7 +69,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Phase 1 — Firebase Foundation Setup ✅ COMPLETED
 
 **Objective:** Establish Firebase project with complete ecosystem services, security rules, and development environment for memorial prayer platform.
-**Knowledge anchors:** [FIREBASE_SETUP_GUIDE.md](documentation/archives/old-docs/development-old/FIREBASE_SETUP_GUIDE.md) · [ANDROID_FIREBASE_INTEGRATION.md](documentation/essential/development/ANDROID_FIREBASE_INTEGRATION.md)
+**Knowledge anchors:** [FIREBASE_SETUP_GUIDE.md](DEVELOPMENT/FIREBASE_SETUP_GUIDE.md) · [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md)
 
 ### P1.A — Firebase Project Configuration ✅ COMPLETED
 - [x] Connect to Firebase project: `surah-almulk` (YourQuran - MySurah)
@@ -107,7 +107,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Phase 2 — Modern Architecture Migration & Authentication
 
 **Objective:** Migrate to Single Activity + Jetpack Compose architecture while implementing multi-provider authentication with Islamic cultural preferences.
-**Knowledge anchors:** [MODULAR_ARCHITECTURE_GUIDE.md](documentation/essential/architecture/MODULAR_ARCHITECTURE_GUIDE.md) · [MVP_FEATURE_BREAKDOWN.md](documentation/essential/development/MVP_FEATURE_BREAKDOWN.md)
+**Knowledge anchors:** [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md) · [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md)
 
 ### P2.A — Modern Architecture Implementation **[PRIORITY 1]** ✅ COMPLETED
 - [x] Create Single Activity (MainActivity.kt) with Navigation Component
@@ -152,7 +152,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Phase 3 — Memorial Creation & Management (Modular Compose)
 
 **Objective:** Core memorial creation functionality with Compose UI, photo management, privacy controls, and Islamic traditions.
-**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](documentation/essential/development/MVP_FEATURE_BREAKDOWN.md) · [MODULAR_ARCHITECTURE_GUIDE.md](documentation/essential/architecture/MODULAR_ARCHITECTURE_GUIDE.md)
+**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
 
 ### P3.A — Memorial Creation UI (Compose) **[COMPLETED]** ✅
 - [x] Create :feature-memorial module with Compose screens **[COMPLETED]**
@@ -198,7 +198,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Phase 4 — Memorial Prayer Features (Compose-First)
 
 **Objective:** Build focused memorial prayer sessions with community features, removing traditional prayer counter functionality.
-**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](documentation/essential/development/MVP_FEATURE_BREAKDOWN.md) · [MODULAR_ARCHITECTURE_GUIDE.md](documentation/essential/architecture/MODULAR_ARCHITECTURE_GUIDE.md)
+**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
 
 ### P4.A — Memorial Prayer Sessions (Compose Implementation) ✅ **[COMPLETED]**
 - [x] ✅ **Remove Legacy Tasbeeh/Prayer Counter System** - Successfully removed all Tasbih counter code, UI, and resources **[COMPLETED]**
@@ -244,7 +244,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Phase 5 — Community Features & Global Statistics (Compose + Firebase)
 
 **Objective:** Connect Muslims worldwide through shared memorial prayers and community engagement using Compose UI and Firebase real-time features.
-**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](documentation/essential/development/MVP_FEATURE_BREAKDOWN.md) · [FIREBASE_MODERN_ARCHITECTURE.md](documentation/essential/architecture/FIREBASE_MODERN_ARCHITECTURE.md)
+**Knowledge anchors:** [MVP_FEATURE_BREAKDOWN.md](DEVELOPMENT/MVP_FEATURE_BREAKDOWN.md) · [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md)
 
 ### P5.A — Global Prayer Statistics (Compose + Firestore) ✅ **[COMPLETED]**
 - [x] Create :feature-community module with CommunityScreen **[COMPLETED]**
@@ -291,7 +291,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Phase 6 — Performance & Cultural Validation
 
 **Objective:** Optimize performance, validate Islamic cultural authenticity, and ensure accessibility compliance.
-**Knowledge anchors:** [CLAUDE.md](CLAUDE.md) · [CULTURAL_VALIDATION.md](documentation/essential/design/CULTURAL_VALIDATION.md)
+**Knowledge anchors:** [CLAUDE.md](CLAUDE.md) · [DESIGN/CULTURAL_VALIDATION.md](DESIGN/CULTURAL_VALIDATION.md)
 
 ### P6.A — Performance Optimization (Compose + Modular) **[PRIORITY 6 - CRITICAL]** ✅ **[COMPLETED]**
 - [x] Optimize Compose prayer counter response time (<50ms) **[SUCCESS METRIC]** ✅ **[OptimizedPrayerCounter.kt with smart debouncing and immediate feedback]**
@@ -332,7 +332,7 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Phase 7 — Production Launch Preparation
 
 **Objective:** Prepare for global production launch with monitoring, analytics, and launch strategy.
-**Knowledge anchors:** [SPRINT_TASK_BREAKDOWN.md](documentation/archives/old-docs/development-old/SPRINT_TASK_BREAKDOWN.md) · [CLAUDE.md](CLAUDE.md)
+**Knowledge anchors:** [SPRINT_TASK_BREAKDOWN.md](DEVELOPMENT/SPRINT_TASK_BREAKDOWN.md) · [CLAUDE.md](CLAUDE.md)
 
 ### P7.A — Production Infrastructure (Modern Stack) ✅ **COMPLETED**
 - [x] Set up production Firebase project with modular configuration
@@ -466,19 +466,19 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 ## Quick Reference
 
 ### 🚀 **Start Development NOW**
-1. Read [MODULAR_ARCHITECTURE_GUIDE.md](documentation/essential/architecture/MODULAR_ARCHITECTURE_GUIDE.md)
+1. Read [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
 2. Follow Single Activity + Jetpack Compose migration guide
-3. Read [ANDROID_FIREBASE_INTEGRATION.md](documentation/essential/development/ANDROID_FIREBASE_INTEGRATION.md)
+3. Read [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md)
 4. Setup modular project structure: `:app`, `:core`, `:feature`, `:shared`
 5. Migrate from Koin to Hilt dependency injection
 6. Test: `./gradlew clean assembleDebug`
 
 ### 📞 **Need Help?**
-- **Modular Architecture**: [MODULAR_ARCHITECTURE_GUIDE.md](documentation/essential/architecture/MODULAR_ARCHITECTURE_GUIDE.md)
-- **Firebase Integration**: [ANDROID_FIREBASE_INTEGRATION.md](documentation/essential/development/ANDROID_FIREBASE_INTEGRATION.md)
+- **Modular Architecture**: [MODULAR_ARCHITECTURE_GUIDE.md](ARCHITECTURE/MODULAR_ARCHITECTURE_GUIDE.md)
+- **Firebase Integration**: [ANDROID_FIREBASE_INTEGRATION.md](DEVELOPMENT/ANDROID_FIREBASE_INTEGRATION.md)
 - **Project Context**: [CLAUDE.md](CLAUDE.md)  
-- **Modern Architecture**: [FIREBASE_MODERN_ARCHITECTURE.md](documentation/essential/architecture/FIREBASE_MODERN_ARCHITECTURE.md)
-- **Team Tasks**: [SPRINT_TASK_BREAKDOWN.md](documentation/archives/old-docs/development-old/SPRINT_TASK_BREAKDOWN.md)
+- **Modern Architecture**: [FIREBASE_MODERN_ARCHITECTURE.md](ARCHITECTURE/FIREBASE_MODERN_ARCHITECTURE.md)
+- **Team Tasks**: [SPRINT_TASK_BREAKDOWN.md](DEVELOPMENT/SPRINT_TASK_BREAKDOWN.md)
 
 ### 🔄 **Continue Development**
 For future sessions: "Continue Single Activity + Jetpack Compose migration for Tahlil memorial prayer platform. Reference: TASK.md + MODULAR_ARCHITECTURE_GUIDE.md + CLAUDE.md"
