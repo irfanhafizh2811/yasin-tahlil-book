@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 🚀 Tahlil Production Release Configuration -->
+<resources>
+    
+    <!-- Release Information -->
+    <string name="release_version">1.0.0</string>
+    <string name="release_build_number">1</string>
+    <string name="release_date">July 29, 2026</string>
+    <string name="release_codename">Masjid al-Haram</string>
+    
+    <!-- App Configuration -->
+    <string name="app_name_release">Tahlil</string>
+    <string name="app_description_short">Global Islamic Memorial Prayer Platform</string>
+    <string name="app_description_long">Connect hearts worldwide through Islamic memorial prayers. Create permanent memorials, perform collective Tahlil, Yasin, and Fatihah prayers following authentic Islamic traditions for your deceased loved ones.</string>
+    
+    <!-- Release Features -->
+    <string name="release_features_title">What\'s New in Tahlil</string>
+    <string name="release_features_list">
+        • Global Memorial Prayer Platform\n
+        • Authentic Islamic Traditions (Tahlil, Yasin, Fatihah)\n
+        • Family Prayer Sharing System\n
+        • 12-Language Support with RTL\n
+        • Cultural Sensitivity Framework\n
+        • Offline Prayer Counter\n
+        • Community Prayer Statistics\n
+        • Memorial Photo Memories
+    </string>
+    
+    <!-- Islamic Cultural Information -->
+    <string name="islamic_authenticity_title">Islamic Authenticity</string>
+    <string name="islamic_authenticity_description">All prayer content validated by certified Islamic scholars. Respects regional customs across 20+ countries with culturally appropriate privacy controls.</string>
+    
+    <!-- Technical Specifications -->
+    <string name="tech_requirements_title">System Requirements</string>
+    <string name="tech_requirements_list">
+        • Android 7.0 (API 24) or higher\n
+        • 100MB free storage space\n
+        • Internet connection for community features\n
+        • Camera permission for memorial photos\n
+        • Notification permission for prayer reminders
+    </string>
+    
+    <!-- Privacy and Security -->
+    <string name="privacy_security_title">Privacy &amp; Security</string>
+    <string name="privacy_security_description">
+        Enterprise-grade security with Islamic privacy values:\n
+        • Family-first memorial privacy controls\n
+        • No personal data sharing without consent\n
+        • GDPR and Islamic privacy compliance\n
+        • Secure Firebase backend with encryption
+    </string>
+    
+    <!-- Supported Languages -->
+    <string name="supported_languages_title">Supported Languages</string>
+    <string name="supported_languages_list">
+        العربية (Arabic) • English • Bahasa Indonesia • Bahasa Malaysia • اردو (Urdu) • Türkçe • Français • Deutsch • Español • Kiswahili • فارسی (Persian) • پښتو (Pashto)
+    </string>
+    
+    <!-- Regional Support -->
+    <string name="regional_support_title">Global Regional Support</string>
+    <string name="regional_support_list">
+        • Southeast Asia: ID, MY, SG, TH, VN, PH, BN\n
+        • Middle East &amp; North Africa: SA, AE, EG, MA, TN, JO, LB\n
+        • South Asia: PK, BD, IN, LK, AF, MV\n
+        • Central Asia: TR, AZ, KZ, UZ, TM, KG, TJ\n
+        • Western Countries: US, CA, GB, FR, DE, NL, BE\n
+        • Oceania: AU, NZ
+    </string>
+    
+    <!-- Contact Information -->
+    <string name="support_email">support@tahlil-platform.com</string>
+    <string name="feedback_email">feedback@tahlil-platform.com</string>
+    <string name="cultural_feedback_email">cultural@tahlil-platform.com</string>
+    <string name="security_email">security@tahlil-platform.com</string>
+    
+    <!-- Social Media -->
+    <string name="website_url">https://tahlil-platform.com</string>
+    <string name="privacy_policy_url">https://tahlil-platform.com/privacy</string>
+    <string name="terms_of_service_url">https://tahlil-platform.com/terms</string>
+    <string name="islamic_guidelines_url">https://tahlil-platform.com/islamic-guidelines</string>
+    
+    <!-- Release Notes Template -->
+    <string name="release_notes_template">
+        🕌 Bismillah - In the name of Allah\n\n
+        
+        Welcome to Tahlil - connecting Muslim hearts worldwide through memorial prayers.\n\n
+        
+        🌟 NEW FEATURES:\n
+        • Create permanent memorials for deceased loved ones\n
+        • Perform authentic Tahlil, Yasin, and Fatihah prayers\n
+        • Share memorial prayers with family members\n
+        • Track collective prayer statistics globally\n
+        • Support for 12 languages with RTL text\n
+        • Islamic cultural validation by certified scholars\n\n
+        
+        📱 TECHNICAL IMPROVEMENTS:\n
+        • Modern Jetpack Compose interface\n
+        • Single Activity architecture\n
+        • Offline prayer counter support\n
+        • Enhanced security with Firebase backend\n
+        • Performance optimizations\n\n
+        
+        ☪️ ISLAMIC COMPLIANCE:\n
+        • Prayer content validated by Islamic scholars\n
+        • Respects regional Islamic customs\n
+        • Family-first privacy controls\n
+        • Culturally appropriate sharing options\n\n
+        
+        Jazakallahu Khairan for choosing Tahlil.\n
+        May Allah accept all our prayers and grant peace to our departed loved ones.\n\n
+        
+        Team Tahlil
+    </string>
+    
+    <!-- Beta Testing Information -->
+    <string name="beta_testing_title">Beta Testing Program</string>
+    <string name="beta_testing_description">
+        Join our Islamic community leaders in testing Tahlil before global release:\n
+        • Early access to new features\n
+        • Direct feedback to development team\n
+        • Islamic cultural validation input\n
+        • Community leader recognition
+    </string>
+    
+    <!-- Launch Strategy -->
+    <string name="launch_regions_phase1">Saudi Arabia, UAE, Indonesia, Malaysia</string>
+    <string name="launch_regions_phase2">Pakistan, Bangladesh, Turkey, Egypt</string>
+    <string name="launch_regions_phase3">India, Nigeria, Morocco, Iran</string>
+    <string name="launch_regions_phase4">Global availability</string>
+    
+</resources>
