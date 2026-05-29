@@ -31,6 +31,11 @@ abstract class TahlilDatabase : RoomDatabase() {
     // Memorial prayer session DAO
     abstract fun memorialPrayerSessionDao(): MemorialPrayerSessionDao
     
+    suspend fun clearAllTestData() {
+        // Use Room's built-in clearAllTables for tests
+        clearAllTables()
+    }
+    
     companion object {
         const val DATABASE_NAME = "tahlil_database"
         const val DATABASE_VERSION = 2
