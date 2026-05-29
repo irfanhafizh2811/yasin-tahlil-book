@@ -1,6 +1,5 @@
 package com.app_muslim.surah_yasin.core.ui.validation
 
-// Import removed to fix compilation
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import java.util.*
@@ -1053,4 +1052,3 @@ data class AuthorBehaviorPattern(
     val lastActivity: Date
 )
 
-// Enums are imported from CulturalValidationTypes

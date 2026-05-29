@@ -528,6 +528,8 @@ class IslamicPrayerTraditionsValidator @Inject constructor(
                                 suggestion = "Consider separate spaces for different genders"
                             )
                         )
+                    } else {
+                        // Gender-segregated style is compatible with non-mixed gender setup
                     }
                 }
                 CommunityGatheringStyle.FAMILY_FOCUSED -> {
@@ -634,7 +636,7 @@ class IslamicPrayerTraditionsValidator @Inject constructor(
             similarity < 0.8 -> {
                 issues.add(
                     TextValidationIssue(
-                        severity = ValidationSeverity.MODERATE,
+                        severity = ValidationSeverity.MEDIUM,
                         message = "Arabic text has some differences from authentic source",
                         suggestion = "Consider reviewing against original sources"
                     )
@@ -656,7 +658,7 @@ class IslamicPrayerTraditionsValidator @Inject constructor(
         if (similarity < 0.7) {
             issues.add(
                 TextValidationIssue(
-                    severity = ValidationSeverity.MODERATE,
+                    severity = ValidationSeverity.MEDIUM,
                     message = "Transliteration differs from standard academic transliteration",
                     suggestion = "Consider using standard transliteration: $authenticText"
                 )
@@ -843,4 +845,7 @@ data class TextValidationIssue(
     val message: String,
     val suggestion: String? = null
 )
+
+// Compatibility result types are now defined in ValidationTypes.kt
+
 

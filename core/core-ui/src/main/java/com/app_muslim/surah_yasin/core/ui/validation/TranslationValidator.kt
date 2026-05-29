@@ -185,7 +185,7 @@ class TranslationValidator @Inject constructor(
                 "timestamp" to Date(),
                 "status" to TranslationStatus.PENDING.name,
                 "priority" to request.priority.name,
-                "culturalContext" to request.culturalContext.toMap(),
+                "culturalContext" to mapOf("type" to request.culturalContext.name),
                 "assignedExperts" to emptyList<String>()
             )
 
@@ -402,6 +402,21 @@ class TranslationValidator @Inject constructor(
                 validateQuranicTranslation(translation, targetLanguage, issues, suggestions)
             }
             TranslationContentType.GENERAL_ISLAMIC -> {
+                validateGeneralIslamicTranslation(translation, targetLanguage, issues, suggestions)
+            }
+            TranslationContentType.PRAYER_TRANSLATION -> {
+                validatePrayerTranslation(translation, targetLanguage, issues, suggestions)
+            }
+            TranslationContentType.MEMORIAL_TEXT -> {
+                validateMemorialTranslation(translation, targetLanguage, issues, suggestions)
+            }
+            TranslationContentType.RELIGIOUS_INSTRUCTION -> {
+                validateGeneralIslamicTranslation(translation, targetLanguage, issues, suggestions)
+            }
+            TranslationContentType.CULTURAL_GUIDANCE -> {
+                validateGeneralIslamicTranslation(translation, targetLanguage, issues, suggestions)
+            }
+            TranslationContentType.GENERAL_CONTENT -> {
                 validateGeneralIslamicTranslation(translation, targetLanguage, issues, suggestions)
             }
         }
@@ -646,7 +661,7 @@ class TranslationValidator @Inject constructor(
         val experts = getTranslationExperts(
             sourceLanguage = request.sourceLanguage,
             targetLanguage = request.targetLanguage,
-            region = request.culturalContext.primaryRegion
+            region = IslamicRegion.MIDDLE_EAST // TODO: Add region field to request or determine from context
         )
         
         return experts.take(2).map { it.id } // Assign top 2 experts
@@ -659,6 +674,8 @@ class TranslationValidator @Inject constructor(
         var baseDays = when (request.priority) {
             TranslationPriority.URGENT -> 1
             TranslationPriority.HIGH -> 2
+            TranslationPriority.CRITICAL -> 1
+            TranslationPriority.MEDIUM -> 4
             TranslationPriority.NORMAL -> 5
             TranslationPriority.LOW -> 10
         }

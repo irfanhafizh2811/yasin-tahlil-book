@@ -1,6 +1,5 @@
 package com.app_muslim.surah_yasin.core.ui.validation
 
-// Import removed to fix compilation
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -268,10 +267,11 @@ class CulturalCustomsValidator @Inject constructor() {
                     "Mixed gender participation: ${if (it.mixedGenderMemorials) "Accepted" else "Not recommended"}"
                 },
                 photoGuidelines = when (customs.prayerPhotoPolicy) {
-                    PhotoPolicy.LIBERAL -> "Memorial photos widely accepted and encouraged"
-                    PhotoPolicy.MODERATE -> "Memorial photos accepted with family approval"
+                    PhotoPolicy.PROHIBITED -> "Memorial photos not allowed"
                     PhotoPolicy.RESTRICTED -> "Memorial photos should be used cautiously"
-                    PhotoPolicy.FORBIDDEN -> "Memorial photos not recommended"
+                    PhotoPolicy.MODERATE -> "Memorial photos accepted with family approval"
+                    PhotoPolicy.LIBERAL -> "Memorial photos freely shared and encouraged"
+                    PhotoPolicy.ALLOWED -> "Memorial photos widely accepted and encouraged"
                 }
             )
             CulturalContentType.PRAYER -> RegionalRecommendations(
@@ -305,8 +305,8 @@ class CulturalCustomsValidator @Inject constructor() {
                 val acceptableDurations = customs.memorialDurationDays.joinToString(", ")
                 warnings.add(
                     CulturalWarning(
-                        region = region,
-                        category = CulturalCategory.MEMORIAL_DURATION,
+                        affectedRegion = region,
+                        category = CulturalViolationType.MEMORIAL_DURATION,
                         message = "Memorial duration of $duration days is not traditional in $region. Common durations: $acceptableDurations days",
                         severity = WarningSeverity.MODERATE
                     )
@@ -328,30 +328,34 @@ class CulturalCustomsValidator @Inject constructor() {
     ) {
         if (hasPhoto) {
             when (customs.prayerPhotoPolicy) {
-                PhotoPolicy.FORBIDDEN -> {
+                PhotoPolicy.PROHIBITED -> {
                     violations.add(
                         CulturalViolation(
                             affectedRegion = region,
-                            category = CulturalCategory.PHOTO_USAGE,
+                            category = CulturalViolationType.PHOTO_USAGE,
                             message = "Memorial photos are culturally inappropriate in $region",
-                            severity = ViolationSeverity.HIGH
+                            severity = ValidationSeverity.HIGH
                         )
                     )
                 }
                 PhotoPolicy.RESTRICTED -> {
-                    if (isPubliclyShared) {
-                        warnings.add(
-                            CulturalWarning(
-                                region = region,
-                                category = CulturalCategory.PHOTO_USAGE,
-                                message = "Public sharing of memorial photos may be culturally sensitive in $region",
-                                severity = WarningSeverity.HIGH
-                            )
+                    warnings.add(
+                        CulturalWarning(
+                            affectedRegion = region,
+                            category = CulturalViolationType.PHOTO_USAGE,
+                            message = "Memorial photos should be used cautiously in $region",
+                            severity = WarningSeverity.MEDIUM
                         )
-                    }
+                    )
                 }
-                PhotoPolicy.MODERATE, PhotoPolicy.LIBERAL -> {
-                    // Photos acceptable
+                PhotoPolicy.MODERATE -> {
+                    // No action needed - moderate usage is acceptable
+                }
+                PhotoPolicy.LIBERAL -> {
+                    // Liberal usage is fully acceptable
+                }
+                PhotoPolicy.ALLOWED -> {
+                    // Fully acceptable - no action needed
                 }
             }
         }
@@ -368,17 +372,19 @@ class CulturalCustomsValidator @Inject constructor() {
         warnings: MutableList<CulturalWarning>
     ) {
         val isAppropriate = when (customs.communityMemorialSharing) {
+            SharingPolicy.PRIVATE_ONLY -> sharingLevel == SharingLevel.PRIVATE
             SharingPolicy.FAMILY_ONLY -> sharingLevel in listOf(SharingLevel.PRIVATE, SharingLevel.FAMILY)
             SharingPolicy.EXTENDED_FAMILY -> sharingLevel in listOf(SharingLevel.PRIVATE, SharingLevel.FAMILY, SharingLevel.EXTENDED_FAMILY)
             SharingPolicy.COMMUNITY_WIDE -> sharingLevel != SharingLevel.PUBLIC
-            SharingPolicy.PUBLIC_WITH_PRIVACY -> true // All levels acceptable
+            SharingPolicy.PUBLIC_WITH_PRIVACY -> true
+            SharingPolicy.PUBLIC -> true // All levels acceptable
         }
 
         if (!isAppropriate) {
             warnings.add(
                 CulturalWarning(
-                    region = region,
-                    category = CulturalCategory.SHARING_LEVEL,
+                    affectedRegion = region,
+                    category = CulturalViolationType.SHARING_LEVEL,
                     message = "Sharing level '${sharingLevel.name}' may exceed cultural norms in $region where '${customs.communityMemorialSharing.name}' is preferred",
                     severity = WarningSeverity.MODERATE
                 )
@@ -425,11 +431,11 @@ class CulturalCustomsValidator @Inject constructor() {
     ) {
         val guidelines = GENDER_INTERACTION_GUIDELINES[region] ?: return
         
-        if (genderMix == GenderMixLevel.MIXED && !guidelines.mixedGenderMemorials) {
+        if (genderMix == GenderMixLevel.FULLY_MIXED && !guidelines.mixedGenderMemorials) {
             warnings.add(
                 CulturalWarning(
-                    region = region,
-                    category = CulturalCategory.GENDER_INTERACTION,
+                    affectedRegion = region,
+                    category = CulturalViolationType.GENDER_INTERACTION,
                     message = "Mixed-gender memorial gatherings may not align with cultural preferences in $region",
                     severity = WarningSeverity.HIGH
                 )
@@ -475,8 +481,8 @@ class CulturalCustomsValidator @Inject constructor() {
         if (setup.isMixedGender && guidelines.separateSpaces) {
             warnings.add(
                 CulturalWarning(
-                    region = region,
-                    category = CulturalCategory.COMMUNITY_PRAYER,
+                    affectedRegion = region,
+                    category = CulturalViolationType.COMMUNITY_PRAYER,
                     message = "Consider separate prayer spaces for different genders as per $region customs",
                     severity = WarningSeverity.MODERATE
                 )
@@ -486,8 +492,8 @@ class CulturalCustomsValidator @Inject constructor() {
         if (setup.femaleLeadership && guidelines.maleLeadershipRequired) {
             warnings.add(
                 CulturalWarning(
-                    region = region,
-                    category = CulturalCategory.PRAYER_LEADERSHIP,
+                    affectedRegion = region,
+                    category = CulturalViolationType.PRAYER_LEADERSHIP,
                     message = "Female prayer leadership for mixed groups may not align with $region customs",
                     severity = WarningSeverity.HIGH
                 )
@@ -527,8 +533,8 @@ class CulturalCustomsValidator @Inject constructor() {
         if (audioVisual.hasMusic && region == IslamicRegion.MIDDLE_EAST) {
             warnings.add(
                 CulturalWarning(
-                    region = region,
-                    category = CulturalCategory.AUDIO_VISUAL,
+                    affectedRegion = region,
+                    category = CulturalViolationType.AUDIO_VISUAL,
                     message = "Musical elements in prayer context may be culturally sensitive in $region",
                     severity = WarningSeverity.MODERATE
                 )
@@ -548,17 +554,18 @@ class CulturalCustomsValidator @Inject constructor() {
         
         violations.forEach { violation ->
             score -= when (violation.severity) {
-                ViolationSeverity.CRITICAL -> 25.0
-                ViolationSeverity.HIGH -> 15.0
-                ViolationSeverity.MODERATE -> 10.0
-                ViolationSeverity.LOW -> 5.0
+                ValidationSeverity.CRITICAL -> 25.0
+                ValidationSeverity.HIGH -> 15.0
+                ValidationSeverity.MEDIUM -> 10.0
+                ValidationSeverity.LOW -> 5.0
             }
         }
         
         warnings.forEach { warning ->
             score -= when (warning.severity) {
                 WarningSeverity.HIGH -> 8.0
-                WarningSeverity.MODERATE -> 5.0
+                WarningSeverity.MEDIUM -> 5.0
+                WarningSeverity.MODERATE -> 4.0
                 WarningSeverity.LOW -> 2.0
             }
         }
@@ -660,14 +667,14 @@ data class CulturalValidationResult(
 
 data class CulturalViolation(
     val affectedRegion: IslamicRegion,
-    val category: CulturalCategory,
+    val category: CulturalViolationType,
     val message: String,
-    val severity: ViolationSeverity
+    val severity: ValidationSeverity
 )
 
 data class CulturalWarning(
-    val region: IslamicRegion,
-    val category: CulturalCategory,
+    val affectedRegion: IslamicRegion,
+    val category: CulturalViolationType,
     val message: String,
     val severity: WarningSeverity
 )
@@ -679,100 +686,5 @@ data class CulturalRecommendation(
     val priority: RecommendationPriority
 )
 
-// Essential enums for CulturalCustomsValidator
-enum class IslamicRegion {
-    MIDDLE_EAST,
-    NORTH_AFRICA,
-    SOUTHEAST_ASIA,
-    SOUTH_ASIA,
-    CENTRAL_ASIA,
-    EUROPE,
-    NORTH_AMERICA,
-    SUB_SAHARAN_AFRICA,
-    EAST_ASIA,
-    OCEANIA,
-    LATIN_AMERICA
-}
 
-enum class CulturalCategory {
-    MEMORIAL_PRACTICES,
-    PRAYER_CUSTOMS,
-    FAMILY_VALUES,
-    COMMUNITY_INTERACTION,
-    GENDER_GUIDELINES,
-    RELIGIOUS_OBSERVANCE
-}
-
-enum class RecommendationPriority {
-    HIGH,
-    MEDIUM,
-    LOW
-}
-
-enum class CoveringLevel {
-    CONSERVATIVE,
-    MODERATE,
-    LIBERAL
-}
-
-enum class SharingLevel {
-    PRIVATE,
-    FAMILY,
-    EXTENDED_FAMILY,
-    COMMUNITY,
-    PUBLIC
-}
-
-enum class GenderMixLevel {
-    MALE_ONLY,
-    FEMALE_ONLY,
-    SEGREGATED,
-    MIXED
-}
-
-enum class CulturalContentType {
-    MEMORIAL,
-    PRAYER
-}
-
-enum class ViolationSeverity {
-    MINOR,
-    MODERATE,
-    MAJOR,
-    CRITICAL
-}
-
-enum class WarningCategory {
-    CULTURAL_SENSITIVITY,
-    RELIGIOUS_APPROPRIATENESS,
-    COMMUNITY_GUIDELINES,
-    FAMILY_VALUES
-}
-
-enum class WarningSeverity {
-    LOW,
-    MEDIUM,
-    HIGH
-}
-
-enum class PhotoPolicy {
-    PROHIBITED,
-    RESTRICTED,
-    MODERATE,
-    ALLOWED
-}
-
-enum class SharingPolicy {
-    PRIVATE_ONLY,
-    FAMILY_ONLY,
-    COMMUNITY_WIDE,
-    PUBLIC
-}
-
-enum class ParticipationLevel {
-    INDIVIDUAL,
-    FAMILY,
-    COMMUNITY,
-    REGIONAL
-}
 

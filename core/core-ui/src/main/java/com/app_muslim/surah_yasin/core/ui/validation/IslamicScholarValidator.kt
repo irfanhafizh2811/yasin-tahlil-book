@@ -57,7 +57,7 @@ class IslamicScholarValidator @Inject constructor(
                 "status" to ScholarValidationStatus.PENDING.name,
                 "requiredScholarCount" to request.requiredScholarCount,
                 "priority" to request.priority.name,
-                "culturalContext" to request.culturalContext.toMap(),
+                "culturalContext" to mapOf("type" to request.culturalContext.name),
                 "assignedScholars" to emptyList<String>()
             )
 
@@ -281,6 +281,18 @@ class IslamicScholarValidator @Inject constructor(
             ScholarValidationContentType.GENERAL_ISLAMIC -> listOf(
                 ScholarSpecialization.ISLAMIC_JURISPRUDENCE
             )
+            ScholarValidationContentType.MEMORIAL_MESSAGE -> listOf(
+                ScholarSpecialization.MEMORIAL_PRACTICES,
+                ScholarSpecialization.CULTURAL_STUDIES
+            )
+            ScholarValidationContentType.RELIGIOUS_GUIDANCE -> listOf(
+                ScholarSpecialization.ISLAMIC_JURISPRUDENCE,
+                ScholarSpecialization.GENERAL_ISLAMIC_STUDIES
+            )
+            ScholarValidationContentType.CULTURAL_PRACTICE -> listOf(
+                ScholarSpecialization.CULTURAL_STUDIES,
+                ScholarSpecialization.GENERAL_ISLAMIC_STUDIES
+            )
         }
 
         val assignedScholars = mutableListOf<String>()
@@ -288,7 +300,7 @@ class IslamicScholarValidator @Inject constructor(
         for (specialization in requiredSpecializations) {
             val scholars = getAvailableScholars(
                 specialization = specialization,
-                region = request.culturalContext.primaryRegion,
+                region = null, // TODO: Add region field to request or determine from context
                 limit = 2
             )
             
@@ -438,6 +450,11 @@ class IslamicScholarValidator @Inject constructor(
             ScholarValidationStatus.APPROVED -> "Content approved by Islamic scholars"
             ScholarValidationStatus.REJECTED -> "Content requires modification based on scholar feedback"
             ScholarValidationStatus.REQUIRES_REVISION -> "Minor revisions suggested by scholars"
+            ScholarValidationStatus.PENDING_REVIEW -> "Waiting for scholar review assignment"
+            ScholarValidationStatus.REQUIRES_MODIFICATION -> "Content needs modification per scholar guidance"
+            ScholarValidationStatus.CONDITIONAL_APPROVAL -> "Approved with minor conditions by scholars"
+            ScholarValidationStatus.INSUFFICIENT_REVIEWS -> "Need additional scholar reviews for consensus"
+            ScholarValidationStatus.MIXED -> "Scholars have mixed opinions on content"
         }
     }
 }
