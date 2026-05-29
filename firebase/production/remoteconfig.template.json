@@ -1,0 +1,192 @@
+{
+  "conditions": [
+    {
+      "name": "production_users",
+      "expression": "true"
+    },
+    {
+      "name": "beta_users", 
+      "expression": "app.id == 'com.app_muslim.surah_yasin.beta'"
+    },
+    {
+      "name": "ios_users",
+      "expression": "device.os == 'ios'"
+    },
+    {
+      "name": "android_users",
+      "expression": "device.os == 'android'"
+    },
+    {
+      "name": "regional_users_sea",
+      "expression": "device.country in ['ID', 'MY', 'SG', 'TH', 'VN', 'PH']"
+    },
+    {
+      "name": "regional_users_mena",
+      "expression": "device.country in ['SA', 'AE', 'EG', 'MA', 'TN', 'JO', 'LB']"
+    },
+    {
+      "name": "regional_users_south_asia",
+      "expression": "device.country in ['PK', 'BD', 'IN', 'LK', 'AF']"
+    }
+  ],
+  "parameters": {
+    "app_maintenance_mode": {
+      "defaultValue": {
+        "value": "false"
+      },
+      "description": "Enable maintenance mode for the app"
+    },
+    "app_minimum_version": {
+      "defaultValue": {
+        "value": "1.0.0"
+      },
+      "description": "Minimum required app version"
+    },
+    "feature_memorial_sharing": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable memorial sharing feature"
+    },
+    "feature_community_prayer": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable community prayer feature"
+    },
+    "feature_global_statistics": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable global prayer statistics"
+    },
+    "feature_prayer_reminders": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable prayer reminder notifications"
+    },
+    "max_memorial_photos": {
+      "defaultValue": {
+        "value": "5"
+      },
+      "description": "Maximum number of photos per memorial"
+    },
+    "max_family_members": {
+      "defaultValue": {
+        "value": "50"
+      },
+      "description": "Maximum family members per memorial"
+    },
+    "prayer_counter_max_increment": {
+      "defaultValue": {
+        "value": "1000"
+      },
+      "description": "Maximum prayer count increment per session"
+    },
+    "enable_cultural_validation": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable Islamic cultural content validation"
+    },
+    "supported_languages": {
+      "defaultValue": {
+        "value": "[\"en\", \"ar\", \"id\", \"ms\", \"ur\", \"tr\", \"fr\", \"de\", \"es\", \"sw\", \"fa\", \"ps\"]"
+      },
+      "description": "List of supported languages"
+    },
+    "regional_prayer_times": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "conditionalValues": {
+        "regional_users_sea": {
+          "value": "true"
+        },
+        "regional_users_mena": {
+          "value": "true"
+        },
+        "regional_users_south_asia": {
+          "value": "true"
+        }
+      },
+      "description": "Enable regional prayer time calculations"
+    },
+    "analytics_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable Firebase Analytics tracking"
+    },
+    "crashlytics_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable Crashlytics crash reporting"
+    },
+    "performance_monitoring": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable Firebase Performance Monitoring"
+    },
+    "app_check_enabled": {
+      "defaultValue": {
+        "value": "true"
+      },
+      "description": "Enable App Check anti-abuse protection"
+    },
+    "api_rate_limits": {
+      "defaultValue": {
+        "value": "{\"memorial_create\": 10, \"prayer_submit\": 1000, \"sharing\": 50}"
+      },
+      "description": "API rate limits per user per hour"
+    },
+    "memorial_expiry_days": {
+      "defaultValue": {
+        "value": "0"
+      },
+      "description": "Memorial auto-expiry days (0 = permanent)"
+    },
+    "community_features": {
+      "defaultValue": {
+        "value": "{\"leaderboards\": true, \"global_stats\": true, \"sharing\": true, \"milestones\": true}"
+      },
+      "description": "Community feature toggles"
+    },
+    "notification_settings": {
+      "defaultValue": {
+        "value": "{\"prayer_reminders\": true, \"memorial_updates\": true, \"community_milestones\": true}"
+      },
+      "description": "Default notification settings"
+    },
+    "theme_customization": {
+      "defaultValue": {
+        "value": "{\"dark_mode\": true, \"islamic_calendar\": true, \"arabic_fonts\": true}"
+      },
+      "description": "Theme customization options"
+    },
+    "beta_features": {
+      "defaultValue": {
+        "value": "false"
+      },
+      "conditionalValues": {
+        "beta_users": {
+          "value": "true"
+        }
+      },
+      "description": "Enable beta features for testing users"
+    }
+  },
+  "parameterGroups": {},
+  "version": {
+    "versionNumber": "1",
+    "updateTime": "2026-05-29T00:00:00Z",
+    "updateUser": {
+      "email": "admin@tahlil-platform.com"
+    },
+    "updateOrigin": "CONSOLE",
+    "updateType": "INCREMENTAL_UPDATE"
+  }
+}

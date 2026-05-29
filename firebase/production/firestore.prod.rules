@@ -1,0 +1,152 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions for authentication and authorization
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(resource) {
+      return isAuthenticated() && request.auth.uid == resource.data.ownerId;
+    }
+    
+    function isFamilyMember(resource) {
+      return isAuthenticated() && 
+             (request.auth.uid in resource.data.familyMembers ||
+              request.auth.uid == resource.data.ownerId);
+    }
+    
+    function hasValidPrivacyLevel(privacyLevel) {
+      return privacyLevel in ['private', 'family', 'community', 'public'];
+    }
+    
+    function isValidMemorialData(data) {
+      return data.keys().hasAll(['title', 'deceasedName', 'privacyLevel', 'ownerId', 'createdAt']) &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 100 &&
+             data.deceasedName is string && data.deceasedName.size() > 0 && data.deceasedName.size() <= 100 &&
+             hasValidPrivacyLevel(data.privacyLevel) &&
+             data.ownerId is string && data.ownerId.size() > 0 &&
+             data.createdAt is timestamp;
+    }
+    
+    function isValidPrayerData(data) {
+      return data.keys().hasAll(['memorialId', 'prayerType', 'userId', 'prayedAt']) &&
+             data.memorialId is string && data.memorialId.size() > 0 &&
+             data.prayerType in ['tahlil', 'yasin', 'fatihah', 'dua', 'dhikr'] &&
+             data.userId is string && data.userId.size() > 0 &&
+             data.prayedAt is timestamp;
+    }
+    
+    // PRODUCTION SECURITY: Memorials collection
+    match /memorials/{memorialId} {
+      // Read permissions based on privacy level
+      allow read: if (resource.data.privacyLevel == 'public') ||
+                     (resource.data.privacyLevel == 'community' && isAuthenticated()) ||
+                     (resource.data.privacyLevel == 'family' && isFamilyMember(resource)) ||
+                     (resource.data.privacyLevel == 'private' && isOwner(resource));
+      
+      // Create permissions - authenticated users only
+      allow create: if isAuthenticated() &&
+                       request.auth.uid == request.resource.data.ownerId &&
+                       isValidMemorialData(request.resource.data);
+      
+      // Update permissions - owner only with data validation
+      allow update: if isOwner(resource) &&
+                       isValidMemorialData(request.resource.data) &&
+                       request.resource.data.ownerId == resource.data.ownerId &&
+                       request.resource.data.createdAt == resource.data.createdAt;
+      
+      // Delete permissions - owner only
+      allow delete: if isOwner(resource);
+      
+      // Memorial prayers subcollection
+      match /prayers/{prayerId} {
+        // Read prayers for accessible memorials
+        allow read: if (get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'public') ||
+                       (get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'community' && isAuthenticated()) ||
+                       (get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'family' && 
+                        isFamilyMember(get(/databases/$(database)/documents/memorials/$(memorialId)))) ||
+                       (get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'private' && 
+                        isOwner(get(/databases/$(database)/documents/memorials/$(memorialId)))) ||
+                       request.auth.uid == resource.data.userId;
+        
+        // Create prayers for accessible memorials
+        allow create: if isAuthenticated() &&
+                         request.auth.uid == request.resource.data.userId &&
+                         isValidPrayerData(request.resource.data) &&
+                         ((get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'public') ||
+                          (get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'community') ||
+                          (get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'family' && 
+                           isFamilyMember(get(/databases/$(database)/documents/memorials/$(memorialId)))) ||
+                          (get(/databases/$(database)/documents/memorials/$(memorialId)).data.privacyLevel == 'private' && 
+                           isOwner(get(/databases/$(database)/documents/memorials/$(memorialId)))));
+        
+        // Update own prayers only
+        allow update: if isAuthenticated() &&
+                         request.auth.uid == resource.data.userId &&
+                         request.auth.uid == request.resource.data.userId &&
+                         isValidPrayerData(request.resource.data);
+        
+        // Delete own prayers only
+        allow delete: if isAuthenticated() &&
+                         request.auth.uid == resource.data.userId;
+      }
+    }
+    
+    // PRODUCTION SECURITY: User profiles
+    match /users/{userId} {
+      // Read own profile and public profiles
+      allow read: if request.auth.uid == userId ||
+                     (isAuthenticated() && resource.data.get('isPublic', false) == true);
+      
+      // Create own profile only
+      allow create: if request.auth.uid == userId &&
+                       request.resource.data.keys().hasAll(['email', 'displayName', 'createdAt']) &&
+                       request.resource.data.email is string &&
+                       request.resource.data.displayName is string &&
+                       request.resource.data.createdAt is timestamp;
+      
+      // Update own profile only with validation
+      allow update: if request.auth.uid == userId &&
+                       request.resource.data.email == resource.data.email &&
+                       request.resource.data.createdAt == resource.data.createdAt;
+      
+      // Delete own profile only
+      allow delete: if request.auth.uid == userId;
+    }
+    
+    // PRODUCTION SECURITY: Community statistics (read-only for authenticated users)
+    match /community/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only Cloud Functions can write statistics
+    }
+    
+    // PRODUCTION SECURITY: Global analytics (read-only for authenticated users)
+    match /analytics/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only Cloud Functions can write analytics
+    }
+    
+    // PRODUCTION SECURITY: Admin operations (admin users only)
+    match /admin/{document=**} {
+      allow read, write: if isAuthenticated() &&
+                            exists(/databases/$(database)/documents/admins/$(request.auth.uid)) &&
+                            get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.role == 'super_admin';
+    }
+    
+    // PRODUCTION SECURITY: Content moderation
+    match /moderation/{document=**} {
+      allow read: if isAuthenticated() &&
+                     exists(/databases/$(database)/documents/moderators/$(request.auth.uid));
+      allow write: if isAuthenticated() &&
+                      exists(/databases/$(database)/documents/moderators/$(request.auth.uid)) &&
+                      get(/databases/$(database)/documents/moderators/$(request.auth.uid)).data.active == true;
+    }
+    
+    // PRODUCTION SECURITY: Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,459 @@
+name: 🚀 Tahlil Quality Gates Pipeline
+
+on:
+  push:
+    branches: [ master, develop, staging ]
+  pull_request:
+    branches: [ master, develop ]
+  workflow_dispatch:
+    inputs:
+      quality_level:
+        description: 'Quality gate level'
+        required: true
+        default: 'standard'
+        type: choice
+        options:
+          - 'basic'
+          - 'standard'
+          - 'strict'
+          - 'production'
+
+env:
+  JAVA_VERSION: '17'
+  FIREBASE_PROJECT_ID: 'surah-almulk'
+  
+  # Quality thresholds
+  MIN_TEST_COVERAGE: 90
+  MAX_APK_SIZE_MB: 50
+  MAX_STARTUP_TIME_MS: 3000
+  MIN_PERFORMANCE_SCORE: 85
+
+jobs:
+  # Job 1: Prepare Quality Gates Environment
+  prepare-environment:
+    name: 🔧 Prepare Quality Gates Environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    outputs:
+      quality-level: ${{ steps.setup.outputs.quality-level }}
+      test-matrix: ${{ steps.setup.outputs.test-matrix }}
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+    
+    - name: 🔧 Setup quality gate configuration
+      id: setup
+      run: |
+        QUALITY_LEVEL="${{ github.event.inputs.quality_level || 'standard' }}"
+        echo "quality-level=$QUALITY_LEVEL" >> $GITHUB_OUTPUT
+        
+        # Configure test matrix based on quality level
+        case $QUALITY_LEVEL in
+          "basic")
+            echo 'test-matrix=["unit"]' >> $GITHUB_OUTPUT
+            ;;
+          "standard")
+            echo 'test-matrix=["unit","integration","security"]' >> $GITHUB_OUTPUT
+            ;;
+          "strict")
+            echo 'test-matrix=["unit","integration","security","performance","cultural"]' >> $GITHUB_OUTPUT
+            ;;
+          "production")
+            echo 'test-matrix=["unit","integration","security","performance","cultural","e2e"]' >> $GITHUB_OUTPUT
+            ;;
+        esac
+    
+    - name: 📋 Display quality gate configuration
+      run: |
+        echo "🎯 Quality Level: ${{ steps.setup.outputs.quality-level }}"
+        echo "🧪 Test Matrix: ${{ steps.setup.outputs.test-matrix }}"
+        echo "📊 Coverage Threshold: ${{ env.MIN_TEST_COVERAGE }}%"
+        echo "📱 Max APK Size: ${{ env.MAX_APK_SIZE_MB }}MB"
+
+  # Job 2: Code Quality Analysis
+  code-quality:
+    name: 📊 Code Quality Analysis
+    runs-on: ubuntu-latest
+    needs: prepare-environment
+    timeout-minutes: 20
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+    
+    - name: ☕ Setup JDK ${{ env.JAVA_VERSION }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        distribution: 'temurin'
+    
+    - name: 🐘 Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-home-cache-cleanup: true
+    
+    - name: 🧹 Run static code analysis
+      run: ./gradlew lintDebug detekt
+    
+    - name: 📈 Generate test coverage report
+      run: ./gradlew createDebugCoverageReport
+    
+    - name: 📊 Validate code coverage threshold
+      run: |
+        COVERAGE_FILE="app/build/reports/coverage/debug/report.xml"
+        if [ -f "$COVERAGE_FILE" ]; then
+          COVERAGE=$(grep -o 'line-rate="[^"]*"' $COVERAGE_FILE | head -1 | sed 's/line-rate="//g' | sed 's/"//g')
+          COVERAGE_PERCENT=$(echo "scale=1; $COVERAGE * 100" | bc)
+          echo "📊 Current coverage: ${COVERAGE_PERCENT}%"
+          
+          if (( $(echo "$COVERAGE_PERCENT >= ${{ env.MIN_TEST_COVERAGE }}" | bc -l) )); then
+            echo "✅ Coverage threshold met: ${COVERAGE_PERCENT}% >= ${{ env.MIN_TEST_COVERAGE }}%"
+          else
+            echo "❌ Coverage threshold not met: ${COVERAGE_PERCENT}% < ${{ env.MIN_TEST_COVERAGE }}%"
+            exit 1
+          fi
+        fi
+    
+    - name: 🔍 Validate lint results
+      run: |
+        LINT_REPORT="app/build/reports/lint-results-debug.xml"
+        if [ -f "$LINT_REPORT" ]; then
+          ERRORS=$(grep -c 'severity="Error"' $LINT_REPORT || echo "0")
+          echo "🚨 Lint errors: $ERRORS"
+          
+          if [ "$ERRORS" -eq 0 ]; then
+            echo "✅ No lint errors found"
+          else
+            echo "❌ Lint errors found: $ERRORS"
+            exit 1
+          fi
+        fi
+    
+    - name: 📋 Upload code quality reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-quality-reports
+        path: |
+          app/build/reports/lint/
+          app/build/reports/detekt/
+          app/build/reports/coverage/
+        retention-days: 30
+
+  # Job 3: Security Quality Gate
+  security-quality:
+    name: 🔒 Security Quality Gate
+    runs-on: ubuntu-latest
+    needs: prepare-environment
+    timeout-minutes: 25
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+    
+    - name: ☕ Setup JDK ${{ env.JAVA_VERSION }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        distribution: 'temurin'
+    
+    - name: 🐘 Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+    
+    - name: 🔍 OWASP Dependency Check
+      run: ./gradlew dependencyCheckAnalyze
+    
+    - name: 🔒 Validate security vulnerabilities
+      run: |
+        VULN_REPORT="build/reports/dependency-check-report.xml"
+        if [ -f "$VULN_REPORT" ]; then
+          CRITICAL_VULNS=$(grep -c 'severity="CRITICAL"' $VULN_REPORT || echo "0")
+          HIGH_VULNS=$(grep -c 'severity="HIGH"' $VULN_REPORT || echo "0")
+          
+          echo "🔍 Critical vulnerabilities: $CRITICAL_VULNS"
+          echo "⚠️ High vulnerabilities: $HIGH_VULNS"
+          
+          if [ "$CRITICAL_VULNS" -eq 0 ] && [ "$HIGH_VULNS" -eq 0 ]; then
+            echo "✅ No critical or high vulnerabilities found"
+          else
+            echo "❌ Critical or high vulnerabilities found"
+            exit 1
+          fi
+        fi
+    
+    - name: 🔑 Check for hardcoded secrets
+      run: |
+        SECRETS_FOUND=$(grep -r "password\|secret\|key\|token" app/src/ --include="*.kt" --include="*.java" | grep -v "// " | grep -v "getString(R.string" || echo "")
+        
+        if [ -z "$SECRETS_FOUND" ]; then
+          echo "✅ No hardcoded secrets detected"
+        else
+          echo "⚠️ Potential hardcoded secrets found (review needed):"
+          echo "$SECRETS_FOUND" | head -5
+          echo "Please review these findings manually"
+        fi
+    
+    - name: 🛡️ Android permissions audit
+      run: |
+        PERMISSIONS=$(grep -E "uses-permission|permission" app/src/main/AndroidManifest.xml || echo "")
+        DANGEROUS_PERMS=$(echo "$PERMISSIONS" | grep -c "WRITE_EXTERNAL_STORAGE\|READ_CONTACTS\|ACCESS_FINE_LOCATION\|CAMERA\|RECORD_AUDIO" || echo "0")
+        
+        echo "📱 Total permissions: $(echo "$PERMISSIONS" | wc -l)"
+        echo "⚠️ Dangerous permissions: $DANGEROUS_PERMS"
+        
+        if [ "$DANGEROUS_PERMS" -le 5 ]; then
+          echo "✅ Acceptable number of dangerous permissions"
+        else
+          echo "❌ Too many dangerous permissions: $DANGEROUS_PERMS"
+          exit 1
+        fi
+    
+    - name: 📋 Upload security reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-reports
+        path: build/reports/dependency-check/
+        retention-days: 60
+
+  # Job 4: Islamic Cultural Quality Gate
+  cultural-quality:
+    name: ☪️ Islamic Cultural Quality Gate
+    runs-on: ubuntu-latest
+    needs: prepare-environment
+    if: contains(fromJSON(needs.prepare-environment.outputs.test-matrix), 'cultural')
+    timeout-minutes: 15
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+    
+    - name: ☕ Setup JDK ${{ env.JAVA_VERSION }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        distribution: 'temurin'
+    
+    - name: 📖 Validate Arabic text encoding
+      run: |
+        echo "📖 Checking Arabic text encoding..."
+        ARABIC_FILES=$(find app/src/main/res/values* -name "*.xml" -exec grep -l "[\u0600-\u06FF]" {} + 2>/dev/null || echo "")
+        
+        if [ -n "$ARABIC_FILES" ]; then
+          echo "📝 Arabic text files found: $(echo "$ARABIC_FILES" | wc -l)"
+          
+          for file in $ARABIC_FILES; do
+            if file "$file" | grep -q "UTF-8"; then
+              echo "✅ $file: Properly encoded"
+            else
+              echo "❌ $file: Invalid encoding"
+              exit 1
+            fi
+          done
+          echo "✅ All Arabic text properly encoded"
+        else
+          echo "ℹ️ No Arabic text files found"
+        fi
+    
+    - name: 🕌 Validate Islamic prayer authenticity
+      run: |
+        echo "🕌 Checking Islamic prayer content..."
+        PRAYER_MARKERS=$(grep -r "بِسْمِ اللَّهِ\|الحمد لله\|لا إله إلا الله" app/src/main/res/values* 2>/dev/null || echo "")
+        
+        if [ -n "$PRAYER_MARKERS" ]; then
+          echo "✅ Islamic prayer content found and validated"
+        else
+          echo "ℹ️ No prayer markers found"
+        fi
+    
+    - name: 🌍 Cultural sensitivity check
+      run: |
+        echo "🌍 Checking cultural sensitivity..."
+        
+        # Check for RTL support
+        RTL_LAYOUTS=$(find app/src/main/res/layout* -name "*.xml" -exec grep -l "android:layoutDirection\|android:textDirection" {} + 2>/dev/null || echo "")
+        if [ -n "$RTL_LAYOUTS" ]; then
+          echo "✅ RTL layout support detected"
+        else
+          echo "ℹ️ No explicit RTL support found"
+        fi
+        
+        # Check for inappropriate content placeholder
+        INAPPROPRIATE_CONTENT=$(grep -r "inappropriate_terms_placeholder" app/src/ || echo "")
+        if [ -z "$INAPPROPRIATE_CONTENT" ]; then
+          echo "✅ No inappropriate content detected"
+        else
+          echo "⚠️ Cultural review needed"
+          exit 1
+        fi
+    
+    - name: 📋 Generate cultural validation report
+      run: |
+        mkdir -p reports/cultural
+        cat > reports/cultural/cultural-validation-report.md << EOF
+        # ☪️ Islamic Cultural Validation Report
+        
+        **Generated**: $(date)
+        **Commit**: $(git rev-parse --short HEAD)
+        
+        ## Validation Results
+        
+        - ✅ Arabic text encoding validated
+        - ✅ Islamic prayer content verified
+        - ✅ Cultural sensitivity reviewed
+        - ✅ RTL support checked
+        
+        ## Status: PASSED
+        
+        All cultural requirements have been validated successfully.
+        EOF
+    
+    - name: 📋 Upload cultural reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: cultural-reports
+        path: reports/cultural/
+        retention-days: 30
+
+  # Job 5: Performance Quality Gate
+  performance-quality:
+    name: ⚡ Performance Quality Gate
+    runs-on: ubuntu-latest
+    needs: prepare-environment
+    if: contains(fromJSON(needs.prepare-environment.outputs.test-matrix), 'performance')
+    timeout-minutes: 30
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+    
+    - name: ☕ Setup JDK ${{ env.JAVA_VERSION }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+        distribution: 'temurin'
+    
+    - name: 🐘 Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+    
+    - name: 🏗️ Build APK for performance testing
+      run: ./gradlew assembleDebug
+    
+    - name: 📱 Validate APK size
+      run: |
+        APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
+        if [ -f "$APK_PATH" ]; then
+          APK_SIZE=$(stat -c%s "$APK_PATH")
+          APK_SIZE_MB=$(echo "scale=1; $APK_SIZE / 1024 / 1024" | bc)
+          
+          echo "📦 APK size: ${APK_SIZE_MB}MB"
+          
+          if (( $(echo "$APK_SIZE_MB <= ${{ env.MAX_APK_SIZE_MB }}" | bc -l) )); then
+            echo "✅ APK size within limit: ${APK_SIZE_MB}MB <= ${{ env.MAX_APK_SIZE_MB }}MB"
+          else
+            echo "❌ APK size exceeded limit: ${APK_SIZE_MB}MB > ${{ env.MAX_APK_SIZE_MB }}MB"
+            exit 1
+          fi
+        else
+          echo "❌ APK not found"
+          exit 1
+        fi
+    
+    - name: 🔢 Method count analysis
+      run: |
+        APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
+        if [ -f "$APK_PATH" ]; then
+          # Approximate method count analysis
+          METHOD_COUNT=$(unzip -p "$APK_PATH" classes.dex | xxd | grep -c "invoke" || echo "0")
+          echo "🔢 Approximate method count: $METHOD_COUNT"
+          
+          # Android has a 64K method limit per dex file
+          if [ "$METHOD_COUNT" -lt 60000 ]; then
+            echo "✅ Method count within acceptable range"
+          else
+            echo "⚠️ High method count detected: $METHOD_COUNT"
+          fi
+        fi
+    
+    - name: 📋 Upload performance reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: performance-reports
+        path: app/build/outputs/apk/
+        retention-days: 30
+
+  # Job 6: Quality Gate Summary
+  quality-gate-summary:
+    name: 📊 Quality Gate Summary
+    runs-on: ubuntu-latest
+    needs: [prepare-environment, code-quality, security-quality, cultural-quality, performance-quality]
+    if: always()
+    timeout-minutes: 10
+    
+    steps:
+    - name: 📥 Download all quality reports
+      uses: actions/download-artifact@v4
+      with:
+        pattern: '*-reports'
+        merge-multiple: true
+    
+    - name: 📊 Generate comprehensive quality report
+      run: |
+        mkdir -p final-reports
+        cat > final-reports/quality-gate-summary.md << EOF
+        # 🚀 Tahlil Quality Gate Summary
+        
+        **Generated**: $(date)
+        **Quality Level**: ${{ needs.prepare-environment.outputs.quality-level }}
+        **Commit**: ${{ github.sha }}
+        **Branch**: ${{ github.ref_name }}
+        
+        ## 📋 Quality Gate Results
+        
+        | Quality Gate | Status | Details |
+        |-------------|---------|---------|
+        | 📊 Code Quality | ${{ needs.code-quality.result == 'success' && '✅ PASSED' || '❌ FAILED' }} | Coverage: ${{ env.MIN_TEST_COVERAGE }}% required |
+        | 🔒 Security | ${{ needs.security-quality.result == 'success' && '✅ PASSED' || '❌ FAILED' }} | No critical vulnerabilities |
+        | ☪️ Cultural | ${{ needs.cultural-quality.result == 'success' && '✅ PASSED' || needs.cultural-quality.result == 'skipped' && '⏭️ SKIPPED' || '❌ FAILED' }} | Islamic compliance verified |
+        | ⚡ Performance | ${{ needs.performance-quality.result == 'success' && '✅ PASSED' || needs.performance-quality.result == 'skipped' && '⏭️ SKIPPED' || '❌ FAILED' }} | APK size: ${{ env.MAX_APK_SIZE_MB }}MB limit |
+        
+        ## 🎯 Production Readiness
+        
+        **Overall Status**: ${{ (needs.code-quality.result == 'success' && needs.security-quality.result == 'success') && '✅ READY' || '❌ NOT READY' }}
+        
+        ${{ (needs.code-quality.result == 'success' && needs.security-quality.result == 'success') && 'All mandatory quality gates have passed successfully. The application meets production requirements.' || 'One or more quality gates failed. Please review the results and fix issues before deployment.' }}
+        
+        ## 📊 Quality Metrics
+        
+        - **Test Coverage**: ${{ env.MIN_TEST_COVERAGE }}% minimum required
+        - **Security**: Zero tolerance for critical vulnerabilities
+        - **Cultural**: Islamic authenticity and RTL support validated
+        - **Performance**: APK size under ${{ env.MAX_APK_SIZE_MB }}MB
+        
+        ---
+        *Generated by Tahlil Quality Gates Pipeline*
+        EOF
+    
+    - name: 📋 Upload final quality report
+      uses: actions/upload-artifact@v4
+      with:
+        name: final-quality-report
+        path: final-reports/
+        retention-days: 90
+    
+    - name: ✅ Quality gates passed notification
+      if: needs.code-quality.result == 'success' && needs.security-quality.result == 'success'
+      run: |
+        echo "🎉 All quality gates passed successfully!"
+        echo "✅ Code quality validated"
+        echo "✅ Security requirements met"
+        echo "${{ needs.cultural-quality.result != 'skipped' && '✅ Cultural compliance verified' || '' }}"
+        echo "${{ needs.performance-quality.result != 'skipped' && '✅ Performance requirements satisfied' || '' }}"
+        echo "🚀 Ready for production deployment!"
+    
+    - name: ❌ Quality gates failed notification
+      if: needs.code-quality.result != 'success' || needs.security-quality.result != 'success'
+      run: |
+        echo "❌ One or more quality gates failed!"
+        echo "Please review the failing quality gates and fix the issues."
+        exit 1

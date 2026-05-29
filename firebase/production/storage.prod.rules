@@ -1,0 +1,120 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isValidImageFile() {
+      return request.resource.contentType.matches('image/.*') &&
+             request.resource.size <= 10 * 1024 * 1024; // 10MB limit
+    }
+    
+    function isValidDocumentFile() {
+      return request.resource.contentType in [
+        'application/pdf',
+        'text/plain',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ] && request.resource.size <= 5 * 1024 * 1024; // 5MB limit for documents
+    }
+    
+    // PRODUCTION SECURITY: Memorial photos
+    match /memorials/{memorialId}/photos/{photoId} {
+      // Read: Based on memorial privacy settings (to be checked via Firestore)
+      allow read: if isAuthenticated();
+      
+      // Create: Authenticated users with valid image files
+      allow create: if isAuthenticated() &&
+                       isValidImageFile() &&
+                       photoId.matches('^[a-zA-Z0-9_-]+$');
+      
+      // Update: Owner only (memorial owner to be verified via Cloud Functions)
+      allow update: if isAuthenticated() &&
+                       isValidImageFile();
+      
+      // Delete: Owner only (memorial owner to be verified via Cloud Functions)
+      allow delete: if isAuthenticated();
+    }
+    
+    // PRODUCTION SECURITY: User profile photos
+    match /users/{userId}/profile/{photoId} {
+      // Read: Public access for public profiles, authenticated for others
+      allow read: if true; // Profile photos are generally public
+      
+      // Create/Update: Own profile only with valid images
+      allow create, update: if isAuthenticated() &&
+                               isOwner(userId) &&
+                               isValidImageFile() &&
+                               photoId.matches('^[a-zA-Z0-9_-]+$');
+      
+      // Delete: Own profile only
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // PRODUCTION SECURITY: Backup files (admin access only)
+    match /backups/{allPaths=**} {
+      allow read, write: if isAuthenticated() &&
+                            request.auth.token.email in [
+                              'admin@tahlil-platform.com',
+                              'backup@tahlil-platform.com'
+                            ];
+    }
+    
+    // PRODUCTION SECURITY: System files (read-only for authenticated users)
+    match /system/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only backend can write system files
+    }
+    
+    // PRODUCTION SECURITY: Temporary uploads (authenticated users, auto-cleanup)
+    match /temp/{userId}/{fileName} {
+      allow read, create, update: if isAuthenticated() &&
+                                     isOwner(userId) &&
+                                     (isValidImageFile() || isValidDocumentFile()) &&
+                                     fileName.matches('^[a-zA-Z0-9._-]+$');
+      
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // PRODUCTION SECURITY: Shared memorial content
+    match /shared/{shareId}/{fileName} {
+      // Public read access for shared content
+      allow read: if true;
+      
+      // Create/Update: Authenticated users only
+      allow create, update: if isAuthenticated() &&
+                               isValidImageFile() &&
+                               fileName.matches('^[a-zA-Z0-9._-]+$');
+      
+      // Delete: Creator only (to be verified via metadata)
+      allow delete: if isAuthenticated();
+    }
+    
+    // PRODUCTION SECURITY: Analytics and logs (admin only)
+    match /analytics/{allPaths=**} {
+      allow read: if isAuthenticated() &&
+                     request.auth.token.email_verified == true &&
+                     request.auth.token.email.matches('.*@tahlil-platform\.com$');
+      allow write: if false; // Only Cloud Functions can write analytics
+    }
+    
+    // PRODUCTION SECURITY: Content moderation files
+    match /moderation/{allPaths=**} {
+      allow read, write: if isAuthenticated() &&
+                            request.auth.token.email_verified == true &&
+                            request.auth.token.get('moderator', false) == true;
+    }
+    
+    // PRODUCTION SECURITY: Deny all other access
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
