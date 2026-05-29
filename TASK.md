@@ -433,6 +433,124 @@ Sub-phase prefixes match team assignments. When implementing a sub-phase, batch 
 
 ---
 
+## Phase 8 — UI/UX Enhancement & Compose Preview System
+
+**Objective:** Implement comprehensive Jetpack Compose preview system across all screens and components for better development workflow and UI consistency.
+**Knowledge anchors:** [COMPOSE_PREVIEW_GUIDE.md](documentation/essential/COMPOSE_PREVIEW_GUIDE.md) · [ComposePreviewTemplate.kt](app/src/main/java/com/app_muslim/surah_yasin/ui/preview/ComposePreviewTemplate.kt)
+
+### P8.A — Compose Preview Implementation (Development Enhancement) **[PRIORITY 1]**
+- [ ] Add comprehensive previews to all **Authentication Screens** (5 screens)
+  - [ ] LoginScreen.kt with multiple states (default, loading, error, validation)
+  - [ ] RegisterScreen.kt with form validation states and cultural preferences
+  - [ ] ForgotPasswordScreen.kt with email input and confirmation states
+  - [ ] AuthScreen.kt with different authentication flows
+  - [ ] CulturalSetupScreen.kt with Islamic region and school selection
+- [ ] Add previews to **Memorial Feature Screens** (12 screens)
+  - [x] MemorialScreen.kt ✅ **[COMPLETED - Full preview system with states, devices, themes]**
+  - [ ] CreateMemorialScreen.kt with form states and Islamic date pickers
+  - [ ] MemorialListScreen.kt with different filter and search states
+  - [ ] EditMemorialScreen.kt with existing data and validation states
+  - [ ] MemorialPrayerScreen.kt with prayer counter and celebration states
+  - [ ] CommunityPrayerScreen.kt with group prayer and participation
+  - [ ] SocialSharingScreen.kt with different sharing platforms
+  - [ ] FamilyInvitationScreen.kt with invitation flow and permissions
+  - [ ] PrivacyControlsScreen.kt with family privacy settings
+  - [ ] SharedMemorialDetailsScreen.kt with guest access view
+  - [ ] ContentValidationScreen.kt with Islamic content review
+  - [ ] PhotoCropScreen.kt with Islamic frame overlays
+- [ ] Add previews to **Community Feature Screens** (6 screens)
+  - [ ] CommunityHomeScreen.kt with global statistics and participation
+  - [ ] PrayerLeaderboardScreen.kt with regional rankings and filters
+  - [ ] CommunityLeaderboardScreen.kt with achievement displays
+  - [ ] MemorialDiscoveryScreen.kt with search and discovery flows
+  - [ ] CommunityScreen.kt with tab navigation and content states
+- [ ] Add previews to **Profile & Settings Screens** (3 screens)  
+  - [ ] ProfileScreen.kt with complete profile data and editing states
+  - [ ] CulturalPreferencesSection.kt with Islamic school and region selection
+  - [ ] BasicInformationSection.kt with form validation and photo upload
+
+### P8.B — Core UI Component Previews (Component Library) **[PRIORITY 2]**
+- [ ] Add previews to **Islamic Typography Components** (5 components)
+  - [ ] ArabicTextComponents.kt with different Arabic fonts and RTL layouts
+  - [ ] RTLTextComponents.kt with bidirectional text and mixed content
+  - [ ] TranslationComponents.kt with Arabic-to-multiple language translations
+  - [ ] AccessibilityTextComponents.kt with screen reader and font scaling
+  - [ ] IslamicTypography.kt with Islamic design system typography
+- [ ] Add previews to **Navigation Components** (4 components)
+  - [ ] TahlilBottomNavigation.kt with different selected states and badges
+  - [ ] NavigationDialogs.kt with guest upgrade and verification prompts
+  - [ ] SessionManagementWrapper.kt with authentication flow states
+  - [ ] AuthAwareNavigation.kt with permission-based navigation
+- [ ] Add previews to **Islamic UI Components** (3 components)
+  - [ ] IslamicCard.kt with different Islamic design patterns and content
+  - [ ] OptimizedPrayerCounter.kt with haptic feedback and animation states
+  - [ ] TahlilTheme.kt with dark/light theme showcase
+
+### P8.C — Memorial Component Previews (Feature Components) **[PRIORITY 3]**
+- [ ] Add previews to **Memorial Creation Components** (7 components)
+  - [ ] DeceasedInformationSection.kt with Arabic/Latin name input
+  - [ ] DateSelectionSection.kt with Hijri/Gregorian calendar integration
+  - [ ] MemorialMessageSection.kt with Arabic text and RTL support
+  - [ ] PrivacyLevelSection.kt with family privacy controls
+  - [ ] PhotoUploadSection.kt with Islamic frame selection
+  - [ ] EnhancedPhotoUpload.kt with camera and gallery integration
+  - [ ] IslamicFrameOverlay.kt with 8 different Islamic frame styles
+- [ ] Add previews to **Community Components** (6 components)
+  - [ ] CommunityAchievementsCard.kt with milestones and celebrations
+  - [ ] FamilyMemorialSharingCard.kt with sharing permissions
+  - [ ] GlobalMilestoneCelebrations.kt with confetti and animations
+  - [ ] GlobalPrayerWorldMap.kt with country statistics visualization
+  - [ ] PrayerAnalyticsCharts.kt with time-based prayer analytics
+  - [ ] PrayerCelebration.kt with prayer completion animations
+- [ ] Add previews to **Memorial List Components** (3 components)
+  - [ ] MemorialDialogs.kt with deletion confirmations and sharing options
+  - [ ] MemorialSharingIntegration.kt with social platform integration
+  - [ ] ProfileHeaderSection.kt with photo upload and completion indicators
+
+### P8.D — Device & Accessibility Previews (Cross-Platform) **[PRIORITY 4]**
+- [ ] Add **Device-Specific Previews** for all major screens
+  - [ ] Phone Portrait (360x640dp) previews for primary user flows
+  - [ ] Phone Landscape (840x360dp) previews for extended usage
+  - [ ] Tablet (1280x800dp) previews for dual-pane layouts
+  - [ ] Small Phone (320x568dp) previews for budget device compatibility
+  - [ ] Foldable Device previews for emerging screen formats
+- [ ] Add **Theme & Cultural Previews**
+  - [ ] Dark Theme previews for all major screens
+  - [ ] High Contrast previews for accessibility compliance
+  - [ ] RTL Layout previews with Arabic content and navigation
+  - [ ] Different Islamic Color Scheme previews (Green, Gold, Traditional)
+  - [ ] Font Scaling previews (100%, 150%, 200%) for accessibility
+- [ ] Add **State-Based Previews**
+  - [ ] Loading states with Islamic-themed spinners and indicators
+  - [ ] Empty states with motivational Islamic content
+  - [ ] Error states with helpful Islamic guidance messages
+  - [ ] Success states with Islamic celebration elements
+  - [ ] Network offline states with prayer continuity messages
+
+### P8.E — Preview Testing & Integration (Quality Assurance) **[PRIORITY 5]**
+- [ ] Create **ComposeTestActivity Enhancement**
+  - [ ] Add navigation menu for all preview screens (40+ screens)
+  - [ ] Integrate device orientation testing capabilities
+  - [ ] Add theme switching for real-time testing
+  - [ ] Include Arabic text input testing for RTL layouts
+  - [ ] Performance testing integration with frame rate monitoring
+- [ ] Implement **Preview Data Management**
+  - [ ] Create comprehensive Islamic sample data providers
+  - [ ] Build realistic Arabic content for text components
+  - [ ] Generate sample memorial and prayer data for testing
+  - [ ] Include edge case data (very long names, special characters)
+  - [ ] Cultural test data for different Islamic regions and schools
+- [ ] Setup **Preview Validation System**
+  - [ ] Automated screenshot testing integration
+  - [ ] Visual regression testing for UI consistency
+  - [ ] Arabic text rendering validation
+  - [ ] Islamic color scheme compliance checking
+  - [ ] Accessibility preview validation framework
+
+**Exit criteria:** All Compose screens and components have comprehensive previews, development workflow enhanced with real-time testing, UI consistency maintained across device types and cultural preferences.
+
+---
+
 ## Success Criteria Summary
 
 ### Technical Success Metrics (Modern Architecture)

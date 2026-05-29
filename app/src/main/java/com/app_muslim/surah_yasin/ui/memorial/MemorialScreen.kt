@@ -15,8 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.app_muslim.surah_yasin.feature.memorial.model.Memorial
+import com.app_muslim.surah_yasin.ui.theme.IslamicTheme
 
 @Composable
 fun MemorialScreen(
@@ -301,5 +305,320 @@ fun ArabicTextDisplay(
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+    }
+}
+
+// ============================================================================
+// PREVIEW DATA PROVIDERS
+// ============================================================================
+
+class MemorialPreviewParameterProvider : PreviewParameterProvider<List<Memorial>> {
+    override val values: Sequence<List<Memorial>> = sequenceOf(
+        // Empty list
+        emptyList(),
+        // Single memorial
+        listOf(
+            Memorial(
+                id = "1",
+                title = "Loving Memory of Grandfather",
+                deceasedName = "Ahmad bin Abdullah",
+                totalPrayers = 45,
+                description = "A wonderful grandfather who taught us about Islam",
+                familyName = "Al-Rashid Family",
+                isPublic = true
+            )
+        ),
+        // Multiple memorials
+        listOf(
+            Memorial(
+                id = "1",
+                title = "Loving Memory of Grandfather", 
+                deceasedName = "Ahmad bin Abdullah",
+                totalPrayers = 45,
+                description = "A wonderful grandfather",
+                familyName = "Al-Rashid Family"
+            ),
+            Memorial(
+                id = "2",
+                title = "In Memory of Our Beloved Mother",
+                deceasedName = "Fatimah bint Hassan",
+                totalPrayers = 123,
+                description = "The most caring mother",
+                familyName = "Al-Zahra Family"
+            ),
+            Memorial(
+                id = "3",
+                title = "Remembering Uncle Yusuf",
+                deceasedName = "Yusuf ibn Omar",
+                totalPrayers = 67,
+                description = "A generous and kind uncle",
+                familyName = "Ibn Omar Family"
+            )
+        )
+    )
+}
+
+// ============================================================================
+// SCREEN PREVIEWS
+// ============================================================================
+
+@Preview(name = "Memorial Screen - Empty State")
+@Composable
+fun PreviewMemorialScreenEmpty() {
+    IslamicTheme {
+        Surface {
+            MemorialScreen(
+                memorials = emptyList(),
+                isLoading = false,
+                onCreateMemorial = {},
+                onMemorialClick = {},
+                onPrayForMemorial = {}
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Screen - Loading State")
+@Composable
+fun PreviewMemorialScreenLoading() {
+    IslamicTheme {
+        Surface {
+            MemorialScreen(
+                memorials = emptyList(),
+                isLoading = true,
+                onCreateMemorial = {},
+                onMemorialClick = {},
+                onPrayForMemorial = {}
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Screen - With Data")
+@Composable
+fun PreviewMemorialScreenWithData() {
+    IslamicTheme {
+        Surface {
+            MemorialScreen(
+                memorials = listOf(
+                    Memorial(
+                        id = "1",
+                        title = "Loving Memory of Grandfather",
+                        deceasedName = "Ahmad bin Abdullah",
+                        totalPrayers = 45,
+                        description = "A wonderful grandfather who taught us about Islam"
+                    ),
+                    Memorial(
+                        id = "2",
+                        title = "In Memory of Our Beloved Mother",
+                        deceasedName = "Fatimah bint Hassan",
+                        totalPrayers = 123,
+                        description = "The most caring mother"
+                    ),
+                    Memorial(
+                        id = "3",
+                        title = "Remembering Uncle Yusuf",
+                        deceasedName = "Yusuf ibn Omar",
+                        totalPrayers = 67,
+                        description = "A generous and kind uncle"
+                    )
+                ),
+                isLoading = false,
+                onCreateMemorial = {},
+                onMemorialClick = {},
+                onPrayForMemorial = {}
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Screen - Dark Theme", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewMemorialScreenDark() {
+    IslamicTheme {
+        Surface {
+            MemorialScreen(
+                memorials = listOf(
+                    Memorial(
+                        id = "1",
+                        title = "Loving Memory of Grandfather",
+                        deceasedName = "Ahmad bin Abdullah",
+                        totalPrayers = 45
+                    )
+                ),
+                isLoading = false,
+                onCreateMemorial = {},
+                onMemorialClick = {},
+                onPrayForMemorial = {}
+            )
+        }
+    }
+}
+
+// ============================================================================
+// COMPONENT PREVIEWS
+// ============================================================================
+
+@Preview(name = "Memorial Card - Single")
+@Composable
+fun PreviewMemorialCard() {
+    IslamicTheme {
+        MemorialCard(
+            memorial = Memorial(
+                id = "1",
+                title = "Loving Memory of Grandfather",
+                deceasedName = "Ahmad bin Abdullah",
+                totalPrayers = 45,
+                description = "A wonderful grandfather who taught us about Islam"
+            ),
+            onMemorialClick = {},
+            onPrayClick = {}
+        )
+    }
+}
+
+@Preview(name = "Memorial Card - High Prayer Count")
+@Composable
+fun PreviewMemorialCardHighPrayers() {
+    IslamicTheme {
+        MemorialCard(
+            memorial = Memorial(
+                id = "2",
+                title = "In Memory of Our Beloved Mother",
+                deceasedName = "Fatimah bint Hassan",
+                totalPrayers = 1247,
+                description = "The most caring mother"
+            ),
+            onMemorialClick = {},
+            onPrayClick = {}
+        )
+    }
+}
+
+@Preview(name = "Memorial Detail Screen")
+@Composable
+fun PreviewMemorialDetailScreen() {
+    IslamicTheme {
+        Surface {
+            MemorialDetailScreen(
+                memorial = Memorial(
+                    id = "1",
+                    title = "Loving Memory of Grandfather",
+                    deceasedName = "Ahmad bin Abdullah",
+                    totalPrayers = 45
+                ),
+                onPrayerIncrement = {},
+                onNavigateBack = {}
+            )
+        }
+    }
+}
+
+@Preview(name = "Arabic Text Display")
+@Composable
+fun PreviewArabicTextDisplay() {
+    IslamicTheme {
+        Surface {
+            ArabicTextDisplay(
+                text = "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم",
+                transliteration = "Bismillahi Rahmani Raheem"
+            )
+        }
+    }
+}
+
+// ============================================================================
+// TABLET PREVIEWS
+// ============================================================================
+
+@Preview(
+    name = "Tablet Memorial Screen",
+    device = "spec:width=1280dp,height=800dp,dpi=240",
+    showSystemUi = true
+)
+@Composable
+fun PreviewTabletMemorialScreen() {
+    IslamicTheme {
+        Surface {
+            TabletMemorialScreen(
+                memorials = listOf(
+                    Memorial(
+                        id = "1",
+                        title = "Loving Memory of Grandfather",
+                        deceasedName = "Ahmad bin Abdullah",
+                        totalPrayers = 45
+                    ),
+                    Memorial(
+                        id = "2", 
+                        title = "In Memory of Our Beloved Mother",
+                        deceasedName = "Fatimah bint Hassan",
+                        totalPrayers = 123
+                    )
+                ),
+                isLoading = false,
+                onCreateMemorial = {},
+                onMemorialClick = {},
+                onPrayForMemorial = {}
+            )
+        }
+    }
+}
+
+// ============================================================================
+// LANDSCAPE ORIENTATION PREVIEW
+// ============================================================================
+
+@Preview(
+    name = "Memorial Screen - Landscape",
+    widthDp = 840,
+    heightDp = 360
+)
+@Composable
+fun PreviewMemorialScreenLandscape() {
+    IslamicTheme {
+        Surface {
+            MemorialScreen(
+                memorials = listOf(
+                    Memorial(
+                        id = "1",
+                        title = "Loving Memory of Grandfather",
+                        deceasedName = "Ahmad bin Abdullah", 
+                        totalPrayers = 45
+                    ),
+                    Memorial(
+                        id = "2",
+                        title = "In Memory of Our Beloved Mother",
+                        deceasedName = "Fatimah bint Hassan",
+                        totalPrayers = 123
+                    )
+                ),
+                isLoading = false,
+                onCreateMemorial = {},
+                onMemorialClick = {},
+                onPrayForMemorial = {}
+            )
+        }
+    }
+}
+
+// ============================================================================
+// DYNAMIC PREVIEW WITH PARAMETERS
+// ============================================================================
+
+@Preview(name = "Memorial Screen - Various States")
+@Composable
+fun PreviewMemorialScreenDynamic(
+    @PreviewParameter(MemorialPreviewParameterProvider::class) memorials: List<Memorial>
+) {
+    IslamicTheme {
+        Surface {
+            MemorialScreen(
+                memorials = memorials,
+                isLoading = false,
+                onCreateMemorial = {},
+                onMemorialClick = {},
+                onPrayForMemorial = {}
+            )
+        }
     }
 }
