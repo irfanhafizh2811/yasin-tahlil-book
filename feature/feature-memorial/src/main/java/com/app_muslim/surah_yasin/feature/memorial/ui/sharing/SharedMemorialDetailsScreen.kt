@@ -20,9 +20,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.app_muslim.surah_yasin.core.firebase.sharing.*
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Shared Memorial Details Screen - Compose implementation
@@ -623,3 +627,129 @@ data class SharedMemorialInfo(
     val familyMemberCount: Int,
     val totalPrayers: Long
 )
+
+// Preview-safe content function
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SharedMemorialDetailsPreview(
+    uiState: SharedMemorialDetailsUiState,
+    onNavigateToAuth: () -> Unit,
+    onNavigateToPrayer: (String) -> Unit,
+    onNavigateBack: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        // Top App Bar
+        SharedMemorialTopBar(
+            onNavigateBack = onNavigateBack
+        )
+        
+        when {
+            uiState.isLoading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+            
+            uiState.error != null -> {
+                SharedMemorialErrorScreen(
+                    error = uiState.error!!,
+                    onRetry = {}
+                )
+            }
+            
+            uiState.memorial != null -> {
+                SharedMemorialContent(
+                    memorial = uiState.memorial!!,
+                    accessPermissions = uiState.accessPermissions,
+                    isAuthenticated = uiState.isAuthenticated,
+                    onJoinPrayers = {
+                        if (uiState.isAuthenticated) {
+                            onNavigateToPrayer("memorial_123")
+                        } else {
+                            onNavigateToAuth()
+                        }
+                    },
+                    onRequestAccess = {}
+                )
+            }
+        }
+    }
+}
+
+// Helper function to create sample memorial info for previews
+private fun getSampleSharedMemorialInfo(): SharedMemorialInfo {
+    return SharedMemorialInfo(
+        memorialId = "memorial_fatimah_zahra",
+        deceasedName = "Fatimah bint Abdullah",
+        sharerName = "Muhammad Ibn Hassan",
+        memorialMessage = "We invite you to join us in remembering our beloved mother through Islamic prayers. May Allah grant her Jannah and accept our prayers.",
+        prayerTypes = listOf("Yasin", "Tahlil", "Fatihah"),
+        photoUrl = null,
+        deathDate = System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000), // 30 days ago
+        privacyLevel = "FAMILY",
+        familyMemberCount = 12,
+        totalPrayers = 1435
+    )
+}
+
+// Helper function to create sample UI state for previews
+private fun getSampleSharedMemorialUiState(
+    isLoading: Boolean = false,
+    isAuthenticated: Boolean = true
+): SharedMemorialDetailsUiState {
+    return SharedMemorialDetailsUiState(
+        isLoading = isLoading,
+        memorial = if (isLoading) null else getSampleSharedMemorialInfo(),
+        isAuthenticated = isAuthenticated,
+        accessPermissions = MemorialSharingPermissions.PRAY_AND_VIEW,
+        error = null,
+        message = null
+    )
+}
+
+// Preview Functions
+@Preview(showBackground = true, name = "Shared Memorial Details")
+@Composable
+private fun PreviewSharedMemorialDetails() {
+    TahlilTheme {
+        SharedMemorialDetailsPreview(
+            uiState = getSampleSharedMemorialUiState(),
+            onNavigateToAuth = {},
+            onNavigateToPrayer = {},
+            onNavigateBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Loading State")
+@Composable
+private fun PreviewSharedMemorialLoading() {
+    TahlilTheme {
+        SharedMemorialDetailsPreview(
+            uiState = getSampleSharedMemorialUiState(isLoading = true),
+            onNavigateToAuth = {},
+            onNavigateToPrayer = {},
+            onNavigateBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Unauthenticated")
+@Composable
+private fun PreviewSharedMemorialUnauthenticated() {
+    TahlilTheme {
+        SharedMemorialDetailsPreview(
+            uiState = getSampleSharedMemorialUiState(isAuthenticated = false),
+            onNavigateToAuth = {},
+            onNavigateToPrayer = {},
+            onNavigateBack = {}
+        )
+    }
+}

@@ -17,10 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app_muslim.surah_yasin.core.common.model.IslamicRegion
 import com.app_muslim.surah_yasin.core.common.model.SchoolOfThought
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -437,6 +441,213 @@ private fun LanguageSelectionStep(
                     }
                 }
             }
+        }
+    }
+}
+
+// ============================================================================
+// PREVIEW DATA PROVIDERS
+// ============================================================================
+
+class CulturalSetupStateProvider : PreviewParameterProvider<Triple<Int, IslamicRegion?, SchoolOfThought?>> {
+    override val values: Sequence<Triple<Int, IslamicRegion?, SchoolOfThought?>> = sequenceOf(
+        // Step, SelectedRegion, SelectedSchool
+        Triple(0, null, null), // Region selection step
+        Triple(0, IslamicRegion.MIDDLE_EAST, null), // Region selected
+        Triple(1, IslamicRegion.SOUTH_ASIA, null), // School selection step
+        Triple(1, IslamicRegion.SOUTH_ASIA, SchoolOfThought.HANAFI), // School selected
+        Triple(2, IslamicRegion.SOUTHEAST_ASIA, SchoolOfThought.SHAFI) // Language selection step
+    )
+}
+
+// ============================================================================
+// STEP-SPECIFIC PREVIEWS
+// ============================================================================
+
+@Preview(name = "Cultural Setup - Region Selection")
+@Composable
+fun PreviewCulturalSetupRegionStep() {
+    TahlilTheme {
+        Surface {
+            CulturalSetupScreen(
+                onSetupComplete = { _, _, _ -> }
+            )
+        }
+    }
+}
+
+@Preview(name = "Cultural Setup - School Selection")
+@Composable
+fun PreviewCulturalSetupSchoolStep() {
+    TahlilTheme {
+        Surface {
+            RegionSelectionStep(
+                selectedRegion = IslamicRegion.SOUTH_ASIA,
+                onRegionSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Cultural Setup - Language Selection")
+@Composable
+fun PreviewCulturalSetupLanguageStep() {
+    TahlilTheme {
+        Surface {
+            LanguageSelectionStep(
+                selectedLanguage = "ar",
+                onLanguageSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Cultural Setup - Dark Theme", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewCulturalSetupDark() {
+    TahlilTheme {
+        Surface {
+            CulturalSetupScreen(
+                onSetupComplete = { _, _, _ -> }
+            )
+        }
+    }
+}
+
+// ============================================================================
+// INDIVIDUAL COMPONENT PREVIEWS
+// ============================================================================
+
+@Preview(name = "Region Selection - Empty")
+@Composable
+fun PreviewRegionSelectionEmpty() {
+    TahlilTheme {
+        Surface {
+            RegionSelectionStep(
+                selectedRegion = null,
+                onRegionSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Region Selection - Middle East Selected")
+@Composable
+fun PreviewRegionSelectionMiddleEast() {
+    TahlilTheme {
+        Surface {
+            RegionSelectionStep(
+                selectedRegion = IslamicRegion.MIDDLE_EAST,
+                onRegionSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "School Selection - Hanafi Selected")
+@Composable
+fun PreviewSchoolSelectionHanafi() {
+    TahlilTheme {
+        Surface {
+            SchoolSelectionStep(
+                selectedSchool = SchoolOfThought.HANAFI,
+                onSchoolSelected = { },
+                selectedRegion = IslamicRegion.SOUTH_ASIA
+            )
+        }
+    }
+}
+
+@Preview(name = "School Selection - Shafi Selected")
+@Composable
+fun PreviewSchoolSelectionShafi() {
+    TahlilTheme {
+        Surface {
+            SchoolSelectionStep(
+                selectedSchool = SchoolOfThought.SHAFI,
+                onSchoolSelected = { },
+                selectedRegion = IslamicRegion.SOUTHEAST_ASIA
+            )
+        }
+    }
+}
+
+@Preview(name = "Language Selection - Arabic Selected")
+@Composable
+fun PreviewLanguageSelectionArabic() {
+    TahlilTheme {
+        Surface {
+            LanguageSelectionStep(
+                selectedLanguage = "ar",
+                onLanguageSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Language Selection - Indonesian Selected")
+@Composable
+fun PreviewLanguageSelectionIndonesian() {
+    TahlilTheme {
+        Surface {
+            LanguageSelectionStep(
+                selectedLanguage = "id",
+                onLanguageSelected = { }
+            )
+        }
+    }
+}
+
+// ============================================================================
+// DEVICE-SPECIFIC PREVIEWS
+// ============================================================================
+
+@Preview(
+    name = "Cultural Setup - Landscape",
+    widthDp = 840,
+    heightDp = 360
+)
+@Composable
+fun PreviewCulturalSetupLandscape() {
+    TahlilTheme {
+        Surface {
+            RegionSelectionStep(
+                selectedRegion = IslamicRegion.SOUTH_ASIA,
+                onRegionSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Cultural Setup - Tablet",
+    device = "spec:width=1280dp,height=800dp,dpi=240"
+)
+@Composable
+fun PreviewCulturalSetupTablet() {
+    TahlilTheme {
+        Surface {
+            SchoolSelectionStep(
+                selectedSchool = SchoolOfThought.MALIKI,
+                onSchoolSelected = { },
+                selectedRegion = IslamicRegion.NORTH_AFRICA
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Cultural Setup - Small Phone",
+    device = "spec:width=360dp,height=640dp,dpi=240"
+)
+@Composable
+fun PreviewCulturalSetupSmallPhone() {
+    TahlilTheme {
+        Surface {
+            LanguageSelectionStep(
+                selectedLanguage = "ur",
+                onLanguageSelected = { }
+            )
         }
     }
 }

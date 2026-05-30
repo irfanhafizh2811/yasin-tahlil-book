@@ -9,10 +9,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app_muslim.surah_yasin.feature.memorial.prayer.viewmodel.MemorialPrayerViewModel
 import com.app_muslim.surah_yasin.feature.memorial.prayer.model.*
+import com.app_muslim.surah_yasin.feature.memorial.prayer.model.MemorialPrayerUiState
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Main screen for Memorial Prayer Sessions with Firebase integration
@@ -83,69 +88,79 @@ fun MemorialPrayerScreen(
                 }
             )
         
-        when (val state = uiState.memorialPrayerState) {
-            is MemorialPrayerState.Idle -> {
-                PrayerSelectionCard(
-                    onStartSession = { prayerType, targetCount ->
-                        viewModel.handleEvent(
-                            MemorialPrayerEvent.StartSession(memorialId, prayerType, targetCount)
-                        )
-                    }
-                )
-            }
-            
-            is MemorialPrayerState.InProgress -> {
-                // Use enhanced animated prayer counter
-                com.app_muslim.surah_yasin.feature.memorial.prayer.ui.components.AnimatedPrayerCounter(
-                    currentCount = state.progress.currentCount,
-                    targetCount = state.progress.targetCount,
-                    onIncrement = { viewModel.handleEvent(MemorialPrayerEvent.IncrementPrayer) }
-                )
+            when (val state = uiState.memorialPrayerState) {
+                is MemorialPrayerState.Idle -> {
+                    PrayerSelectionCard(
+                        onStartSession = { prayerType, targetCount ->
+                            viewModel.handleEvent(
+                                MemorialPrayerEvent.StartSession(memorialId, prayerType, targetCount)
+                            )
+                        }
+                    )
+                }
                 
-                // Session controls
-                PrayerSessionControls(
-                    session = state.session,
-                    onPauseSession = { viewModel.handleEvent(MemorialPrayerEvent.PauseSession) },
-                    onCompleteSession = { viewModel.handleEvent(MemorialPrayerEvent.CompleteSession) }
-                )
-            }
-            
-            is MemorialPrayerState.Paused -> {
-                PrayerSessionCard(
-                    session = state.session,
-                    progress = state.progress,
-                    isPaused = true,
-                    onIncrementPrayer = { viewModel.handleEvent(MemorialPrayerEvent.IncrementPrayer) },
-                    onResumeSession = { viewModel.handleEvent(MemorialPrayerEvent.ResumeSession) },
-                    onCompleteSession = { viewModel.handleEvent(MemorialPrayerEvent.CompleteSession) }
-                )
-            }
-            
-            is MemorialPrayerState.Completed -> {
-                CompletedSessionCard(
-                    session = state.session,
-                    onStartNewSession = {
-                        // Reset to idle state for new session
+                MemorialPrayerState.Active -> {
+                    PrayerSelectionCard(
+                        onStartSession = { prayerType, targetCount ->
+                            viewModel.handleEvent(
+                                MemorialPrayerEvent.StartSession(memorialId, prayerType, targetCount)
+                            )
+                        }
+                    )
+                }
+                
+                is MemorialPrayerState.InProgress -> {
+                    // Use enhanced animated prayer counter
+                    com.app_muslim.surah_yasin.feature.memorial.prayer.ui.components.AnimatedPrayerCounter(
+                        currentCount = state.progress.currentCount,
+                        targetCount = state.progress.targetCount,
+                        onIncrement = { viewModel.handleEvent(MemorialPrayerEvent.IncrementPrayer) }
+                    )
+                    
+                    // Session controls
+                    PrayerSessionControls(
+                        session = state.session,
+                        onPauseSession = { viewModel.handleEvent(MemorialPrayerEvent.PauseSession) },
+                        onCompleteSession = { viewModel.handleEvent(MemorialPrayerEvent.CompleteSession) }
+                    )
+                }
+                
+                is MemorialPrayerState.Paused -> {
+                    PrayerSessionCard(
+                        session = state.session,
+                        progress = state.progress,
+                        isPaused = true,
+                        onIncrementPrayer = { viewModel.handleEvent(MemorialPrayerEvent.IncrementPrayer) },
+                        onResumeSession = { viewModel.handleEvent(MemorialPrayerEvent.ResumeSession) },
+                        onCompleteSession = { viewModel.handleEvent(MemorialPrayerEvent.CompleteSession) }
+                    )
+                }
+                
+                is MemorialPrayerState.Completed -> {
+                    CompletedSessionCard(
+                        session = state.session,
+                        onStartNewSession = {
+                            // Reset to idle state for new session
+                        }
+                    )
+                }
+                
+                MemorialPrayerState.Loading -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
                     }
-                )
-            }
-            
-            is MemorialPrayerState.Loading -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
+                }
+                
+                is MemorialPrayerState.Error -> {
+                    ErrorCard(
+                        message = state.message,
+                        onRetry = { /* TODO: Implement retry */ }
+                    )
                 }
             }
-            
-            is MemorialPrayerState.Error -> {
-                ErrorCard(
-                    message = state.message,
-                    onRetry = { /* TODO: Implement retry */ }
-                )
-            }
-        }
         
         // Recent Sessions with real-time updates
         if (uiState.recentSessions.isNotEmpty()) {
@@ -580,6 +595,485 @@ private fun StatisticsCard(
             Text("Total Sessions: ${statistics.totalSessions}")
             Text("Total Prayers: ${statistics.totalPrayers}")
             Text("Current Streak: ${statistics.currentStreak} days")
+        }
+    }
+}
+// ============================================================================
+// PREVIEW FUNCTIONS & DATA PROVIDERS
+// ============================================================================
+
+class MemorialPrayerUiStateProvider : PreviewParameterProvider<MemorialPrayerUiState> {
+    override val values: Sequence<MemorialPrayerUiState> = sequenceOf(
+        MemorialPrayerUiState(), // Default loading state
+        MemorialPrayerUiState(
+            memorialPrayerState = MemorialPrayerState.Active,
+            isLoading = false
+        ), // Active session state
+        MemorialPrayerUiState(
+            memorialPrayerState = MemorialPrayerState.InProgress(
+                session = MemorialPrayerSession(
+                    sessionId = "session-1",
+                    memorialId = "memorial-123",
+                    prayerType = PrayerType.YASIN,
+                    startTime = java.time.ZonedDateTime.now(),
+                    culturalSettings = CulturalSettings(
+                        schoolOfThought = SchoolOfThought.HANAFI,
+                        language = "en",
+                        regionCode = "US",
+                        prayerTradition = PrayerTradition.INDIVIDUAL
+                    )
+                ),
+                progress = PrayerProgress(
+                    currentCount = 25,
+                    targetCount = 100,
+                    prayerType = PrayerType.YASIN,
+                    duration = 900000L,
+                    percentage = 25f,
+                    estimatedTimeRemaining = 2700000L,
+                    averagePrayerSpeed = 1.0f
+                )
+            ),
+            isLoading = false
+        ), // In progress state
+        MemorialPrayerUiState(
+            memorialPrayerState = MemorialPrayerState.Completed(
+                session = MemorialPrayerSession(
+                    sessionId = "session-2",
+                    memorialId = "memorial-123",
+                    prayerType = PrayerType.TAHLIL,
+                    startTime = java.time.ZonedDateTime.now().minusMinutes(30),
+                    endTime = java.time.ZonedDateTime.now(),
+                    prayerCount = 100,
+                    isCompleted = true,
+                    culturalSettings = CulturalSettings(
+                        schoolOfThought = SchoolOfThought.HANAFI,
+                        language = "en",
+                        regionCode = "US",
+                        prayerTradition = PrayerTradition.INDIVIDUAL
+                    )
+                )
+            ),
+            statistics = MemorialPrayerStats(
+                totalSessions = 15,
+                totalPrayers = 1500,
+                totalTimeSpent = 1800000L,
+                favoriteTimeOfDay = "Morning",
+                mostUsedPrayerType = PrayerType.TAHLIL,
+                longestSession = 3600000L,
+                currentStreak = 7
+            ),
+            isLoading = false
+        ) // Completed session state
+    )
+}
+
+@Composable
+fun MemorialPrayerScreenPreview(
+    memorialId: String = "memorial-123",
+    uiState: MemorialPrayerUiState = MemorialPrayerUiState()
+) {
+    MemorialPrayerScreenContent(
+        memorialId = memorialId,
+        uiState = uiState,
+        onNavigateBack = { },
+        onStartSession = { },
+        onPauseSession = { },
+        onCompleteSession = { },
+        onIncrementPrayer = { }
+    )
+}
+
+@Composable
+private fun MemorialPrayerScreenContent(
+    memorialId: String,
+    uiState: MemorialPrayerUiState,
+    onNavigateBack: () -> Unit,
+    onStartSession: () -> Unit,
+    onPauseSession: () -> Unit,
+    onCompleteSession: () -> Unit,
+    onIncrementPrayer: () -> Unit
+) {
+    // This is a preview wrapper - simplified implementation
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Memorial Prayer Session",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+        
+        Spacer(modifier = Modifier.height(24.dp))
+        
+        when (val state = uiState.memorialPrayerState) {
+            is MemorialPrayerState.InProgress -> {
+                Text(
+                    text = "${state.progress.prayerType.name} Prayer",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = "${state.progress.currentCount}/${state.progress.targetCount}",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                val percentage = (state.progress.currentCount.toFloat() / state.progress.targetCount * 100).toInt()
+                LinearProgressIndicator(
+                    progress = percentage / 100f,
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .height(8.dp)
+                )
+                Text("$percentage% Complete")
+            }
+            is MemorialPrayerState.Completed -> {
+                Text(
+                    text = "🎉 Session Complete!",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Text(
+                    text = "${state.session.prayerType.name} Prayer - ${state.session.prayerCount} recitations",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+            MemorialPrayerState.Active -> {
+                Text("Prayer session is active - ready to begin")
+                Button(onClick = onStartSession) {
+                    Text("Start Session")
+                }
+            }
+            else -> {
+                if (uiState.isLoading) {
+                    CircularProgressIndicator()
+                    Text("Loading prayer session...")
+                } else {
+                    Text("Prayer session ready")
+                }
+            }
+        }
+        
+        if (uiState.statistics != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Card(modifier = Modifier.fillMaxWidth(0.9f)) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Prayer Statistics",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text("Total Sessions: ${uiState.statistics.totalSessions}")
+                    Text("Total Prayers: ${uiState.statistics.totalPrayers}")
+                    Text("Current Streak: ${uiState.statistics.currentStreak} days")
+                }
+            }
+        }
+    }
+}
+
+// ============================================================================
+// MEMORIAL PRAYER SCREEN PREVIEWS
+// ============================================================================
+
+@Preview(name = "Memorial Prayer - Default Loading")
+@Composable
+fun PreviewMemorialPrayerDefault() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview()
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - Active Session")
+@Composable
+fun PreviewMemorialPrayerActive() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.Active,
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - In Progress")
+@Composable
+fun PreviewMemorialPrayerInProgress() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.InProgress(
+                        session = MemorialPrayerSession(
+                            sessionId = "session-preview-1",
+                            memorialId = "memorial-preview",
+                            prayerType = PrayerType.YASIN,
+                            startTime = java.time.ZonedDateTime.now(),
+                            culturalSettings = CulturalSettings(
+                                schoolOfThought = SchoolOfThought.HANAFI,
+                                language = "en",
+                                regionCode = "US",
+                                prayerTradition = PrayerTradition.INDIVIDUAL
+                            )
+                        ),
+                        progress = PrayerProgress(
+                            currentCount = 25,
+                            targetCount = 100,
+                            prayerType = PrayerType.YASIN,
+                            duration = 900000L,
+                            percentage = 25f,
+                            estimatedTimeRemaining = 2700000L,
+                            averagePrayerSpeed = 1.0f
+                        )
+                    ),
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - Halfway Complete")
+@Composable
+fun PreviewMemorialPrayerHalfway() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.InProgress(
+                        session = MemorialPrayerSession(
+                            sessionId = "session-preview-2",
+                            memorialId = "memorial-preview",
+                            prayerType = PrayerType.TAHLIL,
+                            startTime = java.time.ZonedDateTime.now(),
+                            culturalSettings = CulturalSettings(
+                                schoolOfThought = SchoolOfThought.HANAFI,
+                                language = "en",
+                                regionCode = "US",
+                                prayerTradition = PrayerTradition.INDIVIDUAL
+                            )
+                        ),
+                        progress = PrayerProgress(
+                            currentCount = 50,
+                            targetCount = 100,
+                            prayerType = PrayerType.TAHLIL,
+                            duration = 1500000L,
+                            percentage = 50f,
+                            estimatedTimeRemaining = 1500000L,
+                            averagePrayerSpeed = 2.0f
+                        )
+                    ),
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - Nearly Complete")
+@Composable
+fun PreviewMemorialPrayerNearlyComplete() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.InProgress(
+                        session = MemorialPrayerSession(
+                            sessionId = "session-preview-3",
+                            memorialId = "memorial-preview",
+                            prayerType = PrayerType.FATIHAH,
+                            startTime = java.time.ZonedDateTime.now(),
+                            culturalSettings = CulturalSettings(
+                                schoolOfThought = SchoolOfThought.HANAFI,
+                                language = "en",
+                                regionCode = "US",
+                                prayerTradition = PrayerTradition.INDIVIDUAL
+                            )
+                        ),
+                        progress = PrayerProgress(
+                            currentCount = 85,
+                            targetCount = 100,
+                            prayerType = PrayerType.FATIHAH,
+                            duration = 600000L,
+                            percentage = 85f,
+                            estimatedTimeRemaining = 120000L,
+                            averagePrayerSpeed = 8.5f
+                        )
+                    ),
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - Session Complete")
+@Composable
+fun PreviewMemorialPrayerComplete() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.Completed(
+                        session = MemorialPrayerSession(
+                            sessionId = "session-preview-4",
+                            memorialId = "memorial-preview",
+                            prayerType = PrayerType.TAHLIL,
+                            startTime = java.time.ZonedDateTime.now().minusMinutes(30),
+                            endTime = java.time.ZonedDateTime.now(),
+                            prayerCount = 100,
+                            isCompleted = true,
+                            culturalSettings = CulturalSettings(
+                                schoolOfThought = SchoolOfThought.HANAFI,
+                                language = "en",
+                                regionCode = "US",
+                                prayerTradition = PrayerTradition.INDIVIDUAL
+                            )
+                        )
+                    ),
+                    statistics = MemorialPrayerStats(
+                        totalSessions = 15,
+                        totalPrayers = 1500,
+                        totalTimeSpent = 1800000L,
+                        favoriteTimeOfDay = "Morning",
+                        mostUsedPrayerType = PrayerType.TAHLIL,
+                        longestSession = 3600000L,
+                        currentStreak = 7
+                    ),
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - With Statistics")
+@Composable
+fun PreviewMemorialPrayerWithStats() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.Active,
+                    statistics = MemorialPrayerStats(
+                        totalSessions = 42,
+                        totalPrayers = 3360,
+                        totalTimeSpent = 5040000L,
+                        favoriteTimeOfDay = "Afternoon",
+                        mostUsedPrayerType = PrayerType.YASIN,
+                        longestSession = 7200000L,
+                        currentStreak = 14
+                    ),
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - Dark Theme", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewMemorialPrayerDark() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.InProgress(
+                        session = MemorialPrayerSession(
+                            sessionId = "session-preview-dark",
+                            memorialId = "memorial-preview",
+                            prayerType = PrayerType.YASIN,
+                            startTime = java.time.ZonedDateTime.now(),
+                            culturalSettings = CulturalSettings(
+                                schoolOfThought = SchoolOfThought.HANAFI,
+                                language = "en",
+                                regionCode = "US",
+                                prayerTradition = PrayerTradition.INDIVIDUAL
+                            )
+                        ),
+                        progress = PrayerProgress(
+                            currentCount = 33,
+                            targetCount = 100,
+                            prayerType = PrayerType.YASIN,
+                            duration = 1200000L,
+                            percentage = 33f,
+                            estimatedTimeRemaining = 2400000L,
+                            averagePrayerSpeed = 1.65f
+                        )
+                    ),
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Memorial Prayer - Tablet",
+    device = "spec:width=1280dp,height=800dp,dpi=240"
+)
+@Composable
+fun PreviewMemorialPrayerTablet() {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(
+                uiState = MemorialPrayerUiState(
+                    memorialPrayerState = MemorialPrayerState.InProgress(
+                        session = MemorialPrayerSession(
+                            sessionId = "session-preview-tablet",
+                            memorialId = "memorial-preview",
+                            prayerType = PrayerType.TAHLIL,
+                            startTime = java.time.ZonedDateTime.now(),
+                            culturalSettings = CulturalSettings(
+                                schoolOfThought = SchoolOfThought.HANAFI,
+                                language = "en",
+                                regionCode = "US",
+                                prayerTradition = PrayerTradition.INDIVIDUAL
+                            )
+                        ),
+                        progress = PrayerProgress(
+                            currentCount = 67,
+                            targetCount = 100,
+                            prayerType = PrayerType.TAHLIL,
+                            duration = 2400000L,
+                            percentage = 67f,
+                            estimatedTimeRemaining = 1200000L,
+                            averagePrayerSpeed = 1.67f
+                        )
+                    ),
+                    statistics = MemorialPrayerStats(
+                        totalSessions = 25,
+                        totalPrayers = 2100,
+                        totalTimeSpent = 2400000L,
+                        favoriteTimeOfDay = "Evening",
+                        mostUsedPrayerType = PrayerType.TAHLIL,
+                        longestSession = 4800000L,
+                        currentStreak = 12
+                    ),
+                    isLoading = false
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial Prayer - Various States")
+@Composable
+fun PreviewMemorialPrayerDynamic(
+    @PreviewParameter(MemorialPrayerUiStateProvider::class) uiState: MemorialPrayerUiState
+) {
+    TahlilTheme {
+        Surface {
+            MemorialPrayerScreenPreview(uiState = uiState)
         }
     }
 }

@@ -23,10 +23,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.app_muslim.surah_yasin.feature.community.model.*
 import com.app_muslim.surah_yasin.feature.community.viewmodel.MemorialDiscoveryViewModel
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -732,14 +736,220 @@ private fun getFilterSummary(filter: MemorialDiscoveryFilter): String {
 }
 
 private fun MemorialDiscoveryFilter.hasActiveFilters(): Boolean {
-    return region != null ||
+    return searchQuery.isNotBlank() ||
             prayerType != null ||
+            region != null ||
             privacyLevel != null ||
-            dateRange != null ||
             hasActivePrayers != null ||
+            dateRange != null ||
             minPrayerCount != null ||
             sortType != MemorialSortType.MOST_RECENT
 }
 
 // Supporting Data Classes
 // (DiscoveryCategory already defined above)
+
+
+
+
+// Preview Functions
+@Preview(showBackground = true, name = "Memorial Discovery - Loading")
+@Composable
+private fun PreviewMemorialDiscoveryLoading() {
+    TahlilTheme {
+        MemorialDiscoveryScreenPreview(
+            memorials = emptyList(),
+            isLoading = true
+        )
+    }
+}
+
+// Preview-safe content function
+@Composable
+private fun MemorialDiscoveryScreenPreview(
+    memorials: List<DiscoverableMemorial> = getSampleDiscoverableMemorials(),
+    searchQuery: String = "",
+    isLoading: Boolean = false,
+    isLoadingMore: Boolean = false,
+    hasMoreResults: Boolean = false,
+    hasActiveFilters: Boolean = false,
+    errorMessage: String? = null
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        // Top App Bar with Search
+        MemorialDiscoveryTopBar(
+            searchQuery = searchQuery,
+            onSearchQueryChange = { },
+            onNavigateBack = { },
+            onNavigateToFilter = { },
+            hasActiveFilters = hasActiveFilters
+        )
+        
+        // Discovery Content
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item {
+                // Quick Categories
+                DiscoveryQuickCategories(
+                    onCategorySelected = { }
+                )
+            }
+            
+            item {
+                // Featured Memorials
+                val featuredMemorials = memorials.take(5)
+                if (featuredMemorials.isNotEmpty()) {
+                    FeaturedMemorialsSection(
+                        memorials = featuredMemorials,
+                        onMemorialSelected = { }
+                    )
+                }
+            }
+            
+            item {
+                // Search Results Header
+                DiscoveryResultsHeader(
+                    resultCount = memorials.size,
+                    isLoading = isLoading,
+                    currentFilter = getSampleMemorialDiscoveryFilter(hasActiveFilters)
+                )
+            }
+            
+            if (isLoading) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+            } else if (memorials.isEmpty()) {
+                item {
+                    DiscoveryEmptyState(
+                        hasSearchQuery = searchQuery.isNotBlank(),
+                        hasActiveFilters = hasActiveFilters,
+                        onClearFilters = { },
+                        onExploreAll = { }
+                    )
+                }
+            } else {
+                // Memorial Grid
+                items(memorials) { memorial ->
+                    DiscoverableMemorialCard(
+                        memorial = memorial,
+                        onMemorialClick = { },
+                        onJoinClick = { }
+                    )
+                }
+                
+                if (hasMoreResults) {
+                    item {
+                        LoadMoreButton(
+                            isLoading = isLoadingMore,
+                            onLoadMore = { }
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Sample data for previews
+private fun getSampleDiscoverableMemorials(): List<DiscoverableMemorial> {
+    return listOf(
+        DiscoverableMemorial(
+            memorialId = "mem_001",
+            deceasedName = "Ali ibn Abi Talib",
+            deceasedNameArabic = "علي بن أبي طالب",
+            photoUrl = null,
+            createdByUserId = "user_001",
+            createdByName = "Ahmad Hassan",
+            privacyLevel = MemorialPrivacyLevel.COMMUNITY,
+            region = "Global",
+            totalPrayers = 1247L,
+            activePrayerCount = 45L,
+            participantCount = 247,
+            lastPrayerAt = null,
+            createdAt = java.time.ZonedDateTime.of(2024, 4, 15, 12, 0, 0, 0, java.time.ZoneOffset.UTC),
+            description = "The fourth Caliph and cousin of Prophet Muhammad (PBUH)",
+            tags = listOf("Sahaba", "Caliph", "Wisdom")
+        ),
+        DiscoverableMemorial(
+            memorialId = "mem_002", 
+            deceasedName = "Fatimah bint Muhammad",
+            deceasedNameArabic = "فاطمة بنت محمد",
+            photoUrl = null,
+            createdByUserId = "user_002",
+            createdByName = "Aisha Rahman",
+            privacyLevel = MemorialPrivacyLevel.COMMUNITY,
+            region = "Global",
+            totalPrayers = 989L,
+            activePrayerCount = 32L,
+            participantCount = 189,
+            lastPrayerAt = null,
+            createdAt = java.time.ZonedDateTime.of(2024, 5, 1, 14, 30, 0, 0, java.time.ZoneOffset.UTC),
+            description = "Beloved daughter of Prophet Muhammad (PBUH)",
+            tags = listOf("Ahl al-Bayt", "Sayyida")
+        ),
+        DiscoverableMemorial(
+            memorialId = "mem_003",
+            deceasedName = "Hassan al-Basri", 
+            deceasedNameArabic = "الحسن البصري",
+            photoUrl = null,
+            createdByUserId = "user_003",
+            createdByName = "Omar Abdullah",
+            privacyLevel = MemorialPrivacyLevel.PUBLIC,
+            region = "Iraq",
+            totalPrayers = 756L,
+            activePrayerCount = 28L,
+            participantCount = 156,
+            lastPrayerAt = null,
+            createdAt = java.time.ZonedDateTime.of(2024, 5, 10, 16, 45, 0, 0, java.time.ZoneOffset.UTC),
+            description = "Great Islamic scholar and ascetic",
+            tags = listOf("Scholar", "Tabi'un", "Ascetic")
+        )
+    )
+}
+
+private fun getSampleMemorialDiscoveryFilter(hasActiveFilters: Boolean): MemorialDiscoveryFilter {
+    return MemorialDiscoveryFilter(
+        searchQuery = "",
+        prayerType = null,
+        region = if (hasActiveFilters) "Global" else null,
+        privacyLevel = if (hasActiveFilters) MemorialPrivacyLevel.COMMUNITY else null,
+        sortType = MemorialSortType.MOST_RECENT,
+        hasActivePrayers = if (hasActiveFilters) true else null,
+        dateRange = null,
+        minPrayerCount = if (hasActiveFilters) 100 else null,
+        maxResults = 50
+    )
+}
+
+@Preview(showBackground = true, name = "Memorial Discovery - Dark", 
+         uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewMemorialDiscoveryDark() {
+    TahlilTheme(darkTheme = true) {
+        MemorialDiscoveryScreenPreview()
+    }
+}
+
+@Preview(showBackground = true, name = "Memorial Discovery - Tablet",
+         device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+private fun PreviewMemorialDiscoveryTablet() {
+    TahlilTheme {
+        MemorialDiscoveryScreenPreview()
+    }
+}

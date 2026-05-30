@@ -31,9 +31,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.app_muslim.surah_yasin.feature.memorial.model.PhotoCropAspectRatio
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import kotlin.math.max
 import kotlin.math.min
 
@@ -525,4 +529,261 @@ private fun AspectRatioChip(
             }
         } else null
     )
+}
+
+// Preview parameter provider for PhotoCrop previews
+
+class PhotoCropStateProvider : PreviewParameterProvider<Pair<PhotoCropAspectRatio, Boolean>> {
+    override val values = sequenceOf(
+        Pair(PhotoCropAspectRatio.MEMORIAL_STANDARD, false),
+        Pair(PhotoCropAspectRatio.SQUARE, false),
+        Pair(PhotoCropAspectRatio.PORTRAIT, false),
+        Pair(PhotoCropAspectRatio.LANDSCAPE, false),
+        Pair(PhotoCropAspectRatio.ORIGINAL, false),
+        Pair(PhotoCropAspectRatio.MEMORIAL_STANDARD, true) // Processing state
+    )
+}
+
+// Preview Functions
+@Preview(name = "Photo Crop - Memorial Standard")
+@Composable
+private fun PhotoCropScreenPreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.MEMORIAL_STANDARD,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Square")
+@Composable
+private fun PhotoCropScreenSquarePreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.SQUARE,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Portrait")
+@Composable
+private fun PhotoCropScreenPortraitPreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.PORTRAIT,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Wide")
+@Composable
+private fun PhotoCropScreenWidePreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.LANDSCAPE,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Original")
+@Composable
+private fun PhotoCropScreenOriginalPreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.ORIGINAL,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Processing")
+@Composable
+private fun PhotoCropScreenProcessingPreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.MEMORIAL_STANDARD,
+            isCropping = true,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Dark Theme", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PhotoCropScreenDarkPreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.MEMORIAL_STANDARD,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Tablet", device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+private fun PhotoCropScreenTabletPreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.MEMORIAL_STANDARD,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Photo Crop - Landscape", device = "spec:width=411dp,height=891dp,dpi=420,orientation=landscape")
+@Composable
+private fun PhotoCropScreenLandscapePreview() {
+    TahlilTheme {
+        PhotoCropScreenContent(
+            aspectRatio = PhotoCropAspectRatio.MEMORIAL_STANDARD,
+            isCropping = false,
+            onNavigateBack = {},
+            onCropConfirm = {},
+            onAspectRatioChange = {},
+            onResetCrop = {}
+        )
+    }
+}
+
+@Preview(name = "Aspect Ratio Chips")
+@Composable
+private fun AspectRatioChipsPreview() {
+    TahlilTheme {
+        Surface {
+            LazyRow(
+                modifier = Modifier.padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(PhotoCropAspectRatio.entries) { ratio ->
+                    AspectRatioChip(
+                        aspectRatio = ratio,
+                        isSelected = ratio == PhotoCropAspectRatio.MEMORIAL_STANDARD,
+                        onClick = {}
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Preview(name = "Crop Instructions")
+@Composable
+private fun CropInstructionsPreview() {
+    TahlilTheme {
+        Surface {
+            CropInstructions()
+        }
+    }
+}
+
+@Composable
+private fun PhotoCropScreenContent(
+    aspectRatio: PhotoCropAspectRatio,
+    isCropping: Boolean,
+    onNavigateBack: () -> Unit,
+    onCropConfirm: () -> Unit,
+    onAspectRatioChange: (PhotoCropAspectRatio) -> Unit,
+    onResetCrop: () -> Unit
+) {
+    Scaffold(
+        topBar = {
+            CropTopBar(
+                onNavigateBack = onNavigateBack,
+                onCropConfirm = onCropConfirm,
+                isCropping = isCropping
+            )
+        },
+        bottomBar = {
+            CropBottomBar(
+                selectedAspectRatio = aspectRatio,
+                onAspectRatioChange = onAspectRatioChange,
+                onResetCrop = onResetCrop
+            )
+        }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            CropInstructions()
+            
+            // Mock crop area
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(16.dp)
+                    .background(
+                        MaterialTheme.colorScheme.surfaceVariant,
+                        RoundedCornerShape(8.dp)
+                    )
+            ) {
+                Canvas(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    // Mock crop overlay
+                    drawCropOverlay(
+                        containerSize = size,
+                        aspectRatio = aspectRatio,
+                        onCropRectChanged = {}
+                    )
+                }
+                
+                // Placeholder for actual photo
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(120.dp)
+                        .background(
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                            RoundedCornerShape(8.dp)
+                        ),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "Memorial Photo Placeholder",
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        }
+    }
 }

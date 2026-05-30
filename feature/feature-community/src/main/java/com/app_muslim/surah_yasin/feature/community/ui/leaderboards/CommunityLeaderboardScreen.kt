@@ -22,8 +22,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
 import com.app_muslim.surah_yasin.feature.community.model.*
 import com.app_muslim.surah_yasin.feature.community.viewmodel.CommunityLeaderboardViewModel
+import com.app_muslim.surah_yasin.feature.community.viewmodel.CommunityLeaderboardUiState
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Community Leaderboard Screen - Compose Implementation
@@ -139,6 +142,109 @@ fun CommunityLeaderboardScreen(
     uiState.error?.let { error ->
         LaunchedEffect(error) {
             // Show error snackbar
+        }
+    }
+}
+
+@Composable
+private fun CommunityLeaderboardScreenContent(
+    uiState: CommunityLeaderboardUiState,
+    selectedTimeFrame: LeaderboardTimeFrame,
+    selectedCategory: LeaderboardCategory,
+    selectedRegion: String?,
+    onNavigateToProfile: (String) -> Unit,
+    onNavigateBack: () -> Unit,
+    onTimeFrameSelected: (LeaderboardTimeFrame) -> Unit = {},
+    onCategorySelected: (LeaderboardCategory) -> Unit = {},
+    onRegionSelected: (String?) -> Unit = {}
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        // Top App Bar
+        LeaderboardTopBar(
+            onNavigateBack = onNavigateBack
+        )
+        
+        // Filters and Categories
+        LeaderboardFilters(
+            selectedTimeFrame = selectedTimeFrame,
+            selectedCategory = selectedCategory,
+            selectedRegion = selectedRegion,
+            onTimeFrameSelected = onTimeFrameSelected,
+            onCategorySelected = onCategorySelected,
+            onRegionSelected = onRegionSelected
+        )
+        
+        // Leaderboard Content
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item {
+                // Islamic Guidance Card
+                IslamicLeaderboardGuidance()
+            }
+            
+            if (uiState.isLoading) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+            } else {
+                // Top 3 Podium
+                if (uiState.leaderboard?.entries?.isNotEmpty() == true) {
+                    item {
+                        TopThreePodium(
+                            topEntries = uiState.leaderboard!!.entries.take(3),
+                            category = selectedCategory,
+                            onProfileClick = onNavigateToProfile
+                        )
+                    }
+                }
+                
+                // Current User Position (if not in top 3)
+                uiState.currentUserPosition?.let { userPosition ->
+                    if (userPosition.rank > 3) {
+                        item {
+                            CurrentUserPositionCard(
+                                userPosition = userPosition,
+                                category = selectedCategory
+                            )
+                        }
+                    }
+                }
+                
+                // Full Leaderboard List
+                uiState.leaderboard?.let { leaderboard ->
+                    items(leaderboard.entries.drop(3)) { entry ->
+                        LeaderboardEntryCard(
+                            entry = entry,
+                            category = selectedCategory,
+                            onProfileClick = { onNavigateToProfile(entry.userId) }
+                        )
+                    }
+                }
+                
+                // Empty State
+                if (uiState.leaderboard?.entries?.isEmpty() == true && !uiState.isLoading) {
+                    item {
+                        LeaderboardEmptyState(
+                            category = selectedCategory,
+                            timeFrame = selectedTimeFrame
+                        )
+                    }
+                }
+            }
         }
     }
 }
@@ -722,5 +828,137 @@ private fun formatScore(score: Long, category: LeaderboardCategory): String {
         "helping_families" -> "$score families helped"
         "consistency" -> "$score consecutive days"
         else -> "$score points"
+    }
+}
+
+// Preview Functions
+
+private fun createMockLeaderboard(): CommunityLeaderboard {
+    val mockEntries = listOf(
+        LeaderboardEntry(
+            userId = "user_1",
+            displayName = "Ahmad Abdullah",
+            profilePictureUrl = null,
+            rank = 1,
+            score = 1200L,
+            previousRank = 1,
+            change = RankChange.UP,
+            regionCode = "US",
+            regionName = "North America",
+            badges = emptyList(),
+            statistics = mapOf("total_prayers" to 1200L, "sessions" to 120L),
+            lastActiveAt = java.time.ZonedDateTime.of(2024, 1, 1, 10, 0, 0, 0, java.time.ZoneOffset.UTC)
+        ),
+        LeaderboardEntry(
+            userId = "user_2",
+            displayName = "Fatimah Hassan",
+            profilePictureUrl = null,
+            rank = 2,
+            score = 1150L,
+            previousRank = 2,
+            change = RankChange.NO_CHANGE,
+            regionCode = "US",
+            regionName = "North America",
+            badges = emptyList(),
+            statistics = mapOf("total_prayers" to 1150L, "sessions" to 115L),
+            lastActiveAt = java.time.ZonedDateTime.of(2024, 1, 1, 10, 0, 0, 0, java.time.ZoneOffset.UTC)
+        ),
+        LeaderboardEntry(
+            userId = "user_3",
+            displayName = "Omar Khalil",
+            profilePictureUrl = null,
+            rank = 3,
+            score = 1100L,
+            previousRank = 4,
+            change = RankChange.UP,
+            regionCode = "US",
+            regionName = "North America",
+            badges = emptyList(),
+            statistics = mapOf("total_prayers" to 1100L, "sessions" to 110L),
+            lastActiveAt = java.time.ZonedDateTime.of(2024, 1, 1, 10, 0, 0, 0, java.time.ZoneOffset.UTC)
+        )
+    )
+    
+    return CommunityLeaderboard(
+        leaderboardId = "preview_leaderboard",
+        type = LeaderboardType.COMMUNITY,
+        category = LeaderboardCategory.TOTAL_PRAYERS,
+        timeFrame = LeaderboardTimeFrame.THIS_WEEK,
+        region = null,
+        entries = mockEntries,
+        totalEntries = mockEntries.size,
+        lastUpdated = java.time.ZonedDateTime.of(2024, 1, 1, 10, 0, 0, 0, java.time.ZoneOffset.UTC),
+        isRealTime = false
+    )
+}
+
+@Preview(showBackground = true, name = "Community Leaderboard - Loading")
+@Composable
+private fun PreviewCommunityLeaderboardLoading() {
+    TahlilTheme {
+        CommunityLeaderboardScreenContent(
+            uiState = CommunityLeaderboardUiState(isLoading = true),
+            selectedTimeFrame = LeaderboardTimeFrame.THIS_WEEK,
+            selectedCategory = LeaderboardCategory.TOTAL_PRAYERS,
+            selectedRegion = null,
+            onNavigateToProfile = {},
+            onNavigateBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Leaderboard - With Data")
+@Composable
+private fun PreviewCommunityLeaderboardWithData() {
+    TahlilTheme {
+        CommunityLeaderboardScreenContent(
+            uiState = CommunityLeaderboardUiState(
+                isLoading = false,
+                leaderboard = createMockLeaderboard()
+            ),
+            selectedTimeFrame = LeaderboardTimeFrame.THIS_WEEK,
+            selectedCategory = LeaderboardCategory.TOTAL_PRAYERS,
+            selectedRegion = null,
+            onNavigateToProfile = {},
+            onNavigateBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Leaderboard - Dark", 
+         uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewCommunityLeaderboardDark() {
+    TahlilTheme {
+        CommunityLeaderboardScreenContent(
+            uiState = CommunityLeaderboardUiState(
+                isLoading = false,
+                leaderboard = createMockLeaderboard()
+            ),
+            selectedTimeFrame = LeaderboardTimeFrame.THIS_WEEK,
+            selectedCategory = LeaderboardCategory.TOTAL_PRAYERS,
+            selectedRegion = null,
+            onNavigateToProfile = {},
+            onNavigateBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Leaderboard - Tablet",
+         device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+private fun PreviewCommunityLeaderboardTablet() {
+    TahlilTheme {
+        CommunityLeaderboardScreenContent(
+            uiState = CommunityLeaderboardUiState(
+                isLoading = false,
+                leaderboard = createMockLeaderboard()
+            ),
+            selectedTimeFrame = LeaderboardTimeFrame.THIS_WEEK,
+            selectedCategory = LeaderboardCategory.TOTAL_PRAYERS,
+            selectedRegion = null,
+            onNavigateToProfile = {},
+            onNavigateBack = {}
+        )
     }
 }

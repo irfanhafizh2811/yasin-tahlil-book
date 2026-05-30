@@ -13,10 +13,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app_muslim.surah_yasin.feature.memorial.ui.components.*
 import com.app_muslim.surah_yasin.feature.memorial.ui.edit.viewmodel.EditMemorialViewModel
+import com.app_muslim.surah_yasin.feature.memorial.ui.edit.viewmodel.EditMemorialValidationState
+import com.app_muslim.surah_yasin.feature.memorial.model.MemorialData
+import com.app_muslim.surah_yasin.feature.memorial.model.PrayerType
+import com.app_muslim.surah_yasin.feature.memorial.model.PrivacyLevel
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -391,6 +399,307 @@ private fun buildValidationErrors(vararg errors: String?): List<com.app_muslim.s
             "Memorial message must not exceed 1000 characters" -> com.app_muslim.surah_yasin.feature.memorial.model.ValidationError.MEMORIAL_MESSAGE_TOO_LONG
             "Arabic memorial message must not exceed 1000 characters" -> com.app_muslim.surah_yasin.feature.memorial.model.ValidationError.MEMORIAL_MESSAGE_TOO_LONG
             else -> null
+        }
+    }
+}
+
+// Preview Data Providers
+class EditMemorialUiStateProvider : PreviewParameterProvider<EditMemorialUiState> {
+    override val values: Sequence<EditMemorialUiState> = sequenceOf(
+        // Loading state
+        EditMemorialUiState(isInitialLoading = true),
+        
+        // Error state
+        EditMemorialUiState(
+            error = "Failed to load memorial data. Please check your internet connection."
+        ),
+        
+        // Loaded state with memorial
+        EditMemorialUiState(
+            memorial = getSampleMemorialForEditing(),
+            isLoading = false
+        ),
+        
+        // Updating state
+        EditMemorialUiState(
+            memorial = getSampleMemorialForEditing(),
+            isLoading = true
+        ),
+        
+        // Updated complete state
+        EditMemorialUiState(
+            memorial = getSampleMemorialForEditing(),
+            isUpdateComplete = true
+        )
+    )
+}
+
+// Sample data for previews  
+private fun getSampleMemorialForEditing(): MemorialData {
+    return MemorialData(
+        id = "memorial_123",
+        creatorId = "user_456",
+        creatorName = "Ahmad Hassan",
+        deceasedName = "Ali ibn Abi Talib",
+        deceasedNameArabic = "علي بن أبي طالب",
+        memorialMessage = "The fourth Caliph and cousin of Prophet Muhammad (PBUH), known for his wisdom, courage, and dedication to justice. May Allah have mercy on his soul.",
+        memorialMessageArabic = "الخليفة الرابع وابن عم النبي محمد صلى الله عليه وسلم، المعروف بحكمته وشجاعته وتفانيه في العدالة. رحمه الله",
+        dateOfDeath = java.util.Date(System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000)),
+        prayerType = PrayerType.YASIN,
+        privacyLevel = PrivacyLevel.COMMUNITY,
+        photoUrl = "sample_photo_url",
+        createdAt = java.util.Date(System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000)),
+        prayerCount = 45,
+        participantCount = 12,
+        region = "Indonesia",
+        schoolOfThought = "Sunni"
+    )
+}
+
+// Mock data classes for previews - using model types with local UI state
+data class EditMemorialUiState(
+    val memorial: MemorialData? = null,
+    val isInitialLoading: Boolean = false,
+    val isLoading: Boolean = false,
+    val isUpdateComplete: Boolean = false,
+    val error: String? = null
+)
+
+// Mock preview components
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EditMemorialScreenPreview(
+    uiState: EditMemorialUiState = EditMemorialUiState(memorial = getSampleMemorialForEditing()),
+    validationState: EditMemorialValidationState = EditMemorialValidationState()
+) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Edit Memorial",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Navigate Back"
+                        )
+                    }
+                },
+                actions = {
+                    TextButton(
+                        onClick = { },
+                        enabled = validationState.isValid && !uiState.isLoading
+                    ) {
+                        if (uiState.isLoading) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(16.dp),
+                                strokeWidth = 2.dp
+                            )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Default.Save,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("Save")
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        
+        when {
+            uiState.isInitialLoading -> {
+                LoadingContent(modifier = Modifier.fillMaxSize())
+            }
+            
+            uiState.error != null -> {
+                ErrorContent(
+                    error = uiState.error,
+                    onRetry = { },
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+            
+            uiState.memorial != null -> {
+                EditMemorialContent(
+                    memorial = uiState.memorial,
+                    validationState = validationState,
+                    onFieldChange = { _, _ -> },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues)
+                )
+            }
+        }
+    }
+}
+
+// Preview Functions
+@Preview(name = "Edit Memorial Screen - Loaded")
+@Composable
+fun PreviewEditMemorialScreenLoaded() {
+    TahlilTheme {
+        Surface {
+            EditMemorialScreenPreview()
+        }
+    }
+}
+
+@Preview(name = "Edit Memorial Screen - Loading")
+@Composable
+fun PreviewEditMemorialScreenLoading() {
+    TahlilTheme {
+        Surface {
+            EditMemorialScreenPreview(
+                uiState = EditMemorialUiState(isInitialLoading = true)
+            )
+        }
+    }
+}
+
+@Preview(name = "Edit Memorial Screen - Error")
+@Composable
+fun PreviewEditMemorialScreenError() {
+    TahlilTheme {
+        Surface {
+            EditMemorialScreenPreview(
+                uiState = EditMemorialUiState(
+                    error = "Failed to load memorial data. Please check your connection."
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Edit Memorial Screen - Updating")
+@Composable
+fun PreviewEditMemorialScreenUpdating() {
+    TahlilTheme {
+        Surface {
+            EditMemorialScreenPreview(
+                uiState = EditMemorialUiState(
+                    memorial = getSampleMemorialForEditing(),
+                    isLoading = true
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Edit Memorial Screen - Dynamic States", group = "Dynamic")
+@Composable
+fun PreviewEditMemorialScreenDynamic(
+    @PreviewParameter(EditMemorialUiStateProvider::class) uiState: EditMemorialUiState
+) {
+    TahlilTheme {
+        Surface {
+            EditMemorialScreenPreview(uiState = uiState)
+        }
+    }
+}
+
+@Preview(name = "Edit Memorial Screen - Dark Theme")
+@Composable
+fun PreviewEditMemorialScreenDark() {
+    TahlilTheme(darkTheme = true) {
+        Surface {
+            EditMemorialScreenPreview(
+                uiState = EditMemorialUiState(
+                    memorial = getSampleMemorialForEditing()
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Edit Memorial Screen - Tablet", device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+fun PreviewEditMemorialScreenTablet() {
+    TahlilTheme {
+        Surface {
+            EditMemorialScreenPreview()
+        }
+    }
+}
+
+@Preview(name = "Edit Memorial Content")
+@Composable
+fun PreviewEditMemorialContent() {
+    TahlilTheme {
+        Surface {
+            EditMemorialContent(
+                memorial = getSampleMemorialForEditing(),
+                validationState = EditMemorialValidationState(),
+                onFieldChange = { _, _ -> }
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Type Section")
+@Composable
+fun PreviewPrayerTypeSection() {
+    TahlilTheme {
+        Surface {
+            PrayerTypeSection(
+                selectedPrayerType = PrayerType.YASIN,
+                onPrayerTypeSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Radio Button with Label")
+@Composable
+fun PreviewRadioButtonWithLabel() {
+    TahlilTheme {
+        Surface {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                RadioButtonWithLabel(
+                    selected = true,
+                    onClick = { },
+                    label = "Surah Yasin",
+                    description = "Recitation of Surah Yasin for the deceased"
+                )
+                RadioButtonWithLabel(
+                    selected = false,
+                    onClick = { },
+                    label = "Tahlil",
+                    description = "Islamic remembrance and supplication"
+                )
+            }
+        }
+    }
+}
+
+@Preview(name = "Loading Content")
+@Composable
+fun PreviewLoadingContent() {
+    TahlilTheme {
+        Surface {
+            LoadingContent(modifier = Modifier.size(300.dp))
+        }
+    }
+}
+
+@Preview(name = "Error Content")
+@Composable
+fun PreviewErrorContent() {
+    TahlilTheme {
+        Surface {
+            ErrorContent(
+                error = "Network connection failed. Please try again.",
+                onRetry = { },
+                modifier = Modifier.size(300.dp)
+            )
         }
     }
 }

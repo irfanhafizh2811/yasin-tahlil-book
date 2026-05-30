@@ -19,7 +19,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.app_muslim.surah_yasin.core.firebase.sharing.*
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Privacy Controls Screen - Compose implementation
@@ -606,5 +610,115 @@ private fun SettingSliderRow(
             valueRange = range.first.toFloat()..range.last.toFloat(),
             steps = range.last - range.first - 1
         )
+    }
+}
+
+// Preview-safe content function
+@Composable
+private fun PrivacyControlsScreenPreview(
+    uiState: PrivacyControlsUiState = getSamplePrivacyControlsUiState(),
+    memorialName: String = "Ali ibn Abi Talib Memorial"
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        // Top App Bar
+        PrivacyControlsTopBar(
+            memorialName = memorialName,
+            onNavigateBack = { },
+            onSave = { },
+            isSaving = uiState.isSaving
+        )
+        
+        // Content
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item {
+                // Islamic Privacy Header
+                IslamicPrivacyHeaderCard()
+            }
+            
+            item {
+                // Family Sharing Settings
+                FamilySharingSettingsCard(
+                    settings = uiState.settings,
+                    onUpdateSettings = { }
+                )
+            }
+            
+            item {
+                // Social Media Sharing Settings
+                SocialMediaSharingSettingsCard(
+                    settings = uiState.settings,
+                    onUpdateSettings = { }
+                )
+            }
+            
+            item {
+                // Access Control Settings
+                AccessControlSettingsCard(
+                    settings = uiState.settings,
+                    onUpdateSettings = { }
+                )
+            }
+            
+            item {
+                // Advanced Privacy Settings
+                AdvancedPrivacySettingsCard(
+                    settings = uiState.settings,
+                    onUpdateSettings = { }
+                )
+            }
+            
+            item {
+                // Islamic Guidelines Section
+                IslamicGuidelinesCard()
+            }
+        }
+    }
+    
+    // Loading indicator
+    if (uiState.isLoading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+    }
+}
+
+// Sample data for previews
+private fun getSamplePrivacyControlsUiState(): PrivacyControlsUiState {
+    return PrivacyControlsUiState(
+        isLoading = false,
+        isSaving = false,
+        settings = getSampleSharingSettings(),
+        message = null
+    )
+}
+
+private fun getSampleSharingSettings(): MemorialSharingSettings {
+    return MemorialSharingSettings(
+        allowFamilySharing = true,
+        allowSocialMediaSharing = false,
+        requireApprovalForAccess = true,
+        linkExpirationDays = 7,
+        maxSimultaneousAccess = 10,
+        sharingMessageTemplate = "Please join us in remembering our beloved family member through Islamic prayers."
+    )
+}
+
+// Preview Functions
+@Preview(showBackground = true, name = "Privacy Controls")
+@Composable
+private fun PreviewPrivacyControls() {
+    TahlilTheme {
+        PrivacyControlsScreenPreview()
     }
 }

@@ -11,9 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.app_muslim.surah_yasin.core.common.model.IslamicRegion
 import com.app_muslim.surah_yasin.core.common.model.SchoolOfThought
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
+import com.app_muslim.surah_yasin.feature.profile.model.CulturalPreferencesData
 import com.app_muslim.surah_yasin.feature.profile.model.ProfileData
 import com.app_muslim.surah_yasin.feature.profile.model.ProfileEvent
 
@@ -350,5 +355,259 @@ private fun getLanguageDisplayName(languageCode: String): String {
         "pt" -> "Português (Portuguese)"
         "ru" -> "Русский (Russian)"
         else -> "English"
+    }
+}
+
+// Cultural Preferences Section Previews  
+@Preview(name = "Cultural View - Saudi Arabia", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionSaudiPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "ahmad_muhammad_001",
+                displayName = "Ahmad Ibn Muhammad",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "Saudi Arabia",
+                    primaryLanguage = "ar",
+                    schoolOfThought = SchoolOfThought.HANBALI,
+                    showArabicText = true,
+                    showTransliteration = false
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural Edit - Indonesia", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionEditPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "siti_fatimah_002",
+                displayName = "Siti Fatimah Zahra",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.SOUTHEAST_ASIA,
+                    country = "Indonesia",
+                    primaryLanguage = "id",
+                    schoolOfThought = SchoolOfThought.SHAFI,
+                    showArabicText = true,
+                    showTransliteration = true
+                )
+            ),
+            isEditing = true,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural View - Pakistan Hanafi", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionPakistanPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "hassan_ali_003",
+                displayName = "Hassan Ali Khan",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.SOUTH_ASIA,
+                    country = "Pakistan",
+                    primaryLanguage = "ur",
+                    schoolOfThought = SchoolOfThought.HANAFI,
+                    showArabicText = true,
+                    showTransliteration = true
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural View - Morocco", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionMoroccoPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "mariam_hassan_004",
+                displayName = "Mariam Hassan",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.NORTH_AFRICA,
+                    country = "Morocco",
+                    primaryLanguage = "ar",
+                    schoolOfThought = SchoolOfThought.MALIKI,
+                    showArabicText = true,
+                    showTransliteration = false
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural View - Turkey", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionTurkeyPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "mehmet_yilmaz_005",
+                displayName = "Mehmet Yılmaz",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "Turkey",
+                    primaryLanguage = "tr",
+                    schoolOfThought = SchoolOfThought.HANAFI,
+                    showArabicText = true,
+                    showTransliteration = true
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural Edit - New User Setup", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionNewUserPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "omar_new_006",
+                displayName = "Omar Abdullah",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.NOT_SPECIFIED,
+                    country = "",
+                    primaryLanguage = "en",
+                    schoolOfThought = SchoolOfThought.NOT_SPECIFIED,
+                    showArabicText = true,
+                    showTransliteration = true
+                )
+            ),
+            isEditing = true,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural View - Malaysia", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionMalaysiaPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "khadijah_rahman_007",
+                displayName = "Khadijah Rahman",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.SOUTHEAST_ASIA,
+                    country = "Malaysia",
+                    primaryLanguage = "ms",
+                    schoolOfThought = SchoolOfThought.SHAFI,
+                    showArabicText = true,
+                    showTransliteration = false
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural View - Iran Persian", showBackground = true)
+@Composable
+fun CulturalPreferencesSectionIranPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "ali_hosseini_008",
+                displayName = "Ali Hosseini",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "Iran",
+                    primaryLanguage = "fa",
+                    schoolOfThought = SchoolOfThought.JAFARI,
+                    showArabicText = true,
+                    showTransliteration = true
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun CulturalPreferencesSectionDarkPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "ahmed_omar_009",
+                displayName = "Ahmed Omar",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "UAE",
+                    primaryLanguage = "ar",
+                    schoolOfThought = SchoolOfThought.HANBALI,
+                    showArabicText = true,
+                    showTransliteration = false
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural Tablet Layout", showBackground = true, widthDp = 840)
+@Composable
+fun CulturalPreferencesSectionTabletPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "ibrahim_hassan_010",
+                displayName = "Ibrahim Hassan",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.NORTH_AFRICA,
+                    country = "Egypt",
+                    primaryLanguage = "ar",
+                    schoolOfThought = SchoolOfThought.HANAFI,
+                    showArabicText = true,
+                    showTransliteration = true
+                )
+            ),
+            isEditing = true,
+            onEvent = {}
+        )
+    }
+}
+
+@Preview(name = "Cultural RTL Arabic", showBackground = true, locale = "ar")
+@Composable
+fun CulturalPreferencesSectionRTLPreview() {
+    TahlilTheme {
+        CulturalPreferencesSection(
+            profileData = ProfileData(
+                userId = "abdullah_011",
+                displayName = "عبد الله عمر الفاروق",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "Jordan",
+                    primaryLanguage = "ar",
+                    schoolOfThought = SchoolOfThought.HANAFI,
+                    showArabicText = true,
+                    showTransliteration = false
+                )
+            ),
+            isEditing = false,
+            onEvent = {}
+        )
     }
 }

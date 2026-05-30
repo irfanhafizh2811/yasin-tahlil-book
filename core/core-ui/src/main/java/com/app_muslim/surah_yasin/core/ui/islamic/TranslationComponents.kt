@@ -12,10 +12,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app_muslim.surah_yasin.core.ui.theme.IslamicTextStyles
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Data class for prayer content with multiple languages
@@ -383,5 +385,180 @@ private fun getLanguageName(languageCode: String): String {
         "de" -> "Deutsch"
         "es" -> "Español"
         else -> languageCode.uppercase()
+    }
+}
+
+// Preview Functions
+@Preview(showBackground = true, name = "Multi Language Translation")
+@Composable
+private fun PreviewMultiLanguageTranslation() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            MultiLanguageTranslation(
+                translations = mapOf(
+                    "en" to "In the name of Allah, the Most Gracious, the Most Merciful",
+                    "id" to "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang",
+                    "ms" to "Dengan nama Allah Yang Maha Pemurah lagi Maha Mengasihani"
+                ),
+                selectedLanguage = "en",
+                showLanguageLabel = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Phonetic Transliteration")
+@Composable
+private fun PreviewPhoneticTransliteration() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            PhoneticTransliteration(
+                transliteration = "Bismillahir Rahmanir Rahim",
+                showLabel = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Complete Prayer Card")
+@Composable
+private fun PreviewCompletePrayerCard() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            CompletePrayerCard(
+                content = PrayerContent(
+                    arabic = "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+                    transliteration = "Bismillahir Rahmanir Rahim",
+                    translations = mapOf(
+                        "en" to "In the name of Allah, the Most Gracious, the Most Merciful",
+                        "id" to "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang"
+                    ),
+                    source = "Al-Fatihah 1:1",
+                    category = "Opening"
+                ),
+                selectedLanguage = "en",
+                showTransliteration = true,
+                showTranslation = true,
+                showSource = true,
+                arabicTextSize = TextSizeVariant.Medium
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Complete Prayer Card - Large Text")
+@Composable
+private fun PreviewCompletePrayerCardLarge() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            CompletePrayerCard(
+                content = PrayerContent(
+                    arabic = "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ",
+                    transliteration = "Allahummaghfir lahu warhamhu",
+                    translations = mapOf(
+                        "en" to "O Allah, forgive him and have mercy on him",
+                        "id" to "Ya Allah, ampunilah dia dan rahmatilah dia"
+                    ),
+                    source = "Dua for the deceased"
+                ),
+                selectedLanguage = "en",
+                arabicTextSize = TextSizeVariant.Large,
+                showSource = true
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Language Selector")
+@Composable
+private fun PreviewLanguageSelector() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            LanguageSelector(
+                availableLanguages = listOf("en", "id", "ms", "ar", "tr"),
+                selectedLanguage = "en",
+                onLanguageSelected = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Text Size Selector")
+@Composable
+private fun PreviewTextSizeSelector() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            TextSizeSelector(
+                selectedSize = TextSizeVariant.Medium,
+                onSizeSelected = {},
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Interactive Prayer Display - Collapsed")
+@Composable
+private fun PreviewInteractivePrayerDisplayCollapsed() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            InteractivePrayerDisplay(
+                content = PrayerContent(
+                    arabic = "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+                    transliteration = "Rabbana atina fi'd-dunya hasanatan wa fi'l-akhirati hasanatan wa qina 'adhab an-nar",
+                    translations = mapOf(
+                        "en" to "Our Lord, give us good in this world and good in the hereafter, and save us from the punishment of the Fire",
+                        "id" to "Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami dari azab neraka",
+                        "ms" to "Ya Tuhan kami, kurniakanlah kepada kami kebaikan di dunia dan kebaikan di akhirat, dan peliharakanlah kami dari azab neraka"
+                    ),
+                    source = "Al-Baqarah 2:201"
+                ),
+                initialLanguage = "en",
+                allowLanguageChange = true,
+                allowTextSizeChange = true
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Multi Language - Indonesian")
+@Composable
+private fun PreviewMultiLanguageIndonesian() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            MultiLanguageTranslation(
+                translations = mapOf(
+                    "en" to "Glory be to Allah and praise be to Him",
+                    "id" to "Maha Suci Allah dan segala puji bagi-Nya",
+                    "ar" to "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ"
+                ),
+                selectedLanguage = "id",
+                showLanguageLabel = true,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Prayer Card - Arabic Only")
+@Composable
+private fun PreviewPrayerCardArabicOnly() {
+    TahlilTheme {
+        Surface(modifier = Modifier.padding(16.dp)) {
+            CompletePrayerCard(
+                content = PrayerContent(
+                    arabic = "الحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+                    source = "Al-Fatihah 1:2"
+                ),
+                selectedLanguage = "en",
+                showTransliteration = false,
+                showTranslation = false,
+                showSource = true,
+                arabicTextSize = TextSizeVariant.Large
+            )
+        }
     }
 }

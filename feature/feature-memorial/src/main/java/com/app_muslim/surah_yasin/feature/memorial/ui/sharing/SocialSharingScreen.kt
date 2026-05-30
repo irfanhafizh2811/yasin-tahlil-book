@@ -27,9 +27,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app_muslim.surah_yasin.core.firebase.sharing.*
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Social Media Sharing Screen - Compose implementation
@@ -645,5 +649,248 @@ private fun getSharingTypeDisplayName(type: SharingType): String {
         SharingType.CLOSE_FRIENDS -> "Close Friends"
         SharingType.COMMUNITY_OPEN -> "Community"
         SharingType.PUBLIC_MEMORIAL -> "Public Memorial"
+    }
+}
+// ============================================================================
+// PREVIEW FUNCTIONS
+// ============================================================================
+
+class SocialSharingUiStateProvider : PreviewParameterProvider<SocialSharingUiState> {
+    override val values: Sequence<SocialSharingUiState> = sequenceOf(
+        SocialSharingUiState(), // Default state
+        SocialSharingUiState(isLoading = true), // Loading state
+        SocialSharingUiState(
+            isGeneratingLink = true,
+            customMessage = "Please join us in remembering our beloved grandmother"
+        ), // Generating link
+        SocialSharingUiState(
+            sharingLink = "https://tahlil.app/memorial/hajjah-fatimah",
+            customMessage = "In loving memory of Hajjah Fatimah binti Abdullah"
+        ), // With generated link
+        SocialSharingUiState(
+            sharingLink = "https://tahlil.app/memorial/hajjah-fatimah",
+            message = "Link shared successfully to WhatsApp"
+        ) // Success state
+    )
+}
+
+@Composable
+fun SocialSharingScreenPreview(
+    memorialId: String = "memorial-123",
+    memorialName: String = "Memorial for Grandmother",
+    deceasedName: String = "Hajjah Fatimah binti Abdullah",
+    uiState: SocialSharingUiState = SocialSharingUiState()
+) {
+    SocialSharingScreenContent(
+        memorialId = memorialId,
+        memorialName = memorialName,
+        deceasedName = deceasedName,
+        uiState = uiState,
+        onNavigateBack = { },
+        onGenerateLink = { },
+        onShareToApp = { },
+        onCustomMessageChange = { }
+    )
+}
+
+@Composable
+private fun SocialSharingScreenContent(
+    memorialId: String,
+    memorialName: String,
+    deceasedName: String,
+    uiState: SocialSharingUiState,
+    onNavigateBack: () -> Unit,
+    onGenerateLink: () -> Unit,
+    onShareToApp: () -> Unit,
+    onCustomMessageChange: (String) -> Unit
+) {
+    // Implementation would go here - this is a preview wrapper
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Social Sharing Screen",
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Memorial: $memorialName",
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Text(
+            text = "For: $deceasedName",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        
+        if (uiState.isLoading) {
+            CircularProgressIndicator()
+            Text("Loading sharing options...")
+        } else if (uiState.isGeneratingLink) {
+            CircularProgressIndicator()
+            Text("Generating memorial link...")
+        } else if (uiState.sharingLink != null) {
+            Text(
+                text = "✅ Memorial link ready!",
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = uiState.sharingLink,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        } else {
+            Text("Ready to generate sharing link")
+        }
+        
+        if (uiState.message != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = uiState.message,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}
+
+// ============================================================================
+// SOCIAL SHARING SCREEN PREVIEWS
+// ============================================================================
+
+@Preview(name = "Social Sharing - Default State")
+@Composable
+fun PreviewSocialSharingDefault() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview()
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - Loading State")
+@Composable
+fun PreviewSocialSharingLoading() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(
+                uiState = SocialSharingUiState(isLoading = true)
+            )
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - Generating Link")
+@Composable
+fun PreviewSocialSharingGeneratingLink() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(
+                uiState = SocialSharingUiState(
+                    isGeneratingLink = true,
+                    customMessage = "Please join us in remembering our beloved grandmother"
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - With Link Generated")
+@Composable
+fun PreviewSocialSharingWithLink() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(
+                uiState = SocialSharingUiState(
+                    sharingLink = "https://tahlil.app/memorial/hajjah-fatimah",
+                    customMessage = "In loving memory of Hajjah Fatimah binti Abdullah"
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - Success State")
+@Composable
+fun PreviewSocialSharingSuccess() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(
+                uiState = SocialSharingUiState(
+                    sharingLink = "https://tahlil.app/memorial/hajjah-fatimah",
+                    message = "Link shared successfully to WhatsApp"
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - Custom Memorial")
+@Composable
+fun PreviewSocialSharingCustom() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(
+                memorialName = "Memorial for My Beloved Father",
+                deceasedName = "Haji Ahmad ibn Muhammad"
+            )
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - Dark Theme", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewSocialSharingDark() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview()
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - Arabic Names")
+@Composable
+fun PreviewSocialSharingArabic() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(
+                memorialName = "تذكار الجدة الحبيبة",
+                deceasedName = "فاطمة بنت عبد الله"
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Social Sharing - Tablet",
+    device = "spec:width=1280dp,height=800dp,dpi=240"
+)
+@Composable
+fun PreviewSocialSharingTablet() {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(
+                uiState = SocialSharingUiState(
+                    sharingLink = "https://tahlil.app/memorial/hajjah-fatimah",
+                    customMessage = "In loving memory of Hajjah Fatimah binti Abdullah"
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Social Sharing - Various States")
+@Composable
+fun PreviewSocialSharingDynamic(
+    @PreviewParameter(SocialSharingUiStateProvider::class) uiState: SocialSharingUiState
+) {
+    TahlilTheme {
+        Surface {
+            SocialSharingScreenPreview(uiState = uiState)
+        }
     }
 }

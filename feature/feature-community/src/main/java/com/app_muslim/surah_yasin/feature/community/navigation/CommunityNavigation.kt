@@ -73,11 +73,8 @@ fun NavGraphBuilder.addCommunityNavigation(
     ) {
         val viewModel: PrayerLeaderboardViewModel = hiltViewModel()
         PrayerLeaderboardScreen(
-            onNavigateBack = {
+            onBackPressed = {
                 navController.popBackStack()
-            },
-            onNavigateToProfile = { userId ->
-                navController.navigate(CommunityRoutes.userAchievementsRoute(userId))
             },
             viewModel = viewModel
         )

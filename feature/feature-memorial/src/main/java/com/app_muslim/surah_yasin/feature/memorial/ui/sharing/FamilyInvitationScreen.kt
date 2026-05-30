@@ -26,7 +26,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import com.app_muslim.surah_yasin.core.firebase.sharing.*
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Family Invitation Screen - Compose implementation
@@ -647,5 +652,45 @@ private fun formatRelativeTime(dateTime: java.time.ZonedDateTime): String {
         duration.toHours() > 0 -> "${duration.toHours()} hours ago"
         duration.toMinutes() > 0 -> "${duration.toMinutes()} minutes ago"
         else -> "Just now"
+    }
+}
+
+
+// Preview Functions
+@Preview(showBackground = true, name = "Family Invitation - Loading")
+@Composable
+private fun PreviewFamilyInvitationLoading() {
+    TahlilTheme {
+        FamilyInvitationScreen(
+            memorialId = "test_memorial",
+            memorialName = "Test Memorial",
+            onNavigateBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Family Invitation - Dark", 
+         uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewFamilyInvitationDark() {
+    TahlilTheme {
+        FamilyInvitationScreen(
+            memorialId = "test_memorial", 
+            memorialName = "Test Memorial",
+            onNavigateBack = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Family Invitation - Tablet",
+         device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+private fun PreviewFamilyInvitationTablet() {
+    TahlilTheme {
+        FamilyInvitationScreen(
+            memorialId = "test_memorial",
+            memorialName = "Test Memorial", 
+            onNavigateBack = {}
+        )
     }
 }

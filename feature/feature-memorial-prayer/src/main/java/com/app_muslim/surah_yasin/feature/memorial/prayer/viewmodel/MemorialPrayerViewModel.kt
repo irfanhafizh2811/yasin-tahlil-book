@@ -22,8 +22,8 @@ class MemorialPrayerViewModel @Inject constructor(
     private val memorialPrayerRepository: MemorialPrayerRepository
 ) : ViewModel() {
     
-    private val _uiState = MutableStateFlow(PrayerScreenUiState())
-    val uiState: StateFlow<PrayerScreenUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(MemorialPrayerUiState())
+    val uiState: StateFlow<MemorialPrayerUiState> = _uiState.asStateFlow()
     
     private val _currentSession = MutableStateFlow<MemorialPrayerSession?>(null)
     val currentSession: StateFlow<MemorialPrayerSession?> = _currentSession.asStateFlow()
@@ -79,6 +79,8 @@ class MemorialPrayerViewModel @Inject constructor(
                     val progress = PrayerProgress(
                         currentCount = 0,
                         targetCount = targetCount,
+                        prayerType = prayerType,
+                        duration = 0L,
                         percentage = 0f,
                         estimatedTimeRemaining = 0L,
                         averagePrayerSpeed = 0f
@@ -194,6 +196,8 @@ class MemorialPrayerViewModel @Inject constructor(
             val progress = PrayerProgress(
                 currentCount = session.prayerCount,
                 targetCount = targetCount,
+                prayerType = session.prayerType,
+                duration = System.currentTimeMillis() - session.startTime.toInstant().toEpochMilli(),
                 percentage = (session.prayerCount.toFloat() / targetCount.toFloat()) * 100f,
                 estimatedTimeRemaining = 0L, // TODO: Calculate based on speed
                 averagePrayerSpeed = 0f // TODO: Calculate based on history

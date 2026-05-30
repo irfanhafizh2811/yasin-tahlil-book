@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.app_muslim.surah_yasin.feature.memorial.model.Memorial
-import com.app_muslim.surah_yasin.ui.theme.IslamicTheme
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 @Composable
 fun MemorialScreen(
@@ -365,7 +365,7 @@ class MemorialPreviewParameterProvider : PreviewParameterProvider<List<Memorial>
 @Preview(name = "Memorial Screen - Empty State")
 @Composable
 fun PreviewMemorialScreenEmpty() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             MemorialScreen(
                 memorials = emptyList(),
@@ -381,7 +381,7 @@ fun PreviewMemorialScreenEmpty() {
 @Preview(name = "Memorial Screen - Loading State")
 @Composable
 fun PreviewMemorialScreenLoading() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             MemorialScreen(
                 memorials = emptyList(),
@@ -397,7 +397,7 @@ fun PreviewMemorialScreenLoading() {
 @Preview(name = "Memorial Screen - With Data")
 @Composable
 fun PreviewMemorialScreenWithData() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             MemorialScreen(
                 memorials = listOf(
@@ -435,7 +435,7 @@ fun PreviewMemorialScreenWithData() {
 @Preview(name = "Memorial Screen - Dark Theme", uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewMemorialScreenDark() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             MemorialScreen(
                 memorials = listOf(
@@ -462,7 +462,7 @@ fun PreviewMemorialScreenDark() {
 @Preview(name = "Memorial Card - Single")
 @Composable
 fun PreviewMemorialCard() {
-    IslamicTheme {
+    TahlilTheme {
         MemorialCard(
             memorial = Memorial(
                 id = "1",
@@ -480,7 +480,7 @@ fun PreviewMemorialCard() {
 @Preview(name = "Memorial Card - High Prayer Count")
 @Composable
 fun PreviewMemorialCardHighPrayers() {
-    IslamicTheme {
+    TahlilTheme {
         MemorialCard(
             memorial = Memorial(
                 id = "2",
@@ -498,7 +498,7 @@ fun PreviewMemorialCardHighPrayers() {
 @Preview(name = "Memorial Detail Screen")
 @Composable
 fun PreviewMemorialDetailScreen() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             MemorialDetailScreen(
                 memorial = Memorial(
@@ -517,7 +517,7 @@ fun PreviewMemorialDetailScreen() {
 @Preview(name = "Arabic Text Display")
 @Composable
 fun PreviewArabicTextDisplay() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             ArabicTextDisplay(
                 text = "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم",
@@ -538,7 +538,7 @@ fun PreviewArabicTextDisplay() {
 )
 @Composable
 fun PreviewTabletMemorialScreen() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             TabletMemorialScreen(
                 memorials = listOf(
@@ -575,7 +575,7 @@ fun PreviewTabletMemorialScreen() {
 )
 @Composable
 fun PreviewMemorialScreenLandscape() {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             MemorialScreen(
                 memorials = listOf(
@@ -610,7 +610,7 @@ fun PreviewMemorialScreenLandscape() {
 fun PreviewMemorialScreenDynamic(
     @PreviewParameter(MemorialPreviewParameterProvider::class) memorials: List<Memorial>
 ) {
-    IslamicTheme {
+    TahlilTheme {
         Surface {
             MemorialScreen(
                 memorials = memorials,

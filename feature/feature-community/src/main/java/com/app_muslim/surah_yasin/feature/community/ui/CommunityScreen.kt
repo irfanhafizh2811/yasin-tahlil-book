@@ -13,7 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.community.model.*
 
 @Composable
@@ -467,4 +469,213 @@ data class PrayerLeaderboard(
 
 enum class LeaderboardFilter {
     LOCAL, GLOBAL
+}
+
+// Preview Functions
+@Preview(showBackground = true, name = "Community Screen - Loading")
+@Composable
+private fun PreviewCommunityScreenLoading() {
+    TahlilTheme {
+        CommunityScreen(
+            globalStats = GlobalPrayerStatistics(),
+            recentMemorials = emptyList(),
+            leaderboard = emptyList(),
+            isLoading = true,
+            onMemorialClick = {},
+            onJoinPrayer = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Screen - Offline")
+@Composable
+private fun PreviewCommunityScreenOffline() {
+    TahlilTheme {
+        CommunityScreen(
+            globalStats = GlobalPrayerStatistics(
+                totalPrayers = 125000,
+                activePrayers = 42,
+                recentMemorials = 8
+            ),
+            recentMemorials = emptyList(),
+            leaderboard = emptyList(),
+            isLoading = false,
+            isOffline = true,
+            onMemorialClick = {},
+            onJoinPrayer = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Screen - Empty Content")
+@Composable
+private fun PreviewCommunityScreenEmpty() {
+    TahlilTheme {
+        CommunityScreen(
+            globalStats = GlobalPrayerStatistics(
+                totalPrayers = 125000,
+                activePrayers = 42,
+                recentMemorials = 8
+            ),
+            recentMemorials = emptyList(),
+            leaderboard = emptyList(),
+            isLoading = false,
+            onMemorialClick = {},
+            onJoinPrayer = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Screen - With Content")
+@Composable
+private fun PreviewCommunityScreenWithContent() {
+    TahlilTheme {
+        CommunityScreen(
+            globalStats = GlobalPrayerStatistics(
+                totalPrayers = 1250000,
+                activePrayers = 342,
+                recentMemorials = 15
+            ),
+            recentMemorials = listOf(
+                CommunityMemorial(
+                    id = "1",
+                    title = "Memorial for Ahmad Hassan",
+                    deceasedName = "Ahmad Hassan",
+                    totalPrayers = 234,
+                    recentPrayers = 12,
+                    familyName = "Hassan Family"
+                ),
+                CommunityMemorial(
+                    id = "2",
+                    title = "Remembering Fatima Ali",
+                    deceasedName = "Fatima Ali",
+                    totalPrayers = 567,
+                    recentPrayers = 23,
+                    familyName = "Ali Family"
+                )
+            ),
+            leaderboard = listOf(
+                PrayerLeaderboard(
+                    userId = "1",
+                    displayName = "Abdullah Rahman",
+                    totalPrayers = 1250,
+                    rank = 1,
+                    country = "Saudi Arabia"
+                ),
+                PrayerLeaderboard(
+                    userId = "2",
+                    displayName = "Omar Ahmed",
+                    totalPrayers = 980,
+                    rank = 2,
+                    country = "Egypt"
+                ),
+                PrayerLeaderboard(
+                    userId = "3",
+                    displayName = "Ali Hassan",
+                    totalPrayers = 875,
+                    rank = 3,
+                    country = "Pakistan"
+                )
+            ),
+            isLoading = false,
+            onMemorialClick = {},
+            onJoinPrayer = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Global Statistics Card")
+@Composable
+private fun PreviewGlobalStatisticsCard() {
+    TahlilTheme {
+        GlobalStatisticsCard(
+            globalStats = GlobalPrayerStatistics(
+                totalPrayers = 2500000,
+                activePrayers = 542,
+                recentMemorials = 28
+            ),
+            onRefresh = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Global Statistics Card - No Refresh")
+@Composable
+private fun PreviewGlobalStatisticsCardNoRefresh() {
+    TahlilTheme {
+        GlobalStatisticsCard(
+            globalStats = GlobalPrayerStatistics(
+                totalPrayers = 1250000,
+                activePrayers = 125,
+                recentMemorials = 12
+            ),
+            onRefresh = null
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Memorial Card")
+@Composable
+private fun PreviewCommunityMemorialCard() {
+    TahlilTheme {
+        CommunityMemorialCard(
+            memorial = CommunityMemorial(
+                id = "1",
+                title = "Memorial for Grandmother Khadija",
+                deceasedName = "Khadija Abdullah",
+                totalPrayers = 1250,
+                recentPrayers = 45,
+                familyName = "Abdullah Family"
+            ),
+            onMemorialClick = {},
+            onJoinPrayer = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Leaderboard Entry Card - First Place")
+@Composable
+private fun PreviewLeaderboardEntryCardFirst() {
+    TahlilTheme {
+        LeaderboardEntryCard(
+            entry = PrayerLeaderboard(
+                userId = "1",
+                displayName = "Muhammad Abdullah",
+                totalPrayers = 2500,
+                rank = 1,
+                country = "Saudi Arabia"
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Leaderboard Entry Card - Regular")
+@Composable
+private fun PreviewLeaderboardEntryCardRegular() {
+    TahlilTheme {
+        LeaderboardEntryCard(
+            entry = PrayerLeaderboard(
+                userId = "5",
+                displayName = "Ali Rahman",
+                totalPrayers = 750,
+                rank = 5,
+                country = "Indonesia"
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Leaderboard Section")
+@Composable
+private fun PreviewLeaderboardSection() {
+    TahlilTheme {
+        LeaderboardSection(
+            leaderboard = listOf(
+                PrayerLeaderboard("1", "Ahmad Ali", 2500, 1, "Saudi Arabia"),
+                PrayerLeaderboard("2", "Omar Hassan", 1800, 2, "Egypt"),
+                PrayerLeaderboard("3", "Ali Abdullah", 1200, 3, "Pakistan")
+            ),
+            currentFilter = LeaderboardFilter.GLOBAL
+        )
+    }
 }

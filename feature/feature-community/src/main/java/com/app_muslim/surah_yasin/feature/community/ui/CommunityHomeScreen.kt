@@ -21,11 +21,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import kotlinx.coroutines.delay
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app_muslim.surah_yasin.feature.community.model.*
 import com.app_muslim.surah_yasin.feature.community.viewmodel.CommunityHomeViewModel
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Community Home Screen with Real-time Prayer Features
@@ -1018,5 +1022,298 @@ private fun AnimatedMilestoneItem(
                 )
             }
         }
+    }
+}
+// ============================================================================
+// PREVIEW FUNCTIONS & DATA PROVIDERS
+// ============================================================================
+
+class CommunityHomeUiStateProvider : PreviewParameterProvider<CommunityHomeUiState> {
+    override val values: Sequence<CommunityHomeUiState> = sequenceOf(
+        CommunityHomeUiState(), // Default loading state
+        CommunityHomeUiState(
+            isLoading = false,
+            globalStats = GlobalPrayerStats(
+                totalActivePrayers = 1247,
+                totalParticipants = 8934,
+                totalPrayersToday = 45782,
+                topPrayerType = "Yasin"
+            ),
+            activeSessions = listOf(
+                CommunityPrayerSession(
+                    sessionId = "session-1",
+                    memorialId = "memorial-1",
+                    hostUserId = "user-1",
+                    hostDisplayName = "Ahmad Ibn Muhammad",
+                    prayerType = CommunityPrayerType.TAHLIL,
+                    regionCode = "ME",
+                    startTime = java.time.ZonedDateTime.now(),
+                    estimatedDuration = 15,
+                    targetPrayerCount = 100
+                ),
+                CommunityPrayerSession(
+                    sessionId = "session-2", 
+                    memorialId = "memorial-2",
+                    hostUserId = "user-2",
+                    hostDisplayName = "Fatimah Al-Zahra",
+                    prayerType = CommunityPrayerType.YASIN,
+                    regionCode = "SEA",
+                    startTime = java.time.ZonedDateTime.now(),
+                    estimatedDuration = 20,
+                    targetPrayerCount = 1
+                )
+            ),
+            recentActivity = listOf(
+                PrayerActivityItem(
+                    activityId = "activity-1",
+                    activityType = ActivityType.PRAYER_COMPLETED,
+                    userId = "user-3",
+                    userDisplayName = "Hassan Al-Basri",
+                    prayerType = CommunityPrayerType.TAHLIL,
+                    prayerCount = 100,
+                    regionCode = "ME",
+                    timestamp = java.time.ZonedDateTime.now().minusMinutes(5),
+                    message = "completed 100 Tahlil recitations"
+                )
+            )
+        ), // Full active state
+        CommunityHomeUiState(
+            isLoading = false,
+            globalStats = GlobalPrayerStats(
+                totalActivePrayers = 856,
+                totalParticipants = 5421,
+                totalPrayersToday = 23891,
+                topPrayerType = "Al-Fatihah"
+            ),
+            activeSessions = emptyList(), // No active sessions
+            recentActivity = emptyList()
+        ) // Quiet period state
+    )
+}
+
+@Composable
+fun CommunityHomeScreenPreview(
+    uiState: CommunityHomeUiState = CommunityHomeUiState()
+) {
+    CommunityHomeScreenContent(
+        uiState = uiState,
+        onNavigateToSession = { },
+        onNavigateToLeaderboard = { },
+        onNavigateToCreateSession = { },
+        onRefresh = { }
+    )
+}
+
+@Composable
+private fun CommunityHomeScreenContent(
+    uiState: CommunityHomeUiState,
+    onNavigateToSession: (String) -> Unit,
+    onNavigateToLeaderboard: () -> Unit,
+    onNavigateToCreateSession: () -> Unit,
+    onRefresh: () -> Unit
+) {
+    // This is a preview wrapper - simplified implementation
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "🌍 Global Community",
+            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
+        )
+        
+        if (uiState.isLoading) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        } else {
+            // Global Statistics Card
+            if (uiState.globalStats != null) {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                    )
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            "Global Prayer Statistics",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column {
+                                Text("${uiState.globalStats.totalActivePrayers}")
+                                Text(
+                                    "Active Sessions",
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                            Column {
+                                Text("${uiState.globalStats.totalParticipants}")
+                                Text(
+                                    "Users Online",
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                            Column {
+                                Text("${uiState.globalStats.totalPrayersToday}")
+                                Text(
+                                    "Prayers Today",
+                                    style = MaterialTheme.typography.bodySmall
+                                )
+                            }
+                        }
+                        
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            "Trending: ${uiState.globalStats.topPrayerType}",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                    }
+                }
+            }
+            
+            // Active Sessions
+            Text(
+                "Active Prayer Sessions",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+            
+            if (uiState.activeSessions.isEmpty()) {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(32.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            "No active sessions right now\nCreate one to start praying with the community",
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                }
+            } else {
+                uiState.activeSessions.take(3).forEach { session ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(12.dp)) {
+                            Text(
+                                session.hostDisplayName,
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                "${session.prayerType.displayName} Prayer • ${session.participants.size} participants",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            Text(
+                                "Region: ${session.regionCode}",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            }
+            
+            // Quick Actions
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Button(
+                    onClick = onNavigateToCreateSession,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text("Create Session")
+                }
+                OutlinedButton(
+                    onClick = onNavigateToLeaderboard,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text("Leaderboard")
+                }
+            }
+        }
+    }
+}
+
+// ============================================================================
+// COMMUNITY HOME SCREEN PREVIEWS
+// ============================================================================
+
+
+@Preview(showBackground = true, name = "Community Home - Loading")
+@Composable
+private fun PreviewCommunityHomeLoading() {
+    TahlilTheme {
+        CommunityHomeScreenPreview(
+            uiState = CommunityHomeUiState(isLoading = true)
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Home - Global Stats Card")
+@Composable
+private fun PreviewGlobalPrayerStatsCard() {
+    TahlilTheme {
+        GlobalPrayerStatsCard(
+            stats = GlobalPrayerStats(
+                totalActivePrayers = 1247,
+                totalParticipants = 8934,
+                totalPrayersToday = 45782,
+                topPrayerType = "Yasin"
+            ),
+            selectedRegion = "Global",
+            onRegionChange = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Real-time Prayer Counter")
+@Composable  
+private fun PreviewRealTimePrayerCounter() {
+    TahlilTheme {
+        RealTimePrayerCounter(
+            totalActivePrayers = 1500,
+            totalParticipants = 9500
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Community Home - Dark", 
+         uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewCommunityHomeDark() {
+    TahlilTheme {
+        CommunityHomeScreenPreview(
+            uiState = CommunityHomeUiState(
+                isLoading = false,
+                globalStats = GlobalPrayerStats(
+                    totalActivePrayers = 1500,
+                    totalParticipants = 9500,
+                    totalPrayersToday = 45000,
+                    topPrayerType = "Yasin"
+                )
+            )
+        )
     }
 }

@@ -55,14 +55,7 @@ enum class PrayerTradition(val displayName: String) {
     MOSQUE("Mosque")
 }
 
-// Prayer Progress Tracking
-data class PrayerProgress(
-    val currentCount: Int,
-    val targetCount: Int,
-    val percentage: Float,
-    val estimatedTimeRemaining: Long, // in milliseconds
-    val averagePrayerSpeed: Float // prayers per minute
-)
+// Prayer Progress Tracking (moved to MemorialPrayerUiState.kt to avoid duplication)
 
 // Memorial Prayer Statistics
 data class MemorialPrayerStats(
@@ -75,20 +68,11 @@ data class MemorialPrayerStats(
     val currentStreak: Int // consecutive days
 )
 
-// Session State Management
-sealed class MemorialPrayerState {
-    object Idle : MemorialPrayerState()
-    object Loading : MemorialPrayerState()
-    data class InProgress(val session: MemorialPrayerSession, val progress: PrayerProgress) : MemorialPrayerState()
-    data class Paused(val session: MemorialPrayerSession, val progress: PrayerProgress) : MemorialPrayerState()
-    data class Completed(val session: MemorialPrayerSession) : MemorialPrayerState()
-    data class Error(val message: String, val throwable: Throwable? = null) : MemorialPrayerState()
-}
+// Session State Management (moved to MemorialPrayerUiState.kt to avoid duplication)
 
-// UI State Models
+// UI State Models (simplified version, main UI state is in MemorialPrayerUiState.kt)
 data class PrayerScreenUiState(
-    val memorialPrayerState: MemorialPrayerState = MemorialPrayerState.Idle,
-    val availablePrayerTypes: List<PrayerType> = emptyList(),
+    val availablePrayerTypes: List<PrayerType> = PrayerType.values().toList(),
     val recentSessions: List<MemorialPrayerSession> = emptyList(),
     val statistics: MemorialPrayerStats? = null,
     val isVibrationEnabled: Boolean = true,

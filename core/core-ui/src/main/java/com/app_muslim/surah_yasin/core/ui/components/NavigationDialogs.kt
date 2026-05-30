@@ -9,8 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 @Composable
 fun GuestModeRestrictionDialog(
@@ -332,4 +336,252 @@ fun SignOutConfirmationDialog(
             }
         }
     )
+}
+
+// Preview Data Providers
+class GuestModeDialogStateProvider : PreviewParameterProvider<Triple<String, String, Boolean>> {
+    override val values: Sequence<Triple<String, String, Boolean>> = sequenceOf(
+        Triple("", "", true), // Empty state
+        Triple("ahmed.hassan@example.com", "", true), // Email only
+        Triple("ahmed.hassan@example.com", "password123", true), // Complete upgrade form
+        Triple("fatimah.alzahra@gmail.com", "securepass", false) // Sign-in mode
+    )
+}
+
+class DialogVisibilityProvider : PreviewParameterProvider<Boolean> {
+    override val values: Sequence<Boolean> = sequenceOf(true, false)
+}
+
+// Preview Functions
+@Preview(name = "Guest Mode Dialog - Upgrade Mode")
+@Composable
+fun PreviewGuestModeRestrictionDialogUpgrade() {
+    TahlilTheme {
+        Surface {
+            GuestModeRestrictionDialog(
+                isVisible = true,
+                onDismiss = { },
+                onUpgradeAccount = { _, _ -> },
+                onSignInWithAccount = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Guest Mode Dialog - Sign In Mode")
+@Composable
+fun PreviewGuestModeRestrictionDialogSignIn() {
+    TahlilTheme {
+        Surface {
+            var isUpgradeMode by remember { mutableStateOf(false) }
+            GuestModeRestrictionDialog(
+                isVisible = true,
+                onDismiss = { },
+                onUpgradeAccount = { _, _ -> },
+                onSignInWithAccount = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Guest Mode Dialog - Dynamic States", group = "Dynamic")
+@Composable
+fun PreviewGuestModeRestrictionDialogDynamic(
+    @PreviewParameter(GuestModeDialogStateProvider::class) state: Triple<String, String, Boolean>
+) {
+    TahlilTheme {
+        Surface {
+            GuestModeRestrictionDialog(
+                isVisible = true,
+                onDismiss = { },
+                onUpgradeAccount = { _, _ -> },
+                onSignInWithAccount = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Guest Mode Dialog - Dark Theme")
+@Composable
+fun PreviewGuestModeRestrictionDialogDark() {
+    TahlilTheme(darkTheme = true) {
+        Surface {
+            GuestModeRestrictionDialog(
+                isVisible = true,
+                onDismiss = { },
+                onUpgradeAccount = { _, _ -> },
+                onSignInWithAccount = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Guest Mode Dialog - Tablet", device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+fun PreviewGuestModeRestrictionDialogTablet() {
+    TahlilTheme {
+        Surface {
+            GuestModeRestrictionDialog(
+                isVisible = true,
+                onDismiss = { },
+                onUpgradeAccount = { _, _ -> },
+                onSignInWithAccount = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Email Verification Dialog - Default")
+@Composable
+fun PreviewEmailVerificationDialog() {
+    TahlilTheme {
+        Surface {
+            EmailVerificationDialog(
+                isVisible = true,
+                userEmail = "muhammad.ali@example.com",
+                onDismiss = { },
+                onSendVerification = { },
+                onRefreshStatus = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Email Verification Dialog - Arabic Email")
+@Composable
+fun PreviewEmailVerificationDialogArabic() {
+    TahlilTheme {
+        Surface {
+            EmailVerificationDialog(
+                isVisible = true,
+                userEmail = "عبدالرحمن.الحسن@example.com",
+                onDismiss = { },
+                onSendVerification = { },
+                onRefreshStatus = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Email Verification Dialog - Long Email")
+@Composable
+fun PreviewEmailVerificationDialogLongEmail() {
+    TahlilTheme {
+        Surface {
+            EmailVerificationDialog(
+                isVisible = true,
+                userEmail = "very.long.email.address.for.testing@subdomain.example.com",
+                onDismiss = { },
+                onSendVerification = { },
+                onRefreshStatus = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Email Verification Dialog - Dark Theme")
+@Composable
+fun PreviewEmailVerificationDialogDark() {
+    TahlilTheme(darkTheme = true) {
+        Surface {
+            EmailVerificationDialog(
+                isVisible = true,
+                userEmail = "aisha.rahman@gmail.com",
+                onDismiss = { },
+                onSendVerification = { },
+                onRefreshStatus = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Email Verification Dialog - Landscape", device = "spec:width=640dp,height=360dp,dpi=160,orientation=landscape")
+@Composable
+fun PreviewEmailVerificationDialogLandscape() {
+    TahlilTheme {
+        Surface {
+            EmailVerificationDialog(
+                isVisible = true,
+                userEmail = "omar.abdullah@islamicfoundation.org",
+                onDismiss = { },
+                onSendVerification = { },
+                onRefreshStatus = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Sign Out Dialog - Default")
+@Composable
+fun PreviewSignOutConfirmationDialog() {
+    TahlilTheme {
+        Surface {
+            SignOutConfirmationDialog(
+                isVisible = true,
+                isSigningOut = false,
+                onConfirm = { },
+                onDismiss = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Sign Out Dialog - Loading State")
+@Composable
+fun PreviewSignOutConfirmationDialogLoading() {
+    TahlilTheme {
+        Surface {
+            SignOutConfirmationDialog(
+                isVisible = true,
+                isSigningOut = true,
+                onConfirm = { },
+                onDismiss = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Sign Out Dialog - Dark Theme")
+@Composable
+fun PreviewSignOutConfirmationDialogDark() {
+    TahlilTheme(darkTheme = true) {
+        Surface {
+            SignOutConfirmationDialog(
+                isVisible = true,
+                isSigningOut = false,
+                onConfirm = { },
+                onDismiss = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Sign Out Dialog - Loading Dark")
+@Composable
+fun PreviewSignOutConfirmationDialogLoadingDark() {
+    TahlilTheme(darkTheme = true) {
+        Surface {
+            SignOutConfirmationDialog(
+                isVisible = true,
+                isSigningOut = true,
+                onConfirm = { },
+                onDismiss = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Sign Out Dialog - Small Phone", device = "spec:width=360dp,height=640dp,dpi=160")
+@Composable
+fun PreviewSignOutConfirmationDialogSmallPhone() {
+    TahlilTheme {
+        Surface {
+            SignOutConfirmationDialog(
+                isVisible = true,
+                isSigningOut = false,
+                onConfirm = { },
+                onDismiss = { }
+            )
+        }
+    }
 }

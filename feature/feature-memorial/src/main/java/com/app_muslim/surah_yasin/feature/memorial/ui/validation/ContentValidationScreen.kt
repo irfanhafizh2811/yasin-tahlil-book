@@ -17,8 +17,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.app_muslim.surah_yasin.feature.memorial.model.*
 import com.app_muslim.surah_yasin.feature.memorial.ui.validation.viewmodel.ContentValidationViewModel
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -666,5 +670,64 @@ private fun ErrorContent(
             Spacer(modifier = Modifier.width(8.dp))
             Text("Try Again")
         }
+    }
+}
+
+// Preview Functions
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ContentValidationScreenPreview(
+    validation: IslamicContentValidation = createMockValidation()
+) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Content Validation") },
+                navigationIcon = {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        // Note: ValidationContent has its own ContentPadding, so paddingValues is handled internally
+        ValidationContent(
+            validation = validation,
+            onRequestScholarReview = { },
+            onAcceptSuggestions = { }
+        )
+    }
+}
+
+private fun createMockValidation(): IslamicContentValidation {
+    return IslamicContentValidation(
+        id = "validation_123",
+        contentText = "In loving memory of our beloved father who guided us with wisdom and prayer",
+        contentType = ContentType.MEMORIAL_DESCRIPTION,
+        language = "en",
+        isValidated = true,
+        validationStatus = ValidationStatus.APPROVED,
+        validatedBy = "Scholar Ahmad Rahman",
+        validatedAt = java.util.Date(),
+        validationNotes = "Content is culturally appropriate and Islamically compliant",
+        suggestedCorrections = emptyList(),
+        culturalSensitivityScore = 95.0f,
+        islamicComplianceScore = 98.0f,
+        inappropriateFlags = emptyList(),
+        approvedContent = null,
+        rejectionReason = null
+    )
+}
+
+@Preview(showBackground = true, name = "Content Validation")
+@Composable
+private fun PreviewContentValidation() {
+    TahlilTheme {
+        ContentValidationScreenPreview()
     }
 }

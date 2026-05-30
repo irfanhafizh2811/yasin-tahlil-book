@@ -23,13 +23,20 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.text.style.*
 import androidx.compose.ui.unit.*
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.app_muslim.surah_yasin.feature.memorial.model.*
 import com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.*
+import com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialListUiState
+import com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialFilter
+import com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.ShareType
 import com.app_muslim.surah_yasin.feature.memorial.ui.list.components.*
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 // Simple refresh without pull-to-refresh for now
 import java.text.SimpleDateFormat
@@ -138,7 +145,7 @@ fun MemorialListScreen(
     showShareBottomSheet?.let { memorial ->
         MemorialShareBottomSheet(
             memorial = memorial,
-            onShare = { shareType, content ->
+            onShare = { shareType: ShareType, content ->
                 viewModel.shareMemorial(memorial, shareType, content)
                 showShareBottomSheet = null
             },
@@ -772,4 +779,567 @@ private fun isExpiringSoon(date: Date): Boolean {
     val diffInMs = date.time - now.time
     val diffInDays = (diffInMs / (1000 * 60 * 60 * 24)).toInt()
     return diffInDays <= 3
+}
+
+// Preview Data Providers
+class MemorialListStateProvider : PreviewParameterProvider<MemorialListUiState> {
+    override val values: Sequence<MemorialListUiState> = sequenceOf(
+        // Loading state
+        MemorialListUiState(isLoading = true),
+        
+        // Empty state
+        MemorialListUiState(memorials = emptyList()),
+        
+        // Error state
+        MemorialListUiState(
+            error = "Unable to connect to the server. Please check your internet connection.",
+            memorials = emptyList()
+        ),
+        
+        // Populated state
+        MemorialListUiState(
+            memorials = getSampleMemorials()
+        ),
+        
+        // Loading more state
+        MemorialListUiState(
+            memorials = getSampleMemorials(),
+            isLoadingMore = true,
+            hasMoreData = true
+        )
+    )
+}
+
+class SingleMemorialProvider : PreviewParameterProvider<MemorialData> {
+    override val values: Sequence<MemorialData> = sequenceOf(
+        // Standard memorial
+        MemorialData(
+            id = "1",
+            deceasedName = "Ahmed Hassan",
+            deceasedNameArabic = "أحمد حسن",
+            memorialMessage = "A beloved father and devoted servant of Allah who dedicated his life to helping others.",
+            dateOfDeath = Date(System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000)), // 30 days ago
+            privacyLevel = PrivacyLevel.FAMILY,
+            prayerCount = 245,
+            participantCount = 23,
+            photoUrl = null
+        ),
+        
+        // Memorial with photo
+        MemorialData(
+            id = "2",
+            deceasedName = "Fatimah Al-Zahra",
+            deceasedNameArabic = "فاطمة الزهراء",
+            memorialMessage = "A devoted mother and wife who exemplified Islamic values throughout her life.",
+            dateOfDeath = Date(System.currentTimeMillis() - (7L * 24 * 60 * 60 * 1000)), // 7 days ago
+            privacyLevel = PrivacyLevel.COMMUNITY,
+            prayerCount = 892,
+            participantCount = 156,
+            photoUrl = "sample_photo_url",
+            expiresAt = Date(System.currentTimeMillis() + (2L * 24 * 60 * 60 * 1000)) // Expires in 2 days
+        ),
+        
+        // Public memorial with high engagement
+        MemorialData(
+            id = "3",
+            deceasedName = "Muhammad Ali",
+            deceasedNameArabic = "محمد علي",
+            memorialMessage = "A respected community leader and Islamic scholar who touched countless lives.",
+            dateOfDeath = Date(System.currentTimeMillis() - (90L * 24 * 60 * 60 * 1000)), // 90 days ago
+            privacyLevel = PrivacyLevel.PUBLIC,
+            prayerCount = 5420,
+            participantCount = 1250,
+            photoUrl = "sample_photo_url"
+        )
+    )
+}
+
+// Mock data functions
+private fun getSampleMemorials(): List<MemorialData> {
+    return listOf(
+        MemorialData(
+            id = "1",
+            deceasedName = "Ali ibn Abi Talib",
+            deceasedNameArabic = "علي بن أبي طالب",
+            memorialMessage = "The fourth Caliph and cousin of Prophet Muhammad, known for his wisdom and courage.",
+            dateOfDeath = Date(System.currentTimeMillis() - (15L * 24 * 60 * 60 * 1000)),
+            privacyLevel = PrivacyLevel.PUBLIC,
+            prayerCount = 1250,
+            participantCount = 300,
+            photoUrl = null
+        ),
+        MemorialData(
+            id = "2",
+            deceasedName = "Khadijah bint Khuwaylid",
+            deceasedNameArabic = "خديجة بنت خويلد",
+            memorialMessage = "The first wife of Prophet Muhammad and the first person to accept Islam.",
+            dateOfDeath = Date(System.currentTimeMillis() - (45L * 24 * 60 * 60 * 1000)),
+            privacyLevel = PrivacyLevel.COMMUNITY,
+            prayerCount = 2100,
+            participantCount = 520,
+            photoUrl = "sample_photo",
+            expiresAt = Date(System.currentTimeMillis() + (5L * 24 * 60 * 60 * 1000))
+        ),
+        MemorialData(
+            id = "3",
+            deceasedName = "Abu Bakr As-Siddiq",
+            deceasedNameArabic = "أبو بكر الصديق",
+            memorialMessage = "The first Caliph and closest companion of Prophet Muhammad.",
+            dateOfDeath = Date(System.currentTimeMillis() - (120L * 24 * 60 * 60 * 1000)),
+            privacyLevel = PrivacyLevel.FAMILY,
+            prayerCount = 756,
+            participantCount = 89,
+            photoUrl = null
+        )
+    )
+}
+
+// Mock data for previews using the actual model types
+private fun getSampleMemorialListUiState(): com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialListUiState {
+    return com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialListUiState(
+        memorials = getSampleMemorialData(),
+        isLoading = false,
+        isLoadingMore = false,
+        hasMoreData = true,
+        error = null
+    )
+}
+
+private fun getSampleMemorialData(): List<MemorialData> {
+    return listOf(
+        MemorialData(
+            id = "mem_001",
+            creatorId = "user_001",
+            creatorName = "Ahmad Hassan",
+            deceasedName = "Ali ibn Abi Talib",
+            deceasedNameArabic = "علي بن أبي طالب",
+            memorialMessage = "The fourth Caliph and cousin of Prophet Muhammad (PBUH), known for his wisdom, courage, and dedication to justice.",
+            memorialMessageArabic = "الخليفة الرابع وابن عم النبي محمد صلى الله عليه وسلم، المعروف بحكمته وشجاعته وتفانيه في العدالة.",
+            dateOfDeath = Date(System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000)),
+            dateOfDeathHijri = HijriDate(),
+            photoUrl = null,
+            privacyLevel = PrivacyLevel.COMMUNITY,
+            prayerType = PrayerType.YASIN,
+            createdAt = Date(System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000)),
+            isActive = true
+        ),
+        MemorialData(
+            id = "mem_002", 
+            creatorId = "user_001",
+            creatorName = "Ahmad Hassan",
+            deceasedName = "Fatimah bint Muhammad",
+            deceasedNameArabic = "فاطمة بنت محمد",
+            memorialMessage = "Beloved daughter of Prophet Muhammad (PBUH), the mother of Hassan and Hussain.",
+            memorialMessageArabic = "ابنة النبي محمد الحبيبة صلى الله عليه وسلم، أم الحسن والحسين.",
+            dateOfDeath = Date(System.currentTimeMillis() - (60L * 24 * 60 * 60 * 1000)),
+            dateOfDeathHijri = HijriDate(),
+            photoUrl = null,
+            privacyLevel = PrivacyLevel.FAMILY,
+            prayerType = PrayerType.TAHLIL,
+            createdAt = Date(System.currentTimeMillis() - (15L * 24 * 60 * 60 * 1000)),
+            isActive = true
+        ),
+        MemorialData(
+            id = "mem_003",
+            creatorId = "user_001",
+            creatorName = "Ahmad Hassan", 
+            deceasedName = "Hassan al-Basri",
+            deceasedNameArabic = "الحسن البصري",
+            memorialMessage = "Great Islamic scholar, ascetic, and one of the most prominent Tabi'un.",
+            memorialMessageArabic = "عالم إسلامي عظيم، زاهد، وأحد أبرز التابعين.",
+            dateOfDeath = Date(System.currentTimeMillis() - (7L * 24 * 60 * 60 * 1000)),
+            dateOfDeathHijri = HijriDate(),
+            photoUrl = null,
+            privacyLevel = PrivacyLevel.PUBLIC,
+            prayerType = PrayerType.DUA,
+            createdAt = Date(System.currentTimeMillis() - (7L * 24 * 60 * 60 * 1000)),
+            isActive = true
+        )
+    )
+}
+
+// Mock components that would normally require ViewModels
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MemorialListScreenPreview(
+    uiState: com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialListUiState = getSampleMemorialListUiState(),
+    isSearchActive: Boolean = false,
+    searchQuery: String = "",
+    selectedFilter: com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialFilter = com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialFilter.ALL
+) {
+    var showDeleteDialog by remember { mutableStateOf<MemorialData?>(null) }
+    var showShareBottomSheet by remember { mutableStateOf<MemorialData?>(null) }
+
+    Scaffold(
+        topBar = {
+            if (isSearchActive) {
+                SearchAppBar(
+                    query = searchQuery,
+                    onQueryChange = { },
+                    onSearchClose = { },
+                    onSearch = { }
+                )
+            } else {
+                MemorialListTopBar(
+                    title = "My Memorials",
+                    onNavigateBack = { },
+                    onSearchClick = { },
+                    onFilterClick = { }
+                )
+            }
+        },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                onClick = { },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Create Memorial"
+                    )
+                },
+                text = { Text("Create Memorial") },
+                containerColor = MaterialTheme.colorScheme.primary
+            )
+        }
+    ) { paddingValues ->
+        
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            
+            // Filter chips
+            if (selectedFilter != com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.MemorialFilter.ALL || isSearchActive) {
+                FilterChipRow(
+                    selectedFilter = selectedFilter,
+                    onFilterSelected = { },
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+            
+            // Memorial list content
+            MemorialListContent(
+                uiState = uiState,
+                onRefresh = { },
+                onMemorialClick = { },
+                onMemorialEdit = { },
+                onMemorialDelete = { showDeleteDialog = it },
+                onMemorialShare = { showShareBottomSheet = it },
+                onLoadMore = { },
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+    
+    // Delete confirmation dialog
+    showDeleteDialog?.let { memorial ->
+        DeleteMemorialDialog(
+            memorial = memorial,
+            onConfirm = { showDeleteDialog = null },
+            onDismiss = { showDeleteDialog = null }
+        )
+    }
+    
+    // Share bottom sheet
+    showShareBottomSheet?.let { memorial ->
+        MemorialShareBottomSheet(
+            memorial = memorial,
+            onShare = { _, _ -> showShareBottomSheet = null },
+            onDismiss = { showShareBottomSheet = null }
+        )
+    }
+}
+
+// Placeholder components for dialogs/bottom sheets
+@Composable
+fun DeleteMemorialDialog(
+    memorial: MemorialData,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Delete Memorial") },
+        text = { Text("Are you sure you want to delete the memorial for ${memorial.deceasedName}?") },
+        confirmButton = {
+            Button(
+                onClick = onConfirm,
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
+            ) {
+                Text("Delete")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MemorialShareBottomSheet(
+    memorial: MemorialData,
+    onShare: (String, String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    BottomSheetDefaults.ExpandedShape
+    // Simplified bottom sheet content for preview
+    Surface {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("Share Memorial", style = MaterialTheme.typography.headlineSmall)
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Share ${memorial.deceasedName}'s memorial with family and friends.")
+        }
+    }
+}
+
+// Preview Functions
+@Preview(name = "Memorial List Screen - Loading")
+@Composable
+fun PreviewMemorialListScreenLoading() {
+    TahlilTheme {
+        Surface {
+            MemorialListScreenPreview(
+                uiState = MemorialListUiState(isLoading = true)
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Screen - Empty")
+@Composable
+fun PreviewMemorialListScreenEmpty() {
+    TahlilTheme {
+        Surface {
+            MemorialListScreenPreview(
+                uiState = MemorialListUiState(memorials = emptyList())
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Screen - Error")
+@Composable
+fun PreviewMemorialListScreenError() {
+    TahlilTheme {
+        Surface {
+            MemorialListScreenPreview(
+                uiState = MemorialListUiState(
+                    error = "Unable to load memorials. Please check your internet connection.",
+                    memorials = emptyList()
+                )
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Screen - Populated")
+@Composable
+fun PreviewMemorialListScreenPopulated() {
+    TahlilTheme {
+        Surface {
+            MemorialListScreenPreview(
+                uiState = MemorialListUiState(memorials = getSampleMemorials())
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Screen - Search Mode")
+@Composable
+fun PreviewMemorialListScreenSearch() {
+    TahlilTheme {
+        Surface {
+            MemorialListScreenPreview(
+                uiState = MemorialListUiState(memorials = getSampleMemorials()),
+                isSearchActive = true,
+                searchQuery = "Ali"
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Screen - Dynamic States", group = "Dynamic")
+@Composable
+fun PreviewMemorialListScreenDynamic(
+    @PreviewParameter(MemorialListStateProvider::class) uiState: MemorialListUiState
+) {
+    TahlilTheme {
+        Surface {
+            MemorialListScreenPreview(uiState = uiState)
+        }
+    }
+}
+
+@Preview(name = "Memorial List Screen - Dark Theme")
+@Composable
+fun PreviewMemorialListScreenDark() {
+    TahlilTheme(darkTheme = true) {
+        Surface {
+            MemorialListScreenPreview(
+                uiState = MemorialListUiState(memorials = getSampleMemorials())
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Screen - Tablet", device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+fun PreviewMemorialListScreenTablet() {
+    TahlilTheme {
+        Surface {
+            MemorialListScreenPreview(
+                uiState = MemorialListUiState(memorials = getSampleMemorials())
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Item - Standard")
+@Composable
+fun PreviewMemorialListItem() {
+    TahlilTheme {
+        Surface {
+            MemorialListItem(
+                memorial = MemorialData(
+                    id = "1",
+                    deceasedName = "Omar ibn al-Khattab",
+                    deceasedNameArabic = "عمر بن الخطاب",
+                    memorialMessage = "The second Caliph, known for his justice and expansion of the Islamic empire.",
+                    dateOfDeath = Date(),
+                    privacyLevel = PrivacyLevel.COMMUNITY,
+                    prayerCount = 456,
+                    participantCount = 78
+                ),
+                onClick = { },
+                onEdit = { },
+                onDelete = { },
+                onShare = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Item - With Photo")
+@Composable
+fun PreviewMemorialListItemWithPhoto() {
+    TahlilTheme {
+        Surface {
+            MemorialListItem(
+                memorial = MemorialData(
+                    id = "2",
+                    deceasedName = "Aisha bint Abu Bakr",
+                    deceasedNameArabic = "عائشة بنت أبي بكر",
+                    memorialMessage = "The beloved wife of Prophet Muhammad and a scholar of Islam.",
+                    dateOfDeath = Date(),
+                    privacyLevel = PrivacyLevel.PUBLIC,
+                    prayerCount = 1250,
+                    participantCount = 320,
+                    photoUrl = "sample_photo",
+                    expiresAt = Date(System.currentTimeMillis() + (2L * 24 * 60 * 60 * 1000))
+                ),
+                onClick = { },
+                onEdit = { },
+                onDelete = { },
+                onShare = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Memorial List Item - Dynamic", group = "Dynamic")
+@Composable
+fun PreviewMemorialListItemDynamic(
+    @PreviewParameter(SingleMemorialProvider::class) memorial: MemorialData
+) {
+    TahlilTheme {
+        Surface {
+            MemorialListItem(
+                memorial = memorial,
+                onClick = { },
+                onEdit = { },
+                onDelete = { },
+                onShare = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Search App Bar")
+@Composable
+fun PreviewSearchAppBar() {
+    TahlilTheme {
+        Surface {
+            SearchAppBar(
+                query = "Ali",
+                onQueryChange = { },
+                onSearchClose = { },
+                onSearch = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Filter Chip Row")
+@Composable
+fun PreviewFilterChipRow() {
+    TahlilTheme {
+        Surface {
+            FilterChipRow(
+                selectedFilter = MemorialFilter.COMMUNITY,
+                onFilterSelected = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Privacy Chips")
+@Composable
+fun PreviewPrivacyChips() {
+    TahlilTheme {
+        Surface {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                PrivacyLevel.entries.forEach { level ->
+                    PrivacyChip(privacyLevel = level)
+                }
+            }
+        }
+    }
+}
+
+@Preview(name = "Loading State")
+@Composable
+fun PreviewLoadingState() {
+    TahlilTheme {
+        Surface {
+            LoadingState(modifier = Modifier.size(300.dp))
+        }
+    }
+}
+
+@Preview(name = "Error State")
+@Composable
+fun PreviewErrorState() {
+    TahlilTheme {
+        Surface {
+            ErrorState(
+                error = "Network connection failed. Please try again.",
+                onRetry = { },
+                modifier = Modifier.size(300.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Empty State")
+@Composable
+fun PreviewEmptyState() {
+    TahlilTheme {
+        Surface {
+            EmptyState(modifier = Modifier.size(300.dp))
+        }
+    }
 }

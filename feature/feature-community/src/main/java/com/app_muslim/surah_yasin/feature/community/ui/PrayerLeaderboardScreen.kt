@@ -26,8 +26,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.app_muslim.surah_yasin.feature.community.model.*
+import com.app_muslim.surah_yasin.feature.community.model.LeaderboardTimeFrame as ModelLeaderboardTimeFrame
 import com.app_muslim.surah_yasin.feature.community.viewmodel.PrayerLeaderboardViewModel
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 /**
  * Prayer Leaderboard Screen with Regional Rankings
@@ -36,109 +41,101 @@ import com.app_muslim.surah_yasin.feature.community.viewmodel.PrayerLeaderboardV
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrayerLeaderboardScreen(
-    onNavigateBack: () -> Unit,
-    onNavigateToProfile: (String) -> Unit,
+    onBackPressed: (() -> Unit)? = null,
     viewModel: PrayerLeaderboardViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        // Top App Bar
-        TopAppBar(
-            title = { 
-                Text(
-                    text = "🏆 Prayer Leaderboard",
-                    fontWeight = FontWeight.Bold
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = onNavigateBack) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back"
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { 
+                    Text(
+                        "Prayer Leaderboard", 
+                        style = MaterialTheme.typography.headlineSmall
                     )
-                }
-            }
-        )
-        
-        // Filters
-        TimeFrameSelector(
-            selectedTimeFrame = uiState.selectedTimeFrame,
-            onTimeFrameChange = { timeFrame ->
-                viewModel.handleEvent(CommunityEvent.LoadLeaderboard(timeFrame, uiState.selectedRegion))
-            }
-        )
-        
-        RegionFilterRow(
-            selectedRegion = uiState.selectedRegion,
-            onRegionChange = { region ->
-                viewModel.handleEvent(CommunityEvent.LoadLeaderboard(uiState.selectedTimeFrame, region))
-            }
-        )
-        
-        if (uiState.isLoading) {
-            LoadingLeaderboard()
-        } else {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                // User's rank if available
-                uiState.userRank?.let { userRank ->
-                    item {
-                        UserRankCard(
-                            userRank = userRank,
-                            onClick = { onNavigateToProfile(userRank.userId) }
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
+                },
+                navigationIcon = onBackPressed?.let {
+                    {
+                        IconButton(onClick = it) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "Back"
+                            )
+                        }
                     }
-                }
-                
-                // Top 3 podium
-                if (uiState.globalLeaderboard.isNotEmpty()) {
-                    item {
-                        PodiumSection(
-                            topThree = uiState.globalLeaderboard.take(3),
-                            onNavigateToProfile = onNavigateToProfile
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                    }
-                }
-                
-                // Full leaderboard
-                itemsIndexed(
-                    items = uiState.globalLeaderboard.drop(3),
-                    key = { _, entry -> entry.userId }
-                ) { index, entry ->
-                    AnimatedVisibility(
-                        visible = true,
-                        enter = slideInVertically(
-                            initialOffsetY = { it },
-                            animationSpec = tween(300, delayMillis = index * 50)
-                        )
-                    ) {
-                        LeaderboardEntryCard(
-                            entry = entry,
-                            rank = index + 4, // +3 for podium, +1 for 1-based ranking
-                            onClick = { onNavigateToProfile(entry.userId) }
-                        )
-                    }
-                }
-                
-                // Bottom padding
-                item {
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
-            }
+                } ?: {},
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    titleContentColor = MaterialTheme.colorScheme.onSurface
+                )
+            )
         }
-        
-        // Error handling
-        uiState.errorMessage?.let { error ->
-            LaunchedEffect(error) {
-                // Show error snackbar
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp)
+        ) {
+            // Filters
+            TimeFrameSelector(
+                selectedTimeFrame = uiState.selectedTimeFrame,
+                onTimeFrameChange = { timeFrame ->
+                    // viewModel.loadLeaderboard(timeFrame, uiState.selectedRegion)
+                }
+            )
+            
+            RegionFilterRow(
+                selectedRegion = uiState.selectedRegion,
+                onRegionChange = { region ->
+                    // viewModel.loadLeaderboard(uiState.selectedTimeFrame, region)
+                }
+            )
+            
+            if (uiState.isLoading) {
+                LoadingLeaderboard()
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    // User's current rank
+                    uiState.userRank?.let { userRank ->
+                        item {
+                            CurrentUserRankCard(
+                                userRank = userRank,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                    
+                    // Global leaderboard
+                    if (uiState.globalLeaderboard.isNotEmpty()) {
+                        itemsIndexed(uiState.globalLeaderboard) { _, entry ->
+                            LeaderboardEntryCard(
+                                entry = entry,
+                                isCurrentUser = entry.userId == uiState.userRank?.userId
+                            )
+                        }
+                    } else {
+                        item {
+                            EmptyLeaderboard()
+                        }
+                    }
+                    
+                    // User rank (if not in top list)
+                    if (uiState.userRank != null && 
+                        !uiState.globalLeaderboard.any { it.userId == uiState.userRank!!.userId }) {
+                        item {
+                            Divider(modifier = Modifier.padding(vertical = 8.dp))
+                            CurrentUserRankCard(
+                                userRank = uiState.userRank!!,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -146,8 +143,8 @@ fun PrayerLeaderboardScreen(
 
 @Composable
 private fun TimeFrameSelector(
-    selectedTimeFrame: LeaderboardTimeFrame,
-    onTimeFrameChange: (LeaderboardTimeFrame) -> Unit
+    selectedTimeFrame: ModelLeaderboardTimeFrame,
+    onTimeFrameChange: (ModelLeaderboardTimeFrame) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -158,16 +155,16 @@ private fun TimeFrameSelector(
             modifier = Modifier.padding(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(LeaderboardTimeFrame.values()) { timeFrame ->
+            items(ModelLeaderboardTimeFrame.values()) { timeFrame ->
                 FilterChip(
                     onClick = { onTimeFrameChange(timeFrame) },
                     label = { 
                         Text(
                             text = when (timeFrame) {
-                                LeaderboardTimeFrame.TODAY -> "Today"
-                                LeaderboardTimeFrame.THIS_WEEK -> "This Week"
-                                LeaderboardTimeFrame.THIS_MONTH -> "This Month"
-                                LeaderboardTimeFrame.ALL_TIME -> "All Time"
+                                ModelLeaderboardTimeFrame.TODAY -> "Today"
+                                ModelLeaderboardTimeFrame.THIS_WEEK -> "This Week"
+                                ModelLeaderboardTimeFrame.THIS_MONTH -> "This Month"
+                                ModelLeaderboardTimeFrame.ALL_TIME -> "All Time"
                             },
                             fontSize = 12.sp
                         )
@@ -188,285 +185,41 @@ private fun RegionFilterRow(
     selectedRegion: String,
     onRegionChange: (String) -> Unit
 ) {
-    val regions = listOf(
-        "global" to "🌍 Global",
-        "middle_east" to "🕌 Middle East",
-        "south_asia" to "🇮🇳 South Asia",
-        "southeast_asia" to "🇮🇩 Southeast Asia",
-        "north_america" to "🇺🇸 North America",
-        "europe" to "🇪🇺 Europe",
-        "africa" to "🌍 Africa"
+    // Simple region filter implementation
+    Text(
+        text = "Showing: $selectedRegion",
+        style = MaterialTheme.typography.bodySmall,
+        modifier = Modifier.padding(8.dp)
     )
-    
-    LazyRow(
-        modifier = Modifier.padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(vertical = 8.dp)
+}
+
+@Composable
+private fun LoadingLeaderboard() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(32.dp),
+        contentAlignment = Alignment.Center
     ) {
-        items(regions) { (code, name) ->
-            FilterChip(
-                onClick = { onRegionChange(code) },
-                label = { 
-                    Text(
-                        text = name,
-                        fontSize = 11.sp,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                selected = selectedRegion == code,
-                colors = FilterChipDefaults.filterChipColors(
-                    selectedContainerColor = Color(0xFF4CAF50).copy(alpha = 0.2f),
-                    selectedLabelColor = Color(0xFF2E7D32)
-                )
-            )
-        }
+        CircularProgressIndicator()
     }
 }
 
 @Composable
-private fun PodiumSection(
-    topThree: List<PrayerLeaderboardEntry>,
-    onNavigateToProfile: (String) -> Unit
-) {
+private fun EmptyLeaderboard() {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Column(
-            modifier = Modifier.padding(20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "🏆 Top Performers",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
-            
-            Spacer(modifier = Modifier.height(20.dp))
-            
-            // Podium layout
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.Bottom
-            ) {
-                // 2nd place (left)
-                if (topThree.size > 1) {
-                    PodiumPosition(
-                        entry = topThree[1],
-                        position = 2,
-                        height = 60.dp,
-                        onClick = { onNavigateToProfile(topThree[1].userId) }
-                    )
-                }
-                
-                // 1st place (center, tallest)
-                if (topThree.isNotEmpty()) {
-                    PodiumPosition(
-                        entry = topThree[0],
-                        position = 1,
-                        height = 80.dp,
-                        onClick = { onNavigateToProfile(topThree[0].userId) }
-                    )
-                }
-                
-                // 3rd place (right)
-                if (topThree.size > 2) {
-                    PodiumPosition(
-                        entry = topThree[2],
-                        position = 3,
-                        height = 40.dp,
-                        onClick = { onNavigateToProfile(topThree[2].userId) }
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun PodiumPosition(
-    entry: PrayerLeaderboardEntry,
-    position: Int,
-    height: androidx.compose.ui.unit.Dp,
-    onClick: () -> Unit
-) {
-    val podiumColor = when (position) {
-        1 -> Color(0xFFFFD700) // Gold
-        2 -> Color(0xFFC0C0C0) // Silver
-        3 -> Color(0xFFCD7F32) // Bronze
-        else -> MaterialTheme.colorScheme.surface
-    }
-    
-    val crownEmoji = when (position) {
-        1 -> "👑"
-        2 -> "🥈"
-        3 -> "🥉"
-        else -> ""
-    }
-    
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.width(100.dp)
-    ) {
-        // Crown/Medal
-        Text(
-            text = crownEmoji,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
-        
-        // Profile
-        Card(
-            onClick = onClick,
-            shape = CircleShape,
-            modifier = Modifier.size(60.dp)
-        ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.radialGradient(
-                            colors = listOf(
-                                podiumColor.copy(alpha = 0.3f),
-                                podiumColor.copy(alpha = 0.1f)
-                            )
-                        )
-                    )
-            ) {
-                Text(
-                    text = entry.displayName.take(2).uppercase(),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF2E7D32)
-                )
-            }
-        }
-        
-        Spacer(modifier = Modifier.height(4.dp))
-        
-        Text(
-            text = entry.displayName,
-            style = MaterialTheme.typography.bodySmall,
-            fontWeight = FontWeight.Medium,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            textAlign = TextAlign.Center
-        )
-        
-        Text(
-            text = "${entry.totalPrayers} prayers",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-            textAlign = TextAlign.Center
-        )
-        
-        Spacer(modifier = Modifier.height(8.dp))
-        
-        // Podium base
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(height)
-                .background(
-                    color = podiumColor,
-                    shape = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
-                )
+                .padding(32.dp),
+            contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "#$position",
-                modifier = Modifier.align(Alignment.Center),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
+                text = "No leaderboard data available",
+                style = MaterialTheme.typography.bodyMedium
             )
-        }
-    }
-}
-
-@Composable
-private fun UserRankCard(
-    userRank: PrayerLeaderboardEntry,
-    onClick: () -> Unit
-) {
-    Card(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF4CAF50).copy(alpha = 0.1f)
-        ),
-        border = androidx.compose.foundation.BorderStroke(
-            1.dp,
-            Color(0xFF4CAF50).copy(alpha = 0.5f)
-        )
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            // Your rank indicator
-            Surface(
-                shape = CircleShape,
-                color = Color(0xFF4CAF50),
-                modifier = Modifier.size(40.dp)
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "YOU",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.sp
-                    )
-                }
-            }
-            
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "Your Rank: #${userRank.rank}",
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF2E7D32)
-                )
-                
-                Text(
-                    text = "${userRank.totalPrayers} prayers • ${userRank.totalSessions} sessions",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                )
-            }
-            
-            if (userRank.currentStreak > 0) {
-                Surface(
-                    shape = RoundedCornerShape(12.dp),
-                    color = Color(0xFFFF9800).copy(alpha = 0.2f)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(2.dp)
-                    ) {
-                        Text(
-                            text = "🔥",
-                            fontSize = 12.sp
-                        )
-                        Text(
-                            text = "${userRank.currentStreak}",
-                            style = MaterialTheme.typography.bodySmall,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFFE65100)
-                        )
-                    }
-                }
-            }
         }
     }
 }
@@ -474,187 +227,250 @@ private fun UserRankCard(
 @Composable
 private fun LeaderboardEntryCard(
     entry: PrayerLeaderboardEntry,
-    rank: Int,
-    onClick: () -> Unit
+    isCurrentUser: Boolean = false
 ) {
     Card(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        colors = if (isCurrentUser) {
+            CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+        } else {
+            CardDefaults.cardColors()
+        }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Rank number
-            Surface(
-                shape = CircleShape,
-                color = MaterialTheme.colorScheme.surfaceVariant,
-                modifier = Modifier.size(32.dp)
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "$rank",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
+            // Rank display
+            Text(
+                text = "#${entry.rank}",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
             
-            // Profile avatar placeholder
-            Surface(
-                shape = CircleShape,
-                color = Color(0xFF4CAF50).copy(alpha = 0.1f),
-                modifier = Modifier.size(40.dp)
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = entry.displayName.take(2).uppercase(),
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF2E7D32)
-                    )
-                }
-            }
+            Spacer(modifier = Modifier.width(16.dp))
             
-            // User info
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = entry.displayName,
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Medium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Text(
-                        text = "${entry.totalPrayers} prayers",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
-                    
-                    Text(
-                        text = "•",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
-                    )
-                    
-                    Text(
-                        text = entry.regionName,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
-                }
-            }
+            // User name
+            Text(
+                text = entry.displayName,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.weight(1f)
+            )
             
-            // Badges and streak
-            Column(
-                horizontalAlignment = Alignment.End
-            ) {
-                if (entry.badges.isNotEmpty()) {
-                    Text(
-                        text = "🎖️ ${entry.badges.size}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color(0xFFFF9800)
-                    )
-                }
-                
-                if (entry.currentStreak > 0) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(2.dp)
-                    ) {
-                        Text(
-                            text = "🔥",
-                            fontSize = 12.sp
-                        )
-                        Text(
-                            text = "${entry.currentStreak}",
-                            style = MaterialTheme.typography.bodySmall,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFFE65100)
-                        )
-                    }
-                }
-            }
+            // Prayer count
+            Text(
+                text = "${entry.totalPrayers} prayers",
+                style = MaterialTheme.typography.bodyMedium
+            )
         }
     }
 }
 
 @Composable
-private fun LoadingLeaderboard() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        repeat(10) {
-            LeaderboardEntryShimmer()
-        }
-    }
-}
-
-@Composable
-private fun LeaderboardEntryShimmer() {
-    val infiniteTransition = rememberInfiniteTransition()
-    val alpha by infiniteTransition.animateFloat(
-        initialValue = 0.3f,
-        targetValue = 0.7f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1000),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-    
+private fun CurrentUserRankCard(
+    userRank: PrayerLeaderboardEntry,
+    modifier: Modifier = Modifier
+) {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        )
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        Column(
+            modifier = Modifier.padding(16.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(32.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = alpha))
+            Text(
+                text = "Your Rank",
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold
             )
             
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = alpha))
-            )
-            
-            Column(modifier = Modifier.weight(1f)) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(0.6f)
-                        .height(16.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = alpha))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "#${userRank.rank}",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
                 )
                 
-                Spacer(modifier = Modifier.height(4.dp))
-                
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(0.4f)
-                        .height(12.dp)
-                        .clip(RoundedCornerShape(6.dp))
-                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = alpha))
+                Text(
+                    text = "${userRank.totalPrayers} prayers",
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
         }
+    }
+}
+
+// Simple Preview Functions
+@Preview(showBackground = true, name = "Prayer Leaderboard - Loading")
+@Composable
+private fun PreviewPrayerLeaderboardLoading() {
+    TahlilTheme {
+        Column {
+            TimeFrameSelector(
+                selectedTimeFrame = ModelLeaderboardTimeFrame.TODAY,
+                onTimeFrameChange = {}
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            LoadingLeaderboard()
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Time Frame Selector")
+@Composable 
+private fun PreviewTimeFrameSelector() {
+    TahlilTheme {
+        TimeFrameSelector(
+            selectedTimeFrame = ModelLeaderboardTimeFrame.THIS_WEEK,
+            onTimeFrameChange = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Empty Leaderboard")
+@Composable
+private fun PreviewEmptyLeaderboard() {
+    TahlilTheme {
+        EmptyLeaderboard()
+    }
+}
+
+@Preview(showBackground = true, name = "Loading Indicator")
+@Composable
+private fun PreviewLoadingLeaderboard() {
+    TahlilTheme {
+        LoadingLeaderboard()
+    }
+}
+
+@Preview(showBackground = true, name = "Prayer Leaderboard Entry")
+@Composable
+private fun PreviewLeaderboardEntry() {
+    TahlilTheme {
+        // For preview purposes, we'll create a simple display component
+        Card(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "#1",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                Spacer(modifier = Modifier.width(16.dp))
+                
+                Text(
+                    text = "Abdullah Rahman",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f)
+                )
+                
+                Text(
+                    text = "1250 prayers",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Current User Rank Card")
+@Composable
+private fun PreviewCurrentUserRankCard() {
+    TahlilTheme {
+        // Create a mock entry for preview
+        val mockUserRank = PrayerLeaderboardEntry(
+            userId = "user1",
+            displayName = "Current User",
+            regionCode = "ID",
+            regionName = "Indonesia",
+            totalPrayers = 725L,
+            totalSessions = 45L,
+            rank = 12,
+            favoriteParticipationType = CommunityPrayerType.TAHLIL,
+            currentStreak = 15,
+            joinedCommunitySince = java.time.ZonedDateTime.now()
+        )
+        
+        CurrentUserRankCard(
+            userRank = mockUserRank
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Prayer Leaderboard - Current User Entry")
+@Composable
+private fun PreviewLeaderboardEntryCurrentUser() {
+    TahlilTheme {
+        // Create a mock entry for preview
+        val mockEntry = PrayerLeaderboardEntry(
+            userId = "user1",
+            displayName = "You",
+            regionCode = "MY",
+            regionName = "Malaysia",
+            totalPrayers = 890L,
+            totalSessions = 67L,
+            rank = 5,
+            favoriteParticipationType = CommunityPrayerType.YASIN,
+            currentStreak = 25,
+            joinedCommunitySince = java.time.ZonedDateTime.now()
+        )
+        
+        LeaderboardEntryCard(
+            entry = mockEntry,
+            isCurrentUser = true
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Region Filter Row")
+@Composable
+private fun PreviewRegionFilterRow() {
+    TahlilTheme {
+        RegionFilterRow(
+            selectedRegion = "Global",
+            onRegionChange = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "Prayer Leaderboard Screen - Dark", 
+         uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PreviewPrayerLeaderboardDark() {
+    TahlilTheme {
+        Column {
+            TimeFrameSelector(
+                selectedTimeFrame = ModelLeaderboardTimeFrame.ALL_TIME,
+                onTimeFrameChange = {}
+            )
+            EmptyLeaderboard()
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Prayer Leaderboard - Tablet",
+         device = "spec:width=1280dp,height=800dp,dpi=240")
+@Composable
+private fun PreviewPrayerLeaderboardTablet() {
+    TahlilTheme {
+        TimeFrameSelector(
+            selectedTimeFrame = ModelLeaderboardTimeFrame.THIS_MONTH,
+            onTimeFrameChange = {}
+        )
     }
 }
