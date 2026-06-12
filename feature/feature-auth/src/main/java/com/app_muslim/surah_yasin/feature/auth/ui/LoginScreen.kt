@@ -356,7 +356,7 @@ fun LoginScreenPreview(
             text = "Welcome to Tahlil",
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
             ),
             modifier = Modifier.padding(bottom = 8.dp)
         )

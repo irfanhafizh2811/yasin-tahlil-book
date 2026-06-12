@@ -17,6 +17,10 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.memorial.model.ValidationError
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -330,3 +334,186 @@ private data class MessageTemplate(
     val english: String,
     val arabic: String
 )
+
+// Preview Parameter Provider for different message states
+class MemorialMessagePreviewProvider : PreviewParameterProvider<MemorialMessagePreviewData> {
+    override val values = sequenceOf(
+        MemorialMessagePreviewData(
+            description = "Empty State",
+            message = "",
+            messageArabic = "",
+            errors = emptyList()
+        ),
+        MemorialMessagePreviewData(
+            description = "Short Message",
+            message = "A loving father who always guided us with wisdom.",
+            messageArabic = "",
+            errors = emptyList()
+        ),
+        MemorialMessagePreviewData(
+            description = "Bilingual Message",
+            message = "We remember Ahmed with love and pray for his peaceful rest. May Allah grant him Jannah.",
+            messageArabic = "نتذكر أحمد بالحب وندعو له بالراحة الأبدية. اللهم ارحمه وأدخله الجنة.",
+            errors = emptyList()
+        ),
+        MemorialMessagePreviewData(
+            description = "Long Message",
+            message = "A wonderful grandmother who taught us the importance of faith, family, and kindness. Her warm smile and gentle wisdom will forever remain in our hearts. May Allah bless her soul and grant her the highest place in paradise. We will continue to pray for her and follow the beautiful example she set for us throughout her life.",
+            messageArabic = "جدة رائعة علمتنا أهمية الإيمان والأسرة واللطف. ابتسامتها الدافئة وحكمتها اللطيفة ستبقى إلى الأبد في قلوبنا.",
+            errors = emptyList()
+        ),
+        MemorialMessagePreviewData(
+            description = "Message Too Long",
+            message = "This is a very long memorial message that exceeds the maximum allowed character limit for memorial messages in our application. ".repeat(20),
+            messageArabic = "",
+            errors = listOf(ValidationError.MEMORIAL_MESSAGE_TOO_LONG)
+        ),
+        MemorialMessagePreviewData(
+            description = "Inappropriate Content",
+            message = "Some inappropriate content that violates community guidelines",
+            messageArabic = "",
+            errors = listOf(ValidationError.INAPPROPRIATE_CONTENT)
+        ),
+        MemorialMessagePreviewData(
+            description = "Invalid Arabic",
+            message = "Ahmed was a great person",
+            messageArabic = "Ahmed123!@#$%",
+            errors = listOf(ValidationError.ARABIC_TEXT_INVALID)
+        )
+    )
+}
+
+data class MemorialMessagePreviewData(
+    val description: String,
+    val message: String,
+    val messageArabic: String,
+    val errors: List<ValidationError>
+)
+
+@Preview(name = "Empty State", showBackground = true)
+@Composable
+private fun MemorialMessageSectionEmptyPreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "",
+            messageArabic = "",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "With Short Message", showBackground = true)
+@Composable
+private fun MemorialMessageSectionShortPreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "A loving father who always guided us with wisdom.",
+            messageArabic = "",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "With Bilingual Message", showBackground = true)
+@Composable
+private fun MemorialMessageSectionBilingualPreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "We remember Ahmed with love and pray for his peaceful rest. May Allah grant him Jannah.",
+            messageArabic = "نتذكر أحمد بالحب وندعو له بالراحة الأبدية. اللهم ارحمه وأدخله الجنة.",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "With Long Message", showBackground = true)
+@Composable
+private fun MemorialMessageSectionLongPreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "A wonderful grandmother who taught us the importance of faith, family, and kindness. Her warm smile and gentle wisdom will forever remain in our hearts. May Allah bless her soul and grant her the highest place in paradise.",
+            messageArabic = "جدة رائعة علمتنا أهمية الإيمان والأسرة واللطف. ابتسامتها الدافئة وحكمتها اللطيفة ستبقى إلى الأبد في قلوبنا.",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "Message Too Long Error", showBackground = true)
+@Composable
+private fun MemorialMessageSectionTooLongPreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "This is a very long memorial message that exceeds the maximum allowed character limit for memorial messages in our application. ".repeat(15),
+            messageArabic = "",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = listOf(ValidationError.MEMORIAL_MESSAGE_TOO_LONG)
+        )
+    }
+}
+
+@Preview(name = "Inappropriate Content Error", showBackground = true)
+@Composable
+private fun MemorialMessageSectionInappropriatePreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "Some inappropriate content that violates community guidelines",
+            messageArabic = "",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = listOf(ValidationError.INAPPROPRIATE_CONTENT)
+        )
+    }
+}
+
+@Preview(name = "Invalid Arabic Error", showBackground = true)
+@Composable
+private fun MemorialMessageSectionInvalidArabicPreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "Ahmed was a great person",
+            messageArabic = "Ahmed123!@#$%",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = listOf(ValidationError.ARABIC_TEXT_INVALID)
+        )
+    }
+}
+
+@Preview(name = "Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun MemorialMessageSectionDarkPreview() {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = "In loving memory of a dear soul who touched many hearts. May Allah grant them eternal peace.",
+            messageArabic = "في ذكرى محبة لروح عزيزة لمست قلوباً كثيرة. اللهم ارحمها واغفر لها.",
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "Dynamic Preview", showBackground = true)
+@Composable
+private fun MemorialMessageSectionDynamicPreview(
+    @PreviewParameter(MemorialMessagePreviewProvider::class) data: MemorialMessagePreviewData
+) {
+    TahlilTheme {
+        MemorialMessageSection(
+            message = data.message,
+            messageArabic = data.messageArabic,
+            onMessageChange = { },
+            onMessageArabicChange = { },
+            errors = data.errors
+        )
+    }
+}

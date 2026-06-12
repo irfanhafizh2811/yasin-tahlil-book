@@ -13,6 +13,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.memorial.model.PrivacyLevel
 
 @Composable
@@ -365,5 +369,83 @@ private fun PrayerTypeOption(
                 )
             }
         }
+    }
+}
+
+// Preview Parameter Provider for different privacy levels
+class PrivacyLevelPreviewProvider : PreviewParameterProvider<PrivacyLevel> {
+    override val values = sequenceOf(
+        PrivacyLevel.PRIVATE,
+        PrivacyLevel.FAMILY,
+        PrivacyLevel.COMMUNITY,
+        PrivacyLevel.PUBLIC
+    )
+}
+
+@Preview(name = "Private Selected", showBackground = true)
+@Composable
+private fun PrivacyLevelSectionPrivatePreview() {
+    TahlilTheme {
+        PrivacyLevelSection(
+            selectedPrivacy = PrivacyLevel.PRIVATE,
+            onPrivacyChange = { }
+        )
+    }
+}
+
+@Preview(name = "Family Selected", showBackground = true)
+@Composable
+private fun PrivacyLevelSectionFamilyPreview() {
+    TahlilTheme {
+        PrivacyLevelSection(
+            selectedPrivacy = PrivacyLevel.FAMILY,
+            onPrivacyChange = { }
+        )
+    }
+}
+
+@Preview(name = "Community Selected", showBackground = true)
+@Composable
+private fun PrivacyLevelSectionCommunityPreview() {
+    TahlilTheme {
+        PrivacyLevelSection(
+            selectedPrivacy = PrivacyLevel.COMMUNITY,
+            onPrivacyChange = { }
+        )
+    }
+}
+
+@Preview(name = "Public Selected", showBackground = true)
+@Composable
+private fun PrivacyLevelSectionPublicPreview() {
+    TahlilTheme {
+        PrivacyLevelSection(
+            selectedPrivacy = PrivacyLevel.PUBLIC,
+            onPrivacyChange = { }
+        )
+    }
+}
+
+@Preview(name = "Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PrivacyLevelSectionDarkPreview() {
+    TahlilTheme {
+        PrivacyLevelSection(
+            selectedPrivacy = PrivacyLevel.FAMILY,
+            onPrivacyChange = { }
+        )
+    }
+}
+
+@Preview(name = "Dynamic Privacy", showBackground = true)
+@Composable
+private fun PrivacyLevelSectionDynamicPreview(
+    @PreviewParameter(PrivacyLevelPreviewProvider::class) privacyLevel: PrivacyLevel
+) {
+    TahlilTheme {
+        PrivacyLevelSection(
+            selectedPrivacy = privacyLevel,
+            onPrivacyChange = { }
+        )
     }
 }

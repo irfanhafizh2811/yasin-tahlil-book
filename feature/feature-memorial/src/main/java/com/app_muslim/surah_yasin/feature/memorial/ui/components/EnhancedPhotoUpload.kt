@@ -21,14 +21,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import android.content.res.Configuration
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.memorial.model.*
 import com.app_muslim.surah_yasin.feature.memorial.ui.frames.IslamicFrameOverlay
 import com.app_muslim.surah_yasin.feature.memorial.ui.frames.IslamicFrameSelector
+import java.util.*
 
 @Composable
 fun EnhancedPhotoUpload(
@@ -81,7 +87,7 @@ fun EnhancedPhotoUpload(
         // Upload progress
         uploadProgress?.let { progress ->
             if (progress.isUploading) {
-                PhotoUploadProgress(progress = progress)
+                PhotoUploadProgressCard(progress = progress)
             }
         }
         
@@ -521,7 +527,7 @@ private fun PhotoProcessingStatus(
 }
 
 @Composable
-private fun PhotoUploadProgress(
+private fun PhotoUploadProgressCard(
     progress: PhotoUploadProgress
 ) {
     Card(
@@ -624,5 +630,528 @@ private fun PhotoUploadGuidelines() {
                 }
             }
         }
+    }
+}
+
+// ========================================
+// PREVIEW IMPLEMENTATIONS
+// ========================================
+
+@Preview(
+    name = "No Photo State - Light Theme",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadNoPhoto() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = null,
+            frameStyle = IslamicFrameStyle.NONE,
+            uploadProgress = null,
+            processingResult = null,
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "No Photo State - Dark Theme",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadNoPhotoDark() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = null,
+            frameStyle = IslamicFrameStyle.NONE,
+            uploadProgress = null,
+            processingResult = null,
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Photo with Classic Gold Frame",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadClassicGold() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "sample_photo_1",
+                originalUri = null,
+                firebaseUrl = "https://sample.com/photo.jpg",
+                fileName = "Memorial Photo",
+                fileSize = 1024000,
+                mimeType = "image/jpeg",
+                width = 1920,
+                height = 1080,
+                metadata = PhotoMetadata()
+            ),
+            frameStyle = IslamicFrameStyle.CLASSIC_GOLD,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = true,
+                originalSize = 2048000,
+                compressedSize = 1024000,
+                optimizations = listOf(
+                    PhotoOptimization.COMPRESSION,
+                    PhotoOptimization.COLOR_ENHANCEMENT
+                )
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Photo with Geometric Silver Frame",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadGeometric() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "sample_photo_2",
+                originalUri = null,
+                firebaseUrl = "https://sample.com/photo2.jpg",
+                fileName = "Family Memorial",
+                fileSize = 1536000,
+                mimeType = "image/jpeg",
+                width = 1920,
+                height = 1280,
+                metadata = PhotoMetadata()
+            ),
+            frameStyle = IslamicFrameStyle.GEOMETRIC_SILVER,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = true,
+                originalSize = 3072000,
+                compressedSize = 1536000,
+                optimizations = listOf(
+                    PhotoOptimization.COMPRESSION,
+                    PhotoOptimization.ORIENTATION_FIX,
+                    PhotoOptimization.METADATA_REMOVAL
+                )
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Photo with Mosque Arch Frame",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadMosqueArch() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "sample_photo_3",
+                originalUri = null,
+                firebaseUrl = "https://sample.com/photo3.jpg",
+                fileName = "Beloved Father",
+                fileSize = 2048000,
+                mimeType = "image/png",
+                width = 1600,
+                height = 1200,
+                metadata = PhotoMetadata()
+            ),
+            frameStyle = IslamicFrameStyle.MOSQUE_ARCH,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = true,
+                originalSize = 4096000,
+                compressedSize = 2048000,
+                optimizations = listOf(
+                    PhotoOptimization.COMPRESSION,
+                    PhotoOptimization.NOISE_REDUCTION,
+                    PhotoOptimization.SHARPENING
+                )
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Photo with Royal Ornate Frame",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadRoyalOrnate() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "sample_photo_4",
+                originalUri = null,
+                firebaseUrl = "https://sample.com/photo4.jpg",
+                fileName = "Grandmother's Memory",
+                fileSize = 1792000,
+                mimeType = "image/jpeg",
+                width = 2048,
+                height = 1536,
+                metadata = PhotoMetadata()
+            ),
+            frameStyle = IslamicFrameStyle.ROYAL_ORNATE,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = true,
+                originalSize = 3584000,
+                compressedSize = 1792000,
+                optimizations = listOf(
+                    PhotoOptimization.COMPRESSION,
+                    PhotoOptimization.COLOR_ENHANCEMENT,
+                    PhotoOptimization.METADATA_REMOVAL
+                )
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Upload Progress - Preparing",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadProgressPreparing() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "uploading_photo",
+                originalUri = null,
+                firebaseUrl = "",
+                fileName = "Uploading Memorial"
+            ),
+            frameStyle = IslamicFrameStyle.CLASSIC_GOLD,
+            uploadProgress = PhotoUploadProgress(
+                progress = 0.15f,
+                bytesUploaded = 153600,
+                totalBytes = 1024000,
+                uploadSpeed = "2.3 MB/s",
+                estimatedTimeRemaining = "12s",
+                stage = UploadStage.PREPARING
+            ),
+            processingResult = null,
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Upload Progress - Uploading",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadProgressUploading() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "uploading_photo",
+                originalUri = null,
+                firebaseUrl = "",
+                fileName = "Memorial Photo"
+            ),
+            frameStyle = IslamicFrameStyle.GEOMETRIC_SILVER,
+            uploadProgress = PhotoUploadProgress(
+                progress = 0.67f,
+                bytesUploaded = 686080,
+                totalBytes = 1024000,
+                uploadSpeed = "1.8 MB/s",
+                estimatedTimeRemaining = "5s",
+                stage = UploadStage.UPLOADING
+            ),
+            processingResult = null,
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Upload Progress - Finalizing",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadProgressFinalizing() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "uploading_photo",
+                originalUri = null,
+                firebaseUrl = "",
+                fileName = "Family Memorial"
+            ),
+            frameStyle = IslamicFrameStyle.FLORAL_PATTERN,
+            uploadProgress = PhotoUploadProgress(
+                progress = 0.95f,
+                bytesUploaded = 972800,
+                totalBytes = 1024000,
+                uploadSpeed = "3.1 MB/s",
+                estimatedTimeRemaining = "1s",
+                stage = UploadStage.FINALIZING
+            ),
+            processingResult = null,
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Processing Error State",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadError() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = null,
+            frameStyle = IslamicFrameStyle.NONE,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = false,
+                errorMessage = "File size exceeds 10MB limit",
+                errorCode = PhotoProcessingError.FILE_TOO_LARGE,
+                warnings = listOf("Please choose a smaller image file")
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Network Error State",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadNetworkError() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "failed_upload",
+                originalUri = null,
+                firebaseUrl = "",
+                fileName = "Failed Upload"
+            ),
+            frameStyle = IslamicFrameStyle.MINIMALIST_MODERN,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = false,
+                errorMessage = "Upload failed - please check your internet connection",
+                errorCode = PhotoProcessingError.NETWORK_ERROR,
+                warnings = listOf("Retry when connected to the internet")
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Calligraphy Border Frame",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadCalligraphyFrame() {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "calligraphy_photo",
+                originalUri = null,
+                firebaseUrl = "https://sample.com/memorial.jpg",
+                fileName = "Sacred Memorial",
+                fileSize = 1843200,
+                mimeType = "image/jpeg",
+                width = 1800,
+                height = 1350,
+                metadata = PhotoMetadata()
+            ),
+            frameStyle = IslamicFrameStyle.CALLIGRAPHY_BORDER,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = true,
+                originalSize = 3686400,
+                compressedSize = 1843200,
+                optimizations = listOf(
+                    PhotoOptimization.COMPRESSION,
+                    PhotoOptimization.COLOR_ENHANCEMENT,
+                    PhotoOptimization.NOISE_REDUCTION,
+                    PhotoOptimization.SHARPENING
+                )
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+// Preview Parameter Providers for Dynamic Content
+
+class PhotoDataPreviewProvider : PreviewParameterProvider<PhotoData?> {
+    override val values = sequenceOf(
+        null, // No photo state
+        PhotoData(
+            id = "memorial_1",
+            originalUri = null,
+            firebaseUrl = "https://sample.com/memorial1.jpg",
+            fileName = "beloved_father.jpg"
+        ),
+        PhotoData(
+            id = "memorial_2",
+            originalUri = null,
+            firebaseUrl = "https://sample.com/memorial2.jpg",
+            fileName = "dear_mother.jpg"
+        )
+    )
+}
+
+class IslamicFramePreviewProvider : PreviewParameterProvider<IslamicFrameStyle> {
+    override val values = sequenceOf(
+        IslamicFrameStyle.NONE,
+        IslamicFrameStyle.CLASSIC_GOLD,
+        IslamicFrameStyle.GEOMETRIC_SILVER,
+        IslamicFrameStyle.MOSQUE_ARCH,
+        IslamicFrameStyle.ROYAL_ORNATE
+    )
+}
+
+@Preview(
+    name = "Dynamic Photo Data",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadDynamicPhoto(
+    @PreviewParameter(PhotoDataPreviewProvider::class) photoData: PhotoData?
+) {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = photoData,
+            frameStyle = IslamicFrameStyle.CLASSIC_GOLD,
+            uploadProgress = null,
+            processingResult = if (photoData != null) {
+                PhotoProcessingResult(
+                    success = true,
+                    originalSize = 2048000,
+                    compressedSize = 1024000,
+                    optimizations = listOf(PhotoOptimization.COMPRESSION)
+                )
+            } else null,
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Dynamic Islamic Frames",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewEnhancedPhotoUploadDynamicFrames(
+    @PreviewParameter(IslamicFramePreviewProvider::class) frameStyle: IslamicFrameStyle
+) {
+    TahlilTheme {
+        EnhancedPhotoUpload(
+            photoData = PhotoData(
+                id = "frame_demo",
+                originalUri = null,
+                firebaseUrl = "https://sample.com/demo.jpg",
+                fileName = "frame_demonstration.jpg"
+            ),
+            frameStyle = frameStyle,
+            uploadProgress = null,
+            processingResult = PhotoProcessingResult(
+                success = true,
+                originalSize = 1536000,
+                compressedSize = 768000,
+                optimizations = listOf(PhotoOptimization.COMPRESSION)
+            ),
+            onPhotoSelected = { },
+            onPhotoRemoved = { },
+            onFrameSelected = { },
+            onCameraClick = { },
+            onGalleryClick = { },
+            onEditPhoto = { }
+        )
     }
 }

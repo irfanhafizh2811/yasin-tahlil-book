@@ -45,23 +45,48 @@ class PhotoRepository @Inject constructor(
         quality: PhotoQuality = PhotoQuality.MEDIUM,
         frameStyle: IslamicFrameStyle = IslamicFrameStyle.NONE
     ): Flow<PhotoProcessingResult> = flow {
+        val startTime = System.currentTimeMillis()
+        var originalSize = 0L
+        var compressedSize = 0L
+        
         try {
-            emit(PhotoProcessingResult(true, null, "Starting photo processing..."))
+            emit(PhotoProcessingResult(
+                success = true,
+                errorMessage = "Starting photo processing..."
+            ))
             
             // Step 1: Validate photo
             val validationResult = PhotoValidator.validatePhoto(photoUri, context)
             if (!validationResult.isValid) {
-                emit(PhotoProcessingResult(false, null, validationResult.errors.first().message))
+                emit(PhotoProcessingResult(
+                    success = false,
+                    errorMessage = validationResult.errors.first().message,
+                    errorCode = PhotoProcessingError.INVALID_FORMAT
+                ))
                 return@flow
             }
             
+            // Get original file size
+            val inputStream = context.contentResolver.openInputStream(photoUri)
+            originalSize = inputStream?.available()?.toLong() ?: 0
+            inputStream?.close()
+            
             // Step 2: Extract metadata
             val metadata = extractPhotoMetadata(photoUri)
-            emit(PhotoProcessingResult(true, null, "Extracting photo information..."))
+            emit(PhotoProcessingResult(
+                success = true,
+                originalSize = originalSize,
+                errorMessage = "Extracting photo information..."
+            ))
             
             // Step 3: Optimize image
             val optimizedUri = optimizeImage(photoUri, quality)
-            emit(PhotoProcessingResult(true, null, "Optimizing image quality..."))
+            emit(PhotoProcessingResult(
+                success = true,
+                originalSize = originalSize,
+                errorMessage = "Optimizing image quality...",
+                optimizations = listOf(PhotoOptimization.COMPRESSION)
+            ))
             
             // Step 4: Apply Islamic frame if selected
             val framedUri = if (frameStyle != IslamicFrameStyle.NONE) {
@@ -69,11 +94,32 @@ class PhotoRepository @Inject constructor(
             } else {
                 optimizedUri
             }
-            emit(PhotoProcessingResult(true, null, "Applying Islamic frame..."))
+            val optimizations = mutableListOf(PhotoOptimization.COMPRESSION)
+            if (frameStyle != IslamicFrameStyle.NONE) {
+                optimizations.add(PhotoOptimization.COLOR_ENHANCEMENT)
+            }
+            
+            emit(PhotoProcessingResult(
+                success = true,
+                originalSize = originalSize,
+                errorMessage = "Applying Islamic frame...",
+                optimizations = optimizations
+            ))
+            
+            // Get compressed file size
+            val optimizedFile = File(framedUri.path ?: "")
+            compressedSize = if (optimizedFile.exists()) optimizedFile.length() else originalSize
             
             // Step 5: Upload to Firebase Storage
             val firebaseUrl = uploadToFirebaseStorage(framedUri, memorialId)
-            emit(PhotoProcessingResult(true, null, "Uploading to secure storage..."))
+            emit(PhotoProcessingResult(
+                success = true,
+                originalSize = originalSize,
+                compressedSize = compressedSize,
+                compressionRatio = if (originalSize > 0) compressedSize.toFloat() / originalSize else 1.0f,
+                errorMessage = "Uploading to secure storage...",
+                optimizations = optimizations
+            ))
             
             // Step 6: Create photo data
             val photoData = createPhotoData(
@@ -81,14 +127,30 @@ class PhotoRepository @Inject constructor(
                 optimizedUri = framedUri,
                 firebaseUrl = firebaseUrl,
                 metadata = metadata,
-                frameStyle = frameStyle,
                 quality = quality
             )
             
-            emit(PhotoProcessingResult(true, photoData, "Photo processing completed successfully"))
+            val processingTime = System.currentTimeMillis() - startTime
+            emit(PhotoProcessingResult(
+                success = true,
+                originalSize = originalSize,
+                compressedSize = compressedSize,
+                compressionRatio = if (originalSize > 0) compressedSize.toFloat() / originalSize else 1.0f,
+                processingTimeMs = processingTime,
+                optimizations = optimizations,
+                errorMessage = "Photo processing completed successfully"
+            ))
             
         } catch (e: Exception) {
-            emit(PhotoProcessingResult(false, null, "Failed to process photo: ${e.message}"))
+            val processingTime = System.currentTimeMillis() - startTime
+            emit(PhotoProcessingResult(
+                success = false,
+                originalSize = originalSize,
+                compressedSize = compressedSize,
+                processingTimeMs = processingTime,
+                errorMessage = "Failed to process photo: ${e.message}",
+                errorCode = PhotoProcessingError.PROCESSING_FAILED
+            ))
         }
     }
     
@@ -140,15 +202,28 @@ class PhotoRepository @Inject constructor(
     }
     
     fun getUploadProgress(uploadTask: UploadTask): Flow<PhotoUploadProgress> = callbackFlow {
+        val startTime = System.currentTimeMillis()
+        val uploadId = "upload_${System.currentTimeMillis()}"
+        
         val progressListener = OnProgressListener<UploadTask.TaskSnapshot> { taskSnapshot ->
             val progress = taskSnapshot.bytesTransferred.toFloat() / taskSnapshot.totalByteCount.toFloat()
+            val isCompleted = taskSnapshot.task.isComplete
             val uploadProgress = PhotoUploadProgress(
-                isUploading = !taskSnapshot.task.isComplete,
                 progress = progress,
                 bytesUploaded = taskSnapshot.bytesTransferred,
                 totalBytes = taskSnapshot.totalByteCount,
                 uploadSpeed = calculateUploadSpeed(taskSnapshot),
-                estimatedTimeRemaining = calculateEstimatedTime(taskSnapshot)
+                estimatedTimeRemaining = calculateEstimatedTime(taskSnapshot),
+                isUploading = !isCompleted,
+                isCompleted = isCompleted,
+                uploadId = uploadId,
+                startTime = startTime,
+                stage = when {
+                    progress >= 1.0f && isCompleted -> UploadStage.COMPLETED
+                    progress >= 0.8f -> UploadStage.FINALIZING
+                    progress >= 0.1f -> UploadStage.UPLOADING
+                    else -> UploadStage.PREPARING
+                }
             )
             trySend(uploadProgress)
         }
@@ -185,17 +260,16 @@ class PhotoRepository @Inject constructor(
             inputStream.close()
             
             PhotoMetadata(
-                camera = exif.getAttribute(ExifInterface.TAG_MAKE) ?: "",
-                captureDate = exif.dateTime?.let { Date(it) },
-                gpsLocation = "", // Deliberately not storing GPS for privacy
+                deviceModel = android.os.Build.MODEL,
+                cameraInfo = exif.getAttribute(ExifInterface.TAG_MAKE) ?: "",
+                location = "", // Deliberately not storing GPS for privacy
+                timestamp = exif.dateTime?.let { Date(it) } ?: Date(),
                 orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL),
-                flashUsed = exif.getAttributeInt(ExifInterface.TAG_FLASH, 0) > 0,
-                focalLength = exif.getAttributeDouble(ExifInterface.TAG_FOCAL_LENGTH, 0.0).toFloat(),
-                iso = exif.getAttributeInt(ExifInterface.TAG_ISO_SPEED, 0),
-                shutterSpeed = exif.getAttribute(ExifInterface.TAG_EXPOSURE_TIME) ?: "",
-                aperture = exif.getAttribute(ExifInterface.TAG_F_NUMBER) ?: "",
-                isFromCamera = photoUri.scheme == "file",
-                isFromGallery = photoUri.scheme == "content"
+                hasExifData = true,
+                isPortrait = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL) in listOf(
+                    ExifInterface.ORIENTATION_NORMAL,
+                    ExifInterface.ORIENTATION_ROTATE_180
+                )
             )
         } catch (e: Exception) {
             PhotoMetadata()
@@ -288,7 +362,6 @@ class PhotoRepository @Inject constructor(
         optimizedUri: Uri,
         firebaseUrl: String,
         metadata: PhotoMetadata,
-        frameStyle: IslamicFrameStyle,
         quality: PhotoQuality
     ): PhotoData {
         val fileName = "memorial_${System.currentTimeMillis()}.jpg"
@@ -297,21 +370,19 @@ class PhotoRepository @Inject constructor(
         return PhotoData(
             id = UUID.randomUUID().toString(),
             originalUri = originalUri,
-            croppedUri = null,
-            compressedUri = optimizedUri,
+            croppedUri = optimizedUri,
             firebaseUrl = firebaseUrl,
+            localPath = optimizedUri.path ?: "",
             fileName = fileName,
             fileSize = if (file.exists()) file.length() else 0,
+            mimeType = "image/jpeg",
             width = 0, // Would need to decode image to get dimensions
             height = 0,
-            aspectRatio = PhotoConstants.MEMORIAL_ASPECT_RATIO,
-            frameStyle = frameStyle,
-            compressionQuality = quality.quality,
             isUploaded = true,
+            uploadedAt = Date(),
+            compressionRatio = quality.quality / 100f,
             isOptimized = true,
-            metadata = metadata,
-            createdAt = Date(),
-            updatedAt = Date()
+            metadata = metadata
         )
     }
     

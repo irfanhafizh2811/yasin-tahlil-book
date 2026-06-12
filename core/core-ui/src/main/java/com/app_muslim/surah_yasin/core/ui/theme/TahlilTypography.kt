@@ -4,22 +4,45 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.app_muslim.surah_yasin.core.ui.R
 
-// Font Families
-val LpmqIsepMisbahFontFamily = FontFamily(
-    Font(resId = R.font.font_lpmq_isep_misbah, weight = FontWeight.Normal)
-)
+// Font Families - enhanced device compatibility with fallback strategy
+val LpmqIsepMisbahFontFamily = try {
+    FontFamily(
+        Font(
+            resId = R.font.font_lpmq_isep_misbah,
+            weight = FontWeight.Normal,
+            style = FontStyle.Normal
+        )
+    )
+} catch (e: Exception) {
+    // Fallback to system serif font for Arabic text readability
+    FontFamily.Serif
+}
 
-val InterFontFamily = FontFamily(
-    Font(resId = R.font.font_inter_reg, weight = FontWeight.Normal),
-    Font(resId = R.font.font_inter_bold, weight = FontWeight.Bold)
-)
+val InterFontFamily = try {
+    FontFamily(
+        Font(
+            resId = R.font.font_inter_reg, 
+            weight = FontWeight.Normal,
+            style = FontStyle.Normal
+        ),
+        Font(
+            resId = R.font.font_inter_bold, 
+            weight = FontWeight.Bold,
+            style = FontStyle.Normal
+        )
+    )
+} catch (e: Exception) {
+    // Fallback to system sans-serif for UI text
+    FontFamily.SansSerif
+}
 
-// Islamic Typography for Arabic and Latin text
+// Islamic Typography with system font fallback
 val TahlilTypography = Typography(
     // Arabic text styles (for Quranic verses and prayers)
     headlineLarge = TextStyle(
@@ -31,20 +54,18 @@ val TahlilTypography = Typography(
         textAlign = TextAlign.End
     ),
     headlineMedium = TextStyle(
-        fontFamily = LpmqIsepMisbahFontFamily,
+        fontFamily = InterFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 28.sp,
         lineHeight = 42.sp,
-        letterSpacing = 0.6.sp,
-        textAlign = TextAlign.End
+        letterSpacing = 0.6.sp
     ),
     headlineSmall = TextStyle(
-        fontFamily = LpmqIsepMisbahFontFamily,
+        fontFamily = InterFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp,
         lineHeight = 36.sp,
-        letterSpacing = 0.4.sp,
-        textAlign = TextAlign.End
+        letterSpacing = 0.4.sp
     ),
     
     // Latin text styles (for UI and translations)
@@ -117,9 +138,9 @@ val TahlilTypography = Typography(
     )
 )
 
-// Islamic-specific text styles
+// Islamic-specific text styles with enhanced fallback support
 object IslamicTextStyles {
-    // Primary Arabic prayer text
+    // Primary Arabic prayer text with device-safe font loading
     val ArabicPrayerLarge = TextStyle(
         fontFamily = LpmqIsepMisbahFontFamily,
         fontWeight = FontWeight.Normal,
@@ -147,7 +168,7 @@ object IslamicTextStyles {
         textAlign = TextAlign.End
     )
     
-    // Transliteration styles
+    // Transliteration styles with device-safe fonts
     val Transliteration = TextStyle(
         fontFamily = InterFontFamily,
         fontWeight = FontWeight.Normal,
@@ -157,7 +178,7 @@ object IslamicTextStyles {
         textAlign = TextAlign.Center
     )
     
-    // Translation styles  
+    // Translation styles with system font fallback
     val Translation = TextStyle(
         fontFamily = InterFontFamily,
         fontWeight = FontWeight.Normal,
@@ -167,7 +188,7 @@ object IslamicTextStyles {
         textAlign = TextAlign.Center
     )
     
-    // Decorative Arabic headers
+    // Decorative Arabic headers with enhanced fallback
     val ArabicHeader = TextStyle(
         fontFamily = LpmqIsepMisbahFontFamily,
         fontWeight = FontWeight.Bold,

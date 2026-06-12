@@ -9,7 +9,7 @@ android {
     compileSdk 34
     
     defaultConfig {
-        minSdk 24
+        minSdk 26
         targetSdk 34
         // Temporarily disable Android tests to fix build issues
         // testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

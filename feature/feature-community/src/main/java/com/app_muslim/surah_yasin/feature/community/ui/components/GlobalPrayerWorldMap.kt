@@ -23,6 +23,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.community.model.*
 
 /**
@@ -352,5 +356,256 @@ object WorldMapSampleData {
                 rank = 5
             )
         )
+    }
+}
+
+// Preview Parameter Providers
+class CountryPrayerStatsProvider : PreviewParameterProvider<List<CountryPrayerStats>> {
+    override val values = sequenceOf(
+        // Top performing countries
+        listOf(
+            CountryPrayerStats(
+                countryCode = "ID",
+                countryName = "Indonesia",
+                totalPrayers = 2_500_000L,
+                activeParticipants = 450_000L,
+                flag = "🇮🇩",
+                heatLevel = 1.0f,
+                rank = 1,
+                popularPrayerTypes = listOf(
+                    PrayerTypeCount(CommunityPrayerType.TAHLIL, 1_000_000L, 40.0f),
+                    PrayerTypeCount(CommunityPrayerType.YASIN, 900_000L, 36.0f),
+                    PrayerTypeCount(CommunityPrayerType.FATIHAH, 600_000L, 24.0f)
+                )
+            ),
+            CountryPrayerStats(
+                countryCode = "PK",
+                countryName = "Pakistan",
+                totalPrayers = 1_800_000L,
+                activeParticipants = 320_000L,
+                flag = "🇵🇰",
+                heatLevel = 0.95f,
+                rank = 2
+            ),
+            CountryPrayerStats(
+                countryCode = "SA",
+                countryName = "Saudi Arabia",
+                totalPrayers = 950_000L,
+                activeParticipants = 180_000L,
+                flag = "🇸🇦",
+                heatLevel = 0.82f,
+                rank = 3
+            )
+        )
+    )
+}
+
+// Preview Composables
+@Preview(name = "Global Prayer World Map - Default")
+@Composable
+fun GlobalPrayerWorldMapDefaultPreview(
+    @PreviewParameter(CountryPrayerStatsProvider::class) 
+    countryStats: List<CountryPrayerStats>
+) {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            GlobalPrayerWorldMap(
+                countryStats = countryStats,
+                onCountrySelected = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "World Map - With Selection")
+@Composable
+fun GlobalPrayerWorldMapSelectedPreview() {
+    val countryStats = listOf(
+        CountryPrayerStats(
+            countryCode = "ID",
+            countryName = "Indonesia",
+            totalPrayers = 3_200_000L,
+            activeParticipants = 650_000L,
+            flag = "🇮🇩",
+            heatLevel = 1.0f,
+            rank = 1
+        ),
+        CountryPrayerStats(
+            countryCode = "PK",
+            countryName = "Pakistan",
+            totalPrayers = 2_100_000L,
+            activeParticipants = 380_000L,
+            flag = "🇵🇰",
+            heatLevel = 0.92f,
+            rank = 2
+        ),
+        CountryPrayerStats(
+            countryCode = "SA",
+            countryName = "Saudi Arabia",
+            totalPrayers = 1_150_000L,
+            activeParticipants = 225_000L,
+            flag = "🇸🇦",
+            heatLevel = 0.85f,
+            rank = 3
+        )
+    )
+    
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            GlobalPrayerWorldMap(
+                countryStats = countryStats,
+                selectedCountry = countryStats[1], // Pakistan selected
+                onCountrySelected = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Empty Country List")
+@Composable
+fun GlobalPrayerWorldMapEmptyPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            GlobalPrayerWorldMap(
+                countryStats = emptyList(),
+                onCountrySelected = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Country Stats Card")
+@Composable
+fun CountryStatsCardPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            CountryStatsCard(
+                country = CountryPrayerStats(
+                    countryCode = "EG",
+                    countryName = "Egypt",
+                    totalPrayers = 725_000L,
+                    activeParticipants = 118_000L,
+                    flag = "🇪🇬",
+                    heatLevel = 0.72f,
+                    rank = 4
+                ),
+                isSelected = false,
+                onSelect = { },
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Country Flag Component")
+@Composable
+fun CountryFlagPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.padding(16.dp)
+            ) {
+                CountryFlag(
+                    countryName = "Indonesia",
+                    flag = "🇮🇩"
+                )
+                CountryFlag(
+                    countryName = "Saudi Arabia",
+                    flag = "🇸🇦"
+                )
+                CountryFlag(
+                    countryName = "Unknown Country",
+                    flag = "" // No flag, shows country code
+                )
+            }
+        }
+    }
+}
+
+@Preview(name = "Activity Level Indicators")
+@Composable
+fun ActivityLevelIndicatorPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    ActivityLevelIndicator(heatLevel = 0.2f, size = 32.dp)
+                    Text("Low", style = MaterialTheme.typography.labelSmall)
+                }
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    ActivityLevelIndicator(heatLevel = 0.5f, size = 32.dp)
+                    Text("Medium", style = MaterialTheme.typography.labelSmall)
+                }
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    ActivityLevelIndicator(heatLevel = 0.8f, size = 32.dp)
+                    Text("High", style = MaterialTheme.typography.labelSmall)
+                }
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    ActivityLevelIndicator(heatLevel = 1.0f, size = 32.dp)
+                    Text("Max", style = MaterialTheme.typography.labelSmall)
+                }
+            }
+        }
+    }
+}
+
+@Preview(name = "Global Stats Header")
+@Composable
+fun GlobalStatsHeaderPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            GlobalStatsHeader(
+                totalCountries = 157,
+                topCountry = CountryPrayerStats(
+                    countryCode = "ID",
+                    countryName = "Indonesia",
+                    totalPrayers = 3_500_000L,
+                    activeParticipants = 750_000L,
+                    flag = "🇮🇩",
+                    heatLevel = 1.0f,
+                    rank = 1
+                ),
+                selectedCountry = null,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+    }
+}
+
+@Preview(name = "Global Stats Header - With Selection")
+@Composable
+fun GlobalStatsHeaderWithSelectionPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            GlobalStatsHeader(
+                totalCountries = 157,
+                topCountry = CountryPrayerStats(
+                    countryCode = "ID",
+                    countryName = "Indonesia",
+                    totalPrayers = 3_500_000L,
+                    activeParticipants = 750_000L,
+                    flag = "🇮🇩",
+                    heatLevel = 1.0f,
+                    rank = 1
+                ),
+                selectedCountry = CountryPrayerStats(
+                    countryCode = "TR",
+                    countryName = "Turkey",
+                    totalPrayers = 1_200_000L,
+                    activeParticipants = 185_000L,
+                    flag = "🇹🇷",
+                    heatLevel = 0.82f,
+                    rank = 5
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }

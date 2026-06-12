@@ -17,7 +17,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.AsyncImage
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 
 @Composable
 fun PhotoUploadSection(
@@ -443,5 +447,117 @@ fun ValidationErrorsCard(
                 }
             }
         }
+    }
+}
+
+// Preview Parameter Provider for different photo states
+class PhotoUploadPreviewProvider : PreviewParameterProvider<PhotoUploadPreviewData> {
+    override val values = sequenceOf(
+        PhotoUploadPreviewData(
+            description = "No Photo",
+            photoUrl = null,
+            isUploading = false
+        ),
+        PhotoUploadPreviewData(
+            description = "Uploading Photo",
+            photoUrl = null,
+            isUploading = true
+        ),
+        PhotoUploadPreviewData(
+            description = "With Photo",
+            photoUrl = "https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Memorial+Photo",
+            isUploading = false
+        ),
+        PhotoUploadPreviewData(
+            description = "Portrait Photo",
+            photoUrl = "https://via.placeholder.com/200x300/2196F3/FFFFFF?text=Portrait",
+            isUploading = false
+        )
+    )
+}
+
+data class PhotoUploadPreviewData(
+    val description: String,
+    val photoUrl: String?,
+    val isUploading: Boolean
+)
+
+@Preview(name = "No Photo", showBackground = true)
+@Composable
+private fun PhotoUploadSectionNoPhotoPreview() {
+    TahlilTheme {
+        PhotoUploadSection(
+            photoUrl = null,
+            isUploading = false,
+            onPhotoSelected = { },
+            onPhotoRemoved = { }
+        )
+    }
+}
+
+@Preview(name = "Uploading Photo", showBackground = true)
+@Composable
+private fun PhotoUploadSectionUploadingPreview() {
+    TahlilTheme {
+        PhotoUploadSection(
+            photoUrl = null,
+            isUploading = true,
+            onPhotoSelected = { },
+            onPhotoRemoved = { }
+        )
+    }
+}
+
+@Preview(name = "With Photo", showBackground = true)
+@Composable
+private fun PhotoUploadSectionWithPhotoPreview() {
+    TahlilTheme {
+        PhotoUploadSection(
+            photoUrl = "https://via.placeholder.com/300x200/4CAF50/FFFFFF?text=Memorial+Photo",
+            isUploading = false,
+            onPhotoSelected = { },
+            onPhotoRemoved = { }
+        )
+    }
+}
+
+@Preview(name = "Portrait Photo", showBackground = true)
+@Composable
+private fun PhotoUploadSectionPortraitPreview() {
+    TahlilTheme {
+        PhotoUploadSection(
+            photoUrl = "https://via.placeholder.com/200x300/2196F3/FFFFFF?text=Portrait",
+            isUploading = false,
+            onPhotoSelected = { },
+            onPhotoRemoved = { }
+        )
+    }
+}
+
+@Preview(name = "Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun PhotoUploadSectionDarkPreview() {
+    TahlilTheme {
+        PhotoUploadSection(
+            photoUrl = "https://via.placeholder.com/300x200/FF9800/FFFFFF?text=Family+Photo",
+            isUploading = false,
+            onPhotoSelected = { },
+            onPhotoRemoved = { }
+        )
+    }
+}
+
+@Preview(name = "Dynamic Preview", showBackground = true)
+@Composable
+private fun PhotoUploadSectionDynamicPreview(
+    @PreviewParameter(PhotoUploadPreviewProvider::class) data: PhotoUploadPreviewData
+) {
+    TahlilTheme {
+        PhotoUploadSection(
+            photoUrl = data.photoUrl,
+            isUploading = data.isUploading,
+            onPhotoSelected = { },
+            onPhotoRemoved = { }
+        )
     }
 }

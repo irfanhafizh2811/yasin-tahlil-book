@@ -12,6 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.memorial.model.HijriDate
 import java.text.SimpleDateFormat
 import java.util.*
@@ -436,4 +440,207 @@ private fun HijriDatePickerDialog(
             }
         }
     )
+}
+
+// Preview Parameter Provider for different dates
+class DateSelectionPreviewProvider : PreviewParameterProvider<DateSelectionPreviewData> {
+    override val values = sequenceOf(
+        DateSelectionPreviewData(
+            description = "Recent Date",
+            gregorianDate = Calendar.getInstance().apply { 
+                set(2024, Calendar.JANUARY, 15) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1445,
+                month = 7,
+                day = 3,
+                monthName = "Rajab",
+                yearName = "1445H"
+            )
+        ),
+        DateSelectionPreviewData(
+            description = "Ramadan Date",
+            gregorianDate = Calendar.getInstance().apply { 
+                set(2024, Calendar.MARCH, 20) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1445,
+                month = 9,
+                day = 10,
+                monthName = "Ramadan",
+                yearName = "1445H"
+            )
+        ),
+        DateSelectionPreviewData(
+            description = "Historic Date",
+            gregorianDate = Calendar.getInstance().apply { 
+                set(2020, Calendar.DECEMBER, 25) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1442,
+                month = 5,
+                day = 10,
+                monthName = "Jumada al-awwal",
+                yearName = "1442H"
+            )
+        ),
+        DateSelectionPreviewData(
+            description = "Old Date",
+            gregorianDate = Calendar.getInstance().apply { 
+                set(1980, Calendar.JUNE, 15) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1400,
+                month = 4,
+                day = 3,
+                monthName = "Rabi' al-thani",
+                yearName = "1400H"
+            )
+        )
+    )
+}
+
+data class DateSelectionPreviewData(
+    val description: String,
+    val gregorianDate: Date,
+    val hijriDate: HijriDate
+)
+
+@Preview(name = "Default State", showBackground = true)
+@Composable
+private fun DateSelectionSectionDefaultPreview() {
+    TahlilTheme {
+        DateSelectionSection(
+            gregorianDate = Date(),
+            hijriDate = HijriDate(
+                year = 1445,
+                month = 12,
+                day = 1,
+                monthName = "Dhu al-Hijjah",
+                yearName = "1445H"
+            ),
+            onGregorianDateChange = { },
+            onHijriDateChange = { }
+        )
+    }
+}
+
+@Preview(name = "With Recent Date", showBackground = true)
+@Composable
+private fun DateSelectionSectionRecentPreview() {
+    TahlilTheme {
+        DateSelectionSection(
+            gregorianDate = Calendar.getInstance().apply { 
+                set(2024, Calendar.JANUARY, 15) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1445,
+                month = 7,
+                day = 3,
+                monthName = "Rajab",
+                yearName = "1445H"
+            ),
+            onGregorianDateChange = { },
+            onHijriDateChange = { }
+        )
+    }
+}
+
+@Preview(name = "With Ramadan Date", showBackground = true)
+@Composable
+private fun DateSelectionSectionRamadanPreview() {
+    TahlilTheme {
+        DateSelectionSection(
+            gregorianDate = Calendar.getInstance().apply { 
+                set(2024, Calendar.MARCH, 20) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1445,
+                month = 9,
+                day = 10,
+                monthName = "Ramadan",
+                yearName = "1445H"
+            ),
+            onGregorianDateChange = { },
+            onHijriDateChange = { }
+        )
+    }
+}
+
+@Preview(name = "With Historic Date", showBackground = true)
+@Composable
+private fun DateSelectionSectionHistoricPreview() {
+    TahlilTheme {
+        DateSelectionSection(
+            gregorianDate = Calendar.getInstance().apply { 
+                set(2000, Calendar.AUGUST, 10) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1421,
+                month = 5,
+                day = 10,
+                monthName = "Jumada al-awwal",
+                yearName = "1421H"
+            ),
+            onGregorianDateChange = { },
+            onHijriDateChange = { }
+        )
+    }
+}
+
+@Preview(name = "With Old Date", showBackground = true)
+@Composable
+private fun DateSelectionSectionOldPreview() {
+    TahlilTheme {
+        DateSelectionSection(
+            gregorianDate = Calendar.getInstance().apply { 
+                set(1975, Calendar.NOVEMBER, 20) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1395,
+                month = 11,
+                day = 17,
+                monthName = "Dhu al-Qi'dah",
+                yearName = "1395H"
+            ),
+            onGregorianDateChange = { },
+            onHijriDateChange = { }
+        )
+    }
+}
+
+@Preview(name = "Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun DateSelectionSectionDarkPreview() {
+    TahlilTheme {
+        DateSelectionSection(
+            gregorianDate = Calendar.getInstance().apply { 
+                set(2024, Calendar.FEBRUARY, 14) 
+            }.time,
+            hijriDate = HijriDate(
+                year = 1445,
+                month = 8,
+                day = 5,
+                monthName = "Sha'ban",
+                yearName = "1445H"
+            ),
+            onGregorianDateChange = { },
+            onHijriDateChange = { }
+        )
+    }
+}
+
+@Preview(name = "Dynamic Dates", showBackground = true)
+@Composable
+private fun DateSelectionSectionDynamicPreview(
+    @PreviewParameter(DateSelectionPreviewProvider::class) data: DateSelectionPreviewData
+) {
+    TahlilTheme {
+        DateSelectionSection(
+            gregorianDate = data.gregorianDate,
+            hijriDate = data.hijriDate,
+            onGregorianDateChange = { },
+            onHijriDateChange = { }
+        )
+    }
 }

@@ -3,16 +3,14 @@ package com.app_muslim.surah_yasin.view.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
@@ -27,8 +25,14 @@ import androidx.navigation.compose.rememberNavController
 import com.app_muslim.surah_yasin.feature.auth.navigation.authGraph
 import com.app_muslim.surah_yasin.feature.auth.navigation.navigateToAuth
 import com.app_muslim.surah_yasin.feature.auth.viewmodel.AuthViewModel
-import com.app_muslim.surah_yasin.core.common.model.IslamicRegion
-import com.app_muslim.surah_yasin.core.common.model.SchoolOfThought
+import com.app_muslim.surah_yasin.feature.community.navigation.addCommunityNavigation
+import com.app_muslim.surah_yasin.feature.community.navigation.CommunityRoutes
+import com.app_muslim.surah_yasin.feature.memorial.navigation.memorialNavGraph
+import com.app_muslim.surah_yasin.feature.memorial.navigation.navigateToMemorialList
+import com.app_muslim.surah_yasin.feature.profile.navigation.profileScreen
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
+import com.app_muslim.surah_yasin.ui.memorial.MemorialScreen
+import com.app_muslim.surah_yasin.feature.memorial.model.Memorial
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,31 +49,16 @@ class ModernMainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TahlilTheme(content: @Composable () -> Unit) {
-    // Material 3 theme with Islamic colors
-    val islamicColorScheme = lightColorScheme(
-        primary = androidx.compose.ui.graphics.Color(0xFF1B4332), // Islamic Green
-        onPrimary = androidx.compose.ui.graphics.Color.White,
-        secondary = androidx.compose.ui.graphics.Color(0xFFD4AF37), // Islamic Gold
-        onSecondary = androidx.compose.ui.graphics.Color.Black,
-        tertiary = androidx.compose.ui.graphics.Color(0xFFF5F5DC), // Islamic Cream
-        surface = androidx.compose.ui.graphics.Color.White,
-        onSurface = androidx.compose.ui.graphics.Color.Black,
-        background = androidx.compose.ui.graphics.Color.White,
-        onBackground = androidx.compose.ui.graphics.Color.Black
-    )
-    
-    MaterialTheme(
-        colorScheme = islamicColorScheme,
-        content = content
-    )
-}
-
-@Composable
 fun MainNavigation() {
     val navController = rememberNavController()
     val authViewModel: AuthViewModel = hiltViewModel()
     val uiState by authViewModel.uiState.collectAsStateWithLifecycle()
+    
+    // Show splash screen while checking authentication
+    if (uiState.isLoading) {
+        SplashScreen()
+        return
+    }
     
     // Determine start destination based on authentication state
     val startDestination = if (uiState.isAuthenticated) "main" else "auth"
@@ -82,8 +71,10 @@ fun MainNavigation() {
         authGraph(
             navController = navController,
             onAuthComplete = { region, school, language ->
-                // Save user preferences here
-                // For now, we'll just proceed to main app
+                // Navigate to main app after authentication
+                navController.navigate("main") {
+                    popUpTo("auth") { inclusive = true }
+                }
             }
         )
         
@@ -95,7 +86,46 @@ fun MainNavigation() {
 }
 
 @Composable
-fun MainAppContent(navController: NavController) {
+fun SplashScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.primary),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            Text(
+                text = "🕌",
+                style = MaterialTheme.typography.displayLarge,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+            
+            Text(
+                text = "Tahlil",
+                style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+            
+            Text(
+                text = "Global Islamic Memorial Prayer Platform",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+            )
+            
+            Spacer(modifier = Modifier.height(32.dp))
+            
+            CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+        }
+    }
+}
+
+@Composable
+fun MainAppContent(mainNavController: NavController) {
     val bottomNavController = rememberNavController()
     
     Scaffold(
@@ -109,21 +139,80 @@ fun MainAppContent(navController: NavController) {
             startDestination = "tasbeeh",
             modifier = Modifier.padding(paddingValues)
         ) {
+            // Tasbeeh Counter Screen (Main Feature)
             composable("tasbeeh") {
                 TasbeehScreen()
             }
+            
+            // Memorial Feature Navigation Graph
             composable("memorial") {
-                MemorialScreen()
+                MemorialMainScreen(
+                    onNavigateToCreate = {
+                        bottomNavController.navigate("memorial_create")
+                    },
+                    onNavigateToList = {
+                        bottomNavController.navigate("memorial_list")
+                    },
+                    onNavigateToDetail = { memorialId ->
+                        bottomNavController.navigate("memorial_detail/$memorialId")
+                    }
+                )
             }
+            
+            // Memorial creation and management screens
+            memorialNavGraph(
+                onNavigateBack = { bottomNavController.popBackStack() },
+                onMemorialCreated = { memorialId ->
+                    bottomNavController.navigate("memorial") {
+                        popUpTo("memorial") { inclusive = true }
+                    }
+                },
+                onNavigateToDetail = { memorialId ->
+                    bottomNavController.navigate("memorial_detail/$memorialId")
+                },
+                onNavigateToEdit = { memorialId ->
+                    bottomNavController.navigate("edit_memorial/$memorialId")
+                },
+                onNavigateToCreate = {
+                    bottomNavController.navigate("create_memorial")
+                }
+            )
+            
+            // Community Feature Navigation Graph
             composable("community") {
-                CommunityScreen()
+                CommunityMainScreen(
+                    onNavigateToHome = {
+                        bottomNavController.navigate(CommunityRoutes.COMMUNITY_HOME)
+                    },
+                    onNavigateToLeaderboard = {
+                        bottomNavController.navigate(CommunityRoutes.PRAYER_LEADERBOARD)
+                    },
+                    onNavigateToDiscovery = {
+                        bottomNavController.navigate(CommunityRoutes.MEMORIAL_DISCOVERY)
+                    }
+                )
             }
+            
+            // Add community navigation screens
+            addCommunityNavigation(navController = bottomNavController)
+            
+            // Profile Screen
             composable("profile") {
-                ProfileScreen(onSignOut = {
-                    // Handle sign out - navigate back to auth
-                    navController.navigateToAuth()
-                })
+                ProfileMainScreen(
+                    onSignOut = {
+                        // Handle sign out - navigate back to auth
+                        mainNavController.navigateToAuth()
+                    },
+                    onNavigateToSettings = {
+                        bottomNavController.navigate("profile_settings")
+                    }
+                )
             }
+            
+            // Profile navigation screens
+            profileScreen(
+                onNavigateBack = { bottomNavController.popBackStack() }
+            )
         }
     }
 }
@@ -131,9 +220,9 @@ fun MainAppContent(navController: NavController) {
 @Composable
 fun TahlilBottomNavigation(navController: NavController) {
     val items = listOf(
-        BottomNavItem("tasbeeh", "Tasbeeh", Icons.Default.Favorite),
-        BottomNavItem("memorial", "Memorial", Icons.Default.LocationOn),
-        BottomNavItem("community", "Community", Icons.Default.Home),
+        BottomNavItem("tasbeeh", "Tasbeeh", Icons.Default.FavoriteBorder),
+        BottomNavItem("memorial", "Memorial", Icons.Default.Place),
+        BottomNavItem("community", "Community", Icons.Default.Groups),
         BottomNavItem("profile", "Profile", Icons.Default.Person)
     )
     
@@ -186,90 +275,408 @@ data class BottomNavItem(
     val icon: ImageVector
 )
 
-// Placeholder Compose screens
+// ================================================================================================
+// MAIN FEATURE SCREENS
+// ================================================================================================
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TasbeehScreen() {
-    CenterAlignedTopAppBar(
-        title = {
-            Text("Tasbeeh Counter")
+    Column(modifier = Modifier.fillMaxSize()) {
+        CenterAlignedTopAppBar(
+            title = { Text("Tasbeeh Counter") }
+        )
+        
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(24.dp)
+            ) {
+                Text(
+                    text = "📿",
+                    style = MaterialTheme.typography.displayLarge
+                )
+                
+                Text(
+                    text = "Tasbeeh Counter",
+                    style = MaterialTheme.typography.headlineMedium
+                )
+                
+                Text(
+                    text = "Digital prayer beads for Islamic dhikr",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                
+                var count by remember { mutableStateOf(0) }
+                
+                Card {
+                    Column(
+                        modifier = Modifier.padding(32.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = count.toString(),
+                            style = MaterialTheme.typography.displayMedium
+                        )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        Button(
+                            onClick = { count++ },
+                            modifier = Modifier.size(80.dp)
+                        ) {
+                            Text("+1")
+                        }
+                    }
+                }
+                
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    OutlinedButton(onClick = { count = 0 }) {
+                        Text("Reset")
+                    }
+                    
+                    Button(onClick = { /* Save prayer session */ }) {
+                        Text("Save")
+                    }
+                }
+            }
         }
-    )
-    // TODO: Implement actual Tasbeeh Compose UI
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MemorialScreen() {
-    CenterAlignedTopAppBar(
-        title = {
-            Text("Memorial Prayers")
+fun MemorialMainScreen(
+    onNavigateToCreate: () -> Unit,
+    onNavigateToList: () -> Unit,
+    onNavigateToDetail: (String) -> Unit
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        CenterAlignedTopAppBar(
+            title = { Text("Memorial Prayers") }
+        )
+        
+        // Sample memorial data for display
+        val sampleMemorials = remember {
+            listOf(
+                Memorial(
+                    id = "1",
+                    title = "Loving Memory of Grandfather",
+                    deceasedName = "Ahmad bin Abdullah",
+                    totalPrayers = 245,
+                    description = "A wonderful grandfather who taught us about Islam"
+                ),
+                Memorial(
+                    id = "2", 
+                    title = "In Memory of Our Beloved Mother",
+                    deceasedName = "Fatimah bint Hassan",
+                    totalPrayers = 523,
+                    description = "The most caring mother"
+                )
+            )
         }
-    )
-    // TODO: Implement Memorial Compose UI
+        
+        MemorialScreen(
+            memorials = sampleMemorials,
+            isLoading = false,
+            onCreateMemorial = onNavigateToCreate,
+            onMemorialClick = { memorial -> onNavigateToDetail(memorial.id) },
+            onPrayForMemorial = { memorial ->
+                // Handle prayer increment
+            }
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommunityScreen() {
-    CenterAlignedTopAppBar(
-        title = {
-            Text("Global Community")
+fun CommunityMainScreen(
+    onNavigateToHome: () -> Unit,
+    onNavigateToLeaderboard: () -> Unit,
+    onNavigateToDiscovery: () -> Unit
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        CenterAlignedTopAppBar(
+            title = { Text("Global Community") }
+        )
+        
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            item {
+                CommunityFeatureCard(
+                    title = "Community Home",
+                    description = "Join global prayer sessions",
+                    icon = Icons.Default.Home,
+                    onClick = onNavigateToHome
+                )
+            }
+            
+            item {
+                CommunityFeatureCard(
+                    title = "Prayer Leaderboard", 
+                    description = "See top prayer contributors",
+                    icon = Icons.Default.Leaderboard,
+                    onClick = onNavigateToLeaderboard
+                )
+            }
+            
+            item {
+                CommunityFeatureCard(
+                    title = "Memorial Discovery",
+                    description = "Discover memorials from around the world",
+                    icon = Icons.Default.Search,
+                    onClick = onNavigateToDiscovery
+                )
+            }
+            
+            item {
+                Card {
+                    Column(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+                        Text(
+                            text = "Global Prayer Statistics",
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            StatItem("1.2M", "Total Prayers")
+                            StatItem("45K", "Active Users")
+                            StatItem("180", "Countries")
+                        }
+                    }
+                }
+            }
         }
-    )
-    // TODO: Implement Community Compose UI
+    }
+}
+
+@Composable
+fun CommunityFeatureCard(
+    title: String,
+    description: String,
+    icon: ImageVector,
+    onClick: () -> Unit
+) {
+    Card(
+        onClick = onClick
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(40.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = "Navigate",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+fun StatItem(value: String, label: String) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = value,
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(onSignOut: () -> Unit = {}) {
+fun ProfileMainScreen(
+    onSignOut: () -> Unit,
+    onNavigateToSettings: () -> Unit
+) {
     val authViewModel: AuthViewModel = hiltViewModel()
     
     Column(modifier = Modifier.fillMaxSize()) {
         CenterAlignedTopAppBar(
-            title = {
-                Text("Profile")
-            }
+            title = { Text("Profile") }
         )
         
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Box(
-                modifier = Modifier.weight(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "👤",
-                        fontSize = 64.sp
-                    )
-                    Text(
-                        text = "User Profile",
-                        style = MaterialTheme.typography.headlineMedium
-                    )
-                    Text(
-                        text = "Profile management coming soon...",
-                        style = MaterialTheme.typography.bodyMedium.copy(
+            item {
+                // Profile Header
+                Card {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(24.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "👤",
+                            style = MaterialTheme.typography.displayMedium
+                        )
+                        
+                        Spacer(modifier = Modifier.height(16.dp))
+                        
+                        Text(
+                            text = "Islamic User",
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        
+                        Text(
+                            text = "Member since 2024",
+                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                    )
+                    }
                 }
             }
             
-            OutlinedButton(
-                onClick = {
-                    authViewModel.handleAuthEvent(com.app_muslim.surah_yasin.feature.auth.model.AuthEvent.SignOut)
-                    onSignOut()
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Sign Out")
+            item {
+                ProfileMenuItem(
+                    title = "Prayer Statistics",
+                    description = "View your prayer history",
+                    icon = Icons.Default.Analytics,
+                    onClick = { }
+                )
             }
+            
+            item {
+                ProfileMenuItem(
+                    title = "Settings",
+                    description = "App preferences and configuration",
+                    icon = Icons.Default.Settings,
+                    onClick = onNavigateToSettings
+                )
+            }
+            
+            item {
+                ProfileMenuItem(
+                    title = "Help & Support",
+                    description = "Get help and contact support",
+                    icon = Icons.Default.Help,
+                    onClick = { }
+                )
+            }
+            
+            item {
+                ProfileMenuItem(
+                    title = "About",
+                    description = "App information and credits",
+                    icon = Icons.Default.Info,
+                    onClick = { }
+                )
+            }
+            
+            item {
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                OutlinedButton(
+                    onClick = {
+                        authViewModel.handleAuthEvent(
+                            com.app_muslim.surah_yasin.feature.auth.model.AuthEvent.SignOut
+                        )
+                        onSignOut()
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(Icons.Default.Logout, contentDescription = null)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Sign Out")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ProfileMenuItem(
+    title: String,
+    description: String,
+    icon: ImageVector,
+    onClick: () -> Unit
+) {
+    Card(
+        onClick = onClick
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(32.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            
+            Spacer(modifier = Modifier.width(16.dp))
+            
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            
+            Icon(
+                imageVector = Icons.Default.ChevronRight,
+                contentDescription = "Navigate",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

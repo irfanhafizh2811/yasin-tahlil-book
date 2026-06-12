@@ -927,16 +927,20 @@ fun PreviewRegisterScreenSmallPhone() {
 // DYNAMIC PREVIEW WITH PARAMETERS
 // ============================================================================
 
-@Preview(name = "Register Screen - Various States")
+@Preview(name = "Register Screen - Complete State")
 @Composable
-fun PreviewRegisterScreenDynamic(
-    @PreviewParameter(RegisterScreenPreviewParameterProvider::class) statesPair: Pair<AuthUiState, RegisterFormState>
-) {
+fun PreviewRegisterScreenComplete() {
     TahlilTheme {
         Surface {
             RegisterScreenPreview(
-                uiState = statesPair.first,
-                formState = statesPair.second
+                uiState = AuthUiState(),
+                formState = RegisterFormState(
+                    name = "Fatimah Hassan",
+                    email = "fatimah.hassan@example.com",
+                    password = "SecurePass123!",
+                    confirmPassword = "SecurePass123!",
+                    isValid = true
+                )
             )
         }
     }

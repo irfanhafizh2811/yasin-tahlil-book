@@ -16,10 +16,18 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.memorial.model.MemorialData
+import com.app_muslim.surah_yasin.feature.memorial.model.PrayerType
 import com.app_muslim.surah_yasin.feature.memorial.ui.sharing.MemorialSharingNavigation
-import com.app_muslim.surah_yasin.core.firebase.sharing.*
+import com.app_muslim.surah_yasin.feature.memorial.ui.sharing.SocialSharingScreen
+import com.app_muslim.surah_yasin.feature.memorial.ui.sharing.FamilyInvitationScreen
+import java.util.*
 
 /**
  * Enhanced Memorial Sharing Integration
@@ -346,3 +354,159 @@ private fun shareGeneric(context: Context, memorial: MemorialData) {
     
     context.startActivity(android.content.Intent.createChooser(intent, "Share Memorial Prayer Invitation"))
 }
+
+// Preview Parameter Provider for different sharing scenarios
+class MemorialSharingPreviewProvider : PreviewParameterProvider<MemorialData> {
+    override val values = sequenceOf(
+        MemorialData(
+            id = "1",
+            deceasedName = "Ahmed Hassan",
+            deceasedNameArabic = null,
+            dateOfDeath = Calendar.getInstance().apply { 
+                set(2024, Calendar.JANUARY, 15) 
+            }.time,
+            memorialMessage = "A loving father who guided us with wisdom and kindness.",
+            prayerType = PrayerType.YASIN,
+            prayerCount = 127,
+            participantCount = 45,
+            photoUrl = null,
+            createdAt = Date()
+        ),
+        MemorialData(
+            id = "2",
+            deceasedName = "Fatima Al-Zahra",
+            deceasedNameArabic = "فاطمة الزهراء",
+            dateOfDeath = Calendar.getInstance().apply { 
+                set(2023, Calendar.DECEMBER, 20) 
+            }.time,
+            memorialMessage = "A devoted mother and grandmother who taught us faith and kindness.",
+            prayerType = PrayerType.TAHLIL,
+            prayerCount = 892,
+            participantCount = 156,
+            photoUrl = "https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Fatima",
+            createdAt = Date()
+        ),
+        MemorialData(
+            id = "3",
+            deceasedName = "Mohammad Abdullah",
+            deceasedNameArabic = "محمد عبد الله",
+            dateOfDeath = Calendar.getInstance().apply { 
+                set(2022, Calendar.AUGUST, 5) 
+            }.time,
+            memorialMessage = "",
+            prayerType = PrayerType.FATIHAH,
+            prayerCount = 2456,
+            participantCount = 387,
+            photoUrl = "https://via.placeholder.com/200x200/4CAF50/FFFFFF?text=Mohammad",
+            createdAt = Date()
+        )
+    )
+}
+
+@Preview(name = "Enhanced Sharing Dialog - Simple Name", showBackground = true)
+@Composable
+private fun EnhancedMemorialSharingDialogSimplePreview() {
+    TahlilTheme {
+        EnhancedMemorialSharingDialog(
+            memorial = MemorialData(
+                id = "1",
+                deceasedName = "Ahmed Hassan",
+                deceasedNameArabic = null,
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2024, Calendar.JANUARY, 15) 
+                }.time,
+                memorialMessage = "A loving father who guided us with wisdom.",
+                prayerType = PrayerType.YASIN,
+                prayerCount = 127,
+                participantCount = 45,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onDismiss = { },
+            navController = rememberNavController()
+        )
+    }
+}
+
+@Preview(name = "Enhanced Sharing Dialog - Arabic Name", showBackground = true)
+@Composable
+private fun EnhancedMemorialSharingDialogArabicPreview() {
+    TahlilTheme {
+        EnhancedMemorialSharingDialog(
+            memorial = MemorialData(
+                id = "2",
+                deceasedName = "Fatima Al-Zahra",
+                deceasedNameArabic = "فاطمة الزهراء",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2023, Calendar.DECEMBER, 20) 
+                }.time,
+                memorialMessage = "A devoted grandmother who taught us faith and kindness.",
+                prayerType = PrayerType.TAHLIL,
+                prayerCount = 892,
+                participantCount = 156,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onDismiss = { },
+            navController = rememberNavController()
+        )
+    }
+}
+
+@Preview(name = "Enhanced Sharing Dialog - Fatihah Prayer", showBackground = true)
+@Composable
+private fun EnhancedMemorialSharingDialogFatihahPreview() {
+    TahlilTheme {
+        EnhancedMemorialSharingDialog(
+            memorial = MemorialData(
+                id = "3",
+                deceasedName = "Abdullah Al-Rashid",
+                deceasedNameArabic = "عبد الله الراشد",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2022, Calendar.AUGUST, 5) 
+                }.time,
+                memorialMessage = "A wise scholar and community leader.",
+                prayerType = PrayerType.FATIHAH,
+                prayerCount = 2456,
+                participantCount = 387,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onDismiss = { },
+            navController = rememberNavController()
+        )
+    }
+}
+
+// Preview removed to reduce UI rendering overhead
+
+@Preview(name = "Enhanced Sharing Dialog - Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun EnhancedMemorialSharingDialogDarkPreview() {
+    TahlilTheme {
+        EnhancedMemorialSharingDialog(
+            memorial = MemorialData(
+                id = "5",
+                deceasedName = "Aisha Bint Omar",
+                deceasedNameArabic = "عائشة بنت عمر",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2024, Calendar.MARCH, 8) 
+                }.time,
+                memorialMessage = "In loving memory of our beloved mother.",
+                prayerType = PrayerType.YASIN,
+                prayerCount = 445,
+                participantCount = 78,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onDismiss = { },
+            navController = rememberNavController()
+        )
+    }
+}
+
+// Component previews removed to reduce UI rendering overhead
+
+// Sharing option previews removed to reduce UI rendering overhead
+
+// Layout and dynamic previews removed to reduce UI rendering overhead and fix Choreographer issues

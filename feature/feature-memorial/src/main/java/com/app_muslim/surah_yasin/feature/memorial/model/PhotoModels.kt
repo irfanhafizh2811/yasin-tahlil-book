@@ -5,70 +5,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
-@Parcelize
-data class PhotoData(
-    val id: String = "",
-    val originalUri: Uri? = null,
-    val croppedUri: Uri? = null,
-    val compressedUri: Uri? = null,
-    val firebaseUrl: String = "",
-    val fileName: String = "",
-    val fileSize: Long = 0,
-    val width: Int = 0,
-    val height: Int = 0,
-    val aspectRatio: Float = 3f / 4f, // Memorial 3:4 aspect ratio
-    val frameStyle: IslamicFrameStyle = IslamicFrameStyle.NONE,
-    val compressionQuality: Int = 85,
-    val isUploaded: Boolean = false,
-    val isOptimized: Boolean = false,
-    val metadata: PhotoMetadata = PhotoMetadata(),
-    val createdAt: Date = Date(),
-    val updatedAt: Date = Date()
-) : Parcelable
-
-@Parcelize
-data class PhotoMetadata(
-    val camera: String = "",
-    val captureDate: Date? = null,
-    val gpsLocation: String = "", // Removed for privacy
-    val orientation: Int = 0,
-    val flashUsed: Boolean = false,
-    val focalLength: Float = 0f,
-    val iso: Int = 0,
-    val shutterSpeed: String = "",
-    val aperture: String = "",
-    val isFromCamera: Boolean = false,
-    val isFromGallery: Boolean = false
-) : Parcelable
-
-enum class IslamicFrameStyle(
-    val displayName: String,
-    val description: String,
-    val culturalSignificance: String
-) {
-    NONE("No Frame", "Clean and simple memorial", "Simple elegance honoring the deceased"),
-    
-    GEOMETRIC_GOLD("Golden Geometry", "Islamic geometric patterns in gold", 
-        "Traditional Islamic art representing divine perfection"),
-    
-    CALLIGRAPHY_BORDER("Calligraphy Border", "Arabic calligraphy border with prayers", 
-        "Sacred verses offering comfort and blessings"),
-    
-    MOSQUE_ARCH("Mosque Arch", "Elegant mosque architecture frame", 
-        "Inspired by sacred Islamic architecture"),
-    
-    CRESCENT_STARS("Crescent & Stars", "Islamic crescent moon with stars", 
-        "Symbols of Islamic faith and divine guidance"),
-    
-    ARABESQUE_PATTERN("Arabesque Pattern", "Traditional arabesque floral design", 
-        "Classical Islamic ornamental art"),
-    
-    BISMILLAH_FRAME("Bismillah Frame", "Frame with Bismillah inscription", 
-        "Beginning all things with Allah's name"),
-    
-    MEMORIAL_VERSES("Memorial Verses", "Quranic verses for the deceased", 
-        "Sacred verses offering peace for the departed soul")
-}
 
 enum class PhotoQuality(val displayName: String, val quality: Int, val maxSize: Int) {
     HIGH("High Quality", 95, 2048),
@@ -122,21 +58,6 @@ enum class PhotoEditType {
     RESET
 }
 
-data class PhotoProcessingResult(
-    val success: Boolean,
-    val photoData: PhotoData?,
-    val errorMessage: String?,
-    val processingTimeMs: Long = 0
-)
-
-data class PhotoUploadProgress(
-    val isUploading: Boolean = false,
-    val progress: Float = 0f,
-    val bytesUploaded: Long = 0,
-    val totalBytes: Long = 0,
-    val uploadSpeed: String = "",
-    val estimatedTimeRemaining: String = ""
-)
 
 object PhotoConstants {
     const val MAX_FILE_SIZE_MB = 10

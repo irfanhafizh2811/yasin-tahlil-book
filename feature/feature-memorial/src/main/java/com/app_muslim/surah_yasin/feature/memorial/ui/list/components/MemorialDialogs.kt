@@ -16,9 +16,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.memorial.model.MemorialData
+import com.app_muslim.surah_yasin.feature.memorial.model.PrayerType
 import com.app_muslim.surah_yasin.feature.memorial.ui.list.viewmodel.ShareType
 import com.app_muslim.surah_yasin.core.firebase.sharing.SharingPlatform
 import java.text.SimpleDateFormat
@@ -452,4 +457,266 @@ private fun buildMemorialShareText(memorial: MemorialData, customMessage: String
 private fun formatDateOfDeath(date: Date): String {
     val formatter = SimpleDateFormat("MMMM d, yyyy", Locale.getDefault())
     return "Passed away ${formatter.format(date)}"
+}
+
+// Preview Parameter Provider for different memorial states
+class MemorialDialogsPreviewProvider : PreviewParameterProvider<MemorialData> {
+    override val values = sequenceOf(
+        MemorialData(
+            id = "1",
+            deceasedName = "Ahmed Hassan",
+            deceasedNameArabic = null,
+            dateOfDeath = Calendar.getInstance().apply { 
+                set(2024, Calendar.JANUARY, 15) 
+            }.time,
+            memorialMessage = "A loving father who guided us with wisdom and kindness.",
+            prayerType = PrayerType.YASIN,
+            prayerCount = 127,
+            participantCount = 45,
+            photoUrl = null,
+            createdAt = Date()
+        ),
+        MemorialData(
+            id = "2",
+            deceasedName = "Fatima Al-Zahra",
+            deceasedNameArabic = "فاطمة الزهراء",
+            dateOfDeath = Calendar.getInstance().apply { 
+                set(2023, Calendar.DECEMBER, 20) 
+            }.time,
+            memorialMessage = "A devoted mother and grandmother who taught us the importance of faith, family, and kindness. Her warm smile and gentle wisdom will forever remain in our hearts. May Allah bless her soul and grant her the highest place in paradise.",
+            prayerType = PrayerType.TAHLIL,
+            prayerCount = 892,
+            participantCount = 156,
+            photoUrl = "https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Fatima",
+            createdAt = Date()
+        ),
+        MemorialData(
+            id = "3",
+            deceasedName = "Mohammad Abdullah Ibn Ahmad Al-Masri",
+            deceasedNameArabic = "محمد عبد الله بن أحمد المصري",
+            dateOfDeath = Calendar.getInstance().apply { 
+                set(2020, Calendar.JUNE, 10) 
+            }.time,
+            memorialMessage = "",
+            prayerType = PrayerType.FATIHAH,
+            prayerCount = 2456,
+            participantCount = 387,
+            photoUrl = "https://via.placeholder.com/200x200/4CAF50/FFFFFF?text=Mohammad",
+            createdAt = Date()
+        )
+    )
+}
+
+@Preview(name = "Delete Dialog - Simple Name", showBackground = true)
+@Composable
+private fun DeleteMemorialDialogSimplePreview() {
+    TahlilTheme {
+        DeleteMemorialDialog(
+            memorial = MemorialData(
+                id = "1",
+                deceasedName = "Ahmed Hassan",
+                deceasedNameArabic = null,
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2024, Calendar.JANUARY, 15) 
+                }.time,
+                memorialMessage = "A loving father who guided us with wisdom.",
+                prayerType = PrayerType.YASIN,
+                prayerCount = 127,
+                participantCount = 45,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onConfirm = { },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Delete Dialog - Arabic Name", showBackground = true)
+@Composable
+private fun DeleteMemorialDialogArabicPreview() {
+    TahlilTheme {
+        DeleteMemorialDialog(
+            memorial = MemorialData(
+                id = "2",
+                deceasedName = "Fatima Al-Zahra",
+                deceasedNameArabic = "فاطمة الزهراء",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2023, Calendar.DECEMBER, 20) 
+                }.time,
+                memorialMessage = "A devoted grandmother who taught us faith and kindness.",
+                prayerType = PrayerType.TAHLIL,
+                prayerCount = 892,
+                participantCount = 156,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onConfirm = { },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Delete Dialog - Long Name", showBackground = true)
+@Composable
+private fun DeleteMemorialDialogLongNamePreview() {
+    TahlilTheme {
+        DeleteMemorialDialog(
+            memorial = MemorialData(
+                id = "3",
+                deceasedName = "Mohammad Abdullah Ibn Ahmad Al-Masri Al-Qurashi",
+                deceasedNameArabic = "محمد عبد الله بن أحمد المصري القرشي",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2020, Calendar.JUNE, 10) 
+                }.time,
+                memorialMessage = "",
+                prayerType = PrayerType.FATIHAH,
+                prayerCount = 2456,
+                participantCount = 387,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onConfirm = { },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Delete Dialog - Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun DeleteMemorialDialogDarkPreview() {
+    TahlilTheme {
+        DeleteMemorialDialog(
+            memorial = MemorialData(
+                id = "2",
+                deceasedName = "Abdullah Al-Rashid",
+                deceasedNameArabic = "عبد الله الراشد",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2023, Calendar.NOVEMBER, 5) 
+                }.time,
+                memorialMessage = "In loving memory of a dear soul who touched many hearts.",
+                prayerType = PrayerType.TAHLIL,
+                prayerCount = 567,
+                participantCount = 89,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onConfirm = { },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Share Bottom Sheet - No Photo", showBackground = true)
+@Composable
+private fun MemorialShareBottomSheetNoPhotoPreview() {
+    TahlilTheme {
+        MemorialShareBottomSheet(
+            memorial = MemorialData(
+                id = "1",
+                deceasedName = "Ahmed Hassan",
+                deceasedNameArabic = null,
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2024, Calendar.JANUARY, 15) 
+                }.time,
+                memorialMessage = "A loving father who guided us with wisdom and kindness.",
+                prayerType = PrayerType.YASIN,
+                prayerCount = 127,
+                participantCount = 45,
+                photoUrl = null,
+                createdAt = Date(),
+            ),
+            onShare = { _, _ -> },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Share Bottom Sheet - With Photo", showBackground = true)
+@Composable
+private fun MemorialShareBottomSheetWithPhotoPreview() {
+    TahlilTheme {
+        MemorialShareBottomSheet(
+            memorial = MemorialData(
+                id = "2",
+                deceasedName = "Fatima Al-Zahra",
+                deceasedNameArabic = "فاطمة الزهراء",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2023, Calendar.DECEMBER, 20) 
+                }.time,
+                memorialMessage = "A devoted mother and grandmother who taught us the importance of faith.",
+                prayerType = PrayerType.TAHLIL,
+                prayerCount = 892,
+                participantCount = 156,
+                photoUrl = "https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Fatima",
+                createdAt = Date(),
+            ),
+            onShare = { _, _ -> },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Share Bottom Sheet - Long Content", showBackground = true)
+@Composable
+private fun MemorialShareBottomSheetLongContentPreview() {
+    TahlilTheme {
+        MemorialShareBottomSheet(
+            memorial = MemorialData(
+                id = "3",
+                deceasedName = "Mohammad Abdullah Ibn Ahmad Al-Masri Al-Qurashi",
+                deceasedNameArabic = "محمد عبد الله بن أحمد المصري القرشي",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2020, Calendar.JUNE, 10) 
+                }.time,
+                memorialMessage = "A wonderful grandfather who taught us the importance of faith, family, and kindness. His warm smile and gentle wisdom will forever remain in our hearts. May Allah bless his soul and grant him the highest place in paradise. We will continue to pray for him and follow the beautiful example he set for us throughout his life.",
+                prayerType = PrayerType.FATIHAH,
+                prayerCount = 2456,
+                participantCount = 387,
+                photoUrl = "https://via.placeholder.com/200x200/4CAF50/FFFFFF?text=Mohammad",
+                createdAt = Date(),
+            ),
+            onShare = { _, _ -> },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Share Bottom Sheet - Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun MemorialShareBottomSheetDarkPreview() {
+    TahlilTheme {
+        MemorialShareBottomSheet(
+            memorial = MemorialData(
+                id = "4",
+                deceasedName = "Aisha Bint Omar",
+                deceasedNameArabic = "عائشة بنت عمر",
+                dateOfDeath = Calendar.getInstance().apply { 
+                    set(2024, Calendar.MARCH, 8) 
+                }.time,
+                memorialMessage = "In loving memory of our beloved mother.",
+                prayerType = PrayerType.TAHLIL,
+                prayerCount = 345,
+                participantCount = 78,
+                photoUrl = "https://via.placeholder.com/200x200/FF9800/FFFFFF?text=Aisha",
+                createdAt = Date(),
+            ),
+            onShare = { _, _ -> },
+            onDismiss = { }
+        )
+    }
+}
+
+@Preview(name = "Dynamic Dialogs", showBackground = true)
+@Composable
+private fun MemorialDialogsDynamicPreview(
+    @PreviewParameter(MemorialDialogsPreviewProvider::class) memorial: MemorialData
+) {
+    TahlilTheme {
+        DeleteMemorialDialog(
+            memorial = memorial,
+            onConfirm = { },
+            onDismiss = { }
+        )
+    }
 }

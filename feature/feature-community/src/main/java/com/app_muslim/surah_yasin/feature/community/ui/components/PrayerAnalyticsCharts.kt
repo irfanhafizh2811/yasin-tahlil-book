@@ -26,8 +26,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.community.model.*
 import kotlin.math.*
+import java.time.LocalDate
 
 /**
  * Prayer Analytics Charts Components
@@ -768,4 +773,1206 @@ private fun GeographicSummaryCards(
     modifier: Modifier = Modifier
 ) {
     // Implementation for geographic summary cards
+}
+
+// Preview Parameter Providers
+class PrayerAnalyticsProvider : PreviewParameterProvider<Triple<List<DailyPrayerAnalytics>, List<WeeklyPrayerAnalytics>, GlobalPrayerStats>> {
+    override val values = sequenceOf(
+        // Regular analytics data
+        Triple(
+            listOf(
+                DailyPrayerAnalytics(
+                    date = java.time.LocalDate.now().minusDays(6).toString(),
+                    totalPrayers = 45_000L,
+                    uniqueParticipants = 8_500L,
+                    averageSessionDuration = 12.5,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 18_000L,
+                        CommunityPrayerType.YASIN to 15_000L,
+                        CommunityPrayerType.FATIHAH to 12_000L
+                    ),
+                    peakHour = 19,
+                    regionsActive = 85,
+                    newMemorials = 45L,
+                    completedSessions = 8_200L
+                ),
+                DailyPrayerAnalytics(
+                    date = LocalDate.now().minusDays(5).toString(),
+                    totalPrayers = 47_500L,
+                    uniqueParticipants = 8_800L,
+                    averageSessionDuration = 13.2,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 19_000L,
+                        CommunityPrayerType.YASIN to 16_000L,
+                        CommunityPrayerType.FATIHAH to 12_500L
+                    ),
+                    peakHour = 20,
+                    regionsActive = 88,
+                    newMemorials = 52L,
+                    completedSessions = 8_650L
+                ),
+                DailyPrayerAnalytics(
+                    date = LocalDate.now().minusDays(4).toString(),
+                    totalPrayers = 52_000L,
+                    uniqueParticipants = 9_200L,
+                    averageSessionDuration = 14.1,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 21_000L,
+                        CommunityPrayerType.YASIN to 17_500L,
+                        CommunityPrayerType.FATIHAH to 13_500L
+                    ),
+                    regionsActive = 92
+                ),
+                DailyPrayerAnalytics(
+                    date = LocalDate.now().minusDays(3).toString(),
+                    totalPrayers = 49_000L,
+                    uniqueParticipants = 8_900L,
+                    averageSessionDuration = 13.8,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 19_500L,
+                        CommunityPrayerType.YASIN to 16_500L,
+                        CommunityPrayerType.FATIHAH to 13_000L
+                    ),
+                    regionsActive = 89
+                ),
+                DailyPrayerAnalytics(
+                    date = LocalDate.now().minusDays(2).toString(),
+                    totalPrayers = 55_000L,
+                    uniqueParticipants = 9_800L,
+                    averageSessionDuration = 15.2,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 22_000L,
+                        CommunityPrayerType.YASIN to 18_500L,
+                        CommunityPrayerType.FATIHAH to 14_500L
+                    ),
+                    regionsActive = 95
+                ),
+                DailyPrayerAnalytics(
+                    date = LocalDate.now().minusDays(1).toString(),
+                    totalPrayers = 58_500L,
+                    uniqueParticipants = 10_200L,
+                    averageSessionDuration = 16.1,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 23_500L,
+                        CommunityPrayerType.YASIN to 19_500L,
+                        CommunityPrayerType.FATIHAH to 15_500L
+                    ),
+                    regionsActive = 98
+                ),
+                DailyPrayerAnalytics(
+                    date = LocalDate.now().toString(),
+                    totalPrayers = 62_000L,
+                    uniqueParticipants = 11_000L,
+                    averageSessionDuration = 17.3,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 25_000L,
+                        CommunityPrayerType.YASIN to 20_500L,
+                        CommunityPrayerType.FATIHAH to 16_500L
+                    ),
+                    regionsActive = 102
+                )
+            ),
+            listOf(
+                WeeklyPrayerAnalytics(
+                    weekStartDate = LocalDate.now().minusDays(14).toString(),
+                    totalPrayers = 280_000L,
+                    uniqueParticipants = 52_000L,
+                    averageDailyPrayers = 40000.0,
+                    growthRate = 8.5f
+                ),
+                WeeklyPrayerAnalytics(
+                    weekStartDate = LocalDate.now().minusDays(7).toString(),
+                    totalPrayers = 320_000L,
+                    uniqueParticipants = 58_000L,
+                    averageDailyPrayers = 45700.0,
+                    growthRate = 14.3f
+                ),
+                WeeklyPrayerAnalytics(
+                    weekStartDate = LocalDate.now().toString(),
+                    totalPrayers = 385_000L,
+                    uniqueParticipants = 65_500L,
+                    averageDailyPrayers = 55000.0,
+                    growthRate = 20.3f
+                )
+            ),
+            GlobalPrayerStats(
+                totalPrayersToday = 62_000L,
+                totalActivePrayers = 25_000_000L,
+                totalParticipants = 850_000L,
+                totalMemorials = 11_000L,
+                activeRegions = 157,
+                globalTrend = TrendDirection.INCREASING,
+                peakHour = 20,
+                topPrayerType = "Tahlil"
+            )
+        ),
+        
+        // High volume data
+        Triple(
+            listOf(
+                DailyPrayerAnalytics(
+                    date = LocalDate.now().toString(),
+                    totalPrayers = 125_000L,
+                    uniqueParticipants = 28_500L,
+                    averageSessionDuration = 22.1,
+                    prayerTypeBreakdown = mapOf(
+                        CommunityPrayerType.TAHLIL to 45_000L,
+                        CommunityPrayerType.YASIN to 38_000L,
+                        CommunityPrayerType.FATIHAH to 25_000L,
+                        CommunityPrayerType.DHIKR to 12_000L,
+                        CommunityPrayerType.DUA to 5_000L
+                    ),
+                    regionsActive = 195
+                )
+            ),
+            emptyList(),
+            GlobalPrayerStats(
+                totalPrayersToday = 125_000L,
+                totalActivePrayers = 50_000_000L,
+                totalParticipants = 1_200_000L,
+                totalMemorials = 28_500L,
+                activeRegions = 195,
+                globalTrend = TrendDirection.INCREASING,
+                peakHour = 21,
+                topPrayerType = "Tahlil"
+            )
+        )
+    )
+}
+
+class DailyAnalyticsProvider : PreviewParameterProvider<List<DailyPrayerAnalytics>> {
+    override val values = sequenceOf(
+        // Ramadan special period (high activity)
+        listOf(
+            DailyPrayerAnalytics(
+                date = LocalDate.now().minusDays(2).toString(),
+                totalPrayers = 95_000L,
+                uniqueParticipants = 18_500L,
+                averageSessionDuration = 25.2,
+                prayerTypeBreakdown = mapOf(
+                    CommunityPrayerType.TAHLIL to 35_000L,
+                    CommunityPrayerType.YASIN to 30_000L,
+                    CommunityPrayerType.FATIHAH to 20_000L,
+                    CommunityPrayerType.DHIKR to 10_000L
+                ),
+                regionsActive = 178
+            ),
+            DailyPrayerAnalytics(
+                date = LocalDate.now().minusDays(1).toString(),
+                totalPrayers = 108_000L,
+                uniqueParticipants = 21_000L,
+                averageSessionDuration = 28.5,
+                prayerTypeBreakdown = mapOf(
+                    CommunityPrayerType.TAHLIL to 40_000L,
+                    CommunityPrayerType.YASIN to 35_000L,
+                    CommunityPrayerType.FATIHAH to 23_000L,
+                    CommunityPrayerType.DHIKR to 10_000L
+                ),
+                regionsActive = 185
+            ),
+            DailyPrayerAnalytics(
+                date = LocalDate.now().toString(),
+                totalPrayers = 125_000L,
+                uniqueParticipants = 24_500L,
+                averageSessionDuration = 31.8,
+                prayerTypeBreakdown = mapOf(
+                    CommunityPrayerType.TAHLIL to 48_000L,
+                    CommunityPrayerType.YASIN to 40_000L,
+                    CommunityPrayerType.FATIHAH to 25_000L,
+                    CommunityPrayerType.DHIKR to 12_000L
+                ),
+                regionsActive = 192
+            )
+        ),
+        
+        // Regular weekday period
+        listOf(
+            DailyPrayerAnalytics(
+                date = LocalDate.now().toString(),
+                totalPrayers = 45_000L,
+                uniqueParticipants = 8_500L,
+                averageSessionDuration = 15.2,
+                prayerTypeBreakdown = mapOf(
+                    CommunityPrayerType.TAHLIL to 18_000L,
+                    CommunityPrayerType.YASIN to 15_000L,
+                    CommunityPrayerType.FATIHAH to 12_000L
+                ),
+                regionsActive = 125
+            )
+        )
+    )
+}
+
+class PrayerTypeBreakdownProvider : PreviewParameterProvider<Map<CommunityPrayerType, Long>> {
+    override val values = sequenceOf(
+        // Balanced distribution
+        mapOf(
+            CommunityPrayerType.TAHLIL to 25_000L,
+            CommunityPrayerType.YASIN to 20_000L,
+            CommunityPrayerType.FATIHAH to 15_000L,
+            CommunityPrayerType.DHIKR to 8_000L,
+            CommunityPrayerType.DUA to 5_000L
+        ),
+        
+        // Tahlil dominant
+        mapOf(
+            CommunityPrayerType.TAHLIL to 45_000L,
+            CommunityPrayerType.YASIN to 12_000L,
+            CommunityPrayerType.FATIHAH to 8_000L,
+            CommunityPrayerType.DHIKR to 3_000L
+        ),
+        
+        // Three-way split
+        mapOf(
+            CommunityPrayerType.TAHLIL to 22_000L,
+            CommunityPrayerType.YASIN to 21_000L,
+            CommunityPrayerType.FATIHAH to 20_000L
+        )
+    )
+}
+
+// Preview Composables
+@Preview(name = "Prayer Analytics Dashboard - Daily View")
+@Composable
+fun PrayerAnalyticsDashboardDailyPreview(
+    @PreviewParameter(PrayerAnalyticsProvider::class) 
+    data: Triple<List<DailyPrayerAnalytics>, List<WeeklyPrayerAnalytics>, GlobalPrayerStats>
+) {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = data.first,
+                weeklyAnalytics = data.second,
+                countryStats = emptyList(),
+                globalStats = data.third,
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Analytics Dashboard - Weekly View")
+@Composable
+fun PrayerAnalyticsDashboardWeeklyPreview() {
+    val globalStats = GlobalPrayerStats(
+        totalPrayersToday = 95_000L,
+        totalActivePrayers = 38_500_000L,
+        totalParticipants = 975_000L,
+        totalMemorials = 18_500L,
+        activeRegions = 172,
+        globalTrend = TrendDirection.INCREASING,
+        peakHour = 19,
+        topPrayerType = "Yasin"
+    )
+    
+    val weeklyAnalytics = listOf(
+        WeeklyPrayerAnalytics(
+            weekStartDate = LocalDate.now().minusDays(21).toString(),
+            totalPrayers = 450_000L,
+            uniqueParticipants = 85_000L,
+            averageDailyPrayers = 64285.0,
+            growthRate = 12.5f
+        ),
+        WeeklyPrayerAnalytics(
+            weekStartDate = LocalDate.now().minusDays(14).toString(),
+            totalPrayers = 520_000L,
+            uniqueParticipants = 92_000L,
+            averageDailyPrayers = 74285.0,
+            growthRate = 15.6f
+        ),
+        WeeklyPrayerAnalytics(
+            weekStartDate = LocalDate.now().minusDays(7).toString(),
+            totalPrayers = 625_000L,
+            uniqueParticipants = 105_000L,
+            averageDailyPrayers = 89285.0,
+            growthRate = 20.2f
+        )
+    )
+    
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = emptyList(),
+                weeklyAnalytics = weeklyAnalytics,
+                countryStats = emptyList(),
+                globalStats = globalStats,
+                selectedTimeframe = AnalyticsTimeframe.WEEKLY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Analytics Dashboard - Geographic View")
+@Composable
+fun PrayerAnalyticsDashboardGeographicPreview() {
+    val countryStats = listOf(
+        CountryPrayerStats(
+            countryCode = "ID",
+            countryName = "Indonesia",
+            totalPrayers = 5_200_000L,
+            activeParticipants = 850_000L,
+            flag = "🇮🇩",
+            heatLevel = 1.0f,
+            rank = 1
+        ),
+        CountryPrayerStats(
+            countryCode = "PK",
+            countryName = "Pakistan",
+            totalPrayers = 3_800_000L,
+            activeParticipants = 625_000L,
+            flag = "🇵🇰",
+            heatLevel = 0.93f,
+            rank = 2
+        ),
+        CountryPrayerStats(
+            countryCode = "BD",
+            countryName = "Bangladesh",
+            totalPrayers = 2_950_000L,
+            activeParticipants = 485_000L,
+            flag = "🇧🇩",
+            heatLevel = 0.87f,
+            rank = 3
+        ),
+        CountryPrayerStats(
+            countryCode = "SA",
+            countryName = "Saudi Arabia",
+            totalPrayers = 1_850_000L,
+            activeParticipants = 325_000L,
+            flag = "🇸🇦",
+            heatLevel = 0.78f,
+            rank = 4
+        ),
+        CountryPrayerStats(
+            countryCode = "TR",
+            countryName = "Turkey",
+            totalPrayers = 1_425_000L,
+            activeParticipants = 245_000L,
+            flag = "🇹🇷",
+            heatLevel = 0.72f,
+            rank = 5
+        )
+    )
+    
+    val globalStats = GlobalPrayerStats(
+        totalPrayersToday = 125_000L,
+        totalActivePrayers = 45_000_000L,
+        totalParticipants = 1_150_000L,
+        totalMemorials = 28_500L,
+        activeRegions = 185,
+        globalTrend = TrendDirection.INCREASING,
+        peakHour = 20,
+        topPrayerType = "Tahlil"
+    )
+    
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = emptyList(),
+                weeklyAnalytics = emptyList(),
+                countryStats = countryStats,
+                globalStats = globalStats,
+                selectedTimeframe = AnalyticsTimeframe.GEOGRAPHIC,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Daily Analytics View")
+@Composable
+fun DailyAnalyticsViewPreview(
+    @PreviewParameter(DailyAnalyticsProvider::class) 
+    dailyAnalytics: List<DailyPrayerAnalytics>
+) {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            DailyAnalyticsView(
+                dailyAnalytics = dailyAnalytics,
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 125_000L,
+                    totalActivePrayers = 42_000_000L,
+                    totalParticipants = 1_050_000L,
+                    totalMemorials = 24_500L,
+                    activeRegions = 178,
+                    globalTrend = TrendDirection.INCREASING,
+                    peakHour = 21,
+                    topPrayerType = "Tahlil"
+                ),
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Daily Trend Line Chart")
+@Composable
+fun DailyTrendLineChartPreview() {
+    val dailyData = listOf(
+        DailyPrayerAnalytics(
+            date = LocalDate.now().minusDays(6).toString(),
+            totalPrayers = 42_000L,
+            uniqueParticipants = 8_200L,
+            averageSessionDuration = 14.5
+        ),
+        DailyPrayerAnalytics(
+            date = LocalDate.now().minusDays(5).toString(),
+            totalPrayers = 48_500L,
+            uniqueParticipants = 9_100L,
+            averageSessionDuration = 15.8
+        ),
+        DailyPrayerAnalytics(
+            date = LocalDate.now().minusDays(4).toString(),
+            totalPrayers = 52_000L,
+            uniqueParticipants = 9_800L,
+            averageSessionDuration = 16.2
+        ),
+        DailyPrayerAnalytics(
+            date = LocalDate.now().minusDays(3).toString(),
+            totalPrayers = 55_500L,
+            uniqueParticipants = 10_200L,
+            averageSessionDuration = 17.1
+        ),
+        DailyPrayerAnalytics(
+            date = LocalDate.now().minusDays(2).toString(),
+            totalPrayers = 58_000L,
+            uniqueParticipants = 10_800L,
+            averageSessionDuration = 18.5
+        ),
+        DailyPrayerAnalytics(
+            date = LocalDate.now().minusDays(1).toString(),
+            totalPrayers = 61_500L,
+            uniqueParticipants = 11_500L,
+            averageSessionDuration = 19.2
+        ),
+        DailyPrayerAnalytics(
+            date = LocalDate.now().toString(),
+            totalPrayers = 67_000L,
+            uniqueParticipants = 12_800L,
+            averageSessionDuration = 21.5
+        )
+    )
+    
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            DailyTrendLineChart(
+                dailyData = dailyData,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Type Breakdown Chart")
+@Composable
+fun PrayerTypeBreakdownChartPreview(
+    @PreviewParameter(PrayerTypeBreakdownProvider::class) 
+    prayerTypeData: Map<CommunityPrayerType, Long>
+) {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerTypeBreakdownChart(
+                prayerTypeData = prayerTypeData,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Type Legend Item")
+@Composable
+fun PrayerTypeLegendItemPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "Prayer Type Legend Items",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                PrayerTypeLegendItem(
+                    prayerType = CommunityPrayerType.TAHLIL,
+                    count = 25_000L,
+                    color = getPrayerTypeColor(CommunityPrayerType.TAHLIL),
+                    percentage = 40.0f
+                )
+                
+                PrayerTypeLegendItem(
+                    prayerType = CommunityPrayerType.YASIN,
+                    count = 20_000L,
+                    color = getPrayerTypeColor(CommunityPrayerType.YASIN),
+                    percentage = 32.0f
+                )
+                
+                PrayerTypeLegendItem(
+                    prayerType = CommunityPrayerType.FATIHAH,
+                    count = 15_000L,
+                    color = getPrayerTypeColor(CommunityPrayerType.FATIHAH),
+                    percentage = 24.0f
+                )
+                
+                PrayerTypeLegendItem(
+                    prayerType = CommunityPrayerType.DHIKR,
+                    count = 2_500L,
+                    color = getPrayerTypeColor(CommunityPrayerType.DHIKR),
+                    percentage = 4.0f
+                )
+            }
+        }
+    }
+}
+
+@Preview(name = "Statistics Cards")
+@Composable
+fun DailyStatisticsCardsPreview() {
+    val todayStats = DailyPrayerAnalytics(
+        date = LocalDate.now().toString(),
+        totalPrayers = 67_500L,
+        uniqueParticipants = 12_800L,
+        averageSessionDuration = 21.5,
+        prayerTypeBreakdown = mapOf(
+            CommunityPrayerType.TAHLIL to 27_000L,
+            CommunityPrayerType.YASIN to 22_500L,
+            CommunityPrayerType.FATIHAH to 18_000L
+        ),
+        regionsActive = 145
+    )
+    
+    val yesterdayStats = DailyPrayerAnalytics(
+        date = LocalDate.now().minusDays(1).toString(),
+        totalPrayers = 61_500L,
+        uniqueParticipants = 11_500L,
+        averageSessionDuration = 19.2,
+        regionsActive = 138
+    )
+    
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            DailyStatisticsCards(
+                todayStats = todayStats,
+                yesterdayStats = yesterdayStats,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Stat Card")
+@Composable
+fun StatCardPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.padding(16.dp)
+            ) {
+                StatCard(
+                    title = "Today's Prayers",
+                    value = "67,500",
+                    change = 15, // +15%
+                    icon = "🤲"
+                )
+                
+                StatCard(
+                    title = "Participants",
+                    value = "12,800",
+                    change = 11, // +11%
+                    icon = "👥"
+                )
+                
+                StatCard(
+                    title = "Avg Duration",
+                    value = "21m",
+                    change = -2, // -2%
+                    icon = "⏱️"
+                )
+                
+                StatCard(
+                    title = "Active Regions",
+                    value = "145",
+                    change = 7, // +7 regions
+                    icon = "🌍"
+                )
+            }
+        }
+    }
+}
+
+@Preview(name = "Analytics Header")
+@Composable
+fun AnalyticsHeaderPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnalyticsHeader(
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 125_000L,
+                    totalActivePrayers = 45_000_000L,
+                    totalParticipants = 1_150_000L,
+                    totalMemorials = 24_500L,
+                    activeRegions = 185,
+                    globalTrend = TrendDirection.INCREASING,
+                    peakHour = 20,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Trend Indicators")
+@Composable
+fun TrendIndicatorPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "Trend Indicators",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TrendIndicator(trend = TrendDirection.INCREASING)
+                    Text("Increasing")
+                }
+                
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TrendIndicator(trend = TrendDirection.DECREASING)
+                    Text("Decreasing")
+                }
+                
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TrendIndicator(trend = TrendDirection.STABLE)
+                    Text("Stable")
+                }
+            }
+        }
+    }
+}
+
+// ===============================================
+// Device-Specific & Advanced Previews
+// ===============================================
+
+// 1. FOLDABLE DEVICE PREVIEWS
+
+@Preview(
+    name = "Analytics Dashboard - Foldable Open",
+    device = "spec:width=2208dp,height=1768dp,dpi=420",
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardFoldableOpenPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = listOf(
+                    DailyPrayerAnalytics(
+                        date = LocalDate.now().toString(),
+                        totalPrayers = 125_000L,
+                        uniqueParticipants = 28_500L,
+                        averageSessionDuration = 22.1,
+                        prayerTypeBreakdown = mapOf(
+                            CommunityPrayerType.TAHLIL to 45_000L,
+                            CommunityPrayerType.YASIN to 38_000L,
+                            CommunityPrayerType.FATIHAH to 25_000L,
+                            CommunityPrayerType.DHIKR to 12_000L,
+                            CommunityPrayerType.DUA to 5_000L
+                        ),
+                        regionsActive = 195
+                    )
+                ),
+                weeklyAnalytics = emptyList(),
+                countryStats = emptyList(),
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 125_000L,
+                    totalActivePrayers = 50_000_000L,
+                    totalParticipants = 1_200_000L,
+                    totalMemorials = 28_500L,
+                    activeRegions = 195,
+                    globalTrend = TrendDirection.INCREASING,
+                    peakHour = 21,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Analytics Dashboard - Foldable Closed",
+    device = "spec:width=841dp,height=1768dp,dpi=420",
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardFoldableClosedPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = listOf(
+                    DailyPrayerAnalytics(
+                        date = LocalDate.now().toString(),
+                        totalPrayers = 67_500L,
+                        uniqueParticipants = 12_800L,
+                        averageSessionDuration = 21.5,
+                        prayerTypeBreakdown = mapOf(
+                            CommunityPrayerType.TAHLIL to 27_000L,
+                            CommunityPrayerType.YASIN to 22_500L,
+                            CommunityPrayerType.FATIHAH to 18_000L
+                        ),
+                        regionsActive = 145
+                    )
+                ),
+                weeklyAnalytics = emptyList(),
+                countryStats = emptyList(),
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 67_500L,
+                    totalActivePrayers = 42_000_000L,
+                    totalParticipants = 1_050_000L,
+                    totalMemorials = 24_500L,
+                    activeRegions = 178,
+                    globalTrend = TrendDirection.INCREASING,
+                    peakHour = 21,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+// 2. HIGH CONTRAST ACCESSIBILITY PREVIEWS
+
+@Preview(
+    name = "Analytics Dashboard - High Contrast",
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardHighContrastPreview() {
+    TahlilTheme {
+        Surface(
+            color = Color.Black,
+            modifier = Modifier.background(Color.Black)
+        ) {
+            CompositionLocalProvider(
+                LocalContentColor provides Color.White
+            ) {
+                PrayerAnalyticsDashboard(
+                    dailyAnalytics = listOf(
+                        DailyPrayerAnalytics(
+                            date = LocalDate.now().toString(),
+                            totalPrayers = 95_000L,
+                            uniqueParticipants = 18_500L,
+                            averageSessionDuration = 25.2,
+                            prayerTypeBreakdown = mapOf(
+                                CommunityPrayerType.TAHLIL to 35_000L,
+                                CommunityPrayerType.YASIN to 30_000L,
+                                CommunityPrayerType.FATIHAH to 20_000L,
+                                CommunityPrayerType.DHIKR to 10_000L
+                            ),
+                            regionsActive = 178
+                        )
+                    ),
+                    weeklyAnalytics = emptyList(),
+                    countryStats = emptyList(),
+                    globalStats = GlobalPrayerStats(
+                        totalPrayersToday = 95_000L,
+                        totalActivePrayers = 38_500_000L,
+                        totalParticipants = 975_000L,
+                        totalMemorials = 18_500L,
+                        activeRegions = 172,
+                        globalTrend = TrendDirection.INCREASING,
+                        peakHour = 19,
+                        topPrayerType = "Yasin"
+                    ),
+                    selectedTimeframe = AnalyticsTimeframe.DAILY,
+                    onTimeframeChanged = { },
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
+    }
+}
+
+// 3. ISLAMIC COLOR SCHEME PREVIEWS
+
+@Preview(
+    name = "Analytics Dashboard - Islamic Green Theme",
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardIslamicGreenPreview() {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primary = Color(0xFF0D7377), // Islamic Teal
+            secondary = Color(0xFF14A085), // Islamic Green
+            tertiary = Color(0xFF41A58D), // Light Green
+            surface = Color(0xFFF8FBF8), // Light Green Background
+            background = Color(0xFFF0F8F0), // Very Light Green
+            surfaceVariant = Color(0xFFE8F5E8) // Green Tinted Surface
+        )
+    ) {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = listOf(
+                    DailyPrayerAnalytics(
+                        date = LocalDate.now().toString(),
+                        totalPrayers = 85_000L,
+                        uniqueParticipants = 16_200L,
+                        averageSessionDuration = 23.5,
+                        prayerTypeBreakdown = mapOf(
+                            CommunityPrayerType.TAHLIL to 32_000L,
+                            CommunityPrayerType.YASIN to 28_000L,
+                            CommunityPrayerType.FATIHAH to 20_000L,
+                            CommunityPrayerType.DHIKR to 5_000L
+                        ),
+                        regionsActive = 165
+                    )
+                ),
+                weeklyAnalytics = emptyList(),
+                countryStats = emptyList(),
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 85_000L,
+                    totalActivePrayers = 35_000_000L,
+                    totalParticipants = 895_000L,
+                    totalMemorials = 16_200L,
+                    activeRegions = 165,
+                    globalTrend = TrendDirection.INCREASING,
+                    peakHour = 18,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Analytics Dashboard - Islamic Gold Theme",
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardIslamicGoldPreview() {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primary = Color(0xFFD4AF37), // Islamic Gold
+            secondary = Color(0xFFB8860B), // Dark Gold
+            tertiary = Color(0xFFDAA520), // Goldenrod
+            surface = Color(0xFFFFFDF5), // Cream Background
+            background = Color(0xFFFFFAF0), // Floral White
+            surfaceVariant = Color(0xFFFFF8DC) // Cornsilk
+        )
+    ) {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = listOf(
+                    DailyPrayerAnalytics(
+                        date = LocalDate.now().toString(),
+                        totalPrayers = 112_000L,
+                        uniqueParticipants = 22_800L,
+                        averageSessionDuration = 26.8,
+                        prayerTypeBreakdown = mapOf(
+                            CommunityPrayerType.TAHLIL to 42_000L,
+                            CommunityPrayerType.YASIN to 35_000L,
+                            CommunityPrayerType.FATIHAH to 25_000L,
+                            CommunityPrayerType.DHIKR to 10_000L
+                        ),
+                        regionsActive = 188
+                    )
+                ),
+                weeklyAnalytics = emptyList(),
+                countryStats = emptyList(),
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 112_000L,
+                    totalActivePrayers = 44_000_000L,
+                    totalParticipants = 1_100_000L,
+                    totalMemorials = 22_800L,
+                    activeRegions = 188,
+                    globalTrend = TrendDirection.INCREASING,
+                    peakHour = 20,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Analytics Dashboard - Traditional Islamic Theme",
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardTraditionalIslamicPreview() {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primary = Color(0xFF8B4513), // Saddle Brown (Traditional Islamic)
+            secondary = Color(0xFFCD853F), // Peru
+            tertiary = Color(0xFFDEB887), // Burlywood
+            surface = Color(0xFFFAF0E6), // Linen
+            background = Color(0xFFF5F5DC), // Beige
+            surfaceVariant = Color(0xFFDDD3C0) // Warm Gray
+        )
+    ) {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = listOf(
+                    DailyPrayerAnalytics(
+                        date = LocalDate.now().toString(),
+                        totalPrayers = 78_000L,
+                        uniqueParticipants = 14_500L,
+                        averageSessionDuration = 28.2,
+                        prayerTypeBreakdown = mapOf(
+                            CommunityPrayerType.TAHLIL to 35_000L,
+                            CommunityPrayerType.YASIN to 25_000L,
+                            CommunityPrayerType.FATIHAH to 18_000L
+                        ),
+                        regionsActive = 152
+                    )
+                ),
+                weeklyAnalytics = emptyList(),
+                countryStats = emptyList(),
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 78_000L,
+                    totalActivePrayers = 32_000_000L,
+                    totalParticipants = 820_000L,
+                    totalMemorials = 14_500L,
+                    activeRegions = 152,
+                    globalTrend = TrendDirection.STABLE,
+                    peakHour = 19,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+// 4. FONT SCALING ACCESSIBILITY PREVIEWS
+
+@Preview(
+    name = "Analytics Dashboard - Font Scale 150%",
+    fontScale = 1.5f,
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardFontScale150Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = listOf(
+                    DailyPrayerAnalytics(
+                        date = LocalDate.now().toString(),
+                        totalPrayers = 65_000L,
+                        uniqueParticipants = 12_500L,
+                        averageSessionDuration = 20.8,
+                        prayerTypeBreakdown = mapOf(
+                            CommunityPrayerType.TAHLIL to 28_000L,
+                            CommunityPrayerType.YASIN to 22_000L,
+                            CommunityPrayerType.FATIHAH to 15_000L
+                        ),
+                        regionsActive = 142
+                    )
+                ),
+                weeklyAnalytics = emptyList(),
+                countryStats = emptyList(),
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 65_000L,
+                    totalActivePrayers = 38_000_000L,
+                    totalParticipants = 925_000L,
+                    totalMemorials = 12_500L,
+                    activeRegions = 142,
+                    globalTrend = TrendDirection.INCREASING,
+                    peakHour = 19,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(12.dp)
+            )
+        }
+    }
+}
+
+@Preview(
+    name = "Analytics Dashboard - Font Scale 200%",
+    fontScale = 2.0f,
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardFontScale200Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerAnalyticsDashboard(
+                dailyAnalytics = listOf(
+                    DailyPrayerAnalytics(
+                        date = LocalDate.now().toString(),
+                        totalPrayers = 58_000L,
+                        uniqueParticipants = 11_200L,
+                        averageSessionDuration = 18.5,
+                        prayerTypeBreakdown = mapOf(
+                            CommunityPrayerType.TAHLIL to 25_000L,
+                            CommunityPrayerType.YASIN to 20_000L,
+                            CommunityPrayerType.FATIHAH to 13_000L
+                        ),
+                        regionsActive = 128
+                    )
+                ),
+                weeklyAnalytics = emptyList(),
+                countryStats = emptyList(),
+                globalStats = GlobalPrayerStats(
+                    totalPrayersToday = 58_000L,
+                    totalActivePrayers = 34_000_000L,
+                    totalParticipants = 825_000L,
+                    totalMemorials = 11_200L,
+                    activeRegions = 128,
+                    globalTrend = TrendDirection.STABLE,
+                    peakHour = 18,
+                    topPrayerType = "Tahlil"
+                ),
+                selectedTimeframe = AnalyticsTimeframe.DAILY,
+                onTimeframeChanged = { },
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+    }
+}
+
+// 5. NETWORK OFFLINE STATE PREVIEWS
+
+@Preview(
+    name = "Analytics Dashboard - Offline State",
+    showBackground = true
+)
+@Composable
+fun PrayerAnalyticsDashboardOfflinePreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.CloudOff,
+                    contentDescription = "Offline",
+                    modifier = Modifier.size(64.dp),
+                    tint = MaterialTheme.colorScheme.outline
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                Text(
+                    text = "Connection Lost",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Text(
+                    text = "Your prayers continue to be counted. Analytics will sync when connection is restored.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(horizontal = 24.dp)
+                )
+                
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.FavoriteBorder,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        
+                        Spacer(modifier = Modifier.width(12.dp))
+                        
+                        Column {
+                            Text(
+                                text = "Continue Praying Offline",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                            
+                            Text(
+                                text = "Your memorial prayers are saved locally",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                            )
+                        }
+                    }
+                }
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                OutlinedButton(
+                    onClick = { /* Retry connection */ }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Retry Connection")
+                }
+            }
+        }
+    }
 }

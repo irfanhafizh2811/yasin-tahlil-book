@@ -14,6 +14,10 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.memorial.model.ValidationError
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -180,5 +184,156 @@ fun DeceasedInformationSection(
                 }
             }
         }
+    }
+}
+
+// Preview Parameter Provider for different states
+class DeceasedInfoPreviewProvider : PreviewParameterProvider<DeceasedInfoPreviewData> {
+    override val values = sequenceOf(
+        DeceasedInfoPreviewData(
+            name = "",
+            nameArabic = "",
+            errors = listOf(ValidationError.DECEASED_NAME_EMPTY)
+        ),
+        DeceasedInfoPreviewData(
+            name = "Ahmed Hassan",
+            nameArabic = "",
+            errors = emptyList()
+        ),
+        DeceasedInfoPreviewData(
+            name = "Fatima Al-Zahra",
+            nameArabic = "فاطمة الزهراء",
+            errors = emptyList()
+        ),
+        DeceasedInfoPreviewData(
+            name = "A",
+            nameArabic = "",
+            errors = listOf(ValidationError.DECEASED_NAME_TOO_SHORT)
+        ),
+        DeceasedInfoPreviewData(
+            name = "Mohammad Abdullah Ibn Ahmad Al-Masri Al-Qurashi",
+            nameArabic = "محمد عبد الله بن أحمد المصري القرشي",
+            errors = listOf(ValidationError.DECEASED_NAME_TOO_LONG)
+        )
+    )
+}
+
+data class DeceasedInfoPreviewData(
+    val name: String,
+    val nameArabic: String,
+    val errors: List<ValidationError>
+)
+
+@Preview(name = "Empty State", showBackground = true)
+@Composable
+private fun DeceasedInformationSectionEmptyPreview() {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = "",
+            deceasedNameArabic = "",
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = listOf(ValidationError.DECEASED_NAME_EMPTY)
+        )
+    }
+}
+
+@Preview(name = "With Latin Name", showBackground = true)
+@Composable
+private fun DeceasedInformationSectionLatinPreview() {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = "Ahmed Hassan",
+            deceasedNameArabic = "",
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "With Arabic Name", showBackground = true)
+@Composable
+private fun DeceasedInformationSectionArabicPreview() {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = "Fatima Al-Zahra",
+            deceasedNameArabic = "فاطمة الزهراء",
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "Name Too Short Error", showBackground = true)
+@Composable
+private fun DeceasedInformationSectionErrorPreview() {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = "A",
+            deceasedNameArabic = "",
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = listOf(ValidationError.DECEASED_NAME_TOO_SHORT)
+        )
+    }
+}
+
+@Preview(name = "Name Too Long Error", showBackground = true)
+@Composable
+private fun DeceasedInformationSectionLongErrorPreview() {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = "Mohammad Abdullah Ibn Ahmad Al-Masri Al-Qurashi Al-Hanafi",
+            deceasedNameArabic = "محمد عبد الله بن أحمد المصري القرشي الحنفي",
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = listOf(ValidationError.DECEASED_NAME_TOO_LONG)
+        )
+    }
+}
+
+@Preview(name = "Arabic Text Invalid", showBackground = true)
+@Composable
+private fun DeceasedInformationSectionArabicErrorPreview() {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = "Ahmed Hassan",
+            deceasedNameArabic = "Ahmed123!@#",
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = listOf(ValidationError.ARABIC_TEXT_INVALID)
+        )
+    }
+}
+
+@Preview(name = "Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun DeceasedInformationSectionDarkPreview() {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = "Abdullah Al-Rashid",
+            deceasedNameArabic = "عبد الله الراشد",
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = emptyList()
+        )
+    }
+}
+
+@Preview(name = "Dynamic Preview", showBackground = true)
+@Composable
+private fun DeceasedInformationSectionDynamicPreview(
+    @PreviewParameter(DeceasedInfoPreviewProvider::class) data: DeceasedInfoPreviewData
+) {
+    TahlilTheme {
+        DeceasedInformationSection(
+            deceasedName = data.name,
+            deceasedNameArabic = data.nameArabic,
+            onDeceasedNameChange = { },
+            onDeceasedNameArabicChange = { },
+            errors = data.errors
+        )
     }
 }

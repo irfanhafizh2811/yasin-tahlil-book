@@ -25,6 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import kotlinx.coroutines.delay
 import kotlin.math.cos
 import kotlin.math.sin
@@ -416,5 +420,387 @@ fun AnimatedPrayerCounter(
             color = MaterialTheme.colorScheme.onSurface,
             fontWeight = FontWeight.Medium
         )
+    }
+}
+
+// Preview Parameter Providers
+class PrayerCelebrationProvider : PreviewParameterProvider<Triple<String, Int, Boolean>> {
+    override val values = sequenceOf(
+        // Tahlil completion
+        Triple("Tahlil", 100, true),
+        // Yasin completion
+        Triple("Surah Yasin", 1, true),
+        // Fatihah completion
+        Triple("Al-Fatihah", 7, true),
+        // Dhikr completion
+        Triple("Dhikr", 33, true),
+        // Large number completion
+        Triple("Tahlil", 1000, true)
+    )
+}
+
+class MilestoneProvider : PreviewParameterProvider<Triple<Int, String, Boolean>> {
+    override val values = sequenceOf(
+        // 25% milestone
+        Triple(25, "Tahlil", true),
+        // 50% milestone
+        Triple(50, "Surah Yasin", true),
+        // 75% milestone
+        Triple(75, "Al-Fatihah", true),
+        // 100% completion
+        Triple(100, "Dhikr", true)
+    )
+}
+
+class PrayerCounterProvider : PreviewParameterProvider<Triple<Int, Int, Float>> {
+    override val values = sequenceOf(
+        // Beginning of prayer session
+        Triple(0, 100, 0.0f),
+        // 25% progress
+        Triple(25, 100, 0.25f),
+        // 50% progress
+        Triple(50, 100, 0.5f),
+        // 75% progress
+        Triple(75, 100, 0.75f),
+        // Near completion
+        Triple(95, 100, 0.95f),
+        // Complete
+        Triple(100, 100, 1.0f),
+        // Tahlil target (higher number)
+        Triple(67, 100, 0.67f),
+        // Yasin (single recitation)
+        Triple(0, 1, 0.0f),
+        // Dhikr session
+        Triple(15, 33, 0.45f)
+    )
+}
+
+// Preview Composables
+@Preview(name = "Prayer Completion Celebration - Tahlil")
+@Composable
+fun PrayerCompletionCelebrationTahlilPreview() {
+    TahlilTheme {
+        PrayerCompletionCelebration(
+            isVisible = true,
+            prayerType = "Tahlil",
+            totalPrayers = 100,
+            onDismiss = { },
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Preview(name = "Prayer Completion Celebration - Yasin")
+@Composable
+fun PrayerCompletionCelebrationYasinPreview() {
+    TahlilTheme {
+        PrayerCompletionCelebration(
+            isVisible = true,
+            prayerType = "Surah Yasin",
+            totalPrayers = 1,
+            onDismiss = { },
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Preview(name = "Prayer Completion Celebration - Fatihah")
+@Composable
+fun PrayerCompletionCelebrationFatihahPreview() {
+    TahlilTheme {
+        PrayerCompletionCelebration(
+            isVisible = true,
+            prayerType = "Al-Fatihah",
+            totalPrayers = 7,
+            onDismiss = { },
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Preview(name = "Prayer Completion Celebration - Large Number")
+@Composable
+fun PrayerCompletionCelebrationLargePreview() {
+    TahlilTheme {
+        PrayerCompletionCelebration(
+            isVisible = true,
+            prayerType = "Istighfar",
+            totalPrayers = 1000,
+            onDismiss = { },
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Preview(name = "Prayer Completion - Not Visible")
+@Composable
+fun PrayerCompletionCelebrationHiddenPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            PrayerCompletionCelebration(
+                isVisible = false,
+                prayerType = "Tahlil",
+                totalPrayers = 100,
+                onDismiss = { },
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+    }
+}
+
+@Preview(name = "Milestone Celebration - 25%")
+@Composable
+fun MilestoneCelebration25Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            MilestoneCelebration(
+                isVisible = true,
+                milestonePercentage = 25,
+                prayerType = "Tahlil",
+                onDismiss = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Milestone Celebration - 50%")
+@Composable
+fun MilestoneCelebration50Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            MilestoneCelebration(
+                isVisible = true,
+                milestonePercentage = 50,
+                prayerType = "Surah Yasin",
+                onDismiss = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Milestone Celebration - 75%")
+@Composable
+fun MilestoneCelebration75Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            MilestoneCelebration(
+                isVisible = true,
+                milestonePercentage = 75,
+                prayerType = "Al-Fatihah",
+                onDismiss = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Milestone Celebration - 100% Complete")
+@Composable
+fun MilestoneCelebration100Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            MilestoneCelebration(
+                isVisible = true,
+                milestonePercentage = 100,
+                prayerType = "Dhikr Session",
+                onDismiss = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Milestone Celebration - Hidden")
+@Composable
+fun MilestoneCelebrationHiddenPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            MilestoneCelebration(
+                isVisible = false,
+                milestonePercentage = 50,
+                prayerType = "Tahlil",
+                onDismiss = { },
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - Beginning")
+@Composable
+fun AnimatedPrayerCounterBeginningPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 0,
+                targetCount = 100,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - 25% Progress")
+@Composable
+fun AnimatedPrayerCounter25Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 25,
+                targetCount = 100,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - 50% Progress")
+@Composable
+fun AnimatedPrayerCounter50Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 50,
+                targetCount = 100,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - 75% Progress")
+@Composable
+fun AnimatedPrayerCounter75Preview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 75,
+                targetCount = 100,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - Near Complete")
+@Composable
+fun AnimatedPrayerCounterNearCompletePreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 95,
+                targetCount = 100,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - Complete")
+@Composable
+fun AnimatedPrayerCounterCompletePreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 100,
+                targetCount = 100,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - Yasin (Single)")
+@Composable
+fun AnimatedPrayerCounterYasinPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 0,
+                targetCount = 1,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - Dhikr Session")
+@Composable
+fun AnimatedPrayerCounterDhikrPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 15,
+                targetCount = 33,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Prayer Counter - Large Target")
+@Composable
+fun AnimatedPrayerCounterLargeTargetPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            AnimatedPrayerCounter(
+                currentCount = 450,
+                targetCount = 1000,
+                onIncrement = { },
+                modifier = Modifier.padding(24.dp)
+            )
+        }
+    }
+}
+
+@Preview(name = "Celebration Card Only")
+@Composable
+fun CelebrationCardPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            CelebrationCard(
+                prayerType = "Tahlil",
+                totalPrayers = 100,
+                onDismiss = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Celebration Card - Yasin")
+@Composable
+fun CelebrationCardYasinPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            CelebrationCard(
+                prayerType = "Surah Yasin",
+                totalPrayers = 1,
+                onDismiss = { }
+            )
+        }
+    }
+}
+
+@Preview(name = "Celebration Card - Istighfar")
+@Composable
+fun CelebrationCardIstighfarPreview() {
+    TahlilTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            CelebrationCard(
+                prayerType = "Istighfar",
+                totalPrayers = 1000,
+                onDismiss = { }
+            )
+        }
     }
 }

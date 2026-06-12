@@ -27,10 +27,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import android.content.res.Configuration
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.community.model.*
 import java.time.format.DateTimeFormatter
+import java.time.ZonedDateTime
 
 /**
  * Family Memorial Sharing Card Component
@@ -578,3 +584,348 @@ private fun formatDate(date: java.time.ZonedDateTime): String {
     val formatter = DateTimeFormatter.ofPattern("MMM dd")
     return date.format(formatter)
 }
+
+// ========================================
+// PREVIEW IMPLEMENTATIONS
+// ========================================
+
+@Preview(
+    name = "Family Memorial Sharing - With Memorials",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardWithMemorials() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = getSampleSharedMemorials(),
+            familyPrayerInvitations = emptyList(),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Family Memorial Sharing - Dark Theme",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardDark() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = getSampleSharedMemorials(),
+            familyPrayerInvitations = getSamplePrayerInvitations(),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Prayer Invitations Tab",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardInvitations() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = emptyList(),
+            familyPrayerInvitations = getSamplePrayerInvitations(),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Empty Family Memorials",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardEmpty() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = emptyList(),
+            familyPrayerInvitations = emptyList(),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Active Prayer Sessions",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardActiveSessions() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = getActiveSessionMemorials(),
+            familyPrayerInvitations = emptyList(),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Urgent Prayer Invitations",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardUrgentInvitations() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = emptyList(),
+            familyPrayerInvitations = getUrgentPrayerInvitations(),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Large Family Memorial",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardLargeFamily() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = getLargeFamilyMemorials(),
+            familyPrayerInvitations = emptyList(),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+@Preview(
+    name = "Mixed Content",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardMixed() {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = getSampleSharedMemorials().take(2),
+            familyPrayerInvitations = getSamplePrayerInvitations().take(1),
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+// Preview Parameter Providers
+class FamilyMemorialContentPreviewProvider : PreviewParameterProvider<Pair<List<SharedMemorial>, List<PrayerInvitation>>> {
+    override val values = sequenceOf(
+        Pair(emptyList(), emptyList()),
+        Pair(getSampleSharedMemorials(), emptyList()),
+        Pair(emptyList(), getSamplePrayerInvitations()),
+        Pair(getSampleSharedMemorials(), getSamplePrayerInvitations())
+    )
+}
+
+@Preview(
+    name = "Dynamic Family Content",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewFamilyMemorialSharingCardDynamic(
+    @PreviewParameter(FamilyMemorialContentPreviewProvider::class) content: Pair<List<SharedMemorial>, List<PrayerInvitation>>
+) {
+    TahlilTheme {
+        FamilyMemorialSharingCard(
+            sharedMemorials = content.first,
+            familyPrayerInvitations = content.second,
+            onJoinFamilyPrayer = { },
+            onViewMemorial = { },
+            onInviteFamily = { }
+        )
+    }
+}
+
+// Sample Data Functions
+private fun getSampleSharedMemorials(): List<SharedMemorial> = listOf(
+    SharedMemorial(
+        memorialId = "memorial_1",
+        deceasedName = "Abdullah Ibn Ahmad",
+        photoUrl = "https://example.com/photo1.jpg",
+        sharedByName = "Fatima (Wife)",
+        sharedByUserId = "user_1",
+        familyMembers = getSampleFamilyMembers(),
+        totalPrayers = 2847,
+        isActivePrayerSession = false,
+        sharedAt = ZonedDateTime.now().minusDays(2)
+    ),
+    SharedMemorial(
+        memorialId = "memorial_2", 
+        deceasedName = "Khadijah Bint Muhammad",
+        photoUrl = null,
+        sharedByName = "Omar (Son)",
+        sharedByUserId = "user_2",
+        familyMembers = getSampleFamilyMembers().take(3),
+        totalPrayers = 1567,
+        isActivePrayerSession = true,
+        sharedAt = ZonedDateTime.now().minusHours(6)
+    ),
+    SharedMemorial(
+        memorialId = "memorial_3",
+        deceasedName = "Ali Ibn Abu Talib",
+        photoUrl = "https://example.com/photo3.jpg",
+        sharedByName = "Aisha (Daughter)",
+        sharedByUserId = "user_3",
+        familyMembers = getSampleFamilyMembers().take(2),
+        totalPrayers = 892,
+        isActivePrayerSession = false,
+        sharedAt = ZonedDateTime.now().minusDays(5)
+    )
+)
+
+private fun getActiveSessionMemorials(): List<SharedMemorial> = listOf(
+    SharedMemorial(
+        memorialId = "active_1",
+        deceasedName = "Hassan Ibn Ali",
+        photoUrl = "https://example.com/active.jpg", 
+        sharedByName = "Zainab (Sister)",
+        sharedByUserId = "user_active",
+        familyMembers = getSampleFamilyMembers(),
+        totalPrayers = 5634,
+        isActivePrayerSession = true,
+        sharedAt = ZonedDateTime.now().minusMinutes(30)
+    )
+)
+
+private fun getLargeFamilyMemorials(): List<SharedMemorial> = listOf(
+    SharedMemorial(
+        memorialId = "large_family",
+        deceasedName = "Muhammad Ibn Abdullah",
+        photoUrl = "https://example.com/large.jpg",
+        sharedByName = "Ahmad (Son)", 
+        sharedByUserId = "user_large",
+        familyMembers = getLargeFamilyMembers(),
+        totalPrayers = 15847,
+        isActivePrayerSession = false,
+        sharedAt = ZonedDateTime.now().minusDays(1)
+    )
+)
+
+private fun getSamplePrayerInvitations(): List<PrayerInvitation> = listOf(
+    PrayerInvitation(
+        invitationId = "invitation_1",
+        memorialId = "memorial_1",
+        memorialName = "Abdullah Ibn Ahmad",
+        inviterName = "Fatima (Wife)",
+        inviterUserId = "inviter_1",
+        prayerType = CommunityPrayerType.TAHLIL,
+        targetPrayerCount = 100,
+        isUrgent = false,
+        acceptedFamilyMembers = getSampleFamilyMembers().take(3),
+        invitedAt = ZonedDateTime.now().minusHours(2)
+    ),
+    PrayerInvitation(
+        invitationId = "invitation_2",
+        memorialId = "memorial_2",
+        memorialName = "Khadijah Bint Muhammad", 
+        inviterName = "Omar (Son)",
+        inviterUserId = "inviter_2",
+        prayerType = CommunityPrayerType.YASIN,
+        targetPrayerCount = 7,
+        isUrgent = true,
+        acceptedFamilyMembers = getSampleFamilyMembers().take(2),
+        invitedAt = ZonedDateTime.now().minusMinutes(30)
+    )
+)
+
+private fun getUrgentPrayerInvitations(): List<PrayerInvitation> = listOf(
+    PrayerInvitation(
+        invitationId = "urgent_1",
+        memorialId = "urgent_memorial",
+        memorialName = "Urgent Prayer for Grandmother",
+        inviterName = "Ahmad (Grandson)",
+        inviterUserId = "urgent_user",
+        prayerType = CommunityPrayerType.FATIHAH,
+        targetPrayerCount = 41,
+        isUrgent = true,
+        acceptedFamilyMembers = getSampleFamilyMembers(),
+        invitedAt = ZonedDateTime.now().minusMinutes(15)
+    )
+)
+
+private fun getSampleFamilyMembers(): List<FamilyMember> = listOf(
+    FamilyMember(
+        userId = "family_1",
+        name = "Ahmad",
+        profilePhotoUrl = "https://example.com/ahmad.jpg",
+        relationshipType = "Son"
+    ),
+    FamilyMember(
+        userId = "family_2", 
+        name = "Fatima",
+        profilePhotoUrl = "https://example.com/fatima.jpg",
+        relationshipType = "Daughter"
+    ),
+    FamilyMember(
+        userId = "family_3",
+        name = "Omar",
+        profilePhotoUrl = null,
+        relationshipType = "Brother"
+    ),
+    FamilyMember(
+        userId = "family_4",
+        name = "Aisha",
+        profilePhotoUrl = "https://example.com/aisha.jpg",
+        relationshipType = "Sister"
+    ),
+    FamilyMember(
+        userId = "family_5",
+        name = "Ali",
+        profilePhotoUrl = "https://example.com/ali.jpg",
+        relationshipType = "Nephew"
+    )
+)
+
+private fun getLargeFamilyMembers(): List<FamilyMember> = getSampleFamilyMembers() + listOf(
+    FamilyMember(
+        userId = "family_6",
+        name = "Zainab",
+        profilePhotoUrl = "https://example.com/zainab.jpg",
+        relationshipType = "Niece"
+    ),
+    FamilyMember(
+        userId = "family_7",
+        name = "Hassan",
+        profilePhotoUrl = null,
+        relationshipType = "Grandson"
+    ),
+    FamilyMember(
+        userId = "family_8",
+        name = "Hussain",
+        profilePhotoUrl = "https://example.com/hussain.jpg",
+        relationshipType = "Grandson"
+    ),
+    FamilyMember(
+        userId = "family_9",
+        name = "Ruqayya",
+        profilePhotoUrl = "https://example.com/ruqayya.jpg",
+        relationshipType = "Granddaughter"
+    )
+)

@@ -22,7 +22,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import android.content.res.Configuration
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.community.model.*
+import java.time.ZonedDateTime
 
 /**
  * Community Achievements Card Component
@@ -398,3 +404,432 @@ private fun getRelativeTime(timestamp: java.time.ZonedDateTime): String {
         else -> "${duration.toDays() / 7}w ago"
     }
 }
+
+// ========================================
+// PREVIEW IMPLEMENTATIONS
+// ========================================
+
+@Preview(
+    name = "Community Achievements - With Badges",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardWithBadges() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getSampleBadges(),
+            recentMilestones = getSampleMilestones(),
+            currentStreak = 15
+        )
+    }
+}
+
+@Preview(
+    name = "Community Achievements - Dark Theme",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun PreviewCommunityAchievementsCardDark() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getSampleBadges(),
+            recentMilestones = getSampleMilestones(),
+            currentStreak = 42
+        )
+    }
+}
+
+@Preview(
+    name = "Empty Badges State",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardEmpty() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = emptyList(),
+            recentMilestones = emptyList(),
+            currentStreak = 0
+        )
+    }
+}
+
+@Preview(
+    name = "High Streak - Diamond Badges",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardHighStreak() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getDiamondBadges(),
+            recentMilestones = getHighLevelMilestones(),
+            currentStreak = 100
+        )
+    }
+}
+
+@Preview(
+    name = "Leadership Badges Category",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardLeadership() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getLeadershipBadges(),
+            recentMilestones = getLeadershipMilestones(),
+            currentStreak = 28
+        )
+    }
+}
+
+@Preview(
+    name = "Community Badges Only",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardCommunity() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getCommunityBadges(),
+            recentMilestones = getCommunityMilestones(),
+            currentStreak = 7
+        )
+    }
+}
+
+@Preview(
+    name = "New User - Bronze Badges",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardNewUser() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getBronzeBadges(),
+            recentMilestones = getNewUserMilestones(),
+            currentStreak = 3
+        )
+    }
+}
+
+@Preview(
+    name = "Special Event Badges",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardSpecial() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getSpecialBadges(),
+            recentMilestones = getSpecialMilestones(),
+            currentStreak = 60
+        )
+    }
+}
+
+@Preview(
+    name = "Mixed Badge Levels",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardMixed() {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = getMixedLevelBadges(),
+            recentMilestones = getMixedMilestones(),
+            currentStreak = 21
+        )
+    }
+}
+
+// Preview Parameter Providers
+class BadgeCollectionPreviewProvider : PreviewParameterProvider<List<PrayerBadge>> {
+    override val values = sequenceOf(
+        emptyList(),
+        getSampleBadges(),
+        getDiamondBadges(),
+        getBronzeBadges()
+    )
+}
+
+@Preview(
+    name = "Dynamic Badge Collections",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFF
+)
+@Composable
+private fun PreviewCommunityAchievementsCardDynamic(
+    @PreviewParameter(BadgeCollectionPreviewProvider::class) badges: List<PrayerBadge>
+) {
+    TahlilTheme {
+        CommunityAchievementsCard(
+            userBadges = badges,
+            recentMilestones = getSampleMilestones(),
+            currentStreak = when (badges.size) {
+                0 -> 0
+                in 1..3 -> 5
+                in 4..6 -> 20
+                else -> 50
+            }
+        )
+    }
+}
+
+// Sample Data Functions
+private fun getSampleBadges(): List<PrayerBadge> = listOf(
+    PrayerBadge(
+        badgeId = "participation_silver",
+        name = "Prayer Participant",
+        description = "Joined 50 community prayer sessions",
+        iconUrl = "",
+        category = BadgeCategory.PARTICIPATION,
+        level = BadgeLevel.SILVER,
+        earnedAt = ZonedDateTime.now().minusDays(5),
+        requirements = "Join 50 prayer sessions"
+    ),
+    PrayerBadge(
+        badgeId = "dedication_gold",
+        name = "Dedicated Believer",
+        description = "Maintained 30-day prayer streak",
+        iconUrl = "",
+        category = BadgeCategory.DEDICATION,
+        level = BadgeLevel.GOLD,
+        earnedAt = ZonedDateTime.now().minusDays(2),
+        requirements = "30-day streak"
+    ),
+    PrayerBadge(
+        badgeId = "community_bronze",
+        name = "Community Helper",
+        description = "Helped 10 families with memorial prayers",
+        iconUrl = "",
+        category = BadgeCategory.COMMUNITY,
+        level = BadgeLevel.BRONZE,
+        earnedAt = ZonedDateTime.now().minusDays(10),
+        requirements = "Help 10 families"
+    )
+)
+
+private fun getDiamondBadges(): List<PrayerBadge> = listOf(
+    PrayerBadge(
+        badgeId = "leadership_diamond",
+        name = "Prayer Leader",
+        description = "Led 500+ community sessions",
+        iconUrl = "",
+        category = BadgeCategory.LEADERSHIP,
+        level = BadgeLevel.DIAMOND,
+        earnedAt = ZonedDateTime.now().minusDays(1),
+        requirements = "Lead 500 sessions"
+    ),
+    PrayerBadge(
+        badgeId = "milestone_diamond",
+        name = "Million Prayers",
+        description = "Completed 1,000,000 prayers",
+        iconUrl = "",
+        category = BadgeCategory.MILESTONE,
+        level = BadgeLevel.DIAMOND,
+        earnedAt = ZonedDateTime.now().minusHours(6),
+        requirements = "1M prayers"
+    )
+)
+
+private fun getBronzeBadges(): List<PrayerBadge> = listOf(
+    PrayerBadge(
+        badgeId = "first_prayer",
+        name = "First Prayer",
+        description = "Completed your first memorial prayer",
+        iconUrl = "",
+        category = BadgeCategory.MILESTONE,
+        level = BadgeLevel.BRONZE,
+        earnedAt = ZonedDateTime.now().minusDays(1),
+        requirements = "Complete 1 prayer"
+    )
+)
+
+private fun getLeadershipBadges(): List<PrayerBadge> = listOf(
+    PrayerBadge(
+        badgeId = "session_host_gold",
+        name = "Session Host",
+        description = "Successfully hosted 100 prayer sessions",
+        iconUrl = "",
+        category = BadgeCategory.LEADERSHIP,
+        level = BadgeLevel.GOLD,
+        earnedAt = ZonedDateTime.now().minusDays(3),
+        requirements = "Host 100 sessions"
+    ),
+    PrayerBadge(
+        badgeId = "mentor_platinum",
+        name = "Community Mentor",
+        description = "Guided 50 new members",
+        iconUrl = "",
+        category = BadgeCategory.LEADERSHIP,
+        level = BadgeLevel.PLATINUM,
+        earnedAt = ZonedDateTime.now().minusDays(7),
+        requirements = "Guide 50 members"
+    )
+)
+
+private fun getCommunityBadges(): List<PrayerBadge> = listOf(
+    PrayerBadge(
+        badgeId = "family_support_gold",
+        name = "Family Support",
+        description = "Supported 25 grieving families",
+        iconUrl = "",
+        category = BadgeCategory.COMMUNITY,
+        level = BadgeLevel.GOLD,
+        earnedAt = ZonedDateTime.now().minusDays(4),
+        requirements = "Support 25 families"
+    )
+)
+
+private fun getSpecialBadges(): List<PrayerBadge> = listOf(
+    PrayerBadge(
+        badgeId = "ramadan_special",
+        name = "Ramadan Devotion",
+        description = "Participated in all Ramadan community prayers",
+        iconUrl = "",
+        category = BadgeCategory.SPECIAL,
+        level = BadgeLevel.PLATINUM,
+        earnedAt = ZonedDateTime.now().minusDays(30),
+        requirements = "30 days Ramadan prayers"
+    )
+)
+
+private fun getMixedLevelBadges(): List<PrayerBadge> = listOf(
+    getBronzeBadges().first(),
+    getSampleBadges()[1], // Gold
+    getDiamondBadges().first(), // Diamond
+    PrayerBadge(
+        badgeId = "silver_participant",
+        name = "Active Participant", 
+        description = "Regular prayer participation",
+        iconUrl = "",
+        category = BadgeCategory.PARTICIPATION,
+        level = BadgeLevel.SILVER,
+        earnedAt = ZonedDateTime.now().minusDays(8),
+        requirements = "50 prayers"
+    )
+)
+
+private fun getSampleMilestones(): List<PrayerActivityItem> = listOf(
+    PrayerActivityItem(
+        activityId = "milestone1",
+        activityType = ActivityType.MILESTONE_REACHED,
+        userId = "user1",
+        userDisplayName = "Ahmad Ibn Abdullah",
+        message = "Reached 1000 total prayers milestone! 🎉",
+        regionCode = "SA",
+        timestamp = ZonedDateTime.now().minusHours(2)
+    ),
+    PrayerActivityItem(
+        activityId = "badge1",
+        activityType = ActivityType.BADGE_EARNED,
+        userId = "user1",
+        userDisplayName = "Ahmad Ibn Abdullah", 
+        message = "Earned 'Dedicated Believer' gold badge",
+        regionCode = "SA",
+        timestamp = ZonedDateTime.now().minusHours(6)
+    ),
+    PrayerActivityItem(
+        activityId = "streak1",
+        activityType = ActivityType.STREAK_ACHIEVEMENT,
+        userId = "user1",
+        userDisplayName = "Ahmad Ibn Abdullah",
+        message = "Achieved 15-day prayer streak! 🔥",
+        regionCode = "SA", 
+        timestamp = ZonedDateTime.now().minusDays(1)
+    )
+)
+
+private fun getHighLevelMilestones(): List<PrayerActivityItem> = listOf(
+    PrayerActivityItem(
+        activityId = "milestone_high",
+        activityType = ActivityType.MILESTONE_REACHED,
+        userId = "user_pro",
+        userDisplayName = "Khadijah Bint Muhammad",
+        message = "Reached 100,000 prayers milestone! 💎",
+        regionCode = "EG",
+        timestamp = ZonedDateTime.now().minusMinutes(30)
+    ),
+    PrayerActivityItem(
+        activityId = "leadership_milestone",
+        activityType = ActivityType.SESSION_HOSTED,
+        userId = "user_pro",
+        userDisplayName = "Khadijah Bint Muhammad",
+        message = "Successfully hosted 500th community session",
+        regionCode = "EG",
+        timestamp = ZonedDateTime.now().minusHours(4)
+    )
+)
+
+private fun getLeadershipMilestones(): List<PrayerActivityItem> = listOf(
+    PrayerActivityItem(
+        activityId = "host_milestone",
+        activityType = ActivityType.SESSION_HOSTED,
+        userId = "leader1",
+        userDisplayName = "Omar Al-Faruq",
+        message = "Hosted successful prayer session for 50 participants",
+        regionCode = "ID",
+        timestamp = ZonedDateTime.now().minusHours(1)
+    )
+)
+
+private fun getCommunityMilestones(): List<PrayerActivityItem> = listOf(
+    PrayerActivityItem(
+        activityId = "community_help",
+        activityType = ActivityType.PRAYER_COMPLETED,
+        userId = "helper1",
+        userDisplayName = "Fatima Az-Zahra",
+        message = "Completed 500 prayers for the Al-Hassan family memorial",
+        regionCode = "MY",
+        timestamp = ZonedDateTime.now().minusMinutes(45)
+    )
+)
+
+private fun getNewUserMilestones(): List<PrayerActivityItem> = listOf(
+    PrayerActivityItem(
+        activityId = "first_badge",
+        activityType = ActivityType.BADGE_EARNED,
+        userId = "newbie1",
+        userDisplayName = "Aisha Bint Abu Bakr",
+        message = "Earned first badge: 'First Prayer'! 🌟",
+        regionCode = "PK",
+        timestamp = ZonedDateTime.now().minusMinutes(15)
+    )
+)
+
+private fun getSpecialMilestones(): List<PrayerActivityItem> = listOf(
+    PrayerActivityItem(
+        activityId = "special_event",
+        activityType = ActivityType.BADGE_EARNED,
+        userId = "special1",
+        userDisplayName = "Ali Ibn Abu Talib",
+        message = "Earned rare 'Ramadan Devotion' platinum badge! 🌙",
+        regionCode = "IQ",
+        timestamp = ZonedDateTime.now().minusDays(2)
+    )
+)
+
+private fun getMixedMilestones(): List<PrayerActivityItem> = listOf(
+    getSampleMilestones()[0],
+    getNewUserMilestones()[0], 
+    PrayerActivityItem(
+        activityId = "mixed_session",
+        activityType = ActivityType.SESSION_JOINED,
+        userId = "mixed1",
+        userDisplayName = "Zainab Bint Ali",
+        message = "Joined global unity prayer session (500 participants)",
+        regionCode = "TR",
+        timestamp = ZonedDateTime.now().minusHours(3)
+    )
+)

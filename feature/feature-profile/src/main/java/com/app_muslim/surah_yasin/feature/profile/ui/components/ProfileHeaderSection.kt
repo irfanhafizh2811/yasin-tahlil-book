@@ -17,9 +17,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import coil.compose.AsyncImage
+import com.app_muslim.surah_yasin.core.ui.theme.TahlilTheme
 import com.app_muslim.surah_yasin.feature.profile.model.ProfileData
 import com.app_muslim.surah_yasin.feature.profile.model.ProfileEvent
+import com.app_muslim.surah_yasin.feature.profile.model.CulturalPreferencesData
+import com.app_muslim.surah_yasin.core.common.model.IslamicRegion
+import com.app_muslim.surah_yasin.core.common.model.SchoolOfThought
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -208,5 +215,278 @@ private fun ProfileCompletenessIndicator(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+// Preview Parameter Provider for different profile states
+class ProfileHeaderPreviewProvider : PreviewParameterProvider<ProfileData?> {
+    override val values = sequenceOf(
+        null, // No profile data
+        ProfileData(
+            userId = "1",
+            email = "ahmed.hassan@example.com",
+            displayName = "Ahmed Hassan",
+            profilePhotoUrl = null,
+            profilePhotoUri = null,
+            isVerified = false,
+            phoneNumber = null
+        ),
+        ProfileData(
+            userId = "2",
+            email = "fatima.alzahra@example.com",
+            displayName = "Fatima Al-Zahra",
+            profilePhotoUrl = "https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Fatima",
+            profilePhotoUri = null,
+            isVerified = true,
+            phoneNumber = "+1234567890"
+        ),
+        ProfileData(
+            userId = "3",
+            email = "mohammad.abdullah@example.com",
+            displayName = "Mohammad Abdullah Ibn Ahmad Al-Masri",
+            profilePhotoUrl = "https://via.placeholder.com/200x200/4CAF50/FFFFFF?text=Mohammad",
+            profilePhotoUri = null,
+            isVerified = true,
+            phoneNumber = "+9876543210"
+        ),
+        ProfileData(
+            userId = "4",
+            email = "incomplete@example.com",
+            displayName = "Incomplete User",
+            profilePhotoUrl = null,
+            profilePhotoUri = null,
+            isVerified = false,
+            phoneNumber = null
+        )
+    )
+}
+
+@Preview(name = "Profile Header - No Data", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionNoDataPreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = null,
+            isEditing = false,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Profile Header - Basic Profile", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionBasicPreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = ProfileData(
+                userId = "1",
+                email = "ahmed.hassan@example.com",
+                displayName = "Ahmed Hassan",
+                profilePhotoUrl = null,
+                profilePhotoUri = null,
+                isVerified = false,
+                phoneNumber = null
+            ),
+            isEditing = false,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Profile Header - Complete Profile", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionCompletePreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = ProfileData(
+                userId = "2",
+                email = "fatima.alzahra@example.com",
+                displayName = "Fatima Al-Zahra",
+                profilePhotoUrl = "https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Fatima",
+                profilePhotoUri = null,
+                isVerified = true,
+                phoneNumber = "+1234567890",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "Saudi Arabia",
+                    primaryLanguage = "Arabic",
+                    schoolOfThought = SchoolOfThought.HANAFI
+                )
+            ),
+            isEditing = false,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Profile Header - Editing Mode", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionEditingPreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = ProfileData(
+                userId = "2",
+                email = "fatima.alzahra@example.com",
+                displayName = "Fatima Al-Zahra",
+                profilePhotoUrl = "https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Fatima",
+                profilePhotoUri = null,
+                isVerified = true,
+                phoneNumber = "+1234567890",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "Saudi Arabia",
+                    primaryLanguage = "Arabic",
+                    schoolOfThought = SchoolOfThought.HANAFI
+                )
+            ),
+            isEditing = true,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Profile Header - Long Name", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionLongNamePreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = ProfileData(
+                userId = "3",
+                email = "mohammad.abdullah@example.com",
+                displayName = "Mohammad Abdullah Ibn Ahmad Al-Masri Al-Qurashi",
+                profilePhotoUrl = "https://via.placeholder.com/200x200/4CAF50/FFFFFF?text=Mohammad",
+                profilePhotoUri = null,
+                isVerified = true,
+                phoneNumber = "+9876543210",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.NORTH_AFRICA,
+                    country = "Egypt",
+                    primaryLanguage = "Arabic",
+                    schoolOfThought = SchoolOfThought.MALIKI
+                )
+            ),
+            isEditing = false,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Profile Header - Unverified", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionUnverifiedPreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = ProfileData(
+                userId = "4",
+                email = "new.user@example.com",
+                displayName = "New User",
+                profilePhotoUrl = null,
+                profilePhotoUri = null,
+                isVerified = false,
+                phoneNumber = null
+            ),
+            isEditing = false,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Profile Header - No Email", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionNoEmailPreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = ProfileData(
+                userId = "5",
+                email = null,
+                displayName = "Anonymous User",
+                profilePhotoUrl = null,
+                profilePhotoUri = null,
+                isVerified = false,
+                phoneNumber = null
+            ),
+            isEditing = false,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Profile Header - Dark Theme", showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun ProfileHeaderSectionDarkPreview() {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = ProfileData(
+                userId = "2",
+                email = "aisha.bintomar@example.com",
+                displayName = "Aisha Bint Omar",
+                profilePhotoUrl = "https://via.placeholder.com/200x200/FF9800/FFFFFF?text=Aisha",
+                profilePhotoUri = null,
+                isVerified = true,
+                phoneNumber = "+1122334455",
+                culturalPreferences = CulturalPreferencesData(
+                    region = IslamicRegion.MIDDLE_EAST,
+                    country = "Saudi Arabia",
+                    primaryLanguage = "Arabic",
+                    schoolOfThought = SchoolOfThought.SHAFI
+                )
+            ),
+            isEditing = false,
+            onEvent = { }
+        )
+    }
+}
+
+@Preview(name = "Completeness Indicator - Low", showBackground = true)
+@Composable
+private fun ProfileCompletenessIndicatorLowPreview() {
+    TahlilTheme {
+        ProfileCompletenessIndicator(
+            completeness = 25
+        )
+    }
+}
+
+@Preview(name = "Completeness Indicator - Medium", showBackground = true)
+@Composable
+private fun ProfileCompletenessIndicatorMediumPreview() {
+    TahlilTheme {
+        ProfileCompletenessIndicator(
+            completeness = 65
+        )
+    }
+}
+
+@Preview(name = "Completeness Indicator - High", showBackground = true)
+@Composable
+private fun ProfileCompletenessIndicatorHighPreview() {
+    TahlilTheme {
+        ProfileCompletenessIndicator(
+            completeness = 85
+        )
+    }
+}
+
+@Preview(name = "Completeness Indicator - Complete", showBackground = true)
+@Composable
+private fun ProfileCompletenessIndicatorCompletePreview() {
+    TahlilTheme {
+        ProfileCompletenessIndicator(
+            completeness = 100
+        )
+    }
+}
+
+@Preview(name = "Dynamic Profile Header", showBackground = true)
+@Composable
+private fun ProfileHeaderSectionDynamicPreview(
+    @PreviewParameter(ProfileHeaderPreviewProvider::class) profileData: ProfileData?
+) {
+    TahlilTheme {
+        ProfileHeaderSection(
+            profileData = profileData,
+            isEditing = false,
+            onEvent = { }
+        )
     }
 }

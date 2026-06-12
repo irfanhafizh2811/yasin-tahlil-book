@@ -167,29 +167,6 @@ fun IslamicPrayerCard(
     }
 }
 
-// ============================================================================
-// PREVIEW DATA PROVIDERS
-// ============================================================================
-
-class IslamicCardDataProvider : PreviewParameterProvider<Pair<String, String?>> {
-    override val values: Sequence<Pair<String, String?>> = sequenceOf(
-        Pair("Memorial Prayer", "Tahlil for the Deceased"),
-        Pair("Community Prayer", "Join the Global Community"),
-        Pair("Prayer Count: 147", null),
-        Pair("بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم", "In the name of Allah, the Most Gracious"),
-        Pair("Yasin Chapter", "Complete recitation available")
-    )
-}
-
-class IslamicPrayerCardDataProvider : PreviewParameterProvider<Pair<String, Int>> {
-    override val values: Sequence<Pair<String, Int>> = sequenceOf(
-        Pair("بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم", 45),
-        Pair("اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ", 123),
-        Pair("سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", 67),
-        Pair("لَا إِلَهَ إِلَّا اللَّهُ", 234),
-        Pair("اللَّهُمَّ اغْفِرْ لَهُ", 89)
-    )
-}
 
 // ============================================================================
 // ISLAMIC CARD PREVIEWS
@@ -413,34 +390,30 @@ fun PreviewIslamicCardSmallPhone() {
 // DYNAMIC PREVIEWS WITH PARAMETERS
 // ============================================================================
 
-@Preview(name = "Islamic Card - Various Content")
-@Composable
-fun PreviewIslamicCardDynamic(
-    @PreviewParameter(IslamicCardDataProvider::class) cardData: Pair<String, String?>
-) {
+@Preview(name = "Islamic Card - Sample Content")
+@Composable  
+fun PreviewIslamicCardSample() {
     TahlilTheme {
         Surface {
             IslamicCard(
-                title = cardData.first,
-                subtitle = cardData.second,
+                title = "Surah Al-Fatiha",
+                subtitle = "The Opening",
                 onClick = {}
             )
         }
     }
 }
 
-@Preview(name = "Islamic Prayer Card - Various Prayers")
+@Preview(name = "Islamic Prayer Card - Sample Prayer")
 @Composable
-fun PreviewIslamicPrayerCardDynamic(
-    @PreviewParameter(IslamicPrayerCardDataProvider::class) prayerData: Pair<String, Int>
-) {
+fun PreviewIslamicPrayerCardSample() {
     TahlilTheme {
         Surface {
             IslamicPrayerCard(
-                arabicText = prayerData.first,
-                transliteration = "Sample transliteration for preview",
-                translation = "Sample translation for preview purposes",
-                prayerCount = prayerData.second,
+                arabicText = "سُبْحَانَ اللهِ",
+                transliteration = "SubhanAllah",
+                translation = "Glory be to Allah",
+                prayerCount = 33,
                 onClick = {}
             )
         }
